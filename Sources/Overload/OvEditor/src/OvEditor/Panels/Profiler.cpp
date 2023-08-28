@@ -81,8 +81,8 @@ void OvEditor::Panels::Profiler::Update(float p_deltaTime)
 				{
 					auto color = CalculateActionColor(action.percentage);
 					m_actionList->CreateWidget<Texts::TextColored>(action.name, color);
-					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.duration) + "s", color);
-					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.duration / action.calls) + "s", color);
+					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.duration) + " ms", color);
+					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.duration / action.calls) + "ms", color);
 					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.percentage) + "%%", color);
 					m_actionList->CreateWidget<Texts::TextColored>(std::to_string(action.calls) + " calls", color);
 				}

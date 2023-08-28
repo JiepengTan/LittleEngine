@@ -46,7 +46,7 @@ OvAnalytics::Profiling::ProfilerReport OvAnalytics::Profiling::Profiler::Generat
 
 	/* Add every actions to the report */
 	for (auto& data : sortedHistory)
-		report.actions.push_back({ data.second, data.first, (data.first / elapsed.count()) * 100.0, __CALLS_COUNTER[data.second] });
+		report.actions.push_back({ data.second, data.first*1000, (data.first / elapsed.count()) * 100.0, __CALLS_COUNTER[data.second] });
 
 	return report;
 }
