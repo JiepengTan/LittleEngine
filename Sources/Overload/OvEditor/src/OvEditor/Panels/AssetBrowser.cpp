@@ -583,6 +583,13 @@ public:
 			OvTools::Utils::SystemCalls::OpenFile(filePath);
 		};
 
+		auto& showInExplorer = CreateWidget<OvUI::Widgets::Menu::MenuItem>("Show in explorer");
+		showInExplorer.ClickedEvent += [this]
+		{
+			const std::string folder = OvTools::Utils::PathParser::GetContainingFolder(filePath);
+			OvTools::Utils::SystemCalls::ShowInExplorer(folder);
+		};
+		
 		if (!m_protected)
 		{
 			auto& duplicateAction = CreateWidget<OvUI::Widgets::Menu::MenuItem>("Duplicate");
