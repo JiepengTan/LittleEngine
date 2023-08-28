@@ -85,8 +85,8 @@ std::string OvGame::Debug::GameProfiler::GenerateActionString(OvAnalytics::Profi
 	std::string result;
 
 	result += "[" + p_action.name + "]";
-	result += std::to_string(p_action.duration) + "s (total) | ";
-	result += std::to_string(p_action.duration / p_action.calls) + "s (per call) | ";
+	result += std::to_string(p_action.duration) + "ms (total) | ";
+	result += std::to_string(p_action.duration / p_action.calls) + "ms (per call) | ";
 	result += std::to_string(p_action.percentage) + "%% | ";
 	result += std::to_string(p_action.calls) + " calls";
 
