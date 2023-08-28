@@ -1,0 +1,12 @@
+executable_name=Game
+gravity=-9.810000
+x_resolution=1280
+multisampling=true
+y_resolution=720
+start_scene=DemoScene.ovscene
+fullscreen=false
+vsync=true
+samples=4
+opengl_major=4
+opengl_minor=3
+dev_build=true

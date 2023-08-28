@@ -1,0 +1,10 @@
+.vs/
+.vscode/
+Bin/
+Bin-Int/
+Build/
+Builds/
+imgui.ini
+*.aps
+*.vcxproj*
+*.sln
