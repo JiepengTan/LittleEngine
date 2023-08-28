@@ -38,5 +38,8 @@ namespace OvUI::Widgets::Buttons
 
 		Internal::TextureID textureID;
 		OvMaths::FVector2 size;
+		bool isAbsoluteOffset = false;
+		OvMaths::FVector2 offset;
+		
 	};
 }

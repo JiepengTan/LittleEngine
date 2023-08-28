@@ -9,6 +9,7 @@
 #include <OvUI/Panels/PanelMenuBar.h>
 #include <OvUI/Panels/PanelWindow.h>
 #include <OvUI/Widgets/Menu/MenuItem.h>
+#include <OvUI/Widgets/Buttons/ButtonImage.h>
 
 namespace OvEditor::Panels
 {
@@ -42,13 +43,17 @@ namespace OvEditor::Panels
 		void CreateSettingsMenu();
 		void CreateLayoutMenu();
 		void CreateHelpMenu();
-
+		void CreateToolbar();
 		void UpdateToggleableItems();
 		void OpenEveryWindows(bool p_state);
-
+		OvUI::Widgets::Buttons::ButtonImage* CreateToolbarItem(std::string p_name,float& p_offset);
 	private:
 		PanelMap m_panels;
 
 		OvUI::Widgets::Menu::MenuList* m_windowMenu = nullptr;
+		OvUI::Widgets::Buttons::ButtonImage* m_playButton;
+		OvUI::Widgets::Buttons::ButtonImage* m_pauseButton;
+		OvUI::Widgets::Buttons::ButtonImage* m_stopButton;
+		OvUI::Widgets::Buttons::ButtonImage* m_nextButton;
 	};
 }

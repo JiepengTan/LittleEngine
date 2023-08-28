@@ -31,6 +31,7 @@
 #include "OvEditor/Settings/EditorSettings.h"
 #include "OvEditor/Utils/ActorCreationMenu.h"
 
+
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;
 using namespace OvUI::Widgets::Menu;
@@ -46,7 +47,80 @@ OvEditor::Panels::MenuBar::MenuBar()
 	CreateSettingsMenu();
 	CreateLayoutMenu();
 	CreateHelpMenu();
+	CreateToolbar();
 }
+OvUI::Widgets::Buttons::ButtonImage* OvEditor::Panels::MenuBar::CreateToolbarItem(std::string p_name,float& p_offset)
+{
+	const int btnOffset = 20;
+	const int btnSize = 16;
+	const auto btn = &CreateWidget<OvUI::Widgets::Buttons::ButtonImage>(
+		EDITOR_CONTEXT(editorResources)->GetTexture(p_name)->id, OvMaths::FVector2{ btnSize, btnSize });
+	btn->isAbsoluteOffset = true;
+	btn->offset = OvMaths::FVector2(p_offset,0);
+	p_offset += btnSize + btnOffset;
+	return btn;
+}
+void OvEditor::Panels::MenuBar::CreateToolbar()
+{
+	float startOffset = 700;
+	m_playButton	= CreateToolbarItem("Button_Play",startOffset); 
+	m_pauseButton	= CreateToolbarItem("Button_Pause",startOffset);
+	m_stopButton	= CreateToolbarItem("Button_Stop",startOffset);
+	m_nextButton	= CreateToolbarItem("Button_Next",startOffset);
+	auto refreshButton	= CreateToolbarItem("Button_Refresh",startOffset);
+	
+	m_playButton->lineBreak		= false;
+	m_pauseButton->lineBreak	= false;
+	m_stopButton->lineBreak		= false;
+	m_nextButton->lineBreak		= false;
+	refreshButton->lineBreak		= false;
+
+	m_playButton->ClickedEvent	+= EDITOR_BIND(StartPlaying);
+	m_pauseButton->ClickedEvent	+= EDITOR_BIND(PauseGame);
+	m_stopButton->ClickedEvent	+= EDITOR_BIND(StopPlaying);
+	m_nextButton->ClickedEvent	+= EDITOR_BIND(NextFrame);
+	refreshButton->ClickedEvent	+= EDITOR_BIND(RefreshScripts);
+
+	EDITOR_EVENT(EditorModeChangedEvent) += [this](OvEditor::Core::EditorActions::EEditorMode p_newMode)
+	{
+		auto enable = [](OvUI::Widgets::Buttons::ButtonImage* p_button, bool p_enable)
+		{
+			p_button->disabled = !p_enable;
+			p_button->tint = p_enable ? OvUI::Types::Color{ 1.0f, 1.0f, 1.0f, 1.0f} : OvUI::Types::Color{1.0f, 1.0f, 1.0f, 0.15f};
+		};
+
+		switch (p_newMode)
+		{
+		case OvEditor::Core::EditorActions::EEditorMode::EDIT:
+			enable(m_playButton, true);
+			enable(m_pauseButton, false);
+			enable(m_stopButton, false);
+			enable(m_nextButton, false);
+			break;
+		case OvEditor::Core::EditorActions::EEditorMode::PLAY:
+			enable(m_playButton, false);
+			enable(m_pauseButton, true);
+			enable(m_stopButton, true);
+			enable(m_nextButton, true);
+			break;
+		case OvEditor::Core::EditorActions::EEditorMode::PAUSE:
+			enable(m_playButton, true);
+			enable(m_pauseButton, false);
+			enable(m_stopButton, true);
+			enable(m_nextButton, true);
+			break;
+		case OvEditor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
+			enable(m_playButton, true);
+			enable(m_pauseButton, false);
+			enable(m_stopButton, true);
+			enable(m_nextButton, true);
+			break;
+		}
+	};
+
+	EDITOR_EXEC(SetEditorMode(OvEditor::Core::EditorActions::EEditorMode::EDIT));
+}
+
 
 void OvEditor::Panels::MenuBar::HandleShortcuts(float p_deltaTime)
 {

@@ -18,7 +18,6 @@
 #include "OvEditor/Panels/SceneView.h"
 #include "OvEditor/Panels/GameView.h"
 #include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Panels/Toolbar.h"
 #include "OvEditor/Panels/MaterialEditor.h"
 #include "OvEditor/Panels/ProjectSettings.h"
 #include "OvEditor/Panels/AssetProperties.h"
@@ -61,7 +60,6 @@ void OvEditor::Core::Editor::SetupUI()
 	m_panelsManager.CreatePanel<OvEditor::Panels::SceneView>("Scene View", true, settings);
 	m_panelsManager.CreatePanel<OvEditor::Panels::GameView>("Game View", true, settings);
 	m_panelsManager.CreatePanel<OvEditor::Panels::AssetView>("Asset View", false, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::Toolbar>("Toolbar", true, settings);
 	m_panelsManager.CreatePanel<OvEditor::Panels::MaterialEditor>("Material Editor", false, settings);
 	m_panelsManager.CreatePanel<OvEditor::Panels::ProjectSettings>("Project Settings", false, settings);
 	m_panelsManager.CreatePanel<OvEditor::Panels::AssetProperties>("Asset Properties", false, settings);
