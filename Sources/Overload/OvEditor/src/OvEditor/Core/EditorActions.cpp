@@ -132,12 +132,19 @@ void OvEditor::Core::EditorActions::RefreshScripts()
 	if (m_context.scriptInterpreter->IsOk())
 		OVLOG_INFO("Scripts interpretation succeeded!");
 
+	// copy shaders
+	auto srcDir = std::filesystem::canonical("../../Resources//Engine/Shaders").string();
+	auto dstDir = std::filesystem::canonical("Data/Engine/Shaders").string();
+	OVLOG("copyDir " + srcDir + "=>" + dstDir);
+	std::filesystem::copy(srcDir,dstDir,std::filesystem::copy_options::recursive | std::filesystem::copy_options::overwrite_existing);
+	
 	// refresh shaders
 	OvRendering::Resources::Loaders::ShaderLoader::Recompile(
 	*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
 	OvRendering::Resources::Loaders::ShaderLoader::Recompile(
-		*m_context.shaderManager[":Shaders\\StandardPBR.glsl"], "Data\\Engine\\Shaders\\StandardPBR.glsl");
-
+	*m_context.shaderManager[":Shaders\\StandardPBR.glsl"], "Data\\Engine\\Shaders\\StandardPBR.glsl");
+	OvRendering::Resources::Loaders::ShaderLoader::Recompile(
+		*m_context.shaderManager[":Shaders\\ShadowCaster.glsl"], "Data\\Engine\\Shaders\\ShadowCaster.glsl");
 }
 
 std::optional<std::string> OvEditor::Core::EditorActions::SelectBuildFolder()
