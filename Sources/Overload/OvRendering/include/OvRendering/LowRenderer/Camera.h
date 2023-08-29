@@ -177,10 +177,12 @@ namespace OvRendering::LowRenderer
         float m_size;
 		float m_near;
 		float m_far;
-
+		
 		OvMaths::FVector3 m_clearColor;
 
 		bool m_frustumGeometryCulling;
 		bool m_frustumLightCulling;
+	public:
+		OvRendering::Settings::ECameraType m_CameraType;
 	};
 }

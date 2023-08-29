@@ -13,6 +13,7 @@
 
 
 
+namespace OvRendering::Buffers { class ShadowmapBuffer; }
 namespace OvRendering::Resources
 {
 	namespace Loaders { class TextureLoader; }
@@ -23,7 +24,7 @@ namespace OvRendering::Resources
 	class Texture
 	{
 		friend class Loaders::TextureLoader;
-
+		friend class OvRendering::Buffers::ShadowmapBuffer;
 	public:
 		/**
 		* Bind the texture to the given slot
@@ -37,6 +38,7 @@ namespace OvRendering::Resources
 		void Unbind() const;
 
 	private:
+		Texture(uint32_t p_id);
 		Texture(const std::string p_path, uint32_t p_id, uint32_t p_width, uint32_t p_height, uint32_t p_bpp, Settings::ETextureFilteringMode p_firstFilter, Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 		~Texture() = default;
 

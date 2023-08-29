@@ -104,8 +104,17 @@ void OvRendering::Core::Renderer::SetColorWriting(bool p_enable)
 
 void OvRendering::Core::Renderer::SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 {
+	this->m_preViewPortWidth = width;
+	this->m_preViewPortHeight = height;
+	this->m_preViewPortX = x;
+	this->m_preViewPortY = y;
 	glViewport(x, y, width, height);
 }
+void OvRendering::Core::Renderer::RecoverToLastViewPort()
+{
+	SetViewPort(m_preViewPortX, m_preViewPortY, m_preViewPortWidth, m_preViewPortHeight);
+}
+
 
 void OvRendering::Core::Renderer::ReadPixels(uint32_t x, uint32_t y, uint32_t width, uint32_t height, Settings::EPixelDataFormat format, Settings::EPixelDataType type, void* data)
 {

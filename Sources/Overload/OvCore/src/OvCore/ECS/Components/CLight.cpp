@@ -44,7 +44,14 @@ void OvCore::ECS::Components::CLight::SetIntensity(float p_intensity)
 {
 	m_data.intensity = p_intensity;
 }
-
+OvRendering::Entities::Light::Type OvCore::ECS::Components::CLight::GetLightType()
+{
+	return static_cast<OvRendering::Entities::Light::Type>(m_data.type);
+}
+bool OvCore::ECS::Components::CLight::IsDirectional()
+{
+	return GetLightType() == OvRendering::Entities::Light::Type::DIRECTIONAL;
+}
 void OvCore::ECS::Components::CLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	using namespace OvCore::Helpers;

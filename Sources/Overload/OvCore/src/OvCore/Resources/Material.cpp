@@ -28,7 +28,6 @@ void OvCore::Resources::Material::SetShader(OvRendering::Resources::Shader* p_sh
 void OvCore::Resources::Material::FillUniform()
 {
 	m_uniformsData.clear();
-
 	for (const OvRendering::Resources::UniformInfo& element : m_shader->uniforms)
 		m_uniformsData.emplace(element.name, element.defaultValue);
 }

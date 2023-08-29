@@ -23,7 +23,7 @@ namespace OvMaths
 	* Forward declaration due to circular reference
 	*/
 	struct FQuaternion;
-
+	class FTransform;
 	/**
 	* Mathematic representation of a 4x4 Matrix of floats
 	*/
@@ -390,8 +390,8 @@ namespace OvMaths
 		* @param p_upY
 		* @param p_upZ
 		*/
-		static FMatrix4 CreateView(const float p_eyeX, const float p_eyeY, const float p_eyeZ, const float p_lookX, const float p_lookY, const float p_lookZ, const float p_upX, const float p_upY, const float p_upZ);
-		
+		static FMatrix4 CreateView(OvMaths::FTransform& trans);
+		static FMatrix4 CreateView(OvMaths::FVector3 eye, OvMaths::FVector3 look, OvMaths::FVector3 up);
 		/**
 		* Return frustum matrix
 		* @param p_left

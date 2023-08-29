@@ -12,11 +12,12 @@
 #include "OvMaths/FMatrix4.h"
 #include "OvMaths/FVector3.h"
 #include "OvMaths/FQuaternion.h"
+#include "OvMaths/FTransform.h"
 
 const OvMaths::FMatrix4 OvMaths::FMatrix4::Identity = FMatrix4(1.f, 0.f, 0.f, 0.f,
-															   0.f, 1.f, 0.f, 0.f,
-															   0.f, 0.f, 1.f, 0.f,
-															   0.f, 0.f, 0.f, 1.f);
+                                                               0.f, 1.f, 0.f, 0.f,
+                                                               0.f, 0.f, 1.f, 0.f,
+                                                               0.f, 0.f, 0.f, 1.f);
 
 OvMaths::FMatrix4::FMatrix4()
 {
@@ -483,19 +484,20 @@ OvMaths::FMatrix4 OvMaths::FMatrix4::CreateOrthographic(const float p_size, cons
     return ortho;
 }
 
-OvMaths::FMatrix4 OvMaths::FMatrix4::CreateView(const float p_eyeX, const float p_eyeY, const float p_eyeZ, const float p_lookX, const float p_lookY, const float p_lookZ, const float p_upX, const float p_upY, const float p_upZ)
+OvMaths::FMatrix4 OvMaths::FMatrix4::CreateView(OvMaths::FTransform& trans)
 {
-	const OvMaths::FVector3 eye(p_eyeX, p_eyeY, p_eyeZ);
-	const OvMaths::FVector3 look(p_lookX, p_lookY, p_lookZ);
-	const OvMaths::FVector3 up(p_upX, p_upY, p_upZ);
+	return CreateView(trans.GetWorldPosition(),trans.GetWorldForward(),trans.GetWorldUp());
+}
 
-	const OvMaths::FVector3 forward(eye - look);
-	FVector3::Normalize(forward);
+OvMaths::FMatrix4 OvMaths::FMatrix4::CreateView(OvMaths::FVector3 eye, OvMaths::FVector3 foward, OvMaths::FVector3 up)
+{
+	auto negForward = -foward;
+	FVector3::Normalize(negForward);
 
-	const OvMaths::FVector3 upXForward(OvMaths::FVector3::Cross(up, forward));
+	const OvMaths::FVector3 upXForward(OvMaths::FVector3::Cross(up, negForward));
 	FVector3::Normalize(upXForward);
 
-	const OvMaths::FVector3 v(OvMaths::FVector3::Cross(forward, upXForward));
+	const OvMaths::FVector3 v(OvMaths::FVector3::Cross(negForward, upXForward));
 
 	OvMaths::FMatrix4 View;
 
@@ -509,10 +511,10 @@ OvMaths::FMatrix4 OvMaths::FMatrix4::CreateView(const float p_eyeX, const float 
 	View.data[6] = v.z;
 	View.data[7] = -OvMaths::FVector3::Dot(eye, v);
 
-	View.data[8] = forward.x;
-	View.data[9] = forward.y;
-	View.data[10] = forward.z;
-	View.data[11] = -OvMaths::FVector3::Dot(eye, forward);
+	View.data[8] = negForward.x;
+	View.data[9] = negForward.y;
+	View.data[10] = negForward.z;
+	View.data[11] = -OvMaths::FVector3::Dot(eye, negForward);
 
 	return View;
 }

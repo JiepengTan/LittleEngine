@@ -18,4 +18,11 @@ namespace OvRendering::Settings
         ORTHOGRAPHIC,
         PERSPECTIVE
     };
+    enum class ECameraType
+    {
+        Game,
+        Scene,
+        Asset,
+        Other
+    };
 }

@@ -168,6 +168,14 @@ namespace OvRendering::Core
 		 * @param height
 		 */
 		void SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+		/**
+		 * Set the viewport parameters.
+		 * @param x
+		 * @param y
+		 * @param width
+		 * @param height
+		 */
+		void RecoverToLastViewPort();
 
 		/**
 		 * Read a block of pixels from the frame buffer.
@@ -315,5 +323,8 @@ namespace OvRendering::Core
 		Context::Driver&	m_driver;
 		FrameInfo			m_frameInfo;
 		uint8_t				m_state;
+
+		uint32_t m_preViewPortWidth, m_preViewPortHeight;
+		uint32_t m_preViewPortX, m_preViewPortY;
 	};
 }

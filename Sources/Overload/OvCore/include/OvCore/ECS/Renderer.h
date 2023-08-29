@@ -11,6 +11,7 @@
 #include <OvRendering/Core/Renderer.h>
 #include <OvRendering/Resources/Mesh.h>
 #include <OvRendering/Data/Frustum.h>
+#include <OvRendering/Buffers/ShadowmapBuffer.h>
 
 
 #include "OvCore/Resources/Material.h"
@@ -62,6 +63,8 @@ namespace OvCore::ECS
 		*/
 		std::vector<OvMaths::FMatrix4> FindLightMatricesInFrustum(const OvCore::SceneSystem::Scene& p_scene, const OvRendering::Data::Frustum& p_frustum);
 
+
+		ECS::Components::CLight* FindMainLight(const OvCore::SceneSystem::Scene& p_scene);
 		/**
 		* Draw the given scene using the given default material (optional) if no material found on an actor
 		* @param p_scene
@@ -78,7 +81,20 @@ namespace OvCore::ECS
 			const OvRendering::Data::Frustum* p_customFrustum = nullptr,
 			OvCore::Resources::Material* p_defaultMaterial = nullptr
 		);
-
+		/**
+			* Draw shadow map using the given scene 
+			* @param p_scene
+			* @param p_cameraPosition
+			* @param p_camera
+		*/
+		void DrawShadowmap
+		(
+			OvCore::SceneSystem::Scene& p_scene,
+			const OvMaths::FVector3& p_cameraPosition,
+			const OvRendering::LowRenderer::Camera& p_camera,
+			OpaqueDrawables&	opaqueMeshes
+		);
+		
 		/**
 		* Returns opaque and transparents drawables from the scene with frustum culling
 		* @param p_scene
@@ -155,10 +171,11 @@ namespace OvCore::ECS
 		* @param p_userMatrixSender
 		*/
 		void RegisterUserMatrixSender(std::function<void(OvMaths::FMatrix4)> p_userMatrixSender);
-
+		
 	private:
 		std::function<void(OvMaths::FMatrix4)> m_modelMatrixSender;
 		std::function<void(OvMaths::FMatrix4)> m_userMatrixSender;
+		std::unique_ptr<OvRendering::Buffers::ShadowmapBuffer> m_shadowmapBuffer = nullptr;
 		OvRendering::Resources::Texture* m_emptyTexture = nullptr;
 	};
 }

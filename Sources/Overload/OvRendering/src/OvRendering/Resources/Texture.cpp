@@ -24,3 +24,9 @@ OvRendering::Resources::Texture::Texture(const std::string p_path, uint32_t p_id
 {
 
 }
+
+
+OvRendering::Resources::Texture::Texture( uint32_t p_id):id(p_id), width(0), height(0), bitsPerPixel(0),
+firstFilter(Settings::ETextureFilteringMode::LINEAR), secondFilter(Settings::ETextureFilteringMode::LINEAR), isMimapped(false)
+{}
+

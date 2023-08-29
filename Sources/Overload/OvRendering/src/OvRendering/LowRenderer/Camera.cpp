@@ -163,10 +163,5 @@ OvMaths::FMatrix4 OvRendering::LowRenderer::Camera::CalculateViewMatrix(const Ov
 	const auto& up = p_rotation * OvMaths::FVector3::Up;
 	const auto& forward = p_rotation * OvMaths::FVector3::Forward;
 
-	return OvMaths::FMatrix4::CreateView
-	(
-		p_position.x, p_position.y, p_position.z,												// Position
-		p_position.x + forward.x, p_position.y + forward.y, p_position.z + forward.z,			// LookAt (Position + Forward)
-		up.x, up.y, up.z																		// Up Vector
-	);
+	return OvMaths::FMatrix4::CreateView(p_position,forward,up);
 }

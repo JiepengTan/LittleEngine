@@ -44,6 +44,7 @@ void OvEditor::Panels::AView::_Draw_Impl()
 
 void OvEditor::Panels::AView::Render()
 {
+	m_camera.m_CameraType = OvRendering::Settings::ECameraType::Game;
 	FillEngineUBO();
 
 	auto [winWidth, winHeight] = GetSafeSize();
@@ -112,4 +113,5 @@ void OvEditor::Panels::AView::PrepareCamera()
 {
 	auto [winWidth, winHeight] = GetSafeSize();
 	m_camera.CacheMatrices(winWidth, winHeight, m_cameraPosition, m_cameraRotation);
+	m_camera.m_CameraType = OvRendering::Settings::ECameraType::Asset;
 }

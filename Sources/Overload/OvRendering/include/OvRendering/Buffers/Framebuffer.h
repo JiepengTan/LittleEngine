@@ -12,6 +12,8 @@
 
 namespace OvRendering::Buffers
 {
+
+	
 	/**
 	* Wraps OpenGL EBO
 	*/
@@ -66,5 +68,7 @@ namespace OvRendering::Buffers
 		uint32_t m_bufferID = 0;
 		uint32_t m_renderTexture = 0;
 		uint32_t m_depthStencilBuffer = 0;
+	public:
+		static uint32_t m_curFrameBufferId;
 	};
 }

@@ -225,7 +225,6 @@ void OvCore::Scripting::LuaMathsBinder::BindMaths(sol::state & p_luaState)
 		"GetRow", &FMatrix4::GetRow,
 		"GetColumn", &FMatrix4::GetColumn,
 		"CreatePerspective", &FMatrix4::CreatePerspective,
-		"CreateView", &FMatrix4::CreateView,
 		"CreateFrustum", &FMatrix4::CreateFrustum,
 		"Get", [](FMatrix4& target, int row, int col) { return target(row, col); },
 		"Set", [](FMatrix4& target, int row, int col, float value) { target(row, col) = value; }

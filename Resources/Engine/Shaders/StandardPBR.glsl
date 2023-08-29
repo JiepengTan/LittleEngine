@@ -80,6 +80,9 @@ layout(std430, binding = 0) buffer LightSSBO
 
 out vec4 FRAGMENT_COLOR;
 
+// shadow map build in variable
+uniform sampler2D   u_Shadowmap;
+
 uniform sampler2D   u_AlbedoMap;
 uniform sampler2D   u_MetallicMap;
 uniform sampler2D   u_RoughnessMap;
@@ -189,7 +192,9 @@ vec3 CalcAmbientSphereLight(mat4 p_Light)
 void main()
 {
     vec2 texCoords = u_TextureOffset + vec2(mod(fs_in.TexCoords.x * u_TextureTiling.x, 1), mod(fs_in.TexCoords.y * u_TextureTiling.y, 1));
-
+    float shadowmapval = texture(u_Shadowmap, texCoords).r ;
+    FRAGMENT_COLOR = vec4(vec3(shadowmapval),1);
+    return ;
     vec4 albedoRGBA     = texture(u_AlbedoMap, texCoords) * u_Albedo;
     vec3 albedo         = pow(albedoRGBA.rgb, vec3(2.2));
     float metallic      = texture(u_MetallicMap, texCoords).r * u_Metallic;

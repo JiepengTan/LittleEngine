@@ -13,12 +13,16 @@
 namespace OvCore::Resources
 {
 	template<typename T>
-	inline void Material::Set(const std::string p_key, const T& p_value)
+	inline void Material::Set(const std::string p_key, const T& p_value,bool p_isForce )
 	{
 		if (HasShader())
 		{
-			if (m_uniformsData.find(p_key) != m_uniformsData.end())
+			if (m_uniformsData.find(p_key) != m_uniformsData.end() )
 				m_uniformsData[p_key] = std::any(p_value);
+			else if(p_isForce)
+			{
+				m_uniformsData[p_key] = std::any(p_value);
+			}
 		}
 		else
 		{

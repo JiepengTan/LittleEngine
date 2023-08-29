@@ -8,6 +8,7 @@
 
 #include "OvRendering/Buffers/Framebuffer.h"
 
+uint32_t OvRendering::Buffers::Framebuffer::m_curFrameBufferId = 0;
 OvRendering::Buffers::Framebuffer::Framebuffer(uint16_t p_width, uint16_t p_height)
 {
 	/* Generate OpenGL objects */
@@ -40,6 +41,7 @@ OvRendering::Buffers::Framebuffer::~Framebuffer()
 void OvRendering::Buffers::Framebuffer::Bind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_bufferID);
+	m_curFrameBufferId = m_bufferID;
 }
 
 void OvRendering::Buffers::Framebuffer::Unbind()

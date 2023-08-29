@@ -49,7 +49,7 @@ namespace OvCore::Resources
 		* @param p_key
 		* @param p_value
 		*/
-		template<typename T> void Set(const std::string p_key, const T& p_value);
+		template<typename T> void Set(const std::string p_key, const T& p_value, bool p_isForce = false);
 
 		/**
 		* Set a shader uniform value

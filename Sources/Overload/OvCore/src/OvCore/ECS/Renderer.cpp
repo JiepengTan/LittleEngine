@@ -12,6 +12,12 @@
 #include "OvCore/ECS/Renderer.h"
 #include "OvCore/ECS/Components/CModelRenderer.h"
 #include "OvCore/ECS/Components/CMaterialRenderer.h"
+#include "OvCore/ResourceManagement/ShaderManager.h"
+#include "OvCore/Global/ServiceLocator.h"
+#include "OvCore/ResourceManagement/MaterialManager.h"
+#include "OvCore/Helpers/RenderUtils.h"
+#include "OvRendering/Buffers/Framebuffer.h"
+
 
 OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
 	OvRendering::Core::Renderer(p_driver),
@@ -23,6 +29,7 @@ OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
 		false
 	))
 {
+	m_shadowmapBuffer = std::make_unique<OvRendering::Buffers::ShadowmapBuffer>(1024,1024);
 }
 
 OvCore::ECS::Renderer::~Renderer()
@@ -58,6 +65,24 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatrices(const Ov
 
 
 
+OvCore::ECS::Components::CLight* OvCore::ECS::Renderer::FindMainLight(const OvCore::SceneSystem::Scene& p_scene)
+{
+	const auto& facs = p_scene.GetFastAccessComponents();
+	float maxIntersity = -1;
+	ECS::Components::CLight* mainLight = nullptr;
+	for (auto light : facs.lights)
+	{
+		if (light->owner.IsActive() && light->IsDirectional())
+		{
+			if(maxIntersity < light->GetIntensity())
+			{
+				maxIntersity = std::max(maxIntersity,light->GetIntensity());
+				mainLight = light;
+			}
+		}
+	}
+	return mainLight;
+}
 std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatricesInFrustum(const OvCore::SceneSystem::Scene& p_scene, const OvRendering::Data::Frustum& p_frustum)
 {
 	std::vector<OvMaths::FMatrix4> result;
@@ -82,6 +107,50 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatricesInFrustum
 
 	return result;
 }
+void OvCore::ECS::Renderer::DrawShadowmap
+	(
+		OvCore::SceneSystem::Scene& p_scene,
+		const OvMaths::FVector3& p_cameraPosition,
+		const OvRendering::LowRenderer::Camera& p_camera,
+		OpaqueDrawables&	opaqueMeshes
+	)
+{
+	
+	int curFBO = OvRendering::Buffers::Framebuffer::m_curFrameBufferId;
+	m_shadowmapBuffer->Bind();
+	auto shadowMat = OvCore::Global::ServiceLocator::Get<OvCore::ResourceManagement::MaterialManager>()
+		.GetResource(":Materials/Shadowmap.ovmat");
+	auto mainLight = FindMainLight(p_scene);
+	if(mainLight != nullptr)
+	{
+		
+		//auto cameraMatrix = p_camera.GetProjectionMatrix();
+		//auto cameraView = p_camera.GetViewMatrix();
+		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(5, 1, 0.1, 100);
+		auto lightTran = mainLight->owner.transform;
+		auto pos = lightTran.GetWorldPosition();
+		auto forward = lightTran.GetWorldForward();
+		auto up = lightTran.GetWorldUp();
+		auto lightView =  OvMaths::FMatrix4::CreateView(pos,	forward,up);
+		
+		uint8_t stateMask = shadowMat->GenerateStateMask();
+		ApplyStateMask(stateMask);
+		shadowMat->Bind(m_emptyTexture);
+		shadowMat->GetShader()->SetUniformMat4("_LightSpaceMatrix", lightProject*lightView	);
+		for (const auto& [distance, drawable] : opaqueMeshes)
+		{
+			auto& modelMatrix = std::get<0>(drawable);
+			shadowMat->GetShader()->SetUniformMat4("_Local2World",	modelMatrix);
+			auto mesh =std::get<1>(drawable);
+			Draw(*mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, 1);
+		}
+		shadowMat->UnBind();
+	}
+	m_shadowmapBuffer->Unbind();
+	RecoverToLastViewPort();
+	glBindFramebuffer(GL_FRAMEBUFFER, curFBO);
+}
+
 
 void OvCore::ECS::Renderer::RenderScene
 (
@@ -105,12 +174,22 @@ void OvCore::ECS::Renderer::RenderScene
 		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortDrawables(p_scene, p_cameraPosition, p_defaultMaterial);
 	}
 
-	for (const auto& [distance, drawable] : opaqueMeshes)
-		DrawDrawable(drawable);
+	// render shadow
+	
+	DrawShadowmap(p_scene,p_cameraPosition,p_camera,opaqueMeshes);
+	{
+		for (const auto& [distance, drawable] : opaqueMeshes)
+			DrawDrawable(drawable);
 
-	for (const auto& [distance, drawable] : transparentMeshes)
-		DrawDrawable(drawable);
+		for (const auto& [distance, drawable] : transparentMeshes)
+			DrawDrawable(drawable);
+	}
+	if(p_camera.m_CameraType == OvRendering::Settings::ECameraType ::Game)
+		RenderUtils::DrawDebugQuad(m_shadowmapBuffer->GetTexture());
+
 }
+
+
 
 void FindAndSortDrawables
 (
@@ -332,7 +411,7 @@ void OvCore::ECS::Renderer::DrawModelWithMaterials(OvRendering::Resources::Model
 void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix)
 {
 	using namespace OvRendering::Settings;
-
+	p_material.Set("u_Shadowmap",m_shadowmapBuffer->GetTexture(),true);
 	if (p_material.HasShader() && p_material.GetGPUInstances() > 0)
 	{
 		if (p_modelMatrix)

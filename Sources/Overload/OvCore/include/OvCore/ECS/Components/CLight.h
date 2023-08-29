@@ -42,6 +42,16 @@ namespace OvCore::ECS::Components
 		float GetIntensity() const;
 
 		/**
+		* Returns light type
+		*/
+		OvRendering::Entities::Light::Type GetLightType();
+		
+		/**
+		* Is directional light
+		*/
+		bool IsDirectional() ;
+		
+		/**
 		* Defines a new color for the light
 		* @param p_color
 		*/
@@ -72,7 +82,7 @@ namespace OvCore::ECS::Components
 		* @param p_root
 		*/
 		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
-
+		
 	protected:
 		OvRendering::Entities::Light m_data;
 	};
