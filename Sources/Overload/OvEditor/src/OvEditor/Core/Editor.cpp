@@ -95,6 +95,7 @@ void OvEditor::Core::Editor::HandleGlobalShortcuts()
 	{
 		EDITOR_EXEC(DestroyActor(EDITOR_EXEC(GetSelectedActor())));
 	}
+	
 }
 
 void OvEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)

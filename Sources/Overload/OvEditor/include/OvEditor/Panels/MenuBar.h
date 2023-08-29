@@ -36,7 +36,7 @@ namespace OvEditor::Panels
 
 	private:
 		void CreateFileMenu();
-		void CreateBuildMenu();
+		void CreateEditMenu();
 		void CreateWindowMenu();
 		void CreateActorsMenu();
 		void CreateResourcesMenu();
@@ -49,8 +49,9 @@ namespace OvEditor::Panels
 		OvUI::Widgets::Buttons::ButtonImage* CreateToolbarItem(std::string p_name,float& p_offset);
 	private:
 		PanelMap m_panels;
-
+		const std::string PorjectSettingName = "Project Settings";
 		OvUI::Widgets::Menu::MenuList* m_windowMenu = nullptr;
+		OvUI::Widgets::Menu::MenuList* m_editMenu = nullptr;
 		OvUI::Widgets::Buttons::ButtonImage* m_playButton;
 		OvUI::Widgets::Buttons::ButtonImage* m_pauseButton;
 		OvUI::Widgets::Buttons::ButtonImage* m_stopButton;

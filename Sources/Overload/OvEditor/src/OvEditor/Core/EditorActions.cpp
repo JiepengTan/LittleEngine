@@ -124,6 +124,13 @@ void OvEditor::Core::EditorActions::RefreshScripts()
 	m_panelsManager.GetPanelAs<Panels::Inspector>("Inspector").Refresh();
 	if (m_context.scriptInterpreter->IsOk())
 		OVLOG_INFO("Scripts interpretation succeeded!");
+
+	// refresh shaders
+	OvRendering::Resources::Loaders::ShaderLoader::Recompile(
+	*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
+	OvRendering::Resources::Loaders::ShaderLoader::Recompile(
+		*m_context.shaderManager[":Shaders\\StandardPBR.glsl"], "Data\\Engine\\Shaders\\StandardPBR.glsl");
+
 }
 
 std::optional<std::string> OvEditor::Core::EditorActions::SelectBuildFolder()

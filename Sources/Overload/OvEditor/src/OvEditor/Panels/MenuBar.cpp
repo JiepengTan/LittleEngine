@@ -40,7 +40,7 @@ using namespace OvCore::ECS::Components;
 OvEditor::Panels::MenuBar::MenuBar()
 {
 	CreateFileMenu();
-	CreateBuildMenu();
+	CreateEditMenu();
 	CreateWindowMenu();
 	CreateActorsMenu();
 	CreateResourcesMenu();
@@ -138,6 +138,12 @@ void OvEditor::Panels::MenuBar::HandleShortcuts(float p_deltaTime)
 			else
 				EDITOR_EXEC(SaveAs());
 		}
+		
+		if (inputManager.IsKeyPressed(OvWindowing::Inputs::EKey::KEY_B))
+		{
+			bool isShiftPress = inputManager.GetKeyState(OvWindowing::Inputs::EKey::KEY_LEFT_SHIFT) == OvWindowing::Inputs::EKeyState::KEY_DOWN;
+			EDITOR_EXEC(Build(!isShiftPress,true));
+		}
 	}
 }
 
@@ -147,16 +153,28 @@ void OvEditor::Panels::MenuBar::CreateFileMenu()
 	fileMenu.CreateWidget<MenuItem>("New Scene", "CTRL + N").ClickedEvent					+= EDITOR_BIND(LoadEmptyScene);
 	fileMenu.CreateWidget<MenuItem>("Save Scene", "CTRL + S").ClickedEvent					+= EDITOR_BIND(SaveSceneChanges);
 	fileMenu.CreateWidget<MenuItem>("Save Scene As...", "CTRL + SHIFT + S").ClickedEvent	+= EDITOR_BIND(SaveAs);
+	
+	
+	fileMenu.CreateWidget<MenuItem>("Build game", "CTRL + SHIFT + B").ClickedEvent			+= EDITOR_BIND(Build, false, false);
+	fileMenu.CreateWidget<MenuItem>("Build game and run", "CTRL + B").ClickedEvent			+= EDITOR_BIND(Build, true, false);
+	fileMenu.CreateWidget<Visual::Separator>();
+	fileMenu.CreateWidget<MenuItem>("Temporary build").ClickedEvent							  += EDITOR_BIND(Build, true, true);
+	fileMenu.CreateWidget<Visual::Separator>();
 	fileMenu.CreateWidget<MenuItem>("Exit", "ALT + F4").ClickedEvent						+= [] { EDITOR_CONTEXT(window)->SetShouldClose(true); };
+
 }
 
-void OvEditor::Panels::MenuBar::CreateBuildMenu()
+void OvEditor::Panels::MenuBar::CreateEditMenu()
 {
-	auto& buildMenu = CreateWidget<MenuList>("Build");
-	buildMenu.CreateWidget<MenuItem>("Build game").ClickedEvent					+=	EDITOR_BIND(Build, false, false);
-	buildMenu.CreateWidget<MenuItem>("Build game and run").ClickedEvent			+=	EDITOR_BIND(Build, true, false);
-	buildMenu.CreateWidget<Visual::Separator>();
-	buildMenu.CreateWidget<MenuItem>("Temporary build").ClickedEvent			+=	EDITOR_BIND(Build, true, true);
+	m_editMenu = &CreateWidget<MenuList>("Edit");
+	m_editMenu->ClickedEvent += [this]()
+	{
+		if(m_panels.count(PorjectSettingName) > 0)
+		{
+			auto& panel= m_panels.at(PorjectSettingName);
+			panel.second.get().checked = panel.first.get().IsOpened();
+		}
+	};
 }
 
 void OvEditor::Panels::MenuBar::CreateWindowMenu()
@@ -283,9 +301,9 @@ void OvEditor::Panels::MenuBar::CreateHelpMenu()
 
 void OvEditor::Panels::MenuBar::RegisterPanel(const std::string& p_name, OvUI::Panels::PanelWindow& p_panel)
 {
-	auto& menuItem = m_windowMenu->CreateWidget<MenuItem>(p_name, "", true, true);
+	auto menuList = PorjectSettingName == p_name? m_editMenu : m_windowMenu;
+	MenuItem& menuItem = menuList->CreateWidget<MenuItem>(p_name, "", true, true);
 	menuItem.ValueChangedEvent += std::bind(&OvUI::Panels::PanelWindow::SetOpened, &p_panel, std::placeholders::_1);
-
 	m_panels.emplace(p_name, std::make_pair(std::ref(p_panel), std::ref(menuItem)));
 }
 
