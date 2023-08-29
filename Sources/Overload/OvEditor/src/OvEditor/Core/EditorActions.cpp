@@ -68,13 +68,20 @@ void OvEditor::Core::EditorActions::SaveCurrentSceneTo(const std::string& p_path
 
 void OvEditor::Core::EditorActions::LoadSceneFromDisk(const std::string& p_path, bool p_absolute)
 {
+	if(m_isLoadingScene)
+	{
+		OVLOG_INFO("Can not laod another scene when is loading scene " + p_path );
+		return;
+	}
 	if (GetCurrentEditorMode() != EEditorMode::EDIT)
 		StopPlaying();
-
+	m_isLoadingScene = true;
 	m_context.sceneManager.LoadScene(p_path, p_absolute);
 	OVLOG_INFO("Scene loaded from disk: " + m_context.sceneManager.GetCurrentSceneSourcePath());
 	m_panelsManager.GetPanelAs<OvEditor::Panels::SceneView>("Scene View").Focus();
+	m_isLoadingScene = false;
 }
+
 
 bool OvEditor::Core::EditorActions::IsCurrentSceneLoadedFromDisk() const
 {
