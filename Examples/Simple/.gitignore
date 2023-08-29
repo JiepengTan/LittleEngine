@@ -4,6 +4,7 @@ Bin/
 Bin-Int/
 Build/
 Builds/
+Assets/Resources
 imgui.ini
 *.aps
 *.vcxproj*
