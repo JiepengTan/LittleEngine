@@ -223,6 +223,25 @@ namespace OvEditor::Core
 		* Moves the camera to the target actor
 		*/
 		void					MoveToTarget(OvCore::ECS::Actor& p_target);
+		/**
+		* Select Asset
+		*/
+		void OnSelectAsset(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
+		/**
+		* Unselect Asset 
+		*/
+		void OnUnselectAsset(std::string p_path);
+		/**
+		* Try to Open Asset 
+		*/
+		void OpenAssetByFileType(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
+		void OpenAssetMaterial(std::string p_path,bool m_protected);
+		void OpenAssetScene(std::string p_path,bool m_protected);
+		void OpenAssetShader(std::string p_path,bool m_protected);
+		void OpenAssetTexture(std::string p_path,bool m_protected);
+		void OpenAssetModel(std::string p_path,bool m_protected);
+		template<typename TResource, typename TResourceLoader>
+		void PreviewAsset(std::string p_path,bool m_protected);
 		#pragma endregion
 
 		#pragma region RESOURCE_MANAGEMENT

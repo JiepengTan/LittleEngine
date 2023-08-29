@@ -622,6 +622,78 @@ void OvEditor::Core::EditorActions::MoveToTarget(OvCore::ECS::Actor& p_target)
 	EDITOR_PANEL(Panels::SceneView, "Scene View").GetCameraController().MoveToTarget(p_target);
 }
 
+void OvEditor::Core::EditorActions::OnSelectAsset(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected)
+{
+	switch (p_type)
+	{
+	case OvTools::Utils::PathParser::EFileType::MODEL:		OpenAssetModel(p_path,m_protected);	break;
+	case OvTools::Utils::PathParser::EFileType::TEXTURE:	OpenAssetTexture(p_path,m_protected);	break;
+	case OvTools::Utils::PathParser::EFileType::SHADER:		OpenAssetShader(p_path,m_protected);	break;
+	case OvTools::Utils::PathParser::EFileType::MATERIAL:	OpenAssetMaterial(p_path,m_protected);	break;
+	case OvTools::Utils::PathParser::EFileType::SCENE:		/*OpenAssetScene(p_path,m_protected);*/	break;
+	default:  break;
+	}
+}
+
+void OvEditor::Core::EditorActions::OnUnselectAsset(std::string p_path)
+{
+}
+void OvEditor::Core::EditorActions::OpenAssetByFileType(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected)
+{
+	switch (p_type)
+	{
+		case OvTools::Utils::PathParser::EFileType::MODEL:		OpenAssetModel(p_path,m_protected);	break;
+		case OvTools::Utils::PathParser::EFileType::TEXTURE:	OpenAssetTexture(p_path,m_protected);	break;
+		case OvTools::Utils::PathParser::EFileType::SHADER:		OpenAssetShader(p_path,m_protected);	break;
+		case OvTools::Utils::PathParser::EFileType::MATERIAL:	OpenAssetMaterial(p_path,m_protected);	break;
+		case OvTools::Utils::PathParser::EFileType::SCENE:		OpenAssetScene(p_path,m_protected);	break;
+		default:  break;
+	}
+}
+
+template<typename TResource, typename TResourceLoader>
+void OvEditor::Core::EditorActions::PreviewAsset(std::string p_path,bool m_protected)
+{
+	TResource* resource = OvCore::Global::ServiceLocator::Get<TResourceLoader>()[EDITOR_EXEC(GetResourcePath(p_path, m_protected))];
+	auto& assetView = EDITOR_PANEL(OvEditor::Panels::AssetView, "Asset View");
+	assetView.SetResource(resource);
+	assetView.Open();
+	assetView.Focus();
+}
+
+void OvEditor::Core::EditorActions::OpenAssetScene(std::string p_path,bool m_protected)
+{
+	EDITOR_EXEC(LoadSceneFromDisk(EDITOR_EXEC(GetResourcePath(p_path))));
+}
+void OvEditor::Core::EditorActions::OpenAssetShader(std::string p_path,bool m_protected)
+{
+	//PreviewAsset<OvRendering::Resources::Shader,OvCore::ResourceManagement::ShaderManager>(p_path,m_protected);
+}
+void OvEditor::Core::EditorActions::OpenAssetTexture(std::string p_path,bool m_protected)
+{
+	PreviewAsset<OvRendering::Resources::Texture,OvCore::ResourceManagement::TextureManager>(p_path,m_protected);
+}
+void OvEditor::Core::EditorActions::OpenAssetModel(std::string p_path,bool m_protected)
+{
+	PreviewAsset<OvRendering::Resources::Model,OvCore::ResourceManagement::ModelManager>(p_path,m_protected);
+}
+void OvEditor::Core::EditorActions::OpenAssetMaterial(std::string p_path,bool m_protected)
+{
+	OvCore::Resources::Material* material = OVSERVICE(OvCore::ResourceManagement::MaterialManager)[EDITOR_EXEC(GetResourcePath(p_path, m_protected))];
+	if (material)
+	{
+		auto& materialEditor = EDITOR_PANEL(OvEditor::Panels::MaterialEditor, "Material Editor");
+		materialEditor.SetTarget(*material);
+		materialEditor.Open();
+		materialEditor.Focus();
+					
+		OvCore::Resources::Material* resource = OvCore::Global::ServiceLocator::Get<OvCore::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(p_path, m_protected))];
+		auto& assetView = EDITOR_PANEL(OvEditor::Panels::AssetView, "Asset View");
+		assetView.SetResource(resource);
+		assetView.Open();
+		assetView.Focus();
+	}
+}
 void OvEditor::Core::EditorActions::CompileShaders()
 {
 	for (auto shader : m_context.shaderManager.GetResources())

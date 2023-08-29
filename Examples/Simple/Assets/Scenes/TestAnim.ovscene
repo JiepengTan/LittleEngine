@@ -142,15 +142,6 @@
                 <parent>0</parent>
                 <components>
                     <component>
-                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
-                        <data>
-                            <materials>
-                                <material>Mats\Mat_AnimAxe.ovmat</material>
-                                <material>Mats\Mat_AnimBody.ovmat</material>
-                            </materials>
-                        </data>
-                    </component>
-                    <component>
                         <type>class OvCore::ECS::Components::CModelRenderer</type>
                         <data>
                             <model>Resources\Animation\minotaur1.fbx</model>
@@ -161,6 +152,15 @@
                                 <z>0</z>
                             </custom_bounding_sphere_position>
                             <custom_bounding_sphere_radius>1</custom_bounding_sphere_radius>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
+                        <data>
+                            <materials>
+                                <material>Mats\Mat_AnimAxe.ovmat</material>
+                                <material>Mats\Mat_AnimBody.ovmat</material>
+                            </materials>
                         </data>
                     </component>
                     <component>
@@ -195,14 +195,6 @@
                 <parent>0</parent>
                 <components>
                     <component>
-                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
-                        <data>
-                            <materials>
-                                <material>:Materials\Default.ovmat</material>
-                            </materials>
-                        </data>
-                    </component>
-                    <component>
                         <type>class OvCore::ECS::Components::CModelRenderer</type>
                         <data>
                             <model>:Models\Plane.fbx</model>
@@ -213,6 +205,14 @@
                                 <z>0</z>
                             </custom_bounding_sphere_position>
                             <custom_bounding_sphere_radius>1</custom_bounding_sphere_radius>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
+                        <data>
+                            <materials>
+                                <material>:Materials\Default.ovmat</material>
+                            </materials>
                         </data>
                     </component>
                     <component>

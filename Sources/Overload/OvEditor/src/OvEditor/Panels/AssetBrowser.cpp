@@ -1234,6 +1234,9 @@ void OvEditor::Panels::AssetBrowser::ConsiderItem(OvUI::Widgets::Layout::TreeNod
 		default: contextMenu = &clickableText.AddPlugin<FileContextualMenu>(path, protectedItem); break;
 		}
 
+		clickableText.ClickedEvent += EDITOR_BIND(OnSelectAsset, fileType, path, protectedItem);
+		clickableText.DoubleClickedEvent += EDITOR_BIND(OpenAssetByFileType,fileType,path,protectedItem);
+		
 		contextMenu->CreateList();
 
 		contextMenu->DestroyedEvent += [&itemGroup](std::string p_deletedPath)
