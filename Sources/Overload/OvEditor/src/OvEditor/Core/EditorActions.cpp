@@ -461,6 +461,11 @@ void OvEditor::Core::EditorActions::PauseGame()
 	SetEditorMode(EEditorMode::PAUSE);
 	m_context.audioEngine->Suspend();
 }
+void OvEditor::Core::EditorActions::ResumeGame()
+{
+	SetEditorMode(EEditorMode::PLAY);
+	m_context.audioEngine->Unsuspend();
+}
 
 void OvEditor::Core::EditorActions::StopPlaying()
 {

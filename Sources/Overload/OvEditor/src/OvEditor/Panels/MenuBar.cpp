@@ -65,19 +65,40 @@ void OvEditor::Panels::MenuBar::CreateToolbar()
 	float startOffset = 700;
 	m_playButton	= CreateToolbarItem("Button_Play",startOffset); 
 	m_pauseButton	= CreateToolbarItem("Button_Pause",startOffset);
-	m_stopButton	= CreateToolbarItem("Button_Stop",startOffset);
 	m_nextButton	= CreateToolbarItem("Button_Next",startOffset);
 	auto refreshButton	= CreateToolbarItem("Button_Refresh",startOffset);
 	
 	m_playButton->lineBreak		= false;
 	m_pauseButton->lineBreak	= false;
-	m_stopButton->lineBreak		= false;
 	m_nextButton->lineBreak		= false;
 	refreshButton->lineBreak		= false;
 
-	m_playButton->ClickedEvent	+= EDITOR_BIND(StartPlaying);
-	m_pauseButton->ClickedEvent	+= EDITOR_BIND(PauseGame);
-	m_stopButton->ClickedEvent	+= EDITOR_BIND(StopPlaying);
+	m_playButton->ClickedEvent	+=  [this]()
+	{
+		auto& editorActors = OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>();
+		if (editorActors.GetCurrentEditorMode() == OvEditor::Core::EditorActions::EEditorMode::EDIT)
+		{
+			editorActors.StartPlaying();
+			m_playButton->textureID.id =  (uint32_t)EDITOR_CONTEXT(editorResources)->GetTexture("Button_Stop")->id;
+		}else
+		{
+			editorActors.StopPlaying();
+			m_playButton->textureID.id =  (uint32_t)EDITOR_CONTEXT(editorResources)->GetTexture("Button_Play")->id;
+		}
+	};
+	m_pauseButton->ClickedEvent	+=  [this]()
+	{
+		auto& editorActors = OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>();
+		if (editorActors.GetCurrentEditorMode() == OvEditor::Core::EditorActions::EEditorMode::PLAY)
+		{
+			editorActors.PauseGame();
+			m_pauseButton->tint = { 0.9, 0.5, 0.5, 1 };
+		}else if (editorActors.GetCurrentEditorMode() == OvEditor::Core::EditorActions::EEditorMode::PAUSE)
+		{
+			editorActors.ResumeGame();
+			m_pauseButton->tint = { 1, 1, 1, 1 };
+		}
+	};
 	m_nextButton->ClickedEvent	+= EDITOR_BIND(NextFrame);
 	refreshButton->ClickedEvent	+= EDITOR_BIND(RefreshScripts);
 
@@ -94,25 +115,21 @@ void OvEditor::Panels::MenuBar::CreateToolbar()
 		case OvEditor::Core::EditorActions::EEditorMode::EDIT:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
-			enable(m_stopButton, false);
 			enable(m_nextButton, false);
 			break;
 		case OvEditor::Core::EditorActions::EEditorMode::PLAY:
-			enable(m_playButton, false);
+			enable(m_playButton, true);
 			enable(m_pauseButton, true);
-			enable(m_stopButton, true);
 			enable(m_nextButton, true);
 			break;
 		case OvEditor::Core::EditorActions::EEditorMode::PAUSE:
 			enable(m_playButton, true);
-			enable(m_pauseButton, false);
-			enable(m_stopButton, true);
+			enable(m_pauseButton, true);
 			enable(m_nextButton, true);
 			break;
 		case OvEditor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
-			enable(m_stopButton, true);
 			enable(m_nextButton, true);
 			break;
 		}

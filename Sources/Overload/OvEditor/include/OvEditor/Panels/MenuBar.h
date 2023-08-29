@@ -54,7 +54,6 @@ namespace OvEditor::Panels
 		OvUI::Widgets::Menu::MenuList* m_editMenu = nullptr;
 		OvUI::Widgets::Buttons::ButtonImage* m_playButton;
 		OvUI::Widgets::Buttons::ButtonImage* m_pauseButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_stopButton;
 		OvUI::Widgets::Buttons::ButtonImage* m_nextButton;
 	};
 }

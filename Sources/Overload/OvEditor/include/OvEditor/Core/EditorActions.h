@@ -136,6 +136,10 @@ namespace OvEditor::Core
 		* Pause the current playing scene and update the editor mode
 		*/
 		void PauseGame();
+		/**
+		* Resume the current playing scene and update the editor mode
+		*/
+		void ResumeGame();
 
 		/**
 		* Stop platying the current scene and update the editor mode
@@ -415,7 +419,7 @@ namespace OvEditor::Core
 		EEditorMode m_editorMode = EEditorMode::EDIT;
 
 		std::vector<std::pair<uint32_t, std::function<void()>>> m_delayedActions;
-
+		bool m_isLoadingScene = false;
 		tinyxml2::XMLDocument m_sceneBackup;
 	};
 }
