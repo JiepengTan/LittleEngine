@@ -72,8 +72,11 @@ namespace OvRendering::Resources
 
 		Buffers::VertexArray							m_vertexArray;
 		std::unique_ptr<Buffers::VertexBuffer<float>>	m_vertexBuffer;
+		std::unique_ptr<Buffers::VertexBuffer<int>>		m_boneIdBuffer;
 		std::unique_ptr<Buffers::IndexBuffer>			m_indexBuffer;
 
 		Geometry::BoundingSphere m_boundingSphere;
+	public:
+		bool isSkinMesh;
 	};
 }

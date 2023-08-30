@@ -42,6 +42,7 @@ namespace OvRendering::Resources
 		*/
 		const OvRendering::Geometry::BoundingSphere& GetBoundingSphere() const;
 
+		void SetSkinMesh(bool p_skinMesh);
 	private:
 		Model(const std::string& p_path);
 		~Model();
@@ -60,5 +61,6 @@ namespace OvRendering::Resources
 		Geometry::BoundingSphere m_boundingSphere;
 		std::map<std::string, OvRendering::Resources::BoneInfo> m_name2BoneInfo;
 		int m_BoneCounter = 0;
+		bool isSkinMesh;
 	};
 }

@@ -17,6 +17,7 @@
 #include "OvCore/ResourceManagement/MaterialManager.h"
 #include "OvCore/Helpers/RenderUtils.h"
 #include "OvRendering/Buffers/Framebuffer.h"
+#include "OvRendering/Resources/Mesh.h"
 
 
 OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
@@ -426,6 +427,8 @@ void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCor
 		p_material.Bind(m_emptyTexture);
 		p_material.GetShader()->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
 		p_material.GetShader()->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
+		p_material.GetShader()->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
+		
 		Draw(p_mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, p_material.GetGPUInstances());
 		p_material.UnBind();
 	}

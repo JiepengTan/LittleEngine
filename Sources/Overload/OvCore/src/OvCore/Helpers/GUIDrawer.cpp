@@ -28,6 +28,7 @@
 #include <OvCore/ResourceManagement/SoundManager.h>
 
 #include "OvCore/Helpers/GUIDrawer.h"
+#include "OvRendering/Resources/Model.h"
 
 const OvUI::Types::Color OvCore::Helpers::GUIDrawer::TitleColor = { 0.85f, 0.65f, 0.0f };
 const OvUI::Types::Color OvCore::Helpers::GUIDrawer::ClearButtonColor = { 0.5f, 0.0f, 0.0f };

@@ -13,12 +13,12 @@ namespace OvRendering::Geometry
 	*/
 	struct Vertex
 	{
-		float position[3];
-		float texCoords[2];
-		float normals[3];
-		float tangent[3];
-		float bitangent[3];
-		int boneIds[4];
-		float boneWeights[4];
+		float position[3];//0
+		float texCoords[2];//3
+		float normals[3];//5
+		float tangent[3];//8
+		float bitangent[3];//11
+		float boneWeights[4];//14
+		int32_t boneIds[4];
 	};
 }

@@ -16,11 +16,19 @@ const OvRendering::Geometry::BoundingSphere& OvRendering::Resources::Model::GetB
 OvRendering::Resources::Model::Model(const std::string & p_path) : path(p_path)
 {
 }
-
 OvRendering::Resources::Model::~Model()
 {
 	for (auto mesh : m_meshes)
 		delete mesh;
+}
+
+void OvRendering::Resources::Model::SetSkinMesh(bool p_skinMesh)
+{
+	isSkinMesh  = p_skinMesh;
+	for (auto mesh : m_meshes)
+	{
+		mesh->isSkinMesh = isSkinMesh;
+	}
 }
 
 void OvRendering::Resources::Model::ComputeBoundingSphere()

@@ -10,6 +10,7 @@
 #include "OvCore/ResourceManagement/AnimationManager.h"
 #include "OvCore/ResourceManagement/ModelManager.h"
 #include "OvRendering/Resources/Animation.h"
+#include "OvRendering/Resources/Model.h"
 
 OvCore::ECS::Components::CAnimator::CAnimator(ECS::Actor& p_owner) :
     AComponent(p_owner), m_currentTime(0)
@@ -29,6 +30,8 @@ void OvCore::ECS::Components::CAnimator::OnStart()
     mgr.m_model = model;
     auto anim = mgr.GetResource(m_animPath);
     m_curAnim = anim;
+    
+    model->SetSkinMesh(true);
     for (int i = 0; i < 100; i++)
         m_FinalBoneMatrices.push_back(OvMaths::FMatrix4::Identity);
 }
