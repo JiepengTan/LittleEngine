@@ -5,14 +5,16 @@
 */
 
 #include "OvRendering/Resources/Loaders/ModelLoader.h"
+#include "OvRendering/Resources/Model.h"
 
 OvRendering::Resources::Parsers::AssimpParser OvRendering::Resources::Loaders::ModelLoader::__ASSIMP;
 
-OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath, Parsers::EModelParserFlags p_parserFlags)
+OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath,
+	OvRendering::Resources::Parsers::EModelParserFlags p_parserFlags)
 {
 	Model* result = new Model(p_filepath);
-
-	if (__ASSIMP.LoadModel(p_filepath, result->m_meshes, result->m_materialNames, p_parserFlags))
+	
+	if (__ASSIMP.LoadModel(result,p_filepath, result->m_meshes, result->m_materialNames, p_parserFlags))
 	{
 		result->ComputeBoundingSphere();
 		return result;
@@ -22,6 +24,8 @@ OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Cre
 
 	return nullptr;
 }
+
+
 
 void OvRendering::Resources::Loaders::ModelLoader::Reload(Model& p_model, const std::string& p_filePath, Parsers::EModelParserFlags p_parserFlags)
 {

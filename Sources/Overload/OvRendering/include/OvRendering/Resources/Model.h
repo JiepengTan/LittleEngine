@@ -6,22 +6,25 @@
 
 #pragma once
 
+#include <map>
 #include <vector>
-#include <unordered_map>
 #include <string>
-
+#include "OvRendering/Resources/AnimationData.h"
 #include "OvRendering/Resources/Mesh.h"
+namespace OvRendering::Resources::Loaders
+{
+	class ModelLoader;
+}
 
 namespace OvRendering::Resources
 {
-	namespace Loaders { class ModelLoader; }
 
 	/**
 	* A model is a combinaison of meshes
 	*/
 	class Model
 	{
-		friend class Loaders::ModelLoader;
+		friend class OvRendering::Resources::Loaders::ModelLoader;
 
 	public:
 		/**
@@ -47,11 +50,15 @@ namespace OvRendering::Resources
 
 	public:
 		const std::string path;
-
+		int& GetBoneCount() { return m_BoneCounter; }
+		std::map<std::string, OvRendering::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
+		
 	private:
 		std::vector<Mesh*> m_meshes;
 		std::vector<std::string> m_materialNames;
 
 		Geometry::BoundingSphere m_boundingSphere;
+		std::map<std::string, OvRendering::Resources::BoneInfo> m_name2BoneInfo;
+		int m_BoneCounter = 0;
 	};
 }

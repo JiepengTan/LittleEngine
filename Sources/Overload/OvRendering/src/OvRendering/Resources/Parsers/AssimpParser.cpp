@@ -7,11 +7,66 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/matrix4x4.h>
-#include <assimp/postprocess.h>
-
 #include "OvRendering/Resources/Parsers/AssimpParser.h"
+#include <assimp/postprocess.h>
+#include "OvDebug/Assertion.h"
+#include "OvRendering/Resources/AnimationData.h"
+#include "OvRendering/Resources/Animation.h"
+#include "OvRendering/Resources/Model.h"
 
-bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(const std::string & p_fileName, std::vector<Mesh*>& p_meshes, std::vector<std::string>& p_materials, EModelParserFlags p_parserFlags)
+static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
+{
+	return *((OvMaths::FMatrix4*)(&p_from));
+}
+
+bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName)
+{
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_Triangulate);
+	OVASSERT(scene && scene->mRootNode, "");
+	auto animation = scene->mAnimations[0];
+	p_anim->m_Duration = animation->mDuration;
+	p_anim->m_TicksPerSecond = animation->mTicksPerSecond;
+	aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
+	globalTransformation = globalTransformation.Inverse();
+	ReadHierarchyData(p_anim->m_skeletonRoot, scene->mRootNode);
+	
+	auto& boneInfoMap = p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
+	int& boneCount = p_anim->GetBoneCount(); //getting the m_BoneCounter from Model class
+	// read all channel 
+	int size = animation->mNumChannels;
+	//reading channels(bones engaged in an animation and their keyframes)
+	for (int i = 0; i < size; i++)
+	{
+		auto channel = animation->mChannels[i];
+		std::string boneName = channel->mNodeName.data;
+		if (boneInfoMap.find(boneName) == boneInfoMap.end())
+		{
+			boneInfoMap[boneName].id = boneCount;
+			boneCount++;
+		}
+		p_anim->m_Bones.push_back(BoneFrames(channel->mNodeName.data,
+							   boneInfoMap[channel->mNodeName.data].id, channel));
+	}
+	p_anim->m_name2BoneInfo = boneInfoMap;
+	return true;
+}
+void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
+{
+	p_dest.name = p_src->mName.data;
+	p_dest.transformation = ConvertMatrixToGLMFormat(p_src->mTransformation); // 直接内存映射
+	p_dest.childrenCount = p_src->mNumChildren;
+
+	for (int i = 0; i < p_src->mNumChildren; i++)
+	{
+		SkeletonBone newData;
+		ReadHierarchyData(newData, p_src->mChildren[i]);
+		p_dest.children.push_back(newData);
+	}
+}
+
+
+bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string & p_fileName, std::vector<Mesh*>& p_meshes, std::vector<std::string>& p_materials, EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer import;
 	const aiScene* scene = import.ReadFile(p_fileName, static_cast<unsigned int>(p_parserFlags));
@@ -23,7 +78,7 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(const std::string 
 
 	aiMatrix4x4 identity;
 
-	ProcessNode(&identity, scene->mRootNode, scene, p_meshes);
+	ProcessNode(p_model,&identity, scene->mRootNode, scene, p_meshes);
 
 	return true;
 }
@@ -42,7 +97,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessMaterials(const aiSce
 	}
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(void* p_transform, aiNode * p_node, const aiScene * p_scene, std::vector<Mesh*>& p_meshes)
+void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model,void* p_transform, aiNode * p_node, const aiScene * p_scene, std::vector<Mesh*>& p_meshes)
 {
 	aiMatrix4x4 nodeTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform) * p_node->mTransformation;
 
@@ -52,18 +107,66 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(void* p_transfor
 		std::vector<Geometry::Vertex> vertices;
 		std::vector<uint32_t> indices;
 		aiMesh* mesh = p_scene->mMeshes[p_node->mMeshes[i]];
-		ProcessMesh(&nodeTransformation, mesh, p_scene, vertices, indices);
+		ProcessMesh(p_model, &nodeTransformation, mesh, p_scene, vertices, indices);
 		p_meshes.push_back(new Mesh(vertices, indices, mesh->mMaterialIndex)); // The model will handle mesh destruction
 	}
 
 	// Then do the same for each of its children
 	for (uint32_t i = 0; i < p_node->mNumChildren; ++i)
 	{
-		ProcessNode(&nodeTransformation, p_node->mChildren[i], p_scene, p_meshes);
+		ProcessNode(p_model, &nodeTransformation, p_node->mChildren[i], p_scene, p_meshes);
+	}
+}
+void OvRendering::Resources::Parsers::AssimpParser::SetVertexBoneData(Geometry::Vertex& vertex, int boneID, float weight)
+{
+	for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
+	{
+		if (vertex.boneIds[i] < 0)
+		{
+			vertex.boneWeights[i] = weight;
+			vertex.boneIds[i] = boneID;
+			break;
+		}
 	}
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(void* p_transform, aiMesh* p_mesh, const aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices)
+void OvRendering::Resources::Parsers::AssimpParser::ExtractBoneWeightForVertices(OvRendering::Resources::Model* p_model,std::vector<Geometry::Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
+{
+	auto& boneInfoMap = p_model->GetBoneInfoMap();
+	int& boneCount = p_model->GetBoneCount();
+
+	for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+	{
+		int boneID = -1;
+		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
+		if (boneInfoMap.find(boneName) == boneInfoMap.end())
+		{
+			boneInfoMap[boneName] ={
+				boneCount,
+				ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix)
+			};
+			boneID = boneCount;
+			boneCount++;
+		}
+		else
+		{
+			boneID = boneInfoMap[boneName].id;
+		}
+		
+		auto weights = mesh->mBones[boneIndex]->mWeights;
+		int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+
+		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+		{
+			int vertexId = weights[weightIndex].mVertexId;
+			float weight = weights[weightIndex].mWeight;
+			OVASSERT(vertexId <= vertices.size()," Model file invalid !");
+			SetVertexBoneData(vertices[vertexId], boneID, weight);
+		}
+	}
+}
+
+void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, aiMesh* p_mesh, const aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices)
 {
 	aiMatrix4x4 meshTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform);
 
@@ -103,4 +206,5 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(void* p_transfor
 		for (size_t indexID = 0; indexID < 3; ++indexID)
 			p_outIndices.push_back(face.mIndices[indexID]);
 	}
+	ExtractBoneWeightForVertices(p_model,p_outVertices,p_mesh,p_scene);
 }

@@ -18,5 +18,7 @@ namespace OvRendering::Geometry
 		float normals[3];
 		float tangent[3];
 		float bitangent[3];
+		int boneIds[4];
+		float boneWeights[4];
 	};
 }

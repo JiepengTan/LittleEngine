@@ -7,10 +7,12 @@
 #pragma once
 
 #include <string>
-
-#include "OvRendering/Resources/Mesh.h"
 #include "OvRendering/Resources/Parsers/EModelParserFlags.h"
-
+namespace OvRendering::Resources
+{
+	class Model;
+	class Mesh;
+}
 namespace OvRendering::Resources::Parsers
 {
 	/**
@@ -28,6 +30,7 @@ namespace OvRendering::Resources::Parsers
 		*/
 		virtual bool LoadModel
 		(
+			Model* p_model,
 			const std::string& p_fileName,
 			std::vector<Mesh*>& p_meshes,
 			std::vector<std::string>& p_materials,

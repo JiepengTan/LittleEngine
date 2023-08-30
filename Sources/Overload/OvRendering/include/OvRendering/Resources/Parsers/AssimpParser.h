@@ -3,15 +3,21 @@
 * @author: Overload Tech.
 * @licence: MIT
 */
+#pragma once
 
 #include <vector>
 
-
+#include "OvMaths/FMatrix4.h"
 #include "OvRendering/Geometry/Vertex.h"
-#include "OvRendering/Resources/Mesh.h"
 #include "OvRendering/Resources/Parsers/IModelParser.h"
 
-#pragma once
+namespace OvRendering::Resources
+{
+	class Animation;
+	class Model;
+	class Mesh;
+	struct SkeletonBone;
+}
 
 namespace OvRendering::Resources::Parsers
 {
@@ -30,15 +36,22 @@ namespace OvRendering::Resources::Parsers
 		*/
 		bool LoadModel
 		(
+			Model* p_model,
 			const std::string& p_fileName,
 			std::vector<Mesh*>& p_meshes,
 			std::vector<std::string>& p_materials,
 			EModelParserFlags p_parserFlags
 		) override;
-
+		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName);
 	private:
+		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);
 		void ProcessMaterials(const struct aiScene* p_scene, std::vector<std::string>& p_materials);;
-		void ProcessNode(void* p_transform, struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Mesh*>& p_meshes);
-		void ProcessMesh(void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices);
+		void ProcessNode(Model* p_model,void* p_transform, struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Mesh*>& p_meshes);
+		void ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices);
+		void SetVertexBoneData(Geometry::Vertex& vertex, int boneID, float weight);
+		void ExtractBoneWeightForVertices(OvRendering::Resources::Model* p_model, std::vector<Geometry::Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
+	
+	private:
+		const int MAX_BONE_INFLUENCE = 4;
 	};
 }

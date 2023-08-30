@@ -8,9 +8,11 @@
 
 #include <string>
 
-#include "OvRendering/Resources/Model.h"
 #include "OvRendering/Resources/Parsers/AssimpParser.h"
-
+namespace OvRendering::Resources
+{
+	class Model;
+}
 namespace OvRendering::Resources::Loaders
 {
 	/**
