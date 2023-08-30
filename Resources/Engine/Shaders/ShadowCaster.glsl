@@ -2,8 +2,8 @@
 #version 430 core
 layout (location = 0) in vec3 aPos;
 
-uniform mat4 _LightSpaceMatrix;
-uniform mat4 _Local2World;
+uniform mat4 u_LightSpaceMatrix;
+uniform mat4 u_Local2World;
 out vec4 FragPos;
 
 out VS_OUT
@@ -13,7 +13,7 @@ out VS_OUT
 
 void main()
 {
-    vs_out.FragPos = _LightSpaceMatrix * _Local2World * vec4(aPos, 1.0);
+    vs_out.FragPos = u_LightSpaceMatrix * u_Local2World * vec4(aPos, 1.0);
     gl_Position = vs_out.FragPos;
 }
 

@@ -7,6 +7,8 @@ layout (location = 2) in vec3 geo_Normal;
 layout (location = 3) in vec3 geo_Tangent;
 layout (location = 4) in vec3 geo_Bitangent;
 
+uniform mat4 u_LightSpaceMatrix;
+
 /* Global information sent by the engine */
 layout (std140) uniform EngineUBO
 {
@@ -26,6 +28,7 @@ out VS_OUT
     mat3        TBN;
     flat vec3   TangentViewPos;
     vec3        TangentFragPos;
+    vec4        FragPosLightSpace;
 } vs_out;
 
 void main()
@@ -44,6 +47,8 @@ void main()
     vs_out.TexCoords        = geo_TexCoords;
     vs_out.TangentViewPos   = TBNi * ubo_ViewPos;
     vs_out.TangentFragPos   = TBNi * vs_out.FragPos;
+
+    vs_out.FragPosLightSpace = u_LightSpaceMatrix * vec4(vs_out.FragPos, 1.0);
 
     gl_Position = ubo_Projection * ubo_View * vec4(vs_out.FragPos, 1.0);
 }
@@ -69,7 +74,8 @@ in VS_OUT
     vec2        TexCoords;
     mat3        TBN;
     flat vec3   TangentViewPos;
-    vec3        TangentFragPos;
+    vec3        TangentFragPos;    
+    vec4        FragPosLightSpace;
 } fs_in;
 
 /* Light information sent by the engine */
@@ -77,6 +83,11 @@ layout(std430, binding = 0) buffer LightSSBO
 {
     mat4 ssbo_Lights[];
 };
+
+// shadow map build in variable
+uniform sampler2D   u_Shadowmap;
+uniform vec4        u_ShadowLightPosition;
+uniform mat4        u_LightSpaceMatrix;
 
 /* Uniforms (Tweakable from the material editor) */
 uniform vec2        u_TextureTiling           = vec2(1.0, 1.0);
@@ -209,6 +220,44 @@ vec3 CalcAmbientSphereLight(mat4 p_Light)
     return distance(lightPosition, fs_in.FragPos) <= radius ? g_DiffuseTexel.rgb * lightColor * intensity : vec3(0.0);
 }
 
+
+float ShadowCalculation(vec4 fragPosLightSpace)
+{
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+    // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+    float closestDepth = texture(u_Shadowmap, projCoords.xy).r; 
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // calculate bias (based on depth map resolution and slope)
+    vec3 normal = normalize(fs_in.Normal);
+    vec3 lightDir = normalize(u_ShadowLightPosition.xyz - fs_in.FragPos);
+    float bias = max(0.01 * (1.0 - dot(normal, lightDir)), 0.002);
+    // check whether current frag pos is in shadow
+    //float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    //return shadow;
+    // PCF
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_Shadowmap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(u_Shadowmap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+    
+    // keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+        
+    return shadow;
+}
+
 void main()
 {
     g_TexCoords = u_TextureOffset + vec2(mod(fs_in.TexCoords.x * u_TextureTiling.x, 1), mod(fs_in.TexCoords.y * u_TextureTiling.y, 1));
@@ -217,12 +266,17 @@ void main()
     if (u_HeightScale > 0)
         g_TexCoords = ParallaxMapping(normalize(fs_in.TangentViewPos - fs_in.TangentFragPos));
 
+
     /* Apply color mask */
     if (texture(u_MaskMap, g_TexCoords).r != 0.0)
     {
         g_ViewDir           = normalize(ubo_ViewPos - fs_in.FragPos);
         g_DiffuseTexel      = texture(u_DiffuseMap,  g_TexCoords) * u_Diffuse;
         g_SpecularTexel     = texture(u_SpecularMap, g_TexCoords) * vec4(u_Specular, 1.0);
+
+        vec4 fragPosLightSpace = fs_in.FragPosLightSpace;
+        vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+        //FRAGMENT_COLOR = vec4(projCoords,1); return; 
 
         if (u_EnableNormalMapping)
         {
@@ -236,7 +290,10 @@ void main()
         }
 
         vec3 lightSum = vec3(0.0);
-
+        vec3 ambient = vec3(0.0);
+        lightSum += CalcDirectionalLight(ssbo_Lights[0]);
+        ambient += CalcAmbientBoxLight(ssbo_Lights[1]);
+        /*
         for (int i = 0; i < ssbo_Lights.length(); ++i)
         {
             switch(int(ssbo_Lights[i][3][0]))
@@ -244,11 +301,18 @@ void main()
                 case 0: lightSum += CalcPointLight(ssbo_Lights[i]);         break;
                 case 1: lightSum += CalcDirectionalLight(ssbo_Lights[i]);   break;
                 case 2: lightSum += CalcSpotLight(ssbo_Lights[i]);          break;
-                case 3: lightSum += CalcAmbientBoxLight(ssbo_Lights[i]);    break;
+                case 3: ambient += CalcAmbientBoxLight(ssbo_Lights[i]);    break;
                 case 4: lightSum += CalcAmbientSphereLight(ssbo_Lights[i]); break;
             }
-        }
+        }   
+*/ 
+        //float shadow =texture(u_Shadowmap, fs_in.TexCoords.xy).r; 
+        float shadow = clamp( 1.0- ShadowCalculation(fs_in.FragPosLightSpace),0.2,1.0);    
+           // perform perspective divide
+        //FRAGMENT_COLOR = vec4(shadow); return;
 
+        //FRAGMENT_COLOR = vec4(vec3((1.0 - shadow)),1); return;                   
+        lightSum = ambient + shadow * lightSum; 
         FRAGMENT_COLOR = vec4(lightSum, g_DiffuseTexel.a);
     }
     else

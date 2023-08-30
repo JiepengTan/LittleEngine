@@ -115,7 +115,6 @@ void OvCore::ECS::Renderer::DrawShadowmap
 		OpaqueDrawables&	opaqueMeshes
 	)
 {
-	
 	int curFBO = OvRendering::Buffers::Framebuffer::m_curFrameBufferId;
 	m_shadowmapBuffer->Bind();
 	auto shadowMat = OvCore::Global::ServiceLocator::Get<OvCore::ResourceManagement::MaterialManager>()
@@ -126,21 +125,22 @@ void OvCore::ECS::Renderer::DrawShadowmap
 		
 		//auto cameraMatrix = p_camera.GetProjectionMatrix();
 		//auto cameraView = p_camera.GetViewMatrix();
-		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(5, 1, 0.1, 100);
+		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(20, 1, 0.1, 100);
 		auto lightTran = mainLight->owner.transform;
 		auto pos = lightTran.GetWorldPosition();
 		auto forward = lightTran.GetWorldForward();
 		auto up = lightTran.GetWorldUp();
 		auto lightView =  OvMaths::FMatrix4::CreateView(pos,	forward,up);
-		
+		m_lightSpaceVPMatrix = lightProject*lightView;
+		m_lightInfo = OvMaths::FVector4(pos.x,pos.y,pos.z,1);
 		uint8_t stateMask = shadowMat->GenerateStateMask();
 		ApplyStateMask(stateMask);
 		shadowMat->Bind(m_emptyTexture);
-		shadowMat->GetShader()->SetUniformMat4("_LightSpaceMatrix", lightProject*lightView	);
+		shadowMat->GetShader()->SetUniformMat4("u_LightSpaceMatrix", m_lightSpaceVPMatrix	);
 		for (const auto& [distance, drawable] : opaqueMeshes)
 		{
 			auto& modelMatrix = std::get<0>(drawable);
-			shadowMat->GetShader()->SetUniformMat4("_Local2World",	modelMatrix);
+			shadowMat->GetShader()->SetUniformMat4("u_Local2World",	modelMatrix);
 			auto mesh =std::get<1>(drawable);
 			Draw(*mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, 1);
 		}
@@ -184,9 +184,11 @@ void OvCore::ECS::Renderer::RenderScene
 		for (const auto& [distance, drawable] : transparentMeshes)
 			DrawDrawable(drawable);
 	}
+
+	/*
 	if(p_camera.m_CameraType == OvRendering::Settings::ECameraType ::Game)
 		RenderUtils::DrawDebugQuad(m_shadowmapBuffer->GetTexture());
-
+	*/
 }
 
 
@@ -422,6 +424,8 @@ void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCor
 		
 		/* Draw the mesh */
 		p_material.Bind(m_emptyTexture);
+		p_material.GetShader()->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
+		p_material.GetShader()->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
 		Draw(p_mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, p_material.GetGPUInstances());
 		p_material.UnBind();
 	}

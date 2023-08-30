@@ -7,6 +7,8 @@ layout (location = 2) in vec3 geo_Normal;
 layout (location = 3) in vec3 geo_Tangent;
 layout (location = 4) in vec3 geo_Bitangent;
 
+uniform mat4 u_LightSpaceMatrix;
+
 /* Global information sent by the engine */
 layout (std140) uniform EngineUBO
 {
@@ -26,6 +28,7 @@ out VS_OUT
     mat3        TBN;
     flat vec3   TangentViewPos;
     vec3        TangentFragPos;
+    vec4        FragPosLightSpace;
 } vs_out;
 
 void main()
@@ -44,6 +47,8 @@ void main()
     vs_out.TexCoords        = geo_TexCoords;
     vs_out.TangentViewPos   = TBNi * ubo_ViewPos;
     vs_out.TangentFragPos   = TBNi * vs_out.FragPos;
+
+    vs_out.FragPosLightSpace = u_LightSpaceMatrix * vec4(vs_out.FragPos, 1.0);
 
     gl_Position = ubo_Projection * ubo_View * vec4(vs_out.FragPos, 1.0);
 }
@@ -70,6 +75,7 @@ in VS_OUT
     mat3        TBN;
     flat vec3   TangentViewPos;
     vec3        TangentFragPos;
+    vec4        FragPosLightSpace;
 } fs_in;
 
 /* Light information sent by the engine */
@@ -82,6 +88,8 @@ out vec4 FRAGMENT_COLOR;
 
 // shadow map build in variable
 uniform sampler2D   u_Shadowmap;
+uniform vec4        u_ShadowLightPosition;
+uniform mat4        u_LightSpaceMatrix;
 
 uniform sampler2D   u_AlbedoMap;
 uniform sampler2D   u_MetallicMap;
@@ -189,12 +197,47 @@ vec3 CalcAmbientSphereLight(mat4 p_Light)
     return distance(lightPosition, fs_in.FragPos) <= radius ? lightColor * intensity : vec3(0.0);
 }
 
+float ShadowCalculation(vec4 fragPosLightSpace)
+{
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+    // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+    float closestDepth = texture(u_Shadowmap, projCoords.xy).r; 
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // calculate bias (based on depth map resolution and slope)
+    vec3 normal = normalize(fs_in.Normal);
+    vec3 lightDir = normalize(u_ShadowLightPosition.xyz - fs_in.FragPos);
+    float bias = max(0.01 * (1.0 - dot(normal, lightDir)), 0.002);
+    // check whether current frag pos is in shadow
+    //float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    //return shadow;
+    // PCF
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_Shadowmap, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(u_Shadowmap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+    
+    // keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+        
+    return shadow;
+}
+
 void main()
 {
     vec2 texCoords = u_TextureOffset + vec2(mod(fs_in.TexCoords.x * u_TextureTiling.x, 1), mod(fs_in.TexCoords.y * u_TextureTiling.y, 1));
-    float shadowmapval = texture(u_Shadowmap, texCoords).r ;
-    FRAGMENT_COLOR = vec4(vec3(shadowmapval),1);
-    return ;
+
     vec4 albedoRGBA     = texture(u_AlbedoMap, texCoords) * u_Albedo;
     vec3 albedo         = pow(albedoRGBA.rgb, vec3(2.2));
     float metallic      = texture(u_MetallicMap, texCoords).r * u_Metallic;
@@ -290,8 +333,9 @@ void main()
     }
 
     vec3 ambient = ambientSum * albedo * ao;
-    vec3 color = ambient + Lo;
-	
+	float shadow = clamp(1.0- ShadowCalculation(fs_in.FragPosLightSpace),0,1);    
+    vec3 color = ambient + Lo *shadow;
+
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));  
    

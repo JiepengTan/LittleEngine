@@ -177,5 +177,7 @@ namespace OvCore::ECS
 		std::function<void(OvMaths::FMatrix4)> m_userMatrixSender;
 		std::unique_ptr<OvRendering::Buffers::ShadowmapBuffer> m_shadowmapBuffer = nullptr;
 		OvRendering::Resources::Texture* m_emptyTexture = nullptr;
+		OvMaths::FMatrix4 m_lightSpaceVPMatrix;
+		OvMaths::FVector4 m_lightInfo;
 	};
 }

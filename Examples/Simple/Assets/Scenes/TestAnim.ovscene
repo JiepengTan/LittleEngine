@@ -23,20 +23,20 @@
                         <type>class OvCore::ECS::Components::CTransform</type>
                         <data>
                             <position>
-                                <x>0</x>
-                                <y>10</y>
-                                <z>0</z>
+                                <x>-8.921978</x>
+                                <y>25.608912</y>
+                                <z>9.9246998</z>
                             </position>
                             <rotation>
-                                <x>0.81379771</x>
-                                <y>-0.17101006</y>
-                                <z>0.29619816</z>
-                                <w>0.46984628</w>
+                                <x>0.89893478</x>
+                                <y>-0.10183777</y>
+                                <z>0.33123425</z>
+                                <w>0.26800966</w>
                             </rotation>
                             <scale>
-                                <x>1</x>
-                                <y>1</y>
-                                <z>1</z>
+                                <x>0.99999988</x>
+                                <y>1.0000007</y>
+                                <z>1.0000005</z>
                             </scale>
                         </data>
                     </component>
@@ -142,15 +142,6 @@
                 <parent>0</parent>
                 <components>
                     <component>
-                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
-                        <data>
-                            <materials>
-                                <material>Mats\Mat_AnimAxe.ovmat</material>
-                                <material>Mats\Mat_AnimBody.ovmat</material>
-                            </materials>
-                        </data>
-                    </component>
-                    <component>
                         <type>class OvCore::ECS::Components::CModelRenderer</type>
                         <data>
                             <model>Resources\Animation\minotaur1.fbx</model>
@@ -161,6 +152,15 @@
                                 <z>0</z>
                             </custom_bounding_sphere_position>
                             <custom_bounding_sphere_radius>1</custom_bounding_sphere_radius>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
+                        <data>
+                            <materials>
+                                <material>Mats\Mat_AnimAxe.ovmat</material>
+                                <material>Mats\Mat_AnimBody.ovmat</material>
+                            </materials>
                         </data>
                     </component>
                     <component>
@@ -195,14 +195,6 @@
                 <parent>0</parent>
                 <components>
                     <component>
-                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
-                        <data>
-                            <materials>
-                                <material>:Materials\Default.ovmat</material>
-                            </materials>
-                        </data>
-                    </component>
-                    <component>
                         <type>class OvCore::ECS::Components::CModelRenderer</type>
                         <data>
                             <model>:Models\Plane.fbx</model>
@@ -213,6 +205,14 @@
                                 <z>0</z>
                             </custom_bounding_sphere_position>
                             <custom_bounding_sphere_radius>1</custom_bounding_sphere_radius>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
+                        <data>
+                            <materials>
+                                <material>:Materials\Default.ovmat</material>
+                            </materials>
                         </data>
                     </component>
                     <component>
@@ -233,6 +233,58 @@
                                 <x>40</x>
                                 <y>1</y>
                                 <z>40</z>
+                            </scale>
+                        </data>
+                    </component>
+                </components>
+                <behaviours/>
+            </actor>
+            <actor>
+                <name>Cube</name>
+                <tag></tag>
+                <active>true</active>
+                <id>11</id>
+                <parent>0</parent>
+                <components>
+                    <component>
+                        <type>class OvCore::ECS::Components::CModelRenderer</type>
+                        <data>
+                            <model>:Models\Cube.fbx</model>
+                            <frustum_behaviour>1</frustum_behaviour>
+                            <custom_bounding_sphere_position>
+                                <x>0</x>
+                                <y>0</y>
+                                <z>0</z>
+                            </custom_bounding_sphere_position>
+                            <custom_bounding_sphere_radius>1</custom_bounding_sphere_radius>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CMaterialRenderer</type>
+                        <data>
+                            <materials>
+                                <material>:Materials\Default.ovmat</material>
+                            </materials>
+                        </data>
+                    </component>
+                    <component>
+                        <type>class OvCore::ECS::Components::CTransform</type>
+                        <data>
+                            <position>
+                                <x>6.8693066</x>
+                                <y>4.7875543</y>
+                                <z>-8.3841934</z>
+                            </position>
+                            <rotation>
+                                <x>0</x>
+                                <y>0.020932579</y>
+                                <z>0</z>
+                                <w>0.99978095</w>
+                            </rotation>
+                            <scale>
+                                <x>3.9999995</x>
+                                <y>4</y>
+                                <z>3.9999995</z>
                             </scale>
                         </data>
                     </component>
