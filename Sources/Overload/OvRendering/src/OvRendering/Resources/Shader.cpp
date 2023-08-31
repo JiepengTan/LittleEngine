@@ -60,6 +60,14 @@ void OvRendering::Resources::Shader::SetUniformMat4(const std::string& p_name, c
 {
 	glUniformMatrix4fv(GetUniformLocation(p_name), 1, GL_TRUE, &p_mat4.data[0]);
 }
+void OvRendering::Resources::Shader::SetUniformMat4Array(const std::string& p_name, const std::vector<OvMaths::FMatrix4>& p_matAry)
+{
+	for (auto i =0;i< p_matAry.size();i++)
+	{
+		auto mat = p_matAry[i];
+		glUniformMatrix4fv(GetUniformLocation(p_name +"[" + std::to_string(i) + "]"), 1, GL_TRUE, &mat.data[0]);
+	}
+}
 
 int OvRendering::Resources::Shader::GetUniformInt(const std::string& p_name)
 {

@@ -8,6 +8,8 @@
 #include <OvPhysics/Core/PhysicsEngine.h>
 
 #include "OvEditor/Core/Editor.h"
+
+#include "OvCore/GlobalState.h"
 #include "OvEditor/Panels/MenuBar.h"
 #include "OvEditor/Panels/AssetBrowser.h"
 #include "OvEditor/Panels/HardwareInfo.h"
@@ -109,6 +111,22 @@ void OvEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)
 		PROFILER_SPY("Scene garbage collection");
 		m_context.sceneManager.GetCurrentScene()->CollectGarbages();
 		m_context.sceneManager.Update();
+		auto currentScene = m_context.sceneManager.GetCurrentScene();
+		if(currentScene != nullptr)
+		{
+			auto actor = &EDITOR_EXEC(GetSelectedActor());
+			if(actor != nullptr && actor->IsAlive())
+			{
+				auto comps = actor->GetComponents();
+				for (auto comp :comps)
+				{
+					if(comp->owner.IsAlive() && comp->IsUpdateInEdit)
+					{
+						comp->OnUpdate(p_deltaTime);
+					}
+				}
+			}
+		}
 	}
 }
 

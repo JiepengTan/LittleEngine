@@ -11,6 +11,7 @@
 
 #include <OvTools/Eventing/Event.h>
 
+#include "OvCore/GlobalState.h"
 #include "OvCore/ECS/Components/AComponent.h"
 #include "OvCore/ECS/Components/CTransform.h"
 #include "OvCore/ECS/Components/Behaviour.h"

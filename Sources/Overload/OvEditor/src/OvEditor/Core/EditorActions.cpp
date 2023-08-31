@@ -26,6 +26,8 @@
 #include <OvTools/Utils/SystemCalls.h>
 
 #include "OvEditor/Core/EditorActions.h"
+
+#include "OvCore/GlobalState.h"
 #include "OvEditor/Panels/SceneView.h"
 #include "OvEditor/Panels/AssetView.h"
 #include "OvEditor/Panels/GameView.h"
@@ -457,6 +459,7 @@ void OvEditor::Core::EditorActions::StartPlaying()
 {
 	if (m_editorMode == EEditorMode::EDIT)
 	{
+		OvCore::GlobalState::IsPlaying = true;
 		m_context.scriptInterpreter->RefreshAll();
 		EDITOR_PANEL(Panels::Inspector, "Inspector").Refresh();
 
@@ -494,6 +497,7 @@ void OvEditor::Core::EditorActions::StopPlaying()
 {
 	if (m_editorMode != EEditorMode::EDIT)
 	{
+		OvCore::GlobalState::IsPlaying = false;
 		ImGui::GetIO().DisableMouseUpdate = false;
 		m_context.window->SetCursorMode(OvWindowing::Cursor::ECursorMode::NORMAL);
 		SetEditorMode(EEditorMode::EDIT);

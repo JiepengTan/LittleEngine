@@ -10,6 +10,8 @@
 #include <OvRendering/Data/Frustum.h>
 
 #include "OvCore/ECS/Renderer.h"
+
+#include "OvCore/ECS/Components/CAnimator.h"
 #include "OvCore/ECS/Components/CModelRenderer.h"
 #include "OvCore/ECS/Components/CMaterialRenderer.h"
 #include "OvCore/ResourceManagement/ShaderManager.h"
@@ -192,7 +194,19 @@ void OvCore::ECS::Renderer::RenderScene
 	*/
 }
 
-
+std::vector<OvMaths::FMatrix4>* GetBoneMatrix(OvCore::ECS::Components::CModelRenderer* modelRenderer)
+{
+	auto model = modelRenderer->GetModel();
+	if(model && model->isSkinMesh)
+	{
+		auto anim = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CAnimator>();
+		if(anim != nullptr)
+		{
+			return anim->GetFinalBoneMatrices();
+		}
+	}
+	return nullptr;
+}
 
 void FindAndSortDrawables
 (
@@ -210,13 +224,13 @@ void FindAndSortDrawables
 			if (auto model = modelRenderer->GetModel())
 			{
 				float distanceToActor = OvMaths::FVector3::Distance(modelRenderer->owner.transform.GetWorldPosition(), p_cameraPosition);
-
 				if (auto materialRenderer = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
 				{
 					const auto& transform = modelRenderer->owner.transform.GetFTransform();
 
 					const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 
+					std::vector<OvMaths::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
 					for (auto mesh : model->GetMeshes())
 					{
 						OvCore::Resources::Material* material = nullptr;
@@ -230,7 +244,7 @@ void FindAndSortDrawables
 
 						if (material)
 						{
-							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix() };
+							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
 
 							if (material->IsBlendable())
 								p_transparents.emplace(distanceToActor, element);
@@ -295,6 +309,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 						float distanceToActor = OvMaths::FVector3::Distance(transform.GetWorldPosition(), p_cameraPosition);
 						const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 
+						std::vector<OvMaths::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
 						for (const auto& mesh : meshes)
 						{
 							OvCore::Resources::Material* material = nullptr;
@@ -308,7 +323,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 
 							if (material)
 							{
-								OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), &mesh.get(), material, materialRenderer->GetUserMatrix() };
+								OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), &mesh.get(), material, materialRenderer->GetUserMatrix() ,boneAryPtr};
 
 								if (material->IsBlendable())
 									transparentDrawables.emplace(distanceToActor, element);
@@ -349,6 +364,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 
 					const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 
+					std::vector<OvMaths::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
 					for (auto mesh : model->GetMeshes())
 					{
 						OvCore::Resources::Material* material = nullptr;
@@ -362,7 +378,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 
 						if (material)
 						{
-							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix() };
+							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
 
 							if (material->IsBlendable())
 								transparentDrawables.emplace(distanceToActor, element);
@@ -381,7 +397,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 void OvCore::ECS::Renderer::DrawDrawable(const Drawable& p_toDraw)
 {
 	m_userMatrixSender(std::get<3>(p_toDraw));
-	DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw));
+	DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw),std::get<4>(p_toDraw));
 }
 
 void OvCore::ECS::Renderer::DrawModelWithSingleMaterial(OvRendering::Resources::Model& p_model, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix, OvCore::Resources::Material* p_defaultMaterial)
@@ -394,7 +410,7 @@ void OvCore::ECS::Renderer::DrawModelWithSingleMaterial(OvRendering::Resources::
 		OvCore::Resources::Material* material = p_material.GetShader() ? &p_material : p_defaultMaterial;
 
 		if (material)
-			DrawMesh(*mesh, *material, nullptr);
+			DrawMesh(*mesh, *material, nullptr,nullptr);
 	}
 }
 
@@ -407,11 +423,13 @@ void OvCore::ECS::Renderer::DrawModelWithMaterials(OvRendering::Resources::Model
 	{
 		OvCore::Resources::Material* material = p_materials.size() > mesh->GetMaterialIndex() ? p_materials[mesh->GetMaterialIndex()] : p_defaultMaterial;
 		if (material)
-			DrawMesh(*mesh, *material, nullptr);
+			DrawMesh(*mesh, *material, nullptr,nullptr);
 	}
 }
 
-void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix)
+void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix,
+std::vector<OvMaths::FMatrix4>* p_boneMatrixAry
+)
 {
 	using namespace OvRendering::Settings;
 	p_material.Set("u_Shadowmap",m_shadowmapBuffer->GetTexture(),true);
@@ -425,9 +443,14 @@ void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCor
 		
 		/* Draw the mesh */
 		p_material.Bind(m_emptyTexture);
-		p_material.GetShader()->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
-		p_material.GetShader()->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
-		p_material.GetShader()->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
+		auto shader = p_material.GetShader();
+		shader->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
+		shader->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
+		shader->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
+		if(p_mesh.isSkinMesh && p_boneMatrixAry != nullptr )
+		{
+			shader->SetUniformMat4Array("u_BonesMatrices",*p_boneMatrixAry);
+		}
 		
 		Draw(p_mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, p_material.GetGPUInstances());
 		p_material.UnBind();

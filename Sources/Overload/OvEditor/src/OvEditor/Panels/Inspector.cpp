@@ -190,7 +190,7 @@ void OvEditor::Panels::Inspector::FocusActor(OvCore::ECS::Actor& p_target)
 
 void OvEditor::Panels::Inspector::UnFocus()
 {
-	if (m_targetActor)
+	if (m_targetActor && m_targetActor->IsAlive())
 	{
 		m_targetActor->ComponentAddedEvent		-= m_componentAddedListener;
 		m_targetActor->ComponentRemovedEvent	-= m_componentRemovedListener;

@@ -23,8 +23,10 @@ namespace OvCore::ECS::Components
 		~CAnimator() =default;
 		std::string GetName() override;
 		void OnStart() override;
-		void OnUpdate(float dt) override;
+		virtual void OnUpdate(float dt) override;
 		void OnDestroy() override;
+		void LoadAnimations();
+		void UnloadAnimations();
 		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
 		/**
 		* Serialize the component
@@ -45,11 +47,14 @@ namespace OvCore::ECS::Components
 		* @param p_root
 		*/
 		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		
+		std::vector<OvMaths::FMatrix4>* GetFinalBoneMatrices();
+
+		void ToggleBones();
 
 	private:
 		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
 		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,  OvMaths::FMatrix4  parentTransform);
-		std::vector<OvMaths::FMatrix4> GetFinalBoneMatrices();
 	private:
 		std::vector<OvMaths::FMatrix4> m_finalBoneMatrices;
 		OvRendering::Resources::Animation* m_curAnim;

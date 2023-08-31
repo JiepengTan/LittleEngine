@@ -80,7 +80,7 @@ namespace OvRendering::Resources
 		* @param p_mat4
 		*/
 		void SetUniformMat4(const std::string& p_name, const OvMaths::FMatrix4& p_mat4);
-
+		void SetUniformMat4Array(const std::string& p_name, const std::vector<OvMaths::FMatrix4>& p_matAry);
 		/**
 		* Returns the int uniform value identified by the given name
 		* @param p_name

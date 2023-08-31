@@ -15,6 +15,7 @@
 
 #undef APIENTRY
 #include "Windows.h"
+#include "OvCore/GlobalState.h"
 
 FORCE_DEDICATED_GPU
 
@@ -74,6 +75,8 @@ int main(int argc, char** argv)
 		}
 	}
 
+	OvCore::GlobalState::IsPlaying = false;
+	OvCore::GlobalState::IsEditorMode = true;
 	if (ready)
 		TryRun(projectPath, projectName);
 
@@ -98,7 +101,6 @@ static void TryRun(const std::string& projectPath, const std::string& projectNam
 		OvWindowing::Context::Device::ErrorEvent -= listenerId;
 	}
 	catch (...) {}
-
 	if (app)
 		app->Run();
 }

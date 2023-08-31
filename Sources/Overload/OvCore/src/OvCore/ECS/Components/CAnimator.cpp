@@ -13,6 +13,7 @@
 #include "OvRendering/Resources/Animation.h"
 #include "OvRendering/Resources/Model.h"
 #include "OvCore/Helpers/ActorUtils.h"
+#include "OvUI/Widgets/Buttons/Button.h"
 
 OvCore::ECS::Components::CAnimator::CAnimator(ECS::Actor& p_owner) :
     AComponent(p_owner), m_currentTime(0), m_showDebugBones(false)
@@ -25,8 +26,18 @@ std::string OvCore::ECS::Components::CAnimator::GetName()
 {
     return "Animator";
 }
-void OvCore::ECS::Components::CAnimator::OnStart()
+void OvCore::ECS::Components::CAnimator::UnloadAnimations()
 {
+    for (auto bone : m_debugBones)
+    {
+        bone->Destroy();
+    }
+    m_debugBones.clear();
+    m_curAnim = nullptr;
+}
+void OvCore::ECS::Components::CAnimator::LoadAnimations()
+{
+    if(m_curAnim != nullptr) return;
     auto mesh =  owner.GetComponent<CModelRenderer>();
     if(mesh == nullptr) return;
     auto model = mesh->GetModel();
@@ -48,10 +59,14 @@ void OvCore::ECS::Components::CAnimator::OnStart()
         OVLOG("Creaet Actor Done ");
     }
 }
+
+void OvCore::ECS::Components::CAnimator::OnStart()
+{
+    LoadAnimations();
+}
 void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,
                                                                  OvMaths::FMatrix4 parentTransform)
 {
-    
     std::string nodeName = node.name;
     OvMaths::FMatrix4 globalTransformation = parentTransform * node.transformation;
     auto boneInfoMap = m_curAnim->GetBoneInfoMap();
@@ -72,11 +87,7 @@ void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Res
 
 void OvCore::ECS::Components::CAnimator::OnDestroy() 
 {
-    for (auto bone : m_debugBones)
-    {
-        bone->Destroy();
-    }
-    m_debugBones.clear();
+    UnloadAnimations();
 }
 void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
 {
@@ -129,9 +140,9 @@ void OvCore::ECS::Components::CAnimator::CalculateBoneTransform(const OvRenderin
         CalculateBoneTransform(node.children[i], globalTransformation);
 }
 
-std::vector<OvMaths::FMatrix4> OvCore::ECS::Components::CAnimator::GetFinalBoneMatrices()
+std::vector<OvMaths::FMatrix4>* OvCore::ECS::Components::CAnimator::GetFinalBoneMatrices()
 {
-    return m_finalBoneMatrices;
+    return &m_finalBoneMatrices;
 }
 
 
@@ -143,12 +154,27 @@ void OvCore::ECS::Components::CAnimator::OnSerialize(tinyxml2::XMLDocument & p_d
 void OvCore::ECS::Components::CAnimator::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
     OvCore::Helpers::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
+}	
+void OvCore::ECS::Components::CAnimator::ToggleBones()
+{
+    OVLOG("ToggleBones " + std::to_string(m_curAnim == nullptr));
+    if(!m_curAnim)
+    {
+        LoadAnimations();
+    }
+    else
+    {
+        UnloadAnimations();
+    }
 }
 void OvCore::ECS::Components::CAnimator::OnInspector(OvUI::Internal::WidgetContainer& p_root)
-{
+{    
     using namespace OvCore::Helpers;
+    GUIDrawer::DrawBoolean(p_root, "IsUpdateInEdit", IsUpdateInEdit);
     GUIDrawer::DrawAsset(p_root, "animPath", m_animPath);
     GUIDrawer::DrawScalar<float>(p_root, "currentTime", m_currentTime, 0.005f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);
-    
     GUIDrawer::DrawBoolean(p_root, "showDebugBones", m_showDebugBones);
+
+    auto& btn = p_root.CreateWidget<OvUI::Widgets::Buttons::Button>("CreateBones");
+    btn.ClickedEvent+= std::bind(&OvCore::ECS::Components::CAnimator::ToggleBones,this);
 }

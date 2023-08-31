@@ -53,6 +53,7 @@ namespace OvRendering::Resources
 		const std::string path;
 		int& GetBoneCount() { return m_BoneCounter; }
 		std::map<std::string, OvRendering::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
+		bool isSkinMesh;
 		
 	private:
 		std::vector<Mesh*> m_meshes;
@@ -61,6 +62,5 @@ namespace OvRendering::Resources
 		Geometry::BoundingSphere m_boundingSphere;
 		std::map<std::string, OvRendering::Resources::BoneInfo> m_name2BoneInfo;
 		int m_BoneCounter = 0;
-		bool isSkinMesh;
 	};
 }

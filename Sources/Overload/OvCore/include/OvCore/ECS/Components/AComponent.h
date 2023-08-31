@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "OvCore/GlobalState.h"
 #include "OvCore/API/IInspectorItem.h"
 
 namespace OvCore::ECS { class Actor; }
@@ -120,5 +121,6 @@ namespace OvCore::ECS::Components
 
 	public:
 		ECS::Actor& owner;
+		bool IsUpdateInEdit;
 	};
 }

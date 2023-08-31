@@ -28,7 +28,7 @@ namespace OvCore::ECS
 	class Renderer : public OvRendering::Core::Renderer
 	{
 	public:
-		using Drawable				= std::tuple<OvMaths::FMatrix4, OvRendering::Resources::Mesh*, OvCore::Resources::Material*, OvMaths::FMatrix4>;
+		using Drawable				= std::tuple<OvMaths::FMatrix4, OvRendering::Resources::Mesh*, OvCore::Resources::Material*, OvMaths::FMatrix4, std::vector<OvMaths::FMatrix4>*  >;
 		using OpaqueDrawables		= std::multimap<float, Drawable, std::less<float>>;
 		using TransparentDrawables	= std::multimap<float, Drawable, std::greater<float>>;
 
@@ -152,7 +152,7 @@ namespace OvCore::ECS
 		* @param p_material
 		* @param p_modelMatrix (If set to nullptr, no data will be sent to the GPU)
 		*/
-		void DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix);
+		void DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix,std::vector<OvMaths::FMatrix4>* p_boneMatrixAry = nullptr);
 
 		/**
 		* Register the given function as the model matrix sender.
