@@ -9,9 +9,10 @@
 
 #include "OvCore/SceneSystem/Scene.h"
 
+int OvCore::SceneSystem::Scene::s_globalSceneId = 1; 
 OvCore::SceneSystem::Scene::Scene()
 {
-
+	m_sceneId = s_globalSceneId++;
 }
 
 OvCore::SceneSystem::Scene::~Scene()
@@ -27,13 +28,13 @@ OvCore::SceneSystem::Scene::~Scene()
 void OvCore::SceneSystem::Scene::Play()
 {
 	m_isPlaying = true;
-
+	auto &actors = GetActorsCopy(m_actors);
 	/* Wake up actors to allow them to react to OnEnable, OnDisable and OnDestroy, */
-	std::for_each(m_actors.begin(), m_actors.end(), [](ECS::Actor * p_element) { p_element->SetSleeping(false); });
-
-	std::for_each(m_actors.begin(), m_actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnAwake(); });
-	std::for_each(m_actors.begin(), m_actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnEnable(); });
-	std::for_each(m_actors.begin(), m_actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnStart(); });
+	std::for_each(actors.begin(), actors.end(), [](ECS::Actor * p_element) { p_element->SetSleeping(false); });
+	
+	std::for_each(actors.begin(), actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnAwake(); });
+	std::for_each(actors.begin(), actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnEnable(); });
+	std::for_each(actors.begin(), actors.end(), [](ECS::Actor * p_element) { if (p_element->IsActive()) p_element->OnStart(); });
 }
 
 bool OvCore::SceneSystem::Scene::IsPlaying() const
@@ -43,20 +44,23 @@ bool OvCore::SceneSystem::Scene::IsPlaying() const
 
 void OvCore::SceneSystem::Scene::Update(float p_deltaTime)
 {
-	auto actors = m_actors;
+	auto &actors = GetActorsCopy(m_actors);
 	std::for_each(actors.begin(), actors.end(), std::bind(std::mem_fn(&ECS::Actor::OnUpdate), std::placeholders::_1, p_deltaTime));
+	CollectGarbages();
 }
 
 void OvCore::SceneSystem::Scene::FixedUpdate(float p_deltaTime)
 {
-	auto actors = m_actors;
+	auto &actors = GetActorsCopy(m_actors);
 	std::for_each(actors.begin(), actors.end(), std::bind(std::mem_fn(&ECS::Actor::OnFixedUpdate), std::placeholders::_1, p_deltaTime));
+	CollectGarbages();
 }
 
 void OvCore::SceneSystem::Scene::LateUpdate(float p_deltaTime)
 {
-	auto actors = m_actors;
+	auto &actors = GetActorsCopy(m_actors);
 	std::for_each(actors.begin(), actors.end(), std::bind(std::mem_fn(&ECS::Actor::OnLateUpdate), std::placeholders::_1, p_deltaTime));
+	CollectGarbages();
 }
 
 OvCore::ECS::Actor& OvCore::SceneSystem::Scene::CreateActor()
@@ -66,7 +70,7 @@ OvCore::ECS::Actor& OvCore::SceneSystem::Scene::CreateActor()
 
 OvCore::ECS::Actor& OvCore::SceneSystem::Scene::CreateActor(const std::string& p_name, const std::string& p_tag)
 {
-	m_actors.push_back(new OvCore::ECS::Actor(m_availableID++, p_name, p_tag, m_isPlaying));
+	m_actors.push_back(new OvCore::ECS::Actor(this,m_availableID++, p_name, p_tag, m_isPlaying));
 	ECS::Actor& instance = *m_actors.back();
 	instance.ComponentAddedEvent	+= std::bind(&Scene::OnComponentAdded, this, std::placeholders::_1);
 	instance.ComponentRemovedEvent	+= std::bind(&Scene::OnComponentRemoved, this, std::placeholders::_1);
@@ -85,14 +89,17 @@ OvCore::ECS::Actor& OvCore::SceneSystem::Scene::CreateActor(const std::string& p
 
 bool OvCore::SceneSystem::Scene::DestroyActor(ECS::Actor& p_target)
 {
+	if(!p_target.IsAlive()) return false;
+	p_target.MarkAsDestroying();
+	OVLOG("DestroyActor Actor " + std::to_string(p_target.GetID()));
+	m_tempDeleteActors.push_back(&p_target);
+	p_target.OnDestroy();
 	auto found = std::find_if(m_actors.begin(), m_actors.end(), [&p_target](OvCore::ECS::Actor* element)
 	{
 		return element == &p_target;
 	});
-
 	if (found != m_actors.end())
 	{
-		delete *found;
 		m_actors.erase(found);
 		return true;
 	}
@@ -104,15 +111,16 @@ bool OvCore::SceneSystem::Scene::DestroyActor(ECS::Actor& p_target)
 
 void OvCore::SceneSystem::Scene::CollectGarbages()
 {
-	m_actors.erase(std::remove_if(m_actors.begin(), m_actors.end(), [this](ECS::Actor* element)
-	{ 
-		bool isGarbage = !element->IsAlive();
-		if (isGarbage)
+	while (m_tempDeleteActors.size()>0)
+	{
+		auto&actors = GetActorsCopy(m_tempDeleteActors);
+		m_tempDeleteActors.clear();
+		for (auto actor : actors)
 		{
-			delete element;
+			OVLOG("DestroyActor Collection " + std::to_string(actor->GetID()));
+			delete actor;
 		}
-		return isGarbage;
-	}), m_actors.end());
+	}
 }
 
 OvCore::ECS::Actor* OvCore::SceneSystem::Scene::FindActorByName(const std::string& p_name)
@@ -228,6 +236,13 @@ void OvCore::SceneSystem::Scene::OnSerialize(tinyxml2::XMLDocument & p_doc, tiny
 	}
 }
 
+std::vector<OvCore::ECS::Actor*>& OvCore::SceneSystem::Scene::GetActorsCopy(std::vector<ECS::Actor*>& p_vec)
+{
+	m_tempActors.clear();
+	for (auto item : p_vec)
+		m_tempActors.push_back(item);
+	return m_tempActors;
+}
 void OvCore::SceneSystem::Scene::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_root)
 {
 	tinyxml2::XMLNode* actorsRoot = p_root->FirstChildElement("actors");

@@ -39,7 +39,7 @@ void OvCore::Scripting::LuaActorBinder::BindActor(sol::state & p_luaState)
 		"GetParent", &Actor::GetParent,
 		"SetParent", &Actor::SetParent,
 		"DetachFromParent", &Actor::DetachFromParent,
-		"Destroy", &Actor::MarkAsDestroy,
+		"Destroy", &Actor::Destroy,
 		"IsSelfActive", &Actor::IsSelfActive, // TODO: Add to doc
 		"IsActive", &Actor::IsActive,
 		"SetActive", &Actor::SetActive,
@@ -62,16 +62,6 @@ void OvCore::Scripting::LuaActorBinder::BindActor(sol::state & p_luaState)
 		"GetMaterialRenderer", &Actor::GetComponent<CMaterialRenderer>,
 		"GetAudioSource", &Actor::GetComponent<CAudioSource>,
 		"GetAudioListener", &Actor::GetComponent<CAudioListener>,
-
-		/* Behaviours relatives */
-		"GetBehaviour", [](Actor& p_this, const std::string& p_name) -> sol::table
-		{
-			auto behaviour = p_this.GetBehaviour(p_name);
-			if (behaviour)
-				return behaviour->GetTable();
-			else
-				return sol::nil;
-		},
 
 		/* Components Creators */
 		"AddTransform", &Actor::AddComponent<CTransform>,
@@ -102,14 +92,7 @@ void OvCore::Scripting::LuaActorBinder::BindActor(sol::state & p_luaState)
 		"RemoveAmbientSphereLight", &Actor::RemoveComponent<CAmbientSphereLight>,
 		"RemoveMaterialRenderer", &Actor::RemoveComponent<CMaterialRenderer>,
 		"RemoveAudioSource", &Actor::RemoveComponent<CAudioSource>,
-		"RemoveAudioListener", &Actor::RemoveComponent<CAudioListener>,
+		"RemoveAudioListener", &Actor::RemoveComponent<CAudioListener>
 
-		/* Behaviour management */
-		"AddBehaviour", &Actor::AddBehaviour,
-		"RemoveBehaviour", sol::overload
-		(
-			sol::resolve<bool(Behaviour&)>(&Actor::RemoveBehaviour),
-			sol::resolve<bool(const std::string&)>(&Actor::RemoveBehaviour)
-		)
 	);
 }

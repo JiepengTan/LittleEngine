@@ -22,13 +22,10 @@ namespace OvCore::ECS::Components
 		CAnimator(ECS::Actor& p_owner);
 		~CAnimator() =default;
 		std::string GetName() override;
-		virtual void OnStart() override;
-
-		virtual	void OnUpdate(float dt) override;
+		void OnStart() override;
+		void OnUpdate(float dt) override;
+		void OnDestroy() override;
 		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
-		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
-		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
-		std::vector<OvMaths::FMatrix4> GetFinalBoneMatrices();
 		/**
 		* Serialize the component
 		* @param p_doc
@@ -49,15 +46,20 @@ namespace OvCore::ECS::Components
 		*/
 		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
 
-		
 	private:
-		std::vector<OvMaths::FMatrix4> m_FinalBoneMatrices;
-#if DEBUG
-		std::vector<Actor*> m_debugBones;
-#endif
+		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
+		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,  OvMaths::FMatrix4  parentTransform);
+		std::vector<OvMaths::FMatrix4> GetFinalBoneMatrices();
+	private:
+		std::vector<OvMaths::FMatrix4> m_finalBoneMatrices;
 		OvRendering::Resources::Animation* m_curAnim;
 		float m_currentTime;
 		bool m_showDebugBones;
+
+		// debug infos
+	private:
+		std::vector<Actor*> m_debugBones;
+		std::vector<int> m_boneId;
 	public:
 		std::string m_animPath;
 		

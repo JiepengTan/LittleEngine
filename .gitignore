@@ -5,5 +5,3 @@ Bin-Int/
 Build/
 imgui.ini
 *.aps
-*.vcxproj*
-*.sln

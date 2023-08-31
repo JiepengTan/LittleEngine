@@ -74,11 +74,6 @@ namespace OvEditor::Panels
 		void DrawComponent(OvCore::ECS::Components::AComponent& p_component);
 
 		/**
-		* Draw the given behaviour in inspector
-		*/
-		void DrawBehaviour(OvCore::ECS::Components::Behaviour& p_behaviour);
-
-		/**
 		* Refresh the inspector
 		*/
 		void Refresh();
@@ -92,8 +87,6 @@ namespace OvEditor::Panels
 
 		uint64_t m_componentAddedListener	= 0;
 		uint64_t m_componentRemovedListener = 0;
-		uint64_t m_behaviourAddedListener	= 0;
-		uint64_t m_behaviourRemovedListener = 0;
 		uint64_t m_destroyedListener		= 0;
 	};
 }

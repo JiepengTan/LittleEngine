@@ -160,11 +160,19 @@ namespace OvCore::SceneSystem
 		*/
 		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
 
+		std::vector<ECS::Actor*>& GetActorsCopy(std::vector<ECS::Actor*>& p_vec);
+
+		int GetSceneId(){ return m_sceneId;}
 	private:
 		int64_t m_availableID = 1;
 		bool m_isPlaying = false;
 		std::vector<ECS::Actor*> m_actors;
+		std::vector<ECS::Actor*> m_tempActors;
+		std::vector<ECS::Actor*> m_tempDeleteActors;
 
 		FastAccessComponents m_fastAccessComponents;
+		int m_sceneId;
+	private:
+		static int s_globalSceneId; 
 	};
 }

@@ -22,47 +22,29 @@
 #include "OvCore/ECS/Components/CAmbientBoxLight.h"
 #include "OvCore/ECS/Components/CAmbientSphereLight.h"
 #include "OvCore/ECS/Components/CAnimator.h"
+#include "OvCore/SceneSystem/Scene.h"
 
 OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::DestroyedEvent;
 OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::CreatedEvent;
 OvTools::Eventing::Event<OvCore::ECS::Actor&, OvCore::ECS::Actor&> OvCore::ECS::Actor::AttachEvent;
 OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::DettachEvent;
 
-OvCore::ECS::Actor::Actor(int64_t p_actorID, const std::string & p_name, const std::string & p_tag, bool& p_playing) :
-	m_actorID(p_actorID),
+OvCore::ECS::Actor::Actor(SceneSystem::Scene* p_scene, int64_t p_actorID, const std::string & p_name, const std::string & p_tag, bool& p_playing) :
+	Owner(p_scene),
+	m_aliveState(EActorAliveState::Alive),
 	m_name(p_name),
 	m_tag(p_tag),
 	m_playing(p_playing),
+	m_actorID(p_actorID),
 	transform(AddComponent<Components::CTransform>())
 {
+	OVLOG( "scene " + std::to_string(p_scene->GetSceneId()) +  " Create Actor " + std::to_string(p_actorID) + "  name =" + p_name);
 	CreatedEvent.Invoke(*this);
 }
 
 OvCore::ECS::Actor::~Actor()
 {
-	if (!m_sleeping)
-	{
-		if (IsActive())
-			OnDisable();
-
-		if (m_awaked && m_started)
-			OnDestroy();
-	}
-
-	DestroyedEvent.Invoke(*this);
-
-	std::vector<Actor*> toDetach = m_children;
-
-	for (auto child : toDetach)
-		child->DetachFromParent();
-
-	toDetach.clear();
-
-	DetachFromParent();
-
-	std::for_each(m_components.begin(), m_components.end(), [&](std::shared_ptr<Components::AComponent> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto& p_behaviour) { BehaviourRemovedEvent.Invoke(std::ref(p_behaviour.second)); });
-	std::for_each(m_children.begin(), m_children.end(),		[](Actor* p_element) { delete p_element; });
+	
 }
 
 const std::string & OvCore::ECS::Actor::GetName() const
@@ -135,7 +117,7 @@ void OvCore::ECS::Actor::DetachFromParent()
 	DettachEvent.Invoke(*this);
 
 	/* Remove the actor from the parent children list */
-	if (m_parent)
+	if (m_parent && m_parent->IsAlive())
 	{
 		m_parent->m_children.erase(std::remove_if(m_parent->m_children.begin(), m_parent->m_children.end(), [this](Actor* p_element)
 		{
@@ -168,118 +150,160 @@ std::vector<OvCore::ECS::Actor*>& OvCore::ECS::Actor::GetChildren()
 {
 	return m_children;
 }
-
-void OvCore::ECS::Actor::MarkAsDestroy()
+bool OvCore::ECS::Actor::Destroy()
 {
-	m_destroyed = true;
-
+	if(!IsAlive()) return false;
+	Owner->DestroyActor(*this);
 	for (auto child : m_children)
-		child->MarkAsDestroy();
+		child->Destroy();
+	return true;
 }
 
+void OvCore::ECS::Actor::MarkAsDestroying()
+{
+	m_aliveState = EActorAliveState::Destroying;
+}
+void OvCore::ECS::Actor::MarkAsDestroyed()
+{
+	m_aliveState = EActorAliveState::Destroyed;
+}
 bool OvCore::ECS::Actor::IsAlive() const
 {
-	return !m_destroyed;
+	return m_aliveState == EActorAliveState::Alive ;
 }
-
+bool OvCore::ECS::Actor::IsDestroying()const
+{
+	return m_aliveState == EActorAliveState::Destroying ;
+}
+bool OvCore::ECS::Actor::IsDestroyed()const
+{
+	return m_aliveState == EActorAliveState::Destroyed ;
+}
 void OvCore::ECS::Actor::SetSleeping(bool p_sleeping)
 {
 	m_sleeping = p_sleeping;
 }
 
+std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& OvCore::ECS::Actor::GetComponentsCopy(
+	std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& comps)
+{
+	m_tempComponents.clear();
+	for (auto ident : comps){
+		m_tempComponents.push_back(ident);
+	}
+	return m_tempComponents;
+}
+
 void OvCore::ECS::Actor::OnAwake()
 {
+	if(m_awaked) return;
 	m_awaked = true;
-	std::for_each(m_components.begin(), m_components.end(), [](auto element) { element->OnAwake(); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [](auto & element) { element.second.OnAwake(); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnAwake(); });
 }
 
 void OvCore::ECS::Actor::OnStart()
 {
+	if(m_started) return;
 	m_started = true;
-	std::for_each(m_components.begin(), m_components.end(), [](auto element) { element->OnStart(); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [](auto & element) { element.second.OnStart(); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnStart(); });
 }
 
 void OvCore::ECS::Actor::OnEnable()
 {
-	std::for_each(m_components.begin(), m_components.end(), [](auto element) { element->OnEnable(); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [](auto & element) { element.second.OnEnable(); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnEnable(); });
 }
 
 void OvCore::ECS::Actor::OnDisable()
 {
-	std::for_each(m_components.begin(), m_components.end(), [](auto element) { element->OnDisable(); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [](auto & element) { element.second.OnDisable(); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnDisable(); });
 }
 
 void OvCore::ECS::Actor::OnDestroy()
 {
-	std::for_each(m_components.begin(), m_components.end(), [](auto element) { element->OnDestroy(); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [](auto & element) { element.second.OnDestroy(); });
+	if (!m_sleeping)
+	{
+		if (IsActive())
+			OnDisable();
+	}
+	DestroyedEvent.Invoke(*this);
+	
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnDestroy(); });
+	std::for_each(comps.begin(), comps.end(), [&](std::shared_ptr<Components::AComponent> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
+
+	DetachFromParent();
+	
+	MarkAsDestroyed();
+	m_components.clear();
+	m_tempComponents.clear();
+	m_children.clear();
 }
 
 void OvCore::ECS::Actor::OnUpdate(float p_deltaTime)
 {
-	if (IsActive())
+	if (IsAlive()&& IsActive())
 	{
-		std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnUpdate(p_deltaTime); });
-		std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnUpdate(p_deltaTime); });
+		auto comps = GetComponentsCopy(m_components);
+		std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnUpdate(p_deltaTime); });
 	}
 }
 
 void OvCore::ECS::Actor::OnFixedUpdate(float p_deltaTime)
 {
-	if (IsActive())
+	if (IsAlive()&&IsActive())
 	{
-		std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnFixedUpdate(p_deltaTime); });
-		std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnFixedUpdate(p_deltaTime); });
+		auto comps = GetComponentsCopy(m_components);
+		std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnFixedUpdate(p_deltaTime); });
 	}
 }
 
 void OvCore::ECS::Actor::OnLateUpdate(float p_deltaTime)
 {
-	if (IsActive())
+	if (IsAlive()&&IsActive())
 	{
-		std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnLateUpdate(p_deltaTime); });
-		std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnLateUpdate(p_deltaTime); });
+		auto comps = GetComponentsCopy(m_components);
+		std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnLateUpdate(p_deltaTime); });
 	}
 }
 
 void OvCore::ECS::Actor::OnCollisionEnter(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnCollisionEnter(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnCollisionEnter(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionEnter(p_otherObject); });
 }
 
 void OvCore::ECS::Actor::OnCollisionStay(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnCollisionStay(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnCollisionStay(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionStay(p_otherObject); });
 }
 
 void OvCore::ECS::Actor::OnCollisionExit(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnCollisionExit(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnCollisionExit(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionExit(p_otherObject); });
 }
 
 void OvCore::ECS::Actor::OnTriggerEnter(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnTriggerEnter(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnTriggerEnter(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerEnter(p_otherObject); });
 }
 
 void OvCore::ECS::Actor::OnTriggerStay(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnTriggerStay(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnTriggerStay(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerStay(p_otherObject); });
 }
 
 void OvCore::ECS::Actor::OnTriggerExit(Components::CPhysicalObject& p_otherObject)
 {
-	std::for_each(m_components.begin(), m_components.end(), [&](auto element) { element->OnTriggerExit(p_otherObject); });
-	std::for_each(m_behaviours.begin(), m_behaviours.end(), [&](auto & element) { element.second.OnTriggerExit(p_otherObject); });
+	auto comps = GetComponentsCopy(m_components);
+	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerExit(p_otherObject); });
 }
 
 bool OvCore::ECS::Actor::RemoveComponent(OvCore::ECS::Components::AComponent& p_component)
@@ -293,7 +317,6 @@ bool OvCore::ECS::Actor::RemoveComponent(OvCore::ECS::Components::AComponent& p_
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -302,65 +325,6 @@ std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& OvCore::ECS::
 	return m_components;
 }
 
-OvCore::ECS::Components::Behaviour & OvCore::ECS::Actor::AddBehaviour(const std::string & p_name)
-{
-	m_behaviours.try_emplace(p_name, *this, p_name);
-	Components::Behaviour& newInstance = m_behaviours.at(p_name);
-	BehaviourAddedEvent.Invoke(newInstance);
-	if (m_playing && IsActive())
-	{
-		newInstance.OnAwake();
-		newInstance.OnEnable();
-		newInstance.OnStart();
-	}
-	return newInstance;
-}
-
-bool OvCore::ECS::Actor::RemoveBehaviour(Components::Behaviour& p_behaviour)
-{
-	bool found = false;
-
-	for (auto& [name, behaviour] : m_behaviours)
-	{
-		if (&behaviour == &p_behaviour)
-		{
-			found = true;
-			break;
-		}
-	}
-
-	if (found)
-		return RemoveBehaviour(p_behaviour.name);
-	else
-		return false;
-}
-
-bool OvCore::ECS::Actor::RemoveBehaviour(const std::string & p_name)
-{
-	Components::Behaviour* found = GetBehaviour(p_name);
-	if (found)
-	{
-		BehaviourRemovedEvent.Invoke(*found);
-		return m_behaviours.erase(p_name);
-	}
-	else
-	{
-		return false;
-	}
-}
-
-OvCore::ECS::Components::Behaviour* OvCore::ECS::Actor::GetBehaviour(const std::string& p_name)
-{
-	if (auto result = m_behaviours.find(p_name); result != m_behaviours.end())
-		return &result->second;
-	else
-		return nullptr;
-}
-
-std::unordered_map<std::string, OvCore::ECS::Components::Behaviour>& OvCore::ECS::Actor::GetBehaviours()
-{
-	return m_behaviours;
-}
 
 void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
@@ -395,23 +359,6 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 
 	tinyxml2::XMLNode* behavioursNode = p_doc.NewElement("behaviours");
 	actorNode->InsertEndChild(behavioursNode);
-
-	for (auto& behaviour : m_behaviours)
-	{
-		/* Current behaviour root */
-		tinyxml2::XMLNode* behaviourNode = p_doc.NewElement("behaviour");
-		behavioursNode->InsertEndChild(behaviourNode);
-
-		/* Behaviour type */
-		OvCore::Helpers::Serializer::SerializeString(p_doc, behaviourNode, "type", behaviour.first);
-
-		/* Data node (Will be passed to the behaviour) */
-		tinyxml2::XMLElement* data = p_doc.NewElement("data");
-		behaviourNode->InsertEndChild(data);
-
-		/* Data serialization of the behaviour */
-		behaviour.second.OnSerialize(p_doc, data);
-	}
 }
 void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
@@ -453,25 +400,6 @@ void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::
 					component->OnDeserialize(p_doc, currentComponent->FirstChildElement("data"));
 
 				currentComponent = currentComponent->NextSiblingElement("component");
-			}
-		}
-	}
-
-	{
-		tinyxml2::XMLNode* behavioursRoot = p_actorsRoot->FirstChildElement("behaviours");
-
-		if (behavioursRoot)
-		{
-			tinyxml2::XMLElement* currentBehaviour = behavioursRoot->FirstChildElement("behaviour");
-
-			while (currentBehaviour)
-			{
-				std::string behaviourType = currentBehaviour->FirstChildElement("type")->GetText();
-
-				auto& behaviour = AddBehaviour(behaviourType);
-				behaviour.OnDeserialize(p_doc, currentBehaviour->FirstChildElement("data"));
-
-				currentBehaviour = currentBehaviour->NextSiblingElement("behaviour");
 			}
 		}
 	}

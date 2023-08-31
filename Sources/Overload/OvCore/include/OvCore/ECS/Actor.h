@@ -16,14 +16,26 @@
 #include "OvCore/ECS/Components/Behaviour.h"
 #include "OvCore/API/ISerializable.h"
 
+namespace OvCore::SceneSystem
+{
+	class Scene;
+}
+
 namespace OvCore::ECS
 {
+	enum EActorAliveState
+	{
+		Alive,
+		Destroying,
+		Destroyed
+	};
 	/**
 	* The Actor is the main class of the ECS, it corresponds to the entity and is
 	* composed of componenents and behaviours (scripts)
 	*/
 	class Actor : public API::ISerializable
 	{
+		friend class SceneSystem::Scene;
 	public:
 		/**
 		* Constructor of the actor. It will automatically add a transform component
@@ -32,7 +44,7 @@ namespace OvCore::ECS
 		* @param p_tag
 		* @param p_playing
 		*/
-		Actor(int64_t p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
+		Actor(SceneSystem::Scene* p_scene, int64_t p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
 
 		/**
 		* Destructor of the actor instance. Force invoke ComponentRemovedEvent and BehaviourRemovedEvent
@@ -120,10 +132,7 @@ namespace OvCore::ECS
 		*/
 		std::vector<Actor*>& GetChildren();
 
-		/**
-		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself
-		*/
-		void MarkAsDestroy();
+		bool Destroy();
 
 		/**
 		* Returns true if the actor is not marked as destroyed
@@ -137,67 +146,6 @@ namespace OvCore::ECS
 		*/
 		void SetSleeping(bool p_sleeping);
 
-		/**
-		* Called when the scene start or when the actor gets enabled for the first time during play mode
-		* This method will always be called in an ordered triple:
-		* - OnAwake()
-		* - OnEnable()
-		* - OnStart()
-		*/
-		void OnAwake();
-
-		/**
-		* Called when the scene start or when the actor gets enabled for the first time during play mode
-		* This method will always be called in an ordered triple:
-		* - OnAwake()
-		* - OnEnable()
-		* - OnStart()
-		*/
-		void OnStart();
-
-		/**
-		* Called when the actor gets enabled (SetActive set to true) or at scene start if the actor is hierarchically active.
-		* This method can be called in an ordered triple at scene start:
-		* - OnAwake()
-		* - OnEnable()
-		* - OnStart()
-		* Or can be called solo if the actor hierarchical active state changed to true and the actor already gets awaked
-		* Conditions:
-		* - Play mode only
-		*/
-		void OnEnable();
-
-		/**
-		* Called when the actor hierarchical active state changed to false or gets destroyed while being hierarchically active
-		* Conditions:
-		* - Play mode only
-		*/
-		void OnDisable();
-
-		/**
-		* Called when the actor gets destroyed if it has been awaked
-		* Conditions:
-		* - Play mode only
-		*/
-		void OnDestroy();
-
-		/**
-		* Called every frame
-		* @param p_deltaTime
-		*/
-		void OnUpdate(float p_deltaTime);
-
-		/**
-		* Called every physics frame
-		* @param p_deltaTime
-		*/
-		void OnFixedUpdate(float p_deltaTime);
-
-		/**
-		* Called every frame after OnUpdate
-		* @param p_deltaTime
-		*/
-		void OnLateUpdate(float p_deltaTime);
 
 		/**
 		* Called when the actor enter in collision with another physical object
@@ -265,34 +213,6 @@ namespace OvCore::ECS
 		*/
 		std::vector<std::shared_ptr<Components::AComponent>>& GetComponents();
 
-		/**
-		* Add a behaviour to the actor
-		* @param p_name
-		*/
-		Components::Behaviour& AddBehaviour(const std::string& p_name);
-
-		/**
-		* Remove a behaviour by refering to the given instance
-		* @param p_behaviour
-		*/
-		bool RemoveBehaviour(Components::Behaviour& p_behaviour);
-
-		/**
-		* Remove a behaviour by refering to his name
-		* @param p_name
-		*/
-		bool RemoveBehaviour(const std::string& p_name);
-
-		/**
-		* Try to get the given behaviour (Returns nullptr on failure)
-		* @param p_name
-		*/
-		Components::Behaviour* GetBehaviour(const std::string& p_name);
-
-		/**
-		* Returns a reference to the vector of behaviours
-		*/
-		std::unordered_map<std::string, Components::Behaviour>& GetBehaviours();
 
 		/**
 		* Serialize all the components
@@ -314,19 +234,90 @@ namespace OvCore::ECS
 		void RecursiveActiveUpdate();
 		void RecursiveWasActiveUpdate();
 
+	private:
+		
+		/**
+		* Called when the scene start or when the actor gets enabled for the first time during play mode
+		* This method will always be called in an ordered triple:
+		* - OnAwake()
+		* - OnEnable()
+		* - OnStart()
+		*/
+		void OnAwake();
+
+		/**
+		* Called when the scene start or when the actor gets enabled for the first time during play mode
+		* This method will always be called in an ordered triple:
+		* - OnAwake()
+		* - OnEnable()
+		* - OnStart()
+		*/
+		void OnStart();
+
+		/**
+		* Called when the actor gets enabled (SetActive set to true) or at scene start if the actor is hierarchically active.
+		* This method can be called in an ordered triple at scene start:
+		* - OnAwake()
+		* - OnEnable()
+		* - OnStart()
+		* Or can be called solo if the actor hierarchical active state changed to true and the actor already gets awaked
+		* Conditions:
+		* - Play mode only
+		*/
+		void OnEnable();
+
+		/**
+		* Called when the actor hierarchical active state changed to false or gets destroyed while being hierarchically active
+		* Conditions:
+		* - Play mode only
+		*/
+		void OnDisable();
+
+		/**
+		* Called when the actor gets destroyed if it has been awaked
+		* Conditions:
+		* - Play mode only
+		*/
+		void OnDestroy();
+
+		/**
+		* Called every frame
+		* @param p_deltaTime
+		*/
+		void OnUpdate(float p_deltaTime);
+
+		/**
+		* Called every physics frame
+		* @param p_deltaTime
+		*/
+		void OnFixedUpdate(float p_deltaTime);
+
+		/**
+		* Called every frame after OnUpdate
+		* @param p_deltaTime
+		*/
+		void OnLateUpdate(float p_deltaTime);
+		/**
+		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself
+		*/
+		EActorAliveState m_aliveState ;
+		void MarkAsDestroying() ;
+		void MarkAsDestroyed();
+		bool IsDestroyed() const;
+		bool IsDestroying() const;
+	public:
+		SceneSystem::Scene*		Owner = nullptr;
+		
 	public:
 		/* Some events that are triggered when an action occur on the actor instance */
 		OvTools::Eventing::Event<Components::AComponent&>	ComponentAddedEvent;
 		OvTools::Eventing::Event<Components::AComponent&>	ComponentRemovedEvent;
-		OvTools::Eventing::Event<Components::Behaviour&>	BehaviourAddedEvent;
-		OvTools::Eventing::Event<Components::Behaviour&>	BehaviourRemovedEvent;
 
 		/* Some events that are triggered when an action occur on any actor */
 		static OvTools::Eventing::Event<Actor&>				DestroyedEvent;
 		static OvTools::Eventing::Event<Actor&>				CreatedEvent;
 		static OvTools::Eventing::Event<Actor&, Actor&>		AttachEvent;
 		static OvTools::Eventing::Event<Actor&>				DettachEvent;
-
 	private:
 		/* Settings */
 		std::string		m_name;
@@ -336,7 +327,6 @@ namespace OvCore::ECS
 
 		/* Internal settings */
 		int64_t	m_actorID;
-		bool	m_destroyed = false;
 		bool	m_sleeping = true;
 		bool	m_awaked = false;
 		bool	m_started = false;
@@ -349,8 +339,9 @@ namespace OvCore::ECS
 
 		/* Actors components */
 		std::vector<std::shared_ptr<Components::AComponent>> m_components;
-		std::unordered_map<std::string, Components::Behaviour> m_behaviours;
-
+		std::vector<std::shared_ptr<Components::AComponent>> m_tempComponents;
+	private:
+		std::vector<std::shared_ptr<Components::AComponent>>& GetComponentsCopy(std::vector<std::shared_ptr<Components::AComponent>>& comps);
 	public:
 		Components::CTransform& transform;
 	};

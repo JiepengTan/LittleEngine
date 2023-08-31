@@ -569,7 +569,7 @@ OvCore::ECS::Actor & OvEditor::Core::EditorActions::CreateActorWithModel(const s
 
 bool OvEditor::Core::EditorActions::DestroyActor(OvCore::ECS::Actor & p_actor)
 {
-	p_actor.MarkAsDestroy();
+	p_actor.Destroy();
 	OVLOG_INFO("Actor destroyed");
 	return true;
 }
@@ -890,12 +890,7 @@ void OvEditor::Core::EditorActions::PropagateScriptRename(std::string p_previous
 {
 	p_previousName = GetScriptPath(p_previousName);
 	p_newName = GetScriptPath(p_newName);
-
-	if (auto currentScene = m_context.sceneManager.GetCurrentScene())
-		for (auto actor : currentScene->GetActors())
-			if (actor->RemoveBehaviour(p_previousName))
-				actor->AddBehaviour(p_newName);
-
+	
 	PropagateFileRenameThroughSavedFilesOfType(p_previousName, p_newName, OvTools::Utils::PathParser::EFileType::SCENE);
 
 	EDITOR_PANEL(Panels::Inspector, "Inspector").Refresh();

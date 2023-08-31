@@ -143,57 +143,15 @@ OvEditor::Panels::Inspector::Inspector
 			case 10: defineButtonsStates(GetTargetActor()->GetComponent<CMaterialRenderer>());	return;
 			case 11: defineButtonsStates(GetTargetActor()->GetComponent<CAudioSource>());		return;
 			case 12: defineButtonsStates(GetTargetActor()->GetComponent<CAudioListener>());		return;
+			case 13: defineButtonsStates(GetTargetActor()->GetComponent<CAnimator>());		return;
 			}
 		};
 
 		m_componentSelectorWidget = &componentSelectorWidget;
 	}
 
-	/* Script selector + button */
-	{
-		m_scriptSelectorWidget = &m_inspectorHeader->CreateWidget<OvUI::Widgets::InputFields::InputText>("");
-        m_scriptSelectorWidget->lineBreak = false;
-		auto& ddTarget = m_scriptSelectorWidget->AddPlugin<OvUI::Plugins::DDTarget<std::pair<std::string, Layout::Group*>>>("File");
-		
-		auto& addScriptButton = m_inspectorHeader->CreateWidget<OvUI::Widgets::Buttons::Button>("Add Script", OvMaths::FVector2{ 100.f, 0 });
-		addScriptButton.idleBackgroundColor = OvUI::Types::Color{ 0.7f, 0.5f, 0.f };
-		addScriptButton.textColor = OvUI::Types::Color::White;
-
-        // Add script button state updater
-        const auto updateAddScriptButton = [&addScriptButton, this](const std::string& p_script)
-        {
-            const std::string realScriptPath = EDITOR_CONTEXT(projectScriptsPath) + p_script + ".lua";
-
-            const auto targetActor = GetTargetActor();
-            const bool isScriptValid = std::filesystem::exists(realScriptPath) && targetActor && !targetActor->GetBehaviour(p_script);
-
-            addScriptButton.disabled = !isScriptValid;
-            addScriptButton.idleBackgroundColor = isScriptValid ? OvUI::Types::Color{ 0.7f, 0.5f, 0.f } : OvUI::Types::Color{ 0.1f, 0.1f, 0.1f };
-        };
-
-        m_scriptSelectorWidget->ContentChangedEvent += updateAddScriptButton;
-
-		addScriptButton.ClickedEvent += [updateAddScriptButton, this]
-		{
-            const std::string realScriptPath = EDITOR_CONTEXT(projectScriptsPath) + m_scriptSelectorWidget->content + ".lua";
-
-            // Ensure that the script is a valid one
-            if (std::filesystem::exists(realScriptPath))
-            {
-                GetTargetActor()->AddBehaviour(m_scriptSelectorWidget->content);
-                updateAddScriptButton(m_scriptSelectorWidget->content);
-            }
-		};
-
-        ddTarget.DataReceivedEvent += [updateAddScriptButton, this](std::pair<std::string, Layout::Group*> p_data)
-        {
-            m_scriptSelectorWidget->content = EDITOR_EXEC(GetScriptPath(p_data.first));
-            updateAddScriptButton(m_scriptSelectorWidget->content);
-        };
-	}
-
+	
 	m_inspectorHeader->CreateWidget<OvUI::Widgets::Visual::Separator>();
-
 	m_destroyedListener = OvCore::ECS::Actor::DestroyedEvent += [this](OvCore::ECS::Actor& p_destroyed)
 	{ 
 		if (&p_destroyed == m_targetActor)
@@ -218,9 +176,7 @@ void OvEditor::Panels::Inspector::FocusActor(OvCore::ECS::Actor& p_target)
 	m_targetActor = &p_target;
 
 	m_componentAddedListener = m_targetActor->ComponentAddedEvent += [this] (auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_behaviourAddedListener =		m_targetActor->BehaviourAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
 	m_componentRemovedListener =	m_targetActor->ComponentRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_behaviourRemovedListener =	m_targetActor->BehaviourRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
 
 	m_inspectorHeader->enabled = true;
 
@@ -228,7 +184,6 @@ void OvEditor::Panels::Inspector::FocusActor(OvCore::ECS::Actor& p_target)
 
     // Force component and script selectors to trigger their ChangedEvent to update button states
 	m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
-    m_scriptSelectorWidget->ContentChangedEvent.Invoke(m_scriptSelectorWidget->content);
 
 	EDITOR_EVENT(ActorSelectedEvent).Invoke(*m_targetActor);
 }
@@ -239,8 +194,6 @@ void OvEditor::Panels::Inspector::UnFocus()
 	{
 		m_targetActor->ComponentAddedEvent		-= m_componentAddedListener;
 		m_targetActor->ComponentRemovedEvent	-= m_componentRemovedListener;
-		m_targetActor->BehaviourAddedEvent		-= m_behaviourAddedListener;
-		m_targetActor->BehaviourRemovedEvent	-= m_behaviourRemovedListener;
 	}
 
 	SoftUnFocus();
@@ -276,11 +229,6 @@ void OvEditor::Panels::Inspector::CreateActorInspector(OvCore::ECS::Actor& p_tar
 
 	for (auto& [name, instance] : components)
 		DrawComponent(*instance);
-
-	auto& behaviours = p_target.GetBehaviours();
-
-	for (auto&[name, behaviour] : behaviours)
-		DrawBehaviour(behaviour);
 }
 
 void OvEditor::Panels::Inspector::DrawComponent(OvCore::ECS::Components::AComponent& p_component)
@@ -300,22 +248,6 @@ void OvEditor::Panels::Inspector::DrawComponent(OvCore::ECS::Components::ACompon
 	}
 }
 
-void OvEditor::Panels::Inspector::DrawBehaviour(OvCore::ECS::Components::Behaviour & p_behaviour)
-{
-	if (auto inspectorItem = dynamic_cast<OvCore::API::IInspectorItem*>(&p_behaviour); inspectorItem)
-	{
-		auto& header = m_actorInfo->CreateWidget<OvUI::Widgets::Layout::GroupCollapsable>(p_behaviour.name);
-		header.closable = true;
-		header.CloseEvent += [this, &header, &p_behaviour]
-		{
-			p_behaviour.owner.RemoveBehaviour(p_behaviour);
-		};
-
-		auto& columns = header.CreateWidget<OvUI::Widgets::Layout::Columns<2>>();
-		columns.widths[0] = 200;
-		inspectorItem->OnInspector(columns);
-	}
-}
 
 void OvEditor::Panels::Inspector::Refresh()
 {
