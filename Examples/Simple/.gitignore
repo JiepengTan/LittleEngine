@@ -6,6 +6,7 @@ Build/
 Builds/
 Assets/Resources
 imgui.ini
+edit.ini
 *.aps
 *.vcxproj*
 *.sln

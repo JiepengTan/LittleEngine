@@ -344,7 +344,10 @@ namespace OvEditor::Core
 		* @param p_absolute
 		*/
 		void LoadSceneFromDisk(const std::string& p_path, bool p_absolute = false);
-
+		/**
+		* Load last scene from the disk
+		*/
+		void LoadLastScene();
 		/**
 		* Returns true if the current scene has been loaded from disk
 		*/

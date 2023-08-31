@@ -23,7 +23,8 @@ OvEditor::Core::Context::Context(const std::string& p_projectPath, const std::st
 	projectScriptsPath(p_projectPath + "Scripts\\"),
 	editorAssetsPath("Data\\Editor\\"),
 	sceneManager(projectAssetsPath),
-	projectSettings(projectFilePath)
+	projectSettings(projectFilePath),
+	editSettings(p_projectPath + "edit.ini")
 {
 	if (!IsProjectSettingsIntegrityVerified())
 	{

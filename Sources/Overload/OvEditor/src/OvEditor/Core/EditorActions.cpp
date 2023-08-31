@@ -77,11 +77,20 @@ void OvEditor::Core::EditorActions::LoadSceneFromDisk(const std::string& p_path,
 		StopPlaying();
 	m_isLoadingScene = true;
 	m_context.sceneManager.LoadScene(p_path, p_absolute);
-	OVLOG_INFO("Scene loaded from disk: " + m_context.sceneManager.GetCurrentSceneSourcePath());
+	m_context.editSettings.SetOrAdd("last_scene_path",p_path);
+	m_context.editSettings.Rewrite();
+	OVLOG_INFO("Scene loaded from disk: " + m_context.sceneManager.GetCurrentSceneSourcePath() );
 	m_panelsManager.GetPanelAs<OvEditor::Panels::SceneView>("Scene View").Focus();
 	m_isLoadingScene = false;
 }
-
+void OvEditor::Core::EditorActions::LoadLastScene()
+{
+	auto lastPath = m_context.editSettings.GetOrDefault<std::string>("last_scene_path","");
+	if(lastPath != "")
+	{
+		m_context.sceneManager.LoadScene(lastPath);
+	}
+}
 
 bool OvEditor::Core::EditorActions::IsCurrentSceneLoadedFromDisk() const
 {

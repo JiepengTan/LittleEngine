@@ -37,6 +37,13 @@ namespace OvTools::Filesystem
 		* Any comment or line break in your .ini file will get destroyed
 		*/
 		void Rewrite() const;
+		
+		/**
+		* Save the entiere .ini file with the current values. 
+		* Any comment or line break in your .ini file will get destroyed
+		* @param p_path
+		*/
+		void Save(std::string p_path) const;
 
 		/**
 		* Return the value attached to the given key
@@ -70,7 +77,14 @@ namespace OvTools::Filesystem
 		*/
 		template<typename T>
 		bool Add(const std::string& p_key, const T& p_value);
-
+		/**
+		* Force Set or Add a key/value to the IniFile object 
+		* @param p_key
+		* @param p_value
+		*/
+		template<typename T>
+		void SetOrAdd(const std::string& p_key, const T& p_value);
+		
 		/**
 		* Remove an key/value pair identified by the given key (Not applied to the real file untill Rewrite() or Save() is called)
 		* @param p_key

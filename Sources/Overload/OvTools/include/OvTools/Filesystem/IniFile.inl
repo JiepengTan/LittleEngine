@@ -55,7 +55,7 @@ namespace OvTools::Filesystem
 	{
 		return IsKeyExisting(p_key) ? Get<T>(p_key) : p_default;
 	}
-
+	
 	template<typename T>
 	inline bool IniFile::Set(const std::string& p_key, const T& p_value)
 	{
@@ -87,7 +87,7 @@ namespace OvTools::Filesystem
 
 		return false;
 	}
-
+	
 	template<typename T>
 	inline bool IniFile::Add(const std::string & p_key, const T & p_value)
 	{
@@ -118,5 +118,14 @@ namespace OvTools::Filesystem
 		}
 
 		return false;
+	}
+
+	template<typename T>
+	inline void IniFile::SetOrAdd(const std::string & p_key, const T & p_value)
+	{
+		if (!IsKeyExisting(p_key)){
+			Add<T>(p_key,p_value);
+		}
+		Set<T>(p_key, p_value);
 	}
 }

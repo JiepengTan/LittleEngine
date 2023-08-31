@@ -109,5 +109,6 @@ namespace OvEditor::Core
 		OvWindowing::Settings::WindowSettings windowSettings;
 
 		OvTools::Filesystem::IniFile projectSettings;
+		OvTools::Filesystem::IniFile editSettings;
 	};
 }

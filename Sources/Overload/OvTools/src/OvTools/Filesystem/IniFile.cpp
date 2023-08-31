@@ -82,11 +82,10 @@ void OvTools::Filesystem::IniFile::Load()
 		iniFile.close();
 	}
 }
-
-void OvTools::Filesystem::IniFile::Rewrite() const
+void OvTools::Filesystem::IniFile::Save(std::string p_path) const
 {
 	std::ofstream outfile;
-	outfile.open(m_filePath, std::ios_base::trunc);
+	outfile.open(p_path, std::ios_base::trunc);
 
 	if (outfile.is_open())
 	{
@@ -95,6 +94,10 @@ void OvTools::Filesystem::IniFile::Rewrite() const
 	}
 
 	outfile.close();
+}
+void OvTools::Filesystem::IniFile::Rewrite() const
+{
+	Save(m_filePath);
 }
 
 std::pair<std::string, std::string> OvTools::Filesystem::IniFile::ExtractKeyAndValue(const std::string& p_line) const
