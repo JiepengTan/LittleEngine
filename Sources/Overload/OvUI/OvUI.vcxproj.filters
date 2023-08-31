@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI">
+      <UniqueIdentifier>{FB9FCE69-E702-5E0E-9088-96C47CCA2991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\API">
+      <UniqueIdentifier>{640ADFEF-5003-FE41-7935-E3C6658DDD4D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Core">
+      <UniqueIdentifier>{33F9C1EB-9F0F-C081-E886-4BA354DC9009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\ImGui">
+      <UniqueIdentifier>{65E56B64-51C9-2CBA-BA29-270DA62C173C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Internal">
+      <UniqueIdentifier>{87D02CC3-F33C-E8BD-BC30-801B285C0A26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Modules">
+      <UniqueIdentifier>{C3F79A69-AF86-2433-58A5-382E441335D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Panels">
+      <UniqueIdentifier>{EDA77801-5909-560F-E276-9CC14ED78CCE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Plugins">
+      <UniqueIdentifier>{CC1BB64A-B8AA-3F14-61C9-530F4D3750BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Settings">
+      <UniqueIdentifier>{7B7FFD49-E7EB-B844-B0DF-50A21C0BDBAC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Styling">
+      <UniqueIdentifier>{F4369944-E0C5-220E-89E4-3609755233B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Types">
+      <UniqueIdentifier>{DF333A65-CB17-FBBA-3478-F50D207BE53C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets">
+      <UniqueIdentifier>{619A5A5D-4D29-E426-F647-F821E2B5F4CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Buttons">
+      <UniqueIdentifier>{3F597568-2B14-6514-D4CB-DD5EC065AFA4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Drags">
+      <UniqueIdentifier>{8144E89E-6D54-946F-D60D-F98DC23C8308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\InputFields">
+      <UniqueIdentifier>{170B96B0-035C-81F2-2CC0-6FB41870145C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Layout">
+      <UniqueIdentifier>{EEC4738D-5AD2-A173-E3B8-9D5E4FC56D2A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Menu">
+      <UniqueIdentifier>{25B4CDE5-9176-0170-DA26-90FC4628DA4D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Plots">
+      <UniqueIdentifier>{825DBE9F-6E6D-6A70-D726-CF8EC3555909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Selection">
+      <UniqueIdentifier>{F698B1C7-E2BE-7B2E-CB04-01FAB7C9A0FA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Sliders">
+      <UniqueIdentifier>{C6F6446F-B2B1-341B-5B69-AD6547037FAB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Texts">
+      <UniqueIdentifier>{280F03A0-141F-AF70-7DD8-138F69079E09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvUI\Widgets\Visual">
+      <UniqueIdentifier>{E4EB54A5-50F9-828B-D9DF-7E7645EC4E42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI">
+      <UniqueIdentifier>{1F8223CF-0B4F-7EDA-3468-6C822094B368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Core">
+      <UniqueIdentifier>{D7D16D47-4392-E97D-0CCD-32FB784C2E5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\ImGui">
+      <UniqueIdentifier>{89D29235-75A0-863B-5E34-F7614AA162A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Internal">
+      <UniqueIdentifier>{2B5B9C4C-9771-9AE2-E0E8-25044C3E6B6A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Modules">
+      <UniqueIdentifier>{E7BD3120-D3B6-5072-FCE8-35F7E840307E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Panels">
+      <UniqueIdentifier>{91397DF7-FDC4-EABB-06D6-6DB072E046BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Plugins">
+      <UniqueIdentifier>{F0E14C01-DCDA-6B53-050D-51D8F1644B5F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Types">
+      <UniqueIdentifier>{03216136-EFEE-543C-D882-C562C4EF30A1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets">
+      <UniqueIdentifier>{8560F113-7159-1066-9A8B-F5EA86E3EF71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Buttons">
+      <UniqueIdentifier>{6303F2F5-4F28-4176-7873-260664F73F94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Drags">
+      <UniqueIdentifier>{A5152CCC-910F-551E-7A7C-EB2E6615BB8A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\InputFields">
+      <UniqueIdentifier>{3B27E3A2-27E2-D24E-D099-4B99BC331DDF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Layout">
+      <UniqueIdentifier>{92BA3163-FEF1-79FA-07FC-DD1D73B2A0F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Menu">
+      <UniqueIdentifier>{C9F0895B-355D-4556-FE50-DDB36A7C67BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Plots">
+      <UniqueIdentifier>{A62E02CD-9228-2B1F-7B95-C12F672E918B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Selection">
+      <UniqueIdentifier>{1A5C01A7-066C-AD77-6F25-12965B549C10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Sliders">
+      <UniqueIdentifier>{EAA0C1FC-D6C5-107D-FF10-F60CEB940F9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Texts">
+      <UniqueIdentifier>{4CE046CD-38DA-6F1F-2147-06300DE0D58B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvUI\Widgets\Visual">
+      <UniqueIdentifier>{88E1127B-F418-5B12-FD22-BF3569D9810B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvUI\API\IDrawable.h">
+      <Filter>include\OvUI\API</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Core\UIManager.h">
+      <Filter>include\OvUI\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imconfig.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imgui.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imgui_impl_glfw.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imgui_impl_opengl3.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imgui_internal.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imstb_rectpack.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imstb_textedit.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\ImGui\imstb_truetype.h">
+      <Filter>include\OvUI\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Internal\Converter.h">
+      <Filter>include\OvUI\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Internal\EMemoryMode.h">
+      <Filter>include\OvUI\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Internal\TextureID.h">
+      <Filter>include\OvUI\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Internal\WidgetContainer.h">
+      <Filter>include\OvUI\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Modules\Canvas.h">
+      <Filter>include\OvUI\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Panels\APanel.h">
+      <Filter>include\OvUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Panels\APanelTransformable.h">
+      <Filter>include\OvUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Panels\PanelMenuBar.h">
+      <Filter>include\OvUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Panels\PanelUndecorated.h">
+      <Filter>include\OvUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Panels\PanelWindow.h">
+      <Filter>include\OvUI\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\ContextualMenu.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\DDSource.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\DDTarget.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\DataDispatcher.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\IPlugin.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Plugins\Pluginable.h">
+      <Filter>include\OvUI\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Settings\Alignment.h">
+      <Filter>include\OvUI\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Settings\PanelWindowSettings.h">
+      <Filter>include\OvUI\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Styling\EStyle.h">
+      <Filter>include\OvUI\Styling</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Types\Color.h">
+      <Filter>include\OvUI\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\AWidget.h">
+      <Filter>include\OvUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\AButton.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\Button.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\ButtonArrow.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\ButtonColored.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\ButtonImage.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Buttons\ButtonSmall.h">
+      <Filter>include\OvUI\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\DataWidget.h">
+      <Filter>include\OvUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragDouble.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragFloat.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragInt.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragMultipleDoubles.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragMultipleFloats.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragMultipleInts.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragMultipleScalars.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Drags\DragSingleScalar.h">
+      <Filter>include\OvUI\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputDouble.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputFloat.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputInt.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputMultipleDoubles.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputMultipleFloats.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputMultipleInts.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputMultipleScalars.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputSingleScalar.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\InputFields\InputText.h">
+      <Filter>include\OvUI\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\Columns.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\Dummy.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\Group.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\GroupCollapsable.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\NewLine.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\Spacing.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Layout\TreeNode.h">
+      <Filter>include\OvUI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Menu\MenuItem.h">
+      <Filter>include\OvUI\Widgets\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Menu\MenuList.h">
+      <Filter>include\OvUI\Widgets\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Plots\APlot.h">
+      <Filter>include\OvUI\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Plots\PlotHistogram.h">
+      <Filter>include\OvUI\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Plots\PlotLines.h">
+      <Filter>include\OvUI\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\CheckBox.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\ColorEdit.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\ColorPicker.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\ComboBox.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\RadioButton.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Selection\RadioButtonLinker.h">
+      <Filter>include\OvUI\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\ESliderOrientation.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderDouble.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderFloat.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderInt.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderMultipleDoubles.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderMultipleFloats.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderMultipleInts.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderMultipleScalars.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Sliders\SliderSingleScalar.h">
+      <Filter>include\OvUI\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\Text.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextClickable.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextColored.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextDisabled.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextLabelled.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextSelectable.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Texts\TextWrapped.h">
+      <Filter>include\OvUI\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Visual\Bullet.h">
+      <Filter>include\OvUI\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Visual\Image.h">
+      <Filter>include\OvUI\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Visual\ProgressBar.h">
+      <Filter>include\OvUI\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvUI\Widgets\Visual\Separator.h">
+      <Filter>include\OvUI\Widgets\Visual</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvUI\Core\UIManager.cpp">
+      <Filter>src\OvUI\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui_demo.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui_draw.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui_impl_glfw.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui_impl_opengl3.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\ImGui\imgui_widgets.cpp">
+      <Filter>src\OvUI\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Internal\Converter.cpp">
+      <Filter>src\OvUI\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Internal\WidgetContainer.cpp">
+      <Filter>src\OvUI\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Modules\Canvas.cpp">
+      <Filter>src\OvUI\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Panels\APanel.cpp">
+      <Filter>src\OvUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Panels\APanelTransformable.cpp">
+      <Filter>src\OvUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Panels\PanelMenuBar.cpp">
+      <Filter>src\OvUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Panels\PanelUndecorated.cpp">
+      <Filter>src\OvUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Panels\PanelWindow.cpp">
+      <Filter>src\OvUI\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Plugins\ContextualMenu.cpp">
+      <Filter>src\OvUI\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Types\Color.cpp">
+      <Filter>src\OvUI\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\AWidget.cpp">
+      <Filter>src\OvUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Buttons\Button.cpp">
+      <Filter>src\OvUI\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Buttons\ButtonArrow.cpp">
+      <Filter>src\OvUI\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Buttons\ButtonColored.cpp">
+      <Filter>src\OvUI\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Buttons\ButtonImage.cpp">
+      <Filter>src\OvUI\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Buttons\ButtonSmall.cpp">
+      <Filter>src\OvUI\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Drags\DragDouble.cpp">
+      <Filter>src\OvUI\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Drags\DragFloat.cpp">
+      <Filter>src\OvUI\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Drags\DragInt.cpp">
+      <Filter>src\OvUI\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\InputFields\InputDouble.cpp">
+      <Filter>src\OvUI\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\InputFields\InputFloat.cpp">
+      <Filter>src\OvUI\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\InputFields\InputInt.cpp">
+      <Filter>src\OvUI\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\InputFields\InputText.cpp">
+      <Filter>src\OvUI\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\Dummy.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\Group.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\GroupCollapsable.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\NewLine.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\Spacing.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Layout\TreeNode.cpp">
+      <Filter>src\OvUI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Menu\MenuItem.cpp">
+      <Filter>src\OvUI\Widgets\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Menu\MenuList.cpp">
+      <Filter>src\OvUI\Widgets\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Plots\APlot.cpp">
+      <Filter>src\OvUI\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Plots\PlotHistogram.cpp">
+      <Filter>src\OvUI\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Plots\PlotLines.cpp">
+      <Filter>src\OvUI\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\CheckBox.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\ColorEdit.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\ColorPicker.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\ComboBox.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\RadioButton.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Selection\RadioButtonLinker.cpp">
+      <Filter>src\OvUI\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Sliders\SliderDouble.cpp">
+      <Filter>src\OvUI\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Sliders\SliderFloat.cpp">
+      <Filter>src\OvUI\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Sliders\SliderInt.cpp">
+      <Filter>src\OvUI\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\Text.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextClickable.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextColored.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextDisabled.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextLabelled.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextSelectable.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Texts\TextWrapped.cpp">
+      <Filter>src\OvUI\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Visual\Bullet.cpp">
+      <Filter>src\OvUI\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Visual\Image.cpp">
+      <Filter>src\OvUI\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Visual\ProgressBar.cpp">
+      <Filter>src\OvUI\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvUI\Widgets\Visual\Separator.cpp">
+      <Filter>src\OvUI\Widgets\Visual</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvMaths">
+      <UniqueIdentifier>{7A424616-E6CD-B3DA-EFDE-36CF5BE90FDB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvMaths\Internal">
+      <UniqueIdentifier>{E6B19816-D2D6-E796-FB21-CD26E7A5E6B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvMaths">
+      <UniqueIdentifier>{1EA21BE7-8A57-94DC-134C-8EB37F008BE0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvMaths\Internal">
+      <UniqueIdentifier>{0AEAAD29-F678-37F3-9F97-4BEE8B054899}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvMaths\FMatrix3.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FMatrix4.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FQuaternion.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FTransform.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FVector2.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FVector3.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\FVector4.h">
+      <Filter>include\OvMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvMaths\Internal\TransformNotifier.h">
+      <Filter>include\OvMaths\Internal</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvMaths\FMatrix3.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FMatrix4.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FQuaternion.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FTransform.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FVector2.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FVector3.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\FVector4.cpp">
+      <Filter>src\OvMaths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvMaths\Internal\TransformNotifier.cpp">
+      <Filter>src\OvMaths\Internal</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

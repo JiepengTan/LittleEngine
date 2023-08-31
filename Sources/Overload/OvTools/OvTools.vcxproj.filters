@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvTools">
+      <UniqueIdentifier>{8E86CC16-FA11-3ADB-0323-BDCF6F2D96DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvTools\Eventing">
+      <UniqueIdentifier>{3DDFAFC1-2904-FF41-524F-E4D13ED3FD5F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvTools\Filesystem">
+      <UniqueIdentifier>{0288ADC6-EE97-5997-5751-BEB543804830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvTools\Time">
+      <UniqueIdentifier>{EC2B4F18-D8BA-D8E1-81D9-ECDC6D47E987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvTools\Utils">
+      <UniqueIdentifier>{6EBA4C22-DA26-081D-A31A-A07A0F462A85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvTools">
+      <UniqueIdentifier>{32E6A1E7-9E9B-1ADD-2790-14B4934411E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvTools\Filesystem">
+      <UniqueIdentifier>{2659F1F3-1253-1A46-FBBF-B056E75880B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvTools\Time">
+      <UniqueIdentifier>{10F2E5CE-FCEA-0421-251D-EAA51175E42C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvTools\Utils">
+      <UniqueIdentifier>{1245BCAB-7E5B-BA41-C7D2-456333288BC9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvTools\Eventing\Event.h">
+      <Filter>include\OvTools\Eventing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Eventing\Event.inl">
+      <Filter>include\OvTools\Eventing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Filesystem\IniFile.h">
+      <Filter>include\OvTools\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Filesystem\IniFile.inl">
+      <Filter>include\OvTools\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Filesystem\tinyxml2.h">
+      <Filter>include\OvTools\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Time\Clock.h">
+      <Filter>include\OvTools\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Time\Date.h">
+      <Filter>include\OvTools\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\PathParser.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\Random.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\ReferenceOrValue.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\SizeConverter.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\String.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvTools\Utils\SystemCalls.h">
+      <Filter>include\OvTools\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvTools\Filesystem\IniFile.cpp">
+      <Filter>src\OvTools\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Filesystem\tinyxml2.cpp">
+      <Filter>src\OvTools\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Time\Clock.cpp">
+      <Filter>src\OvTools\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Time\Date.cpp">
+      <Filter>src\OvTools\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Utils\PathParser.cpp">
+      <Filter>src\OvTools\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Utils\Random.cpp">
+      <Filter>src\OvTools\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Utils\SizeConverter.cpp">
+      <Filter>src\OvTools\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Utils\String.cpp">
+      <Filter>src\OvTools\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvTools\Utils\SystemCalls.cpp">
+      <Filter>src\OvTools\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

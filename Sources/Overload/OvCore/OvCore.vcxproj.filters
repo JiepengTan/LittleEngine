@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore">
+      <UniqueIdentifier>{A65CED17-922A-E11D-7BBE-5144672BBD82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\API">
+      <UniqueIdentifier>{8F2412D3-7B08-D328-E468-CD7BD06BBDAA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\ECS">
+      <UniqueIdentifier>{F03312D3-DC17-D328-4578-CD7B317BBDAA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\ECS\Components">
+      <UniqueIdentifier>{05C3C040-71DB-A76A-3A88-3704A65F3C04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\Global">
+      <UniqueIdentifier>{4634EEF5-B2A0-A9F0-7B94-414EE7BFCB58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\Helpers">
+      <UniqueIdentifier>{68532CF0-544D-5542-3DBA-EB522953BBAE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\ResourceManagement">
+      <UniqueIdentifier>{1A154F09-8683-A488-CF6C-5F883B1A9A24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\Resources">
+      <UniqueIdentifier>{90090F53-7C2E-5ED3-A579-436391FD5CF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\Resources\Loaders">
+      <UniqueIdentifier>{8931681C-7582-535E-9EE6-41208A96E6C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\SceneSystem">
+      <UniqueIdentifier>{2860D16E-1470-7D3F-7D29-E25D69586CD8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvCore\Scripting">
+      <UniqueIdentifier>{2859B593-147E-0414-3DC9-E9A3294D0332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore">
+      <UniqueIdentifier>{CA570326-B60F-4573-1F17-1ECF0BEEDF63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\ECS">
+      <UniqueIdentifier>{142139A4-00EF-2CAA-E982-9DD0D5EF080F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\ECS\Components">
+      <UniqueIdentifier>{A9B1D27D-1574-0608-5E24-9594CA25DFE5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\Global">
+      <UniqueIdentifier>{EABE5D7F-56D5-5B15-9F4C-E7360BA22C9D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\Helpers">
+      <UniqueIdentifier>{8C328DA7-7816-4EFD-E176-4850CD79387F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\ResourceManagement">
+      <UniqueIdentifier>{BEB53F45-2ACE-266F-F37A-B6085F52BB08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\Resources">
+      <UniqueIdentifier>{B4412466-A0D0-AD2F-49EF-C12A355DBED5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\Resources\Loaders">
+      <UniqueIdentifier>{AD4DB50E-9908-A5BA-42C0-1D052E5AEF4A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\SceneSystem">
+      <UniqueIdentifier>{4C31159C-382B-3EEE-2198-D4FE0D31A45A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvCore\Scripting">
+      <UniqueIdentifier>{4C91CAA6-3820-5470-E13E-686BCDAC6416}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvCore\API\IInspectorItem.h">
+      <Filter>include\OvCore\API</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\API\ISerializable.h">
+      <Filter>include\OvCore\API</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Actor.h">
+      <Filter>include\OvCore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Actor.inl">
+      <Filter>include\OvCore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\AComponent.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\Behaviour.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\Behaviour.inl">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CAmbientBoxLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CAmbientSphereLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CAnimator.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CAudioListener.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CAudioSource.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CCamera.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CDirectionalLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CMaterialRenderer.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CModelRenderer.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CPhysicalBox.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CPhysicalCapsule.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CPhysicalObject.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CPhysicalSphere.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CPointLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CSpotLight.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Components\CTransform.h">
+      <Filter>include\OvCore\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\PhysicsWrapper.h">
+      <Filter>include\OvCore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ECS\Renderer.h">
+      <Filter>include\OvCore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Global\ServiceLocator.h">
+      <Filter>include\OvCore\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Helpers\ActorUtils.h">
+      <Filter>include\OvCore\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Helpers\GUIDrawer.h">
+      <Filter>include\OvCore\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Helpers\GUIDrawer.inl">
+      <Filter>include\OvCore\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Helpers\RenderUtils.h">
+      <Filter>include\OvCore\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Helpers\Serializer.h">
+      <Filter>include\OvCore\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\AResourceManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\AResourceManager.inl">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\AnimationManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\MaterialManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\ModelManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\ShaderManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\SoundManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\ResourceManagement\TextureManager.h">
+      <Filter>include\OvCore\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Resources\Loaders\MaterialLoader.h">
+      <Filter>include\OvCore\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Resources\Material.h">
+      <Filter>include\OvCore\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Resources\Material.inl">
+      <Filter>include\OvCore\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\SceneSystem\Scene.h">
+      <Filter>include\OvCore\SceneSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\SceneSystem\SceneManager.h">
+      <Filter>include\OvCore\SceneSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\LuaActorBinder.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\LuaBinder.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\LuaComponentBinder.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\LuaGlobalsBinder.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\LuaMathsBinder.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvCore\Scripting\ScriptInterpreter.h">
+      <Filter>include\OvCore\Scripting</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvCore\ECS\Actor.cpp">
+      <Filter>src\OvCore\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\AComponent.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\Behaviour.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CAmbientBoxLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CAmbientSphereLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CAnimator.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CAudioListener.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CAudioSource.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CCamera.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CDirectionalLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CMaterialRenderer.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CModelRenderer.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CPhysicalBox.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CPhysicalCapsule.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CPhysicalObject.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CPhysicalSphere.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CPointLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CSpotLight.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Components\CTransform.cpp">
+      <Filter>src\OvCore\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\PhysicsWrapper.cpp">
+      <Filter>src\OvCore\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ECS\Renderer.cpp">
+      <Filter>src\OvCore\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Global\ServiceLocator.cpp">
+      <Filter>src\OvCore\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Helpers\ActorUtils.cpp">
+      <Filter>src\OvCore\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Helpers\GUIDrawer.cpp">
+      <Filter>src\OvCore\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Helpers\RenderUtils.cpp">
+      <Filter>src\OvCore\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Helpers\Serializer.cpp">
+      <Filter>src\OvCore\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\AnimationManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\MaterialManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\ModelManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\ShaderManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\SoundManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\ResourceManagement\TextureManager.cpp">
+      <Filter>src\OvCore\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Resources\Loaders\MaterialLoader.cpp">
+      <Filter>src\OvCore\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Resources\Material.cpp">
+      <Filter>src\OvCore\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\SceneSystem\Scene.cpp">
+      <Filter>src\OvCore\SceneSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\SceneSystem\SceneManager.cpp">
+      <Filter>src\OvCore\SceneSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\LuaActorBinder.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\LuaBinder.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\LuaComponentBinder.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\LuaGlobalsBinder.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\LuaMathsBinder.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvCore\Scripting\ScriptInterpreter.cpp">
+      <Filter>src\OvCore\Scripting</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

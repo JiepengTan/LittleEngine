@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering">
+      <UniqueIdentifier>{5B62BD9B-C7C3-9AA9-5031-E15BBC91D168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Buffers">
+      <UniqueIdentifier>{D74C3065-435A-5E4B-CC40-5A36384D2A02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Context">
+      <UniqueIdentifier>{EF07C4A4-5B15-F28A-E4FB-ED755008BE41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Core">
+      <UniqueIdentifier>{933729EB-7F5C-786B-A8A7-5DFB942B7789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Data">
+      <UniqueIdentifier>{A48829EB-90AD-786B-B9F8-5DFBA57C7789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Entities">
+      <UniqueIdentifier>{6F510ED6-5B0C-FE81-04C4-76CCF05D4812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Geometry">
+      <UniqueIdentifier>{16665CEE-0221-4C9A-ABD8-C4E49772962A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\LowRenderer">
+      <UniqueIdentifier>{33B0FC45-9F93-0B86-A896-39C214F9D1D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Resources">
+      <UniqueIdentifier>{8575F5F4-F18D-DC1E-BA3A-6CB8261271B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Resources\Loaders">
+      <UniqueIdentifier>{7EC2A1C2-EA86-A0B2-B3EC-D07C1F703CE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Resources\Parsers">
+      <UniqueIdentifier>{F4561ED7-601B-1DC7-2981-4D919504B9FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Settings">
+      <UniqueIdentifier>{DBED9C0D-C7A8-8CB9-7060-05045CFAD649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvRendering\Utils">
+      <UniqueIdentifier>{FB7B9851-673E-CCDB-B0EE-5A681CF0A4B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering">
+      <UniqueIdentifier>{FFF3C191-6B7F-2F56-7490-B24AE09A8B56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Buffers">
+      <UniqueIdentifier>{7B42EE3A-E779-36D2-F083-9AF55C3A5DCB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Context">
+      <UniqueIdentifier>{93FD817A-FF34-CA11-083F-2E3574F5F00A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Core">
+      <UniqueIdentifier>{B76F3EFE-A3FE-C7C7-4C1D-DCC2388BD86D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Data">
+      <UniqueIdentifier>{C8C03EFE-B44F-C8C7-5D6E-DCC249DCD86D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Entities">
+      <UniqueIdentifier>{93FB8A63-7F20-DAE3-A86B-BF7394EFD801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\LowRenderer">
+      <UniqueIdentifier>{D7D7440F-43E5-72F5-CCCB-6EE038D83EAC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Resources">
+      <UniqueIdentifier>{29640732-9526-3BBC-DED6-C9484AD8139A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Resources\Loaders">
+      <UniqueIdentifier>{22157AD1-8E83-CF50-D76C-8A50431AC5EC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvRendering\Resources\Parsers">
+      <UniqueIdentifier>{98A9F6E5-0418-4C65-4D01-0765B9AE4101}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvRendering\Buffers\EAccessSpecifier.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\Framebuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\IndexBuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\ShaderStorageBuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\ShaderStorageBuffer.inl">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\ShadowmapBuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\UniformBuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\UniformBuffer.inl">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\VertexArray.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\VertexArray.inl">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\VertexBuffer.h">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Buffers\VertexBuffer.inl">
+      <Filter>include\OvRendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Context\Driver.h">
+      <Filter>include\OvRendering\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Core\Renderer.h">
+      <Filter>include\OvRendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Core\ShapeDrawer.h">
+      <Filter>include\OvRendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Data\Frustum.h">
+      <Filter>include\OvRendering\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Entities\Light.h">
+      <Filter>include\OvRendering\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Geometry\BoundingSphere.h">
+      <Filter>include\OvRendering\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Geometry\Vertex.h">
+      <Filter>include\OvRendering\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\LowRenderer\Camera.h">
+      <Filter>include\OvRendering\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Animation.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\AnimationData.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\IMesh.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Loaders\AnimationLoader.h">
+      <Filter>include\OvRendering\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Loaders\ModelLoader.h">
+      <Filter>include\OvRendering\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Loaders\ShaderLoader.h">
+      <Filter>include\OvRendering\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Loaders\TextureLoader.h">
+      <Filter>include\OvRendering\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Mesh.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Model.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Parsers\AssimpParser.h">
+      <Filter>include\OvRendering\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Parsers\EModelParserFlags.h">
+      <Filter>include\OvRendering\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Parsers\IModelParser.h">
+      <Filter>include\OvRendering\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Shader.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Skeleton.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\Texture.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\UniformInfo.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Resources\UniformType.h">
+      <Filter>include\OvRendering\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\DriverSettings.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EComparaisonAlgorithm.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\ECullFace.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\ECullingOptions.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EOperation.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EPixelDataFormat.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EPixelDataType.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EPrimitiveMode.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\EProjectionMode.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\ERasterizationMode.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\ERenderingCapability.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Settings\ETextureFilteringMode.h">
+      <Filter>include\OvRendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvRendering\Utils\Defines.h">
+      <Filter>include\OvRendering\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvRendering\Buffers\Framebuffer.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Buffers\IndexBuffer.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Buffers\ShaderStorageBuffer.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Buffers\ShadowmapBuffer.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Buffers\UniformBuffer.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Buffers\VertexArray.cpp">
+      <Filter>src\OvRendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Context\Driver.cpp">
+      <Filter>src\OvRendering\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Core\Renderer.cpp">
+      <Filter>src\OvRendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Core\ShapeDrawer.cpp">
+      <Filter>src\OvRendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Data\Frustum.cpp">
+      <Filter>src\OvRendering\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Entities\Light.cpp">
+      <Filter>src\OvRendering\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\LowRenderer\Camera.cpp">
+      <Filter>src\OvRendering\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Animation.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Loaders\AnimationLoader.cpp">
+      <Filter>src\OvRendering\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Loaders\ModelLoader.cpp">
+      <Filter>src\OvRendering\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Loaders\ShaderLoader.cpp">
+      <Filter>src\OvRendering\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Loaders\TextureLoader.cpp">
+      <Filter>src\OvRendering\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Mesh.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Model.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Parsers\AssimpParser.cpp">
+      <Filter>src\OvRendering\Resources\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Shader.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Skeleton.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvRendering\Resources\Texture.cpp">
+      <Filter>src\OvRendering\Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

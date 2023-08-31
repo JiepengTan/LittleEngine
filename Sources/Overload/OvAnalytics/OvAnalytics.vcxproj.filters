@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvAnalytics">
+      <UniqueIdentifier>{E58D2959-51EF-0667-DA5C-4D1946BD3D26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvAnalytics\Hardware">
+      <UniqueIdentifier>{023A1A38-EEF4-09E4-97AC-822E83465474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\OvAnalytics\Profiling">
+      <UniqueIdentifier>{9E4C68AC-0A65-4FD6-D311-DF6F3FE9E36F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvAnalytics">
+      <UniqueIdentifier>{891F2E4F-F5AA-9B13-FEBB-1E086AC6F713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvAnalytics\Hardware">
+      <UniqueIdentifier>{26E496C5-1209-E645-3B54-CBD527D8E463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OvAnalytics\Profiling">
+      <UniqueIdentifier>{423B7AE9-AEFD-AD73-F7AD-3C0063AF8651}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvAnalytics\Hardware\CPUInfo.h">
+      <Filter>include\OvAnalytics\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Hardware\GPUInfo.h">
+      <Filter>include\OvAnalytics\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Hardware\HardwareInfo.h">
+      <Filter>include\OvAnalytics\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Hardware\HardwareReport.h">
+      <Filter>include\OvAnalytics\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Hardware\RAMInfo.h">
+      <Filter>include\OvAnalytics\Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Profiling\Profiler.h">
+      <Filter>include\OvAnalytics\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Profiling\ProfilerReport.h">
+      <Filter>include\OvAnalytics\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OvAnalytics\Profiling\ProfilerSpy.h">
+      <Filter>include\OvAnalytics\Profiling</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvAnalytics\Hardware\CPUInfo.cpp">
+      <Filter>src\OvAnalytics\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvAnalytics\Hardware\GPUInfo.cpp">
+      <Filter>src\OvAnalytics\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvAnalytics\Hardware\HardwareInfo.cpp">
+      <Filter>src\OvAnalytics\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvAnalytics\Hardware\RAMInfo.cpp">
+      <Filter>src\OvAnalytics\Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvAnalytics\Profiling\Profiler.cpp">
+      <Filter>src\OvAnalytics\Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OvAnalytics\Profiling\ProfilerSpy.cpp">
+      <Filter>src\OvAnalytics\Profiling</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

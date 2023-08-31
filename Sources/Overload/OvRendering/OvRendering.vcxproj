@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{68C0E779-D475-606F-5D6A-5A46C91E5773}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OvRendering</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\Bin\Debug\OvRendering\</OutDir>
+    <IntDir>..\..\..\Bin-Int\Debug\OvRendering\</IntDir>
+    <TargetName>OvRendering</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\Bin\Release\OvRendering\</OutDir>
+    <IntDir>..\..\..\Bin-Int\Release\OvRendering\</IntDir>
+    <TargetName>OvRendering</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\assimp\include;..\OvDebug\include;..\OvMaths\include;..\OvTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\assimp\include;..\OvDebug\include;..\OvMaths\include;..\OvTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OvRendering\Buffers\EAccessSpecifier.h" />
+    <ClInclude Include="include\OvRendering\Buffers\Framebuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\IndexBuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\ShaderStorageBuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\ShaderStorageBuffer.inl" />
+    <ClInclude Include="include\OvRendering\Buffers\ShadowmapBuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\UniformBuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\UniformBuffer.inl" />
+    <ClInclude Include="include\OvRendering\Buffers\VertexArray.h" />
+    <ClInclude Include="include\OvRendering\Buffers\VertexArray.inl" />
+    <ClInclude Include="include\OvRendering\Buffers\VertexBuffer.h" />
+    <ClInclude Include="include\OvRendering\Buffers\VertexBuffer.inl" />
+    <ClInclude Include="include\OvRendering\Context\Driver.h" />
+    <ClInclude Include="include\OvRendering\Core\Renderer.h" />
+    <ClInclude Include="include\OvRendering\Core\ShapeDrawer.h" />
+    <ClInclude Include="include\OvRendering\Data\Frustum.h" />
+    <ClInclude Include="include\OvRendering\Entities\Light.h" />
+    <ClInclude Include="include\OvRendering\Geometry\BoundingSphere.h" />
+    <ClInclude Include="include\OvRendering\Geometry\Vertex.h" />
+    <ClInclude Include="include\OvRendering\LowRenderer\Camera.h" />
+    <ClInclude Include="include\OvRendering\Resources\Animation.h" />
+    <ClInclude Include="include\OvRendering\Resources\AnimationData.h" />
+    <ClInclude Include="include\OvRendering\Resources\IMesh.h" />
+    <ClInclude Include="include\OvRendering\Resources\Loaders\AnimationLoader.h" />
+    <ClInclude Include="include\OvRendering\Resources\Loaders\ModelLoader.h" />
+    <ClInclude Include="include\OvRendering\Resources\Loaders\ShaderLoader.h" />
+    <ClInclude Include="include\OvRendering\Resources\Loaders\TextureLoader.h" />
+    <ClInclude Include="include\OvRendering\Resources\Mesh.h" />
+    <ClInclude Include="include\OvRendering\Resources\Model.h" />
+    <ClInclude Include="include\OvRendering\Resources\Parsers\AssimpParser.h" />
+    <ClInclude Include="include\OvRendering\Resources\Parsers\EModelParserFlags.h" />
+    <ClInclude Include="include\OvRendering\Resources\Parsers\IModelParser.h" />
+    <ClInclude Include="include\OvRendering\Resources\Shader.h" />
+    <ClInclude Include="include\OvRendering\Resources\Skeleton.h" />
+    <ClInclude Include="include\OvRendering\Resources\Texture.h" />
+    <ClInclude Include="include\OvRendering\Resources\UniformInfo.h" />
+    <ClInclude Include="include\OvRendering\Resources\UniformType.h" />
+    <ClInclude Include="include\OvRendering\Settings\DriverSettings.h" />
+    <ClInclude Include="include\OvRendering\Settings\EComparaisonAlgorithm.h" />
+    <ClInclude Include="include\OvRendering\Settings\ECullFace.h" />
+    <ClInclude Include="include\OvRendering\Settings\ECullingOptions.h" />
+    <ClInclude Include="include\OvRendering\Settings\EOperation.h" />
+    <ClInclude Include="include\OvRendering\Settings\EPixelDataFormat.h" />
+    <ClInclude Include="include\OvRendering\Settings\EPixelDataType.h" />
+    <ClInclude Include="include\OvRendering\Settings\EPrimitiveMode.h" />
+    <ClInclude Include="include\OvRendering\Settings\EProjectionMode.h" />
+    <ClInclude Include="include\OvRendering\Settings\ERasterizationMode.h" />
+    <ClInclude Include="include\OvRendering\Settings\ERenderingCapability.h" />
+    <ClInclude Include="include\OvRendering\Settings\ETextureFilteringMode.h" />
+    <ClInclude Include="include\OvRendering\Utils\Defines.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\OvRendering\Buffers\Framebuffer.cpp" />
+    <ClCompile Include="src\OvRendering\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\OvRendering\Buffers\ShaderStorageBuffer.cpp" />
+    <ClCompile Include="src\OvRendering\Buffers\ShadowmapBuffer.cpp" />
+    <ClCompile Include="src\OvRendering\Buffers\UniformBuffer.cpp" />
+    <ClCompile Include="src\OvRendering\Buffers\VertexArray.cpp" />
+    <ClCompile Include="src\OvRendering\Context\Driver.cpp" />
+    <ClCompile Include="src\OvRendering\Core\Renderer.cpp" />
+    <ClCompile Include="src\OvRendering\Core\ShapeDrawer.cpp" />
+    <ClCompile Include="src\OvRendering\Data\Frustum.cpp" />
+    <ClCompile Include="src\OvRendering\Entities\Light.cpp" />
+    <ClCompile Include="src\OvRendering\LowRenderer\Camera.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Animation.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Loaders\AnimationLoader.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Loaders\ModelLoader.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Loaders\ShaderLoader.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Loaders\TextureLoader.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Mesh.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Model.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Parsers\AssimpParser.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Shader.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Skeleton.cpp" />
+    <ClCompile Include="src\OvRendering\Resources\Texture.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
