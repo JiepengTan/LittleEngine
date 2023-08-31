@@ -39,6 +39,7 @@ OvEditor::Core::Context::Context(const std::string& p_projectPath, const std::st
 	ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	MaterialManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	SoundManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	AnimationManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 
 	/* Settings */
 	OvWindowing::Settings::DeviceSettings deviceSettings;

@@ -6,8 +6,11 @@ layout (location = 1) in vec2 geo_TexCoords;
 layout (location = 2) in vec3 geo_Normal;
 layout (location = 3) in vec3 geo_Tangent;
 layout (location = 4) in vec3 geo_Bitangent;
+layout(location = 5) in vec4 geo_BoneWeights;
+layout(location = 6) in ivec4 geo_BoneIds; 
 
 uniform mat4 u_LightSpaceMatrix;
+uniform int u_IsSkinMesh;
 
 /* Global information sent by the engine */
 layout (std140) uniform EngineUBO

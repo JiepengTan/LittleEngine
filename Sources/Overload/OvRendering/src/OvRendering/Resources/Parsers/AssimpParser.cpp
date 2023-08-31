@@ -9,6 +9,7 @@
 #include <assimp/matrix4x4.h>
 #include "OvRendering/Resources/Parsers/AssimpParser.h"
 
+#include <array>
 #include <cassert>
 #include <assimp/postprocess.h>
 #include "OvDebug/Assertion.h"
@@ -25,8 +26,7 @@ static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer importer;
-	auto flags  = aiProcess_Triangulate | aiProcess_GenNormals |  aiProcess_JoinIdenticalVertices;
-	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_Triangulate);
+	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure);
 	if(scene == nullptr || scene->mAnimations == nullptr)
 	{
 		OVLOG_ERROR("Can not load animtion file " + p_fileName);
@@ -38,6 +38,8 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 	aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
 	globalTransformation = globalTransformation.Inverse();
 	ReadHierarchyData(p_anim->m_skeletonRoot, scene->mRootNode);
+
+	// "$AssimpFbx$_Pre" 是特殊字符作用未知 
 	
 	auto& boneInfoMap = p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
 	int& boneCount = p_anim->GetBoneCount(); //getting the m_BoneCounter from Model class
@@ -52,6 +54,10 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 		{
 			boneInfoMap[boneName].id = boneCount;
 			boneCount++;
+			if(boneName != "root")
+			{
+				OVLOG("Miss Animation Node " + boneName);
+			}
 		}
 		p_anim->m_Bones.push_back(BoneFrames(channel->mNodeName.data,
 							   boneInfoMap[channel->mNodeName.data].id, channel));
@@ -59,7 +65,7 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 	p_anim->m_name2BoneInfo = boneInfoMap;
 	return true;
 }
-void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
+void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData( SkeletonBone& p_dest, const aiNode* p_src)
 {
 	p_dest.name = p_src->mName.data;
 	p_dest.transformation = ConvertMatrixToGLMFormat(p_src->mTransformation); // 直接内存映射
@@ -71,13 +77,14 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBo
 		ReadHierarchyData(newData, p_src->mChildren[i]);
 		p_dest.children.push_back(newData);
 	}
+	name2Bone[p_dest.name] = p_dest;
 }
 
 
 bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string & p_fileName, std::vector<Mesh*>& p_meshes, std::vector<std::string>& p_materials, EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(p_fileName, static_cast<unsigned int>(p_parserFlags));
+	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_GlobalScale | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		return false;
@@ -202,7 +209,15 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Res
 				tangent.z,
 				bitangent.x,
 				bitangent.y,
-				bitangent.z
+				bitangent.z,
+				0,
+				0,
+				0,
+				0,
+				-1,
+				-1,
+				-1,
+				-1,
 			}
 		);
 	}

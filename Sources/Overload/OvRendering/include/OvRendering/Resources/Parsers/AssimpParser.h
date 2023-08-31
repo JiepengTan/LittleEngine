@@ -5,6 +5,7 @@
 */
 #pragma once
 
+#include <map>
 #include <vector>
 
 #include "OvMaths/FMatrix4.h"
@@ -52,6 +53,7 @@ namespace OvRendering::Resources::Parsers
 		void ExtractBoneWeightForVertices(OvRendering::Resources::Model* p_model, std::vector<Geometry::Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
 	
 	private:
+		std::map<std::string, SkeletonBone> name2Bone ;
 		const int MAX_BONE_INFLUENCE = 4;
 	};
 }
