@@ -6,6 +6,7 @@
 #include "CModelRenderer.h"
 #include "OvCore/ECS/Actor.h"
 #include "OvMaths/FMatrix4.h"
+#include "OvCore/ECS/Components/AComponent.h"
 
 namespace OvRendering::Resources
 {
@@ -19,6 +20,8 @@ namespace OvCore::ECS::Components
 
 	public:
 		CAnimator(ECS::Actor& p_owner);
+		~CAnimator() =default;
+		std::string GetName() override;
 		virtual void OnStart() override;
 
 		virtual	void OnUpdate(float dt) override;

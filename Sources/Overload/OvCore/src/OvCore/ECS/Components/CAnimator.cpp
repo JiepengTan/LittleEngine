@@ -18,7 +18,10 @@ OvCore::ECS::Components::CAnimator::CAnimator(ECS::Actor& p_owner) :
     m_curAnim = nullptr;
     m_FinalBoneMatrices.reserve(100);
 }
-
+std::string OvCore::ECS::Components::CAnimator::GetName()
+{
+    return "Animator";
+}
 void OvCore::ECS::Components::CAnimator::OnStart()
 {
     auto mesh =  owner.GetComponent<CModelRenderer>();

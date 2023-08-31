@@ -9,6 +9,7 @@
 #include <string>
 
 #include "OvRendering/Resources/Parsers/AssimpParser.h"
+#include "OvRendering/Resources/Model.h"
 namespace OvRendering::Resources
 {
 	class Model;

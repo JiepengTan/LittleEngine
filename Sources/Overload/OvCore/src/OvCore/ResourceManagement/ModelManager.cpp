@@ -7,6 +7,7 @@
 #include "OvCore/ResourceManagement/ModelManager.h"
 
 #include <OvTools/Filesystem/IniFile.h>
+#include <OvRendering/Resources/Model.h>
 
 OvRendering::Resources::Parsers::EModelParserFlags GetAssetMetadata(const std::string& p_path)
 {

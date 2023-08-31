@@ -37,9 +37,11 @@
 #include <OvCore/ECS/Components/CMaterialRenderer.h>
 #include <OvCore/ECS/Components/CAudioSource.h>
 #include <OvCore/ECS/Components/CAudioListener.h>
+#include <OvCore/ECS/Components/CAnimator.h>
 
 #include <OvWindowing/Dialogs/MessageBox.h>
 
+#include "OvCore/ECS/Components/CAnimator.h"
 #include "OvEditor/Core/EditorActions.h"
 
 using namespace OvCore::ECS::Components;
@@ -111,6 +113,7 @@ OvEditor::Panels::Inspector::Inspector
 			case 10: GetTargetActor()->AddComponent<CMaterialRenderer>();	break;
 			case 11: GetTargetActor()->AddComponent<CAudioSource>();		break;
 			case 12: GetTargetActor()->AddComponent<CAudioListener>();		break;
+			case 13: GetTargetActor()->AddComponent<CAnimator>();		break;
 			}
 
 			componentSelectorWidget.ValueChangedEvent.Invoke(componentSelectorWidget.currentChoice);

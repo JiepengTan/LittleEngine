@@ -6,14 +6,15 @@ layout (location = 1) in vec2 geo_TexCoords;
 layout (location = 2) in vec3 geo_Normal;
 layout (location = 3) in vec3 geo_Tangent;
 layout (location = 4) in vec3 geo_Bitangent;
-layout(location = 5) in ivec4 geo_BoneIds; 
-layout(location = 6) in vec4 geo_BoneWeights;
+layout(location = 5) in vec4 geo_BoneWeights;
+layout(location = 6) in ivec4 geo_BoneIds; 
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
 uniform mat4 u_BonesMatrices[MAX_BONES];
 
 uniform mat4 u_LightSpaceMatrix;
+uniform int u_IsSkinMesh;
 
 /* Global information sent by the engine */
 layout (std140) uniform EngineUBO
@@ -48,18 +49,20 @@ void main()
 
     mat3 TBNi = transpose(vs_out.TBN);
     vec3 totalPosition = geo_Pos;
-    for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
-    {
-        if(geo_BoneIds[i] == -1) 
-            continue;
-        if(geo_BoneIds[i] >=MAX_BONES) 
+    if(u_IsSkinMesh>0.5){
+        for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
         {
-            totalPosition = vec4(pos,1.0f);
-            break;
+            if(geo_BoneIds[i] == -1) 
+                continue;
+            if(geo_BoneIds[i] >=MAX_BONES) 
+            {
+                totalPosition = vec4(geo_Pos,1.0f);
+                break;
+            }
+            vec4 localPosition = u_BonesMatrices[geo_BoneIds[i]] * vec4(geo_Pos,1.0f);
+            totalPosition += localPosition * geo_BoneWeights[i];
         }
-        vec4 localPosition = u_BonesMatrices[geo_BoneIds[i]] * vec4(geo_Pos,1.0f);
-        totalPosition += localPosition * geo_BoneWeights[i];
-   }
+    }
 
     vs_out.FragPos          = vec3(ubo_Model * vec4(totalPosition, 1.0));
     vs_out.Normal           = normalize(mat3(transpose(inverse(ubo_Model))) * geo_Normal);
