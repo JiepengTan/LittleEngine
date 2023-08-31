@@ -55,7 +55,10 @@ namespace OvMaths
 		* Check if the transform has a parent
 		*/
 		bool HasParent() const;
-
+		
+		void SetLocalMatrix(FMatrix4 p_localMatrix);
+		void SetWorldMatrix(FMatrix4 p_worldMatrix);
+		
 		/**
 		* Initialize transform with raw data from world info
 		* @param p_position

@@ -42,7 +42,7 @@ void OvCore::Scripting::LuaComponentBinder::BindComponent(sol::state & p_luaStat
 		"SetLocalPosition", &CTransform::SetLocalPosition,
 		"SetLocalRotation", &CTransform::SetLocalRotation,
 		"SetLocalScale", &CTransform::SetLocalScale,
-		"SetWorldPosition", &CTransform::SetWorldPosition,
+		"SetWorldPosition", &CTransform::SetWorldMatrix,
 		"SetWorldRotation", &CTransform::SetWorldRotation,
 		"SetWorldScale", &CTransform::SetWorldScale,
 		"GetPosition", [](CTransform& p_this) -> FVector3 { return p_this.GetWorldPosition(); },

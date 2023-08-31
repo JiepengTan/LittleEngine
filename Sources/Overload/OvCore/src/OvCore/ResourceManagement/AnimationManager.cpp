@@ -11,11 +11,15 @@
 #include "OvRendering/Resources/Loaders/AnimationLoader.h"
 
 
+
 OvRendering::Resources::Animation* OvCore::ResourceManagement::AnimationManager::CreateResource(const std::string& p_path)
 {
 	std::string realPath = GetRealPath(p_path);
-	auto anim = OvRendering::Resources::Loaders::AnimationLoader::Create( realPath,m_model);
-	anim->m_path = p_path; // Force the resource path to fit the given path
+	auto anim = OvRendering::Resources::Loaders::AnimationLoader::Create( realPath,currentModel);
+	if(anim != nullptr)
+	{
+		anim->m_path = p_path; // Force the resource path to fit the given path
+	}
 	return anim;
 }
 
@@ -29,5 +33,5 @@ void OvCore::ResourceManagement::AnimationManager::ReloadResource(OvRendering::R
 	OVLOG_ERROR("Now do not support reload animation!");
 	return;
 	std::string realPath = GetRealPath(p_path);
-	OvRendering::Resources::Loaders::AnimationLoader::Reload(*p_resource, realPath, m_model);
+	OvRendering::Resources::Loaders::AnimationLoader::Reload(*p_resource, realPath, currentModel);
 }

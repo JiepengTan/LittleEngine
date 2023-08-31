@@ -75,7 +75,19 @@ void OvMaths::FTransform::GenerateMatricesLocal(FVector3 p_position, FQuaternion
 
 	UpdateWorldMatrix();
 }
+void OvMaths::FTransform::SetLocalMatrix(FMatrix4 p_localMatrix)
+{
+	m_localMatrix= p_localMatrix;
+	UpdateWorldMatrix();
+	UpdateLocalMatrix();
+}
 
+void OvMaths::FTransform::SetWorldMatrix(FMatrix4 p_worldMatrix)
+{
+	m_worldMatrix= p_worldMatrix;
+	UpdateLocalMatrix();
+	UpdateWorldMatrix();
+}
 void OvMaths::FTransform::GenerateMatricesWorld(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale)
 {
 	m_worldMatrix = FMatrix4::Translation(p_position) * FQuaternion::ToMatrix4(FQuaternion::Normalize(p_rotation)) * FMatrix4::Scaling(p_scale);

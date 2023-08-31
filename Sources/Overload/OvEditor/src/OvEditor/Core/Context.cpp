@@ -11,6 +11,8 @@
 
 #include "OvEditor/Core/Context.h"
 
+#include "OvCore/ResourceManagement/AnimationManager.h"
+
 using namespace OvCore::Global;
 using namespace OvCore::ResourceManagement;
 
@@ -95,12 +97,13 @@ OvEditor::Core::Context::Context(const std::string& p_projectPath, const std::st
 	ServiceLocator::Provide<ShaderManager>(shaderManager);
 	ServiceLocator::Provide<MaterialManager>(materialManager);
 	ServiceLocator::Provide<SoundManager>(soundManager);
+	ServiceLocator::Provide<AnimationManager>(animationManager);
 	ServiceLocator::Provide<OvWindowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<OvWindowing::Window>(*window);
 	ServiceLocator::Provide<OvCore::SceneSystem::SceneManager>(sceneManager);
 	ServiceLocator::Provide<OvAudio::Core::AudioEngine>(*audioEngine);
 	ServiceLocator::Provide<OvAudio::Core::AudioPlayer>(*audioPlayer);
-
+	
 	/* Scripting */
 	scriptInterpreter = std::make_unique<OvCore::Scripting::ScriptInterpreter>(projectScriptsPath);
 

@@ -27,6 +27,7 @@ namespace OvCore::ECS::Components
 		virtual	void OnUpdate(float dt) override;
 		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
 		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
+		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
 		std::vector<OvMaths::FMatrix4> GetFinalBoneMatrices();
 		/**
 		* Serialize the component
@@ -51,9 +52,14 @@ namespace OvCore::ECS::Components
 		
 	private:
 		std::vector<OvMaths::FMatrix4> m_FinalBoneMatrices;
+#if DEBUG
+		std::vector<Actor*> m_debugBones;
+#endif
 		OvRendering::Resources::Animation* m_curAnim;
 		float m_currentTime;
+		bool m_showDebugBones;
 	public:
 		std::string m_animPath;
+		
 	};
 }

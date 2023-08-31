@@ -92,6 +92,7 @@ OvEditor::Panels::Inspector::Inspector
 		componentSelectorWidget.choices.emplace(10, "Material Renderer");
 		componentSelectorWidget.choices.emplace(11, "Audio Source");
 		componentSelectorWidget.choices.emplace(12, "Audio Listener");
+		componentSelectorWidget.choices.emplace(13, "CAnimator");
 
 		auto& addComponentButton = m_inspectorHeader->CreateWidget<OvUI::Widgets::Buttons::Button>("Add Component", OvMaths::FVector2{ 100.f, 0 });
 		addComponentButton.idleBackgroundColor = OvUI::Types::Color{ 0.7f, 0.5f, 0.f };

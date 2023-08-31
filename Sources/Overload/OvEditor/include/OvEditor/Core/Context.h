@@ -26,6 +26,7 @@
 #include <OvCore/ResourceManagement/ShaderManager.h>
 #include <OvCore/ResourceManagement/MaterialManager.h>
 #include <OvCore/ResourceManagement/SoundManager.h>
+#include "OvCore/ResourceManagement/AnimationManager.h"
 #include <OvCore/SceneSystem/SceneManager.h>
 #include <OvCore/Scripting/ScriptInterpreter.h>
 
@@ -105,6 +106,7 @@ namespace OvEditor::Core
 		OvCore::ResourceManagement::ShaderManager	shaderManager;
 		OvCore::ResourceManagement::MaterialManager	materialManager;
 		OvCore::ResourceManagement::SoundManager	soundManager;
+		OvCore::ResourceManagement::AnimationManager animationManager;
 
 		OvWindowing::Settings::WindowSettings windowSettings;
 

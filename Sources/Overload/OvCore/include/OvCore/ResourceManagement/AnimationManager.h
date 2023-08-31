@@ -37,6 +37,6 @@ namespace OvCore::ResourceManagement
         virtual void ReloadResource(OvRendering::Resources::Animation* p_resource, const std::string& p_path) override;
 
     public:
-        OvRendering::Resources::Model* m_model;
+        OvRendering::Resources::Model* currentModel;
     };
 }

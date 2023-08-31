@@ -42,7 +42,7 @@ namespace OvRendering::Resources::Parsers
 			std::vector<std::string>& p_materials,
 			EModelParserFlags p_parserFlags
 		) override;
-		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName);
+		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags);
 	private:
 		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);
 		void ProcessMaterials(const struct aiScene* p_scene, std::vector<std::string>& p_materials);;

@@ -8,8 +8,11 @@
 #include <assimp/scene.h>
 #include <assimp/matrix4x4.h>
 #include "OvRendering/Resources/Parsers/AssimpParser.h"
+
+#include <cassert>
 #include <assimp/postprocess.h>
 #include "OvDebug/Assertion.h"
+#include "OvDebug/Logger.h"
 #include "OvRendering/Resources/AnimationData.h"
 #include "OvRendering/Resources/Animation.h"
 #include "OvRendering/Resources/Model.h"
@@ -19,11 +22,16 @@ static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 	return *((OvMaths::FMatrix4*)(&p_from));
 }
 
-bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName)
+bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer importer;
+	auto flags  = aiProcess_Triangulate | aiProcess_GenNormals |  aiProcess_JoinIdenticalVertices;
 	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_Triangulate);
-	OVASSERT(scene && scene->mRootNode, "");
+	if(scene == nullptr || scene->mAnimations == nullptr)
+	{
+		OVLOG_ERROR("Can not load animtion file " + p_fileName);
+		return false;
+	}
 	auto animation = scene->mAnimations[0];
 	p_anim->m_Duration = animation->mDuration;
 	p_anim->m_TicksPerSecond = animation->mTicksPerSecond;

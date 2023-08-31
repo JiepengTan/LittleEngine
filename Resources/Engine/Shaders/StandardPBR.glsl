@@ -49,20 +49,7 @@ void main()
 
     mat3 TBNi = transpose(vs_out.TBN);
     vec3 totalPosition = geo_Pos;
-    if(u_IsSkinMesh>0.5){
-        for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
-        {
-            if(geo_BoneIds[i] == -1) 
-                continue;
-            if(geo_BoneIds[i] >=MAX_BONES) 
-            {
-                totalPosition = vec4(geo_Pos,1.0f);
-                break;
-            }
-            vec4 localPosition = u_BonesMatrices[geo_BoneIds[i]] * vec4(geo_Pos,1.0f);
-            totalPosition += localPosition * geo_BoneWeights[i];
-        }
-    }
+
 
     vs_out.FragPos          = vec3(ubo_Model * vec4(totalPosition, 1.0));
     vs_out.Normal           = normalize(mat3(transpose(inverse(ubo_Model))) * geo_Normal);

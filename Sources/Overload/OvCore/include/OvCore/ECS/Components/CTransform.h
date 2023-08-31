@@ -53,7 +53,9 @@ namespace OvCore::ECS::Components
 		* Check if the transform has a parent
 		*/
 		bool HasParent() const;
-
+		void SetWorldMatrix(OvMaths::FMatrix4 p_worldMatrix);
+		void SetLocalMatrix(OvMaths::FMatrix4 p_localMatrix);
+		
 		/**
 		* Set the position of the transform in the local space
 		* @param p_newPosition
@@ -72,7 +74,7 @@ namespace OvCore::ECS::Components
 		*/
 		void SetLocalScale(struct OvMaths::FVector3 p_newScale);
 
-
+	
 		/**
 		* Set the position of the transform in world space
 		* @param p_newPosition

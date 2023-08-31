@@ -32,6 +32,14 @@ bool OvCore::ECS::Components::CTransform::HasParent() const
 	return m_transform.HasParent();
 }
 
+void OvCore::ECS::Components::CTransform::SetWorldMatrix(OvMaths::FMatrix4 p_worldMatrix)
+{
+	m_transform.SetWorldMatrix(p_worldMatrix);
+}
+void OvCore::ECS::Components::CTransform::SetLocalMatrix(OvMaths::FMatrix4 p_localMatrix)
+{
+	m_transform.SetLocalMatrix(p_localMatrix);
+}
 void OvCore::ECS::Components::CTransform::SetLocalPosition(OvMaths::FVector3 p_newPosition)
 {
 	m_transform.SetLocalPosition(p_newPosition);
@@ -46,7 +54,6 @@ void OvCore::ECS::Components::CTransform::SetLocalScale(OvMaths::FVector3 p_newS
 {
 	m_transform.SetLocalScale(p_newScale);
 }
-
 void OvCore::ECS::Components::CTransform::SetWorldPosition(OvMaths::FVector3 p_newPosition)
 {
 	m_transform.SetWorldPosition(p_newPosition);

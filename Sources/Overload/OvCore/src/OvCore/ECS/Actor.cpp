@@ -21,6 +21,7 @@
 #include "OvCore/ECS/Components/CSpotLight.h"
 #include "OvCore/ECS/Components/CAmbientBoxLight.h"
 #include "OvCore/ECS/Components/CAmbientSphereLight.h"
+#include "OvCore/ECS/Components/CAnimator.h"
 
 OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::DestroyedEvent;
 OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::CreatedEvent;
@@ -412,7 +413,6 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 		behaviour.second.OnSerialize(p_doc, data);
 	}
 }
-
 void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
 	OvCore::Helpers::Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
@@ -447,6 +447,7 @@ void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::
 				else if (componentType == typeid(Components::CSpotLight).name())			component = &AddComponent<OvCore::ECS::Components::CSpotLight>();
 				else if (componentType == typeid(Components::CAmbientBoxLight).name())		component = &AddComponent<OvCore::ECS::Components::CAmbientBoxLight>();
 				else if (componentType == typeid(Components::CAmbientSphereLight).name())	component = &AddComponent<OvCore::ECS::Components::CAmbientSphereLight>();
+				else if (componentType == typeid(Components::CAnimator).name())				component = &AddComponent<OvCore::ECS::Components::CAnimator>();
 
 				if (component)
 					component->OnDeserialize(p_doc, currentComponent->FirstChildElement("data"));
