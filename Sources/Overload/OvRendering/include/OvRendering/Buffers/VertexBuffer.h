@@ -31,7 +31,8 @@ namespace OvRendering::Buffers
 		* @param p_data
 		*/
 		VertexBuffer(std::vector<T>& p_data);
-
+		
+		void Remap(T* p_data, size_t p_elements);
 		/**
 		* Destructor
 		*/
@@ -42,6 +43,7 @@ namespace OvRendering::Buffers
 		*/
 		void Bind();
 
+		
 		/**
 		* Bind the buffer
 		*/

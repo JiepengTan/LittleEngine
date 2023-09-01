@@ -13,6 +13,7 @@
 #include "OvRendering/Resources/Animation.h"
 #include "OvRendering/Resources/Model.h"
 #include "OvCore/Helpers/ActorUtils.h"
+#include "OvMaths/DebugUtil.h"
 #include "OvUI/Widgets/Buttons/Button.h"
 
 OvCore::ECS::Components::CAnimator::CAnimator(ECS::Actor& p_owner) :
@@ -33,11 +34,14 @@ void OvCore::ECS::Components::CAnimator::UnloadAnimations()
         bone->Destroy();
     }
     m_debugBones.clear();
+    m_boneId.clear();
+    m_finalBoneMatrices.clear();
     m_curAnim = nullptr;
 }
 void OvCore::ECS::Components::CAnimator::LoadAnimations()
 {
     if(m_curAnim != nullptr) return;
+    //owner.transform.SetLocalScale(OvMaths::FVector3::One*0.01f);
     auto mesh =  owner.GetComponent<CModelRenderer>();
     if(mesh == nullptr) return;
     auto model = mesh->GetModel();
@@ -47,11 +51,7 @@ void OvCore::ECS::Components::CAnimator::LoadAnimations()
     mgr.currentModel = model;
     auto anim = mgr.GetResource(m_animPath);
     m_curAnim = anim;
-    if(anim != nullptr)
-    {
-        model->SetSkinMesh(true);
-    }
-    for (int i = 0; i < m_curAnim->m_BoneCounter; i++)
+    for (int i = 0; i < *m_curAnim->m_BoneCounter; i++)
         m_finalBoneMatrices.push_back(OvMaths::FMatrix4::Identity);
     if(anim && m_showDebugBones)
     {
@@ -64,12 +64,13 @@ void OvCore::ECS::Components::CAnimator::OnStart()
 {
     LoadAnimations();
 }
+
 void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,
                                                                  OvMaths::FMatrix4 parentTransform)
 {
     std::string nodeName = node.name;
     OvMaths::FMatrix4 globalTransformation = parentTransform * node.transformation;
-    auto boneInfoMap = m_curAnim->GetBoneInfoMap();
+    auto& boneInfoMap = *m_curAnim->GetBoneInfoMap();
     auto actor = ActorUtils::CreateCube(&owner,nodeName);
     m_debugBones.push_back(actor);
     int id = -1;
@@ -80,32 +81,102 @@ void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Res
         m_finalBoneMatrices[id] = globalTransformation * offset;
         actor->transform.SetLocalMatrix(m_finalBoneMatrices[id]);
     }
+    actor->transform.SetLocalScale(OvMaths::FVector3::One * boneDrawSize);
     m_boneId.push_back(id);
     for (int i = 0; i < node.childrenCount; i++)
         CreateBoneActors(node.children[i], globalTransformation);
 }
-
 void OvCore::ECS::Components::CAnimator::OnDestroy() 
 {
     UnloadAnimations();
 }
+
+void OvCore::ECS::Components::CAnimator::DoAnimation()
+{
+    auto model = owner.GetComponent<CModelRenderer>()->GetModel();
+    auto& boneMatrixs = m_finalBoneMatrices;
+    for (auto mesh : model->GetMeshes())
+    {
+        // animate
+        auto& rawVertexes = mesh->rawVertexes;
+        auto& animatedVertexes = mesh->animatedVertexes;
+        const int count = (int)rawVertexes.size();
+        for (int i =0 ;i < count;i++)
+        {
+            memcpy(&animatedVertexes[i].position, &rawVertexes[i].position,sizeof(float)*3);
+            auto vectex = rawVertexes[i];
+            auto pos = OvMaths::FVector4();
+            memcpy(&pos, &vectex.position,sizeof(float)*3);
+            pos.w = 1;
+            auto rawPos = pos;
+            auto totalPos = OvMaths::FVector4();
+            for (int idx = 0;idx <4;idx++)
+            {
+                auto boneId = vectex.boneIds[idx];
+                if(boneId==-1) continue;
+                if(boneId >=100 )
+                {
+                    totalPos = rawPos;
+                    break;
+                }
+                totalPos += (boneMatrixs[vectex.boneIds[idx]] * pos) * vectex.boneWeights[idx];
+            }
+            if(totalPos.w > 0.001) totalPos = (totalPos/totalPos.w);
+            memcpy(&animatedVertexes[i].position, &totalPos,sizeof(float)*3);
+            /*
+                auto normal = OvMaths::FVector4();
+                auto totalNormal = OvMaths::FVector4();
+                normal.w =0;
+                for (int idx = 0;idx <4;idx++)
+                {
+                    if(vectex.boneIds[idx]>=0)
+                    {
+                        totalNormal += boneMatrixs[vectex.boneIds[idx]] * normal * vectex.boneWeights[idx];
+                    }
+                }
+                memcpy(&normal, &vectex.normals,sizeof(float)*3);
+                auto finalNormal = OvMaths::FVector3();
+                memcpy(&finalNormal, &totalNormal,sizeof(float)*3);
+                OvMaths::FVector3::Normalize(finalNormal);
+                memcpy(&animatedVertexes[i].normals, &finalNormal,sizeof(float)*3);
+                */
+        }
+        mesh->Rebind(); // rebind skin mesh buffers
+    }
+}
+
+void OvCore::ECS::Components::CAnimator::UpdateBones()
+{
+    if(m_showDebugBones)
+    {
+        for (int i =0;i < m_boneId.size();i++)
+        {
+            if(m_boneId[i]>0)
+            {
+                m_debugBones[i]->transform.SetLocalMatrix(m_finalBoneMatrices[m_boneId[i]]);
+                m_debugBones[i]->transform.SetLocalScale(OvMaths::FVector3::One * boneDrawSize);
+            }
+        }
+    }
+}
+
 void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
 {
-    if (m_curAnim)
+    if ( m_curAnim)
     {
+        hasUpdate = true;
         m_currentTime += m_curAnim->GetTicksPerSecond() * dt;
         m_currentTime = fmod(m_currentTime, m_curAnim->GetDuration());
         CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
-        if(m_showDebugBones)
+        DoAnimation();
+        UpdateBones();
+        int idx = 0;
+        for (auto mat : m_finalBoneMatrices)
         {
-            for (int i =0;i < m_boneId.size();i++)
-            {
-                if(m_boneId[i]>0)
-                {
-                    m_debugBones[i]->transform.SetLocalMatrix(m_finalBoneMatrices[m_boneId[i]]);
-                }
-            }
+            DebugUtil::Dump(std::to_string(idx++) + " =");
+            DebugUtil::Dump(mat,true);
         }
+		DebugUtil::Flush();
     }
 }
 
@@ -129,7 +200,10 @@ void OvCore::ECS::Components::CAnimator::CalculateBoneTransform(const OvRenderin
 
     OvMaths::FMatrix4 globalTransformation = parentTransform * nodeTransform;
 
-    auto boneInfoMap = m_curAnim->GetBoneInfoMap();
+    DebugUtil::Dump(" "+nodeName + " :" +( bone == nullptr?"": std::to_string(bone->GetBoneID())) + "=");
+    DebugUtil::Dump(globalTransformation,true);
+    
+    auto& boneInfoMap =*m_curAnim->GetBoneInfoMap();
     if (boneInfoMap.find(nodeName) != boneInfoMap.end())
     {
         const int index = boneInfoMap[nodeName].id;
@@ -174,7 +248,8 @@ void OvCore::ECS::Components::CAnimator::OnInspector(OvUI::Internal::WidgetConta
     GUIDrawer::DrawAsset(p_root, "animPath", m_animPath);
     GUIDrawer::DrawScalar<float>(p_root, "currentTime", m_currentTime, 0.005f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);
     GUIDrawer::DrawBoolean(p_root, "showDebugBones", m_showDebugBones);
-
+    GUIDrawer::DrawScalar(p_root, "boneDrawSize", boneDrawSize);
+    
     auto& btn = p_root.CreateWidget<OvUI::Widgets::Buttons::Button>("CreateBones");
     btn.ClickedEvent+= std::bind(&OvCore::ECS::Components::CAnimator::ToggleBones,this);
 }

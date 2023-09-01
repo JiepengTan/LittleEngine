@@ -32,10 +32,10 @@ namespace OvRendering::Resources
         std::string m_path;
 
         
-        std::map<std::string, BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
-        int& GetBoneCount() { return m_BoneCounter; }
-        std::map<std::string, BoneInfo> m_name2BoneInfo;
-        int m_BoneCounter = 0;
+        std::map<std::string, BoneInfo>* GetBoneInfoMap() { return m_name2BoneInfo; }
+        int* GetBoneCount() { return m_BoneCounter; }
+        std::map<std::string, BoneInfo>* m_name2BoneInfo;
+        int* m_BoneCounter ;
         
         SkeletonBone& GetSkeletonRoot() { return m_skeletonRoot; }
         SkeletonBone m_skeletonRoot;

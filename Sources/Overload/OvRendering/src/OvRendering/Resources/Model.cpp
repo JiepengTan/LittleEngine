@@ -22,15 +22,6 @@ OvRendering::Resources::Model::~Model()
 		delete mesh;
 }
 
-void OvRendering::Resources::Model::SetSkinMesh(bool p_skinMesh)
-{
-	isSkinMesh  = p_skinMesh;
-	for (auto mesh : m_meshes)
-	{
-		mesh->isSkinMesh = isSkinMesh;
-	}
-}
-
 void OvRendering::Resources::Model::ComputeBoundingSphere()
 {
 	if (m_meshes.size() == 1)

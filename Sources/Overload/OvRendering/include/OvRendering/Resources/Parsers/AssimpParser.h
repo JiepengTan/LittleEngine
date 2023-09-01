@@ -19,7 +19,7 @@ namespace OvRendering::Resources
 	class Mesh;
 	struct SkeletonBone;
 }
-
+class aiAnimation;
 namespace OvRendering::Resources::Parsers
 {
 	/**
@@ -43,6 +43,7 @@ namespace OvRendering::Resources::Parsers
 			std::vector<std::string>& p_materials,
 			EModelParserFlags p_parserFlags
 		) override;
+		void ReadMissingBones(OvRendering::Resources::Animation* p_anim, aiAnimation* animation);
 		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags);
 	private:
 		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);

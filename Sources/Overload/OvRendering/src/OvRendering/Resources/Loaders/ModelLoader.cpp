@@ -5,12 +5,15 @@
 */
 
 #include "OvRendering/Resources/Loaders/ModelLoader.h"
+
 #include "OvRendering/Resources/Model.h"
 
 OvRendering::Resources::Parsers::AssimpParser OvRendering::Resources::Loaders::ModelLoader::__ASSIMP;
 
+
+
 OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath,
-	OvRendering::Resources::Parsers::EModelParserFlags p_parserFlags)
+                                                                                    OvRendering::Resources::Parsers::EModelParserFlags p_parserFlags)
 {
 	Model* result = new Model(p_filepath);
 	
@@ -19,7 +22,7 @@ OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Cre
 		result->ComputeBoundingSphere();
 		return result;
 	}
-
+	
 	delete result;
 
 	return nullptr;

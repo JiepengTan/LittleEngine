@@ -29,8 +29,9 @@ namespace OvRendering::Resources
 		* @param p_indices
 		* @param p_materialIndex
 		*/
-		Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex);
+		Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex,bool p_isSkinMesh = false);
 
+		virtual void Rebind(bool p_recreateBound = false);
 		/**
 		* Bind the mesh (Actually bind its VAO)
 		*/
@@ -62,7 +63,7 @@ namespace OvRendering::Resources
 		const OvRendering::Geometry::BoundingSphere& GetBoundingSphere() const;
 
 	private:
-		void CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices);
+		void CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>* p_indices);
 		void ComputeBoundingSphere(const std::vector<Geometry::Vertex>& p_vertices);
 
 	private:
@@ -74,9 +75,11 @@ namespace OvRendering::Resources
 		std::unique_ptr<Buffers::VertexBuffer<float>>	m_vertexBuffer;
 		std::unique_ptr<Buffers::VertexBuffer<int>>		m_boneIdBuffer;
 		std::unique_ptr<Buffers::IndexBuffer>			m_indexBuffer;
-
+		
 		Geometry::BoundingSphere m_boundingSphere;
 	public:
 		bool isSkinMesh;
+		std::vector<Geometry::Vertex> rawVertexes;
+		std::vector<Geometry::Vertex> animatedVertexes;
 	};
 }

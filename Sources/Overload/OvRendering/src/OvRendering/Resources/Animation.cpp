@@ -29,7 +29,7 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiVector3D aiPosition = channel->mPositionKeys[positionIndex].mValue;
         float timeStamp = channel->mPositionKeys[positionIndex].mTime;
         KeyPosition data;
-        data.position = OvMaths::FVector3(aiPosition.x, aiPosition.y, aiPosition.z);
+        data.position = OvMaths::FVector3(aiPosition.x, aiPosition.y, aiPosition.z) ;
         data.timeStamp = timeStamp;
         m_Positions.push_back(data);
     }
@@ -40,7 +40,7 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiQuaternion aiOrientation = channel->mRotationKeys[rotationIndex].mValue;
         float timeStamp = channel->mRotationKeys[rotationIndex].mTime;
         KeyRotation data;
-        data.orientation = OvMaths::FQuaternion(aiOrientation.w, aiOrientation.x, aiOrientation.y, aiOrientation.z);
+        data.orientation = OvMaths::FQuaternion(aiOrientation.x, aiOrientation.y, aiOrientation.z,aiOrientation.w);
         data.timeStamp = timeStamp;
         m_Rotations.push_back(data);
     }
@@ -51,7 +51,7 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiVector3D scale = channel->mScalingKeys[keyIndex].mValue;
         float timeStamp = channel->mScalingKeys[keyIndex].mTime;
         KeyScale data;
-        data.scale = OvMaths::FVector3(scale.x, scale.y, scale.z);
+        data.scale = OvMaths::FVector3(scale.x, scale.y, scale.z) ;
         data.timeStamp = timeStamp;
         m_Scales.push_back(data);
     }

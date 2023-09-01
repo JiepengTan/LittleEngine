@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\OvMaths\DebugUtil.h" />
     <ClInclude Include="include\OvMaths\FMatrix3.h" />
     <ClInclude Include="include\OvMaths\FMatrix4.h" />
     <ClInclude Include="include\OvMaths\FQuaternion.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="include\OvMaths\Internal\TransformNotifier.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\OvMaths\DebugUtil.cpp" />
     <ClCompile Include="src\OvMaths\FMatrix3.cpp" />
     <ClCompile Include="src\OvMaths\FMatrix4.cpp" />
     <ClCompile Include="src\OvMaths\FQuaternion.cpp" />

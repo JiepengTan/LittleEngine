@@ -8,15 +8,25 @@
 
 #include "OvRendering/Resources/Mesh.h"
 
-OvRendering::Resources::Mesh::Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex) :
+OvRendering::Resources::Mesh::Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex,bool p_isSkinMesh) :
 	m_vertexCount(static_cast<uint32_t>(p_vertices.size())),
 	m_indicesCount(static_cast<uint32_t>(p_indices.size())),
 	m_materialIndex(p_materialIndex)
 {
-	CreateBuffers(p_vertices, p_indices);
+	isSkinMesh = p_isSkinMesh;
+	CreateBuffers(p_vertices, &p_indices);
 	ComputeBoundingSphere(p_vertices);
+	if(isSkinMesh)
+	{
+		rawVertexes =p_vertices;// std::move(p_vertices); TODO Move
+		animatedVertexes = rawVertexes;
+	}
 }
-
+void OvRendering::Resources::Mesh::Rebind(bool p_recreateBound)
+{
+	CreateBuffers(animatedVertexes, nullptr); // TODO Remap Buffer , do not need recreate it
+	if(p_recreateBound)	ComputeBoundingSphere(animatedVertexes);
+}
 void OvRendering::Resources::Mesh::Bind()
 {
 	m_vertexArray.Bind();
@@ -47,7 +57,7 @@ const OvRendering::Geometry::BoundingSphere& OvRendering::Resources::Mesh::GetBo
 	return m_boundingSphere;
 }
 
-void OvRendering::Resources::Mesh::CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices)
+void OvRendering::Resources::Mesh::CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>* p_indices)
 {
 	std::vector<float> vertexData;
 	std::vector<int> vertexBoneIdData;
@@ -87,7 +97,8 @@ void OvRendering::Resources::Mesh::CreateBuffers(const std::vector<Geometry::Ver
 	}
 	m_boneIdBuffer = std::make_unique<Buffers::VertexBuffer<int32_t>>(vertexBoneIdData);
 	m_vertexBuffer	= std::make_unique<Buffers::VertexBuffer<float>>(vertexData);
-	m_indexBuffer	= std::make_unique<Buffers::IndexBuffer>(const_cast<uint32_t*>(p_indices.data()), p_indices.size());
+	if(p_indices != nullptr)
+		m_indexBuffer	= std::make_unique<Buffers::IndexBuffer>(const_cast<uint32_t*>(p_indices->data()), p_indices->size());
 
 	uint32_t sizeOfBoneIds =sizeof(int32_t)*4;
 	uint64_t vertexSize = sizeof(Geometry::Vertex)-sizeOfBoneIds;

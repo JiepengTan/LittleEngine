@@ -23,26 +23,10 @@ static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 	return *((OvMaths::FMatrix4*)(&p_from));
 }
 
-bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags)
+void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering::Resources::Animation* p_anim, aiAnimation* animation)
 {
-	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure);
-	if(scene == nullptr || scene->mAnimations == nullptr)
-	{
-		OVLOG_ERROR("Can not load animtion file " + p_fileName);
-		return false;
-	}
-	auto animation = scene->mAnimations[0];
-	p_anim->m_Duration = animation->mDuration;
-	p_anim->m_TicksPerSecond = animation->mTicksPerSecond;
-	aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
-	globalTransformation = globalTransformation.Inverse();
-	ReadHierarchyData(p_anim->m_skeletonRoot, scene->mRootNode);
-
-	// "$AssimpFbx$_Pre" 是特殊字符作用未知 
-	
-	auto& boneInfoMap = p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
-	int& boneCount = p_anim->GetBoneCount(); //getting the m_BoneCounter from Model class
+	auto& boneInfoMap = *p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
+	int& boneCount = *p_anim->GetBoneCount(); //getting the m_BoneCounter from Model class
 	// read all channel 
 	int size = animation->mNumChannels;
 	//reading channels(bones engaged in an animation and their keyframes)
@@ -60,11 +44,31 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 			}
 		}
 		p_anim->m_Bones.push_back(BoneFrames(channel->mNodeName.data,
-							   boneInfoMap[channel->mNodeName.data].id, channel));
+		                                     boneInfoMap[channel->mNodeName.data].id, channel));
 	}
-	p_anim->m_name2BoneInfo = boneInfoMap;
+}
+
+bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags)
+{
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure);
+	if(scene == nullptr || scene->mAnimations == nullptr)
+	{
+		OVLOG_ERROR("Can not load animtion file " + p_fileName);
+		return false;
+	}
+	auto animation = scene->mAnimations[0];
+	p_anim->m_Duration = animation->mDuration;
+	p_anim->m_TicksPerSecond = animation->mTicksPerSecond;
+	aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
+	globalTransformation = globalTransformation.Inverse();
+	ReadHierarchyData(p_anim->m_skeletonRoot, scene->mRootNode);
+	// "$AssimpFbx$_Pre" is a special name , why need it?
+	ReadMissingBones(p_anim, animation);
 	return true;
 }
+
+
 void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData( SkeletonBone& p_dest, const aiNode* p_src)
 {
 	p_dest.name = p_src->mName.data;
@@ -84,7 +88,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData( SkeletonB
 bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string & p_fileName, std::vector<Mesh*>& p_meshes, std::vector<std::string>& p_materials, EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_GlobalScale | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
+	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate  | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		return false;
@@ -95,6 +99,12 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, co
 
 	ProcessNode(p_model,&identity, scene->mRootNode, scene, p_meshes);
 
+	bool hasBone = false;
+	for (auto mesh : p_meshes)
+	{
+		hasBone |= mesh->isSkinMesh;
+	}
+	p_model->isSkinMesh = hasBone;
 	return true;
 }
 
@@ -123,7 +133,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model,v
 		std::vector<uint32_t> indices;
 		aiMesh* mesh = p_scene->mMeshes[p_node->mMeshes[i]];
 		ProcessMesh(p_model, &nodeTransformation, mesh, p_scene, vertices, indices);
-		p_meshes.push_back(new Mesh(vertices, indices, mesh->mMaterialIndex)); // The model will handle mesh destruction
+		p_meshes.push_back(new Mesh(vertices, indices, mesh->mMaterialIndex,mesh->HasBones())); // The model will handle mesh destruction
 	}
 
 	// Then do the same for each of its children

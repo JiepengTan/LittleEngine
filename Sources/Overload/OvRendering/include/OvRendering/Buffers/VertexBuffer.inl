@@ -24,7 +24,15 @@ namespace OvRendering::Buffers
 	inline VertexBuffer<T>::VertexBuffer(std::vector<T>& p_data) : VertexBuffer(p_data.data(), p_data.size())
 	{
 	}
-
+	
+	template <class T>
+	inline void VertexBuffer<T>::Remap(T* p_data, size_t p_elements)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
+		glBufferData(GL_ARRAY_BUFFER, p_elements * sizeof(T), p_data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
 	template<class T>
 	inline VertexBuffer<T>::~VertexBuffer()
 	{
