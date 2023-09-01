@@ -71,7 +71,7 @@ void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Res
     std::string nodeName = node.name;
     OvMaths::FMatrix4 globalTransformation = parentTransform * node.transformation;
     auto& boneInfoMap = *m_curAnim->GetBoneInfoMap();
-    auto actor = ActorUtils::CreateCube(&owner,nodeName);
+    auto actor = ActorUtils::CreateEmptyActor(&owner,nodeName);
     m_debugBones.push_back(actor);
     int id = -1;
     if (boneInfoMap.find(nodeName) != boneInfoMap.end())

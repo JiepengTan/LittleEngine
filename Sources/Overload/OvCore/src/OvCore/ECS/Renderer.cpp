@@ -128,12 +128,14 @@ void OvCore::ECS::Renderer::DrawShadowmap
 		
 		//auto cameraMatrix = p_camera.GetProjectionMatrix();
 		//auto cameraView = p_camera.GetViewMatrix();
-		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(20, 1, 0.1, 100);
+		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(10, 1, 0.1, 100);
 		auto lightTran = mainLight->owner.transform;
 		auto pos = lightTran.GetWorldPosition();
 		auto forward = lightTran.GetWorldForward();
 		auto up = lightTran.GetWorldUp();
-		auto lightView =  OvMaths::FMatrix4::CreateView(pos,	forward,up);
+		// TODO Use Correct light pos to cover the enough scene
+		auto lightRgihtPos =p_cameraPosition;
+		auto lightView =  OvMaths::FMatrix4::CreateView(lightRgihtPos,	forward,up);
 		m_lightSpaceVPMatrix = lightProject*lightView;
 		m_lightInfo = OvMaths::FVector4(pos.x,pos.y,pos.z,1);
 		uint8_t stateMask = shadowMat->GenerateStateMask();

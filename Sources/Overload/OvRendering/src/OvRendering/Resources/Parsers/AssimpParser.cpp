@@ -51,7 +51,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering
 bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure);
+	const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure | aiProcess_GlobalScale);
 	if(scene == nullptr || scene->mAnimations == nullptr)
 	{
 		OVLOG_ERROR("Can not load animtion file " + p_fileName);
@@ -88,7 +88,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData( SkeletonB
 bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string & p_fileName, std::vector<Mesh*>& p_meshes, std::vector<std::string>& p_materials, EModelParserFlags p_parserFlags)
 {
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate  | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
+	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate |aiProcess_GlobalScale | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		return false;
