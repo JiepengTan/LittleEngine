@@ -13,9 +13,5 @@ OvCore::ECS::Components::AComponent::AComponent(ECS::Actor& p_owner) : owner(p_o
 
 OvCore::ECS::Components::AComponent::~AComponent()
 {
-	if (owner.IsActive())
-	{
-		OnDisable();
-		OnDestroy();
-	}
+
 }
