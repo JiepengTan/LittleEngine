@@ -32,7 +32,7 @@ OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
 		false
 	))
 {
-	m_shadowmapBuffer = std::make_unique<OvRendering::Buffers::ShadowmapBuffer>(1024,1024);
+	m_shadowmapBuffer = std::make_unique<OvRendering::Buffers::ShadowmapBuffer>(2048,2048);
 }
 
 OvCore::ECS::Renderer::~Renderer()

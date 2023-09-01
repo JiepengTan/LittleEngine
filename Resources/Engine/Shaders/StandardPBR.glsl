@@ -262,10 +262,11 @@ void main()
 {
     vec2 texCoords = u_TextureOffset + vec2(mod(fs_in.TexCoords.x * u_TextureTiling.x, 1), mod(fs_in.TexCoords.y * u_TextureTiling.y, 1));
 
+    vec4 metailSmoothness = texture(u_MetallicMap, texCoords);
     vec4 albedoRGBA     = texture(u_AlbedoMap, texCoords) * u_Albedo;
     vec3 albedo         = pow(albedoRGBA.rgb, vec3(2.2));
-    float metallic      = texture(u_MetallicMap, texCoords).r * u_Metallic;
-    float roughness     = texture(u_RoughnessMap, texCoords).r * u_Roughness;
+    float metallic      = metailSmoothness.r * u_Metallic;
+    float roughness     = (1-metailSmoothness.a)* u_Roughness;
     float ao            = texture(u_AmbientOcclusionMap, texCoords).r;
     vec3 normal;
 
