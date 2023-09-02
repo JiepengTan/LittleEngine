@@ -5,6 +5,7 @@
 #include "OvMaths/FMatrix4.h"
 #include "OvCore/ECS/Components/CAnimator.h"
 
+#include "OvAnalytics/Profiling/ProfilerSpy.h"
 #include "OvCore/ECS/Components/CModelRenderer.h"
 #include "OvCore/Global/ServiceLocator.h"
 #include "OvCore/Helpers/ActorUtils.h"
@@ -91,8 +92,10 @@ void OvCore::ECS::Components::CAnimator::OnDestroy()
     UnloadAnimations();
 }
 
-void OvCore::ECS::Components::CAnimator::DoAnimation()
+void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
 {
+    
+    PROFILER_SPY("Animator::UpVertexBufferCPU");
     auto model = owner.GetComponent<CModelRenderer>()->GetModel();
     auto& boneMatrixs = m_finalBoneMatrices;
     for (auto mesh : model->GetMeshes())
@@ -145,8 +148,9 @@ void OvCore::ECS::Components::CAnimator::DoAnimation()
     }
 }
 
-void OvCore::ECS::Components::CAnimator::UpdateBones()
+void OvCore::ECS::Components::CAnimator::UpdateBonesGameObjects()
 {
+    PROFILER_SPY("Animator::UpdateBonesGameObjects");
     if(m_showDebugBones)
     {
         for (int i =0;i < m_boneId.size();i++)
@@ -160,16 +164,23 @@ void OvCore::ECS::Components::CAnimator::UpdateBones()
     }
 }
 
+void OvCore::ECS::Components::CAnimator::UpdateBoneMatrix()
+{
+    PROFILER_SPY("Animator::UpdateBoneMatrix");
+    CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
+}
+
 void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
 {
+    PROFILER_SPY("Animator");
     if ( m_curAnim)
     {
         hasUpdate = true;
         m_currentTime += m_curAnim->GetTicksPerSecond() * dt;
         m_currentTime = fmod(m_currentTime, m_curAnim->GetDuration());
-        CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
-        DoAnimation();
-        UpdateBones();
+        UpdateBoneMatrix();
+        UpVertexBufferCPU();
+        UpdateBonesGameObjects();
         int idx = 0;
         for (auto mat : m_finalBoneMatrices)
         {

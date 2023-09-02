@@ -118,6 +118,7 @@ void OvCore::ECS::Renderer::DrawShadowmap
 		OpaqueDrawables&	opaqueMeshes
 	)
 {
+	PROFILER_SPY("DrawShadowmap");
 	int curFBO = OvRendering::Buffers::Framebuffer::m_curFrameBufferId;
 	m_shadowmapBuffer->Bind();
 	auto shadowMat = OvCore::Global::ServiceLocator::Get<OvCore::ResourceManagement::MaterialManager>()

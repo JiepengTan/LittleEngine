@@ -27,8 +27,9 @@ namespace OvCore::ECS::Components
 		void OnDestroy() override;
 		void LoadAnimations();
 		void UnloadAnimations();
-		void DoAnimation();
-		void UpdateBones();
+		void UpVertexBufferCPU();
+		void UpdateBonesGameObjects();
+		void UpdateBoneMatrix();
 		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
 		/**
 		* Serialize the component
