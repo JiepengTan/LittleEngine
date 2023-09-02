@@ -45,7 +45,7 @@ namespace OvTools::Eventing
 	template<class... ArgTypes>
 	uint64_t Event<ArgTypes...>::GetListenerCount()
 	{
-		return m_callbacks.size();
+		return m_callbacks.Size();
 	}
 
 	template<class... ArgTypes>

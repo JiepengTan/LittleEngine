@@ -18,7 +18,7 @@ OvRendering::Resources::Animation* OvCore::ResourceManagement::AnimationManager:
 	auto anim = OvRendering::Resources::Loaders::AnimationLoader::Create( realPath,currentModel);
 	if(anim != nullptr)
 	{
-		anim->m_path = p_path; // Force the resource path to fit the given path
+		anim->path = p_path; // Force the resource path to fit the given path
 	}
 	return anim;
 }

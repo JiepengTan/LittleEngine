@@ -188,7 +188,29 @@ OvMaths::FMatrix4 OvMaths::FMatrix4::Multiply(const FMatrix4& p_left, float p_sc
 		result.data[i] *= p_scalar;
 	return result;
 }
+OvMaths::FVector3 OvMaths::FMatrix4::MultiplyVector(const FMatrix4& p_matrix, const FVector3& p_vector)
+{
+	FVector3 multiply;
+	multiply.x = ((p_matrix.data[0] * p_vector.x) + (p_matrix.data[1] * p_vector.y) + (p_matrix.data[2]
+		* p_vector.z) );
+	multiply.y = ((p_matrix.data[4] * p_vector.x) + (p_matrix.data[5] * p_vector.y) + (p_matrix.data[6]
+		* p_vector.z) );
+	multiply.z = ((p_matrix.data[8] * p_vector.x) + (p_matrix.data[9] * p_vector.y) + (p_matrix.data[10]
+		* p_vector.z) );
+	return multiply;
+}
+OvMaths::FVector3 OvMaths::FMatrix4::MultiplyPoint(const FMatrix4& p_matrix, const FVector3& p_vector)
+{
+	FVector3 multiply;
 
+	multiply.x = ((p_matrix.data[0] * p_vector.x) + (p_matrix.data[1] * p_vector.y) + (p_matrix.data[2]
+		* p_vector.z) + (p_matrix.data[3] * 1));
+	multiply.y = ((p_matrix.data[4] * p_vector.x) + (p_matrix.data[5] * p_vector.y) + (p_matrix.data[6]
+		* p_vector.z) + (p_matrix.data[7] * 1));
+	multiply.z = ((p_matrix.data[8] * p_vector.x) + (p_matrix.data[9] * p_vector.y) + (p_matrix.data[10]
+		* p_vector.z) + (p_matrix.data[11] * 1));
+	return multiply;
+}
 OvMaths::FVector4 OvMaths::FMatrix4::Multiply(const FMatrix4& p_matrix, const FVector4& p_vector)
 {
 	FVector4 multiply;

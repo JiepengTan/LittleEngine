@@ -43,18 +43,17 @@ namespace OvRendering::Resources::Parsers
 			std::vector<std::string>& p_materials,
 			EModelParserFlags p_parserFlags
 		) override;
-		void ReadMissingBones(OvRendering::Resources::Animation* p_anim, aiAnimation* animation);
 		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags);
 	private:
+		void ReadMissingBones(OvRendering::Resources::Animation* p_anim, aiAnimation* animation);
 		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);
 		void ProcessMaterials(const struct aiScene* p_scene, std::vector<std::string>& p_materials);;
 		void ProcessNode(Model* p_model,void* p_transform, struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Mesh*>& p_meshes);
-		void ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices);
-		void SetVertexBoneData(Geometry::Vertex& vertex, int boneID, float weight);
-		void ExtractBoneWeightForVertices(OvRendering::Resources::Model* p_model, std::vector<Geometry::Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
+		void ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene,
+			Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices);
 	
 	private:
-		std::map<std::string, SkeletonBone> name2Bone ;
+		std::map<std::string, SkeletonBone> m_name2Bone ;
 		const int MAX_BONE_INFLUENCE = 4;
 	};
 }

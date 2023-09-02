@@ -13,6 +13,20 @@
 namespace OvRendering::Buffers
 {
 	/**
+	* Wraps from OpenGL types enum
+	*/
+	enum class EType
+	{
+		BYTE			= 0x1400,
+		UNISGNED_BYTE	= 0x1401,
+		SHORT			= 0x1402,
+		UNSIGNED_SHORT	= 0x1403,
+		INT				= 0x1404,
+		UNSIGNED_INT	= 0x1405,
+		FLOAT			= 0x1406,
+		DOUBLE			= 0x140A
+	};
+	/**
 	* Wraps OpenGL VBO
 	*/
 	template <class T>
@@ -22,17 +36,18 @@ namespace OvRendering::Buffers
 		/**
 		* Create the VBO using a pointer to the first element and a size (number of elements)
 		* @param p_data
-		* @parma p_elements
+		* @parma p_elementCount
 		*/
-		VertexBuffer(T* p_data, size_t p_elements);
-
+		VertexBuffer(T* p_data, size_t p_elementCount);
+		
+		VertexBuffer(void* p_data,size_t p_elementCount,size_t p_elemTypeSize);
 		/**
 		* Create the EBO using a vector
 		* @param p_data
 		*/
 		VertexBuffer(std::vector<T>& p_data);
 		
-		void Remap(T* p_data, size_t p_elements);
+		void Rebind(void* p_data,size_t p_elementCount,size_t p_elemTypeSize);
 		/**
 		* Destructor
 		*/

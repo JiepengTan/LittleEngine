@@ -62,50 +62,17 @@ OvRendering::Resources::Parsers::EModelParserFlags GetAssetMetadataAA(const std:
 
 OvRendering::Resources::Parsers::AssimpParser OvRendering::Resources::Loaders::AnimationLoader::__ASSIMP;
 
-void OvRendering::Resources::Loaders::AnimationLoader::DumpModelBonesInfo(OvRendering::Resources::Model* model, const char* outPath)
-{
-	std::stringstream ss;
-
-	auto maps = model->GetBoneInfoMap();
-	for (auto info : maps)
-	{
-		DebugUtil::Dump( info.first+" id = "+std::to_string(info.second.id) + "  =");
-		auto matrix = info.second.offset;
-		// 变成行优先
-		DebugUtil::Dump(matrix,true);
-	}
-    	
-	for (auto mesh : model->GetMeshes())
-	{
-		DebugUtil::Dump( "-----------------------------",true);
-		int idx =0;
-		for (auto vertex : mesh->rawVertexes)
-		{
-			DebugUtil::Dump(std::to_string(idx++) +" : ",true);	
-			for (int i=0;i<4;i++)
-			{
-				DebugUtil::Dump("    "+std::to_string(vertex.boneIds[i])+ " ");
-				DebugUtil::Dump(vertex.boneWeights[i],true);
-			}
-		}
-	}
-	DebugUtil::Dump( "============================done",true);
-}
 
 OvRendering::Resources::Animation* OvRendering::Resources::Loaders::AnimationLoader::Create(const std::string& p_filepath,OvRendering::Resources::Model* p_model)
 {
 	Animation* result = new Animation();
-	result->m_path = p_filepath;
+	result->path = p_filepath;
 	// The boneId of the animation should be the same as the boneId of the model
 	result->m_name2BoneInfo = &p_model->GetBoneInfoMap();
 	result->m_BoneCounter = &p_model->GetBoneCount();
 	auto flags = GetAssetMetadataAA(p_filepath);
 	if (__ASSIMP.LoadAnimation(result,p_filepath,flags))
 	{
-		if(p_filepath.find("minotaur1") != -1)
-		{
-			DumpModelBonesInfo(p_model, "I:/Projects/LearnOpenGL_Autho/Test.txt");
-		}
 		return result;
 	}
 	delete result;
@@ -116,7 +83,7 @@ void OvRendering::Resources::Loaders::AnimationLoader::Reload(Animation& p_anim,
 	Animation* newModel = Create(p_filePath,p_model);
 	if (newModel)
 	{
-		p_anim.m_path = newModel->m_path;
+		p_anim.path = newModel->path;
 		p_anim.m_Bones =std::move(newModel->m_Bones);
 		p_anim.m_Duration = newModel->m_Duration;
 		p_anim.m_TicksPerSecond = newModel->m_TicksPerSecond;

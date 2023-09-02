@@ -9,6 +9,7 @@
 
 namespace OvMaths
 {
+	
 	/**
 	* Mathematic representation of a 4D vector of floats
 	*/

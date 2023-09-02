@@ -151,6 +151,7 @@
     <ClCompile Include="src\OvRendering\Core\ShapeDrawer.cpp" />
     <ClCompile Include="src\OvRendering\Data\Frustum.cpp" />
     <ClCompile Include="src\OvRendering\Entities\Light.cpp" />
+    <ClCompile Include="src\OvRendering\Geometry\Vertex.cpp" />
     <ClCompile Include="src\OvRendering\LowRenderer\Camera.cpp" />
     <ClCompile Include="src\OvRendering\Resources\Animation.cpp" />
     <ClCompile Include="src\OvRendering\Resources\Loaders\AnimationLoader.cpp" />

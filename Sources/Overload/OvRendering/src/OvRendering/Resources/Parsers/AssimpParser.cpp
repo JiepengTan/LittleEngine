@@ -26,7 +26,7 @@ static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering::Resources::Animation* p_anim, aiAnimation* animation)
 {
 	auto& boneInfoMap = *p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
-	int& boneCount = *p_anim->GetBoneCount(); //getting the m_BoneCounter from Model class
+	int& boneCount = *p_anim->GetBoneCounter(); //getting the m_BoneCounter from Model class
 	// read all channel 
 	int size = animation->mNumChannels;
 	//reading channels(bones engaged in an animation and their keyframes)
@@ -43,8 +43,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering
 				OVLOG("Miss Animation Node " + boneName);
 			}
 		}
-		p_anim->m_Bones.push_back(BoneFrames(channel->mNodeName.data,
-		                                     boneInfoMap[channel->mNodeName.data].id, channel));
+		p_anim->AddBone(BoneFrames(channel->mNodeName.data,boneInfoMap[channel->mNodeName.data].id, channel));
 	}
 }
 
@@ -58,11 +57,12 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 		return false;
 	}
 	auto animation = scene->mAnimations[0];
-	p_anim->m_Duration = animation->mDuration;
-	p_anim->m_TicksPerSecond = animation->mTicksPerSecond;
+	p_anim->SetDuration(animation->mDuration);
+	p_anim->SetTicksPerSecond(animation->mTicksPerSecond);
 	aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
 	globalTransformation = globalTransformation.Inverse();
-	ReadHierarchyData(p_anim->m_skeletonRoot, scene->mRootNode);
+	m_name2Bone.clear();
+	ReadHierarchyData(p_anim->GetSkeletonRoot(), scene->mRootNode);
 	// "$AssimpFbx$_Pre" is a special name , why need it?
 	ReadMissingBones(p_anim, animation);
 	return true;
@@ -81,7 +81,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData( SkeletonB
 		ReadHierarchyData(newData, p_src->mChildren[i]);
 		p_dest.children.push_back(newData);
 	}
-	name2Bone[p_dest.name] = p_dest;
+	m_name2Bone[p_dest.name] = p_dest;
 }
 
 
@@ -129,11 +129,13 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model,v
 	// Process all the node's meshes (if any)
 	for (uint32_t i = 0; i < p_node->mNumMeshes; ++i)
 	{
-		std::vector<Geometry::Vertex> vertices;
 		std::vector<uint32_t> indices;
 		aiMesh* mesh = p_scene->mMeshes[p_node->mMeshes[i]];
+		auto flag = mesh->HasBones()? Geometry::vdf_all:Geometry::vdf_allNoBone;
+		Geometry::VertexDataBuffer vertices(mesh->mNumVertices,flag);
 		ProcessMesh(p_model, &nodeTransformation, mesh, p_scene, vertices, indices);
-		p_meshes.push_back(new Mesh(vertices, indices, mesh->mMaterialIndex,mesh->HasBones())); // The model will handle mesh destruction
+		auto meshPtr = new Mesh(vertices, indices, mesh->mMaterialIndex,flag,mesh->HasBones());
+		p_meshes.push_back(meshPtr); // The model will handle mesh destruction
 	}
 
 	// Then do the same for each of its children
@@ -142,56 +144,11 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model,v
 		ProcessNode(p_model, &nodeTransformation, p_node->mChildren[i], p_scene, p_meshes);
 	}
 }
-void OvRendering::Resources::Parsers::AssimpParser::SetVertexBoneData(Geometry::Vertex& vertex, int boneID, float weight)
-{
-	for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
-	{
-		if (vertex.boneIds[i] < 0)
-		{
-			vertex.boneWeights[i] = weight;
-			vertex.boneIds[i] = boneID;
-			break;
-		}
-	}
-}
 
-void OvRendering::Resources::Parsers::AssimpParser::ExtractBoneWeightForVertices(OvRendering::Resources::Model* p_model,std::vector<Geometry::Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
-{
-	auto& boneInfoMap = p_model->GetBoneInfoMap();
-	int& boneCount = p_model->GetBoneCount();
 
-	for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
-	{
-		int boneID = -1;
-		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
-		if (boneInfoMap.find(boneName) == boneInfoMap.end())
-		{
-			boneInfoMap[boneName] ={
-				boneCount,
-				ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix)
-			};
-			boneID = boneCount;
-			boneCount++;
-		}
-		else
-		{
-			boneID = boneInfoMap[boneName].id;
-		}
-		
-		auto weights = mesh->mBones[boneIndex]->mWeights;
-		int numWeights = mesh->mBones[boneIndex]->mNumWeights;
 
-		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
-		{
-			int vertexId = weights[weightIndex].mVertexId;
-			float weight = weights[weightIndex].mWeight;
-			OVASSERT(vertexId <= vertices.size()," Model file invalid !");
-			SetVertexBoneData(vertices[vertexId], boneID, weight);
-		}
-	}
-}
-
-void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, aiMesh* p_mesh, const aiScene* p_scene, std::vector<Geometry::Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices)
+void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform,
+	aiMesh* p_mesh, const aiScene* p_scene, Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices)
 {
 	aiMatrix4x4 meshTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform);
 
@@ -202,42 +159,79 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Res
 		aiVector3D texCoords	= p_mesh->mTextureCoords[0] ? p_mesh->mTextureCoords[0][i] : aiVector3D(0.0f, 0.0f, 0.0f);
 		aiVector3D tangent		= p_mesh->mTangents ? meshTransformation * p_mesh->mTangents[i] : aiVector3D(0.0f, 0.0f, 0.0f);
 		aiVector3D bitangent	= p_mesh->mBitangents ? meshTransformation * p_mesh->mBitangents[i] : aiVector3D(0.0f, 0.0f, 0.0f);
-
-		p_outVertices.push_back
-		(
-			{
-				position.x,
-				position.y,
-				position.z,
-				texCoords.x,
-				texCoords.y,
-				normal.x,
-				normal.y,
-				normal.z,
-				tangent.x,
-				tangent.y,
-				tangent.z,
-				bitangent.x,
-				bitangent.y,
-				bitangent.z,
-				0,
-				0,
-				0,
-				0,
-				-1,
-				-1,
-				-1,
-				-1,
-			}
-		);
+		aiColor4D  color	= p_mesh->mColors[0] != nullptr ?  p_mesh->mColors[0][i] : aiColor4D(0.0f, 0.0f, 0.0f,0.0f);
+		
+		p_verticesBuffer.SetPosition(i,position.x,position.y,position.z);
+		p_verticesBuffer.SetTexCoord(i,texCoords.x,texCoords.y);
+		p_verticesBuffer.SetColor(i,color.r,color.g,color.b,color.a);
+		p_verticesBuffer.SetNormal(i,normal.x,normal.y,normal.z);
+		p_verticesBuffer.SetTangent(i,tangent.x,tangent.y,tangent.z);
+		p_verticesBuffer.SetBitangent(i,bitangent.x,bitangent.y,bitangent.z);
+		if(p_mesh->mNumBones >0)
+		{
+			p_verticesBuffer.SetBoneId(i,-1,-1,-1,-1);
+			p_verticesBuffer.SetBoneWeight(i,0,0,0,0);
+		}
+		
 	}
 
 	for (uint32_t faceID = 0; faceID < p_mesh->mNumFaces; ++faceID)
 	{
 		auto& face = p_mesh->mFaces[faceID];
-
 		for (size_t indexID = 0; indexID < 3; ++indexID)
 			p_outIndices.push_back(face.mIndices[indexID]);
 	}
-	ExtractBoneWeightForVertices(p_model,p_outVertices,p_mesh,p_scene);
+
+	// extra bone info
+	auto& boneInfoMap = p_model->GetBoneInfoMap();
+	int& boneCount = p_model->GetBoneCount();
+
+	auto weightPtr = (float*)p_verticesBuffer.GetDataPtr(Geometry::EVertexDataFlagsIndex::boneWeight);
+	auto boneIdPtr = (int*)p_verticesBuffer.GetDataPtr(Geometry::EVertexDataFlagsIndex::boneId);
+	auto boneIdAryLen =p_verticesBuffer.dataLen[(int)Geometry::EVertexDataFlagsIndex::boneWeight];
+	for (int boneIndex = 0; boneIndex < p_mesh->mNumBones; ++boneIndex)
+	{
+		int boneID;
+		std::string boneName = p_mesh->mBones[boneIndex]->mName.C_Str();
+		if (boneInfoMap.find(boneName) == boneInfoMap.end())
+		{
+			boneInfoMap[boneName] ={
+				boneCount,
+				ConvertMatrixToGLMFormat(p_mesh->mBones[boneIndex]->mOffsetMatrix)
+			};
+			boneID = boneCount;
+			boneCount++;
+		}
+		else
+		{
+			boneID = boneInfoMap[boneName].id;
+		}
+		
+		auto weights = p_mesh->mBones[boneIndex]->mWeights;
+		int numWeights = p_mesh->mBones[boneIndex]->mNumWeights;
+
+		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+		{
+			int vertexId = weights[weightIndex].mVertexId;
+			float weight = weights[weightIndex].mWeight;
+			//SetVertexBoneData(vertices[vertexId], boneID, weight);
+			int startOffset = vertexId * MAX_BONE_INFLUENCE;
+			if(startOffset >= p_verticesBuffer.Size())
+			{
+				OVLOG_ERROR("Model file animation invalid !" + p_model->path);
+			}
+			for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
+			{
+				int curOffset = startOffset + i;
+				OVASSERT(boneIdAryLen > curOffset,"SetData outOfRange ");
+				if (boneIdPtr[curOffset] < 0)
+				{
+					boneIdPtr[curOffset] = boneID;
+					weightPtr[curOffset] = weight;
+					break;
+				}
+			}
+		}
+	}
 }
+

@@ -8,24 +8,112 @@
 
 #include "OvRendering/Resources/Mesh.h"
 
-OvRendering::Resources::Mesh::Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex,bool p_isSkinMesh) :
-	m_vertexCount(static_cast<uint32_t>(p_vertices.size())),
+OvRendering::Resources::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
+			uint32_t p_materialIndex,
+			Geometry::EVertexDataFlags p_dataFlag,
+			bool p_isReadWrite ):
+	m_vertexCount(static_cast<uint32_t>(p_vertices.Size())),
 	m_indicesCount(static_cast<uint32_t>(p_indices.size())),
-	m_materialIndex(p_materialIndex)
+	m_materialIndex(p_materialIndex),
+	m_dataFlags(p_dataFlag)
 {
-	isSkinMesh = p_isSkinMesh;
-	CreateBuffers(p_vertices, &p_indices);
-	ComputeBoundingSphere(p_vertices);
+	m_vertexArray.Bind();
+	std::cout<< "Create Mesh ====================   " <<std::endl;
+	isSkinMesh = (m_dataFlags & (Geometry::EVertexDataFlags::vdf_boneId |  Geometry::EVertexDataFlags::vdf_boneWeight) ) != 0;
+	isReadWriteable = p_isReadWrite;
+	for (int i=0;i<VERTEX_DATA_FLAGS_INDEX_COUNT;i++)
+	{
+		m_dataPtrs[i] = nullptr;
+		m_vertexBuffer[i] = nullptr;
+	}
+	m_animatedPositions = nullptr;
+
+	for (int i =0;i< VERTEX_DATA_FLAGS_INDEX_COUNT;i++)
+	{
+		auto& info = Geometry::VertexStructInfos[i];
+		auto ptr  = p_vertices.GetDataPtr(info.pos);
+		if(ptr != nullptr)
+		{
+			std::cout<< " create vertexBuffer ctor  ptr= "<<(long)ptr<<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
+			m_vertexBuffer[(int)info.pos] = std::make_unique<Buffers::VertexBuffer<float>>(ptr, m_vertexCount * info.elemCount,  info.elemTypeSize);
+		}
+	}
+	
+	if(isReadWriteable)
+	{
+		for (auto element : Geometry::VertexStructInfos)
+		{
+			if (element.HasFlag(p_dataFlag)){
+				m_dataPtrs[(int)element.pos] = p_vertices.MoveDataPtr(element.pos);
+			}
+		}
+	}
+	
+	if(!isReadWriteable &&isSkinMesh){
+		// anim need raw position data
+		m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position] = p_vertices.MoveDataPtr(Geometry::EVertexDataFlagsIndex::position);
+	}
+	
 	if(isSkinMesh)
 	{
-		rawVertexes =p_vertices;// std::move(p_vertices); TODO Move
-		animatedVertexes = rawVertexes;
+		auto totalSize= m_vertexCount * Geometry::VertexStructInfos[(int)Geometry::EVertexDataFlagsIndex::position].MemorySize();
+		m_animatedPositions = (float*)malloc( totalSize);
+		memcpy(m_animatedPositions,m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position] ,totalSize);
+	}
+	m_indexBuffer= std::make_unique<Buffers::IndexBuffer>(const_cast<uint32_t*>(p_indices.data()), p_indices.size());
+
+	// bind
+	for (int i =0;i< VERTEX_DATA_FLAGS_INDEX_COUNT;i++)
+	{
+		auto& info = Geometry::VertexStructInfos[i];
+		if(m_vertexBuffer[(int)info.pos] != nullptr)
+		{
+			Buffers::VertexBuffer<float>& ptr = *m_vertexBuffer[(int)info.pos];
+			std::cout<< " BindAttribute  VertexBufferId= "<<ptr.GetID() <<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
+			m_vertexArray.BindAttribute(i, ptr,  info.elemType, info.elemCount, info.MemorySize(), 0);
+		}
+	}
+	m_vertexArray.Unbind();
+	ComputeBoundingSphere();
+}
+
+
+
+
+OvRendering::Resources::Mesh::~Mesh()
+{
+	for (int i = 0; i<(int) Geometry::EVertexDataFlagsIndex::count; i++)
+	{
+		if(m_dataPtrs[i] != nullptr)
+		{
+			//std::cout<<"~MeshFree ptr "<<i <<" " <<(long)m_dataPtrs[i] <<std::endl;
+			free(m_dataPtrs[i]);
+		}
+		m_dataPtrs[i] = nullptr;
+	}
+	if(m_animatedPositions != nullptr)
+	{
+		//std::cout<<"~MeshFree ptr m_animatedPositions " <<(long)m_animatedPositions <<std::endl;
+		free(m_animatedPositions);
+	}
+	m_animatedPositions = nullptr;
+		/**/
+}
+void* OvRendering::Resources::Mesh::GetDataPtrs(Geometry::EVertexDataFlagsIndex typeIdx)
+{
+	if(m_dataPtrs[(int)typeIdx] != nullptr)
+	{
+		return m_dataPtrs[(int)typeIdx];
 	}
 }
 void OvRendering::Resources::Mesh::Rebind(bool p_recreateBound)
 {
-	CreateBuffers(animatedVertexes, nullptr); // TODO Remap Buffer , do not need recreate it
-	if(p_recreateBound)	ComputeBoundingSphere(animatedVertexes);
+	Bind();
+	auto& info =  Geometry::VertexStructInfos[(int)Geometry::EVertexDataFlagsIndex::position];
+	auto& posBuffer = m_vertexBuffer[(int)Geometry::EVertexDataFlagsIndex::position];
+	posBuffer->Rebind(GetAnimatedPositions(),m_vertexCount * info.elemCount,  info.elemTypeSize);
+	if(p_recreateBound)	ComputeBoundingSphere();
+	Unbind();
 }
 void OvRendering::Resources::Mesh::Bind()
 {
@@ -57,67 +145,24 @@ const OvRendering::Geometry::BoundingSphere& OvRendering::Resources::Mesh::GetBo
 	return m_boundingSphere;
 }
 
-void OvRendering::Resources::Mesh::CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>* p_indices)
-{
-	std::vector<float> vertexData;
-	std::vector<int> vertexBoneIdData;
+float* OvRendering::Resources::Mesh::GetPositions() const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position]);}
 
-	std::vector<unsigned int> rawIndices;
+float* OvRendering::Resources::Mesh::GetBoneWeights()const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneWeight]);}
 
-	for (const auto& vertex : p_vertices)
-	{
-		vertexData.push_back(vertex.position[0]);
-		vertexData.push_back(vertex.position[1]);
-		vertexData.push_back(vertex.position[2]);
+int* OvRendering::Resources::Mesh::GetBoneIds() const{return (int*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneId]);}
 
-		vertexData.push_back(vertex.texCoords[0]);
-		vertexData.push_back(vertex.texCoords[1]);
+float* OvRendering::Resources::Mesh::GetAnimatedPositions()const{return m_animatedPositions;}
 
-		vertexData.push_back(vertex.normals[0]);
-		vertexData.push_back(vertex.normals[1]);
-		vertexData.push_back(vertex.normals[2]);
-
-		vertexData.push_back(vertex.tangent[0]);
-		vertexData.push_back(vertex.tangent[1]);
-		vertexData.push_back(vertex.tangent[2]);
-
-		vertexData.push_back(vertex.bitangent[0]);
-		vertexData.push_back(vertex.bitangent[1]);
-		vertexData.push_back(vertex.bitangent[2]);
-
-		vertexData.push_back(vertex.boneWeights[0]);
-		vertexData.push_back(vertex.boneWeights[1]);
-		vertexData.push_back(vertex.boneWeights[2]);
-		vertexData.push_back(vertex.boneWeights[3]);
-		
-		vertexBoneIdData.push_back(vertex.boneIds[0]);
-		vertexBoneIdData.push_back(vertex.boneIds[1]);
-		vertexBoneIdData.push_back(vertex.boneIds[2]);
-		vertexBoneIdData.push_back(vertex.boneIds[3]);
-	}
-	m_boneIdBuffer = std::make_unique<Buffers::VertexBuffer<int32_t>>(vertexBoneIdData);
-	m_vertexBuffer	= std::make_unique<Buffers::VertexBuffer<float>>(vertexData);
-	if(p_indices != nullptr)
-		m_indexBuffer	= std::make_unique<Buffers::IndexBuffer>(const_cast<uint32_t*>(p_indices->data()), p_indices->size());
-
-	uint32_t sizeOfBoneIds =sizeof(int32_t)*4;
-	uint64_t vertexSize = sizeof(Geometry::Vertex)-sizeOfBoneIds;
-
-	m_vertexArray.BindAttribute(0, *m_vertexBuffer, Buffers::EType::FLOAT, 3, vertexSize, offsetof(Geometry::Vertex, position));
-	m_vertexArray.BindAttribute(1, *m_vertexBuffer,	Buffers::EType::FLOAT, 2, vertexSize, offsetof(Geometry::Vertex, texCoords));
-	m_vertexArray.BindAttribute(2, *m_vertexBuffer,	Buffers::EType::FLOAT, 3, vertexSize, offsetof(Geometry::Vertex, normals));
-	m_vertexArray.BindAttribute(3, *m_vertexBuffer,	Buffers::EType::FLOAT, 3, vertexSize, offsetof(Geometry::Vertex, tangent));
-	m_vertexArray.BindAttribute(4, *m_vertexBuffer,	Buffers::EType::FLOAT, 3, vertexSize, offsetof(Geometry::Vertex, bitangent));
-	m_vertexArray.BindAttribute(5, *m_vertexBuffer,	Buffers::EType::FLOAT, 4, vertexSize, offsetof(Geometry::Vertex, boneWeights));
-	m_vertexArray.BindAttribute(6, *m_boneIdBuffer,	Buffers::EType::INT, 4, sizeOfBoneIds,  0);
+int OvRendering::Resources::Mesh:: GetPositionBufferSize(){
+	return m_vertexCount * Geometry::VertexStructInfos[(int)Geometry::EVertexDataFlagsIndex::position].MemorySize();
 }
 
-void OvRendering::Resources::Mesh::ComputeBoundingSphere(const std::vector<Geometry::Vertex>& p_vertices)
+void OvRendering::Resources::Mesh::ComputeBoundingSphere()
 {
 	m_boundingSphere.position = OvMaths::FVector3::Zero;
 	m_boundingSphere.radius = 0.0f;
-
-	if (!p_vertices.empty())
+	auto p_vertices = (float*)m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position] ;
+	if (p_vertices != nullptr) 
 	{
 		float minX = std::numeric_limits<float>::max();
 		float minY = std::numeric_limits<float>::max();
@@ -127,22 +172,23 @@ void OvRendering::Resources::Mesh::ComputeBoundingSphere(const std::vector<Geome
 		float maxY = std::numeric_limits<float>::min();
 		float maxZ = std::numeric_limits<float>::min();
 
-		for (const auto& vertex : p_vertices)
+		for (uint32_t i =0;i< m_vertexCount;i++)
 		{
-			minX = std::min(minX, vertex.position[0]);
-			minY = std::min(minY, vertex.position[1]);
-			minZ = std::min(minZ, vertex.position[2]);
+			auto position = &p_vertices[i*3];
+			minX = std::min(minX, position[0]);
+			minY = std::min(minY, position[1]);
+			minZ = std::min(minZ, position[2]);
 
-			maxX = std::max(maxX, vertex.position[0]);
-			maxY = std::max(maxY, vertex.position[1]);
-			maxZ = std::max(maxZ, vertex.position[2]);
+			maxX = std::max(maxX, position[0]);
+			maxY = std::max(maxY, position[1]);
+			maxZ = std::max(maxZ, position[2]);
 		}
 
 		m_boundingSphere.position = OvMaths::FVector3{ minX + maxX, minY + maxY, minZ + maxZ } / 2.0f;
 
-		for (const auto& vertex : p_vertices)
+		for (uint32_t i =0;i< m_vertexCount;i++)
 		{
-			const auto& position = reinterpret_cast<const OvMaths::FVector3&>(vertex.position);
+			OvMaths::FVector3 position = *(reinterpret_cast<const OvMaths::FVector3*> (&p_vertices[i*3]));
 			m_boundingSphere.radius = std::max(m_boundingSphere.radius, OvMaths::FVector3::Distance(m_boundingSphere.position, position));
 		}
 	}

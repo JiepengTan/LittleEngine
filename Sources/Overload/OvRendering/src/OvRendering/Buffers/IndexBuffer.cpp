@@ -8,11 +8,15 @@
 
 #include "OvRendering/Buffers/IndexBuffer.h"
 
+#include <iostream>
+
 OvRendering::Buffers::IndexBuffer::IndexBuffer(unsigned int* p_data, size_t p_elements)
 {
 	glGenBuffers(1, &m_bufferID);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_bufferID);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, p_elements * sizeof(unsigned int), p_data, GL_STATIC_DRAW);
+	std::cout<< " GL_ELEMENT_ARRAY_BUFFER   "<<m_bufferID <<"  ptr= " << p_data <<"  count= " << (int)p_elements * sizeof(unsigned int) <<std::endl;
+	
 }
 
 OvRendering::Buffers::IndexBuffer::IndexBuffer(std::vector<uint32_t>& p_data) : IndexBuffer(p_data.data(), p_data.size())

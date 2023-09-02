@@ -70,6 +70,7 @@ namespace OvCore::ECS::Components
 		std::vector<Actor*> m_debugBones;
 		std::vector<int> m_boneId;
 		float boneDrawSize = 0.1f;
+		
 	public:
 		std::string m_animPath;
 		

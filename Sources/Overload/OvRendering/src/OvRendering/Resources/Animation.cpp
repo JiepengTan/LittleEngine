@@ -154,11 +154,6 @@ OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolateScaling(float a
 
 
 
-
-OvRendering::Resources::Animation::~Animation()
-{
-}
-
 OvRendering::Resources::BoneFrames* OvRendering::Resources::Animation::FindBone(const std::string& name)
 {
     auto iter = std::find_if(m_Bones.begin(), m_Bones.end(),

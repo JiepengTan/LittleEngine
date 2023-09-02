@@ -197,7 +197,19 @@ namespace OvMaths
 		* @param p_right
 		*/
 		static FMatrix4 Subtract(const FMatrix4& p_left, const FMatrix4& p_right);
-
+		/**
+		* Vector Product vec3 : add transform
+		* @param p_matrix
+		* @param p_vector
+		*/
+	    static OvMaths::FVector3 MultiplyPoint(const FMatrix4& p_matrix, const FVector3& p_vector);
+		/**
+		* Vector Product vec3 : no transform
+		* @param p_matrix
+		* @param p_vector
+		*/
+		static OvMaths::FVector3 MultiplyVector(const FMatrix4& p_matrix, const FVector3& p_vector);
+		
 		/**
 		* Scalar Product
 		* @param p_left

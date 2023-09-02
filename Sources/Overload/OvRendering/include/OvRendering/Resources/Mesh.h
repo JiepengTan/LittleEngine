@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <array>
 #include <vector>
 #include <memory>
 
@@ -17,6 +18,9 @@
 
 namespace OvRendering::Resources
 {
+
+
+	
 	/**
 	* Standard mesh of OvRendering
 	*/
@@ -29,8 +33,16 @@ namespace OvRendering::Resources
 		* @param p_indices
 		* @param p_materialIndex
 		*/
-		Mesh(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex,bool p_isSkinMesh = false);
-
+		Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
+			uint32_t p_materialIndex,
+			Geometry::EVertexDataFlags p_dataFlag ,
+			bool p_isReadWrite);
+		~Mesh();
+/*
+		Mesh(const Mesh& mesh);
+		Mesh& operator=(const Mesh& r);
+		
+		*/
 		virtual void Rebind(bool p_recreateBound = false);
 		/**
 		* Bind the mesh (Actually bind its VAO)
@@ -61,10 +73,15 @@ namespace OvRendering::Resources
 		* Returns the bounding sphere of the mesh
 		*/
 		const OvRendering::Geometry::BoundingSphere& GetBoundingSphere() const;
-
+		
+		float* GetAnimatedPositions()const;
+		float* GetPositions() const;
+		float* GetBoneWeights() const;
+		int* GetBoneIds() const;
+		int GetPositionBufferSize();
+		Geometry::EVertexDataFlags GetDataFlags(){ return m_dataFlags;} 
 	private:
-		void CreateBuffers(const std::vector<Geometry::Vertex>& p_vertices, const std::vector<uint32_t>* p_indices);
-		void ComputeBoundingSphere(const std::vector<Geometry::Vertex>& p_vertices);
+		void ComputeBoundingSphere();
 
 	private:
 		const uint32_t m_vertexCount;
@@ -72,14 +89,21 @@ namespace OvRendering::Resources
 		const uint32_t m_materialIndex;
 
 		Buffers::VertexArray							m_vertexArray;
-		std::unique_ptr<Buffers::VertexBuffer<float>>	m_vertexBuffer;
-		std::unique_ptr<Buffers::VertexBuffer<int>>		m_boneIdBuffer;
 		std::unique_ptr<Buffers::IndexBuffer>			m_indexBuffer;
 		
+		std::unique_ptr<Buffers::VertexBuffer<float>>	m_vertexBuffer[VERTEX_DATA_FLAGS_INDEX_COUNT];
+		// malloc datas ,should be released correct
+		void*  m_dataPtrs[VERTEX_DATA_FLAGS_INDEX_COUNT];
+		float* m_animatedPositions;
+		Geometry::EVertexDataFlags m_dataFlags;
+		
 		Geometry::BoundingSphere m_boundingSphere;
+
 	public:
+
 		bool isSkinMesh;
-		std::vector<Geometry::Vertex> rawVertexes;
-		std::vector<Geometry::Vertex> animatedVertexes;
+		bool isReadWriteable;
+		
+		void* GetDataPtrs(Geometry::EVertexDataFlagsIndex typeIdx);
 	};
 }

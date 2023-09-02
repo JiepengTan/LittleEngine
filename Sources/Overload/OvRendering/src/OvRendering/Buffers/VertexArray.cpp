@@ -19,11 +19,13 @@ OvRendering::Buffers::VertexArray::~VertexArray()
 
 void OvRendering::Buffers::VertexArray::Bind()
 {
+	//std::cout<< " Bind m_bufferID=  "<<m_bufferID<< std::endl;
 	glBindVertexArray(m_bufferID);
 }
 
 void OvRendering::Buffers::VertexArray::Unbind()
 {
+	//std::cout<< " unbind m_bufferID=  "<<m_bufferID<< std::endl;
 	glBindVertexArray(0);
 }
 
