@@ -3,11 +3,12 @@
 
 layout (location = 0) in vec3 geo_Pos;
 layout (location = 1) in vec2 geo_TexCoords;
-layout (location = 2) in vec3 geo_Normal;
-layout (location = 3) in vec3 geo_Tangent;
-layout (location = 4) in vec3 geo_Bitangent;
-layout(location = 5) in vec4 geo_BoneWeights;
-layout(location = 6) in ivec4 geo_BoneIds; 
+layout (location = 2) in vec3 geo_Color;
+layout (location = 3) in vec3 geo_Normal;
+layout (location = 4) in vec3 geo_Tangent;
+layout (location = 5) in vec3 geo_Bitangent;
+layout (location = 6) in vec4 geo_BoneWeights;
+layout (location = 7) in ivec4 geo_BoneIds; 
 
 uniform mat4 u_LightSpaceMatrix;
 uniform int u_IsSkinMesh;
@@ -310,7 +311,7 @@ void main()
         }   
 */ 
         //float shadow =texture(u_Shadowmap, fs_in.TexCoords.xy).r; 
-        float shadow = clamp( 1.0- ShadowCalculation(fs_in.FragPosLightSpace),0.2,1.0);    
+        float shadow =1;// clamp( 1.0- ShadowCalculation(fs_in.FragPosLightSpace),0.2,1.0);    
            // perform perspective divide
         //FRAGMENT_COLOR = vec4(shadow); return;
 

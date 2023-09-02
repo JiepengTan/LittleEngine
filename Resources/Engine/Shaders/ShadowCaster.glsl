@@ -1,6 +1,6 @@
 #shader vertex
 #version 430 core
-layout (location = 0) in vec3 aPos;
+layout (location = 0) in vec3 geo_Pos;
 
 uniform mat4 u_LightSpaceMatrix;
 uniform mat4 u_Local2World;
@@ -13,7 +13,7 @@ out VS_OUT
 
 void main()
 {
-    vs_out.FragPos = u_LightSpaceMatrix * u_Local2World * vec4(aPos, 1.0);
+    vs_out.FragPos = u_LightSpaceMatrix * u_Local2World * vec4(geo_Pos, 1.0);
     gl_Position = vs_out.FragPos;
 }
 

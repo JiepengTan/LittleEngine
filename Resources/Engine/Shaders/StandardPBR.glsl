@@ -3,11 +3,12 @@
 
 layout (location = 0) in vec3 geo_Pos;
 layout (location = 1) in vec2 geo_TexCoords;
-layout (location = 2) in vec3 geo_Normal;
-layout (location = 3) in vec3 geo_Tangent;
-layout (location = 4) in vec3 geo_Bitangent;
-layout(location = 5) in vec4 geo_BoneWeights;
-layout(location = 6) in ivec4 geo_BoneIds; 
+layout (location = 2) in vec3 geo_Color;
+layout (location = 3) in vec3 geo_Normal;
+layout (location = 4) in vec3 geo_Tangent;
+layout (location = 5) in vec3 geo_Bitangent;
+layout (location = 6) in vec4 geo_BoneWeights;
+layout (location = 7) in ivec4 geo_BoneIds; 
 
 const int MAX_BONES = 100;
 const int MAX_BONE_INFLUENCE = 4;
