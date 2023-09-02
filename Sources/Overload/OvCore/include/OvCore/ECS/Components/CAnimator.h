@@ -30,6 +30,7 @@ namespace OvCore::ECS::Components
 		void UpVertexBufferCPU();
 		void UpdateBonesGameObjects();
 		void UpdateBoneMatrix();
+		void DumpAnimationLog();
 		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
 		/**
 		* Serialize the component

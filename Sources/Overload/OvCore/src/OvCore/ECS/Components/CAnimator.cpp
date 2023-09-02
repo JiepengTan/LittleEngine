@@ -170,6 +170,17 @@ void OvCore::ECS::Components::CAnimator::UpdateBoneMatrix()
     CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
 }
 
+void OvCore::ECS::Components::CAnimator::DumpAnimationLog()
+{
+    int idx = 0;
+    for (auto mat : m_finalBoneMatrices)
+    {
+        DebugUtil::Dump(std::to_string(idx++) + " =");
+        DebugUtil::Dump(mat,true);
+    }
+    DebugUtil::Flush();
+}
+
 void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
 {
     PROFILER_SPY("Animator");
@@ -181,13 +192,7 @@ void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
         UpdateBoneMatrix();
         UpVertexBufferCPU();
         UpdateBonesGameObjects();
-        int idx = 0;
-        for (auto mat : m_finalBoneMatrices)
-        {
-            DebugUtil::Dump(std::to_string(idx++) + " =");
-            DebugUtil::Dump(mat,true);
-        }
-		DebugUtil::Flush();
+        //DumpAnimationLog();
     }
 }
 
