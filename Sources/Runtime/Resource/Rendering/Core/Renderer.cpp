@@ -6,7 +6,7 @@
 
 #include <functional>
 
-#include "Resource/Rendering/Core/Renderer.h"
+#include "Resource/Rendering/Core/ECSRenderer.h"
 
 OvRendering::Core::Renderer::Renderer(Context::Driver& p_driver) : m_driver(p_driver), m_state(0)
 {

@@ -15,13 +15,15 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LittleEditor</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -42,7 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\Bin-Int\Debug\</IntDir>
+    <IntDir>..\..\Bin-Int\Debug\Editor\</IntDir>
     <TargetName>LittleEditor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
@@ -56,14 +58,21 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level1</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ConformanceMode>true</ConformanceMode>
+      <UseFullPaths>false</UseFullPaths>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -72,8 +81,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LittleEngine.lib;assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Bin/Debug;..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Debug\$(ProjectName)"
@@ -196,11 +206,6 @@ EXIT /B 0</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Editor.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Runtime\Runtime.vcxproj">
-      <Project>{68C0E779-D475-606F-5D6A-5A46C91E5773}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

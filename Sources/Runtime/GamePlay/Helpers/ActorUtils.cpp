@@ -34,7 +34,7 @@ OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateEmptyActor( OvCore::ECS::Acto
 OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateActorWithModel(const std::string& p_modelName,
                                                              OvCore::ECS::Actor* p_parent, const std::string& p_name)
 {
-    auto& path= ":Models\\" + p_modelName + ".fbx";
+    auto path= ":Models\\" + p_modelName + ".fbx";
     auto instance = CreateEmptyActor( p_parent, p_name);
 
     auto& modelManager = OvCore::Global::ServiceLocator::Get<ResourceManagement::ModelManager>();

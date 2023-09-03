@@ -8,7 +8,7 @@
 
 #include <map>
 
-#include "Resource/Rendering/Core/Renderer.h"
+#include "Resource/Rendering/Core/ECSRenderer.h"
 #include "Resource/Rendering/Resources/Mesh.h"
 #include "Resource/Rendering/Data/Frustum.h"
 #include "Resource/Rendering/Buffers/ShadowmapBuffer.h"
@@ -25,7 +25,7 @@ namespace OvCore::ECS
 	* A Renderer capable of rendering stuffs linked with the ECS. It is a convenient class that should be used instead of OvRendering::Core::Renderer
 	* when you plan to use the OvCore ECS architecture.
 	*/
-	class Renderer : public OvRendering::Core::Renderer
+	class ECSRenderer : public OvRendering::Core::Renderer
 	{
 	public:
 		using Drawable				= std::tuple<OvMaths::FMatrix4, OvRendering::Resources::Mesh*, OvCore::Resources::Material*, OvMaths::FMatrix4, std::vector<OvMaths::FMatrix4>*  >;
@@ -36,13 +36,13 @@ namespace OvCore::ECS
 		* Constructor of the Renderer
 		* @param p_driver
 		*/
-		Renderer(OvRendering::Context::Driver& p_driver);
+		ECSRenderer(OvRendering::Context::Driver& p_driver);
 
 		/**
 		* Destructor of the Renderer
 		* @param p_driver
 		*/
-		~Renderer();
+		~ECSRenderer();
 
 		/**
 		* Parse a scene to find the main camera

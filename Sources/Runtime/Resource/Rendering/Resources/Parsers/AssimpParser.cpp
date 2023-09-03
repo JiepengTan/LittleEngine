@@ -44,7 +44,8 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering
                 OVLOG("Miss Animation Node " + boneName);
             }
         }
-        p_anim->AddBone(BoneFrames(channel->mNodeName.data, boneInfoMap[channel->mNodeName.data].id, channel));
+        const BoneFrames& boneFrames = BoneFrames(channel->mNodeName.data, boneInfoMap[channel->mNodeName.data].id, channel);
+        p_anim->AddBone(boneFrames);
     }
 }
 

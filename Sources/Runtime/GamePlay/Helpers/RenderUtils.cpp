@@ -1,5 +1,5 @@
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
-#include "GamePlay/ECS/Renderer.h"
+#include "GamePlay/ECS/ECSRenderer.h"
 #include "GamePlay/ECS/Components/CMaterialRenderer.h"
 #include "GamePlay/Global/ServiceLocator.h"
 #include "Resource/ResourceManagement/MaterialManager.h"

@@ -9,7 +9,7 @@
 #include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
 #include "Resource/Rendering/Data/Frustum.h"
 
-#include "GamePlay/ECS/Renderer.h"
+#include "GamePlay/ECS/ECSRenderer.h"
 
 #include "GamePlay/ECS/Components/CAnimator.h"
 #include "GamePlay/ECS/Components/CModelRenderer.h"
@@ -22,7 +22,7 @@
 #include "Resource/Rendering/Resources/Mesh.h"
 
 
-OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
+OvCore::ECS::ECSRenderer::ECSRenderer(OvRendering::Context::Driver& p_driver) :
 	OvRendering::Core::Renderer(p_driver),m_isGPUSkin(false),
 	m_emptyTexture(OvRendering::Resources::Loaders::TextureLoader::CreateColor
 	(
@@ -35,12 +35,12 @@ OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
 	m_shadowmapBuffer = std::make_unique<OvRendering::Buffers::ShadowmapBuffer>(2048,2048);
 }
 
-OvCore::ECS::Renderer::~Renderer()
+OvCore::ECS::ECSRenderer::~ECSRenderer()
 {
 	OvRendering::Resources::Loaders::TextureLoader::Destroy(m_emptyTexture);
 }
 
-OvCore::ECS::Components::CCamera* OvCore::ECS::Renderer::FindMainCamera(const OvCore::SceneSystem::Scene& p_scene)
+OvCore::ECS::Components::CCamera* OvCore::ECS::ECSRenderer::FindMainCamera(const OvCore::SceneSystem::Scene& p_scene)
 {
 	for (OvCore::ECS::Components::CCamera* camera : p_scene.GetFastAccessComponents().cameras)
 		if (camera->owner.IsActive())
@@ -49,7 +49,7 @@ OvCore::ECS::Components::CCamera* OvCore::ECS::Renderer::FindMainCamera(const Ov
 	return nullptr;
 }
 
-std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatrices(const OvCore::SceneSystem::Scene& p_scene)
+std::vector<OvMaths::FMatrix4> OvCore::ECS::ECSRenderer::FindLightMatrices(const OvCore::SceneSystem::Scene& p_scene)
 {
 	std::vector<OvMaths::FMatrix4> result;
 
@@ -68,7 +68,7 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatrices(const Ov
 
 
 
-OvCore::ECS::Components::CLight* OvCore::ECS::Renderer::FindMainLight(const OvCore::SceneSystem::Scene& p_scene)
+OvCore::ECS::Components::CLight* OvCore::ECS::ECSRenderer::FindMainLight(const OvCore::SceneSystem::Scene& p_scene)
 {
 	const auto& facs = p_scene.GetFastAccessComponents();
 	float maxIntersity = -1;
@@ -86,7 +86,7 @@ OvCore::ECS::Components::CLight* OvCore::ECS::Renderer::FindMainLight(const OvCo
 	}
 	return mainLight;
 }
-std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatricesInFrustum(const OvCore::SceneSystem::Scene& p_scene, const OvRendering::Data::Frustum& p_frustum)
+std::vector<OvMaths::FMatrix4> OvCore::ECS::ECSRenderer::FindLightMatricesInFrustum(const OvCore::SceneSystem::Scene& p_scene, const OvRendering::Data::Frustum& p_frustum)
 {
 	std::vector<OvMaths::FMatrix4> result;
 
@@ -110,7 +110,7 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::Renderer::FindLightMatricesInFrustum
 
 	return result;
 }
-void OvCore::ECS::Renderer::DrawShadowmap
+void OvCore::ECS::ECSRenderer::DrawShadowmap
 	(
 		OvCore::SceneSystem::Scene& p_scene,
 		const OvMaths::FVector3& p_cameraPosition,
@@ -158,7 +158,7 @@ void OvCore::ECS::Renderer::DrawShadowmap
 }
 
 
-void OvCore::ECS::Renderer::RenderScene
+void OvCore::ECS::ECSRenderer::RenderScene
 (
 	OvCore::SceneSystem::Scene& p_scene,
 	const OvMaths::FVector3& p_cameraPosition,
@@ -213,8 +213,8 @@ std::vector<OvMaths::FMatrix4>* GetBoneMatrix(OvCore::ECS::Components::CModelRen
 
 void FindAndSortDrawables
 (
-	OvCore::ECS::Renderer::OpaqueDrawables& p_opaques,
-	OvCore::ECS::Renderer::TransparentDrawables& p_transparents,
+	OvCore::ECS::ECSRenderer::OpaqueDrawables& p_opaques,
+	OvCore::ECS::ECSRenderer::TransparentDrawables& p_transparents,
 	const OvCore::SceneSystem::Scene& p_scene,
 	const OvMaths::FVector3& p_cameraPosition,
 	OvCore::Resources::Material* p_defaultMaterial
@@ -247,7 +247,7 @@ void FindAndSortDrawables
 
 						if (material)
 						{
-							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
+							OvCore::ECS::ECSRenderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
 
 							if (material->IsBlendable())
 								p_transparents.emplace(distanceToActor, element);
@@ -261,7 +261,7 @@ void FindAndSortDrawables
 	}
 }
 
-std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::TransparentDrawables> OvCore::ECS::Renderer::FindAndSortFrustumCulledDrawables
+std::pair<OvCore::ECS::ECSRenderer::OpaqueDrawables, OvCore::ECS::ECSRenderer::TransparentDrawables> OvCore::ECS::ECSRenderer::FindAndSortFrustumCulledDrawables
 (
 	const OvCore::SceneSystem::Scene& p_scene,
 	const OvMaths::FVector3& p_cameraPosition,
@@ -271,8 +271,8 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 {
 	using namespace OvCore::ECS::Components;
 
-	OvCore::ECS::Renderer::OpaqueDrawables opaqueDrawables;
-	OvCore::ECS::Renderer::TransparentDrawables transparentDrawables;
+	OvCore::ECS::ECSRenderer::OpaqueDrawables opaqueDrawables;
+	OvCore::ECS::ECSRenderer::TransparentDrawables transparentDrawables;
 
 	for (CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
 	{
@@ -326,7 +326,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 
 							if (material)
 							{
-								OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), &mesh.get(), material, materialRenderer->GetUserMatrix() ,boneAryPtr};
+								OvCore::ECS::ECSRenderer::Drawable element = { transform.GetWorldMatrix(), &mesh.get(), material, materialRenderer->GetUserMatrix() ,boneAryPtr};
 
 								if (material->IsBlendable())
 									transparentDrawables.emplace(distanceToActor, element);
@@ -343,15 +343,15 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 	return { opaqueDrawables, transparentDrawables };
 }
 
-std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::TransparentDrawables> OvCore::ECS::Renderer::FindAndSortDrawables
+std::pair<OvCore::ECS::ECSRenderer::OpaqueDrawables, OvCore::ECS::ECSRenderer::TransparentDrawables> OvCore::ECS::ECSRenderer::FindAndSortDrawables
 (
 	const OvCore::SceneSystem::Scene& p_scene,
 	const OvMaths::FVector3& p_cameraPosition,
 	OvCore::Resources::Material* p_defaultMaterial
 )
 {
-	OvCore::ECS::Renderer::OpaqueDrawables opaqueDrawables;
-	OvCore::ECS::Renderer::TransparentDrawables transparentDrawables;
+	OvCore::ECS::ECSRenderer::OpaqueDrawables opaqueDrawables;
+	OvCore::ECS::ECSRenderer::TransparentDrawables transparentDrawables;
 
 	for (OvCore::ECS::Components::CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
 	{
@@ -381,7 +381,7 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 
 						if (material)
 						{
-							OvCore::ECS::Renderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
+							OvCore::ECS::ECSRenderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
 
 							if (material->IsBlendable())
 								transparentDrawables.emplace(distanceToActor, element);
@@ -397,13 +397,13 @@ std::pair<OvCore::ECS::Renderer::OpaqueDrawables, OvCore::ECS::Renderer::Transpa
 	return { opaqueDrawables, transparentDrawables };
 }
 
-void OvCore::ECS::Renderer::DrawDrawable(const Drawable& p_toDraw)
+void OvCore::ECS::ECSRenderer::DrawDrawable(const Drawable& p_toDraw)
 {
 	m_userMatrixSender(std::get<3>(p_toDraw));
 	DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw),std::get<4>(p_toDraw));
 }
 
-void OvCore::ECS::Renderer::DrawModelWithSingleMaterial(OvRendering::Resources::Model& p_model, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix, OvCore::Resources::Material* p_defaultMaterial)
+void OvCore::ECS::ECSRenderer::DrawModelWithSingleMaterial(OvRendering::Resources::Model& p_model, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix, OvCore::Resources::Material* p_defaultMaterial)
 {
 	if (p_modelMatrix)
 		m_modelMatrixSender(*p_modelMatrix);
@@ -417,7 +417,7 @@ void OvCore::ECS::Renderer::DrawModelWithSingleMaterial(OvRendering::Resources::
 	}
 }
 
-void OvCore::ECS::Renderer::DrawModelWithMaterials(OvRendering::Resources::Model& p_model, std::vector<OvCore::Resources::Material*> p_materials, OvMaths::FMatrix4 const* p_modelMatrix, OvCore::Resources::Material* p_defaultMaterial)
+void OvCore::ECS::ECSRenderer::DrawModelWithMaterials(OvRendering::Resources::Model& p_model, std::vector<OvCore::Resources::Material*> p_materials, OvMaths::FMatrix4 const* p_modelMatrix, OvCore::Resources::Material* p_defaultMaterial)
 {
 	if (p_modelMatrix)
 		m_modelMatrixSender(*p_modelMatrix);
@@ -430,7 +430,7 @@ void OvCore::ECS::Renderer::DrawModelWithMaterials(OvRendering::Resources::Model
 	}
 }
 
-void OvCore::ECS::Renderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix,
+void OvCore::ECS::ECSRenderer::DrawMesh(OvRendering::Resources::Mesh& p_mesh, OvCore::Resources::Material& p_material, OvMaths::FMatrix4 const* p_modelMatrix,
 std::vector<OvMaths::FMatrix4>* p_boneMatrixAry
 )
 {
@@ -462,12 +462,12 @@ std::vector<OvMaths::FMatrix4>* p_boneMatrixAry
 	}
 }
 
-void OvCore::ECS::Renderer::RegisterModelMatrixSender(std::function<void(OvMaths::FMatrix4)> p_modelMatrixSender)
+void OvCore::ECS::ECSRenderer::RegisterModelMatrixSender(std::function<void(OvMaths::FMatrix4)> p_modelMatrixSender)
 {
 	m_modelMatrixSender = p_modelMatrixSender;
 }
 
-void OvCore::ECS::Renderer::RegisterUserMatrixSender(std::function<void(OvMaths::FMatrix4)> p_userMatrixSender)
+void OvCore::ECS::ECSRenderer::RegisterUserMatrixSender(std::function<void(OvMaths::FMatrix4)> p_userMatrixSender)
 {
 	m_userMatrixSender = p_userMatrixSender;
 }

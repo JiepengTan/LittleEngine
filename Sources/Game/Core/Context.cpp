@@ -53,7 +53,7 @@ OvGame::Core::Context::Context() :
 
 	/* Graphics context creation */
 	driver = std::make_unique<OvRendering::Context::Driver>(OvRendering::Settings::DriverSettings{ false });
-	renderer = std::make_unique<OvCore::ECS::Renderer>(*driver);
+	renderer = std::make_unique<OvCore::ECS::ECSRenderer>(*driver);
 
 	renderer->SetCapability(OvRendering::Settings::ERenderingCapability::MULTISAMPLE, projectSettings.Get<bool>("multisampling"));
 

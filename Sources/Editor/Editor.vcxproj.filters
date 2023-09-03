@@ -144,9 +144,6 @@
     <ClCompile Include="Core\ProjectHub.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>src\OvEditor</Filter>
-    </ClCompile>
     <ClCompile Include="Panels\AView.cpp">
       <Filter>Panels</Filter>
     </ClCompile>
@@ -204,6 +201,7 @@
     <ClCompile Include="Utils\ActorCreationMenu.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Editor.rc" />

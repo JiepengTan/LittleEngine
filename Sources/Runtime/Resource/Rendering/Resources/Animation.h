@@ -21,7 +21,7 @@ namespace OvRendering::Resources
         Animation() = default;
         ~Animation() = default;
         BoneFrames* FindBone(const std::string& name);
-        void AddBone(BoneFrames& bone){m_Bones.push_back(bone);}
+        void AddBone(const BoneFrames& bone){m_Bones.push_back(bone);}
         
         inline int GetTicksPerSecond() { return m_TicksPerSecond; }
         inline float GetDuration() { return m_Duration; }  

@@ -20,9 +20,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -42,7 +43,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\Bin-Int\Debug\</IntDir>
+    <IntDir>..\..\Bin-Int\Debug\Runtime\</IntDir>
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -55,21 +56,30 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <AdditionalOptions>%(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ConformanceMode>true</ConformanceMode>
+      <UseFullPaths>false</UseFullPaths>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -151,7 +161,7 @@
     <ClInclude Include="GamePlay\ECS\Components\CSpotLight.h" />
     <ClInclude Include="GamePlay\ECS\Components\CTransform.h" />
     <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h" />
-    <ClInclude Include="GamePlay\ECS\Renderer.h" />
+    <ClInclude Include="GamePlay\ECS\ECSRenderer.h" />
     <ClInclude Include="GamePlay\Global\ServiceLocator.h" />
     <ClInclude Include="GamePlay\Helpers\ActorUtils.h" />
     <ClInclude Include="GamePlay\Helpers\GUIDrawer.h" />
@@ -300,7 +310,7 @@
     <ClInclude Include="Resource\Rendering\Buffers\VertexArray.h" />
     <ClInclude Include="Resource\Rendering\Buffers\VertexBuffer.h" />
     <ClInclude Include="Resource\Rendering\Context\Driver.h" />
-    <ClInclude Include="Resource\Rendering\Core\Renderer.h" />
+    <ClInclude Include="Resource\Rendering\Core\ECSRenderer.h" />
     <ClInclude Include="Resource\Rendering\Core\ShapeDrawer.h" />
     <ClInclude Include="Resource\Rendering\Data\Frustum.h" />
     <ClInclude Include="Resource\Rendering\Entities\Light.h" />
@@ -397,7 +407,7 @@
     <ClCompile Include="GamePlay\ECS\Components\CSpotLight.cpp" />
     <ClCompile Include="GamePlay\ECS\Components\CTransform.cpp" />
     <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp" />
-    <ClCompile Include="GamePlay\ECS\Renderer.cpp" />
+    <ClCompile Include="GamePlay\ECS\ECSRenderer.cpp" />
     <ClCompile Include="GamePlay\Global\ServiceLocator.cpp" />
     <ClCompile Include="GamePlay\Helpers\ActorUtils.cpp" />
     <ClCompile Include="GamePlay\Helpers\GUIDrawer.cpp" />
