@@ -35,6 +35,12 @@ void OvCore::ECS::Components::CAnimator::UnloadAnimations()
     {
         bone->Destroy();
     }
+    
+    if(m_debugBoneRoot != nullptr)
+    {
+        m_debugBoneRoot->Destroy();
+        m_debugBoneRoot = nullptr;
+    }
     m_debugBones.clear();
     m_boneId.clear();
     m_finalBoneMatrices.clear();
@@ -58,6 +64,7 @@ void OvCore::ECS::Components::CAnimator::LoadAnimations()
         m_finalBoneMatrices.push_back(OvMaths::FMatrix4::Identity);
     if (anim && m_showDebugBones)
     {
+        m_debugBoneRoot  = ActorUtils::CreateEmptyActor(&owner, "BoneRoot");
         CreateBoneActors(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
         OVLOG("Creaet Actor Done ");
     }
@@ -74,7 +81,7 @@ void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Res
     std::string nodeName = node.name;
     OvMaths::FMatrix4 globalTransformation = parentTransform * node.transformation;
     auto& boneInfoMap = *m_curAnim->GetBoneInfoMap();
-    auto boneActor = ActorUtils::CreateEmptyActor(&owner, nodeName);
+    auto boneActor = ActorUtils::CreateCube(m_debugBoneRoot, nodeName);
     m_debugBones.push_back(boneActor);
     int id = -1;
     if (boneInfoMap.find(nodeName) != boneInfoMap.end())
@@ -136,7 +143,8 @@ void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
                 {
                     auto boneId = boneIds[boneIdOffset + idx];
                     auto weight = boneWeights[boneWeightOffset + idx];
-                    if (boneId == -1) continue;
+                    if (boneId == -1)
+                        break;
                     if (boneId >= boneCount)
                     {
                         finalPos = rawPos;
@@ -160,13 +168,18 @@ void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
 void OvCore::ECS::Components::CAnimator::UpdateBonesGameObjects()
 {
     PROFILER_SPY("Animator::UpdateBonesGameObjects");
-    if (m_showDebugBones)
+    if(m_showDebugBones)
     {
-        for (int i = 0; i < m_boneId.size(); i++)
+        auto& boneInfoMap = *m_curAnim->GetBoneInfoMap();
+        for (auto item : boneInfoMap)
         {
-            if (m_boneId[i] > 0)
+            int i = item.second.id;
+            if(i< m_boneId.size()&& m_boneId[i]>0)
             {
-                m_debugBones[i]->transform.SetLocalMatrix(m_finalBoneMatrices[m_boneId[i]]);
+                auto local2Model = OvMaths::FMatrix4::Inverse(item.second.offset);
+                auto modelPos = local2Model * OvMaths::FVector4(0,0,0,1);
+                auto finalPos = m_finalBoneMatrices[m_boneId[i]] * modelPos;
+                m_debugBones[i]->transform.SetLocalPosition(OvMaths::FVector3(finalPos.x,finalPos.y,finalPos.z));
                 m_debugBones[i]->transform.SetLocalScale(OvMaths::FVector3::One * boneDrawSize);
             }
         }

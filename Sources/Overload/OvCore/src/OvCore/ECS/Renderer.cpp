@@ -23,7 +23,7 @@
 
 
 OvCore::ECS::Renderer::Renderer(OvRendering::Context::Driver& p_driver) :
-	OvRendering::Core::Renderer(p_driver),
+	OvRendering::Core::Renderer(p_driver),m_isGPUSkin(false),
 	m_emptyTexture(OvRendering::Resources::Loaders::TextureLoader::CreateColor
 	(
 		(255 << 24) | (255 << 16) | (255 << 8) | 255,
@@ -449,12 +449,14 @@ std::vector<OvMaths::FMatrix4>* p_boneMatrixAry
 		auto shader = p_material.GetShader();
 		shader->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
 		shader->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
-		shader->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
-		if(p_mesh.isSkinMesh && p_boneMatrixAry != nullptr )
+		if(m_isGPUSkin)
 		{
-			shader->SetUniformMat4Array("u_BonesMatrices",*p_boneMatrixAry);
+			shader->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
+			if(p_mesh.isSkinMesh && p_boneMatrixAry != nullptr )
+			{
+				shader->SetUniformMat4Array("u_BonesMatrices",*p_boneMatrixAry);
+			}
 		}
-		
 		Draw(p_mesh, OvRendering::Settings::EPrimitiveMode::TRIANGLES, p_material.GetGPUInstances());
 		p_material.UnBind();
 	}

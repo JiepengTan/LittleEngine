@@ -19,7 +19,9 @@ namespace OvRendering::Resources
 	class Mesh;
 	struct SkeletonBone;
 }
-class aiAnimation;
+struct aiAnimation;
+struct aiMesh;
+struct aiNode;
 namespace OvRendering::Resources::Parsers
 {
 	/**
@@ -49,8 +51,11 @@ namespace OvRendering::Resources::Parsers
 		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);
 		void ProcessMaterials(const struct aiScene* p_scene, std::vector<std::string>& p_materials);;
 		void ProcessNode(Model* p_model,void* p_transform, struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Mesh*>& p_meshes);
+		void NormalizedBoneWeights(float* weightPtr, unsigned vertexCount);
+		void ProcessVertexBoneInfo(OvRendering::Resources::Model* p_model, aiMesh* p_mesh,OvRendering::Geometry::VertexDataBuffer& p_verticesBuffer);
+		void NormalizedBoneWeights(aiMesh* p_mesh, float* weightPtr);
 		void ProcessMesh(OvRendering::Resources::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene,
-			Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices);
+		                 Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices);
 	
 	private:
 		std::map<std::string, SkeletonBone> m_name2Bone ;

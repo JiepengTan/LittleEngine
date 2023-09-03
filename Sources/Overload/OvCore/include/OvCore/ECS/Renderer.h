@@ -179,5 +179,6 @@ namespace OvCore::ECS
 		OvRendering::Resources::Texture* m_emptyTexture = nullptr;
 		OvMaths::FMatrix4 m_lightSpaceVPMatrix;
 		OvMaths::FVector4 m_lightInfo;
+		bool m_isGPUSkin;
 	};
 }

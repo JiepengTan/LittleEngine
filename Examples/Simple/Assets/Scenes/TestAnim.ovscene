@@ -236,9 +236,9 @@
                                 <w>1</w>
                             </rotation>
                             <scale>
-                                <x>10</x>
-                                <y>1</y>
-                                <z>10</z>
+                                <x>9.9999997e-05</x>
+                                <y>9.9999997e-05</y>
+                                <z>0</z>
                             </scale>
                         </data>
                     </component>
