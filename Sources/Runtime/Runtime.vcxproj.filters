@@ -538,9 +538,6 @@
     <ClCompile Include="Resource\Resources\Material.cpp">
       <Filter>Resource\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="out\CMakeFiles\3.27.2\CompilerIdCXX\CMakeCXXCompilerId.cpp">
-      <Filter>out\CMakeFiles\3.27.2\CompilerIdCXX</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h">

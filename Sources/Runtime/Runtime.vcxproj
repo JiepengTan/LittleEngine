@@ -15,6 +15,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LittleEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -56,11 +57,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -72,7 +75,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -87,7 +90,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-
   <ItemGroup>
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
@@ -394,7 +396,7 @@
     <ClCompile Include="GamePlay\ECS\Components\CSpotLight.cpp" />
     <ClCompile Include="GamePlay\ECS\Components\CTransform.cpp" />
     <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp" />
-    <ClCompile Include="GamePlay\ECS\Renderer.cpp"/>
+    <ClCompile Include="GamePlay\ECS\Renderer.cpp" />
     <ClCompile Include="GamePlay\Global\ServiceLocator.cpp" />
     <ClCompile Include="GamePlay\Helpers\ActorUtils.cpp" />
     <ClCompile Include="GamePlay\Helpers\GUIDrawer.cpp" />
