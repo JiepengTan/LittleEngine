@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReshapeProject", "ReshapeProject.csproj", "{5F4C261A-1B15-4CCE-A80A-463ABA4A7BAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReshapeProject", "ReshapeProject.csproj", "{B616187D-C05E-4C69-A45B-DB2D4B64DD35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F4C261A-1B15-4CCE-A80A-463ABA4A7BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F4C261A-1B15-4CCE-A80A-463ABA4A7BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F4C261A-1B15-4CCE-A80A-463ABA4A7BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F4C261A-1B15-4CCE-A80A-463ABA4A7BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
