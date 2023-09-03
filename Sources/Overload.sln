@@ -1,29 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvEditor", "OvEditor\OvEditor.vcxproj", "{31129D87-1DDF-F792-46F8-E53A32242D21}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvEditor", "Overload\OvEditor\OvEditor.vcxproj", "{31129D87-1DDF-F792-46F8-E53A32242D21}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvAnalytics", "OvAnalytics\OvAnalytics.vcxproj", "{F2EB5337-5EA1-CC2C-E795-C603534AC330}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvAnalytics", "Overload\OvAnalytics\OvAnalytics.vcxproj", "{F2EB5337-5EA1-CC2C-E795-C603534AC330}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvAudio", "OvAudio\OvAudio.vcxproj", "{9C2F13DD-080F-9278-1127-1D4F7D85F8D9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvAudio", "Overload\OvAudio\OvAudio.vcxproj", "{9C2F13DD-080F-9278-1127-1D4F7D85F8D9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvCore", "OvCore\OvCore.vcxproj", "{937EA4C8-7F20-CF9E-68DB-E2F2541C56EF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvCore", "Overload\OvCore\OvCore.vcxproj", "{937EA4C8-7F20-CF9E-68DB-E2F2541C56EF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvDebug", "OvDebug\OvDebug.vcxproj", "{11AC40DD-7D8B-BF78-86A3-4A4FF20126DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvDebug", "Overload\OvDebug\OvDebug.vcxproj", "{11AC40DD-7D8B-BF78-86A3-4A4FF20126DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvGame", "OvGame\OvGame.vcxproj", "{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvGame", "Overload\OvGame\OvGame.vcxproj", "{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvMaths", "OvMaths\OvMaths.vcxproj", "{07A2E1DD-7381-6079-7C99-EB4FE8F7C6DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvMaths", "Overload\OvMaths\OvMaths.vcxproj", "{07A2E1DD-7381-6079-7C99-EB4FE8F7C6DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvPhysics", "OvPhysics\OvPhysics.vcxproj", "{CD7775D4-39E2-294B-8220-DBF0EEC907A0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvPhysics", "Overload\OvPhysics\OvPhysics.vcxproj", "{CD7775D4-39E2-294B-8220-DBF0EEC907A0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvRendering", "OvRendering\OvRendering.vcxproj", "{68C0E779-D475-606F-5D6A-5A46C91E5773}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvRendering", "Overload\OvRendering\OvRendering.vcxproj", "{68C0E779-D475-606F-5D6A-5A46C91E5773}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvTools", "OvTools\OvTools.vcxproj", "{1BE667DE-87C5-E679-90DD-7150FC3B4DDB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvTools", "Overload\OvTools\OvTools.vcxproj", "{1BE667DE-87C5-E679-90DD-7150FC3B4DDB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvUI", "OvUI\OvUI.vcxproj", "{A8628A7C-9499-8B0D-3D86-7110299C070F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvUI", "Overload\OvUI\OvUI.vcxproj", "{A8628A7C-9499-8B0D-3D86-7110299C070F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvWindowing", "OvWindowing\OvWindowing.vcxproj", "{E0FB1472-4CB1-8D67-D5A5-873E415A846B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OvWindowing", "Overload\OvWindowing\OvWindowing.vcxproj", "{E0FB1472-4CB1-8D67-D5A5-873E415A846B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MetaParser", "MetaParser\MetaParser.vcxproj", "{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{E0FB1472-4CB1-8D67-D5A5-873E415A846B}.Debug|x64.Build.0 = Debug|x64
 		{E0FB1472-4CB1-8D67-D5A5-873E415A846B}.Release|x64.ActiveCfg = Release|x64
 		{E0FB1472-4CB1-8D67-D5A5-873E415A846B}.Release|x64.Build.0 = Release|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Debug|x64.ActiveCfg = Debug|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Debug|x64.Build.0 = Debug|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.ActiveCfg = Release|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
