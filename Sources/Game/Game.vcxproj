@@ -58,7 +58,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glfw\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\lua\include;..\..\..\Dependencies\bullet3\include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\irrklang\include;..\OvAnalytics\include;..\OvAudio\include;..\OvCore\include;..\OvDebug\include;..\OvMaths\include;..\OvPhysics\include;..\OvRendering\include;..\OvTools\include;..\OvUI\include;..\OvWindowing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Runtime;.;..\..\3rdParty\glfw\include;..\..\3rdParty\stb_image\include;..\..\3rdParty\lua\include;..\..\3rdParty\bullet3\include;..\..\3rdParty\glew\include;..\..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -66,13 +66,13 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glfw\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\lua\include;..\..\..\Dependencies\bullet3\include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\irrklang\include;..\OvAnalytics\include;..\OvAudio\include;..\OvCore\include;..\OvDebug\include;..\OvMaths\include;..\OvPhysics\include;..\OvRendering\include;..\OvTools\include;..\OvUI\include;..\OvWindowing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Runtime;.;..\..\3rdParty\glfw\include;..\..\3rdParty\stb_image\include;..\..\3rdParty\lua\include;..\..\3rdParty\bullet3\include;..\..\3rdParty\glew\include;..\..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\Dependencies\glfw\lib;..\..\..\Dependencies\bullet3\lib\Debug;..\..\..\Dependencies\lua\lib;..\..\..\Dependencies\glew\lib;..\..\..\Dependencies\irrklang\lib;..\..\..\Dependencies\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rdParty\glfw\lib;..\..\3rdParty\bullet3\lib\Debug;..\..\3rdParty\lua\lib;..\..\3rdParty\glew\lib;..\..\3rdParty\irrklang\lib;..\..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Debug\$(ProjectName)"
@@ -88,7 +88,7 @@ EXIT /B 0</Command>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glfw\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\lua\include;..\..\..\Dependencies\bullet3\include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\irrklang\include;..\OvAnalytics\include;..\OvAudio\include;..\OvCore\include;..\OvDebug\include;..\OvMaths\include;..\OvPhysics\include;..\OvRendering\include;..\OvTools\include;..\OvUI\include;..\OvWindowing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Runtime;.;..\..\3rdParty\glfw\include;..\..\3rdParty\stb_image\include;..\..\3rdParty\lua\include;..\..\3rdParty\bullet3\include;..\..\3rdParty\glew\include;..\..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -99,14 +99,14 @@ EXIT /B 0</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glfw\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\lua\include;..\..\..\Dependencies\bullet3\include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\irrklang\include;..\OvAnalytics\include;..\OvAudio\include;..\OvCore\include;..\OvDebug\include;..\OvMaths\include;..\OvPhysics\include;..\OvRendering\include;..\OvTools\include;..\OvUI\include;..\OvWindowing\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Runtime;.;..\..\3rdParty\glfw\include;..\..\3rdParty\stb_image\include;..\..\3rdParty\lua\include;..\..\3rdParty\bullet3\include;..\..\3rdParty\glew\include;..\..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\Dependencies\glfw\lib;..\..\..\Dependencies\bullet3\lib\Release;..\..\..\Dependencies\lua\lib;..\..\..\Dependencies\glew\lib;..\..\..\Dependencies\irrklang\lib;..\..\..\Dependencies\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rdParty\glfw\lib;..\..\3rdParty\bullet3\lib\Release;..\..\3rdParty\lua\lib;..\..\3rdParty\glew\lib;..\..\3rdParty\irrklang\lib;..\..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Release\$(ProjectName)"
