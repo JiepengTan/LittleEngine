@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{68C0E779-D475-606F-5D6A-5A46C91E5773}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OvRendering</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\Bin\Debug\OvRendering\</OutDir>
+    <IntDir>..\..\..\Bin-Int\Debug\OvRendering\</IntDir>
+    <TargetName>OvRendering</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\Bin\Release\OvRendering\</OutDir>
+    <IntDir>..\..\..\Bin-Int\Release\OvRendering\</IntDir>
+    <TargetName>OvRendering</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\assimp\include;..\OvDebug\include;..\OvMaths\include;..\OvTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\..\..\Dependencies\glew\include;..\..\..\Dependencies\stb_image\include;..\..\..\Dependencies\assimp\include;..\OvDebug\include;..\OvMaths\include;..\OvTools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
+    <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
+    <ClInclude Include="Core\Analytics\Hardware\HardwareInfo.h" />
+    <ClInclude Include="Core\Analytics\Hardware\HardwareReport.h" />
+    <ClInclude Include="Core\Analytics\Hardware\RAMInfo.h" />
+    <ClInclude Include="Core\Analytics\Profiling\Profiler.h" />
+    <ClInclude Include="Core\Analytics\Profiling\ProfilerReport.h" />
+    <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h" />
+    <ClInclude Include="Core\Debug\Assertion.h" />
+    <ClInclude Include="Core\Debug\ConsoleColor.h" />
+    <ClInclude Include="Core\Debug\ConsoleHandler.h" />
+    <ClInclude Include="Core\Debug\FileHandler.h" />
+    <ClInclude Include="Core\Debug\HistoryHandler.h" />
+    <ClInclude Include="Core\Debug\ILogHandler.h" />
+    <ClInclude Include="Core\Debug\Logger.h" />
+    <ClInclude Include="Core\GlobalState.h" />
+    <ClInclude Include="Core\Maths\DebugUtil.h" />
+    <ClInclude Include="Core\Maths\FMatrix3.h" />
+    <ClInclude Include="Core\Maths\FMatrix4.h" />
+    <ClInclude Include="Core\Maths\FQuaternion.h" />
+    <ClInclude Include="Core\Maths\FTransform.h" />
+    <ClInclude Include="Core\Maths\FVector2.h" />
+    <ClInclude Include="Core\Maths\FVector3.h" />
+    <ClInclude Include="Core\Maths\FVector4.h" />
+    <ClInclude Include="Core\Maths\Internal\TransformNotifier.h" />
+    <ClInclude Include="Core\Tools\Eventing\Event.h" />
+    <ClInclude Include="Core\Tools\Filesystem\IniFile.h" />
+    <ClInclude Include="Core\Tools\Filesystem\tinyxml2.h" />
+    <ClInclude Include="Core\Tools\Time\Clock.h" />
+    <ClInclude Include="Core\Tools\Time\Date.h" />
+    <ClInclude Include="Core\Tools\Utils\PathParser.h" />
+    <ClInclude Include="Core\Tools\Utils\Random.h" />
+    <ClInclude Include="Core\Tools\Utils\ReferenceOrValue.h" />
+    <ClInclude Include="Core\Tools\Utils\SizeConverter.h" />
+    <ClInclude Include="Core\Tools\Utils\String.h" />
+    <ClInclude Include="Core\Tools\Utils\SystemCalls.h" />
+    <ClInclude Include="GamePlay\API\IInspectorItem.h" />
+    <ClInclude Include="GamePlay\API\ISerializable.h" />
+    <ClInclude Include="GamePlay\ECS\Actor.h" />
+    <ClInclude Include="GamePlay\ECS\Components\AComponent.h" />
+    <ClInclude Include="GamePlay\ECS\Components\Behaviour.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CAmbientBoxLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CAmbientSphereLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CAnimator.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CAudioListener.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CAudioSource.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CCamera.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CDirectionalLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CMaterialRenderer.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CModelRenderer.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CPhysicalBox.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CPhysicalCapsule.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CPhysicalObject.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CPhysicalSphere.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CPointLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CSpotLight.h" />
+    <ClInclude Include="GamePlay\ECS\Components\CTransform.h" />
+    <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h" />
+    <ClInclude Include="GamePlay\ECS\Renderer.h" />
+    <ClInclude Include="GamePlay\Global\ServiceLocator.h" />
+    <ClInclude Include="GamePlay\Helpers\ActorUtils.h" />
+    <ClInclude Include="GamePlay\Helpers\GUIDrawer.h" />
+    <ClInclude Include="GamePlay\Helpers\RenderUtils.h" />
+    <ClInclude Include="GamePlay\Helpers\Serializer.h" />
+    <ClInclude Include="GamePlay\SceneSystem\Scene.h" />
+    <ClInclude Include="GamePlay\SceneSystem\SceneManager.h" />
+    <ClInclude Include="GamePlay\Scripting\LuaActorBinder.h" />
+    <ClInclude Include="GamePlay\Scripting\LuaBinder.h" />
+    <ClInclude Include="GamePlay\Scripting\LuaComponentBinder.h" />
+    <ClInclude Include="GamePlay\Scripting\LuaGlobalsBinder.h" />
+    <ClInclude Include="GamePlay\Scripting\LuaMathsBinder.h" />
+    <ClInclude Include="GamePlay\Scripting\ScriptInterpreter.h" />
+    <ClInclude Include="Modules\Audio\Core\AudioEngine.h" />
+    <ClInclude Include="Modules\Audio\Core\AudioPlayer.h" />
+    <ClInclude Include="Modules\Audio\Entities\AudioListener.h" />
+    <ClInclude Include="Modules\Audio\Entities\AudioSource.h" />
+    <ClInclude Include="Modules\Audio\Resources\Loaders\SoundLoader.h" />
+    <ClInclude Include="Modules\Audio\Resources\Sound.h" />
+    <ClInclude Include="Modules\Audio\Tracking\SoundStopEventBinder.h" />
+    <ClInclude Include="Modules\Audio\Tracking\SoundTracker.h" />
+    <ClInclude Include="Modules\Physics\Core\PhysicsEngine.h" />
+    <ClInclude Include="Modules\Physics\Entities\PhysicalBox.h" />
+    <ClInclude Include="Modules\Physics\Entities\PhysicalCapsule.h" />
+    <ClInclude Include="Modules\Physics\Entities\PhysicalObject.h" />
+    <ClInclude Include="Modules\Physics\Entities\PhysicalSphere.h" />
+    <ClInclude Include="Modules\Physics\Entities\RaycastHit.h" />
+    <ClInclude Include="Modules\Physics\Settings\BodySettings.h" />
+    <ClInclude Include="Modules\Physics\Settings\PhysicsSettings.h" />
+    <ClInclude Include="Modules\Physics\Tools\Conversion.h" />
+    <ClInclude Include="Modules\UI\API\IDrawable.h" />
+    <ClInclude Include="Modules\UI\Core\UIManager.h" />
+    <ClInclude Include="Modules\UI\ImGui\imconfig.h" />
+    <ClInclude Include="Modules\UI\ImGui\imgui.h" />
+    <ClInclude Include="Modules\UI\ImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="Modules\UI\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Modules\UI\ImGui\imgui_internal.h" />
+    <ClInclude Include="Modules\UI\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="Modules\UI\ImGui\imstb_textedit.h" />
+    <ClInclude Include="Modules\UI\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Modules\UI\Internal\Converter.h" />
+    <ClInclude Include="Modules\UI\Internal\EMemoryMode.h" />
+    <ClInclude Include="Modules\UI\Internal\TextureID.h" />
+    <ClInclude Include="Modules\UI\Internal\WidgetContainer.h" />
+    <ClInclude Include="Modules\UI\Modules\Canvas.h" />
+    <ClInclude Include="Modules\UI\Panels\APanel.h" />
+    <ClInclude Include="Modules\UI\Panels\APanelTransformable.h" />
+    <ClInclude Include="Modules\UI\Panels\PanelMenuBar.h" />
+    <ClInclude Include="Modules\UI\Panels\PanelUndecorated.h" />
+    <ClInclude Include="Modules\UI\Panels\PanelWindow.h" />
+    <ClInclude Include="Modules\UI\Plugins\ContextualMenu.h" />
+    <ClInclude Include="Modules\UI\Plugins\DDSource.h" />
+    <ClInclude Include="Modules\UI\Plugins\DDTarget.h" />
+    <ClInclude Include="Modules\UI\Plugins\DataDispatcher.h" />
+    <ClInclude Include="Modules\UI\Plugins\IPlugin.h" />
+    <ClInclude Include="Modules\UI\Plugins\Pluginable.h" />
+    <ClInclude Include="Modules\UI\Settings\Alignment.h" />
+    <ClInclude Include="Modules\UI\Settings\PanelWindowSettings.h" />
+    <ClInclude Include="Modules\UI\Styling\EStyle.h" />
+    <ClInclude Include="Modules\UI\Types\Color.h" />
+    <ClInclude Include="Modules\UI\Widgets\AWidget.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\AButton.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\Button.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\ButtonArrow.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\ButtonColored.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\ButtonImage.h" />
+    <ClInclude Include="Modules\UI\Widgets\Buttons\ButtonSmall.h" />
+    <ClInclude Include="Modules\UI\Widgets\DataWidget.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragDouble.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragFloat.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragInt.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragMultipleDoubles.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragMultipleFloats.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragMultipleInts.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragMultipleScalars.h" />
+    <ClInclude Include="Modules\UI\Widgets\Drags\DragSingleScalar.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputDouble.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputFloat.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputInt.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputMultipleDoubles.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputMultipleFloats.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputMultipleInts.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputMultipleScalars.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputSingleScalar.h" />
+    <ClInclude Include="Modules\UI\Widgets\InputFields\InputText.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\Columns.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\Dummy.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\Group.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\GroupCollapsable.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\NewLine.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\Spacing.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\TreeNode.h" />
+    <ClInclude Include="Modules\UI\Widgets\Menu\MenuItem.h" />
+    <ClInclude Include="Modules\UI\Widgets\Menu\MenuList.h" />
+    <ClInclude Include="Modules\UI\Widgets\Plots\APlot.h" />
+    <ClInclude Include="Modules\UI\Widgets\Plots\PlotHistogram.h" />
+    <ClInclude Include="Modules\UI\Widgets\Plots\PlotLines.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\CheckBox.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\ColorEdit.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\ColorPicker.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\ComboBox.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\RadioButton.h" />
+    <ClInclude Include="Modules\UI\Widgets\Selection\RadioButtonLinker.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\ESliderOrientation.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderDouble.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderFloat.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderInt.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderMultipleDoubles.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderMultipleFloats.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderMultipleInts.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderMultipleScalars.h" />
+    <ClInclude Include="Modules\UI\Widgets\Sliders\SliderSingleScalar.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\Text.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextClickable.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextColored.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextDisabled.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextLabelled.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextSelectable.h" />
+    <ClInclude Include="Modules\UI\Widgets\Texts\TextWrapped.h" />
+    <ClInclude Include="Modules\UI\Widgets\Visual\Bullet.h" />
+    <ClInclude Include="Modules\UI\Widgets\Visual\Image.h" />
+    <ClInclude Include="Modules\UI\Widgets\Visual\ProgressBar.h" />
+    <ClInclude Include="Modules\UI\Widgets\Visual\Separator.h" />
+    <ClInclude Include="Platform\Windowing\Context\Device.h" />
+    <ClInclude Include="Platform\Windowing\Context\EDeviceError.h" />
+    <ClInclude Include="Platform\Windowing\Cursor\ECursorMode.h" />
+    <ClInclude Include="Platform\Windowing\Cursor\ECursorShape.h" />
+    <ClInclude Include="Platform\Windowing\Dialogs\FileDialog.h" />
+    <ClInclude Include="Platform\Windowing\Dialogs\MessageBox.h" />
+    <ClInclude Include="Platform\Windowing\Dialogs\OpenFileDialog.h" />
+    <ClInclude Include="Platform\Windowing\Dialogs\SaveFileDialog.h" />
+    <ClInclude Include="Platform\Windowing\Inputs\EKey.h" />
+    <ClInclude Include="Platform\Windowing\Inputs\EKeyState.h" />
+    <ClInclude Include="Platform\Windowing\Inputs\EMouseButton.h" />
+    <ClInclude Include="Platform\Windowing\Inputs\EMouseButtonState.h" />
+    <ClInclude Include="Platform\Windowing\Inputs\InputManager.h" />
+    <ClInclude Include="Platform\Windowing\Settings\DeviceSettings.h" />
+    <ClInclude Include="Platform\Windowing\Settings\WindowSettings.h" />
+    <ClInclude Include="Platform\Windowing\Window.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\EAccessSpecifier.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\Framebuffer.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\ShaderStorageBuffer.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\ShadowmapBuffer.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\UniformBuffer.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\VertexArray.h" />
+    <ClInclude Include="Resource\Rendering\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Resource\Rendering\Context\Driver.h" />
+    <ClInclude Include="Resource\Rendering\Core\Renderer.h" />
+    <ClInclude Include="Resource\Rendering\Core\ShapeDrawer.h" />
+    <ClInclude Include="Resource\Rendering\Data\Frustum.h" />
+    <ClInclude Include="Resource\Rendering\Entities\Light.h" />
+    <ClInclude Include="Resource\Rendering\Geometry\BoundingSphere.h" />
+    <ClInclude Include="Resource\Rendering\Geometry\Vertex.h" />
+    <ClInclude Include="Resource\Rendering\LowRenderer\Camera.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Animation.h" />
+    <ClInclude Include="Resource\Rendering\Resources\AnimationData.h" />
+    <ClInclude Include="Resource\Rendering\Resources\IMesh.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Loaders\AnimationLoader.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Loaders\ModelLoader.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Loaders\ShaderLoader.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Loaders\TextureLoader.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Mesh.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Model.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Parsers\AssimpParser.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Parsers\EModelParserFlags.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Parsers\IModelParser.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Shader.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Skeleton.h" />
+    <ClInclude Include="Resource\Rendering\Resources\Texture.h" />
+    <ClInclude Include="Resource\Rendering\Resources\UniformInfo.h" />
+    <ClInclude Include="Resource\Rendering\Resources\UniformType.h" />
+    <ClInclude Include="Resource\Rendering\Settings\DriverSettings.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EComparaisonAlgorithm.h" />
+    <ClInclude Include="Resource\Rendering\Settings\ECullFace.h" />
+    <ClInclude Include="Resource\Rendering\Settings\ECullingOptions.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EOperation.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EPixelDataFormat.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EPixelDataType.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EPrimitiveMode.h" />
+    <ClInclude Include="Resource\Rendering\Settings\EProjectionMode.h" />
+    <ClInclude Include="Resource\Rendering\Settings\ERasterizationMode.h" />
+    <ClInclude Include="Resource\Rendering\Settings\ERenderingCapability.h" />
+    <ClInclude Include="Resource\Rendering\Settings\ETextureFilteringMode.h" />
+    <ClInclude Include="Resource\Rendering\Utils\Defines.h" />
+    <ClInclude Include="Resource\ResourceManagement\AResourceManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\AnimationManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\MaterialManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\ModelManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\ShaderManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\SoundManager.h" />
+    <ClInclude Include="Resource\ResourceManagement\TextureManager.h" />
+    <ClInclude Include="Resource\Resources\Loaders\MaterialLoader.h" />
+    <ClInclude Include="Resource\Resources\Material.h" />
+    <ClCompile Include="Core\Analytics\Hardware\CPUInfo.cpp" />
+    <ClCompile Include="Core\Analytics\Hardware\GPUInfo.cpp" />
+    <ClCompile Include="Core\Analytics\Hardware\HardwareInfo.cpp" />
+    <ClCompile Include="Core\Analytics\Hardware\RAMInfo.cpp" />
+    <ClCompile Include="Core\Analytics\Profiling\Profiler.cpp" />
+    <ClCompile Include="Core\Analytics\Profiling\ProfilerSpy.cpp" />
+    <ClCompile Include="Core\Debug\Assertion.cpp" />
+    <ClCompile Include="Core\Debug\ConsoleHandler.cpp" />
+    <ClCompile Include="Core\Debug\FileHandler.cpp" />
+    <ClCompile Include="Core\Debug\HistoryHandler.cpp" />
+    <ClCompile Include="Core\Debug\Logger.cpp" />
+    <ClCompile Include="Core\GlobalState.cpp" />
+    <ClCompile Include="Core\Maths\DebugUtil.cpp" />
+    <ClCompile Include="Core\Maths\FMatrix3.cpp" />
+    <ClCompile Include="Core\Maths\FMatrix4.cpp" />
+    <ClCompile Include="Core\Maths\FQuaternion.cpp" />
+    <ClCompile Include="Core\Maths\FTransform.cpp" />
+    <ClCompile Include="Core\Maths\FVector2.cpp" />
+    <ClCompile Include="Core\Maths\FVector3.cpp" />
+    <ClCompile Include="Core\Maths\FVector4.cpp" />
+    <ClCompile Include="Core\Maths\Internal\TransformNotifier.cpp" />
+    <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp" />
+    <ClCompile Include="Core\Tools\Filesystem\tinyxml2.cpp" />
+    <ClCompile Include="Core\Tools\Time\Clock.cpp" />
+    <ClCompile Include="Core\Tools\Time\Date.cpp" />
+    <ClCompile Include="Core\Tools\Utils\PathParser.cpp" />
+    <ClCompile Include="Core\Tools\Utils\Random.cpp" />
+    <ClCompile Include="Core\Tools\Utils\SizeConverter.cpp" />
+    <ClCompile Include="Core\Tools\Utils\String.cpp" />
+    <ClCompile Include="Core\Tools\Utils\SystemCalls.cpp" />
+    <ClCompile Include="GamePlay\ECS\Actor.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\AComponent.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\Behaviour.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CAmbientBoxLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CAmbientSphereLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CAnimator.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CAudioListener.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CAudioSource.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CCamera.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CDirectionalLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CMaterialRenderer.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CModelRenderer.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CPhysicalBox.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CPhysicalCapsule.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CPhysicalObject.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CPhysicalSphere.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CPointLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CSpotLight.cpp" />
+    <ClCompile Include="GamePlay\ECS\Components\CTransform.cpp" />
+    <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp" />
+    <ClCompile Include="GamePlay\ECS\Renderer.cpp"/>
+    <ClCompile Include="GamePlay\Global\ServiceLocator.cpp" />
+    <ClCompile Include="GamePlay\Helpers\ActorUtils.cpp" />
+    <ClCompile Include="GamePlay\Helpers\GUIDrawer.cpp" />
+    <ClCompile Include="GamePlay\Helpers\RenderUtils.cpp" />
+    <ClCompile Include="GamePlay\Helpers\Serializer.cpp" />
+    <ClCompile Include="GamePlay\SceneSystem\Scene.cpp" />
+    <ClCompile Include="GamePlay\SceneSystem\SceneManager.cpp" />
+    <ClCompile Include="GamePlay\Scripting\LuaActorBinder.cpp" />
+    <ClCompile Include="GamePlay\Scripting\LuaBinder.cpp" />
+    <ClCompile Include="GamePlay\Scripting\LuaComponentBinder.cpp" />
+    <ClCompile Include="GamePlay\Scripting\LuaGlobalsBinder.cpp" />
+    <ClCompile Include="GamePlay\Scripting\LuaMathsBinder.cpp" />
+    <ClCompile Include="GamePlay\Scripting\ScriptInterpreter.cpp" />
+    <ClCompile Include="Modules\Audio\Core\AudioEngine.cpp" />
+    <ClCompile Include="Modules\Audio\Core\AudioPlayer.cpp" />
+    <ClCompile Include="Modules\Audio\Entities\AudioListener.cpp" />
+    <ClCompile Include="Modules\Audio\Entities\AudioSource.cpp" />
+    <ClCompile Include="Modules\Audio\Resources\Loaders\SoundLoader.cpp" />
+    <ClCompile Include="Modules\Audio\Resources\Sound.cpp" />
+    <ClCompile Include="Modules\Audio\Tracking\SoundStopEventBinder.cpp" />
+    <ClCompile Include="Modules\Audio\Tracking\SoundTracker.cpp" />
+    <ClCompile Include="Modules\Physics\Core\PhysicsEngine.cpp" />
+    <ClCompile Include="Modules\Physics\Entities\PhysicalBox.cpp" />
+    <ClCompile Include="Modules\Physics\Entities\PhysicalCapsule.cpp" />
+    <ClCompile Include="Modules\Physics\Entities\PhysicalObject.cpp" />
+    <ClCompile Include="Modules\Physics\Entities\PhysicalSphere.cpp" />
+    <ClCompile Include="Modules\Physics\Tools\Conversion.cpp" />
+    <ClCompile Include="Modules\UI\Core\UIManager.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Modules\UI\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Modules\UI\Internal\Converter.cpp" />
+    <ClCompile Include="Modules\UI\Internal\WidgetContainer.cpp" />
+    <ClCompile Include="Modules\UI\Modules\Canvas.cpp" />
+    <ClCompile Include="Modules\UI\Panels\APanel.cpp" />
+    <ClCompile Include="Modules\UI\Panels\APanelTransformable.cpp" />
+    <ClCompile Include="Modules\UI\Panels\PanelMenuBar.cpp" />
+    <ClCompile Include="Modules\UI\Panels\PanelUndecorated.cpp" />
+    <ClCompile Include="Modules\UI\Panels\PanelWindow.cpp" />
+    <ClCompile Include="Modules\UI\Plugins\ContextualMenu.cpp" />
+    <ClCompile Include="Modules\UI\Types\Color.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\AWidget.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Buttons\Button.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Buttons\ButtonArrow.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Buttons\ButtonColored.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Buttons\ButtonImage.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Buttons\ButtonSmall.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Drags\DragDouble.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Drags\DragFloat.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Drags\DragInt.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\InputFields\InputDouble.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\InputFields\InputFloat.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\InputFields\InputInt.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\InputFields\InputText.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\Dummy.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\Group.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\GroupCollapsable.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\NewLine.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\Spacing.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\TreeNode.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Menu\MenuItem.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Menu\MenuList.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Plots\APlot.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Plots\PlotHistogram.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Plots\PlotLines.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\CheckBox.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\ColorEdit.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\ColorPicker.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\ComboBox.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\RadioButton.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Selection\RadioButtonLinker.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Sliders\SliderDouble.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Sliders\SliderFloat.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Sliders\SliderInt.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\Text.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextClickable.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextColored.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextDisabled.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextLabelled.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextSelectable.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Texts\TextWrapped.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Visual\Bullet.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Visual\Image.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Visual\ProgressBar.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Visual\Separator.cpp" />
+    <ClCompile Include="Platform\Windowing\Context\Device.cpp" />
+    <ClCompile Include="Platform\Windowing\Dialogs\FileDialog.cpp" />
+    <ClCompile Include="Platform\Windowing\Dialogs\MessageBox.cpp" />
+    <ClCompile Include="Platform\Windowing\Dialogs\OpenFileDialog.cpp" />
+    <ClCompile Include="Platform\Windowing\Dialogs\SaveFileDialog.cpp" />
+    <ClCompile Include="Platform\Windowing\Inputs\InputManager.cpp" />
+    <ClCompile Include="Platform\Windowing\Window.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\Framebuffer.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\ShaderStorageBuffer.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\ShadowmapBuffer.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\UniformBuffer.cpp" />
+    <ClCompile Include="Resource\Rendering\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Resource\Rendering\Context\Driver.cpp" />
+    <ClCompile Include="Resource\Rendering\Core\Renderer.cpp" />
+    <ClCompile Include="Resource\Rendering\Core\ShapeDrawer.cpp" />
+    <ClCompile Include="Resource\Rendering\Data\Frustum.cpp" />
+    <ClCompile Include="Resource\Rendering\Entities\Light.cpp" />
+    <ClCompile Include="Resource\Rendering\Geometry\Vertex.cpp" />
+    <ClCompile Include="Resource\Rendering\LowRenderer\Camera.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Animation.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Loaders\AnimationLoader.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Loaders\ModelLoader.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Loaders\ShaderLoader.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Loaders\TextureLoader.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Mesh.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Model.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Parsers\AssimpParser.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Shader.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Skeleton.cpp" />
+    <ClCompile Include="Resource\Rendering\Resources\Texture.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\AnimationManager.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\MaterialManager.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\ModelManager.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\ShaderManager.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\SoundManager.cpp" />
+    <ClCompile Include="Resource\ResourceManagement\TextureManager.cpp" />
+    <ClCompile Include="Resource\Resources\Loaders\MaterialLoader.cpp" />
+    <ClCompile Include="Resource\Resources\Material.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

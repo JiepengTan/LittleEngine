@@ -1,7 +1,9 @@
 .vs/
 .vscode/
-Bin/
-Bin-Int/
+.idea/
+x86/
+x64/
 Build/
-imgui.ini
-*.aps
+Bin/
+Builds/
+Bin-Int/

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\cursor\cursor.cpp">
+      <Filter>parser\cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\cursor\cursor_type.cpp">
+      <Filter>parser\cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\generator.cpp">
+      <Filter>parser\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\reflection_generator.cpp">
+      <Filter>parser\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\serializer_generator.cpp">
+      <Filter>parser\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\class.cpp">
+      <Filter>parser\language_types</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\field.cpp">
+      <Filter>parser\language_types</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\method.cpp">
+      <Filter>parser\language_types</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\type_info.cpp">
+      <Filter>parser\language_types</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\meta\meta_info.cpp">
+      <Filter>parser\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\meta\meta_utils.cpp">
+      <Filter>parser\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\parser\parser.cpp">
+      <Filter>parser\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\template_manager\template_manager.cpp">
+      <Filter>parser\template_manager</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\BuildSystem.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\CXCompilationDatabase.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\CXErrorCode.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\CXString.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\Documentation.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\Index.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\clang-c\Platform.h">
+      <Filter>3rd_party\LLVM\include\clang-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\3rd_party\LLVM\include\llvm-c\lto.h">
+      <Filter>3rd_party\LLVM\include\llvm-c</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\common\namespace.h">
+      <Filter>parser\common</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\common\precompiled.h">
+      <Filter>parser\common</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\common\schema_module.h">
+      <Filter>parser\common</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\cursor\cursor.h">
+      <Filter>parser\cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\cursor\cursor_type.h">
+      <Filter>parser\cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\generator.h">
+      <Filter>parser\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\reflection_generator.h">
+      <Filter>parser\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\generator\serializer_generator.h">
+      <Filter>parser\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\class.h">
+      <Filter>parser\language_types</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\field.h">
+      <Filter>parser\language_types</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\method.h">
+      <Filter>parser\language_types</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\language_types\type_info.h">
+      <Filter>parser\language_types</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\meta\meta_data_config.h">
+      <Filter>parser\meta</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\meta\meta_info.h">
+      <Filter>parser\meta</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\meta\meta_utils.h">
+      <Filter>parser\meta</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\parser\parser.h">
+      <Filter>parser\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="I:\Projects\OverloadEngine\Overload\Sources\Tools\MetaParser\parser\template_manager\template_manager.h">
+      <Filter>parser\template_manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="3rd_party">
+      <UniqueIdentifier>{4B880FB9-C192-3840-8A40-0486818261A5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party\LLVM">
+      <UniqueIdentifier>{03823EF4-9A9D-399E-BAE4-0FCED89F51AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party\LLVM\include">
+      <UniqueIdentifier>{573144D3-0A84-33C3-B323-69E9DFDD1A05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party\LLVM\include\clang-c">
+      <UniqueIdentifier>{D079FE4F-CDCC-3503-89D6-B846002CCE4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party\LLVM\include\llvm-c">
+      <UniqueIdentifier>{A0EAC701-3605-3D02-B9E1-CF98E484810A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser">
+      <UniqueIdentifier>{44FE3D14-B761-3A93-9F51-BC96D38F351D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\common">
+      <UniqueIdentifier>{A32E4609-CBB4-3ED1-9761-B484B4F578C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\cursor">
+      <UniqueIdentifier>{41D97771-2900-3199-BA49-52A34896D636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\generator">
+      <UniqueIdentifier>{97F31A61-9388-3D77-A604-8EAD400B34AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\language_types">
+      <UniqueIdentifier>{4CFB4389-19EA-3FAE-9C3D-017C19648DD5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\meta">
+      <UniqueIdentifier>{8345E19F-0DA5-3F42-9584-2D7789BAB190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\parser">
+      <UniqueIdentifier>{8A6EBED7-D519-3454-8650-B578AE4B24F4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parser\template_manager">
+      <UniqueIdentifier>{644D2A87-3650-3995-B966-1FB31720C8B8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
