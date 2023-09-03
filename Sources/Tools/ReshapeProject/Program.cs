@@ -5,21 +5,6 @@ using GamesTan;
 
 namespace ReshapeProject
 {
-    static class StringExt
-    {
-        static bool StartWithExt(this string str, string tag)
-        {
-            if (str.Length < tag.Length) return false;
-            var len = tag.Length;
-            for (int i = 0; i < len; i++)
-            {
-                if (str[i] != tag[i]) return false;
-            }
-
-            return true;
-        }
-    }
-
     internal class Program
     {
         public static void Main(string[] args)
@@ -38,13 +23,14 @@ namespace ReshapeProject
                 { "OvEditor", "../Editor" },
                 { "OvGame", "../Game" },
                 { "OvMaths", "Core/Maths" },
+                { "OvMAths", "Core/Maths" },
                 { "OvPhysics", "Modules/Physics" },
                 { "OvRendering", "Resource/Rendering" },
                 { "OvTools", "Core/Tools" },
                 { "OvUI", "Modules/UI" },
                 { "OvWindowing", "Platform/Windowing" },
                 { "OvAnim", "Modules/Anim" },
-                { "OvCore/ResourceManagement", "Resource/Rendering" },
+                { "OvCore/ResourceManagement", "Resource/ResourceManagement" },
                 { "OvCore/Resources", "Resource/Resources" },
                 { "OvCore/GlobalState.h", "Core/GlobalState.h" },
                 { "OvCore/", "GamePlay/" },
@@ -60,9 +46,7 @@ namespace ReshapeProject
             List<string> allCppFiles = new List<string>();
             foreach (var dir in paths)
             {
-                PathUtil.Walk(dir, "*.h|*.inl", (p) => { allCppFiles.Add(p); });
-                PathUtil.Walk(dir, "*.h", (p) => { allCppFiles.Add(p); });
-                PathUtil.Walk(dir, "*.cpp", (p) => { allCppFiles.Add(p); });
+                PathUtil.Walk(dir, "*.h|*.inl|*.cpp", (p) => { allCppFiles.Add(p); });
             }
 
             var headTag = "#include";
