@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/ModelManager.h"
 
-#include <OvTools/Filesystem/IniFile.h>
-#include <OvRendering/Resources/Model.h>
+#include "Core/Tools/Filesystem/IniFile.h"
+#include "Resource/Rendering/Resources/Model.h"
 
 OvRendering::Resources::Parsers::EModelParserFlags GetAssetMetadata(const std::string& p_path)
 {

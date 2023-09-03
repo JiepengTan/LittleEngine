@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include "OvUI/Widgets/Buttons/AButton.h"
-#include "OvUI/Types/Color.h"
+#include "Modules/UI/Widgets/Buttons/AButton.h"
+#include "Modules/UI/Types/Color.h"
 
 namespace OvUI::Widgets::Buttons
 {

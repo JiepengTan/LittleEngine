@@ -10,10 +10,10 @@
 #include <memory>
 #include <algorithm>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Panels/APanel.h"
-#include "OvUI/Widgets/Menu/MenuList.h"
+#include "Modules/UI/Panels/APanel.h"
+#include "Modules/UI/Widgets/Menu/MenuList.h"
 
 namespace OvUI::Panels
 {

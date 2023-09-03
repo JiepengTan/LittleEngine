@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Texts/TextLabelled.h"
+#include "Modules/UI/Widgets/Texts/TextLabelled.h"
 
 OvUI::Widgets::Texts::TextLabelled::TextLabelled(const std::string& p_content, const std::string& p_label) :
 	Text(p_content), label(p_label)

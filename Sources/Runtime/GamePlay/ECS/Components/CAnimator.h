@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "CModelRenderer.h"
-#include "OvCore/ECS/Actor.h"
-#include "OvMaths/FMatrix4.h"
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Actor.h"
+#include "Core/Maths/FMatrix4.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 namespace OvRendering::Resources
 {

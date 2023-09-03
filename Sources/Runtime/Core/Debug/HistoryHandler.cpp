@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvDebug/HistoryHandler.h"
+#include "Core/Debug/HistoryHandler.h"
 
 std::queue<OvDebug::LogData> OvDebug::HistoryHandler::LOG_QUEUE;
 

@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvCore/ECS/Components/AComponent.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Actor.h"
 
 OvCore::ECS::Components::AComponent::AComponent(ECS::Actor& p_owner) : owner(p_owner)
 {

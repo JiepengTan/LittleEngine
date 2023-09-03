@@ -6,17 +6,17 @@
 
 #pragma once
 
-#include <OvRendering/LowRenderer/Camera.h>
+#include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Core/PanelsManager.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Core/PanelsManager.h"
 
-#include <OvUI/Modules/Canvas.h>
+#include "Modules/UI/Modules/Canvas.h"
 
-#include "OvEditor/Core/Context.h"
+#include "../Editor/Core/Context.h"
 
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
 namespace OvEditor::Core
 {

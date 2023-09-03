@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvRendering/Entities/Light.h"
+#include "Resource/Rendering/Entities/Light.h"
 
 uint32_t Pack(uint8_t c0, uint8_t c1, uint8_t c2, uint8_t c3)
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Selection/ColorPicker.h"
+#include "Modules/UI/Widgets/Selection/ColorPicker.h"
 
 OvUI::Widgets::Selection::ColorPicker::ColorPicker(bool p_enableAlpha, const Types::Color & p_defaultColor) :
 	DataWidget<Types::Color>(color), enableAlpha(p_enableAlpha), color(p_defaultColor)

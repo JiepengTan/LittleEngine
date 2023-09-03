@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvMaths/FTransform.h>
-#include <OvMaths/FVector2.h>
+#include "Core/Maths/FTransform.h"
+#include "Core/Maths/FVector2.h"
 
-#include <OvCore/ECS/Actor.h>
+#include "GamePlay/ECS/Actor.h"
 
 namespace OvEditor::Core
 {

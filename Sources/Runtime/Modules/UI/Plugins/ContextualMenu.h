@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include "OvUI/Plugins/IPlugin.h"
-#include "OvUI/Internal/WidgetContainer.h"
-#include "OvUI/Widgets/Menu/MenuList.h"
-#include "OvUI/Widgets/Menu/MenuItem.h"
+#include "Modules/UI/Plugins/IPlugin.h"
+#include "Modules/UI/Internal/WidgetContainer.h"
+#include "Modules/UI/Widgets/Menu/MenuList.h"
+#include "Modules/UI/Widgets/Menu/MenuItem.h"
 
 namespace OvUI::Plugins
 {

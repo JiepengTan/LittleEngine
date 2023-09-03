@@ -11,7 +11,7 @@
 #include <mutex>
 
 
-#include "OvAnalytics/Profiling/ProfilerReport.h"
+#include "Core/Analytics/Profiling/ProfilerReport.h"
 
 namespace OvAnalytics::Profiling
 {

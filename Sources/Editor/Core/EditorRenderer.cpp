@@ -4,27 +4,27 @@
 * @licence: MIT
 */
 
-#include <OvCore/ECS/Components/CCamera.h>
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CMaterialRenderer.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
 
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-#include <OvDebug/Assertion.h>
+#include "Core/Debug/Assertion.h"
 
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Core/EditorResources.h"
-#include "OvEditor/Panels/AView.h"
-#include "OvEditor/Panels/GameView.h"
-#include "OvEditor/Core/GizmoBehaviour.h"
-#include "OvEditor/Settings/EditorSettings.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Core/EditorResources.h"
+#include "../Editor/Panels/AView.h"
+#include "../Editor/Panels/GameView.h"
+#include "../Editor/Core/GizmoBehaviour.h"
+#include "../Editor/Settings/EditorSettings.h"
 
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Core/EditorActions.h"
 
 using namespace OvMaths;
 using namespace OvRendering::Resources;

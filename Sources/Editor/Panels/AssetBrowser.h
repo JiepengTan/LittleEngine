@@ -10,9 +10,9 @@
 #include <unordered_map>
 #include <queue>
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/TreeNode.h>
-#include <OvRendering/Resources/Loaders/TextureLoader.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/TreeNode.h"
+#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
 
 namespace OvEditor::Panels
 {

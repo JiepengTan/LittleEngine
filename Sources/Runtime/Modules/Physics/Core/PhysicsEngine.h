@@ -10,9 +10,9 @@
 #include <map>
 #include <optional>
 
-#include "OvPhysics/Entities/PhysicalObject.h"
-#include "OvPhysics/Settings/PhysicsSettings.h"
-#include "OvPhysics/Entities/RaycastHit.h"
+#include "Modules/Physics/Entities/PhysicalObject.h"
+#include "Modules/Physics/Settings/PhysicsSettings.h"
+#include "Modules/Physics/Entities/RaycastHit.h"
 
 namespace OvPhysics::Core
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAudio/Resources/Sound.h"
+#include "Modules/Audio/Resources/Sound.h"
 
 OvAudio::Resources::Sound::Sound(const std::string& p_path) : path(p_path)
 {

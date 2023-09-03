@@ -8,11 +8,11 @@
 
 #ifdef _DEBUG
 
-#include <OvRendering/Core/Renderer.h>
-#include <OvWindowing/Window.h>
+#include "Resource/Rendering/Core/Renderer.h"
+#include "Platform/Windowing/Window.h"
 
-#include <OvUI/Panels/PanelUndecorated.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
+#include "Modules/UI/Panels/PanelUndecorated.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
 
 namespace OvGame::Debug
 {

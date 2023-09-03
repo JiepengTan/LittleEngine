@@ -8,9 +8,9 @@
 
 #include <variant>
 
-#include <OvCore/Resources/Material.h>
+#include "Resource/Resources/Material.h"
 
-#include "OvEditor/Panels/AViewControllable.h"
+#include "../Editor/Panels/AViewControllable.h"
 
 namespace OvEditor::Panels
 {

@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <cmath>
 
-#include "OvMaths/FVector3.h"
+#include "Core/Maths/FVector3.h"
 
 const OvMaths::FVector3 OvMaths::FVector3::One(1.0f, 1.0f, 1.0f);
 const OvMaths::FVector3 OvMaths::FVector3::Zero(0.0f, 0.0f, 0.0f);

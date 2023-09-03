@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvEditor/Core/Context.h"
-#include "OvEditor/Core/Editor.h"
+#include "../Editor/Core/Context.h"
+#include "../Editor/Core/Editor.h"
 
 namespace OvEditor::Core
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvMaths/Internal/TransformNotifier.h"
+#include "Core/Maths/Internal/TransformNotifier.h"
 
 OvMaths::Internal::TransformNotifier::NotificationHandlerID OvMaths::Internal::TransformNotifier::AddNotificationHandler(NotificationHandler p_notificationHandler)
 {

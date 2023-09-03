@@ -9,10 +9,10 @@
 #include <string>
 #include <cmath>
 
-#include "OvMaths/FMatrix4.h"
-#include "OvMaths/FVector3.h"
-#include "OvMaths/FQuaternion.h"
-#include "OvMaths/FTransform.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FQuaternion.h"
+#include "Core/Maths/FTransform.h"
 
 const OvMaths::FMatrix4 OvMaths::FMatrix4::Identity = FMatrix4(1.f, 0.f, 0.f, 0.f,
                                                                0.f, 1.f, 0.f, 0.f,

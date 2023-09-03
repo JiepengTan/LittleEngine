@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvCore/Resources/Material.h"
+#include "Resource/Resources/Material.h"
 
 namespace OvCore::Resources::Loaders
 {

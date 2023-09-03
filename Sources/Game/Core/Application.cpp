@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <OvTools/Time/Clock.h>
+#include "Core/Tools/Time/Clock.h"
 
-#include "OvGame/Core/Application.h"
+#include "../Game/Core/Application.h"
 
 OvGame::Core::Application::Application() :
 	m_game(m_context)

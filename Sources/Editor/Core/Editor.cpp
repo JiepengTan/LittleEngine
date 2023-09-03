@@ -4,25 +4,25 @@
 * @licence: MIT
 */
 
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
-#include <OvPhysics/Core/PhysicsEngine.h>
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
+#include "Modules/Physics/Core/PhysicsEngine.h"
 
-#include "OvEditor/Core/Editor.h"
+#include "../Editor/Core/Editor.h"
 
-#include "OvCore/GlobalState.h"
-#include "OvEditor/Panels/MenuBar.h"
-#include "OvEditor/Panels/AssetBrowser.h"
-#include "OvEditor/Panels/HardwareInfo.h"
-#include "OvEditor/Panels/Profiler.h"
-#include "OvEditor/Panels/Console.h"
-#include "OvEditor/Panels/Inspector.h"
-#include "OvEditor/Panels/Hierarchy.h"
-#include "OvEditor/Panels/SceneView.h"
-#include "OvEditor/Panels/GameView.h"
-#include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Panels/MaterialEditor.h"
-#include "OvEditor/Panels/ProjectSettings.h"
-#include "OvEditor/Panels/AssetProperties.h"
+#include "Core/GlobalState.h"
+#include "../Editor/Panels/MenuBar.h"
+#include "../Editor/Panels/AssetBrowser.h"
+#include "../Editor/Panels/HardwareInfo.h"
+#include "../Editor/Panels/Profiler.h"
+#include "../Editor/Panels/Console.h"
+#include "../Editor/Panels/Inspector.h"
+#include "../Editor/Panels/Hierarchy.h"
+#include "../Editor/Panels/SceneView.h"
+#include "../Editor/Panels/GameView.h"
+#include "../Editor/Panels/AssetView.h"
+#include "../Editor/Panels/MaterialEditor.h"
+#include "../Editor/Panels/ProjectSettings.h"
+#include "../Editor/Panels/AssetProperties.h"
 
 using namespace OvCore::ResourceManagement;
 using namespace OvEditor::Panels;

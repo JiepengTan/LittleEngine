@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/Profiler.h"
+#include "../Editor/Panels/Profiler.h"
 
-#include <OvDebug/Logger.h>
-#include <OvUI/Widgets/Visual/Separator.h>
+#include "Core/Debug/Logger.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <OvMaths/FVector2.h>
-#include <OvTools/Eventing/Event.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Widgets/DataWidget.h"
-#include "OvUI/Widgets/Sliders/ESliderOrientation.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/DataWidget.h"
+#include "Modules/UI/Widgets/Sliders/ESliderOrientation.h"
+#include "Modules/UI/Internal/Converter.h"
 
 namespace OvUI::Widgets::Sliders
 {

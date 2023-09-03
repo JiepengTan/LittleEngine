@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Panels/APanelTransformable.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Panels/APanelTransformable.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Panels::APanelTransformable::APanelTransformable
 (

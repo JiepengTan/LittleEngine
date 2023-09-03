@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvGame/Utils/FPSCounter.h"
+#include "../Game/Utils/FPSCounter.h"
 
 OvGame::Utils::FPSCounter::FPSCounter(OvWindowing::Window& p_window) : m_window(p_window)
 {

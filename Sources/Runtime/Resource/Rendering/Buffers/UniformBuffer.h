@@ -9,8 +9,8 @@
 #include <vector>
 #include <string>
 
-#include "OvRendering/Context/Driver.h"
-#include "OvRendering/Buffers/EAccessSpecifier.h"
+#include "Resource/Rendering/Context/Driver.h"
+#include "Resource/Rendering/Buffers/EAccessSpecifier.h"
 
 namespace OvRendering::Resources { class Shader; }
 
@@ -95,4 +95,4 @@ namespace OvRendering::Buffers
 	};
 }
 
-#include "OvRendering/Buffers/UniformBuffer.inl"
+#include "Resource/Rendering/Buffers/UniformBuffer.inl"

@@ -8,7 +8,7 @@
 
 #include <sol.hpp>
 
-#include "OvCore/ECS/Components/CPhysicalObject.h"
+#include "GamePlay/ECS/Components/CPhysicalObject.h"
 
 namespace OvCore::ECS { class Actor; }
 
@@ -176,4 +176,4 @@ namespace OvCore::ECS::Components
 	};
 }
 
-#include "OvCore/ECS/Components/Behaviour.inl"
+#include "GamePlay/ECS/Components/Behaviour.inl"

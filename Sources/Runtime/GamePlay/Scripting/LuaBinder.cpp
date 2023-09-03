@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include "OvCore/Scripting/LuaBinder.h"
+#include "GamePlay/Scripting/LuaBinder.h"
 
-#include "OvCore/Scripting/LuaMathsBinder.h"
-#include "OvCore/Scripting/LuaActorBinder.h"
-#include "OvCore/Scripting/LuaComponentBinder.h"
-#include "OvCore/Scripting/LuaGlobalsBinder.h"
+#include "GamePlay/Scripting/LuaMathsBinder.h"
+#include "GamePlay/Scripting/LuaActorBinder.h"
+#include "GamePlay/Scripting/LuaComponentBinder.h"
+#include "GamePlay/Scripting/LuaGlobalsBinder.h"
 
 void OvCore::Scripting::LuaBinder::CallBinders(sol::state& p_luaState)
 {

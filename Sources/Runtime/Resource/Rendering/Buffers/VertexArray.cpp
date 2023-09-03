@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvRendering/Buffers/VertexArray.h"
+#include "Resource/Rendering/Buffers/VertexArray.h"
 
 OvRendering::Buffers::VertexArray::VertexArray()
 {

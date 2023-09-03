@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvTools/Eventing/Event.h"
+#include "Core/Tools/Eventing/Event.h"
 
 namespace OvTools::Eventing
 {

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/VertexBuffer.h"
+#include "Resource/Rendering/Buffers/VertexBuffer.h"
 
 namespace OvRendering::Buffers
 {

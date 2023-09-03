@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Sliders/SliderFloat.h"
+#include "Modules/UI/Widgets/Sliders/SliderFloat.h"
 
 OvUI::Widgets::Sliders::SliderFloat::SliderFloat
 (

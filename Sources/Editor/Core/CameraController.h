@@ -8,12 +8,12 @@
 
 #include <queue>
 
-#include <OvWindowing/Inputs/InputManager.h>
-#include <OvWindowing/Window.h>
-#include <OvRendering/LowRenderer/Camera.h>
+#include "Platform/Windowing/Inputs/InputManager.h"
+#include "Platform/Windowing/Window.h"
+#include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include "OvEditor/Panels/Hierarchy.h"
-#include "OvEditor/Panels/AView.h"
+#include "../Editor/Panels/Hierarchy.h"
+#include "../Editor/Panels/AView.h"
 
 namespace OvEditor::Core
 {

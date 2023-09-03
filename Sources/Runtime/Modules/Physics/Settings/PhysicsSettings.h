@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <OvMaths/FVector3.h>
+#include "Core/Maths/FVector3.h"
 
 namespace OvPhysics::Settings
 {

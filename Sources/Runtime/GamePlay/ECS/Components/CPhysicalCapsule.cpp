@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include <OvPhysics/Entities/PhysicalCapsule.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
+#include "Modules/Physics/Entities/PhysicalCapsule.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
 
-#include "OvCore/ECS/Components/CPhysicalCapsule.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Actor.h"
 
 using namespace OvPhysics::Entities;
 

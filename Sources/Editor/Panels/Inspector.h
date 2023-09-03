@@ -6,18 +6,18 @@
 
 #pragma once
 
-#include <OvRendering/Resources/Loaders/TextureLoader.h>
+#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/GroupCollapsable.h>
-#include <OvUI/Widgets/InputFields/InputText.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Selection/CheckBox.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Selection/ComboBox.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
+#include "Modules/UI/Widgets/InputFields/InputText.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Selection/CheckBox.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Selection/ComboBox.h"
 
-#include "OvEditor/Panels/Hierarchy.h"
-#include "OvEditor/Panels/AssetBrowser.h"
+#include "../Editor/Panels/Hierarchy.h"
+#include "../Editor/Panels/AssetBrowser.h"
 
 namespace OvEditor::Panels
 {

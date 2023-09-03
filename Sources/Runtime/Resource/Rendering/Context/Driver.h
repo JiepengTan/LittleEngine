@@ -9,7 +9,7 @@
 #include <stdint.h>
 
 
-#include "OvRendering/Settings/DriverSettings.h"
+#include "Resource/Rendering/Settings/DriverSettings.h"
 
 namespace OvRendering::Context
 {

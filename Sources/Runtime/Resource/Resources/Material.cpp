@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include "OvCore/Resources/Material.h"
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/ResourceManagement/TextureManager.h"
+#include "Resource/Resources/Material.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/TextureManager.h"
 
-#include <OvRendering/Buffers/UniformBuffer.h>
-#include <OvRendering/Resources/Texture.h>
+#include "Resource/Rendering/Buffers/UniformBuffer.h"
+#include "Resource/Rendering/Resources/Texture.h"
 
 void OvCore::Resources::Material::SetShader(OvRendering::Resources::Shader* p_shader)
 {

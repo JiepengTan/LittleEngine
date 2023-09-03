@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAudio/Tracking/SoundTracker.h"
+#include "Modules/Audio/Tracking/SoundTracker.h"
 
 OvAudio::Tracking::SoundTracker::SoundTracker(irrklang::ISound* p_track) :
 	m_track(p_track),

@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "OvRendering/Context/Driver.h"
+#include "Resource/Rendering/Context/Driver.h"
 
 namespace OvRendering::Buffers
 {
@@ -74,4 +74,4 @@ namespace OvRendering::Buffers
 	};
 }
 
-#include "OvRendering/Buffers/VertexBuffer.inl"
+#include "Resource/Rendering/Buffers/VertexBuffer.inl"

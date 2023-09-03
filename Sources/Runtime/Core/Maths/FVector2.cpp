@@ -7,7 +7,7 @@
 #include <utility>
 #include <stdexcept>
 
-#include "OvMaths/FVector2.h"
+#include "Core/Maths/FVector2.h"
 
 const OvMaths::FVector2 OvMaths::FVector2::One(1.0f, 1.0f);
 const OvMaths::FVector2 OvMaths::FVector2::Zero(0.0f, 0.0f);

@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Visual/Image.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Visual::Image::Image(uint32_t p_textureID, const OvMaths::FVector2& p_size) :
 	textureID{ p_textureID }, size(p_size)

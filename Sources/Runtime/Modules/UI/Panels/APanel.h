@@ -9,7 +9,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "OvUI/Internal/WidgetContainer.h"
+#include "Modules/UI/Internal/WidgetContainer.h"
 
 namespace OvUI::Panels
 {

@@ -11,12 +11,12 @@
 #include <irrklang/ik_ISoundEngine.h>
 #include <irrklang/ik_ISoundStopEventReceiver.h>
 
-#include <OvTools/Eventing/Event.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FTransform.h>
+#include "Core/Tools/Eventing/Event.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FTransform.h"
 
-#include "OvAudio/Tracking/SoundTracker.h"
-#include "OvAudio/Resources/Sound.h"
+#include "Modules/Audio/Tracking/SoundTracker.h"
+#include "Modules/Audio/Resources/Sound.h"
 
 namespace OvAudio::Core { class AudioPlayer; }
 

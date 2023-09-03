@@ -6,7 +6,7 @@
 
 #include <windows.h>
 
-#include "OvWindowing/Dialogs/MessageBox.h"
+#include "Platform/Windowing/Dialogs/MessageBox.h"
 
 #undef MessageBox
 

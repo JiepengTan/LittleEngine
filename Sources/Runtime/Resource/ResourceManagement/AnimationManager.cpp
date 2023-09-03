@@ -1,14 +1,14 @@
-﻿/**
+/**
 * @project: Overload
 * @author: Overload Tech.
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/AnimationManager.h"
-#include <OvTools/Filesystem/IniFile.h>
+#include "Resource/ResourceManagement/AnimationManager.h"
+#include "Core/Tools/Filesystem/IniFile.h"
 
-#include "OvDebug/Logger.h"
-#include "OvRendering/Resources/Loaders/AnimationLoader.h"
+#include "Core/Debug/Logger.h"
+#include "Resource/Rendering/Resources/Loaders/AnimationLoader.h"
 
 
 

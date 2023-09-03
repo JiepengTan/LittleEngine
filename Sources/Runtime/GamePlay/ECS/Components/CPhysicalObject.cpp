@@ -4,15 +4,15 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvUI/Widgets/Selection/ComboBox.h>
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/UI/Widgets/Selection/ComboBox.h"
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include <OvPhysics/Entities/PhysicalObject.h>
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include "OvCore/ECS/Components/CPhysicalObject.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CPhysicalObject.h"
+#include "GamePlay/ECS/Actor.h"
 
 OvCore::ECS::Components::CPhysicalObject::CPhysicalObject(ECS::Actor & p_owner) : 
 	AComponent(p_owner)

@@ -4,14 +4,14 @@
 * @licence: MIT
 */
 
-#include "OvCore/Scripting/LuaMathsBinder.h"
+#include "GamePlay/Scripting/LuaMathsBinder.h"
 
-#include <OvMaths/FVector2.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FVector4.h>
-#include <OvMaths/FMatrix3.h>
-#include <OvMaths/FMatrix4.h>
-#include <OvMaths/FQuaternion.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FVector4.h"
+#include "Core/Maths/FMatrix3.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FQuaternion.h"
 
 void OvCore::Scripting::LuaMathsBinder::BindMaths(sol::state & p_luaState)
 {

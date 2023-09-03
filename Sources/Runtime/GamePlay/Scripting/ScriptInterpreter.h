@@ -10,7 +10,7 @@
 
 #include <sol.hpp>
 
-#include "OvCore/ECS/Components/Behaviour.h"
+#include "GamePlay/ECS/Components/Behaviour.h"
 
 namespace OvCore::Scripting
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAnalytics/Hardware/GPUInfo.h"
+#include "Core/Analytics/Hardware/GPUInfo.h"
 
 OvAnalytics::Hardware::GPUInfo::GPUInfo()
 {

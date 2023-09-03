@@ -8,7 +8,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/VertexArray.h"
+#include "Resource/Rendering/Buffers/VertexArray.h"
 
 namespace OvRendering::Buffers
 {

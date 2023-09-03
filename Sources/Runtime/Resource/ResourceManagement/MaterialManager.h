@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvCore/Resources/Loaders/MaterialLoader.h"
-#include "OvCore/ResourceManagement/AResourceManager.h"
+#include "Resource/Resources/Loaders/MaterialLoader.h"
+#include "Resource/ResourceManagement/AResourceManager.h"
 
 namespace OvCore::ResourceManagement
 {

@@ -8,11 +8,11 @@
 
 #include <array>
 
-#include <OvMaths/FMatrix4.h>
-#include <OvMaths/FTransform.h>
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FTransform.h"
 
 
-#include "OvRendering/Geometry/BoundingSphere.h"
+#include "Resource/Rendering/Geometry/BoundingSphere.h"
 
 namespace OvRendering::Data
 {

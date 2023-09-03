@@ -4,17 +4,17 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include "OvUI/imgui/imgui.h"
+#include "Modules/UI/imgui/imgui.h"
 
-#include "OvEditor/Core/CameraController.h"
+#include "../Editor/Core/CameraController.h"
 
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
 
 OvEditor::Core::CameraController::CameraController
 (

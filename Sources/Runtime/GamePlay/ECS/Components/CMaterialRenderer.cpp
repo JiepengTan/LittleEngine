@@ -4,20 +4,20 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/InputFields/InputInt.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Buttons/ButtonSmall.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Plugins/DDTarget.h>
+#include "Modules/UI/Widgets/InputFields/InputInt.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Buttons/ButtonSmall.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include <OvTools/Utils/PathParser.h>
+#include "Core/Tools/Utils/PathParser.h"
 
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/ECS/Components/CMaterialRenderer.h"
-#include "OvCore/ECS/Components/CModelRenderer.h"
-#include "OvCore/ResourceManagement/MaterialManager.h"
-#include "OvCore/Global/ServiceLocator.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "GamePlay/Global/ServiceLocator.h"
 
 OvCore::ECS::Components::CMaterialRenderer::CMaterialRenderer(ECS::Actor & p_owner) : AComponent(p_owner)
 {

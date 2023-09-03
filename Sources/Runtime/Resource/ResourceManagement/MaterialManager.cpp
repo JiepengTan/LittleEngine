@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/MaterialManager.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
 
 OvCore::Resources::Material * OvCore::ResourceManagement::MaterialManager::CreateResource(const std::string & p_path)
 {

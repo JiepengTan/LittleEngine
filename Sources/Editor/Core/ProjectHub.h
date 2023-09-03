@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <OvRendering/Core/Renderer.h>
-#include <OvWindowing/Context/Device.h>
-#include <OvWindowing/Window.h>
-#include <OvRendering/Context/Driver.h>
-#include <OvUI/Core/UIManager.h>
-#include <OvUI/Panels/PanelWindow.h>
+#include "Resource/Rendering/Core/Renderer.h"
+#include "Platform/Windowing/Context/Device.h"
+#include "Platform/Windowing/Window.h"
+#include "Resource/Rendering/Context/Driver.h"
+#include "Modules/UI/Core/UIManager.h"
+#include "Modules/UI/Panels/PanelWindow.h"
 
 namespace OvEditor::Core
 {

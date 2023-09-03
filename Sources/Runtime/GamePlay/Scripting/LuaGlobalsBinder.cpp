@@ -4,24 +4,24 @@
 * @licence: MIT
 */
 
-#include "OvCore/Scripting/LuaGlobalsBinder.h"
+#include "GamePlay/Scripting/LuaGlobalsBinder.h"
 
-#include <OvDebug/Logger.h>
-#include <OvTools/Utils/Random.h>
+#include "Core/Debug/Logger.h"
+#include "Core/Tools/Utils/Random.h"
 
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/ECS/PhysicsWrapper.h"
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/SceneSystem/SceneManager.h"
-#include "OvCore/ResourceManagement/ModelManager.h"
-#include "OvCore/ResourceManagement/ShaderManager.h"
-#include "OvCore/ResourceManagement/TextureManager.h"
-#include "OvCore/ResourceManagement/MaterialManager.h"
-#include "OvCore/ResourceManagement/SoundManager.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/ECS/PhysicsWrapper.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Resource/ResourceManagement/SoundManager.h"
 
-#include <OvPhysics/Entities/PhysicalObject.h>
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include <OvWindowing/Inputs/InputManager.h>
+#include "Platform/Windowing/Inputs/InputManager.h"
 
 void OvCore::Scripting::LuaGlobalsBinder::BindGlobals(sol::state & p_luaState)
 {

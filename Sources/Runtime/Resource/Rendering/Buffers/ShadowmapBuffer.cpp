@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @project: Overload
 * @author: gamestan
 * @licence: MIT
@@ -6,11 +6,11 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering\Buffers\ShadowmapBuffer.h"
+#include "Resource/Rendering/Buffers/ShadowmapBuffer.h"
 
 #include <memory>
 
-#include "OvDebug/Logger.h"
+#include "Core/Debug/Logger.h"
 
 
 OvRendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_width, uint16_t p_height)

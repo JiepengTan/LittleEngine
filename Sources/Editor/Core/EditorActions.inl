@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Core/EditorActions.h"
 
 namespace OvEditor::Core
 {

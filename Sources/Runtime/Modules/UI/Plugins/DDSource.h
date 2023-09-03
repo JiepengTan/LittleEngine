@@ -8,11 +8,11 @@
 
 #include <string>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/ImGui/imgui.h"
+#include "Modules/UI/ImGui/imgui.h"
 
-#include "OvUI/Plugins/IPlugin.h"
+#include "Modules/UI/Plugins/IPlugin.h"
 
 namespace OvUI::Plugins
 {

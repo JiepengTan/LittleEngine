@@ -6,11 +6,11 @@
 
 #ifdef _DEBUG
 
-#include "OvGame/Debug/GameProfiler.h"
+#include "../Game/Debug/GameProfiler.h"
 
-#include <OvDebug/Logger.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
+#include "Core/Debug/Logger.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

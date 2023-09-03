@@ -12,12 +12,12 @@
 #include <bullet/btBulletCollisionCommon.h>
 #include <bullet/btBulletDynamicsCommon.h>
 
-#include <OvMaths/FTransform.h>
+#include "Core/Maths/FTransform.h"
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
 
-#include "OvPhysics/Settings/BodySettings.h"
+#include "Modules/Physics/Settings/BodySettings.h"
 
 namespace OvPhysics::Core { class PhysicsEngine; }
 

@@ -8,13 +8,13 @@
 
 #include <string>
 
-#include <OvUI/Types/Color.h>
+#include "Modules/UI/Types/Color.h"
 
-#include <OvMaths/FVector2.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FVector4.h>
-#include <OvMaths/FQuaternion.h>
-#include <OvTools/Filesystem/tinyxml2.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FVector4.h"
+#include "Core/Maths/FQuaternion.h"
+#include "Core/Tools/Filesystem/tinyxml2.h"
 
 
 

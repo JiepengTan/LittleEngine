@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAudio/Tracking/SoundStopEventBinder.h"
+#include "Modules/Audio/Tracking/SoundStopEventBinder.h"
 
 OvAudio::Tracking::SoundStopEventBinder::SoundStopEventBinder(OvTools::Eventing::Event<>& p_soundFinishedEvent) : SoundFinishedEvent(p_soundFinishedEvent)
 {

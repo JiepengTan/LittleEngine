@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvPhysics/Entities/PhysicalBox.h"
-#include "OvPhysics/Tools/Conversion.h"
+#include "Modules/Physics/Entities/PhysicalBox.h"
+#include "Modules/Physics/Tools/Conversion.h"
 
 OvPhysics::Entities::PhysicalBox::PhysicalBox(const OvMaths::FVector3& p_size) : PhysicalObject()
 {

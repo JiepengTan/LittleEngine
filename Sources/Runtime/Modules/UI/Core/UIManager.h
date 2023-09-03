@@ -9,8 +9,8 @@
 #include <string>
 #include <unordered_map>
 
-#include "OvUI/Modules/Canvas.h"
-#include "OvUI/Styling/EStyle.h"
+#include "Modules/UI/Modules/Canvas.h"
+#include "Modules/UI/Styling/EStyle.h"
 
 namespace OvUI::Core
 {

@@ -9,7 +9,7 @@
 #include <irrklang/irrKlang.h>
 #include <irrklang/ik_ISoundStopEventReceiver.h>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
 namespace OvAudio::Tracking
 {

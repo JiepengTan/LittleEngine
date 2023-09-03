@@ -1,4 +1,4 @@
-﻿#include <fstream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include "FMatrix4.h"

@@ -8,9 +8,9 @@
 #include <map>
 #include <vector>
 
-#include "OvMaths/FMatrix4.h"
-#include "OvRendering/Geometry/Vertex.h"
-#include "OvRendering/Resources/Parsers/IModelParser.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Resource/Rendering/Geometry/Vertex.h"
+#include "Resource/Rendering/Resources/Parsers/IModelParser.h"
 
 namespace OvRendering::Resources
 {

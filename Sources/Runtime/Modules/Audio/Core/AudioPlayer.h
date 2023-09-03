@@ -7,8 +7,8 @@
 #pragma once
 
 
-#include "OvAudio/Core/AudioEngine.h"
-#include "OvAudio/Resources/Sound.h"
+#include "Modules/Audio/Core/AudioEngine.h"
+#include "Modules/Audio/Resources/Sound.h"
 
 namespace OvAudio::Core
 {

@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/ShaderStorageBuffer.h"
+#include "Resource/Rendering/Buffers/ShaderStorageBuffer.h"
 
 OvRendering::Buffers::ShaderStorageBuffer::ShaderStorageBuffer(EAccessSpecifier p_accessSpecifier)
 {

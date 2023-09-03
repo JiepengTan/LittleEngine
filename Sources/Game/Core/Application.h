@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvGame/Core/Context.h"
-#include "OvGame/Core/Game.h"
+#include "../Game/Core/Context.h"
+#include "../Game/Core/Game.h"
 
 namespace OvGame::Core
 {

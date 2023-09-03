@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Widgets/DataWidget.h"
+#include "Modules/UI/Widgets/DataWidget.h"
 
 namespace OvUI::Widgets::InputFields
 {

@@ -6,14 +6,14 @@
 
 #pragma once
 
-#include <OvAnalytics/Profiling/Profiler.h>
+#include "Core/Analytics/Profiling/Profiler.h"
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Widgets/Selection/CheckBox.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Buttons/Button.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Widgets/Selection/CheckBox.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
 
 namespace OvEditor::Panels
 {

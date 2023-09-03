@@ -4,21 +4,21 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Plugins/DDTarget.h>
-#include <OvUI/Widgets/Visual/Image.h>
-#include <OvUI/Widgets/Selection/ComboBox.h>
-#include <OvUI/Widgets/Selection/CheckBox.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Plugins/DDTarget.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Modules/UI/Widgets/Selection/ComboBox.h"
+#include "Modules/UI/Widgets/Selection/CheckBox.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
 
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/ResourceManagement/TextureManager.h"
-#include "OvCore/ResourceManagement/ModelManager.h"
-#include "OvCore/ResourceManagement/ShaderManager.h"
-#include "OvCore/ECS/Components/CModelRenderer.h"
-#include "OvCore/ECS/Components/CMaterialRenderer.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Actor.h"
 
 OvCore::ECS::Components::CModelRenderer::CModelRenderer(ECS::Actor& p_owner) : AComponent(p_owner)
 {

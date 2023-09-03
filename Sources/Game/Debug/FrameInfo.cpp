@@ -6,7 +6,7 @@
 
 #ifdef _DEBUG
 
-#include "OvGame/Debug/FrameInfo.h"
+#include "../Game/Debug/FrameInfo.h"
 
 OvGame::Debug::FrameInfo::FrameInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window) :
 	m_renderer(p_renderer),

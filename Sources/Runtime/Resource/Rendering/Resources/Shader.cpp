@@ -6,10 +6,10 @@
 
 #include <GL/glew.h>
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvRendering/Resources/Texture.h"
-#include "OvRendering/Resources/Shader.h"
+#include "Resource/Rendering/Resources/Texture.h"
+#include "Resource/Rendering/Resources/Shader.h"
 
 OvRendering::Resources::Shader::Shader(const std::string p_path, uint32_t p_id) : path(p_path), id(p_id)
 {

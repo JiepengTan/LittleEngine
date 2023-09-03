@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "OvAudio/Resources/Sound.h"
+#include "Modules/Audio/Resources/Sound.h"
 
 namespace OvAudio::Resources::Loaders
 {

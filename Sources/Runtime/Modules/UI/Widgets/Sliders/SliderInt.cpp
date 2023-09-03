@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Sliders/SliderInt.h"
+#include "Modules/UI/Widgets/Sliders/SliderInt.h"
 
 OvUI::Widgets::Sliders::SliderInt::SliderInt
 (

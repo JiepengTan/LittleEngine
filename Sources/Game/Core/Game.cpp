@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include "OvGame/Core/Game.h"
+#include "../Game/Core/Game.h"
 
-#include <OvDebug/Logger.h>
-#include <OvUI/Widgets/Texts/Text.h>
+#include "Core/Debug/Logger.h"
+#include "Modules/UI/Widgets/Texts/Text.h"
 
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
 OvGame::Core::Game::Game(Context & p_context) :
 	m_context(p_context),

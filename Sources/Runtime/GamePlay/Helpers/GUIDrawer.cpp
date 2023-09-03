@@ -6,29 +6,29 @@
 
 #include <array>
 
-#include <OvTools/Utils/PathParser.h>
+#include "Core/Tools/Utils/PathParser.h"
 
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Widgets/Drags/DragSingleScalar.h>
-#include <OvUI/Widgets/Drags/DragMultipleScalars.h>
-#include <OvUI/Widgets/InputFields/InputText.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Selection/CheckBox.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Buttons/ButtonSmall.h>
-#include <OvUI/Plugins/DDTarget.h>
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Widgets/Drags/DragSingleScalar.h"
+#include "Modules/UI/Widgets/Drags/DragMultipleScalars.h"
+#include "Modules/UI/Widgets/InputFields/InputText.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Selection/CheckBox.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Buttons/ButtonSmall.h"
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
-#include <OvCore/ResourceManagement/ShaderManager.h>
-#include <OvCore/ResourceManagement/MaterialManager.h>
-#include <OvCore/ResourceManagement/SoundManager.h>
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Resource/ResourceManagement/SoundManager.h"
 
-#include "OvCore/Helpers/GUIDrawer.h"
-#include "OvRendering/Resources/Model.h"
+#include "GamePlay/Helpers/GUIDrawer.h"
+#include "Resource/Rendering/Resources/Model.h"
 
 const OvUI::Types::Color OvCore::Helpers::GUIDrawer::TitleColor = { 0.85f, 0.65f, 0.0f };
 const OvUI::Types::Color OvCore::Helpers::GUIDrawer::ClearButtonColor = { 0.5f, 0.0f, 0.0f };

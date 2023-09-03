@@ -6,15 +6,15 @@
 
 #pragma once
 
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FMatrix4.h>
-#include <OvMaths/FQuaternion.h>
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FQuaternion.h"
 
-#include <OvTools/Utils/ReferenceOrValue.h>
+#include "Core/Tools/Utils/ReferenceOrValue.h"
 
 
-#include "OvRendering/Data/Frustum.h"
-#include "OvRendering/Settings/EProjectionMode.h"
+#include "Resource/Rendering/Data/Frustum.h"
+#include "Resource/Rendering/Settings/EProjectionMode.h"
 
 namespace OvRendering::LowRenderer
 {

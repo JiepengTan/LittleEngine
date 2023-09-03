@@ -4,13 +4,13 @@
 * @licence: MIT
 */
 
-#include <OvUI/Plugins/DDTarget.h>
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Panels/SceneView.h"
-#include "OvEditor/Panels/GameView.h"
-#include "OvEditor/Settings/EditorSettings.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Panels/SceneView.h"
+#include "../Editor/Panels/GameView.h"
+#include "../Editor/Settings/EditorSettings.h"
 
 OvEditor::Panels::SceneView::SceneView
 (

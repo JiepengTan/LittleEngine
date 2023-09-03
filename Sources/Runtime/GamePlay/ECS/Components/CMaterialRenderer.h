@@ -8,12 +8,12 @@
 
 #include <array>
 
-#include <OvUI/Widgets/Layout/Columns.h>
+#include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include <OvRendering/Resources/Mesh.h>
+#include "Resource/Rendering/Resources/Mesh.h"
 
-#include "OvCore/Resources/Material.h"
-#include "OvCore/ECS/Components/AComponent.h"
+#include "Resource/Resources/Material.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 #define MAX_MATERIAL_COUNT 255
 

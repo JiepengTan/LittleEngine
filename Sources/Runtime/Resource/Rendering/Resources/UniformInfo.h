@@ -9,7 +9,7 @@
 #include <string>
 #include <any>
 
-#include "OvRendering/Resources/UniformType.h"
+#include "Resource/Rendering/Resources/UniformType.h"
 
 namespace OvRendering::Resources
 {

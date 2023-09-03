@@ -8,16 +8,16 @@
 
 #include <variant>
 
-#include <OvTools/Filesystem/IniFile.h>
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Filesystem/IniFile.h"
+#include "Core/Tools/Eventing/Event.h"
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/Columns.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include <OvRendering/Resources/Model.h>
-#include <OvRendering/Resources/Texture.h>
+#include "Resource/Rendering/Resources/Model.h"
+#include "Resource/Rendering/Resources/Texture.h"
 
 namespace OvEditor::Panels
 {

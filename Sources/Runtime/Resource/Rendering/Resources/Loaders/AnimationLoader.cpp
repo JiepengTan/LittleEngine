@@ -4,18 +4,18 @@
 * @licence: MIT
 */
 
-#include "OvRendering/Resources/Loaders/AnimationLoader.h"
+#include "Resource/Rendering/Resources/Loaders/AnimationLoader.h"
 
 #include <assimp/postprocess.h>
 
-#include "OvRendering/Resources/Animation.h"
-#include "OvRendering/Resources/Loaders/ModelLoader.h"
-#include "OvTools/Filesystem/IniFile.h"
+#include "Resource/Rendering/Resources/Animation.h"
+#include "Resource/Rendering/Resources/Loaders/ModelLoader.h"
+#include "Core/Tools/Filesystem/IniFile.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-#include "OvMaths/DebugUtil.h"
+#include "Core/Maths/DebugUtil.h"
 
 
 OvRendering::Resources::Parsers::EModelParserFlags GetAssetMetadataAA(const std::string& p_path)

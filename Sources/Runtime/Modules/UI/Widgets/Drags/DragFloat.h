@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/Drags/DragSingleScalar.h"
+#include "Modules/UI/Widgets/Drags/DragSingleScalar.h"
 
 namespace OvUI::Widgets::Drags
 {

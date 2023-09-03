@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvRendering/Core/Renderer.h"
-#include "OvRendering/Resources/Mesh.h"
+#include "Resource/Rendering/Core/Renderer.h"
+#include "Resource/Rendering/Resources/Mesh.h"
 
 namespace OvRendering::Core
 {

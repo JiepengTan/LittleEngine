@@ -6,11 +6,11 @@
 
 #include <algorithm>
 
-#include "OvPhysics/Core/PhysicsEngine.h"
-#include "OvPhysics/Tools/Conversion.h"
-#include "OvPhysics/Entities/PhysicalObject.h"
+#include "Modules/Physics/Core/PhysicsEngine.h"
+#include "Modules/Physics/Tools/Conversion.h"
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
 using namespace OvPhysics::Tools;
 using namespace OvPhysics::Entities;

@@ -1,4 +1,4 @@
-﻿#include "OvRendering/Geometry/Vertex.h"
+#include "Resource/Rendering/Geometry/Vertex.h"
 #include <cstdlib>
 #include <iostream>
 #include <ostream>

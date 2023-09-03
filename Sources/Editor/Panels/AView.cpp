@@ -6,8 +6,8 @@
 
 #include <GL/glew.h>
 
-#include "OvEditor/Panels/AView.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Panels/AView.h"
+#include "../Editor/Core/EditorActions.h"
 
 OvEditor::Panels::AView::AView
 (

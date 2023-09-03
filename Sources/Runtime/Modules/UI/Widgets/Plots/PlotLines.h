@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/Plots/APlot.h"
+#include "Modules/UI/Widgets/Plots/APlot.h"
 
 namespace OvUI::Widgets::Plots
 {

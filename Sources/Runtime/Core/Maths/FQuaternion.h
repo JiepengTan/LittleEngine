@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include "OvMaths/FVector3.h"
-#include "OvMaths/FMatrix3.h"
-#include "OvMaths/FMatrix4.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FMatrix3.h"
+#include "Core/Maths/FMatrix4.h"
 
 #include <string>
 

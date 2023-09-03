@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Texts/Text.h"
 
 namespace OvUI::Widgets::Texts
 {

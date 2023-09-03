@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvRendering/Entities/Light.h>
+#include "Resource/Rendering/Entities/Light.h"
 
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 namespace OvCore::ECS { class Actor; }
 

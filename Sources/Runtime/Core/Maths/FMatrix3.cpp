@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <cmath>
 
-#include "OvMaths/FMatrix3.h"
+#include "Core/Maths/FMatrix3.h"
 
 const OvMaths::FMatrix3 OvMaths::FMatrix3::Identity = OvMaths::FMatrix3(1.0f, 0.0f, 0.0f,
 	0.0f, 1.0f, 0.0f,

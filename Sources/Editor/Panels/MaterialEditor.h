@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvRendering/Resources/Shader.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Resource/Rendering/Resources/Shader.h"
 
 namespace OvCore::Resources { class Material; }
 

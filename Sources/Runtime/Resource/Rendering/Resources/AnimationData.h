@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "OvMaths/FMatrix4.h"
-#include "OvMaths/FQuaternion.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FQuaternion.h"
 
 
 struct aiNodeAnim;

@@ -9,7 +9,7 @@
 #include <irrklang/irrKlang.h>
 
 
-#include "OvAudio/Tracking/SoundStopEventBinder.h"
+#include "Modules/Audio/Tracking/SoundStopEventBinder.h"
 
 namespace OvAudio::Tracking
 {

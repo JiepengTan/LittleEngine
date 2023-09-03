@@ -8,7 +8,7 @@
 
 #include <functional>
 
-#include "OvUI/Plugins/IPlugin.h"
+#include "Modules/UI/Plugins/IPlugin.h"
 
 #define TRY_GATHER(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) output = plugin->Gather();
 #define TRY_PROVIDE(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) plugin->Provide(output);

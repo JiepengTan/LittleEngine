@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvWindowing/Dialogs/FileDialog.h"
+#include "Platform/Windowing/Dialogs/FileDialog.h"
 
 namespace OvWindowing::Dialogs
 {

@@ -9,12 +9,12 @@
 #include <string>
 #include <map>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvDebug/ILogHandler.h"
-#include "OvDebug/ConsoleHandler.h"
-#include "OvDebug/FileHandler.h"
-#include "OvDebug/HistoryHandler.h"
+#include "Core/Debug/ILogHandler.h"
+#include "Core/Debug/ConsoleHandler.h"
+#include "Core/Debug/FileHandler.h"
+#include "Core/Debug/HistoryHandler.h"
 
 #define OVLOG(message)			OvDebug::Logger::Log(message, OvDebug::ELogLevel::LOG_DEFAULT,	OvDebug::ELogMode::CONSOLE)
 #define OVLOG_INFO(message)		OvDebug::Logger::Log(message, OvDebug::ELogLevel::LOG_INFO,		OvDebug::ELogMode::CONSOLE)
@@ -99,4 +99,4 @@ namespace OvDebug
 	};
 }
 
-#include "OvDebug/Logger.inl"
+#include "Core/Debug/Logger.inl"

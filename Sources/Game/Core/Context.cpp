@@ -6,9 +6,9 @@
 
 #include <filesystem>
 
-#include "OvGame/Core/Context.h"
+#include "../Game/Core/Context.h"
 
-#include <OvCore/Global/ServiceLocator.h>
+#include "GamePlay/Global/ServiceLocator.h"
 
 using namespace OvCore::Global;
 using namespace OvCore::ResourceManagement;

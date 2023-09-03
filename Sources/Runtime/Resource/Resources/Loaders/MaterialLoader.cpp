@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvCore/Resources/Loaders/MaterialLoader.h"
+#include "Resource/Resources/Loaders/MaterialLoader.h"
 
 OvCore::Resources::Material * OvCore::Resources::Loaders::MaterialLoader::Create(const std::string & p_path)
 {

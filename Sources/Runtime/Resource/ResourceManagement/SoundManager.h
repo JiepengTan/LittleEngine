@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvAudio/Resources/Loaders/SoundLoader.h>
+#include "Modules/Audio/Resources/Loaders/SoundLoader.h"
 
-#include "OvCore/ResourceManagement/AResourceManager.h"
+#include "Resource/ResourceManagement/AResourceManager.h"
 
 namespace OvCore::ResourceManagement
 {

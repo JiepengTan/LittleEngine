@@ -4,15 +4,15 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/ProjectSettings.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Panels/ProjectSettings.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include <OvCore/Resources/Loaders/MaterialLoader.h>
-#include <OvCore/Helpers/GUIDrawer.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Layout/GroupCollapsable.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Buttons/Button.h>
+#include "Resource/Resources/Loaders/MaterialLoader.h"
+#include "GamePlay/Helpers/GUIDrawer.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

@@ -6,9 +6,9 @@
 
 #include <GL/glew.h>
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvRendering/Context/Driver.h"
+#include "Resource/Rendering/Context/Driver.h"
 
 OvRendering::Context::Driver::Driver(const Settings::DriverSettings& p_driverSettings)
 {

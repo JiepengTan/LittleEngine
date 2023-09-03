@@ -6,8 +6,8 @@
 
 #include <irrklang/ik_vec3d.h>
 
-#include "OvAudio/Core/AudioPlayer.h"
-#include "OvAudio/Entities/AudioSource.h"
+#include "Modules/Audio/Core/AudioPlayer.h"
+#include "Modules/Audio/Entities/AudioSource.h"
 
 OvTools::Eventing::Event<OvAudio::Entities::AudioSource&> OvAudio::Entities::AudioSource::CreatedEvent;
 OvTools::Eventing::Event<OvAudio::Entities::AudioSource&> OvAudio::Entities::AudioSource::DestroyedEvent;

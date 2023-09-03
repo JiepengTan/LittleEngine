@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include <OvRendering/Utils/Defines.h>
+#include "Resource/Rendering/Utils/Defines.h"
 
-#include "OvCore/GlobalState.h"
-#include "OvGame/Core/Application.h"
+#include "Core/GlobalState.h"
+#include "../Game/Core/Application.h"
 
 FORCE_DEDICATED_GPU
 

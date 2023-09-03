@@ -1,5 +1,5 @@
-﻿#pragma once
-#include "OvCore/ECS/Actor.h"
+#pragma once
+#include "GamePlay/ECS/Actor.h"
 
 namespace OvEditor::Core
 {

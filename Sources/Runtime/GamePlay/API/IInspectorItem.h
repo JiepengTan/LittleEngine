@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvUI/Internal/WidgetContainer.h>
+#include "Modules/UI/Internal/WidgetContainer.h"
 
-#include "OvCore/API/ISerializable.h"
-#include "OvCore/Helpers/GUIDrawer.h"
+#include "GamePlay/API/ISerializable.h"
+#include "GamePlay/Helpers/GUIDrawer.h"
 
 namespace OvCore::API
 {

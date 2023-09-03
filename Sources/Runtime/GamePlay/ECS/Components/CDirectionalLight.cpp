@@ -4,13 +4,13 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
 
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Actor.h"
 
-#include "OvCore/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
 
 OvCore::ECS::Components::CDirectionalLight::CDirectionalLight(ECS::Actor & p_owner) :
 	CLight(p_owner)

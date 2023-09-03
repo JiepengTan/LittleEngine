@@ -8,7 +8,7 @@
 
 
 
-#include "OvCore/SceneSystem/Scene.h"
+#include "GamePlay/SceneSystem/Scene.h"
 
 namespace OvCore::SceneSystem
 {

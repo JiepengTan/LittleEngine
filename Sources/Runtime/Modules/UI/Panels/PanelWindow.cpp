@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "OvUI/Panels/PanelWindow.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Internal/Converter.h"
 
-#include "OvUI/ImGui/imgui_internal.h"
+#include "Modules/UI/ImGui/imgui_internal.h"
 
 OvUI::Panels::PanelWindow::PanelWindow(const std::string& p_name, bool p_opened, const Settings::PanelWindowSettings& p_floatingPanelSettings) :
 	name(p_name),

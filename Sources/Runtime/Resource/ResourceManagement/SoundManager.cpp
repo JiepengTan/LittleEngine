@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/SoundManager.h"
+#include "Resource/ResourceManagement/SoundManager.h"
 
 OvAudio::Resources::Sound* OvCore::ResourceManagement::SoundManager::CreateResource(const std::string& p_path)
 {

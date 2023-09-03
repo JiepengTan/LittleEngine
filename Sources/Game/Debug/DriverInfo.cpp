@@ -6,7 +6,7 @@
 
 #ifdef _DEBUG
 
-#include "OvGame/Debug/DriverInfo.h"
+#include "../Game/Debug/DriverInfo.h"
 
 OvGame::Debug::DriverInfo::DriverInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window)
 {

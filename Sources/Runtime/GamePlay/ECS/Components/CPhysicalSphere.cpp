@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include <OvPhysics/Entities/PhysicalSphere.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
+#include "Modules/Physics/Entities/PhysicalSphere.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
 
-#include "OvCore/ECS/Components/CPhysicalSphere.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Actor.h"
 
 using namespace OvPhysics::Entities;
 

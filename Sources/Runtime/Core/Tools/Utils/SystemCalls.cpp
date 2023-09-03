@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvTools/Utils/PathParser.h"
-#include "OvTools/Utils/SystemCalls.h"
+#include "Core/Tools/Utils/PathParser.h"
+#include "Core/Tools/Utils/SystemCalls.h"
 
 #include <Windows.h>
 

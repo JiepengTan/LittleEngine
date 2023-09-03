@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Visual/ProgressBar.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Visual/ProgressBar.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Visual::ProgressBar::ProgressBar(float p_fraction, const OvMaths::FVector2 & p_size, const std::string & p_overlay) :
 	fraction(p_fraction), size(p_size), overlay(p_overlay)

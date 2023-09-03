@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvRendering/Buffers/VertexBuffer.h"
+#include "Resource/Rendering/Buffers/VertexBuffer.h"
 
 namespace OvRendering::Buffers
 {
@@ -60,4 +60,4 @@ namespace OvRendering::Buffers
 	};
 }
 
-#include "OvRendering/Buffers/VertexArray.inl"
+#include "Resource/Rendering/Buffers/VertexArray.inl"

@@ -8,32 +8,32 @@
 #include <iostream>
 #include <fstream>
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CModelRenderer.h>
-#include <OvCore/ECS/Components/CMaterialRenderer.h>
-#include <OvCore/ECS/Components/CAudioSource.h>
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
 
-#include <OvWindowing/Dialogs/OpenFileDialog.h>
-#include <OvWindowing/Dialogs/SaveFileDialog.h>
-#include <OvWindowing/Dialogs/MessageBox.h>
+#include "Platform/Windowing/Dialogs/OpenFileDialog.h"
+#include "Platform/Windowing/Dialogs/SaveFileDialog.h"
+#include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#include <OvTools/Utils/PathParser.h>
-#include <OvTools/Utils/String.h>
-#include <OvTools/Utils/SystemCalls.h>
+#include "Core/Tools/Utils/PathParser.h"
+#include "Core/Tools/Utils/String.h"
+#include "Core/Tools/Utils/SystemCalls.h"
 
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include "OvCore/GlobalState.h"
-#include "OvEditor/Panels/SceneView.h"
-#include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Panels/GameView.h"
-#include "OvEditor/Panels/Inspector.h"
-#include "OvEditor/Panels/ProjectSettings.h"
-#include "OvEditor/Panels/MaterialEditor.h"
+#include "Core/GlobalState.h"
+#include "../Editor/Panels/SceneView.h"
+#include "../Editor/Panels/AssetView.h"
+#include "../Editor/Panels/GameView.h"
+#include "../Editor/Panels/Inspector.h"
+#include "../Editor/Panels/ProjectSettings.h"
+#include "../Editor/Panels/MaterialEditor.h"
 
 OvEditor::Core::EditorActions::EditorActions(Context& p_context, EditorRenderer& p_editorRenderer, PanelsManager& p_panelsManager) :
 	m_context(p_context), 

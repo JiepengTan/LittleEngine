@@ -8,8 +8,8 @@
 
 #include <vector>
 
-#include "OvRendering/Context/Driver.h"
-#include "OvRendering/Buffers/EAccessSpecifier.h"
+#include "Resource/Rendering/Context/Driver.h"
+#include "Resource/Rendering/Buffers/EAccessSpecifier.h"
 
 namespace OvRendering::Resources { class Shader; }
 
@@ -54,4 +54,4 @@ namespace OvRendering::Buffers
 	};
 }
 
-#include "OvRendering/Buffers/ShaderStorageBuffer.inl"
+#include "Resource/Rendering/Buffers/ShaderStorageBuffer.inl"

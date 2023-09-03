@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Plots/PlotHistogram.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Plots/PlotHistogram.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Plots::PlotHistogram::PlotHistogram
 (

@@ -7,11 +7,11 @@
 #pragma once
 
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Visual/Image.h>
-#include <OvRendering/Buffers/UniformBuffer.h>
-#include <OvRendering/Buffers/Framebuffer.h>
-#include <OvRendering/LowRenderer/Camera.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Resource/Rendering/Buffers/UniformBuffer.h"
+#include "Resource/Rendering/Buffers/Framebuffer.h"
+#include "Resource/Rendering/LowRenderer/Camera.h"
 
 namespace OvEditor::Core { class EditorRenderer; }
 

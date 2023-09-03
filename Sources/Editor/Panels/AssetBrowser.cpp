@@ -7,35 +7,35 @@
 #include <fstream>
 #include <iostream>
 
-#include <OvUI/Widgets/Texts/TextClickable.h>
-#include <OvUI/Widgets/Visual/Image.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Plugins/DDSource.h>
-#include <OvUI/Plugins/DDTarget.h>
-#include <OvUI/Plugins/ContextualMenu.h>
+#include "Modules/UI/Widgets/Texts/TextClickable.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Plugins/DDSource.h"
+#include "Modules/UI/Plugins/DDTarget.h"
+#include "Modules/UI/Plugins/ContextualMenu.h"
 
-#include <OvWindowing/Dialogs/MessageBox.h>
-#include <OvWindowing/Dialogs/SaveFileDialog.h>
-#include <OvWindowing/Dialogs/OpenFileDialog.h>
-#include <OvTools/Utils/SystemCalls.h>
-#include <OvTools/Utils/PathParser.h>
-#include <OvTools/Utils/String.h>
+#include "Platform/Windowing/Dialogs/MessageBox.h"
+#include "Platform/Windowing/Dialogs/SaveFileDialog.h"
+#include "Platform/Windowing/Dialogs/OpenFileDialog.h"
+#include "Core/Tools/Utils/SystemCalls.h"
+#include "Core/Tools/Utils/PathParser.h"
+#include "Core/Tools/Utils/String.h"
 
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
-#include <OvCore/ResourceManagement/ShaderManager.h>
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvEditor/Panels/AssetBrowser.h"
-#include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Panels/MaterialEditor.h"
-#include "OvEditor/Panels/AssetProperties.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Core/EditorResources.h"
+#include "../Editor/Panels/AssetBrowser.h"
+#include "../Editor/Panels/AssetView.h"
+#include "../Editor/Panels/MaterialEditor.h"
+#include "../Editor/Panels/AssetProperties.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Core/EditorResources.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

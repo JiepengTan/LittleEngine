@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Texts/TextColored.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Texts::TextColored::TextColored(const std::string& p_content, const Types::Color& p_color) :
 	Text(p_content), color(p_color)

@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvMaths/FVector2.h>
+#include "Core/Maths/FVector2.h"
 
-#include "OvUI/Internal/TextureID.h"
-#include "OvUI/Widgets/AWidget.h"
+#include "Modules/UI/Internal/TextureID.h"
+#include "Modules/UI/Widgets/AWidget.h"
 
 namespace OvUI::Widgets::Visual
 {

@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvPhysics/Entities/PhysicalObject.h>
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 namespace OvCore::ECS { class Actor; }
 

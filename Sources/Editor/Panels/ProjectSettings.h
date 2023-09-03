@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Panels/PanelWindow.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Panels/PanelWindow.h"
 
-#include <OvTools/Filesystem/IniFile.h>
+#include "Core/Tools/Filesystem/IniFile.h"
 
 namespace OvEditor::Panels
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Sliders/SliderDouble.h"
+#include "Modules/UI/Widgets/Sliders/SliderDouble.h"
 
 OvUI::Widgets::Sliders::SliderDouble::SliderDouble
 (

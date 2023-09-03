@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Texts/TextWrapped.h"
+#include "Modules/UI/Widgets/Texts/TextWrapped.h"
 
 OvUI::Widgets::Texts::TextWrapped::TextWrapped(const std::string & p_content) :
 	Text(p_content)

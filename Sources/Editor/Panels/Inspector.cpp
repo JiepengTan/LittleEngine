@@ -6,43 +6,43 @@
 
 #include <map>
 
-#include "OvEditor/Panels/Inspector.h"
+#include "../Editor/Panels/Inspector.h"
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Drags/DragMultipleFloats.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvUI/Widgets/Layout/Spacing.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Visual/Image.h>
-#include <OvUI/Widgets/InputFields/InputFloat.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
-#include <OvUI/Plugins/DDTarget.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Drags/DragMultipleFloats.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/UI/Widgets/Layout/Spacing.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Modules/UI/Widgets/InputFields/InputFloat.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
-#include <OvCore/ResourceManagement/ShaderManager.h>
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
 
-#include <OvCore/ECS/Components/CTransform.h>
-#include <OvCore/ECS/Components/CModelRenderer.h>
-#include <OvCore/ECS/Components/CCamera.h>
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CMaterialRenderer.h>
-#include <OvCore/ECS/Components/CAudioSource.h>
-#include <OvCore/ECS/Components/CAudioListener.h>
-#include <OvCore/ECS/Components/CAnimator.h>
+#include "GamePlay/ECS/Components/CTransform.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "GamePlay/ECS/Components/CAudioListener.h"
+#include "GamePlay/ECS/Components/CAnimator.h"
 
-#include <OvWindowing/Dialogs/MessageBox.h>
+#include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#include "OvCore/ECS/Components/CAnimator.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "GamePlay/ECS/Components/CAnimator.h"
+#include "../Editor/Core/EditorActions.h"
 
 using namespace OvCore::ECS::Components;
 using namespace OvUI::Widgets;

@@ -6,8 +6,8 @@
 
 #include <cmath>
 
-#include "OvRendering/LowRenderer/Camera.h"
-#include "OvMaths/FMatrix4.h"
+#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Core/Maths/FMatrix4.h"
 
 OvRendering::LowRenderer::Camera::Camera() :
     m_projectionMode(Settings::EProjectionMode::PERSPECTIVE),

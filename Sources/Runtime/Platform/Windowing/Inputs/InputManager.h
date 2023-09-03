@@ -8,11 +8,11 @@
 
 #include <unordered_map>
 
-#include "OvWindowing/Window.h"
-#include "OvWindowing/Inputs/EKey.h"
-#include "OvWindowing/Inputs/EKeyState.h"
-#include "OvWindowing/Inputs/EMouseButton.h"
-#include "OvWindowing/Inputs/EMouseButtonState.h"
+#include "Platform/Windowing/Window.h"
+#include "Platform/Windowing/Inputs/EKey.h"
+#include "Platform/Windowing/Inputs/EKeyState.h"
+#include "Platform/Windowing/Inputs/EMouseButton.h"
+#include "Platform/Windowing/Inputs/EMouseButtonState.h"
 
 namespace OvWindowing::Inputs
 {

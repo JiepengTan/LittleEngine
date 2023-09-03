@@ -1,10 +1,10 @@
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
-#include "OvCore/ECS/Renderer.h"
-#include "OvCore/ECS/Components/CMaterialRenderer.h"
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/ResourceManagement/MaterialManager.h"
-#include "OvCore/Helpers/RenderUtils.h"
-#include "OvRendering/Resources/Loaders/ShaderLoader.h"
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
+#include "GamePlay/ECS/Renderer.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "GamePlay/Helpers/RenderUtils.h"
+#include "Resource/Rendering/Resources/Loaders/ShaderLoader.h"
 
 unsigned int OvCore::ECS::RenderUtils::_QuadVAO = 0;
 unsigned int OvCore::ECS::RenderUtils::_QuadVBO = 0;

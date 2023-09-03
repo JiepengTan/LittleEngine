@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/Sliders/SliderSingleScalar.h"
+#include "Modules/UI/Widgets/Sliders/SliderSingleScalar.h"
 
 namespace OvUI::Widgets::Sliders
 {

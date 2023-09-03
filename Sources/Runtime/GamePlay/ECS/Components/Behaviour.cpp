@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvDebug/Logger.h>
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Core/Debug/Logger.h"
 
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/ECS/Components/Behaviour.h"
-#include "OvCore/Scripting/LuaBinder.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/ECS/Components/Behaviour.h"
+#include "GamePlay/Scripting/LuaBinder.h"
 
 OvTools::Eventing::Event<OvCore::ECS::Components::Behaviour*> OvCore::ECS::Components::Behaviour::CreatedEvent;
 OvTools::Eventing::Event<OvCore::ECS::Components::Behaviour*> OvCore::ECS::Components::Behaviour::DestroyedEvent;

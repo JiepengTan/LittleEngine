@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvUI/Widgets/Selection/ComboBox.h"
+#include "Modules/UI/Widgets/Selection/ComboBox.h"
 
 OvUI::Widgets::Selection::ComboBox::ComboBox(int p_currentChoice) :
 	DataWidget<int>(currentChoice), currentChoice(p_currentChoice)

@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include <OvPhysics/Entities/PhysicalBox.h>
+#include "Modules/Physics/Entities/PhysicalBox.h"
 
-#include "OvCore/ECS/Components/CPhysicalBox.h"
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Actor.h"
 
 using namespace OvPhysics::Entities;
 

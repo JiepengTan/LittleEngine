@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Core/GizmoBehaviour.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Settings/EditorSettings.h"
+#include "../Editor/Core/GizmoBehaviour.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Settings/EditorSettings.h"
 
 float SnapValue(float p_value, float p_step)
 {

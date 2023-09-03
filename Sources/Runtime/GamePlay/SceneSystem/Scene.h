@@ -7,12 +7,12 @@
 #pragma once
 
 
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/API/ISerializable.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/API/ISerializable.h"
 
-#include "OvCore/ECS/Components/CModelRenderer.h"
-#include "OvCore/ECS/Components/CCamera.h"
-#include "OvCore/ECS/Components/CLight.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/ECS/Components/CLight.h"
 
 namespace OvCore::SceneSystem
 {

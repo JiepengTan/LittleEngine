@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Menu/MenuList.h"
+#include "Modules/UI/Widgets/Menu/MenuList.h"
 
 OvUI::Widgets::Menu::MenuList::MenuList(const std::string & p_name, bool p_locked) :
 	name(p_name), locked(p_locked)

@@ -9,10 +9,10 @@
 #include <chrono>
 
 
-#include "OvAnalytics/Hardware/HardwareReport.h"
-#include "OvAnalytics/Hardware/CPUInfo.h"
-#include "OvAnalytics/Hardware/GPUInfo.h"
-#include "OvAnalytics/Hardware/RAMInfo.h"
+#include "Core/Analytics/Hardware/HardwareReport.h"
+#include "Core/Analytics/Hardware/CPUInfo.h"
+#include "Core/Analytics/Hardware/GPUInfo.h"
+#include "Core/Analytics/Hardware/RAMInfo.h"
 
 namespace OvAnalytics::Hardware
 {

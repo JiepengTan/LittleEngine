@@ -9,10 +9,10 @@
 #include <vector>
 #include <limits>
 
-#include <OvMaths/FVector2.h>
+#include "Core/Maths/FVector2.h"
 
-#include "OvUI/Widgets/AWidget.h"
-#include "OvUI/Widgets/DataWidget.h"
+#include "Modules/UI/Widgets/AWidget.h"
+#include "Modules/UI/Widgets/DataWidget.h"
 
 namespace OvUI::Widgets::Plots
 {

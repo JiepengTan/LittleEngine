@@ -4,34 +4,34 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/Hierarchy.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Panels/Hierarchy.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Selection/CheckBox.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Plugins/DDSource.h>
-#include <OvUI/Plugins/DDTarget.h>
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Selection/CheckBox.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Plugins/DDSource.h"
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include <OvCore/Global/ServiceLocator.h>
+#include "GamePlay/Global/ServiceLocator.h"
 
-#include <OvCore/ECS/Components/CCamera.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CAudioSource.h>
-#include <OvCore/ECS/Components/CAudioListener.h>
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "GamePlay/ECS/Components/CAudioListener.h"
 
-#include <OvUI/Plugins/ContextualMenu.h>
+#include "Modules/UI/Plugins/ContextualMenu.h"
 
-#include "OvEditor/Utils/ActorCreationMenu.h"
+#include "../Editor/Utils/ActorCreationMenu.h"
 
 class HierarchyContextualMenu : public OvUI::Plugins::ContextualMenu
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvWindowing/Dialogs/OpenFileDialog.h"
+#include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 
 #include <Windows.h>
 

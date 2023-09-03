@@ -4,15 +4,15 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Layout/Group.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
 
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Actor.h"
 
-#include "OvCore/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
 
 OvCore::ECS::Components::CSpotLight::CSpotLight(ECS::Actor & p_owner) :
 	CLight(p_owner)

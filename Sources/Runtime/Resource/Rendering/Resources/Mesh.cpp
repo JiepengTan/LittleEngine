@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvRendering/Resources/Mesh.h"
+#include "Resource/Rendering/Resources/Mesh.h"
 
 OvRendering::Resources::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
 			uint32_t p_materialIndex,

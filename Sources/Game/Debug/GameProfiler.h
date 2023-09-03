@@ -8,14 +8,14 @@
 
 #ifdef _DEBUG
 
-#include <OvRendering/Core/Renderer.h>
-#include <OvWindowing/Window.h>
+#include "Resource/Rendering/Core/Renderer.h"
+#include "Platform/Windowing/Window.h"
 
-#include <OvAnalytics/Profiling/Profiler.h>
-#include <OvUI/Panels/PanelUndecorated.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Buttons/Button.h>
+#include "Core/Analytics/Profiling/Profiler.h"
+#include "Modules/UI/Panels/PanelUndecorated.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
 
 namespace OvGame::Debug
 {

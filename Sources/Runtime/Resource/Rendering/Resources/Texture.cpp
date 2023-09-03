@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Resources/Texture.h"
+#include "Resource/Rendering/Resources/Texture.h"
 
 void OvRendering::Resources::Texture::Bind(uint32_t p_slot) const
 {

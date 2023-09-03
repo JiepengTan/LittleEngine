@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Plots/PlotLines.h>
-#include <OvUI/Widgets/Plots/PlotHistogram.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Plots/PlotLines.h"
+#include "Modules/UI/Widgets/Plots/PlotHistogram.h"
 
 namespace OvAnalytics::Hardware { class HardwareInfo; }
 

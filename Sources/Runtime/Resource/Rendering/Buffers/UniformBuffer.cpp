@@ -6,8 +6,8 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/UniformBuffer.h"
-#include "OvRendering/Resources/Shader.h"
+#include "Resource/Rendering/Buffers/UniformBuffer.h"
+#include "Resource/Rendering/Resources/Shader.h"
 
 OvRendering::Buffers::UniformBuffer::UniformBuffer(size_t p_size, uint32_t p_bindingPoint, uint32_t p_offset, EAccessSpecifier p_accessSpecifier)
 {

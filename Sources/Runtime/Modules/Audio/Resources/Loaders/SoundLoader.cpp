@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAudio/Resources/Loaders/SoundLoader.h"
+#include "Modules/Audio/Resources/Loaders/SoundLoader.h"
 
 OvAudio::Resources::Sound* OvAudio::Resources::Loaders::SoundLoader::Create(const std::string& p_filepath)
 {

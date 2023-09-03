@@ -6,24 +6,24 @@
 
 #include <filesystem>
 
-#include <OvTools/Utils/PathParser.h>
-#include <OvTools/Utils/SizeConverter.h>
+#include "Core/Tools/Utils/PathParser.h"
+#include "Core/Tools/Utils/SizeConverter.h"
 
-#include <OvCore/Helpers/GUIDrawer.h>
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
+#include "GamePlay/Helpers/GUIDrawer.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
 
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/GroupCollapsable.h>
-#include <OvUI/Widgets/Layout/NewLine.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Selection/ComboBox.h>
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
+#include "Modules/UI/Widgets/Layout/NewLine.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Selection/ComboBox.h"
 
-#include "OvEditor/Panels/AssetProperties.h"
-#include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Panels/AssetProperties.h"
+#include "../Editor/Panels/AssetView.h"
+#include "../Editor/Core/EditorActions.h"
 
 OvEditor::Panels::AssetProperties::AssetProperties
 (

@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "OvWindowing/Inputs/InputManager.h"
+#include "Platform/Windowing/Inputs/InputManager.h"
 
 OvWindowing::Inputs::InputManager::InputManager(Window& p_window) : m_window(p_window)
 {

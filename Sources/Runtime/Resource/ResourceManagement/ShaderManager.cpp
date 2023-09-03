@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/ShaderManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
 
 OvRendering::Resources::Shader* OvCore::ResourceManagement::ShaderManager::CreateResource(const std::string & p_path)
 {

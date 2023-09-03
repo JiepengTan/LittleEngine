@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvUI/Widgets/Texts/Text.h"
-#include "OvUI/Types/Color.h"
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Types/Color.h"
 
 namespace OvUI::Widgets::Texts
 {

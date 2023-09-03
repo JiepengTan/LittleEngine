@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/IndexBuffer.h"
+#include "Resource/Rendering/Buffers/IndexBuffer.h"
 
 #include <iostream>
 

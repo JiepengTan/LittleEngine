@@ -4,32 +4,32 @@
 * @licence: MIT
 */
 
-#include <OvTools/Utils/SystemCalls.h>
+#include "Core/Tools/Utils/SystemCalls.h"
 
-#include <OvCore/ECS/Components/CCamera.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CAudioSource.h>
-#include <OvCore/ECS/Components/CAudioListener.h>
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "GamePlay/ECS/Components/CAudioListener.h"
 
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Sliders/SliderInt.h>
-#include <OvUI/Widgets/Sliders/SliderFloat.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Sliders/SliderInt.h"
+#include "Modules/UI/Widgets/Sliders/SliderFloat.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
 
-#include "OvEditor/Panels/MenuBar.h"
-#include "OvEditor/Panels/SceneView.h"
-#include "OvEditor/Panels/AssetView.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Settings/EditorSettings.h"
-#include "OvEditor/Utils/ActorCreationMenu.h"
+#include "../Editor/Panels/MenuBar.h"
+#include "../Editor/Panels/SceneView.h"
+#include "../Editor/Panels/AssetView.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Settings/EditorSettings.h"
+#include "../Editor/Utils/ActorCreationMenu.h"
 
 
 using namespace OvUI::Panels;

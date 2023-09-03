@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <map>
-#include "OvRendering/Resources/AnimationData.h"
-#include "OvRendering/Resources/Loaders/ModelLoader.h"
+#include "Resource/Rendering/Resources/AnimationData.h"
+#include "Resource/Rendering/Resources/Loaders/ModelLoader.h"
 
 namespace OvRendering::Resources
 {

@@ -6,9 +6,9 @@
 
 #define _CRT_SECURE_NO_WARNINGS // Enable getenv
 
-#include <OvTools/Time/Date.h>
+#include "Core/Tools/Time/Date.h"
 
-#include "OvDebug/FileHandler.h"
+#include "Core/Debug/FileHandler.h"
 
 #include <fstream>
 #include <iostream>

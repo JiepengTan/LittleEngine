@@ -8,19 +8,19 @@
 
 #include <optional>
 
-#include "OvRendering/Context/Driver.h"
-#include "OvRendering/LowRenderer/Camera.h"
-#include "OvRendering/Resources/Shader.h"
-#include "OvRendering/Resources/Model.h"
-#include "OvRendering/Settings/ERenderingCapability.h"
-#include "OvRendering/Settings/EPrimitiveMode.h"
-#include "OvRendering/Settings/ERasterizationMode.h"
-#include "OvRendering/Settings/EComparaisonAlgorithm.h"
-#include "OvRendering/Settings/EOperation.h"
-#include "OvRendering/Settings/ECullFace.h"
-#include "OvRendering/Settings/ECullingOptions.h"
-#include "OvRendering/Settings/EPixelDataFormat.h"
-#include "OvRendering/Settings/EPixelDataType.h"
+#include "Resource/Rendering/Context/Driver.h"
+#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Resource/Rendering/Resources/Shader.h"
+#include "Resource/Rendering/Resources/Model.h"
+#include "Resource/Rendering/Settings/ERenderingCapability.h"
+#include "Resource/Rendering/Settings/EPrimitiveMode.h"
+#include "Resource/Rendering/Settings/ERasterizationMode.h"
+#include "Resource/Rendering/Settings/EComparaisonAlgorithm.h"
+#include "Resource/Rendering/Settings/EOperation.h"
+#include "Resource/Rendering/Settings/ECullFace.h"
+#include "Resource/Rendering/Settings/ECullingOptions.h"
+#include "Resource/Rendering/Settings/EPixelDataFormat.h"
+#include "Resource/Rendering/Settings/EPixelDataType.h"
 
 namespace OvRendering::Core
 {

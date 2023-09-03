@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Texts/TextDisabled.h"
+#include "Modules/UI/Widgets/Texts/TextDisabled.h"
 
 OvUI::Widgets::Texts::TextDisabled::TextDisabled(const std::string & p_content) :
 	Text(p_content)

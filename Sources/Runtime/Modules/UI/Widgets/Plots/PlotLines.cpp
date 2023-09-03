@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Plots/PlotLines.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Plots/PlotLines.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Plots::PlotLines::PlotLines
 (

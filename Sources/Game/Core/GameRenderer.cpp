@@ -4,17 +4,17 @@
 * @licence: MIT
 */
 
-#include "OvGame/Core/GameRenderer.h"
+#include "../Game/Core/GameRenderer.h"
 
-#include <OvAnalytics/Profiling/ProfilerSpy.h>
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-#include <OvCore/ECS/Components/CMaterialRenderer.h>
-#include <OvCore/ECS/Components/CModelRenderer.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
 
 using namespace OvMaths;
 using namespace OvRendering::Resources;

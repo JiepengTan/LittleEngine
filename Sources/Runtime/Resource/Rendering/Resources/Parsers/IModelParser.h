@@ -7,7 +7,7 @@
 #pragma once
 
 #include <string>
-#include "OvRendering/Resources/Parsers/EModelParserFlags.h"
+#include "Resource/Rendering/Resources/Parsers/EModelParserFlags.h"
 namespace OvRendering::Resources
 {
 	class Model;

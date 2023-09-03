@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvCore/Helpers/GUIDrawer.h"
+#include "GamePlay/Helpers/GUIDrawer.h"
 
 namespace OvCore::Helpers
 {

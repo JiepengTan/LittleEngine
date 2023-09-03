@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Resources/RawShaders.h"
+#include "../Editor/Resources/RawShaders.h"
 
 std::pair<std::string, std::string> OvEditor::Resources::RawShaders::GetGrid()
 {

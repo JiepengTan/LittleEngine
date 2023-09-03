@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvTools/Filesystem/tinyxml2.h>
+#include "Core/Tools/Filesystem/tinyxml2.h"
 
 
-#include "OvCore/Helpers/Serializer.h"
+#include "GamePlay/Helpers/Serializer.h"
 
 namespace OvCore::API
 {

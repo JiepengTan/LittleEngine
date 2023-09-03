@@ -7,10 +7,10 @@
 #pragma once
 
 
-#include "OvMaths/FVector3.h"
-#include "OvMaths/FTransform.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FTransform.h"
 
-#include "OvAudio/Entities/AudioSource.h"
+#include "Modules/Audio/Entities/AudioSource.h"
 
 namespace OvAudio::Entities
 {

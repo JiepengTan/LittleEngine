@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
 
 namespace OvEditor::Panels
 {

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvCore/GlobalState.h"
-#include "OvCore/API/IInspectorItem.h"
+#include "Core/GlobalState.h"
+#include "GamePlay/API/IInspectorItem.h"
 
 namespace OvCore::ECS { class Actor; }
 

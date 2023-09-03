@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAnalytics/Hardware/CPUInfo.h"
+#include "Core/Analytics/Hardware/CPUInfo.h"
 
 float OvAnalytics::Hardware::CPUInfo::CalculateCPULoad()
 {

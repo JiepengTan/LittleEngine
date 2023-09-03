@@ -7,16 +7,16 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/matrix4x4.h>
-#include "OvRendering/Resources/Parsers/AssimpParser.h"
+#include "Resource/Rendering/Resources/Parsers/AssimpParser.h"
 
 #include <array>
 #include <cassert>
 #include <assimp/postprocess.h>
-#include "OvDebug/Assertion.h"
-#include "OvDebug/Logger.h"
-#include "OvRendering/Resources/AnimationData.h"
-#include "OvRendering/Resources/Animation.h"
-#include "OvRendering/Resources/Model.h"
+#include "Core/Debug/Assertion.h"
+#include "Core/Debug/Logger.h"
+#include "Resource/Rendering/Resources/AnimationData.h"
+#include "Resource/Rendering/Resources/Animation.h"
+#include "Resource/Rendering/Resources/Model.h"
 
 static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 {

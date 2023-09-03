@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @project: Overload
 * @author: Overload Tech.
 * @licence: MIT
@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvCore/ResourceManagement/AResourceManager.h"
-#include "OvRendering/Resources/Animation.h"
+#include "Resource/ResourceManagement/AResourceManager.h"
+#include "Resource/Rendering/Resources/Animation.h"
 
 namespace OvCore::ResourceManagement
 {

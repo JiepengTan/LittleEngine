@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Layout/Spacing.h"
+#include "Modules/UI/Widgets/Layout/Spacing.h"
 
 OvUI::Widgets::Layout::Spacing::Spacing(uint16_t p_spaces) : spaces(p_spaces)
 {

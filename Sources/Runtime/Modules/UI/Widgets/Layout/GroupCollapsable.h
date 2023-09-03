@@ -8,9 +8,9 @@
 
 #include <vector>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
 
 namespace OvUI::Widgets::Layout
 {

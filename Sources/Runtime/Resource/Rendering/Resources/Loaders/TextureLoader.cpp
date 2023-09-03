@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <stb_image/stb_image.h>
 
-#include "OvRendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
 
 OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader::Create(const std::string& p_filepath, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {

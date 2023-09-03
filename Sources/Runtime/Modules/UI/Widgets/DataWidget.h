@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/AWidget.h"
+#include "Modules/UI/Widgets/AWidget.h"
 
 namespace OvUI::Widgets
 {

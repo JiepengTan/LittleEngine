@@ -1,17 +1,17 @@
 #pragma once
 
-#include "OvRendering/Resources/Animation.h"
-#include "OvRendering/Resources/Model.h"
+#include "Resource/Rendering/Resources/Animation.h"
+#include "Resource/Rendering/Resources/Model.h"
 #include <vector>
 #include <map>
 #include <functional>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
-#include "OvDebug/Assertion.h"
-#include "OvMaths/FMatrix4.h"
+#include "Core/Debug/Assertion.h"
+#include "Core/Maths/FMatrix4.h"
 
 #include <assimp/anim.h>
-#include "OvMaths/FQuaternion.h"
+#include "Core/Maths/FQuaternion.h"
 
 using namespace std;
 using namespace OvMaths;

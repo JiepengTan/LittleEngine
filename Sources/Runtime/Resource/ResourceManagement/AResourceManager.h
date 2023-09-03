@@ -115,4 +115,4 @@ namespace OvCore::ResourceManagement
 	};
 }
 
-#include "OvCore/ResourceManagement/AResourceManager.inl"
+#include "Resource/ResourceManagement/AResourceManager.inl"

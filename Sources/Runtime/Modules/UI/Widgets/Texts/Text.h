@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvUI/Widgets/AWidget.h"
-#include "OvUI/Widgets/DataWidget.h"
+#include "Modules/UI/Widgets/AWidget.h"
+#include "Modules/UI/Widgets/DataWidget.h"
 
 namespace OvUI::Widgets::Texts
 {

@@ -6,35 +6,35 @@
 
 #pragma once
 
-#include <OvTools/Filesystem/IniFile.h>
+#include "Core/Tools/Filesystem/IniFile.h"
 
-#include <OvRendering/Buffers/UniformBuffer.h>
-#include <OvRendering/Buffers/ShaderStorageBuffer.h>
-#include <OvRendering/Core/ShapeDrawer.h>
+#include "Resource/Rendering/Buffers/UniformBuffer.h"
+#include "Resource/Rendering/Buffers/ShaderStorageBuffer.h"
+#include "Resource/Rendering/Core/ShapeDrawer.h"
 
-#include <OvPhysics/Core/PhysicsEngine.h>
+#include "Modules/Physics/Core/PhysicsEngine.h"
 
-#include <OvAudio/Core/AudioEngine.h>
+#include "Modules/Audio/Core/AudioEngine.h"
 
-#include <OvWindowing/Context/Device.h>
-#include <OvWindowing/Inputs/InputManager.h>
-#include <OvWindowing/Window.h>
+#include "Platform/Windowing/Context/Device.h"
+#include "Platform/Windowing/Inputs/InputManager.h"
+#include "Platform/Windowing/Window.h"
 
-#include <OvCore/ECS/Renderer.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
-#include <OvCore/ResourceManagement/ShaderManager.h>
-#include <OvCore/ResourceManagement/MaterialManager.h>
-#include <OvCore/ResourceManagement/SoundManager.h>
-#include "OvCore/ResourceManagement/AnimationManager.h"
-#include <OvCore/SceneSystem/SceneManager.h>
-#include <OvCore/Scripting/ScriptInterpreter.h>
+#include "GamePlay/ECS/Renderer.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Resource/ResourceManagement/SoundManager.h"
+#include "Resource/ResourceManagement/AnimationManager.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
+#include "GamePlay/Scripting/ScriptInterpreter.h"
 
-#include <OvUI/Core/UIManager.h>
-#include <OvAudio/Core/AudioEngine.h>
-#include <OvAudio/Core/AudioPlayer.h>
+#include "Modules/UI/Core/UIManager.h"
+#include "Modules/Audio/Core/AudioEngine.h"
+#include "Modules/Audio/Core/AudioPlayer.h"
 
-#include "OvEditor/Core/EditorResources.h"
+#include "../Editor/Core/EditorResources.h"
 
 namespace OvEditor::Core
 {

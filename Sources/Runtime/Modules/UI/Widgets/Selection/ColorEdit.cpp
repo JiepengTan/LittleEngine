@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Selection/ColorEdit.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
 
 OvUI::Widgets::Selection::ColorEdit::ColorEdit(bool p_enableAlpha, const Types::Color & p_defaultColor) :
 	DataWidget<Types::Color>(color), enableAlpha(p_enableAlpha), color(p_defaultColor)

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Menu/MenuItem.h"
+#include "Modules/UI/Widgets/Menu/MenuItem.h"
 
 OvUI::Widgets::Menu::MenuItem::MenuItem(const std::string & p_name, const std::string & p_shortcut, bool p_checkable, bool p_checked) :
 	DataWidget(m_selected), name(p_name), shortcut(p_shortcut), checkable(p_checkable), checked(p_checked)

@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvDebug/ConsoleHandler.h"
-#include "OvDebug/ConsoleColor.h"
+#include "Core/Debug/ConsoleHandler.h"
+#include "Core/Debug/ConsoleColor.h"
 
 #include <iostream>
 

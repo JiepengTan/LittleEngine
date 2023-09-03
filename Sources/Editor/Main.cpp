@@ -6,16 +6,16 @@
 
 #include <filesystem>
 
-#include <OvTools/Utils/String.h>
+#include "Core/Tools/Utils/String.h"
 
-#include <OvRendering/Utils/Defines.h>
+#include "Resource/Rendering/Utils/Defines.h"
 
-#include "OvEditor/Core/ProjectHub.h"
-#include "OvEditor/Core/Application.h"
+#include "../Editor/Core/ProjectHub.h"
+#include "../Editor/Core/Application.h"
 
 #undef APIENTRY
 #include "Windows.h"
-#include "OvCore/GlobalState.h"
+#include "Core/GlobalState.h"
 
 FORCE_DEDICATED_GPU
 

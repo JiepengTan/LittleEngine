@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Types/Color.h"
+#include "Modules/UI/Types/Color.h"
 
 const OvUI::Types::Color OvUI::Types::Color::Red		= { 1.f, 0.f, 0.f };
 const OvUI::Types::Color OvUI::Types::Color::Green		= { 0.f, 1.f, 0.f };

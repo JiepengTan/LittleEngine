@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvEditor/Panels/AView.h"
-#include "OvEditor/Core/CameraController.h"
+#include "../Editor/Panels/AView.h"
+#include "../Editor/Core/CameraController.h"
 
 namespace OvEditor::Panels
 {

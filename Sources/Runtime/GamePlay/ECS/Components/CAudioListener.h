@@ -8,9 +8,9 @@
 
 #include "AComponent.h"
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include <OvAudio/Entities/AudioListener.h>
+#include "Modules/Audio/Entities/AudioListener.h"
 
 namespace OvCore::ECS { class Actor; }
 

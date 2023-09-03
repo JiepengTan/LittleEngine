@@ -10,11 +10,11 @@
 #include <vector>
 #include <memory>
 
-#include "OvRendering/Buffers/VertexArray.h"
-#include "OvRendering/Buffers/IndexBuffer.h"
-#include "OvRendering/Resources/IMesh.h"
-#include "OvRendering/Geometry/Vertex.h"
-#include "OvRendering/Geometry/BoundingSphere.h"
+#include "Resource/Rendering/Buffers/VertexArray.h"
+#include "Resource/Rendering/Buffers/IndexBuffer.h"
+#include "Resource/Rendering/Resources/IMesh.h"
+#include "Resource/Rendering/Geometry/Vertex.h"
+#include "Resource/Rendering/Geometry/BoundingSphere.h"
 
 namespace OvRendering::Resources
 {

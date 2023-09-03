@@ -6,13 +6,13 @@
 
 #pragma once
 
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvTools/Filesystem/IniFile.h>
-#include <OvTools/Utils/PathParser.h>
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Core/Tools/Filesystem/IniFile.h"
+#include "Core/Tools/Utils/PathParser.h"
 
-#include "OvEditor/Core/Context.h"
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Core/PanelsManager.h"
+#include "../Editor/Core/Context.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Core/PanelsManager.h"
 
 #define EDITOR_EXEC(action)					OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().action
 #define EDITOR_BIND(method, ...)			std::bind(&OvEditor::Core::EditorActions::method, &OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>(), ##__VA_ARGS__)
@@ -427,4 +427,4 @@ namespace OvEditor::Core
 	};
 }
 
-#include "OvEditor/Core/EditorActions.inl"
+#include "../Editor/Core/EditorActions.inl"

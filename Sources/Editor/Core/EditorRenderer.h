@@ -6,16 +6,16 @@
 
 #pragma once
 
-#include <OvRendering/LowRenderer/Camera.h>
+#include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include <OvCore/ECS/Actor.h>
-#include <OvCore/SceneSystem/SceneManager.h>
-#include <OvCore/ECS/Components/CModelRenderer.h>
-#include <OvCore/Resources/Material.h>
-#include <OvCore/ECS/Components/CAmbientBoxLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "Resource/Resources/Material.h"
+#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
 
-#include "OvEditor/Core/Context.h"
+#include "../Editor/Core/Context.h"
 
 namespace OvEditor::Core { enum class EGizmoOperation; }
 namespace OvEditor::Panels { class AView; }

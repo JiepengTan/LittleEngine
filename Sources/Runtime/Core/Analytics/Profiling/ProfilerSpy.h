@@ -10,8 +10,8 @@
 #include <chrono>
 
 
-#include "OvAnalytics/Profiling/Profiler.h"
-#include "OvAnalytics/Profiling/ProfilerSpy.h"
+#include "Core/Analytics/Profiling/Profiler.h"
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
 /**
 * This macro allow the creation of profiler spies

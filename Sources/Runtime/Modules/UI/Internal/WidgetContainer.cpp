@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvUI/Internal/WidgetContainer.h"
+#include "Modules/UI/Internal/WidgetContainer.h"
 
 void OvUI::Internal::WidgetContainer::RemoveWidget(Widgets::AWidget& p_widget)
 {

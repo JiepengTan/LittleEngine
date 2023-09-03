@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/AViewControllable.h"
+#include "../Editor/Panels/AViewControllable.h"
 
 OvEditor::Panels::AViewControllable::AViewControllable
 (

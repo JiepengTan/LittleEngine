@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvCore/Resources/Material.h"
+#include "Resource/Resources/Material.h"
 
 namespace OvCore::Resources
 {

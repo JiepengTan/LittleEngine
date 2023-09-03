@@ -8,8 +8,8 @@
 
 #include <vector>
 
-#include "OvUI/Widgets/AWidget.h"
-#include "OvUI/Internal/EMemoryMode.h"
+#include "Modules/UI/Widgets/AWidget.h"
+#include "Modules/UI/Internal/EMemoryMode.h"
 
 namespace OvUI::Internal
 {

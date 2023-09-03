@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvRendering/Core/ShapeDrawer.h"
-#include "OvRendering/Resources/Loaders/ShaderLoader.h"
+#include "Resource/Rendering/Core/ShapeDrawer.h"
+#include "Resource/Rendering/Resources/Loaders/ShaderLoader.h"
 
 OvRendering::Core::ShapeDrawer::ShapeDrawer(OvRendering::Core::Renderer& p_renderer) : m_renderer(p_renderer)
 {

@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "OvRendering/Context/Driver.h"
+#include "Resource/Rendering/Context/Driver.h"
 
 namespace OvRendering::Buffers
 {

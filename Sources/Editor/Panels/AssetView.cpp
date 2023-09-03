@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include <OvTools/Utils/PathParser.h>
-#include <OvUI/Plugins/DDTarget.h>
+#include "Core/Tools/Utils/PathParser.h"
+#include "Modules/UI/Plugins/DDTarget.h"
 
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Panels/AssetView.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Panels/AssetView.h"
 
 
 OvEditor::Panels::AssetView::AssetView

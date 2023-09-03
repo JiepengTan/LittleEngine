@@ -8,10 +8,10 @@
 
 #include <memory>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Panels/APanelTransformable.h"
-#include "OvUI/Settings/PanelWindowSettings.h"
+#include "Modules/UI/Panels/APanelTransformable.h"
+#include "Modules/UI/Settings/PanelWindowSettings.h"
 
 namespace OvUI::Panels
 {

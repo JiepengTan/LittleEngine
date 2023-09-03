@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvUI/Panels/APanel.h"
+#include "Modules/UI/Panels/APanel.h"
 
 uint64_t OvUI::Panels::APanel::__PANEL_ID_INCREMENT = 0;
 

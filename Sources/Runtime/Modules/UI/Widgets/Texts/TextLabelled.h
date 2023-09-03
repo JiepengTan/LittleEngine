@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Texts/Text.h"
 
 namespace OvUI::Widgets::Texts
 {

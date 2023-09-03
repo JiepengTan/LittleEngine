@@ -7,9 +7,9 @@
 #pragma once
 
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvCore/ECS/Components/Behaviour.h"
+#include "GamePlay/ECS/Components/Behaviour.h"
 
 namespace OvCore::ECS::Components
 {

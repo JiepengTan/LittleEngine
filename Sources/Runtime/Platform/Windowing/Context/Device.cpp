@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvWindowing/Context/Device.h"
+#include "Platform/Windowing/Context/Device.h"
 
 #include <stdexcept>
 

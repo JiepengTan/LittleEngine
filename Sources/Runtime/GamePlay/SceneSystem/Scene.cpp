@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <string>
 
-#include "OvCore/SceneSystem/Scene.h"
+#include "GamePlay/SceneSystem/Scene.h"
 
 int OvCore::SceneSystem::Scene::s_globalSceneId = 1; 
 OvCore::SceneSystem::Scene::Scene()

@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Layout/Dummy.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Layout/Dummy.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Layout::Dummy::Dummy(const OvMaths::FVector2& p_size) : size(p_size)
 {

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvCore/ECS/Components/CLight.h"
+#include "GamePlay/ECS/Components/CLight.h"
 
 namespace OvCore::ECS { class Actor; }
 

@@ -8,7 +8,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/UniformBuffer.h"
+#include "Resource/Rendering/Buffers/UniformBuffer.h"
 
 namespace OvRendering::Buffers
 {

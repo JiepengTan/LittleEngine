@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include "OvCore/ECS/PhysicsWrapper.h"
+#include "GamePlay/ECS/PhysicsWrapper.h"
 
-#include "OvCore/Global/ServiceLocator.h"
+#include "GamePlay/Global/ServiceLocator.h"
 
-#include <OvPhysics/Core/PhysicsEngine.h>
+#include "Modules/Physics/Core/PhysicsEngine.h"
 
 std::optional<OvCore::ECS::PhysicsWrapper::RaycastHit> OvCore::ECS::PhysicsWrapper::Raycast(OvMaths::FVector3 p_origin, OvMaths::FVector3 p_direction, float p_distance)
 {

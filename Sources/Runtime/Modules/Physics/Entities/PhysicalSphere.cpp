@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvPhysics/Entities/PhysicalSphere.h"
+#include "Modules/Physics/Entities/PhysicalSphere.h"
 
 OvPhysics::Entities::PhysicalSphere::PhysicalSphere(float p_radius) : PhysicalObject()
 {

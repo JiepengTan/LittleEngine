@@ -8,10 +8,10 @@
 
 #include <string>
 
-#include "OvUI/API/IDrawable.h"
-#include "OvUI/Plugins/Pluginable.h"
-#include "OvUI/Plugins/DataDispatcher.h"
-#include "OvUI/ImGui/imgui.h"
+#include "Modules/UI/API/IDrawable.h"
+#include "Modules/UI/Plugins/Pluginable.h"
+#include "Modules/UI/Plugins/DataDispatcher.h"
+#include "Modules/UI/ImGui/imgui.h"
 
 namespace  OvUI::Internal { class WidgetContainer; }
 

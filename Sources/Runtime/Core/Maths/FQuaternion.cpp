@@ -8,7 +8,7 @@
 #include <cmath>
 #include <stdexcept>
 
-#include "OvMaths/FQuaternion.h"
+#include "Core/Maths/FQuaternion.h"
 
 #undef PI
 

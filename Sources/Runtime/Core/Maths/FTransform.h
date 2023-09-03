@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include "OvMaths/Internal/TransformNotifier.h"
-#include "OvMaths/FQuaternion.h"
-#include "OvMaths/FMatrix4.h"
-#include "OvMaths/FVector3.h"
+#include "Core/Maths/Internal/TransformNotifier.h"
+#include "Core/Maths/FQuaternion.h"
+#include "Core/Maths/FMatrix4.h"
+#include "Core/Maths/FVector3.h"
 
 namespace OvMaths
 {

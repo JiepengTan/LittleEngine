@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvRendering/Resources/Shader.h"
+#include "Resource/Rendering/Resources/Shader.h"
 
 namespace OvRendering::Resources::Loaders
 {

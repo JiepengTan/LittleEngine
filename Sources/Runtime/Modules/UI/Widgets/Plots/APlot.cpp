@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Plots/APlot.h"
+#include "Modules/UI/Widgets/Plots/APlot.h"
 
 OvUI::Widgets::Plots::APlot::APlot
 (

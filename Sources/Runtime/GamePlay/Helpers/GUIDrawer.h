@@ -6,18 +6,18 @@
 
 #pragma once
 
-#include <OvMaths/FVector2.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FVector4.h>
-#include <OvMaths/FQuaternion.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FVector4.h"
+#include "Core/Maths/FQuaternion.h"
 
-#include <OvUI/Internal/WidgetContainer.h>
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Drags/DragSingleScalar.h>
-#include <OvUI/Widgets/Drags/DragMultipleScalars.h>
-#include <OvUI/Widgets/InputFields/InputText.h>
-#include <OvUI/Widgets/Visual/Image.h>
-#include <OvUI/Types/Color.h>
+#include "Modules/UI/Internal/WidgetContainer.h"
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Drags/DragSingleScalar.h"
+#include "Modules/UI/Widgets/Drags/DragMultipleScalars.h"
+#include "Modules/UI/Widgets/InputFields/InputText.h"
+#include "Modules/UI/Widgets/Visual/Image.h"
+#include "Modules/UI/Types/Color.h"
 
 
 
@@ -103,4 +103,4 @@ namespace OvCore::Helpers
 	};
 }
 
-#include "OvCore/Helpers/GUIDrawer.inl"
+#include "GamePlay/Helpers/GUIDrawer.inl"

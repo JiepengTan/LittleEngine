@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/HardwareInfo.h"
+#include "../Editor/Panels/HardwareInfo.h"
 
-#include <OvAnalytics/Hardware/HardwareInfo.h>
+#include "Core/Analytics/Hardware/HardwareInfo.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

@@ -9,9 +9,9 @@
 #include <any>
 #include <map>
 
-#include <OvRendering/Resources/Shader.h>
+#include "Resource/Rendering/Resources/Shader.h"
 
-#include "OvCore/API/ISerializable.h"
+#include "GamePlay/API/ISerializable.h"
 
 
 namespace OvCore::Resources
@@ -184,4 +184,4 @@ namespace OvCore::Resources
 	};
 }
 
-#include "OvCore/Resources/Material.inl"
+#include "Resource/Resources/Material.inl"

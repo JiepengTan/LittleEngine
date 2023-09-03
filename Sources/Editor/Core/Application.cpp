@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <OvTools/Time/Clock.h>
+#include "Core/Tools/Time/Clock.h"
 
-#include "OvEditor/Core/Application.h"
+#include "../Editor/Core/Application.h"
 
 OvEditor::Core::Application::Application(const std::string& p_projectPath, const std::string& p_projectName) :
 	m_context(p_projectPath, p_projectName),

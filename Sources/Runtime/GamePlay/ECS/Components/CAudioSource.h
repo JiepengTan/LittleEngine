@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvAudio/Entities/AudioSource.h>
-#include <OvTools/Eventing/Event.h>
+#include "Modules/Audio/Entities/AudioSource.h"
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 namespace OvCore::ECS { class Actor; }
 

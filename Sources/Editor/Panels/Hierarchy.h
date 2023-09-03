@@ -6,14 +6,14 @@
 
 #pragma once
 
-#include <OvRendering/Resources/Loaders/TextureLoader.h>
-#include <OvRendering/LowRenderer/Camera.h>
+#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include <OvCore/SceneSystem/SceneManager.h>
+#include "GamePlay/SceneSystem/SceneManager.h"
 
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Layout/TreeNode.h>
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Layout/TreeNode.h"
 
 namespace OvEditor::Panels
 {

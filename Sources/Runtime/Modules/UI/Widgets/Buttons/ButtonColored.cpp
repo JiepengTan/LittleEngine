@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Buttons/ButtonColored.h"
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Widgets/Buttons/ButtonColored.h"
+#include "Modules/UI/Internal/Converter.h"
 
 OvUI::Widgets::Buttons::ButtonColored::ButtonColored(const std::string & p_label, const Types::Color& p_color, const OvMaths::FVector2& p_size, bool p_enableAlpha) :
 	label(p_label), color(p_color), size(p_size), enableAlpha(p_enableAlpha)

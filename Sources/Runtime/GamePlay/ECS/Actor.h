@@ -9,13 +9,13 @@
 #include <unordered_map>
 #include <memory>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvCore/GlobalState.h"
-#include "OvCore/ECS/Components/AComponent.h"
-#include "OvCore/ECS/Components/CTransform.h"
-#include "OvCore/ECS/Components/Behaviour.h"
-#include "OvCore/API/ISerializable.h"
+#include "Core/GlobalState.h"
+#include "GamePlay/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/CTransform.h"
+#include "GamePlay/ECS/Components/Behaviour.h"
+#include "GamePlay/API/ISerializable.h"
 
 namespace OvCore::SceneSystem
 {
@@ -348,4 +348,4 @@ namespace OvCore::ECS
 	};
 }
 
-#include "OvCore/ECS/Actor.inl"
+#include "GamePlay/ECS/Actor.inl"

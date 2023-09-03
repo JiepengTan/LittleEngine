@@ -8,12 +8,12 @@
 
 #include <unordered_map>
 
-#include <OvMaths/FVector2.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FVector4.h>
-#include <OvMaths/FMatrix4.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FVector4.h"
+#include "Core/Maths/FMatrix4.h"
 
-#include "OvRendering/Resources/UniformInfo.h"
+#include "Resource/Rendering/Resources/UniformInfo.h"
 
 
 

@@ -9,11 +9,11 @@
 
 #include <GL/glew.h>
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvRendering/Resources/Loaders/ShaderLoader.h"
+#include "Resource/Rendering/Resources/Loaders/ShaderLoader.h"
 
-#include "OvTools/Utils/PathParser.h"
+#include "Core/Tools/Utils/PathParser.h"
 
 std::string OvRendering::Resources::Loaders::ShaderLoader::__FILE_TRACE;
 

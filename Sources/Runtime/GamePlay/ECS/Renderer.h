@@ -8,16 +8,16 @@
 
 #include <map>
 
-#include <OvRendering/Core/Renderer.h>
-#include <OvRendering/Resources/Mesh.h>
-#include <OvRendering/Data/Frustum.h>
-#include <OvRendering/Buffers/ShadowmapBuffer.h>
+#include "Resource/Rendering/Core/Renderer.h"
+#include "Resource/Rendering/Resources/Mesh.h"
+#include "Resource/Rendering/Data/Frustum.h"
+#include "Resource/Rendering/Buffers/ShadowmapBuffer.h"
 
 
-#include "OvCore/Resources/Material.h"
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/ECS/Components/CCamera.h"
-#include "OvCore/SceneSystem/Scene.h"
+#include "Resource/Resources/Material.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CCamera.h"
+#include "GamePlay/SceneSystem/Scene.h"
 
 namespace OvCore::ECS
 {

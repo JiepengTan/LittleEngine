@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include "OvRendering/Resources/Loaders/ModelLoader.h"
+#include "Resource/Rendering/Resources/Loaders/ModelLoader.h"
 
-#include "OvRendering/Resources/Model.h"
+#include "Resource/Rendering/Resources/Model.h"
 
 OvRendering::Resources::Parsers::AssimpParser OvRendering::Resources::Loaders::ModelLoader::__ASSIMP;
 

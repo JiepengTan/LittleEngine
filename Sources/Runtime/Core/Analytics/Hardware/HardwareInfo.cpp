@@ -6,7 +6,7 @@
 
 #include <Windows.h>
 
-#include "OvAnalytics/Hardware/HardwareInfo.h"
+#include "Core/Analytics/Hardware/HardwareInfo.h"
 
 OvAnalytics::Hardware::HardwareInfo::HardwareInfo(double p_timeInterval) :
 	m_timeInterval(p_timeInterval),

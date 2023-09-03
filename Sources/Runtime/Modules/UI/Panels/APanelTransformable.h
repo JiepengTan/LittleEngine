@@ -9,11 +9,11 @@
 #include <vector>
 #include <memory>
 
-#include <OvMaths/FVector2.h>
-#include <OvTools/Eventing/Event.h>
+#include "Core/Maths/FVector2.h"
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Panels/APanel.h"
-#include "OvUI/Settings/Alignment.h"
+#include "Modules/UI/Panels/APanel.h"
+#include "Modules/UI/Settings/Alignment.h"
 
 namespace OvUI::Panels
 {

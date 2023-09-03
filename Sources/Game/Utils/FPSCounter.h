@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvUI/Panels/PanelUndecorated.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
+#include "Modules/UI/Panels/PanelUndecorated.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
 
-#include <OvWindowing/Window.h>
+#include "Platform/Windowing/Window.h"
 
 namespace OvGame::Utils
 {

@@ -8,8 +8,8 @@
 #include <array>
 #include <cstdint>
 
-#include "OvDebug/Assertion.h"
-#include "OvRendering/Buffers/VertexArray.h"
+#include "Core/Debug/Assertion.h"
+#include "Resource/Rendering/Buffers/VertexArray.h"
 
 #define VERTEX_DATA_FLAGS_INDEX_COUNT ((int)(OvRendering::Geometry::EVertexDataFlagsIndex::count))
 namespace OvRendering::Geometry

@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvRendering/Resources/Loaders/ShaderLoader.h>
+#include "Resource/Rendering/Resources/Loaders/ShaderLoader.h"
 
-#include "OvCore/ResourceManagement/AResourceManager.h"
+#include "Resource/ResourceManagement/AResourceManager.h"
 
 namespace OvCore::ResourceManagement
 {

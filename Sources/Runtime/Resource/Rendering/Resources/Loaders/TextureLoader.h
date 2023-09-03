@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "OvRendering/Resources/Texture.h"
+#include "Resource/Rendering/Resources/Texture.h"
 
 
 namespace OvRendering::Resources::Loaders

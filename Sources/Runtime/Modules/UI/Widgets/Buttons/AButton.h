@@ -8,9 +8,9 @@
 
 #include <string>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvUI/Widgets/AWidget.h"
+#include "Modules/UI/Widgets/AWidget.h"
 
 namespace OvUI::Widgets::Buttons
 {

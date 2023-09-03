@@ -4,20 +4,20 @@
 * @licence: MIT
 */
 
-#include "OvEditor/Panels/MaterialEditor.h"
-#include "OvEditor/Panels/AssetView.h"
+#include "../Editor/Panels/MaterialEditor.h"
+#include "../Editor/Panels/AssetView.h"
 
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include <OvCore/Resources/Loaders/MaterialLoader.h>
-#include <OvCore/Helpers/GUIDrawer.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Layout/GroupCollapsable.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Texts/TextColored.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/Buttons/ButtonSmall.h>
-#include <OvUI/Widgets/Selection/ColorEdit.h>
+#include "Resource/Resources/Loaders/MaterialLoader.h"
+#include "GamePlay/Helpers/GUIDrawer.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Texts/TextColored.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/Buttons/ButtonSmall.h"
+#include "Modules/UI/Widgets/Selection/ColorEdit.h"
 
 using namespace OvUI::Panels;
 using namespace OvUI::Widgets;

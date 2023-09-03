@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include "OvAnalytics/Profiling/ProfilerSpy.h"
-#include "OvAnalytics/Profiling/Profiler.h"
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
+#include "Core/Analytics/Profiling/Profiler.h"
 
 OvAnalytics::Profiling::ProfilerSpy::ProfilerSpy(const std::string & p_name) :
 	name(p_name),

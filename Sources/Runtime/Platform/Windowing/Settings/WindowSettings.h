@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include "OvWindowing/Cursor/ECursorShape.h"
-#include "OvWindowing/Cursor/ECursorMode.h"
+#include "Platform/Windowing/Cursor/ECursorShape.h"
+#include "Platform/Windowing/Cursor/ECursorMode.h"
 
 namespace OvWindowing::Settings
 {

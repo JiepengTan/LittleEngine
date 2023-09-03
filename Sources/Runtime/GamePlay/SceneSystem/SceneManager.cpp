@@ -4,13 +4,13 @@
 * @licence: MIT
 */
 
-#include <OvTools/Filesystem/tinyxml2.h>
-#include <OvWindowing/Dialogs/MessageBox.h>
+#include "Core/Tools/Filesystem/tinyxml2.h"
+#include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#include "OvCore/SceneSystem/SceneManager.h"
-#include "OvCore/ECS/Components/CDirectionalLight.h"
-#include "OvCore/ECS/Components/CAmbientSphereLight.h"
-#include "OvCore/ECS/Components/CCamera.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "GamePlay/ECS/Components/CCamera.h"
 
 OvCore::SceneSystem::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
 {

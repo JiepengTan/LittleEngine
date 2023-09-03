@@ -10,8 +10,8 @@
 #include <optional>
 
 
-#include "OvAudio/Entities/AudioSource.h"
-#include "OvAudio/Entities/AudioListener.h"
+#include "Modules/Audio/Entities/AudioSource.h"
+#include "Modules/Audio/Entities/AudioListener.h"
 
 namespace OvAudio::Core
 {

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvUI/Widgets/InputFields/InputMultipleScalars.h"
+#include "Modules/UI/Widgets/InputFields/InputMultipleScalars.h"
 
 namespace OvUI::Widgets::InputFields
 {

@@ -1,12 +1,12 @@
-﻿#include "OvCore/Helpers/ActorUtils.h"
+#include "GamePlay/Helpers/ActorUtils.h"
 
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/ECS/Components/CMaterialRenderer.h"
-#include "OvCore/ECS/Components/CModelRenderer.h"
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/ResourceManagement/MaterialManager.h"
-#include "OvCore/ResourceManagement/ModelManager.h"
-#include "OvCore/SceneSystem/SceneManager.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/ECS/Components/CMaterialRenderer.h"
+#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
 
 OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreatePlane(OvCore::ECS::Actor* p_parent, const std::string& p_name)
 {

@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "OvPhysics/Entities/PhysicalObject.h"
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include "OvPhysics/Tools/Conversion.h"
-#include "OvDebug/Logger.h"
+#include "Modules/Physics/Tools/Conversion.h"
+#include "Core/Debug/Logger.h"
 
 using namespace OvPhysics::Tools;
 using namespace OvPhysics::Settings;

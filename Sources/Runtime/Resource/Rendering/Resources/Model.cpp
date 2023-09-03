@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-#include "OvRendering/Resources/Model.h"
+#include "Resource/Rendering/Resources/Model.h"
 
 const OvRendering::Geometry::BoundingSphere& OvRendering::Resources::Model::GetBoundingSphere() const
 {

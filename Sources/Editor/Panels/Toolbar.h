@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <OvUI/Widgets/Buttons/ButtonImage.h>
-#include <OvUI/Panels/PanelWindow.h>
+#include "Modules/UI/Widgets/Buttons/ButtonImage.h"
+#include "Modules/UI/Panels/PanelWindow.h"
 
 namespace OvEditor::Panels
 {

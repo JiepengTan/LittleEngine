@@ -12,8 +12,8 @@
 
 #include <stdint.h>
 
-#include "OvMaths/FVector3.h"
-#include "OvMaths/FVector4.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FVector4.h"
 
 
 namespace OvMaths

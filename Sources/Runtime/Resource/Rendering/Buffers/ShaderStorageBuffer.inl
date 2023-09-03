@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvRendering/Buffers/ShaderStorageBuffer.h"
+#include "Resource/Rendering/Buffers/ShaderStorageBuffer.h"
 #include "UniformBuffer.h"
 
 namespace OvRendering::Buffers

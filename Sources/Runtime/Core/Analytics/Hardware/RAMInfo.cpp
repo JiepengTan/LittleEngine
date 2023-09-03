@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvAnalytics/Hardware/RAMInfo.h"
+#include "Core/Analytics/Hardware/RAMInfo.h"
 
 void OvAnalytics::Hardware::RAMInfo::Update()
 {

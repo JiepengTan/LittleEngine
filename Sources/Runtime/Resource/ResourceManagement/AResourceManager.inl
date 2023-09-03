@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-#include "OvCore/ResourceManagement/AResourceManager.h"
+#include "Resource/ResourceManagement/AResourceManager.h"
 
 namespace OvCore::ResourceManagement
 {

@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include "OvRendering/Buffers/Framebuffer.h"
+#include "Resource/Rendering/Buffers/Framebuffer.h"
 
 uint32_t OvRendering::Buffers::Framebuffer::m_curFrameBufferId = 0;
 OvRendering::Buffers::Framebuffer::Framebuffer(uint16_t p_width, uint16_t p_height)

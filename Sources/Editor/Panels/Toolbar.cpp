@@ -4,13 +4,13 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Layout/Spacing.h>
+#include "Modules/UI/Widgets/Layout/Spacing.h"
 
-#include "OvEditor/Panels/Toolbar.h"
-#include "OvEditor/Core/EditorActions.h"
+#include "../Editor/Panels/Toolbar.h"
+#include "../Editor/Core/EditorActions.h"
 
-#include <OvCore/Global/ServiceLocator.h>
-#include <OvCore/ResourceManagement/TextureManager.h>
+#include "GamePlay/Global/ServiceLocator.h"
+#include "Resource/ResourceManagement/TextureManager.h"
 
 OvEditor::Panels::Toolbar::Toolbar
 (

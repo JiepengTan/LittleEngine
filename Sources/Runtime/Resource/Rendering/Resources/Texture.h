@@ -9,7 +9,7 @@
 #include <stdint.h>
 #include <string>
 
-#include "OvRendering/Settings/ETextureFilteringMode.h"
+#include "Resource/Rendering/Settings/ETextureFilteringMode.h"
 
 
 

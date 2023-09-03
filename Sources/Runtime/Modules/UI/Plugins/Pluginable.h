@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "OvUI/Plugins/IPlugin.h"
+#include "Modules/UI/Plugins/IPlugin.h"
 
 namespace OvUI::Plugins
 {

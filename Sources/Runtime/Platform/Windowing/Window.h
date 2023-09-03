@@ -10,10 +10,10 @@
 
 #include <GLFW/glfw3.h>
 
-#include "OvWindowing/Context/Device.h"
-#include "OvWindowing/Settings/WindowSettings.h"
-#include "OvWindowing/Cursor/ECursorShape.h"
-#include "OvWindowing/Cursor/ECursorMode.h"
+#include "Platform/Windowing/Context/Device.h"
+#include "Platform/Windowing/Settings/WindowSettings.h"
+#include "Platform/Windowing/Cursor/ECursorShape.h"
+#include "Platform/Windowing/Cursor/ECursorMode.h"
 
 namespace OvWindowing
 {

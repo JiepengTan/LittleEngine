@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvRendering/Geometry/Vertex.h>
-#include <OvRendering/Resources/Model.h>
+#include "Resource/Rendering/Geometry/Vertex.h"
+#include "Resource/Rendering/Resources/Model.h"
 
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
 namespace OvCore::ECS { class Actor; }
 

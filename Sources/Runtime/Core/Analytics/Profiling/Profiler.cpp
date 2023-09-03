@@ -9,8 +9,8 @@
 #include <map>
 #include <string>
 
-#include "OvAnalytics/Profiling/Profiler.h"
-#include "OvAnalytics/Profiling/ProfilerSpy.h"
+#include "Core/Analytics/Profiling/Profiler.h"
+#include "Core/Analytics/Profiling/ProfilerSpy.h"
 
 bool											OvAnalytics::Profiling::Profiler::__ENABLED;
 std::mutex										OvAnalytics::Profiling::Profiler::__SAVE_MUTEX;

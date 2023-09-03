@@ -4,14 +4,14 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Plots/PlotLines.h>
-#include <OvUI/Widgets/Drags/DragFloat.h>
-#include <OvAudio/Core/AudioPlayer.h>
+#include "Modules/UI/Widgets/Plots/PlotLines.h"
+#include "Modules/UI/Widgets/Drags/DragFloat.h"
+#include "Modules/Audio/Core/AudioPlayer.h"
 
-#include "OvCore/ECS/Components/CAudioSource.h"
-#include "OvCore/ECS/Actor.h"
-#include "OvCore/Global/ServiceLocator.h"
-#include "OvCore/SceneSystem/SceneManager.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/Global/ServiceLocator.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
 
 OvCore::ECS::Components::CAudioSource::CAudioSource(ECS::Actor& p_owner) :
 	AComponent(p_owner),

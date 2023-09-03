@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Core/UIManager.h"
+#include "Modules/UI/Core/UIManager.h"
 
 OvUI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_style, const std::string& p_glslVersion)
 {

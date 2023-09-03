@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include "OvCore/ECS/Components/AComponent.h"
+#include "GamePlay/ECS/Components/AComponent.h"
 
-#include <OvMaths/FTransform.h>
-#include <OvMaths/FVector3.h>
-#include <OvMaths/FQuaternion.h>
+#include "Core/Maths/FTransform.h"
+#include "Core/Maths/FVector3.h"
+#include "Core/Maths/FQuaternion.h"
 
 #include "AComponent.h"
 

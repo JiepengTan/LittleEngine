@@ -9,21 +9,21 @@
 #include <filesystem>
 #include <fstream>
 
-#include "OvEditor/Core/ProjectHub.h"
+#include "../Editor/Core/ProjectHub.h"
 
-#include <OvUI/Widgets/Texts/Text.h>
-#include <OvUI/Widgets/Visual/Separator.h>
-#include <OvUI/Widgets/Layout/Columns.h>
-#include <OvUI/Widgets/Layout/Spacing.h>
-#include <OvUI/Widgets/Layout/Group.h>
-#include <OvUI/Widgets/Buttons/Button.h>
-#include <OvUI/Widgets/InputFields/InputText.h>
+#include "Modules/UI/Widgets/Texts/Text.h"
+#include "Modules/UI/Widgets/Visual/Separator.h"
+#include "Modules/UI/Widgets/Layout/Columns.h"
+#include "Modules/UI/Widgets/Layout/Spacing.h"
+#include "Modules/UI/Widgets/Layout/Group.h"
+#include "Modules/UI/Widgets/Buttons/Button.h"
+#include "Modules/UI/Widgets/InputFields/InputText.h"
 
-#include <OvTools/Utils/PathParser.h>
+#include "Core/Tools/Utils/PathParser.h"
 
-#include <OvWindowing/Dialogs/SaveFileDialog.h>
-#include <OvWindowing/Dialogs/OpenFileDialog.h>
-#include <OvWindowing/Dialogs/MessageBox.h>
+#include "Platform/Windowing/Dialogs/SaveFileDialog.h"
+#include "Platform/Windowing/Dialogs/OpenFileDialog.h"
+#include "Platform/Windowing/Dialogs/MessageBox.h"
 
 #define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\projects.ini")
 

@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvCore/ResourceManagement/TextureManager.h>
-#include <OvCore/ResourceManagement/ModelManager.h>
-#include <OvCore/ResourceManagement/ShaderManager.h>
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/ResourceManagement/ModelManager.h"
+#include "Resource/ResourceManagement/ShaderManager.h"
 
 namespace OvEditor::Core
 {

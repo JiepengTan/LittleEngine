@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <OvCore/SceneSystem/SceneManager.h>
+#include "GamePlay/SceneSystem/SceneManager.h"
 
-#include "OvEditor/Panels/AView.h"
+#include "../Editor/Panels/AView.h"
 
 namespace OvEditor::Core { class EditorRenderer; }
 

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvCore/ECS/Actor.h"
+#include "GamePlay/ECS/Actor.h"
 
 namespace OvCore::ECS
 {

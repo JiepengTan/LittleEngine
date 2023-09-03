@@ -9,8 +9,8 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "OvRendering/Resources/AnimationData.h"
-#include "OvRendering/Resources/Mesh.h"
+#include "Resource/Rendering/Resources/AnimationData.h"
+#include "Resource/Rendering/Resources/Mesh.h"
 namespace OvRendering::Resources::Loaders
 {
 	class ModelLoader;

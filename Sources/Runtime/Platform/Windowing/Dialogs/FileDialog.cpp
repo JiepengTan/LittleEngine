@@ -8,7 +8,7 @@
 
 #include <Windows.h>
 
-#include "OvWindowing/Dialogs/FileDialog.h"
+#include "Platform/Windowing/Dialogs/FileDialog.h"
 
 OvWindowing::Dialogs::FileDialog::FileDialog(std::function<int(tagOFNA*)> p_callback, const std::string & p_dialogTitle) :
 	m_callback(p_callback),

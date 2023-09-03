@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include "OvUI/Internal/Converter.h"
+#include "Modules/UI/Internal/Converter.h"
 
-#include "OvUI/Widgets/Buttons/ButtonSmall.h"
+#include "Modules/UI/Widgets/Buttons/ButtonSmall.h"
 
 OvUI::Widgets::Buttons::ButtonSmall::ButtonSmall(const std::string& p_label) :
 	label(p_label)

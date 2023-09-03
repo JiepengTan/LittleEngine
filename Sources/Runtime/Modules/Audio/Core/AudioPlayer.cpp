@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvAudio/Core/AudioPlayer.h"
+#include "Modules/Audio/Core/AudioPlayer.h"
 
 OvAudio::Core::AudioPlayer::AudioPlayer(AudioEngine& p_audioEngine) : m_audioEngine(p_audioEngine)
 {

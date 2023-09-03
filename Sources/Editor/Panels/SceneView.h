@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "OvEditor/Panels/AViewControllable.h"
-#include "OvEditor/Core/GizmoBehaviour.h"
+#include "../Editor/Panels/AViewControllable.h"
+#include "../Editor/Core/GizmoBehaviour.h"
 
 namespace OvEditor::Panels
 {

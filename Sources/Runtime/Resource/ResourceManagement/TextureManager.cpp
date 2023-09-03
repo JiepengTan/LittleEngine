@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "OvCore/ResourceManagement/TextureManager.h"
-#include "OvRendering/Settings/DriverSettings.h"
+#include "Resource/ResourceManagement/TextureManager.h"
+#include "Resource/Rendering/Settings/DriverSettings.h"
 
-#include <OvTools/Filesystem/IniFile.h>
+#include "Core/Tools/Filesystem/IniFile.h"
 
 std::tuple<OvRendering::Settings::ETextureFilteringMode, OvRendering::Settings::ETextureFilteringMode, bool> GetAssetMetadata(const std::string& p_path)
 {

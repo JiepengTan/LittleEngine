@@ -4,22 +4,22 @@
 * @licence: MIT
 */
 
-#include <OvUI/Widgets/Menu/MenuList.h>
-#include <OvUI/Widgets/Menu/MenuItem.h>
+#include "Modules/UI/Widgets/Menu/MenuList.h"
+#include "Modules/UI/Widgets/Menu/MenuItem.h"
 
-#include <OvCore/ECS/Components/CPhysicalBox.h>
-#include <OvCore/ECS/Components/CPhysicalSphere.h>
-#include <OvCore/ECS/Components/CPhysicalCapsule.h>
-#include <OvCore/ECS/Components/CPointLight.h>
-#include <OvCore/ECS/Components/CDirectionalLight.h>
-#include <OvCore/ECS/Components/CSpotLight.h>
-#include <OvCore/ECS/Components/CAmbientSphereLight.h>
-#include <OvCore/ECS/Components/CAudioSource.h>
-#include <OvCore/ECS/Components/CAudioListener.h>
-#include <OvCore/ECS/Components/CCamera.h>
+#include "GamePlay/ECS/Components/CPhysicalBox.h"
+#include "GamePlay/ECS/Components/CPhysicalSphere.h"
+#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
+#include "GamePlay/ECS/Components/CPointLight.h"
+#include "GamePlay/ECS/Components/CDirectionalLight.h"
+#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "GamePlay/ECS/Components/CAudioListener.h"
+#include "GamePlay/ECS/Components/CCamera.h"
 
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Utils/ActorCreationMenu.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Utils/ActorCreationMenu.h"
 
 std::function<void()> Combine(std::function<void()> p_a, std::optional<std::function<void()>> p_b)
 {

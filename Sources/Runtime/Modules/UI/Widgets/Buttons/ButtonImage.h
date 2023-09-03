@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <OvMaths/FVector2.h>
+#include "Core/Maths/FVector2.h"
 
-#include "OvUI/Internal/TextureID.h"
-#include "OvUI/Types/Color.h"
-#include "OvUI/Widgets/Buttons/AButton.h"
+#include "Modules/UI/Internal/TextureID.h"
+#include "Modules/UI/Types/Color.h"
+#include "Modules/UI/Widgets/Buttons/AButton.h"
 
 namespace OvUI::Widgets::Buttons
 {

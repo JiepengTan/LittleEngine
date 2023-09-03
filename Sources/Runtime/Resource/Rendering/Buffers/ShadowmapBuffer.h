@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @project: Overload
 * @author: gamestan
 * @licence: MIT
@@ -8,8 +8,8 @@
 
 #include <memory>
 
-#include "OvRendering/Context/Driver.h"
-#include "OvRendering/Resources/Texture.h"
+#include "Resource/Rendering/Context/Driver.h"
+#include "Resource/Rendering/Resources/Texture.h"
 
 namespace OvRendering::Buffers
 {

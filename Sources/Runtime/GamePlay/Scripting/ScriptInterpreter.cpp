@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include <OvDebug/Logger.h>
+#include "Core/Debug/Logger.h"
 
-#include "OvCore/Scripting/LuaBinder.h"
-#include "OvCore/Scripting/ScriptInterpreter.h"
+#include "GamePlay/Scripting/LuaBinder.h"
+#include "GamePlay/Scripting/ScriptInterpreter.h"
 
 OvCore::Scripting::ScriptInterpreter::ScriptInterpreter(const std::string& p_scriptRootFolder) :
 	m_scriptRootFolder(p_scriptRootFolder)

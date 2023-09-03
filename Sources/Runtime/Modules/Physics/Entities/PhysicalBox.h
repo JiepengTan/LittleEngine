@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "OvPhysics/Entities/PhysicalObject.h"
+#include "Modules/Physics/Entities/PhysicalObject.h"
 
 namespace OvPhysics::Entities
 {

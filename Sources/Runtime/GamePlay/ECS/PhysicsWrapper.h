@@ -9,11 +9,11 @@
 #include <optional>
 #include <vector>
 
-#include <OvPhysics/Entities/RaycastHit.h>
+#include "Modules/Physics/Entities/RaycastHit.h"
 
-#include <OvMaths/FVector3.h>
+#include "Core/Maths/FVector3.h"
 
-#include "OvCore/ECS/Components/CPhysicalObject.h"
+#include "GamePlay/ECS/Components/CPhysicalObject.h"
 
 namespace OvCore::ECS
 {

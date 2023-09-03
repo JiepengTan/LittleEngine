@@ -9,7 +9,7 @@
 #include <string>
 #include <queue>
 
-#include "OvDebug/ILogHandler.h"
+#include "Core/Debug/ILogHandler.h"
 
 namespace OvDebug
 {

@@ -10,11 +10,11 @@
 
 #include <GLFW/glfw3.h>
 
-#include <OvTools/Eventing/Event.h>
+#include "Core/Tools/Eventing/Event.h"
 
-#include "OvWindowing/Context/EDeviceError.h"
-#include "OvWindowing/Settings/DeviceSettings.h"
-#include "OvWindowing/Cursor/ECursorShape.h"
+#include "Platform/Windowing/Context/EDeviceError.h"
+#include "Platform/Windowing/Settings/DeviceSettings.h"
+#include "Platform/Windowing/Cursor/ECursorShape.h"
 
 namespace OvWindowing::Context
 {

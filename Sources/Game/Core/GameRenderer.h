@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <OvCore/ECS/Actor.h>
-#include <OvCore/SceneSystem/SceneManager.h>
-#include <OvCore/ECS/Components/CCamera.h>
+#include "GamePlay/ECS/Actor.h"
+#include "GamePlay/SceneSystem/SceneManager.h"
+#include "GamePlay/ECS/Components/CCamera.h"
 
-#include "OvGame/Core/Context.h"
+#include "../Game/Core/Context.h"
 
 namespace OvGame::Core
 {

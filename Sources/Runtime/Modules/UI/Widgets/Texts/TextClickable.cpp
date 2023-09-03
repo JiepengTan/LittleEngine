@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "OvUI/Widgets/Texts/TextClickable.h"
+#include "Modules/UI/Widgets/Texts/TextClickable.h"
 
 OvUI::Widgets::Texts::TextClickable::TextClickable(const std::string & p_content) :
 	Text(p_content)

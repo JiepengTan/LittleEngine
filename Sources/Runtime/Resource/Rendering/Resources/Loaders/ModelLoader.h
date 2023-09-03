@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include "OvRendering/Resources/Parsers/AssimpParser.h"
-#include "OvRendering/Resources/Model.h"
+#include "Resource/Rendering/Resources/Parsers/AssimpParser.h"
+#include "Resource/Rendering/Resources/Model.h"
 namespace OvRendering::Resources
 {
 	class Model;

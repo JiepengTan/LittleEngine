@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <OvUI/Panels/PanelMenuBar.h>
-#include <OvUI/Panels/PanelWindow.h>
-#include <OvUI/Widgets/Menu/MenuItem.h>
-#include <OvUI/Widgets/Buttons/ButtonImage.h>
+#include "Modules/UI/Panels/PanelMenuBar.h"
+#include "Modules/UI/Panels/PanelWindow.h"
+#include "Modules/UI/Widgets/Menu/MenuItem.h"
+#include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 
 namespace OvEditor::Panels
 {

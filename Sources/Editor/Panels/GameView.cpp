@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include <OvCore/ECS/Components/CCamera.h>
+#include "GamePlay/ECS/Components/CCamera.h"
 
-#include "OvEditor/Core/EditorRenderer.h"
-#include "OvEditor/Panels/GameView.h"
-#include "OvEditor/Core/EditorActions.h"
-#include "OvEditor/Settings/EditorSettings.h"
+#include "../Editor/Core/EditorRenderer.h"
+#include "../Editor/Panels/GameView.h"
+#include "../Editor/Core/EditorActions.h"
+#include "../Editor/Settings/EditorSettings.h"
 
 OvEditor::Panels::GameView::GameView
 (

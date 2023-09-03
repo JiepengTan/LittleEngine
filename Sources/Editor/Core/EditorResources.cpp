@@ -4,15 +4,15 @@
 * @licence: MIT
 */
 
-#include <OvCore/Helpers/GUIDrawer.h>
+#include "GamePlay/Helpers/GUIDrawer.h"
 
-#include <OvRendering/Settings/ETextureFilteringMode.h>
+#include "Resource/Rendering/Settings/ETextureFilteringMode.h"
 
-#include <OvTools/Utils/PathParser.h>
+#include "Core/Tools/Utils/PathParser.h"
 
-#include "OvEditor/Core/EditorResources.h"
-#include "OvEditor/Resources/RawTextures.h"
-#include "OvEditor/Resources/RawShaders.h"
+#include "../Editor/Core/EditorResources.h"
+#include "../Editor/Resources/RawTextures.h"
+#include "../Editor/Resources/RawShaders.h"
 
 OvEditor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
 {
