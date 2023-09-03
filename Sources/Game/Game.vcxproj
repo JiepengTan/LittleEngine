@@ -14,18 +14,12 @@
     <ProjectGuid>{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>OvGame</RootNamespace>
+    <RootNamespace>LittleGame</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
@@ -35,22 +29,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\Bin\Debug\OvGame\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Debug\OvGame\</IntDir>
-    <TargetName>OvGame</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\Bin\Release\OvGame\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Release\OvGame\</IntDir>
-    <TargetName>OvGame</TargetName>
+    <OutDir>..\..\Bin\Debug</OutDir>
+    <IntDir>..\..\Bin-Int\Debug</IntDir>
+    <TargetName>LittleGame</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -63,6 +47,7 @@
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -75,46 +60,6 @@
       <AdditionalLibraryDirectories>..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Debug\$(ProjectName)"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Debug\Builder\Development"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Debug\Builder\Development"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Debug\Builder\Shipping"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Debug\Builder\Shipping"
-EXIT /B 0</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Release;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Release\$(ProjectName)"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Release\Builder\Development"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Release\Builder\Development"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Release\Builder\Shipping"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Release\Builder\Shipping"
-EXIT /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

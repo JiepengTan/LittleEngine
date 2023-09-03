@@ -41,15 +41,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Debug\</IntDir>
+    <OutDir>..\..\Bin\Debug\</OutDir>
+    <IntDir>..\..\Bin-Int\Debug\</IntDir>
     <TargetName>LittleEditor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\Bin\Release\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Release\</IntDir>
+    <OutDir>..\..\Bin\Release\</OutDir>
+    <IntDir>..\..\Bin-Int\Release\</IntDir>
     <TargetName>LittleEditor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
@@ -63,6 +63,7 @@
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

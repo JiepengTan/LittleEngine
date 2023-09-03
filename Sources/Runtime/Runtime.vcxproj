@@ -41,14 +41,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Debug\</IntDir>
+    <OutDir>..\..\Bin\Debug\</OutDir>
+    <IntDir>..\..\Bin-Int\Debug\</IntDir>
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\Bin\Release\</OutDir>
-    <IntDir>..\..\..\Bin-Int\Release\</IntDir>
+    <OutDir>..\..\Bin\Release\</OutDir>
+    <IntDir>..\..\Bin-Int\Release\</IntDir>
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -64,6 +64,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
