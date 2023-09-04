@@ -49,6 +49,15 @@
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.exe" "$(ProjectDir)..\..\Build\Debug\Tools\"
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.dll" "$(ProjectDir)..\..\Build\Debug\Tools\"
+          "$(ProjectDir)..\..\Build\Debug\Tools\MetaParser.exe" "Prebuild"  
+          EXIT /B 0
+      </Command>
+    </PreBuildEvent>
+
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level1</WarningLevel>
@@ -80,16 +89,15 @@
     </Link>
     <PostBuildEvent>
       <Command>
-for /f "delims=|" %%i in ('dir /B /S "$(ProjectDir)..\3rdParty\*.dll"') do xcopy /Q /Y "%%i" "$(ProjectDir)..\..\Bin\$(ProjectName)\"
-xcopy "$(ProjectDir)..\..\Resources\Engine\*" "$(ProjectDir)..\..\Build\Debug\Data\Engine\" /y /i /r /e /q
-xcopy "$(ProjectDir)..\..\Resources\Editor\*" "$(ProjectDir)..\..\Build\Debug\Data\Editor\" /y /i /r /e /q
-xcopy "$(ProjectDir)\Layout.ini" "$(ProjectDir)..\..\Build\Debug\Config\" /y /i
-xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.exe" "$(ProjectDir)..\..\Build\Debug\"
-xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.dll" "$(ProjectDir)..\..\Build\Debug\"
-xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.exe" "$(ProjectDir)..\..\Build\Debug\Tools\"
-xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.dll" "$(ProjectDir)..\..\Build\Debug\Tools\"
-xcopy "$(ProjectDir)..\..\Bin\Debug\*Game.exe" "$(ProjectDir)..\..\Build\Debug\Builder\Development" /y /i /c
-EXIT /B 0</Command>
+          for /f "delims=|" %%i in ('dir /B /S "$(ProjectDir)..\3rdParty\*.dll"') do xcopy /Q /Y "%%i" "$(ProjectDir)..\..\Bin\$(ProjectName)\"
+          xcopy "$(ProjectDir)..\..\Resources\Engine\*" "$(ProjectDir)..\..\Build\Debug\Data\Engine\" /y /i /r /e /q
+          xcopy "$(ProjectDir)..\..\Resources\Editor\*" "$(ProjectDir)..\..\Build\Debug\Data\Editor\" /y /i /r /e /q
+          xcopy "$(ProjectDir)\Layout.ini" "$(ProjectDir)..\..\Build\Debug\Config\" /y /i
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.exe" "$(ProjectDir)..\..\Build\Debug\"
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.dll" "$(ProjectDir)..\..\Build\Debug\"
+          xcopy "$(ProjectDir)..\..\Bin\Debug\*Game.exe" "$(ProjectDir)..\..\Build\Debug\Builder\Development" /y /i /c
+          EXIT /B 0
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
