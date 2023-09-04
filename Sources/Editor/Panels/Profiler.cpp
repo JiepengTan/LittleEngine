@@ -6,7 +6,7 @@
 
 #include "../Editor/Panels/Profiler.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
 
 using namespace OvUI::Panels;

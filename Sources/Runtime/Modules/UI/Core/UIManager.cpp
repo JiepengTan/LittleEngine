@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Core/UIManager.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 OvUI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_style, const std::string& p_glslVersion)
 {

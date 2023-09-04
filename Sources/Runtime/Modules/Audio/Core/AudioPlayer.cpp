@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "Modules/Audio/Core/AudioPlayer.h"
 

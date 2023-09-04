@@ -5,7 +5,7 @@
 */
 
 #include "Modules/UI/Widgets/Texts/TextColored.h"
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "GamePlay/ECS/Actor.h"
 #include "GamePlay/ECS/Components/Behaviour.h"

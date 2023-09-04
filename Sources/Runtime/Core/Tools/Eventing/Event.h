@@ -61,7 +61,7 @@ namespace OvTools::Eventing
 		void RemoveAllListeners();
 
 		/**
-		* Return the number of callback registered
+		* Return the number of callback Registered
 		*/
 		uint64_t GetListenerCount();
 

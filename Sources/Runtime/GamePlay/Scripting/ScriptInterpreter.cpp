@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "GamePlay/Scripting/LuaBinder.h"
 #include "GamePlay/Scripting/ScriptInterpreter.h"

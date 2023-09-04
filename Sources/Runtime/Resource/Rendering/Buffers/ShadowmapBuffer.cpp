@@ -10,7 +10,7 @@
 
 #include <memory>
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 
 OvRendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_width, uint16_t p_height)

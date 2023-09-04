@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Core/GlobalState.h"
+#include "Core/Base/GlobalState.h"
 #include "GamePlay/API/IInspectorItem.h"
 
 namespace OvCore::ECS { class Actor; }

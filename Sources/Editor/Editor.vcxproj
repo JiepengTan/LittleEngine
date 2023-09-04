@@ -86,6 +86,8 @@ xcopy "$(ProjectDir)..\..\Resources\Editor\*" "$(ProjectDir)..\..\Build\Debug\Da
 xcopy "$(ProjectDir)\Layout.ini" "$(ProjectDir)..\..\Build\Debug\Config\" /y /i
 xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.exe" "$(ProjectDir)..\..\Build\Debug\"
 xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.dll" "$(ProjectDir)..\..\Build\Debug\"
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.exe" "$(ProjectDir)..\..\Build\Debug\Tools\"
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.dll" "$(ProjectDir)..\..\Build\Debug\Tools\"
 xcopy "$(ProjectDir)..\..\Bin\Debug\*Game.exe" "$(ProjectDir)..\..\Build\Debug\Builder\Development" /y /i /c
 EXIT /B 0</Command>
     </PostBuildEvent>

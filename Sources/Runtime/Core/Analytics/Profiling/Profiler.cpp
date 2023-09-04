@@ -73,7 +73,7 @@ void OvAnalytics::Profiling::Profiler::Save(OvAnalytics::Profiling::ProfilerSpy&
 {
 	__SAVE_MUTEX.lock();
 
-	/* Check if this thread is already registered */
+	/* Check if this thread is already Registered */
 	if (std::find(__WORKING_THREADS.begin(), __WORKING_THREADS.end(), std::this_thread::get_id()) == __WORKING_THREADS.end())
 		__WORKING_THREADS.push_back(std::this_thread::get_id());
 

@@ -7,7 +7,7 @@
 #include "Resource/ResourceManagement/AnimationManager.h"
 #include "Core/Tools/Filesystem/IniFile.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 #include "Resource/Rendering/Resources/Loaders/AnimationLoader.h"
 
 

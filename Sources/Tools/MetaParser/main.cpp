@@ -14,13 +14,13 @@ int main(int argc, char* argv[])
     int  result     = 0;
     int idx =0;
     argv[idx++]=argv[0];
-    argv[idx++]=(char* )("I:/Projects/Piccolo/engine/bin/precompile.json");
-    argv[idx++]=(char* )("I:/Projects/Piccolo/build/parser_header.h");
-    argv[idx++]=(char* )("I:/Projects/Piccolo/engine/source");
+    argv[idx++]=(char* )("I:/Projects/LittleEngine/engine/bin/precompile.json");
+    argv[idx++]=(char* )("I:/Projects/LittleEngine/build/parser_header.h");
+    argv[idx++]=(char* )("I:/Projects/LittleEngine/engine/source");
     argv[idx++]=(char* )("*");
-    argv[idx++]=(char* ) ("Piccolo");
+    argv[idx++]=(char* ) ("LittleEngine");
     argv[idx++]=(char* ) ("0");
-    
+    std::cout<<"hello"<<std::endl;
     if (argv[1] != nullptr && argv[2] != nullptr && argv[3] != nullptr && argv[4] != nullptr && argv[5] != nullptr &&
         argv[6] != nullptr)
     {
@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
             std::cout <<  str <<std::endl;
         }
         
+        return 0;
         MetaParser::prepare();
 
         result = parse(argv[1], argv[2], argv[3], argv[4], argv[5], argv[6]);

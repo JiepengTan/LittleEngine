@@ -102,6 +102,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Base\GlobalState.cpp"/>
+    <ClCompile Include="Core\Base\Macro.cpp"/>
+    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
+    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
+    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
+    <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
+    <ClCompile Include="_Generated\AllReflection.cpp" />
+    <ClCompile Include="_Generated\AllSerializer.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\HardwareInfo.h" />
@@ -110,6 +118,9 @@
     <ClInclude Include="Core\Analytics\Profiling\Profiler.h" />
     <ClInclude Include="Core\Analytics\Profiling\ProfilerReport.h" />
     <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h" />
+    <ClInclude Include="Core\Base\GlobalState.h" />
+    <ClInclude Include="Core\Base\Macro.h" />
+    <ClInclude Include="Core\CoreInclude.h" />
     <ClInclude Include="Core\Debug\Assertion.h" />
     <ClInclude Include="Core\Debug\ConsoleColor.h" />
     <ClInclude Include="Core\Debug\ConsoleHandler.h" />
@@ -117,7 +128,6 @@
     <ClInclude Include="Core\Debug\HistoryHandler.h" />
     <ClInclude Include="Core\Debug\ILogHandler.h" />
     <ClInclude Include="Core\Debug\Logger.h" />
-    <ClInclude Include="Core\GlobalState.h" />
     <ClInclude Include="Core\Maths\DebugUtil.h" />
     <ClInclude Include="Core\Maths\FMatrix3.h" />
     <ClInclude Include="Core\Maths\FMatrix4.h" />
@@ -127,6 +137,12 @@
     <ClInclude Include="Core\Maths\FVector3.h" />
     <ClInclude Include="Core\Maths\FVector4.h" />
     <ClInclude Include="Core\Maths\Internal\TransformNotifier.h" />
+    <ClInclude Include="Core\Reflection\Example\meta_example.h" />
+    <ClInclude Include="Core\Reflection\Reflection.h" />
+    <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
+    <ClInclude Include="Core\Serialization\Json.h" />
+    <ClInclude Include="Core\Serialization\json11\json11.hpp" />
+    <ClInclude Include="Core\Serialization\JsonSerializer.h" />
     <ClInclude Include="Core\Tools\Eventing\Event.h" />
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h" />
     <ClInclude Include="Core\Tools\Filesystem\tinyxml2.h" />
@@ -367,7 +383,6 @@
     <ClCompile Include="Core\Debug\FileHandler.cpp" />
     <ClCompile Include="Core\Debug\HistoryHandler.cpp" />
     <ClCompile Include="Core\Debug\Logger.cpp" />
-    <ClCompile Include="Core\GlobalState.cpp" />
     <ClCompile Include="Core\Maths\DebugUtil.cpp" />
     <ClCompile Include="Core\Maths\FMatrix3.cpp" />
     <ClCompile Include="Core\Maths\FMatrix4.cpp" />
@@ -377,6 +392,9 @@
     <ClCompile Include="Core\Maths\FVector3.cpp" />
     <ClCompile Include="Core\Maths\FVector4.cpp" />
     <ClCompile Include="Core\Maths\Internal\TransformNotifier.cpp" />
+    <ClCompile Include="Core\Reflection\Example\meta_example.cpp"/>
+    <ClCompile Include="Core\Reflection\Reflection.cpp"/>
+    <ClCompile Include="Core\Reflection\ReflectionRegister.cpp"/>
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp" />
     <ClCompile Include="Core\Tools\Filesystem\tinyxml2.cpp" />
     <ClCompile Include="Core\Tools\Time\Clock.cpp" />
@@ -535,6 +553,11 @@
     <ClCompile Include="Resource\ResourceManagement\TextureManager.cpp" />
     <ClCompile Include="Resource\Resources\Loaders\MaterialLoader.cpp" />
     <ClCompile Include="Resource\Resources\Material.cpp" />
+    <ClInclude Include="_Generated\AllReflection.h" />
+    <ClInclude Include="_Generated\AllSerializer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Generated\Padding.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

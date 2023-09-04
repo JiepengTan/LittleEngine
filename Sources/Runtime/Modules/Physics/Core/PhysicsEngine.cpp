@@ -10,7 +10,7 @@
 #include "Modules/Physics/Tools/Conversion.h"
 #include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 using namespace OvPhysics::Tools;
 using namespace OvPhysics::Entities;

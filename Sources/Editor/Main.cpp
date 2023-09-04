@@ -15,7 +15,7 @@
 
 #undef APIENTRY
 #include "Windows.h"
-#include "Core/GlobalState.h"
+#include "Core/Base/GlobalState.h"
 
 FORCE_DEDICATED_GPU
 

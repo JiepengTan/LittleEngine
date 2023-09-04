@@ -8,7 +8,7 @@
 
 #include "../Game/Debug/GameProfiler.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 

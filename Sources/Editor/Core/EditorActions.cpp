@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "GamePlay/ECS/Components/CPhysicalBox.h"
 #include "GamePlay/ECS/Components/CPhysicalSphere.h"
@@ -27,7 +27,7 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-#include "Core/GlobalState.h"
+#include "Core/Base/GlobalState.h"
 #include "../Editor/Panels/SceneView.h"
 #include "../Editor/Panels/AssetView.h"
 #include "../Editor/Panels/GameView.h"

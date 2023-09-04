@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "Resource/Rendering/Resources/Texture.h"
 #include "Resource/Rendering/Resources/Shader.h"

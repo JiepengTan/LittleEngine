@@ -6,7 +6,7 @@
 
 #include "Resource/Rendering/Utils/Defines.h"
 
-#include "Core/GlobalState.h"
+#include "Core/Base/GlobalState.h"
 #include "../Game/Core/Application.h"
 
 FORCE_DEDICATED_GPU

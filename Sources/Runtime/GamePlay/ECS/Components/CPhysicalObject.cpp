@@ -7,7 +7,7 @@
 #include "Modules/UI/Widgets/Drags/DragFloat.h"
 #include "Modules/UI/Widgets/Selection/ComboBox.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "Modules/Physics/Entities/PhysicalObject.h"
 

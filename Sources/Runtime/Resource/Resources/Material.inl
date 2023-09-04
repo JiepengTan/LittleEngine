@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "Resource/Resources/Material.h"
 

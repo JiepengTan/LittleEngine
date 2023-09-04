@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/Group.h"

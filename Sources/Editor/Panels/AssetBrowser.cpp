@@ -28,7 +28,7 @@
 #include "Resource/ResourceManagement/TextureManager.h"
 #include "Resource/ResourceManagement/ShaderManager.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 
 #include "../Editor/Panels/AssetBrowser.h"
 #include "../Editor/Panels/AssetView.h"

@@ -13,7 +13,7 @@
 #include <cassert>
 #include <assimp/postprocess.h>
 #include "Core/Debug/Assertion.h"
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 #include "Resource/Rendering/Resources/AnimationData.h"
 #include "Resource/Rendering/Resources/Animation.h"
 #include "Resource/Rendering/Resources/Model.h"

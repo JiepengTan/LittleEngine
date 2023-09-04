@@ -6,7 +6,7 @@
 
 #include "../Game/Core/Game.h"
 
-#include "Core/Debug/Logger.h"
+#include "Core/CoreInclude.h"
 #include "Modules/UI/Widgets/Texts/Text.h"
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
