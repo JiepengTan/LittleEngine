@@ -15,9 +15,10 @@ namespace OvRendering::Resources
 }
 namespace OvCore::ECS::Components
 {
-	class CAnimator: public AComponent
+	REFLECTION_TYPE(CAnimator)
+	CLASS (CAnimator : public AComponent, WhiteListFields)
 	{
-
+		REFLECTION_BODY(CAnimator)
 	public:
 		CAnimator(ECS::Actor& p_owner);
 		~CAnimator() =default;
@@ -60,6 +61,7 @@ namespace OvCore::ECS::Components
 		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
 		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,  OvMaths::FMatrix4  parentTransform);
 	private:
+        META(Enable)
 		float m_currentTime;
 		bool m_showDebugBones;
 		OvRendering::Resources::Animation* m_curAnim;
@@ -73,6 +75,7 @@ namespace OvCore::ECS::Components
 		float boneDrawSize = 0.05f;
 		
 	public:
+        META(Enable)
 		std::string m_animPath;
 		
 		bool hasUpdate = false;

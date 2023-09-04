@@ -32,18 +32,15 @@ int parse(std::string project_input_file_name,
 
 int main(int argc, char* argv[])
 {
-    for (int i = 0; i < argc; i++)
+    if (argc < 7)
     {
-        std::cout << "Params " << i << " =" << std::string(argv[i]) << std::endl;
-    }
-    if (argc < 3)
-    {
+        auto path =  argv[0];
         argv = new char*[7];
         int idx = 0;
-        argv[idx++] = argv[0];
-        argv[idx++] = (char*)("I:/Projects/LittleEngine/Bin/Tools/CodeAnalyzerOutput.txt");
-        argv[idx++] = (char*)("I:/Projects/LittleEngine/Bin/Tools/CodeParserResult.h");
-        argv[idx++] = (char*)("I:/Projects/LittleEngine/Sources/Runtime");
+        argv[idx++] = path;
+        argv[idx++] = (char*)("I:/Projects/OverloadEngine/Overload/Bin/Tools/CodeAnalyzerOutput.txt");
+        argv[idx++] = (char*)("I:/Projects/OverloadEngine/Overload/Bin/Tools/CodeParserResult.h");
+        argv[idx++] = (char*)("I:/Projects/OverloadEngine/Overload/Sources/Runtime");
         argv[idx++] = (char*)("*");
         argv[idx++] = (char*)("LittleEngine");
         argv[idx++] = (char*)("0");
@@ -53,7 +50,7 @@ int main(int argc, char* argv[])
     if (argv[1] != nullptr && argv[2] != nullptr && argv[3] != nullptr && argv[4] != nullptr && argv[5] != nullptr &&
         argv[6] != nullptr)
     {
-        std::cout << "!!!!ParseCo11de!" << std::endl;
+        std::cout << "!ParseCo11de!" << std::endl;
         for (int i = 0; i < 7; i++)
         {
             auto str = std::string(argv[i]);

@@ -6,7 +6,8 @@
 
 #pragma once
 
-#include "Core/Base/GlobalState.h"
+#include "Core/CoreInclude.h"
+#include "Core/Reflection/Reflection.h"
 #include "GamePlay/API/IInspectorItem.h"
 
 namespace OvCore::ECS { class Actor; }
@@ -14,13 +15,14 @@ namespace OvCore::ECS { class Actor; }
 namespace OvCore::ECS::Components
 {
 	class CPhysicalObject;
-
 	/**
 	* AComponent is the base class for any component.
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
-	class AComponent : public API::IInspectorItem
+	REFLECTION_TYPE(AComponent)
+	CLASS (AComponent : public API::IInspectorItem, WhiteListFields)
 	{
+		REFLECTION_BODY(AComponent)
 	public:
 		/**
 		* Constructor of a AComponent (Must be called by derived classes)
@@ -121,6 +123,7 @@ namespace OvCore::ECS::Components
 
 	public:
 		ECS::Actor& owner;
+        META(Enable)
 		bool IsUpdateInEdit;
 	};
 }
