@@ -331,11 +331,11 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 	tinyxml2::XMLNode* actorNode = p_doc.NewElement("actor");
 	p_actorsRoot->InsertEndChild(actorNode);
 
-	OvCore::Helpers::Serializer::SerializeString(p_doc, actorNode, "name", m_name);
-	OvCore::Helpers::Serializer::SerializeString(p_doc, actorNode, "tag", m_tag);
-	OvCore::Helpers::Serializer::SerializeBoolean(p_doc, actorNode, "active", m_active);
-	OvCore::Helpers::Serializer::SerializeInt64(p_doc, actorNode, "id", m_actorID);
-	OvCore::Helpers::Serializer::SerializeInt64(p_doc, actorNode, "parent", m_parentID);
+	OvCore::Serializer::SerializeString(p_doc, actorNode, "name", m_name);
+	OvCore::Serializer::SerializeString(p_doc, actorNode, "tag", m_tag);
+	OvCore::Serializer::SerializeBoolean(p_doc, actorNode, "active", m_active);
+	OvCore::Serializer::SerializeInt64(p_doc, actorNode, "id", m_actorID);
+	OvCore::Serializer::SerializeInt64(p_doc, actorNode, "parent", m_parentID);
 
 	tinyxml2::XMLNode* componentsNode = p_doc.NewElement("components");
 	actorNode->InsertEndChild(componentsNode);
@@ -347,7 +347,7 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 		componentsNode->InsertEndChild(componentNode);
 
 		/* Component type */
-		OvCore::Helpers::Serializer::SerializeString(p_doc, componentNode, "type", typeid(*component).name());
+		OvCore::Serializer::SerializeString(p_doc, componentNode, "type", typeid(*component).name());
 
 		/* Data node (Will be passed to the component) */
 		tinyxml2::XMLElement* data = p_doc.NewElement("data");
@@ -362,11 +362,11 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 }
 void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
-	OvCore::Helpers::Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
-	OvCore::Helpers::Serializer::DeserializeString(p_doc, p_actorsRoot, "tag", m_tag);
-	OvCore::Helpers::Serializer::DeserializeBoolean(p_doc, p_actorsRoot, "active", m_active);
-	OvCore::Helpers::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "id", m_actorID);
-	OvCore::Helpers::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "parent", m_parentID);
+	OvCore::Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
+	OvCore::Serializer::DeserializeString(p_doc, p_actorsRoot, "tag", m_tag);
+	OvCore::Serializer::DeserializeBoolean(p_doc, p_actorsRoot, "active", m_active);
+	OvCore::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "id", m_actorID);
+	OvCore::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "parent", m_parentID);
 
 	{
 		tinyxml2::XMLNode* componentsRoot = p_actorsRoot->FirstChildElement("components");

@@ -8,6 +8,7 @@
 
 #include "Core/CoreInclude.h"
 #include "Core/Reflection/Reflection.h"
+#include "Core/Serialization/JsonSerializer.h"
 #include "GamePlay/API/IInspectorItem.h"
 
 namespace OvCore::ECS { class Actor; }

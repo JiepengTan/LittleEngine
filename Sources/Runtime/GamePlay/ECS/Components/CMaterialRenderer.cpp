@@ -91,7 +91,7 @@ void OvCore::ECS::Components::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocume
 
 	for (uint8_t i = 0; i < elementsToSerialize; ++i)
 	{
-		OvCore::Helpers::Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
+		OvCore::Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
 	}
 }
 

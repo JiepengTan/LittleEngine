@@ -49,15 +49,6 @@
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PreBuildEvent>
-      <Command>
-          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.exe" "$(ProjectDir)..\..\Build\Debug\Tools\"
-          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.dll" "$(ProjectDir)..\..\Build\Debug\Tools\"
-          "$(ProjectDir)..\..\Build\Debug\Tools\MetaParser.exe" "Prebuild"  
-          EXIT /B 0
-      </Command>
-    </PreBuildEvent>
-
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level1</WarningLevel>

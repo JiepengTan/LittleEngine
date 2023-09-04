@@ -6,7 +6,7 @@ namespace Generator
 {
     SerializerGenerator::SerializerGenerator(std::string                             source_directory,
                                              std::function<std::string(std::string)> get_include_function) :
-        GeneratorInterface(source_directory + "/_generated/serializer", source_directory, get_include_function)
+        GeneratorInterface(source_directory + "/_Generated/Serializer", source_directory, get_include_function)
     {
         prepareStatus(m_out_path);
     }
@@ -99,9 +99,9 @@ namespace Generator
         mustache_data.set("include_headfiles", m_include_headfiles);
 
         std::string render_string = TemplateManager::getInstance()->renderByTemplate("allSerializer.h", mustache_data);
-        Utils::saveFile(render_string, m_out_path + "/all_serializer.h");
+        Utils::saveFile(render_string, m_out_path + "/AllSerializer.h");
         render_string = TemplateManager::getInstance()->renderByTemplate("allSerializer.ipp", mustache_data);
-        Utils::saveFile(render_string, m_out_path + "/all_serializer.ipp");
+        Utils::saveFile(render_string, m_out_path + "/AllSerializer.ipp");
     }
 
     SerializerGenerator::~SerializerGenerator() {}

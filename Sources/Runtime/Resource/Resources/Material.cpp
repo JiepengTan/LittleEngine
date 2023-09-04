@@ -187,7 +187,6 @@ std::map<std::string, std::any>& OvCore::Resources::Material::GetUniformsData()
 
 void OvCore::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvCore::Helpers;
 	using namespace OvRendering::Resources;
 	using namespace OvMaths;
 
@@ -254,8 +253,7 @@ void OvCore::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tin
 }
 
 void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
-{
-	using namespace OvCore::Helpers;
+{ 
 
 	tinyxml2::XMLNode* settingsNode = p_node->FirstChildElement("settings");
 	
@@ -271,7 +269,7 @@ void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, t
 	}
 
 	/* We get the shader with Deserialize method */
-	OvRendering::Resources::Shader* deserializedShader = OvCore::Helpers::Serializer::DeserializeShader(p_doc, p_node, "shader");
+	OvRendering::Resources::Shader* deserializedShader = OvCore::Serializer::DeserializeShader(p_doc, p_node, "shader");
 
 	/* We verify that the shader is valid (Not null) */
 	if (deserializedShader)
@@ -301,31 +299,31 @@ void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, t
 						switch (uniformInfo->type)
 						{
 						case OvRendering::Resources::UniformType::UNIFORM_BOOL:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeBoolean(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeBoolean(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_INT:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeInt(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeInt(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_FLOAT:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeFloat(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeFloat(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeVec2(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec2(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeVec3(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec3(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeVec4(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec4(p_doc, uniform, "value");
 							break;
 
 						case OvRendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
-							m_uniformsData[uniformInfo->name] = OvCore::Helpers::Serializer::DeserializeTexture(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeTexture(p_doc, uniform, "value");
 							break;
 						}
 					}

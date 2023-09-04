@@ -109,32 +109,32 @@ OvRendering::LowRenderer::Camera & OvCore::ECS::Components::CCamera::GetCamera()
 
 void OvCore::ECS::Components::CCamera::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	OvCore::Helpers::Serializer::SerializeFloat(p_doc, p_node, "fov", m_camera.GetFov());
-	OvCore::Helpers::Serializer::SerializeFloat(p_doc, p_node, "size", m_camera.GetSize());
-	OvCore::Helpers::Serializer::SerializeFloat(p_doc, p_node, "near", m_camera.GetNear());
-	OvCore::Helpers::Serializer::SerializeFloat(p_doc, p_node, "far", m_camera.GetFar());
-	OvCore::Helpers::Serializer::SerializeVec3(p_doc, p_node, "clear_color", m_camera.GetClearColor());
-	OvCore::Helpers::Serializer::SerializeBoolean(p_doc, p_node, "frustum_geometry_culling", m_camera.HasFrustumGeometryCulling());
-	OvCore::Helpers::Serializer::SerializeBoolean(p_doc, p_node, "frustum_light_culling", m_camera.HasFrustumLightCulling());
-	OvCore::Helpers::Serializer::SerializeInt(p_doc, p_node, "projection_mode", static_cast<int>(m_camera.GetProjectionMode()));
+	OvCore::Serializer::SerializeFloat(p_doc, p_node, "fov", m_camera.GetFov());
+	OvCore::Serializer::SerializeFloat(p_doc, p_node, "size", m_camera.GetSize());
+	OvCore::Serializer::SerializeFloat(p_doc, p_node, "near", m_camera.GetNear());
+	OvCore::Serializer::SerializeFloat(p_doc, p_node, "far", m_camera.GetFar());
+	OvCore::Serializer::SerializeVec3(p_doc, p_node, "clear_color", m_camera.GetClearColor());
+	OvCore::Serializer::SerializeBoolean(p_doc, p_node, "frustum_geometry_culling", m_camera.HasFrustumGeometryCulling());
+	OvCore::Serializer::SerializeBoolean(p_doc, p_node, "frustum_light_culling", m_camera.HasFrustumLightCulling());
+	OvCore::Serializer::SerializeInt(p_doc, p_node, "projection_mode", static_cast<int>(m_camera.GetProjectionMode()));
 }
 
 void OvCore::ECS::Components::CCamera::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	m_camera.SetFov(OvCore::Helpers::Serializer::DeserializeFloat(p_doc, p_node, "fov"));
-	m_camera.SetSize(OvCore::Helpers::Serializer::DeserializeFloat(p_doc, p_node, "size"));
-	m_camera.SetNear(OvCore::Helpers::Serializer::DeserializeFloat(p_doc, p_node, "near"));
-	m_camera.SetFar(OvCore::Helpers::Serializer::DeserializeFloat(p_doc, p_node, "far"));
-	m_camera.SetClearColor(OvCore::Helpers::Serializer::DeserializeVec3(p_doc, p_node, "clear_color"));
-	m_camera.SetFrustumGeometryCulling(OvCore::Helpers::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_geometry_culling"));
-	m_camera.SetFrustumLightCulling(OvCore::Helpers::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_light_culling"));
+	m_camera.SetFov(OvCore::Serializer::DeserializeFloat(p_doc, p_node, "fov"));
+	m_camera.SetSize(OvCore::Serializer::DeserializeFloat(p_doc, p_node, "size"));
+	m_camera.SetNear(OvCore::Serializer::DeserializeFloat(p_doc, p_node, "near"));
+	m_camera.SetFar(OvCore::Serializer::DeserializeFloat(p_doc, p_node, "far"));
+	m_camera.SetClearColor(OvCore::Serializer::DeserializeVec3(p_doc, p_node, "clear_color"));
+	m_camera.SetFrustumGeometryCulling(OvCore::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_geometry_culling"));
+	m_camera.SetFrustumLightCulling(OvCore::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_light_culling"));
 
     // We have to make sure the "projection_mode" exists in the serialized component, otherwise we do not want to modify the default setting (Perspective).
     // This is a bad practice to have each components calling setters in `OnDeserialize` even if no XML node hasn't been found for a given property.
     // We should rework this system later. As it is out of the scope of the orthographic projection scope, this will be left as is for now.
     if (p_node->FirstChildElement("projection_mode"))
     {
-        m_camera.SetProjectionMode(static_cast<OvRendering::Settings::EProjectionMode>(OvCore::Helpers::Serializer::DeserializeInt(p_doc, p_node, "projection_mode")));
+        m_camera.SetProjectionMode(static_cast<OvRendering::Settings::EProjectionMode>(OvCore::Serializer::DeserializeInt(p_doc, p_node, "projection_mode")));
     }
 }
 

@@ -12,7 +12,7 @@ namespace Generator
 {
     ReflectionGenerator::ReflectionGenerator(std::string                             source_directory,
                                              std::function<std::string(std::string)> get_include_function) :
-        GeneratorInterface(source_directory + "/_generated/reflection", source_directory, get_include_function)
+        GeneratorInterface(source_directory + "/_Generated/Reflection", source_directory, get_include_function)
     {
         prepareStatus(m_out_path);
     }
@@ -134,7 +134,7 @@ namespace Generator
         mustache_data.set("sourefile_names", sourefile_names);
         std::string render_string =
             TemplateManager::getInstance()->renderByTemplate("allReflectionFile", mustache_data);
-        Utils::saveFile(render_string, m_out_path + "/all_reflection.h");
+        Utils::saveFile(render_string, m_out_path + "/AllReflection.h");
     }
 
     ReflectionGenerator::~ReflectionGenerator() {}

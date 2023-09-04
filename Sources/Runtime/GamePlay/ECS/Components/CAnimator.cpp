@@ -260,12 +260,12 @@ std::vector<OvMaths::FMatrix4>* OvCore::ECS::Components::CAnimator::GetFinalBone
 
 void OvCore::ECS::Components::CAnimator::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-    OvCore::Helpers::Serializer::SerializeString(p_doc, p_node, "animPath", m_animPath);
+    OvCore::Serializer::SerializeString(p_doc, p_node, "animPath", m_animPath);
 }
 
 void OvCore::ECS::Components::CAnimator::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-    OvCore::Helpers::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
+    OvCore::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
 }
 
 void OvCore::ECS::Components::CAnimator::ToggleBones()

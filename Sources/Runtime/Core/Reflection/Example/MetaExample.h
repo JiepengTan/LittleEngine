@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Core/Reflection/Reflection.h"
-
-namespace LittleEngine
+namespace OvCore::ECS::Components
 {
     REFLECTION_TYPE(BaseTest)
     CLASS(BaseTest, Fields)
@@ -30,6 +29,6 @@ namespace LittleEngine
         REFLECTION_BODY(Test2);
 
     public:
-        std::vector<Reflection::ReflectionPtr<BaseTest>> m_test_base_array;
+        std::vector<OvCore::Reflection::ReflectionPtr<BaseTest>> m_test_base_array;
     };
 } // namespace LittleEngine

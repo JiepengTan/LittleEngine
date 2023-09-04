@@ -41,14 +41,14 @@ void OvCore::ECS::Components::CPhysicalBox::OnSerialize(tinyxml2::XMLDocument & 
 {
 	CPhysicalObject::OnSerialize(p_doc, p_node);
 
-	Helpers::Serializer::SerializeVec3(p_doc, p_node, "size", GetSize());
+	Serializer::SerializeVec3(p_doc, p_node, "size", GetSize());
 }
 
 void OvCore::ECS::Components::CPhysicalBox::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnDeserialize(p_doc, p_node);
 
-	SetSize(Helpers::Serializer::DeserializeVec3(p_doc, p_node, "size"));
+	SetSize(Serializer::DeserializeVec3(p_doc, p_node, "size"));
 }
 
 void OvCore::ECS::Components::CPhysicalBox::OnInspector(OvUI::Internal::WidgetContainer & p_root)

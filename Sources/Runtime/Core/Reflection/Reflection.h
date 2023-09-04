@@ -8,7 +8,7 @@
 #include <unordered_Set>
 #include <vector>
 
-namespace LittleEngine
+namespace OvCore
 {
 
 #if defined(__REFLECTION_PARSER__)
@@ -25,7 +25,7 @@ namespace LittleEngine
 
 #define REFLECTION_BODY(class_name) \
     friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
-    friend class Serializer;
+    friend class JsonSerializer;
     // public: virtual std::string GetTypeName() override {return #class_name;}
 
 #define REFLECTION_TYPE(class_name) \
@@ -54,11 +54,11 @@ namespace LittleEngine
     *static_cast<type*>(dst_ptr) = *static_cast<type*>(src_ptr.GetPtr());
 
 #define TypeMetaDef(class_name, ptr) \
-    LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
+    OvCore::Reflection::ReflectionInstance(OvCore::Reflection::TypeMeta::NewMetaFromName(#class_name), \
                                             (class_name*)ptr)
 
 #define TypeMetaDefPtr(class_name, ptr) \
-    new LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
+    new OvCore::Reflection::ReflectionInstance(OvCore::Reflection::TypeMeta::NewMetaFromName(#class_name), \
                                                 (class_name*)ptr)
 
     template<typename T, typename U, typename = void>

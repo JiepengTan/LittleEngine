@@ -1,17 +1,14 @@
-#include "Core/CoreInclude.h"
-
-#include "Meta_example.h"
-#include "_Generated/AllSerializer.h"
-
 
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
-#include "Core/Serialization/JsonSerializer.h"
+#include "Core/Reflection/Example/MetaExample.h"
+#include "_Generated/Serializer/AllSerializer.h"
 
+#include "Core/CoreInclude.h"
 
-namespace LittleEngine
+namespace OvCore::ECS::Components
 {
     void MetaExample()
     {
@@ -31,7 +28,7 @@ namespace LittleEngine
         // serializer & deserializer
 
         // Write Test1_in (object) to Test1_json_in (json)
-        auto test1_json_in = JsonSerializer::Write(test1_in);
+        auto test1_json_in =OvCore:: JsonSerializer::Write(test1_in);
 
         std::string test1_context = test1_json_in.dump();
 
@@ -39,10 +36,10 @@ namespace LittleEngine
         std::string err;
 
         auto&& Test1_json = Json::parse(test1_context, err);
-        JsonSerializer::Read(Test1_json, test1_out);
+        OvCore::JsonSerializer::Read(Test1_json, test1_out);
         OVLOG_INFO(test1_context);
 
-        auto        Test2_json_in = JsonSerializer::Write(test2_in);
+        auto        Test2_json_in = OvCore::JsonSerializer::Write(test2_in);
         std::string test2_context = Test2_json_in.dump();
 
         std::fstream out_put("out.txt", std::ios::out);
@@ -52,12 +49,12 @@ namespace LittleEngine
 
         Test2  test2_out;
         auto&& test2_json = Json::parse(test2_context, err);
-        JsonSerializer::Read(test2_json, test2_out);
+        OvCore::JsonSerializer::Read(test2_json, test2_out);
         OVLOG_INFO(test2_context.c_str());
 
         // reflection
         auto                       Meta = TypeMetaDef(Test2, &test2_out);
-        Reflection::FieldAccessor* fields;
+        OvCore::Reflection::FieldAccessor* fields;
         int                        fields_count = Meta.m_meta.GetFieldsList(fields);
         for (int i = 0; i < fields_count; ++i)
         {
@@ -66,12 +63,12 @@ namespace LittleEngine
                       << (char*)filed_accesser.Get(Meta.m_instance) << std::endl;
             if (filed_accesser.IsArrayType())
             {
-                Reflection::ArrayAccessor array_accesser;
-                if (Reflection::TypeMeta::NewArrayAccessorFromName(filed_accesser.GetFieldTypeName(), array_accesser))
+                OvCore::Reflection::ArrayAccessor array_accesser;
+                if (OvCore::Reflection::TypeMeta::NewArrayAccessorFromName(filed_accesser.GetFieldTypeName(), array_accesser))
                 {
                     void* field_instance = filed_accesser.Get(Meta.m_instance);
                     int   count          = array_accesser.GetSize(field_instance);
-                    auto  typeMetaItem   = Reflection::TypeMeta::NewMetaFromName(array_accesser.GetElementTypeName());
+                    auto  typeMetaItem   = OvCore::Reflection::TypeMeta::NewMetaFromName(array_accesser.GetElementTypeName());
                     for (int index = 0; index < count; ++index)
                     {
                         std::cout << ":L:" << index << ":R:" << (int*)array_accesser.Get(index, field_instance)

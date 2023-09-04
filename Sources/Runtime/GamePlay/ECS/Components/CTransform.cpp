@@ -161,18 +161,18 @@ OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetLocalRight() const
 
 void OvCore::ECS::Components::CTransform::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-	OvCore::Helpers::Serializer::SerializeVec3(p_doc, p_node, "position", GetLocalPosition());
-	OvCore::Helpers::Serializer::SerializeQuat(p_doc, p_node, "rotation", GetLocalRotation());
-	OvCore::Helpers::Serializer::SerializeVec3(p_doc, p_node, "scale", GetLocalScale());
+	OvCore::Serializer::SerializeVec3(p_doc, p_node, "position", GetLocalPosition());
+	OvCore::Serializer::SerializeQuat(p_doc, p_node, "rotation", GetLocalRotation());
+	OvCore::Serializer::SerializeVec3(p_doc, p_node, "scale", GetLocalScale());
 }
 
 void OvCore::ECS::Components::CTransform::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	m_transform.GenerateMatricesLocal
 	(
-		OvCore::Helpers::Serializer::DeserializeVec3(p_doc, p_node, "position"),
-		OvCore::Helpers::Serializer::DeserializeQuat(p_doc, p_node, "rotation"),
-		OvCore::Helpers::Serializer::DeserializeVec3(p_doc, p_node, "scale")
+		OvCore::Serializer::DeserializeVec3(p_doc, p_node, "position"),
+		OvCore::Serializer::DeserializeQuat(p_doc, p_node, "rotation"),
+		OvCore::Serializer::DeserializeVec3(p_doc, p_node, "scale")
 	);
 }
 

@@ -54,6 +54,16 @@
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>
+          echo "$(ProjectDir)"
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.exe" "$(ProjectDir)..\..\Build\Debug\Tools\"
+          xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\Tools\*.dll" "$(ProjectDir)..\..\Build\Debug\Tools\"
+          echo "MetaParser filesToGenerate sourceCodeDirectory showErrors(0 or 1)"
+          "$(ProjectDir)..\..\Build\Debug\Tools\MetaParser.exe" "$(ProjectDir)..\..\Bin\Tools\CodeAnalyzerOutput.txt" "$(ProjectDir)..\..\Sources\Runtime\"
+          EXIT /B 0
+      </Command>
+    </PreBuildEvent>
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level2</WarningLevel>
@@ -105,11 +115,7 @@
     <ClCompile Include="Core\Base\GlobalState.cpp"/>
     <ClCompile Include="Core\Base\Macro.cpp"/>
     <ClCompile Include="Core\Serialization\json11\json11.cpp" />
-    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
-    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
-    <ClCompile Include="_Generated\AllReflection.cpp" />
-    <ClCompile Include="_Generated\AllSerializer.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\HardwareInfo.h" />
@@ -137,7 +143,7 @@
     <ClInclude Include="Core\Maths\FVector3.h" />
     <ClInclude Include="Core\Maths\FVector4.h" />
     <ClInclude Include="Core\Maths\Internal\TransformNotifier.h" />
-    <ClInclude Include="Core\Reflection\Example\meta_example.h" />
+    <ClInclude Include="Core\Reflection\Example\MetaExample.h" />
     <ClInclude Include="Core\Reflection\Reflection.h" />
     <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
     <ClInclude Include="Core\Serialization\Json.h" />
@@ -392,7 +398,7 @@
     <ClCompile Include="Core\Maths\FVector3.cpp" />
     <ClCompile Include="Core\Maths\FVector4.cpp" />
     <ClCompile Include="Core\Maths\Internal\TransformNotifier.cpp" />
-    <ClCompile Include="Core\Reflection\Example\meta_example.cpp"/>
+    <ClCompile Include="Core\Reflection\Example\MetaExample.cpp" />
     <ClCompile Include="Core\Reflection\Reflection.cpp"/>
     <ClCompile Include="Core\Reflection\ReflectionRegister.cpp"/>
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp" />
@@ -553,8 +559,6 @@
     <ClCompile Include="Resource\ResourceManagement\TextureManager.cpp" />
     <ClCompile Include="Resource\Resources\Loaders\MaterialLoader.cpp" />
     <ClCompile Include="Resource\Resources\Material.cpp" />
-    <ClInclude Include="_Generated\AllReflection.h" />
-    <ClInclude Include="_Generated\AllSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_CodeTemplate\allReflectionFile.mustache" />
@@ -562,7 +566,6 @@
     <Content Include="_CodeTemplate\allSerializer.ipp.mustache" />
     <Content Include="_CodeTemplate\commonReflectionFile.mustache" />
     <Content Include="_CodeTemplate\commonSerializerGenFile.mustache" />
-    <Content Include="_Generated\Padding.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

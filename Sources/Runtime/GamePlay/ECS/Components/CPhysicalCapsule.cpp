@@ -52,16 +52,16 @@ void OvCore::ECS::Components::CPhysicalCapsule::OnSerialize(tinyxml2::XMLDocumen
 {
 	CPhysicalObject::OnSerialize(p_doc, p_node);
 
-	Helpers::Serializer::SerializeFloat(p_doc, p_node, "radius", GetRadius());
-	Helpers::Serializer::SerializeFloat(p_doc, p_node, "height", GetHeight());
+	Serializer::SerializeFloat(p_doc, p_node, "radius", GetRadius());
+	Serializer::SerializeFloat(p_doc, p_node, "height", GetHeight());
 }
 
 void OvCore::ECS::Components::CPhysicalCapsule::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnDeserialize(p_doc, p_node);
 
-	SetRadius(Helpers::Serializer::DeserializeFloat(p_doc, p_node, "radius"));
-	SetHeight(Helpers::Serializer::DeserializeFloat(p_doc, p_node, "height"));
+	SetRadius(Serializer::DeserializeFloat(p_doc, p_node, "radius"));
+	SetHeight(Serializer::DeserializeFloat(p_doc, p_node, "height"));
 }
 
 void OvCore::ECS::Components::CPhysicalCapsule::OnInspector(OvUI::Internal::WidgetContainer & p_root)

@@ -36,7 +36,7 @@ namespace OvCore::Resources
 	class Material;
 }
 
-namespace OvCore::Helpers
+namespace OvCore
 {
 	class Serializer
 	{
