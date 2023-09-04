@@ -154,9 +154,6 @@
     <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp">
       <Filter>GamePlay\ECS</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Renderer.cpp">
-      <Filter>GamePlay\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="GamePlay\Global\ServiceLocator.cpp">
       <Filter>GamePlay\Global</Filter>
     </ClCompile>
@@ -538,6 +535,9 @@
     <ClCompile Include="Resource\Resources\Material.cpp">
       <Filter>Resource\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="GamePlay\ECS\SceneRenderer.cpp">
+      <Filter>GamePlay\ECS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h">
@@ -715,9 +715,6 @@
       <Filter>GamePlay\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h">
-      <Filter>GamePlay\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Renderer.h">
       <Filter>GamePlay\ECS</Filter>
     </ClInclude>
     <ClInclude Include="GamePlay\Global\ServiceLocator.h">
@@ -1164,9 +1161,6 @@
     <ClInclude Include="Resource\Rendering\Context\Driver.h">
       <Filter>Resource\Rendering\Context</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Rendering\Core\Renderer.h">
-      <Filter>Resource\Rendering\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\Rendering\Core\ShapeDrawer.h">
       <Filter>Resource\Rendering\Core</Filter>
     </ClInclude>
@@ -1301,6 +1295,12 @@
     </ClInclude>
     <ClInclude Include="Resource\Resources\Material.h">
       <Filter>Resource\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Rendering\Core\Renderer.h">
+      <Filter>Resource\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\ECS\SceneRenderer.h">
+      <Filter>GamePlay\ECS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -62,7 +62,7 @@ OvEditor::Core::Context::Context(const std::string& p_projectPath, const std::st
 
 	/* Graphics context creation */
 	driver = std::make_unique<OvRendering::Context::Driver>(OvRendering::Settings::DriverSettings{ true });
-	renderer = std::make_unique<OvCore::ECS::ECSRenderer>(*driver);
+	renderer = std::make_unique<OvCore::ECS::SceneRenderer>(*driver);
 	renderer->SetCapability(OvRendering::Settings::ERenderingCapability::MULTISAMPLE, true);
 	shapeDrawer = std::make_unique<OvRendering::Core::ShapeDrawer>(*renderer);
 

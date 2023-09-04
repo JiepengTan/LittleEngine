@@ -17,7 +17,7 @@
 
 #include "Modules/UI/Core/UIManager.h"
 
-#include "GamePlay/ECS/ECSRenderer.h"
+#include "GamePlay/ECS/SceneRenderer.h"
 #include "Resource/ResourceManagement/ModelManager.h"
 #include "Resource/ResourceManagement/TextureManager.h"
 #include "Resource/ResourceManagement/ShaderManager.h"
@@ -58,7 +58,7 @@ namespace OvGame::Core
 		std::unique_ptr<OvWindowing::Window>						window;
 		std::unique_ptr<OvWindowing::Inputs::InputManager>			inputManager;
 		std::unique_ptr<OvRendering::Context::Driver>				driver;
-		std::unique_ptr<OvCore::ECS::ECSRenderer>						renderer;
+		std::unique_ptr<OvCore::ECS::SceneRenderer>						renderer;
 		std::unique_ptr<OvUI::Core::UIManager>						uiManager;
 		std::unique_ptr<OvPhysics::Core::PhysicsEngine>				physicsEngine;
 		std::unique_ptr<OvAudio::Core::AudioEngine>					audioEngine;

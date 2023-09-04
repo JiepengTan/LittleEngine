@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/Core/ECSRenderer.h"
+#include "Resource/Rendering/Core/Renderer.h"
 #include "Platform/Windowing/Context/Device.h"
 #include "Platform/Windowing/Window.h"
 #include "Resource/Rendering/Context/Driver.h"

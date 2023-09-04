@@ -32,22 +32,29 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\Bin\Debug</OutDir>
-    <IntDir>..\..\Bin-Int\Debug</IntDir>
+    <OutDir>..\..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>..\..\Bin-Int\Debug\$(ProjectName)\</IntDir>
     <TargetName>LittleGame</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level1</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ConformanceMode>true</ConformanceMode>
+      <UseFullPaths>false</UseFullPaths>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -56,10 +63,20 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LittleEngine.lib;assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\Bin;..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Link>
     <PostBuildEvent>
+      <Command>
+for /f "delims=|" %%i in ('dir /B /S "$(ProjectDir)..\3rdParty\*.dll"') do xcopy /Q /Y "%%i" "$(ProjectDir)..\..\Bin\$(ProjectName)\"
+xcopy "$(ProjectDir)..\..\Resources\Engine\*" "$(ProjectDir)..\..\Build\Debug\Data\Engine\" /y /i /r /e /q
+xcopy "$(ProjectDir)..\..\Resources\Editor\*" "$(ProjectDir)..\..\Build\Debug\Data\Editor\" /y /i /r /e /q
+xcopy "$(ProjectDir)\Layout.ini" "$(ProjectDir)..\..\Build\Debug\Config\" /y /i
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.exe" "$(ProjectDir)..\..\Build\Debug\"
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.dll" "$(ProjectDir)..\..\Build\Debug\"
+xcopy "$(ProjectDir)..\..\Bin\Debug\*Game.exe" "$(ProjectDir)..\..\Build\Debug\Builder\Development" /y /i /c
+EXIT /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

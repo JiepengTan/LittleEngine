@@ -42,14 +42,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\Bin-Int\Debug\Runtime\</IntDir>
+    <OutDir>..\..\Bin\</OutDir>
+    <IntDir>..\..\Bin-Int\Debug\$(ProjectName)\</IntDir>
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\Bin\Release\</OutDir>
-    <IntDir>..\..\Bin-Int\Release\</IntDir>
+    <OutDir>..\..\Bin\</OutDir>
+    <IntDir>..\..\Bin-Int\Release\$(ProjectName)\</IntDir>
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="GamePlay\ECS\Components\CSpotLight.h" />
     <ClInclude Include="GamePlay\ECS\Components\CTransform.h" />
     <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h" />
-    <ClInclude Include="GamePlay\ECS\ECSRenderer.h" />
+    <ClInclude Include="GamePlay\ECS\SceneRenderer.h" />
     <ClInclude Include="GamePlay\Global\ServiceLocator.h" />
     <ClInclude Include="GamePlay\Helpers\ActorUtils.h" />
     <ClInclude Include="GamePlay\Helpers\GUIDrawer.h" />
@@ -310,7 +310,7 @@
     <ClInclude Include="Resource\Rendering\Buffers\VertexArray.h" />
     <ClInclude Include="Resource\Rendering\Buffers\VertexBuffer.h" />
     <ClInclude Include="Resource\Rendering\Context\Driver.h" />
-    <ClInclude Include="Resource\Rendering\Core\ECSRenderer.h" />
+    <ClInclude Include="Resource\Rendering\Core\Renderer.h" />
     <ClInclude Include="Resource\Rendering\Core\ShapeDrawer.h" />
     <ClInclude Include="Resource\Rendering\Data\Frustum.h" />
     <ClInclude Include="Resource\Rendering\Entities\Light.h" />
@@ -407,7 +407,7 @@
     <ClCompile Include="GamePlay\ECS\Components\CSpotLight.cpp" />
     <ClCompile Include="GamePlay\ECS\Components\CTransform.cpp" />
     <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp" />
-    <ClCompile Include="GamePlay\ECS\ECSRenderer.cpp" />
+    <ClCompile Include="GamePlay\ECS\SceneRenderer.cpp" />
     <ClCompile Include="GamePlay\Global\ServiceLocator.cpp" />
     <ClCompile Include="GamePlay\Helpers\ActorUtils.cpp" />
     <ClCompile Include="GamePlay\Helpers\GUIDrawer.cpp" />

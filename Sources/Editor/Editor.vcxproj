@@ -43,15 +43,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\Bin\Debug\</OutDir>
-    <IntDir>..\..\Bin-Int\Debug\Editor\</IntDir>
-    <TargetName>LittleEditor</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\Bin\Release\</OutDir>
-    <IntDir>..\..\Bin-Int\Release\</IntDir>
+    <OutDir>..\..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>..\..\Bin-Int\Debug\$(ProjectName)\</IntDir>
     <TargetName>LittleEditor</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
@@ -82,59 +75,18 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>LittleEngine.lib;assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../Bin/Debug;..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Bin;..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Debug\$(ProjectName)"
-xcopy "$(SolutionDir)\..\..\Resources\Engine\*" "$(SolutionDir)\..\..\Build\Debug\Data\Engine" /y /i /r /e /q
-xcopy "$(SolutionDir)\..\..\Resources\Editor\*" "$(SolutionDir)\..\..\Build\Debug\Data\Editor" /y /i /r /e /q
-xcopy "$(ProjectDir)\Layout.ini" "$(SolutionDir)\..\..\Build\Debug\Config\" /y /i
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Debug\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Debug\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Debug\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Debug\"
-xcopy "$(SolutionDir)..\..\Bin\Debug\OvGame\*.exe" "$(SolutionDir)..\..\Build\Debug\Builder\Development" /y /i /c
-xcopy "$(SolutionDir)..\..\Bin\Release\OvGame\*.exe" "$(SolutionDir)..\..\Build\Debug\Builder\Shipping" /y /i /c
-EXIT /B 0</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Release;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>for /f "delims=|" %%i in ('dir /B /S "$(SolutionDir)..\..\Dependencies\*.dll"') do xcopy /Q /Y "%%i" "$(SolutionDir)..\..\Bin\Release\$(ProjectName)"
-xcopy "$(SolutionDir)\..\..\Resources\Engine\*" "$(SolutionDir)\..\..\Build\Release\Data\Engine" /y /i /r /e /q
-xcopy "$(SolutionDir)\..\..\Resources\Editor\*" "$(SolutionDir)\..\..\Build\Release\Data\Editor" /y /i /r /e /q
-xcopy "$(ProjectDir)\Layout.ini" "$(SolutionDir)\..\..\Build\Release\Config\" /y /i
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Release\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Debug\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Release\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.exe" "$(SolutionDir)\..\..\Build\Release\"
-xcopy /Y /I /Q /D "$(SolutionDir)\..\..\Bin\Release\$(ProjectName)\*.dll" "$(SolutionDir)\..\..\Build\Release\"
-xcopy "$(SolutionDir)..\..\Bin\Debug\OvGame\*.exe" "$(SolutionDir)..\..\Build\Release\Builder\Development" /y /i /c
-xcopy "$(SolutionDir)..\..\Bin\Release\OvGame\*.exe" "$(SolutionDir)..\..\Build\Release\Builder\Shipping" /y /i /c
+      <Command>
+for /f "delims=|" %%i in ('dir /B /S "$(ProjectDir)..\3rdParty\*.dll"') do xcopy /Q /Y "%%i" "$(ProjectDir)..\..\Bin\$(ProjectName)\"
+xcopy "$(ProjectDir)..\..\Resources\Engine\*" "$(ProjectDir)..\..\Build\Debug\Data\Engine\" /y /i /r /e /q
+xcopy "$(ProjectDir)..\..\Resources\Editor\*" "$(ProjectDir)..\..\Build\Debug\Data\Editor\" /y /i /r /e /q
+xcopy "$(ProjectDir)\Layout.ini" "$(ProjectDir)..\..\Build\Debug\Config\" /y /i
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.exe" "$(ProjectDir)..\..\Build\Debug\"
+xcopy /Y /I /Q /D "$(ProjectDir)..\..\Bin\$(ProjectName)\*.dll" "$(ProjectDir)..\..\Build\Debug\"
+xcopy "$(ProjectDir)..\..\Bin\Debug\*Game.exe" "$(ProjectDir)..\..\Build\Debug\Builder\Development" /y /i /c
 EXIT /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -206,6 +158,12 @@ EXIT /B 0</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Editor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Runtime\Runtime.vcxproj">
+      <Project>{68c0e779-d475-606f-5d6a-5a46c91e5773}</Project>
+      <Name>Runtime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

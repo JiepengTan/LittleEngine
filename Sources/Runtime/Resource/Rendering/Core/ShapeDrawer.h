@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/Core/ECSRenderer.h"
+#include "Resource/Rendering/Core/Renderer.h"
 #include "Resource/Rendering/Resources/Mesh.h"
 
 namespace OvRendering::Core

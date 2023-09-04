@@ -6,6 +6,8 @@
 
 #include "Modules/UI/Core/UIManager.h"
 
+#include "Core/Debug/Logger.h"
+
 OvUI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_style, const std::string& p_glslVersion)
 {
 	ImGui::CreateContext();
@@ -172,6 +174,7 @@ bool OvUI::Core::UIManager::LoadFont(const std::string& p_id, const std::string 
 {
 	if (m_fonts.find(p_id) == m_fonts.end())
 	{
+		OVLOG("load font path =" + p_path);
 		auto& io = ImGui::GetIO();
 		ImFont* fontInstance = io.Fonts->AddFontFromFileTTF(p_path.c_str(), p_fontSize);
 
@@ -179,6 +182,9 @@ bool OvUI::Core::UIManager::LoadFont(const std::string& p_id, const std::string 
 		{
 			m_fonts[p_id] = fontInstance;
 			return true;
+		}
+		else {
+			OVLOG_ERROR("Could not load font !" + p_path);
 		}
 	}
 	
