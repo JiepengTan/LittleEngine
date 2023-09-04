@@ -11,30 +11,28 @@ namespace CodeAnalyzer
     {
         public static void Main(string[] args)
         {
-            var paths = new string[]
+            foreach (var arg in args)
             {
-                @"../../Sources/Runtime",
-            };
-            string targetPath = "CodeAnalyzerOutput.txt";
-            if (args.Length > 1)
-            {
-                targetPath = args[1];
             }
-
-            ReplaceCodeIncludes(paths,targetPath);
+            var dir = "../../Sources/Runtime";
+            string targetPath = "CodeAnalyzerOutput.txt";
+            if (args.Length >= 2)
+            {
+                targetPath = args[0];
+                dir= args[1];
+            }
+            Console.WriteLine("CodeAnalyzer Param targetPath=" +targetPath  + " sourceDir = " +dir );
+            ReplaceCodeIncludes(dir,targetPath);
         }
 
         
-        private static void ReplaceCodeIncludes(string[] paths,string targetPath)
+        private static void ReplaceCodeIncludes(string dir,string targetPath)
         {
             HashSet<string> allCppFiles = new HashSet<string>();
-            foreach (var dir in paths)
+            PathUtil.Walk(dir, "*.h|*.inl|*.hpp", (p) =>
             {
-                PathUtil.Walk(dir, "*.h|*.inl|*.hpp", (p) =>
-                {
-                    allCppFiles.Add(Path.GetFullPath(p).Replace("\\","/"));
-                });
-            }
+                allCppFiles.Add(Path.GetFullPath(p).Replace("\\","/"));
+            });
 
             var lst = allCppFiles.ToList();
             lst.Sort();

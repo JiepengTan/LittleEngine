@@ -35,11 +35,11 @@ int main(int argc, char* args[])
     //args[1] =(char*) "I:/Projects/OverloadEngine/Overload/Sources/Runtime/../../Bin/Tools/CodeAnalyzerOutput.txt";
     //args[2] =(char*) "I:/Projects/OverloadEngine/Overload/Sources/Runtime/../../Sources/Runtime";
     std::cout << "Arguments Count"<< argc << std::endl;
-    if(argc <3)
+    if(argc <4)
     {
         std::cerr << "Arguments parse error!" << std::endl
         << "Please call the tool like this:" << std::endl
-        << "MetaParser filesToGenerate sourceCodeDirectory showErrors(0 or 1)"
+        << "MetaParser filesToGenerate sourceCodeDirectory tempBuildFile "
         << std::endl
         << std::endl;
         for ( int i =0;i< argc;i++  )
@@ -55,12 +55,17 @@ int main(int argc, char* args[])
         std::string project_input_file_name = args[1];
         std::string include_path = args[2];
         std::string show_errors = "0";
-        std::string source_include_file_name = "CodeParserResult.h";
+        std::string source_include_file_name =args[3];
         std::string sys_include = "*";
         std::string module_name = "LittleEngine";
         std::string template_dir = include_path + "/_CodeTemplate/";
         
-        std::cout << "MetaParser inputFiles=" +project_input_file_name + " sourceDir ="<<include_path + " showErrors=" + show_errors << std::endl;
+        std::cout <<
+            "MetaParser inputFiles=" +project_input_file_name +
+            " sourceDir ="<<include_path +
+            " tempBuildFile =" << source_include_file_name +
+            " showErrors=" + show_errors
+        << std::endl;
         
         auto result = parse(
             project_input_file_name, template_dir, source_include_file_name, include_path,
