@@ -18,6 +18,7 @@ public:
     static void prepare(void);
 
     MetaParser(const std::string project_input_file,
+               const std::string template_dir,
                const std::string include_file_path,
                const std::string include_path,
                const std::string include_sys,

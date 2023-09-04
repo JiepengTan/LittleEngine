@@ -19,4 +19,6 @@ private:
     TemplateManager(const TemplateManager&);
     TemplateManager&                             operator=(const TemplateManager&);
     std::unordered_map<std::string, std::string> m_template_pool;
+public:
+    static std::string TemplateDir;
 };

@@ -40,6 +40,7 @@ std::string MetaParser::getIncludeFile(std::string name)
 }
 
 MetaParser::MetaParser(const std::string project_input_file,
+                       const std::string template_dir,
                        const std::string include_file_path,
                        const std::string include_path,
                        const std::string sys_include,
@@ -50,7 +51,7 @@ MetaParser::MetaParser(const std::string project_input_file,
     m_sys_include(sys_include), m_module_name(module_name), m_is_show_errors(is_show_errors)
 {
     m_work_paths = Utils::split(include_path, ";");
-
+    TemplateManager::TemplateDir = template_dir;
     m_generators.emplace_back(new Generator::SerializerGenerator(
         m_work_paths[0], std::bind(&MetaParser::getIncludeFile, this, std::placeholders::_1)));
     m_generators.emplace_back(new Generator::ReflectionGenerator(

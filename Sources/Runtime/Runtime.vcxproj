@@ -557,6 +557,11 @@
     <ClInclude Include="_Generated\AllSerializer.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_CodeTemplate\allReflectionFile.mustache" />
+    <Content Include="_CodeTemplate\allSerializer.h.mustache" />
+    <Content Include="_CodeTemplate\allSerializer.ipp.mustache" />
+    <Content Include="_CodeTemplate\commonReflectionFile.mustache" />
+    <Content Include="_CodeTemplate\commonSerializerGenFile.mustache" />
     <Content Include="_Generated\Padding.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

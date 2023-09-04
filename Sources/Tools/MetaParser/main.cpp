@@ -1,51 +1,81 @@
 #include "common/precompiled.h"
 #include "parser/parser.h"
 
-int parse(std::string project_file_name,
+int parse(std::string project_input_file_name,
+          std::string template_dir,
           std::string source_include_file_name,
           std::string include_path,
           std::string sys_include,
           std::string module_name,
-          std::string show_errors);
+          std::string show_errors)
+{
+    std::cout << std::endl;
+    std::cout << "Parsing meta data for target \"" << module_name << "\"" << std::endl;
+    std::fstream input_file;
+
+    bool is_show_errors = "0" != show_errors;
+    MetaParser parser(
+        project_input_file_name, template_dir, source_include_file_name,
+        include_path, sys_include, module_name, is_show_errors);
+
+    std::cout << "Parsing in " << include_path << std::endl;
+    int result = parser.parse();
+    if (0 != result)
+    {
+        return result;
+    }
+
+    parser.generateFiles();
+
+    return 0;
+}
 
 int main(int argc, char* argv[])
 {
-    for (int i =0;i<argc;i++)
+    for (int i = 0; i < argc; i++)
     {
-        std::cout<<"Params "<< i <<" =" << std::string(argv[i])<<std::endl;  
+        std::cout << "Params " << i << " =" << std::string(argv[i]) << std::endl;
     }
-    if(argc <3)
+    if (argc < 3)
     {
         argv = new char*[7];
-        int idx =0;
-        argv[idx++]=argv[0];
-        argv[idx++]=(char* )("I:/Projects/LittleEngine/engine/bin/precompile.json");
-        argv[idx++]=(char* )("I:/Projects/LittleEngine/build/parser_header.h");
-        argv[idx++]=(char* )("I:/Projects/LittleEngine/engine/source");
-        argv[idx++]=(char* )("*");
-        argv[idx++]=(char* ) ("LittleEngine");
-        argv[idx++]=(char* ) ("0");
+        int idx = 0;
+        argv[idx++] = argv[0];
+        argv[idx++] = (char*)("I:/Projects/LittleEngine/Bin/Tools/CodeAnalyzerOutput.txt");
+        argv[idx++] = (char*)("I:/Projects/LittleEngine/Bin/Tools/CodeParserResult.h");
+        argv[idx++] = (char*)("I:/Projects/LittleEngine/Sources/Runtime");
+        argv[idx++] = (char*)("*");
+        argv[idx++] = (char*)("LittleEngine");
+        argv[idx++] = (char*)("0");
     }
-    return 0;
     auto start_time = std::chrono::system_clock::now();
-    int  result     = 0;
+    int result = 0;
     if (argv[1] != nullptr && argv[2] != nullptr && argv[3] != nullptr && argv[4] != nullptr && argv[5] != nullptr &&
         argv[6] != nullptr)
     {
-        std::cout << "!!!!ParseCo11de!"<< std::endl;
-        for (int i =0;i<7;i++)
+        std::cout << "!!!!ParseCo11de!" << std::endl;
+        for (int i = 0; i < 7; i++)
         {
             auto str = std::string(argv[i]);
-            std::cout <<  str <<std::endl;
+            std::cout << str << std::endl;
         }
-        
+
         MetaParser::prepare();
 
-        result = parse(argv[1], argv[2], argv[3], argv[4], argv[5], argv[6]);
+        std::string project_input_file_name = argv[1];
+        std::string source_include_file_name = argv[2];
+        std::string include_path =argv[3];
+        std::string sys_include = argv[4];
+        std::string module_name = argv[5];
+        std::string show_errors = argv[6];
+        std::string template_dir = include_path + "/_CodeTemplate/";
+        result = parse(
+            project_input_file_name, template_dir, argv[2], include_path,
+            sys_include, module_name, show_errors);
 
         auto duration_time = std::chrono::system_clock::now() - start_time;
         std::cout << "Completed in " << std::chrono::duration_cast<std::chrono::milliseconds>(duration_time).count()
-                  << "ms" << std::endl;
+            << "ms" << std::endl;
         return result;
     }
     else
@@ -58,34 +88,6 @@ int main(int argc, char* argv[])
                   << std::endl;
         return -1;
     }
-
-    return 0;
-}
-
-int parse(std::string project_input_file_name,
-          std::string source_include_file_name,
-          std::string include_path,
-          std::string sys_include,
-          std::string module_name,
-          std::string show_errors)
-{
-    std::cout << std::endl;
-    std::cout << "Parsing meta data for target \"" << module_name << "\"" << std::endl;
-    std::fstream input_file;
-
-    bool is_show_errors = "0" != show_errors;
-
-    MetaParser parser(
-        project_input_file_name, source_include_file_name, include_path, sys_include, module_name, is_show_errors);
-
-    std::cout << "Parsing in " << include_path << std::endl;
-    int result = parser.parse();
-    if (0 != result)
-    {
-        return result;
-    }
-
-    parser.generateFiles();
 
     return 0;
 }
