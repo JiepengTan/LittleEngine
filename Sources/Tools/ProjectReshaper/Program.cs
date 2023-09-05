@@ -16,7 +16,7 @@ namespace GamesTan.ProjectReshaper
         public static void Main(string[] args)
         {
             //ReplaceHeadInclude();
-            ReplaceNameSpace();
+            //ReplaceNameSpace();
         }
 
         private static void ReplaceNameSpace()
