@@ -11,7 +11,7 @@ namespace GamesTan.ProjectReshaper
             List<string> allCppFiles = new List<string>();
             foreach (var dir in paths)
             {
-                PathUtil.Walk(dir, "*.h|*.inl|*.cpp", (p) => { allCppFiles.Add(p); });
+                PathUtil.Walk(dir, "*.h|*.inl|*.cpp|*.mustache", (p) => { allCppFiles.Add(p); });
             }
             foreach (var file in allCppFiles)
             {

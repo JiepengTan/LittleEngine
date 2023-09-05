@@ -1,14 +1,14 @@
 ﻿#pragma once
 #include "Core/CoreInclude.h"
 #include "Core/Reflection/Reflection.h"
-
-namespace OvCore::ResDefines
+#ifdef false
+namespace OvCore
 {
     // 资源的内部数据，没有文件映射关系
-    REFLECTION_TYPE(ResStruct)
+    REFLECTION_TYPE(ResData)
     CLASS(ResData, Fields)
     {
-        REFLECTION_BODY(ResStruct)
+        REFLECTION_BODY(ResData)
     public:
         int64_t objectId;
         StringName name;
@@ -26,3 +26,4 @@ namespace OvCore::ResDefines
 
 
 }
+#endif

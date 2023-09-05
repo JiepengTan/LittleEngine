@@ -15,7 +15,7 @@ namespace GamesTan.ProjectReshaper
         };
         public static void Main(string[] args)
         {
-            ReplaceHeadInclude();
+            //ReplaceHeadInclude();
             ReplaceNameSpace();
         }
 
@@ -23,8 +23,20 @@ namespace GamesTan.ProjectReshaper
         {
             var namespaceMap = new Dictionary<string, string>()
             {
+                { "OvCore::ECS::Components", "LittleEngine"},
+                { "OvCore::ECS", "LittleEngine"},
                 { "OvCore", "LittleEngine" },
+                { "OvMaths", "LittleEngine" },
+                { "OvTools", "LittleEngine" },
                 { "OvEditor", "LittleEditor" },
+                { "OvGame", "LittleGame" },
+                
+                { "OvAnalytics", "LittleEngine::Analytics" },
+                { "OvAudio", "LittleEngine::Audio" },
+                { "OvPhysics", "LittleEngine::Physics" },
+                { "OvRendering", "LittleEngine::Rendering" },
+                { "OvUI", "LittleEngine::UI" },
+                { "OvWindowing", "LittleEngine::Windowing" },
             };
             ContentReplacement.ReplaceFiles(sourceDirs, namespaceMap);
         }
