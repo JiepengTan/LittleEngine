@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include=".\parser\cursor\cursor.cpp" />
+    <ClCompile Include=".\parser\cursor\cursor_type.cpp" />
+    <ClCompile Include=".\parser\generator\generator.cpp" />
+    <ClCompile Include=".\parser\generator\reflection_generator.cpp" />
+    <ClCompile Include=".\parser\generator\serializer_generator.cpp" />
+    <ClCompile Include=".\parser\language_types\class.cpp" />
+    <ClCompile Include=".\parser\language_types\field.cpp" />
+    <ClCompile Include=".\parser\language_types\method.cpp" />
+    <ClCompile Include=".\parser\language_types\type_info.cpp" />
+    <ClCompile Include=".\parser\meta\meta_info.cpp" />
+    <ClCompile Include=".\parser\meta\meta_utils.cpp" />
+    <ClCompile Include=".\parser\parser\parser.cpp" />
+    <ClCompile Include=".\parser\template_manager\template_manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\BuildSystem.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\CXCompilationDatabase.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\CXErrorCode.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\CXString.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\Documentation.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\Index.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\clang-c\Platform.h" />
+    <ClInclude Include=".\3rd_party\LLVM\include\llvm-c\lto.h" />
+    <ClInclude Include=".\parser\common\namespace.h" />
+    <ClInclude Include=".\parser\common\precompiled.h" />
+    <ClInclude Include=".\parser\common\schema_module.h" />
+    <ClInclude Include=".\parser\cursor\cursor.h" />
+    <ClInclude Include=".\parser\cursor\cursor_type.h" />
+    <ClInclude Include=".\parser\generator\generator.h" />
+    <ClInclude Include=".\parser\generator\reflection_generator.h" />
+    <ClInclude Include=".\parser\generator\serializer_generator.h" />
+    <ClInclude Include=".\parser\language_types\class.h" />
+    <ClInclude Include=".\parser\language_types\field.h" />
+    <ClInclude Include=".\parser\language_types\method.h" />
+    <ClInclude Include=".\parser\language_types\type_info.h" />
+    <ClInclude Include=".\parser\meta\meta_data_config.h" />
+    <ClInclude Include=".\parser\meta\meta_info.h" />
+    <ClInclude Include=".\parser\meta\meta_utils.h" />
+    <ClInclude Include=".\parser\parser\parser.h" />
+    <ClInclude Include=".\parser\template_manager\template_manager.h" />
+    <ClInclude Include="uuid\basic_name_generator.hpp" />
+    <ClInclude Include="uuid\detail\config.hpp" />
+    <ClInclude Include="uuid\detail\md5.hpp" />
+    <ClInclude Include="uuid\detail\random_provider.hpp" />
+    <ClInclude Include="uuid\detail\random_provider_arc4random.ipp" />
+    <ClInclude Include="uuid\detail\random_provider_bcrypt.ipp" />
+    <ClInclude Include="uuid\detail\random_provider_detect_platform.hpp" />
+    <ClInclude Include="uuid\detail\random_provider_getentropy.ipp" />
+    <ClInclude Include="uuid\detail\random_provider_getrandom.ipp" />
+    <ClInclude Include="uuid\detail\random_provider_include_platform.hpp" />
+    <ClInclude Include="uuid\detail\random_provider_posix.ipp" />
+    <ClInclude Include="uuid\detail\random_provider_wincrypt.ipp" />
+    <ClInclude Include="uuid\detail\sha1.hpp" />
+    <ClInclude Include="uuid\detail\uuid_generic.ipp" />
+    <ClInclude Include="uuid\detail\uuid_x86.ipp" />
+    <ClInclude Include="uuid\entropy_error.hpp" />
+    <ClInclude Include="uuid\name_generator.hpp" />
+    <ClInclude Include="uuid\name_generator_md5.hpp" />
+    <ClInclude Include="uuid\name_generator_sha1.hpp" />
+    <ClInclude Include="uuid\nil_generator.hpp" />
+    <ClInclude Include="uuid\random_generator.hpp" />
+    <ClInclude Include="uuid\string_generator.hpp" />
+    <ClInclude Include="uuid\uuid.hpp" />
+    <ClInclude Include="uuid\uuid_generators.hpp" />
+    <ClInclude Include="uuid\uuid_hash.hpp" />
+    <ClInclude Include="uuid\uuid_io.hpp" />
+    <ClInclude Include="uuid\uuid_serialize.hpp" />
+  </ItemGroup>
+</Project>

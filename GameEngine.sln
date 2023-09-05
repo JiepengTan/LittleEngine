@@ -13,9 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Sources\Game\Game.v
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{1F5C3D08-E4CC-40AC-8BD3-8AA012D68BEF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{86914EE6-2AEF-44EA-A054-C414F7359E50}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalyzer", "Sources\Tools\CodeAnalyzer\CodeAnalyzer.csproj", "{B616187D-C05E-4C69-A45B-DB2D4B64D224}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdParty", "3rdParty", "{C2115AE7-53B8-4380-80C0-65F7964F6310}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "Sources\3rdParty\boost\boost.vcxproj", "{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,8 @@ Global
 		{68C0E779-D475-606F-5D6A-5A46C91E5773}.Release|x64.Build.0 = Release|x64
 		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Debug|x64.ActiveCfg = Debug|x64
 		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Debug|x64.Build.0 = Debug|x64
-		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.ActiveCfg = Release|x64
-		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.Build.0 = Release|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.ActiveCfg = Debug|x64
+		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26}.Release|x64.Build.0 = Debug|x64
 		{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}.Debug|x64.ActiveCfg = Debug|x64
 		{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}.Debug|x64.Build.0 = Debug|x64
 		{E473A6C8-D015-D19E-B9D0-E4F2A51158EF}.Release|x64.ActiveCfg = Release|x64
@@ -43,6 +45,10 @@ Global
 		{B616187D-C05E-4C69-A45B-DB2D4B64D224}.Debug|x64.Build.0 = Debug|Any CPU
 		{B616187D-C05E-4C69-A45B-DB2D4B64D224}.Release|x64.ActiveCfg = Release|Any CPU
 		{B616187D-C05E-4C69-A45B-DB2D4B64D224}.Release|x64.Build.0 = Release|Any CPU
+		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6}.Debug|x64.ActiveCfg = Debug|x64
+		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6}.Debug|x64.Build.0 = Debug|x64
+		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6}.Release|x64.ActiveCfg = Debug|x64
+		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6}.Release|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{87CE1F81-EEDE-42D9-99DF-97AC2E523B26} = {1F5C3D08-E4CC-40AC-8BD3-8AA012D68BEF}
 		{B616187D-C05E-4C69-A45B-DB2D4B64D224} = {1F5C3D08-E4CC-40AC-8BD3-8AA012D68BEF}
+		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6} = {C2115AE7-53B8-4380-80C0-65F7964F6310}
 	EndGlobalSection
 EndGlobal
