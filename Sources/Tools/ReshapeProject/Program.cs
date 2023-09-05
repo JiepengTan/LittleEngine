@@ -17,13 +17,13 @@ namespace ReshapeProject
             };
             var namespaceMap = new Dictionary<string, string>()
             {
-                { "GamePlay/Helpers/", "Modules/Utils/" },
-                { "GamePlay/Scripting/", "Modules/Scripting/" },
-                { "GamePlay/", "Modules/Framework/" },
+                { "Resource/ResourceManagement/", "Modules/Rendering/ResourceManagement/" },
+                { "Resource/Resources/", "Modules/Rendering/Resources/" },
+                { "Resource/Rendering/", "Modules/Rendering/" },
             };
 
 
-            var oldIncludeTag = "GamePlay/";
+            var oldIncludeTag = "Resource/";
             ReplaceCodeIncludes(oldIncludeTag, paths, namespaceMap);
         }
 

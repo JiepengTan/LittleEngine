@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
-#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Modules/Rendering/LowRenderer/Camera.h"
 
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 

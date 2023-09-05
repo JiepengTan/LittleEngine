@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include "Resource/ResourceManagement/TextureManager.h"
-#include "Resource/ResourceManagement/ModelManager.h"
-#include "Resource/ResourceManagement/ShaderManager.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
-#include "Resource/ResourceManagement/SoundManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/SoundManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Utils/Serializer.h"
 

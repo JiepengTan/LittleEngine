@@ -8,7 +8,7 @@
 
 #include <variant>
 
-#include "Resource/Resources/Material.h"
+#include "Modules/Rendering/Resources/Material.h"
 
 #include "../Editor/Panels/AViewControllable.h"
 

@@ -10,9 +10,9 @@
 
 #include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include "Resource/Rendering/Resources/Mesh.h"
+#include "Modules/Rendering/Resources/Mesh.h"
 
-#include "Resource/Resources/Material.h"
+#include "Modules/Rendering/Resources/Material.h"
 #include "Modules/Framework/ECS/Components/AComponent.h"
 
 #define MAX_MATERIAL_COUNT 255

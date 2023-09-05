@@ -24,9 +24,9 @@
 #include "Core/Tools/Utils/String.h"
 
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/ModelManager.h"
-#include "Resource/ResourceManagement/TextureManager.h"
-#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
 
 #include "Core/CoreInclude.h"
 

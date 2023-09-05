@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "Resource/Rendering/Geometry/Vertex.h"
-#include "Resource/Rendering/Resources/Model.h"
+#include "Modules/Rendering/Geometry/Vertex.h"
+#include "Modules/Rendering/Resources/Model.h"
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 

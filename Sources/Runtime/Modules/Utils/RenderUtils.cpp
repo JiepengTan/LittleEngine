@@ -2,9 +2,9 @@
 #include "Modules/Framework/ECS/SceneRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Utils/RenderUtils.h"
-#include "Resource/Rendering/Resources/Loaders/ShaderLoader.h"
+#include "Modules/Rendering/Resources/Loaders/ShaderLoader.h"
 
 unsigned int OvCore::ECS::RenderUtils::_QuadVAO = 0;
 unsigned int OvCore::ECS::RenderUtils::_QuadVBO = 0;

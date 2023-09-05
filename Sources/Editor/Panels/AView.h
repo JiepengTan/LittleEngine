@@ -9,9 +9,9 @@
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Visual/Image.h"
-#include "Resource/Rendering/Buffers/UniformBuffer.h"
-#include "Resource/Rendering/Buffers/Framebuffer.h"
-#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Modules/Rendering/Buffers/UniformBuffer.h"
+#include "Modules/Rendering/Buffers/Framebuffer.h"
+#include "Modules/Rendering/LowRenderer/Camera.h"
 
 namespace OvEditor::Core { class EditorRenderer; }
 

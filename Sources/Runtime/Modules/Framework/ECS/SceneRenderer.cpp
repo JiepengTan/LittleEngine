@@ -6,20 +6,20 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
-#include "Resource/Rendering/Data/Frustum.h"
+#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Modules/Rendering/Data/Frustum.h"
 
 #include "Modules/Framework/ECS/SceneRenderer.h"
 
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
-#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Utils/RenderUtils.h"
-#include "Resource/Rendering/Buffers/Framebuffer.h"
-#include "Resource/Rendering/Resources/Mesh.h"
+#include "Modules/Rendering/Buffers/Framebuffer.h"
+#include "Modules/Rendering/Resources/Mesh.h"
 
 
 OvCore::ECS::SceneRenderer::SceneRenderer(OvRendering::Context::Driver& p_driver) :

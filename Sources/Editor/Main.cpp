@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Utils/String.h"
 
-#include "Resource/Rendering/Utils/Defines.h"
+#include "Modules/Rendering/Utils/Defines.h"
 
 #include "../Editor/Core/ProjectHub.h"
 #include "../Editor/Core/Application.h"

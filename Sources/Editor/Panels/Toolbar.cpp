@@ -10,7 +10,7 @@
 #include "../Editor/Core/EditorActions.h"
 
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
 
 OvEditor::Panels::Toolbar::Toolbar
 (

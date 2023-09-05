@@ -6,12 +6,12 @@
 
 #include <filesystem>
 
-#include "Resource/Rendering/Entities/Light.h"
+#include "Modules/Rendering/Entities/Light.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 
 #include "../Editor/Core/Context.h"
 
-#include "Resource/ResourceManagement/AnimationManager.h"
+#include "Modules/Rendering/ResourceManagement/AnimationManager.h"
 
 using namespace OvCore::Global;
 using namespace OvCore::ResourceManagement;

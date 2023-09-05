@@ -4,8 +4,8 @@
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
-#include "Resource/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
 OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreatePlane(OvCore::ECS::Actor* p_parent, const std::string& p_name)

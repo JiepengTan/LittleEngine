@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include "Resource/Rendering/Core/Renderer.h"
+#include "Modules/Rendering/Core/Renderer.h"
 #include "Platform/Windowing/Context/Device.h"
 #include "Platform/Windowing/Window.h"
-#include "Resource/Rendering/Context/Driver.h"
+#include "Modules/Rendering/Context/Driver.h"
 #include "Modules/UI/Core/UIManager.h"
 #include "Modules/UI/Panels/PanelWindow.h"
 

@@ -6,7 +6,7 @@
 
 #include "Modules/Utils/GUIDrawer.h"
 
-#include "Resource/Rendering/Settings/ETextureFilteringMode.h"
+#include "Modules/Rendering/Settings/ETextureFilteringMode.h"
 
 #include "Core/Tools/Utils/PathParser.h"
 

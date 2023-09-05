@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Modules/Rendering/LowRenderer/Camera.h"
 
 #include "../Editor/Core/EditorRenderer.h"
 #include "../Editor/Core/EditorActions.h"

@@ -10,7 +10,7 @@
 
 #include "Platform/Windowing/Inputs/InputManager.h"
 #include "Platform/Windowing/Window.h"
-#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Modules/Rendering/LowRenderer/Camera.h"
 
 #include "../Editor/Panels/Hierarchy.h"
 #include "../Editor/Panels/AView.h"

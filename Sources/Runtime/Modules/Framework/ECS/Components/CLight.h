@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/Entities/Light.h"
+#include "Modules/Rendering/Entities/Light.h"
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 

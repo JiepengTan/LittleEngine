@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/LowRenderer/Camera.h"
+#include "Modules/Rendering/LowRenderer/Camera.h"
 #include "AComponent.h"
 
 namespace OvCore::ECS { class Actor; }

@@ -16,8 +16,8 @@
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include "Resource/Rendering/Resources/Model.h"
-#include "Resource/Rendering/Resources/Texture.h"
+#include "Modules/Rendering/Resources/Model.h"
+#include "Modules/Rendering/Resources/Texture.h"
 
 namespace OvEditor::Panels
 {

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"

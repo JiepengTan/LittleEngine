@@ -10,7 +10,7 @@
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
-#include "Resource/Rendering/Resources/Shader.h"
+#include "Modules/Rendering/Resources/Shader.h"
 
 namespace OvCore::Resources { class Material; }
 

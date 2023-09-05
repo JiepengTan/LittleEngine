@@ -8,9 +8,9 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-#include "Resource/Rendering/Buffers/UniformBuffer.h"
-#include "Resource/Rendering/Buffers/ShaderStorageBuffer.h"
-#include "Resource/Rendering/Core/ShapeDrawer.h"
+#include "Modules/Rendering/Buffers/UniformBuffer.h"
+#include "Modules/Rendering/Buffers/ShaderStorageBuffer.h"
+#include "Modules/Rendering/Core/ShapeDrawer.h"
 
 #include "Modules/Physics/Core/PhysicsEngine.h"
 
@@ -21,12 +21,12 @@
 #include "Platform/Windowing/Window.h"
 
 #include "Modules/Framework/ECS/SceneRenderer.h"
-#include "Resource/ResourceManagement/ModelManager.h"
-#include "Resource/ResourceManagement/TextureManager.h"
-#include "Resource/ResourceManagement/ShaderManager.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
-#include "Resource/ResourceManagement/SoundManager.h"
-#include "Resource/ResourceManagement/AnimationManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/SoundManager.h"
+#include "Modules/Rendering/ResourceManagement/AnimationManager.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 #include "Modules/Scripting/ScriptInterpreter.h"
 

@@ -16,7 +16,7 @@
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
-#include "Resource/ResourceManagement/MaterialManager.h"
+#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 
 OvCore::ECS::Components::CMaterialRenderer::CMaterialRenderer(ECS::Actor & p_owner) : AComponent(p_owner)

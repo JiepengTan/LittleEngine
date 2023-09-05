@@ -9,7 +9,7 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-#include "Resource/Resources/Loaders/MaterialLoader.h"
+#include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
 #include "Modules/Utils/GUIDrawer.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"

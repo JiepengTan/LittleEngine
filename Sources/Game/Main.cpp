@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Resource/Rendering/Utils/Defines.h"
+#include "Modules/Rendering/Utils/Defines.h"
 
 #include "Core/Base/GlobalState.h"
 #include "../Game/Core/Application.h"

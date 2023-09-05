@@ -8,7 +8,7 @@
 
 #ifdef _DEBUG
 
-#include "Resource/Rendering/Core/Renderer.h"
+#include "Modules/Rendering/Core/Renderer.h"
 #include "Platform/Windowing/Window.h"
 
 #include "Modules/UI/Panels/PanelUndecorated.h"

@@ -11,8 +11,8 @@
 
 #include "Modules/Utils/GUIDrawer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/ModelManager.h"
-#include "Resource/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
 
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Modules/UI/Widgets/Layout/Group.h"

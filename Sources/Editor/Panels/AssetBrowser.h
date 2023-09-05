@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/TreeNode.h"
-#include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
 
 namespace OvEditor::Panels
 {

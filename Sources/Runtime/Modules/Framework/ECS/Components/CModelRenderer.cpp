@@ -13,9 +13,9 @@
 #include "Modules/UI/Widgets/Drags/DragFloat.h"
 
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Resource/ResourceManagement/TextureManager.h"
-#include "Resource/ResourceManagement/ModelManager.h"
-#include "Resource/ResourceManagement/ShaderManager.h"
+#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/ECS/Actor.h"
