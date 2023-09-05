@@ -149,6 +149,8 @@
     <ClInclude Include="Core\Serialization\Json.h" />
     <ClInclude Include="Core\Serialization\json11\json11.hpp" />
     <ClInclude Include="Core\Serialization\JsonSerializer.h" />
+    <ClInclude Include="Core\String\StringName.h" />
+    <ClInclude Include="Core\String\StringText.h" />
     <ClInclude Include="Core\Tools\Eventing\Event.h" />
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h" />
     <ClInclude Include="Core\Tools\Filesystem\tinyxml2.h" />
@@ -646,9 +648,14 @@
     <ClCompile Include="Platform\Windowing\Dialogs\SaveFileDialog.cpp" />
     <ClCompile Include="Platform\Windowing\Inputs\InputManager.cpp" />
     <ClCompile Include="Platform\Windowing\Window.cpp" />
+    <ClInclude Include="Resource\ResIncludeBasic.h" />
+    <ClInclude Include="Resource\ResInclude.h" />
+    <ClInclude Include="Resource\ResIncludeAnimation.h" />
+    <ClInclude Include="Resource\ResIncludeAudio.h" />
+    <ClInclude Include="Resource\ResIncludeRendering.h" />
+    <ClInclude Include="Resource\ResIncludeScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resource\padding.txt" />
     <Content Include="_CodeTemplate\allReflectionFile.mustache" />
     <Content Include="_CodeTemplate\allSerializer.h.mustache" />
     <Content Include="_CodeTemplate\allSerializer.ipp.mustache" />
