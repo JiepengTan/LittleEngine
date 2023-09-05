@@ -9,7 +9,7 @@
 #include "../Editor/Panels/Toolbar.h"
 #include "../Editor/Core/EditorActions.h"
 
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 #include "Resource/ResourceManagement/TextureManager.h"
 
 OvEditor::Panels::Toolbar::Toolbar

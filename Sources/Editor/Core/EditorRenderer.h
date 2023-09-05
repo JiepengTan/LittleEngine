@@ -8,12 +8,12 @@
 
 #include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include "GamePlay/ECS/Actor.h"
-#include "GamePlay/SceneSystem/SceneManager.h"
-#include "GamePlay/ECS/Components/CModelRenderer.h"
+#include "Modules/Framework/ECS/Actor.h"
+#include "Modules/Framework/SceneSystem/SceneManager.h"
+#include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Resource/Resources/Material.h"
-#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
-#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
 #include "../Editor/Core/Context.h"
 

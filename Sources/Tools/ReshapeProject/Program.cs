@@ -17,31 +17,18 @@ namespace ReshapeProject
             };
             var namespaceMap = new Dictionary<string, string>()
             {
-                { "OvAnalytics", "Core/Analytics" },
-                { "OvAudio", "Modules/Audio" },
-                { "OvDebug", "Core/Debug" },
-                { "OvEditor", "../Editor" },
-                { "OvGame", "../Game" },
-                { "OvMaths", "Core/Maths" },
-                { "OvMAths", "Core/Maths" },
-                { "OvPhysics", "Modules/Physics" },
-                { "OvRendering", "Resource/Rendering" },
-                { "OvTools", "Core/Tools" },
-                { "OvUI", "Modules/UI" },
-                { "OvWindowing", "Platform/Windowing" },
-                { "OvAnim", "Modules/Anim" },
-                { "OvCore/ResourceManagement", "Resource/ResourceManagement" },
-                { "OvCore/Resources", "Resource/Resources" },
-                { "OvCore/GlobalState.h", "Core/GlobalState.h" },
-                { "OvCore/", "GamePlay/" },
+                { "GamePlay/Helpers/", "Modules/Utils/" },
+                { "GamePlay/Scripting/", "Modules/Scripting/" },
+                { "GamePlay/", "Modules/Framework/" },
             };
 
 
-            ReplaceCodeIncludes(paths, namespaceMap);
+            var oldIncludeTag = "GamePlay/";
+            ReplaceCodeIncludes(oldIncludeTag, paths, namespaceMap);
         }
 
         
-        private static void ReplaceCodeIncludes(string[] paths, Dictionary<string, string> namespaceMap)
+        private static void ReplaceCodeIncludes(string oldIncludeTag, string[] paths, Dictionary<string, string> namespaceMap)
         {
             List<string> allCppFiles = new List<string>();
             foreach (var dir in paths)
@@ -50,12 +37,16 @@ namespace ReshapeProject
             }
 
             var headTag = "#include";
-            var oldIncludeTag = "Ov";
             foreach (var file in allCppFiles)
             {
                 Console.WriteLine(file);
                 var lines = File.ReadAllLines(file);
                 var resultLines = new List<string>(lines.Length);
+                if (file.Contains("CSpotLight.h"))
+                {
+                    int ss = 0;
+                }
+
                 foreach (var line in lines)
                 {
                     var result = line;
@@ -69,7 +60,7 @@ namespace ReshapeProject
                             .Replace(">", "")
                             .Replace("\\", "/")
                             .Trim();
-                        if (head.StartsWith(oldIncludeTag)) // old namespace
+                        if (oldIncludeTag== "" || head.StartsWith(oldIncludeTag)) // old namespace
                         {
                             foreach (var item in namespaceMap)
                             {

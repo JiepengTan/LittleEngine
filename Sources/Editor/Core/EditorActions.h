@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 #include "Core/Tools/Filesystem/IniFile.h"
 #include "Core/Tools/Utils/PathParser.h"
 

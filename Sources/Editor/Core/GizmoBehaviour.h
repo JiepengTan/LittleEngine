@@ -9,7 +9,7 @@
 #include "Core/Maths/FTransform.h"
 #include "Core/Maths/FVector2.h"
 
-#include "GamePlay/ECS/Actor.h"
+#include "Modules/Framework/ECS/Actor.h"
 
 namespace OvEditor::Core
 {

@@ -10,11 +10,11 @@
 
 #include "../Editor/Core/CameraController.h"
 
-#include "GamePlay/ECS/Components/CPhysicalBox.h"
-#include "GamePlay/ECS/Components/CPhysicalSphere.h"
-#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
-#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
-#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "Modules/Framework/ECS/Components/CPhysicalBox.h"
+#include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
+#include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
+#include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
 OvEditor::Core::CameraController::CameraController
 (

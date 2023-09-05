@@ -8,13 +8,13 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-#include "GamePlay/ECS/Components/CMaterialRenderer.h"
-#include "GamePlay/ECS/Components/CModelRenderer.h"
-#include "GamePlay/ECS/Components/CPointLight.h"
-#include "GamePlay/ECS/Components/CDirectionalLight.h"
-#include "GamePlay/ECS/Components/CSpotLight.h"
-#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
-#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
+#include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
+#include "Modules/Framework/ECS/Components/CModelRenderer.h"
+#include "Modules/Framework/ECS/Components/CPointLight.h"
+#include "Modules/Framework/ECS/Components/CDirectionalLight.h"
+#include "Modules/Framework/ECS/Components/CSpotLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
 using namespace OvMaths;
 using namespace OvRendering::Resources;

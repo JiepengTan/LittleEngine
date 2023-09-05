@@ -4,14 +4,14 @@
 * @licence: MIT
 */
 
-#include "GamePlay/ECS/Components/CCamera.h"
-#include "GamePlay/ECS/Components/CPhysicalBox.h"
-#include "GamePlay/ECS/Components/CPhysicalSphere.h"
-#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
-#include "GamePlay/ECS/Components/CMaterialRenderer.h"
-#include "GamePlay/ECS/Components/CPointLight.h"
-#include "GamePlay/ECS/Components/CDirectionalLight.h"
-#include "GamePlay/ECS/Components/CSpotLight.h"
+#include "Modules/Framework/ECS/Components/CCamera.h"
+#include "Modules/Framework/ECS/Components/CPhysicalBox.h"
+#include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
+#include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
+#include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
+#include "Modules/Framework/ECS/Components/CPointLight.h"
+#include "Modules/Framework/ECS/Components/CDirectionalLight.h"
+#include "Modules/Framework/ECS/Components/CSpotLight.h"
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 

@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Modules/UI/Modules/Canvas.h"
-#include "GamePlay/ECS/Components/CCamera.h"
+#include "Modules/Framework/ECS/Components/CCamera.h"
 
 #include "../Game/Core/Context.h"
 #include "../Game/Core/GameRenderer.h"

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "Core/Base/Macro.h"
 #include "Core/Tools/Guid.h"

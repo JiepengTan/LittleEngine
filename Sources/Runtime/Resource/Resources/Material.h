@@ -11,7 +11,7 @@
 
 #include "Resource/Rendering/Resources/Shader.h"
 
-#include "GamePlay/API/ISerializable.h"
+#include "Modules/Framework/API/ISerializable.h"
 
 
 namespace OvCore::Resources

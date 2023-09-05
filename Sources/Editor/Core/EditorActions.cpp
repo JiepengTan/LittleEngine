@@ -10,12 +10,12 @@
 
 #include "Core/CoreInclude.h"
 
-#include "GamePlay/ECS/Components/CPhysicalBox.h"
-#include "GamePlay/ECS/Components/CPhysicalSphere.h"
-#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
-#include "GamePlay/ECS/Components/CModelRenderer.h"
-#include "GamePlay/ECS/Components/CMaterialRenderer.h"
-#include "GamePlay/ECS/Components/CAudioSource.h"
+#include "Modules/Framework/ECS/Components/CPhysicalBox.h"
+#include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
+#include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
+#include "Modules/Framework/ECS/Components/CModelRenderer.h"
+#include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
+#include "Modules/Framework/ECS/Components/CAudioSource.h"
 
 #include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 #include "Platform/Windowing/Dialogs/SaveFileDialog.h"

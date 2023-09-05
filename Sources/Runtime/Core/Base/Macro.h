@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Core/Debug/Logger.h"
 
 #define OVLOG(message)			OvDebug::Logger::Log(message, OvDebug::ELogLevel::LOG_DEFAULT,	OvDebug::ELogMode::CONSOLE)

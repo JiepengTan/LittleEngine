@@ -7,7 +7,7 @@
 #include <filesystem>
 
 #include "Resource/Rendering/Entities/Light.h"
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 
 #include "../Editor/Core/Context.h"
 

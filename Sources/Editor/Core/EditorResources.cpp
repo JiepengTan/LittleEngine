@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "GamePlay/Helpers/GUIDrawer.h"
+#include "Modules/Utils/GUIDrawer.h"
 
 #include "Resource/Rendering/Settings/ETextureFilteringMode.h"
 

@@ -5,7 +5,7 @@
 */
 
 #include "Resource/Resources/Material.h"
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 #include "Resource/ResourceManagement/TextureManager.h"
 
 #include "Resource/Rendering/Buffers/UniformBuffer.h"

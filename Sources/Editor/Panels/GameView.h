@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "GamePlay/SceneSystem/SceneManager.h"
+#include "Modules/Framework/SceneSystem/SceneManager.h"
 
 #include "../Editor/Panels/AView.h"
 

@@ -15,19 +15,19 @@
 
 #include "Core/CoreInclude.h"
 
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 
-#include "GamePlay/ECS/Components/CCamera.h"
-#include "GamePlay/ECS/Components/CPointLight.h"
-#include "GamePlay/ECS/Components/CDirectionalLight.h"
-#include "GamePlay/ECS/Components/CSpotLight.h"
-#include "GamePlay/ECS/Components/CAmbientBoxLight.h"
-#include "GamePlay/ECS/Components/CAmbientSphereLight.h"
-#include "GamePlay/ECS/Components/CPhysicalBox.h"
-#include "GamePlay/ECS/Components/CPhysicalSphere.h"
-#include "GamePlay/ECS/Components/CPhysicalCapsule.h"
-#include "GamePlay/ECS/Components/CAudioSource.h"
-#include "GamePlay/ECS/Components/CAudioListener.h"
+#include "Modules/Framework/ECS/Components/CCamera.h"
+#include "Modules/Framework/ECS/Components/CPointLight.h"
+#include "Modules/Framework/ECS/Components/CDirectionalLight.h"
+#include "Modules/Framework/ECS/Components/CSpotLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
+#include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
+#include "Modules/Framework/ECS/Components/CPhysicalBox.h"
+#include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
+#include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
+#include "Modules/Framework/ECS/Components/CAudioSource.h"
+#include "Modules/Framework/ECS/Components/CAudioListener.h"
 
 #include "Modules/UI/Plugins/ContextualMenu.h"
 

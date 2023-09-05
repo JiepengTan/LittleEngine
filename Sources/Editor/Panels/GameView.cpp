@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "GamePlay/ECS/Components/CCamera.h"
+#include "Modules/Framework/ECS/Components/CCamera.h"
 
 #include "../Editor/Core/EditorRenderer.h"
 #include "../Editor/Panels/GameView.h"

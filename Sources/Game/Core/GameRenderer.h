@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include "GamePlay/ECS/Actor.h"
-#include "GamePlay/SceneSystem/SceneManager.h"
-#include "GamePlay/ECS/Components/CCamera.h"
+#include "Modules/Framework/ECS/Actor.h"
+#include "Modules/Framework/SceneSystem/SceneManager.h"
+#include "Modules/Framework/ECS/Components/CCamera.h"
 
 #include "../Game/Core/Context.h"
 

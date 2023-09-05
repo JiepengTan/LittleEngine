@@ -17,14 +17,14 @@
 
 #include "Modules/UI/Core/UIManager.h"
 
-#include "GamePlay/ECS/SceneRenderer.h"
+#include "Modules/Framework/ECS/SceneRenderer.h"
 #include "Resource/ResourceManagement/ModelManager.h"
 #include "Resource/ResourceManagement/TextureManager.h"
 #include "Resource/ResourceManagement/ShaderManager.h"
 #include "Resource/ResourceManagement/MaterialManager.h"
 #include "Resource/ResourceManagement/SoundManager.h"
-#include "GamePlay/SceneSystem/SceneManager.h"
-#include "GamePlay/Scripting/ScriptInterpreter.h"
+#include "Modules/Framework/SceneSystem/SceneManager.h"
+#include "Modules/Scripting/ScriptInterpreter.h"
 
 #include "Modules/Audio/Core/AudioEngine.h"
 #include "Modules/Audio/Core/AudioPlayer.h"

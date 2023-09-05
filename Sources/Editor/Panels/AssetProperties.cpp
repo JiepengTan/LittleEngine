@@ -9,8 +9,8 @@
 #include "Core/Tools/Utils/PathParser.h"
 #include "Core/Tools/Utils/SizeConverter.h"
 
-#include "GamePlay/Helpers/GUIDrawer.h"
-#include "GamePlay/Global/ServiceLocator.h"
+#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Framework/Global/ServiceLocator.h"
 #include "Resource/ResourceManagement/ModelManager.h"
 #include "Resource/ResourceManagement/TextureManager.h"
 

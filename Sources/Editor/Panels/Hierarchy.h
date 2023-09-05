@@ -9,7 +9,7 @@
 #include "Resource/Rendering/Resources/Loaders/TextureLoader.h"
 #include "Resource/Rendering/LowRenderer/Camera.h"
 
-#include "GamePlay/SceneSystem/SceneManager.h"
+#include "Modules/Framework/SceneSystem/SceneManager.h"
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/Group.h"
