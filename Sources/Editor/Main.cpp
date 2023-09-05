@@ -15,7 +15,7 @@
 
 #undef APIENTRY
 #include "Windows.h"
-#include "Core/Base/GlobalState.h"
+#include "Core/Base/Application.h"
 
 FORCE_DEDICATED_GPU
 
@@ -75,8 +75,8 @@ int main(int argc, char** argv)
 		}
 	}
 
-	LittleEngine::GlobalState::IsPlaying = false;
-	LittleEngine::GlobalState::IsEditorMode = true;
+	LittleEngine::Application::isPlaying = false;
+	LittleEngine::Application::isEditorMode = true;
 	if (ready)
 		TryRun(projectPath, projectName);
 

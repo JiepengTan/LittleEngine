@@ -34,7 +34,7 @@
     <ClCompile Include="Core\Debug\Logger.cpp">
       <Filter>Core\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="Core\GlobalState.cpp">
+    <ClCompile Include="Core\Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\DebugUtil.cpp">
@@ -585,7 +585,7 @@
     <ClInclude Include="Core\Debug\Logger.h">
       <Filter>Core\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="Core\GlobalState.h">
+    <ClInclude Include="Core\Application.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\DebugUtil.h">

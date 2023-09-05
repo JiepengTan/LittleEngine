@@ -9,7 +9,7 @@
 
 #include "../Editor/Core/Editor.h"
 
-#include "Core/Base/GlobalState.h"
+#include "Core/Base/Application.h"
 #include "../Editor/Panels/MenuBar.h"
 #include "../Editor/Panels/AssetBrowser.h"
 #include "../Editor/Panels/HardwareInfo.h"

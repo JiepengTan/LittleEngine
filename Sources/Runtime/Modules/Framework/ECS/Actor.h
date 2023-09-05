@@ -11,7 +11,7 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-#include "Core/Base/GlobalState.h"
+#include "Core/Base/Application.h"
 #include "Modules/Framework/ECS/Components/AComponent.h"
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Modules/Framework/ECS/Components/Behaviour.h"

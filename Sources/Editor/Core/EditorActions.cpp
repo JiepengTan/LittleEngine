@@ -27,7 +27,7 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-#include "Core/Base/GlobalState.h"
+#include "Core/Base/Application.h"
 #include "../Editor/Panels/SceneView.h"
 #include "../Editor/Panels/AssetView.h"
 #include "../Editor/Panels/GameView.h"
@@ -459,7 +459,7 @@ void LittleEditor::Core::EditorActions::StartPlaying()
 {
 	if (m_editorMode == EEditorMode::EDIT)
 	{
-		LittleEngine::GlobalState::IsPlaying = true;
+		LittleEngine::Application::isPlaying = true;
 		m_context.scriptInterpreter->RefreshAll();
 		EDITOR_PANEL(Panels::Inspector, "Inspector").Refresh();
 
@@ -497,7 +497,7 @@ void LittleEditor::Core::EditorActions::StopPlaying()
 {
 	if (m_editorMode != EEditorMode::EDIT)
 	{
-		LittleEngine::GlobalState::IsPlaying = false;
+		LittleEngine::Application::isPlaying = false;
 		ImGui::GetIO().DisableMouseUpdate = false;
 		m_context.window->SetCursorMode(LittleEngine::Windowing::Cursor::ECursorMode::NORMAL);
 		SetEditorMode(EEditorMode::EDIT);

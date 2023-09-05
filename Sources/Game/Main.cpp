@@ -6,7 +6,7 @@
 
 #include "Modules/Rendering/Utils/Defines.h"
 
-#include "Core/Base/GlobalState.h"
+#include "Core/Base/Application.h"
 #include "../Game/Core/GameApp.h"
 
 FORCE_DEDICATED_GPU
@@ -19,8 +19,8 @@ int main()
 INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 #endif
 {
-	LittleEngine::GlobalState::IsPlaying = true;
-	LittleEngine::GlobalState::IsEditorMode = false;
+	LittleEngine::Application::isPlaying = true;
+	LittleEngine::Application::isEditorMode = false;
 	LittleGame::Core::GameApp app;
 	app.Run();
 

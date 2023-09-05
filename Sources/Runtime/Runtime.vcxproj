@@ -112,7 +112,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Base\GlobalState.cpp"/>
+    <ClCompile Include="Core\Base\Application.cpp" />
     <ClCompile Include="Core\Base\Macro.cpp"/>
     <ClCompile Include="Core\Maths\FFloat.cpp" />
     <ClCompile Include="Core\Serialization\json11\json11.cpp" />
@@ -125,7 +125,7 @@
     <ClInclude Include="Core\Analytics\Profiling\Profiler.h" />
     <ClInclude Include="Core\Analytics\Profiling\ProfilerReport.h" />
     <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h" />
-    <ClInclude Include="Core\Base\GlobalState.h" />
+    <ClInclude Include="Core\Base\Application.h" />
     <ClInclude Include="Core\Base\Macro.h" />
     <ClInclude Include="Core\CoreInclude.h" />
     <ClInclude Include="Core\Debug\Assertion.h" />
