@@ -7,12 +7,12 @@
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
 #include "Modules/UI/ImGui/imgui_internal.h"
 
-OvUI::Widgets::Layout::GroupCollapsable::GroupCollapsable(const std::string & p_name) :
+LittleEngine::UI::Widgets::Layout::GroupCollapsable::GroupCollapsable(const std::string & p_name) :
 	name(p_name)
 {
 }
 
-void OvUI::Widgets::Layout::GroupCollapsable::_Draw_Impl()
+void LittleEngine::UI::Widgets::Layout::GroupCollapsable::_Draw_Impl()
 {
 	bool previouslyOpened = opened;
 

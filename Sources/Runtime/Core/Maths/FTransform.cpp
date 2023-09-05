@@ -6,19 +6,19 @@
 
 #include "Core/Maths/FTransform.h"
 
-OvMaths::FTransform::FTransform(FVector3 p_localPosition, FQuaternion p_localRotation, FVector3 p_localScale) :
+LittleEngine::FTransform::FTransform(FVector3 p_localPosition, FQuaternion p_localRotation, FVector3 p_localScale) :
 	m_notificationHandlerID(-1),
 	m_parent(nullptr)
 {
 	GenerateMatricesLocal(p_localPosition, p_localRotation, p_localScale);
 }
 
-OvMaths::FTransform::~FTransform()
+LittleEngine::FTransform::~FTransform()
 {
 	Notifier.NotifyChildren(Internal::TransformNotifier::ENotification::TRANSFORM_DESTROYED);
 }
 
-void OvMaths::FTransform::NotificationHandler(Internal::TransformNotifier::ENotification p_notification)
+void LittleEngine::FTransform::NotificationHandler(Internal::TransformNotifier::ENotification p_notification)
 {
 	switch (p_notification)
 	{
@@ -38,7 +38,7 @@ void OvMaths::FTransform::NotificationHandler(Internal::TransformNotifier::ENoti
 	}
 }
 
-void OvMaths::FTransform::SetParent(FTransform& p_parent)
+void LittleEngine::FTransform::SetParent(FTransform& p_parent)
 {
 	m_parent = &p_parent;
 
@@ -47,7 +47,7 @@ void OvMaths::FTransform::SetParent(FTransform& p_parent)
 	UpdateWorldMatrix();
 }
 
-bool OvMaths::FTransform::RemoveParent()
+bool LittleEngine::FTransform::RemoveParent()
 {
 	if (m_parent != nullptr)
 	{
@@ -61,12 +61,12 @@ bool OvMaths::FTransform::RemoveParent()
 	return false;
 }
 
-bool OvMaths::FTransform::HasParent() const
+bool LittleEngine::FTransform::HasParent() const
 {
 	return m_parent != nullptr;
 }
 
-void OvMaths::FTransform::GenerateMatricesLocal(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale)
+void LittleEngine::FTransform::GenerateMatricesLocal(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale)
 {
 	m_localMatrix = FMatrix4::Translation(p_position) * FQuaternion::ToMatrix4(FQuaternion::Normalize(p_rotation)) * FMatrix4::Scaling(p_scale);
 	m_localPosition = p_position;
@@ -75,20 +75,20 @@ void OvMaths::FTransform::GenerateMatricesLocal(FVector3 p_position, FQuaternion
 
 	UpdateWorldMatrix();
 }
-void OvMaths::FTransform::SetLocalMatrix(FMatrix4 p_localMatrix)
+void LittleEngine::FTransform::SetLocalMatrix(FMatrix4 p_localMatrix)
 {
 	m_localMatrix= p_localMatrix;
 	UpdateWorldMatrix();
 	UpdateLocalMatrix();
 }
 
-void OvMaths::FTransform::SetWorldMatrix(FMatrix4 p_worldMatrix)
+void LittleEngine::FTransform::SetWorldMatrix(FMatrix4 p_worldMatrix)
 {
 	m_worldMatrix= p_worldMatrix;
 	UpdateLocalMatrix();
 	UpdateWorldMatrix();
 }
-void OvMaths::FTransform::GenerateMatricesWorld(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale)
+void LittleEngine::FTransform::GenerateMatricesWorld(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale)
 {
 	m_worldMatrix = FMatrix4::Translation(p_position) * FQuaternion::ToMatrix4(FQuaternion::Normalize(p_rotation)) * FMatrix4::Scaling(p_scale);
 	m_worldPosition = p_position;
@@ -98,7 +98,7 @@ void OvMaths::FTransform::GenerateMatricesWorld(FVector3 p_position, FQuaternion
 	UpdateLocalMatrix();
 }
 
-void OvMaths::FTransform::UpdateWorldMatrix()
+void LittleEngine::FTransform::UpdateWorldMatrix()
 {
 	m_worldMatrix = HasParent() ? m_parent->m_worldMatrix * m_localMatrix : m_localMatrix;
 	PreDecomposeWorldMatrix();
@@ -106,7 +106,7 @@ void OvMaths::FTransform::UpdateWorldMatrix()
 	Notifier.NotifyChildren(Internal::TransformNotifier::ENotification::TRANSFORM_CHANGED);
 }
 
-void OvMaths::FTransform::UpdateLocalMatrix()
+void LittleEngine::FTransform::UpdateLocalMatrix()
 {
 	m_localMatrix = HasParent() ? FMatrix4::Inverse(m_parent->m_worldMatrix) * m_worldMatrix : m_worldMatrix;
 	PreDecomposeLocalMatrix();
@@ -114,47 +114,47 @@ void OvMaths::FTransform::UpdateLocalMatrix()
 	Notifier.NotifyChildren(Internal::TransformNotifier::ENotification::TRANSFORM_CHANGED);
 }
 
-void OvMaths::FTransform::SetLocalPosition(FVector3 p_newPosition)
+void LittleEngine::FTransform::SetLocalPosition(FVector3 p_newPosition)
 {
 	GenerateMatricesLocal(p_newPosition, m_localRotation, m_localScale);
 }
 
-void OvMaths::FTransform::SetLocalRotation(FQuaternion p_newRotation)
+void LittleEngine::FTransform::SetLocalRotation(FQuaternion p_newRotation)
 {
 	GenerateMatricesLocal(m_localPosition, p_newRotation, m_localScale);
 }
 
-void OvMaths::FTransform::SetLocalScale(FVector3 p_newScale)
+void LittleEngine::FTransform::SetLocalScale(FVector3 p_newScale)
 {
 	GenerateMatricesLocal(m_localPosition, m_localRotation, p_newScale);
 }
 
-void OvMaths::FTransform::SetWorldPosition(FVector3 p_newPosition)
+void LittleEngine::FTransform::SetWorldPosition(FVector3 p_newPosition)
 {
 	GenerateMatricesWorld(p_newPosition, m_worldRotation, m_worldScale);
 }
 
-void OvMaths::FTransform::SetWorldRotation(FQuaternion p_newRotation)
+void LittleEngine::FTransform::SetWorldRotation(FQuaternion p_newRotation)
 {
 	GenerateMatricesWorld(m_worldPosition, p_newRotation, m_worldScale);
 }
 
-void OvMaths::FTransform::SetWorldScale(FVector3 p_newScale)
+void LittleEngine::FTransform::SetWorldScale(FVector3 p_newScale)
 {
 	GenerateMatricesWorld(m_worldPosition, m_worldRotation, p_newScale);
 }
 
-void OvMaths::FTransform::TranslateLocal(const FVector3& p_translation)
+void LittleEngine::FTransform::TranslateLocal(const FVector3& p_translation)
 {
 	SetLocalPosition(m_localPosition + p_translation);
 }
 
-void OvMaths::FTransform::RotateLocal(const FQuaternion& p_rotation)
+void LittleEngine::FTransform::RotateLocal(const FQuaternion& p_rotation)
 {
 	SetLocalRotation(m_localRotation * p_rotation);
 }
 
-void OvMaths::FTransform::ScaleLocal(const FVector3& p_scale)
+void LittleEngine::FTransform::ScaleLocal(const FVector3& p_scale)
 {
 	SetLocalScale(FVector3
 	(
@@ -164,77 +164,77 @@ void OvMaths::FTransform::ScaleLocal(const FVector3& p_scale)
 	));
 }
 
-const OvMaths::FVector3& OvMaths::FTransform::GetLocalPosition() const
+const LittleEngine::FVector3& LittleEngine::FTransform::GetLocalPosition() const
 {
 	return m_localPosition;
 }
 
-const OvMaths::FQuaternion& OvMaths::FTransform::GetLocalRotation() const
+const LittleEngine::FQuaternion& LittleEngine::FTransform::GetLocalRotation() const
 {
 	return m_localRotation;
 }
 
-const OvMaths::FVector3& OvMaths::FTransform::GetLocalScale() const
+const LittleEngine::FVector3& LittleEngine::FTransform::GetLocalScale() const
 {
 	return m_localScale;
 }
 
-const OvMaths::FVector3& OvMaths::FTransform::GetWorldPosition() const
+const LittleEngine::FVector3& LittleEngine::FTransform::GetWorldPosition() const
 {
 	return m_worldPosition;
 }
 
-const OvMaths::FQuaternion& OvMaths::FTransform::GetWorldRotation() const
+const LittleEngine::FQuaternion& LittleEngine::FTransform::GetWorldRotation() const
 {
 	return m_worldRotation;
 }
 
-const OvMaths::FVector3& OvMaths::FTransform::GetWorldScale() const
+const LittleEngine::FVector3& LittleEngine::FTransform::GetWorldScale() const
 {
 	return m_worldScale;
 }
 
-const OvMaths::FMatrix4& OvMaths::FTransform::GetLocalMatrix() const
+const LittleEngine::FMatrix4& LittleEngine::FTransform::GetLocalMatrix() const
 {
 	return m_localMatrix;
 }
 
-const OvMaths::FMatrix4& OvMaths::FTransform::GetWorldMatrix() const
+const LittleEngine::FMatrix4& LittleEngine::FTransform::GetWorldMatrix() const
 {
 	return m_worldMatrix;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetWorldForward() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetWorldForward() const
 {
 	return m_worldRotation * FVector3::Forward;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetWorldUp() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetWorldUp() const
 {
 	return m_worldRotation * FVector3::Up;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetWorldRight() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetWorldRight() const
 {
 	return m_worldRotation * FVector3::Right;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetLocalForward() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetLocalForward() const
 {
 	return m_localRotation * FVector3::Forward;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetLocalUp() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetLocalUp() const
 {
 	return m_localRotation * FVector3::Up;
 }
 
-OvMaths::FVector3 OvMaths::FTransform::GetLocalRight() const
+LittleEngine::FVector3 LittleEngine::FTransform::GetLocalRight() const
 {
 	return m_localRotation * FVector3::Right;
 }
 
-void OvMaths::FTransform::PreDecomposeWorldMatrix()
+void LittleEngine::FTransform::PreDecomposeWorldMatrix()
 {
 	m_worldPosition.x = m_worldMatrix(0, 3);
 	m_worldPosition.y = m_worldMatrix(1, 3);
@@ -274,7 +274,7 @@ void OvMaths::FTransform::PreDecomposeWorldMatrix()
 	m_worldRotation = FQuaternion(rotationMatrix);
 }
 
-void OvMaths::FTransform::PreDecomposeLocalMatrix()
+void LittleEngine::FTransform::PreDecomposeLocalMatrix()
 {
 	m_localPosition.x = m_localMatrix(0, 3);
 	m_localPosition.y = m_localMatrix(1, 3);

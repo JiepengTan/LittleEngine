@@ -13,51 +13,51 @@
 
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
-OvCore::ECS::Components::CAmbientSphereLight::CAmbientSphereLight(ECS::Actor & p_owner) :
+LittleEngine::CAmbientSphereLight::CAmbientSphereLight(Actor & p_owner) :
 	CLight(p_owner)
 {
     m_data.intensity = 0.1f;
 	m_data.constant = 1.0f;
 
-	m_data.type = static_cast<float>(OvRendering::Entities::Light::Type::AMBIENT_SPHERE);
+	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::AMBIENT_SPHERE);
 }
 
-std::string OvCore::ECS::Components::CAmbientSphereLight::GetName()
+std::string LittleEngine::CAmbientSphereLight::GetName()
 {
 	return "Ambient Sphere Light";
 }
 
-float OvCore::ECS::Components::CAmbientSphereLight::GetRadius() const
+float LittleEngine::CAmbientSphereLight::GetRadius() const
 {
 	return m_data.quadratic;
 }
 
-void OvCore::ECS::Components::CAmbientSphereLight::SetRadius(float p_radius)
+void LittleEngine::CAmbientSphereLight::SetRadius(float p_radius)
 {
 	m_data.constant = p_radius;
 }
 
-void OvCore::ECS::Components::CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnSerialize(p_doc, p_node);
 
 	Serializer::SerializeFloat(p_doc, p_node, "radius", m_data.constant);
 }
 
-void OvCore::ECS::Components::CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnDeserialize(p_doc, p_node);
 
 	Serializer::DeserializeFloat(p_doc, p_node, "radius", m_data.constant);
 }
 
-void OvCore::ECS::Components::CAmbientSphereLight::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAmbientSphereLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnInspector(p_root);
 

@@ -14,36 +14,36 @@
 #include "../Editor/Resources/RawTextures.h"
 #include "../Editor/Resources/RawShaders.h"
 
-OvEditor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
+LittleEditor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
 {
-	using namespace OvRendering::Resources::Loaders;
+	using namespace LittleEngine::Rendering::Resources::Loaders;
 
 	std::string buttonsFolder	= p_editorAssetsPath + "Textures\\Buttons\\";
 	std::string iconsFolder		= p_editorAssetsPath + "Textures\\Icons\\";
 	std::string modelsFolder	= p_editorAssetsPath + "Models\\";
 	std::string shadersFolder	= p_editorAssetsPath + "Shaders\\";
 
-	OvRendering::Resources::Parsers::EModelParserFlags modelParserFlags = OvRendering::Resources::Parsers::EModelParserFlags::NONE;
+	LittleEngine::Rendering::Resources::Parsers::EModelParserFlags modelParserFlags = LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::NONE;
 
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::TRIANGULATE;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::GEN_SMOOTH_NORMALS;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_MESHES;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_GRAPH;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::FIND_INSTANCES;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::CALC_TANGENT_SPACE;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::JOIN_IDENTICAL_VERTICES;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::DEBONE;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::FIND_INVALID_DATA;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::GEN_UV_COORDS;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::PRE_TRANSFORM_VERTICES;
-	modelParserFlags |= OvRendering::Resources::Parsers::EModelParserFlags::GLOBAL_SCALE;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::TRIANGULATE;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GEN_SMOOTH_NORMALS;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_MESHES;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_GRAPH;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::FIND_INSTANCES;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::CALC_TANGENT_SPACE;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::JOIN_IDENTICAL_VERTICES;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::DEBONE;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::FIND_INVALID_DATA;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GEN_UV_COORDS;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::PRE_TRANSFORM_VERTICES;
+	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GLOBAL_SCALE;
 
-	OvRendering::Settings::ETextureFilteringMode firstFilterEditor = OvRendering::Settings::ETextureFilteringMode::LINEAR;
-	OvRendering::Settings::ETextureFilteringMode secondFilterEditor = OvRendering::Settings::ETextureFilteringMode::LINEAR;
+	LittleEngine::Rendering::Settings::ETextureFilteringMode firstFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
+	LittleEngine::Rendering::Settings::ETextureFilteringMode secondFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
 
-	OvRendering::Settings::ETextureFilteringMode firstFilterBillboard = OvRendering::Settings::ETextureFilteringMode::NEAREST;
-	OvRendering::Settings::ETextureFilteringMode secondFilterBillboard = OvRendering::Settings::ETextureFilteringMode::NEAREST;
+	LittleEngine::Rendering::Settings::ETextureFilteringMode firstFilterBillboard = LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
+	LittleEngine::Rendering::Settings::ETextureFilteringMode secondFilterBillboard = LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
 
 	/* Buttons */
 
@@ -162,9 +162,9 @@ OvEditor::Core::EditorResources::EditorResources(const std::string& p_editorAsse
 	m_models["Camera"]			= ModelLoader::Create(modelsFolder + "Camera.fbx", modelParserFlags);
 
 	/* Shaders */
-	auto gridSource			= OvEditor::Resources::RawShaders::GetGrid();
-	auto gizmoSource		= OvEditor::Resources::RawShaders::GetGizmo();
-	auto billboardSource	= OvEditor::Resources::RawShaders::GetBillboard();
+	auto gridSource			= LittleEditor::Resources::RawShaders::GetGrid();
+	auto gizmoSource		= LittleEditor::Resources::RawShaders::GetGizmo();
+	auto billboardSource	= LittleEditor::Resources::RawShaders::GetBillboard();
 	m_shaders["Grid"]		= ShaderLoader::CreateFromSource(gridSource.first, gridSource.second);
 	m_shaders["Gizmo"]		= ShaderLoader::CreateFromSource(gizmoSource.first, gizmoSource.second);
 	m_shaders["Billboard"]	= ShaderLoader::CreateFromSource(billboardSource.first, billboardSource.second);
@@ -172,30 +172,30 @@ OvEditor::Core::EditorResources::EditorResources(const std::string& p_editorAsse
 	/* From memory */
 	{
 		std::vector<uint64_t> raw = EMPTY_TEXTURE;
-		m_textures["Empty_Texture"] = OvRendering::Resources::Loaders::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-		OvCore::Helpers::GUIDrawer::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
+		m_textures["Empty_Texture"] = LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
+		LittleEngine::Helpers::GUIDrawer::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
 	}
 }
 
-OvEditor::Core::EditorResources::~EditorResources()
+LittleEditor::Core::EditorResources::~EditorResources()
 {
 	for (auto[id, texture] : m_textures)
-		OvRendering::Resources::Loaders::TextureLoader::Destroy(texture);
+		LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(texture);
 
 	for (auto [id, mesh] : m_models)
-		OvRendering::Resources::Loaders::ModelLoader::Destroy(mesh);
+		LittleEngine::Rendering::Resources::Loaders::ModelLoader::Destroy(mesh);
 
 	for (auto [id, shader] : m_shaders)
-		OvRendering::Resources::Loaders::ShaderLoader::Destroy(shader);
+		LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(shader);
 }
 
-OvRendering::Resources::Texture* OvEditor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
+LittleEngine::Rendering::Resources::Texture* LittleEditor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
 {
-	using namespace OvTools::Utils;
+	using namespace LittleEngine::Utils;
 	return GetTexture("Icon_" + PathParser::FileTypeToString(PathParser::GetFileType(p_filename)));
 }
 
-OvRendering::Resources::Texture* OvEditor::Core::EditorResources::GetTexture(const std::string& p_id)
+LittleEngine::Rendering::Resources::Texture* LittleEditor::Core::EditorResources::GetTexture(const std::string& p_id)
 {
 	if (m_textures.find(p_id) != m_textures.end())
 		return m_textures.at(p_id);
@@ -203,7 +203,7 @@ OvRendering::Resources::Texture* OvEditor::Core::EditorResources::GetTexture(con
 	return nullptr;
 }
 
-OvRendering::Resources::Model* OvEditor::Core::EditorResources::GetModel(const std::string& p_id)
+LittleEngine::Rendering::Resources::Model* LittleEditor::Core::EditorResources::GetModel(const std::string& p_id)
 {
 	if (m_models.find(p_id) != m_models.end())
 		return m_models.at(p_id);
@@ -211,7 +211,7 @@ OvRendering::Resources::Model* OvEditor::Core::EditorResources::GetModel(const s
 	return nullptr;
 }
 
-OvRendering::Resources::Shader* OvEditor::Core::EditorResources::GetShader(const std::string& p_id)
+LittleEngine::Rendering::Resources::Shader* LittleEditor::Core::EditorResources::GetShader(const std::string& p_id)
 {
 	if (m_shaders.find(p_id) != m_shaders.end())
 		return m_shaders.at(p_id);

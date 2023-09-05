@@ -8,7 +8,7 @@
 
 #include <Windows.h>
 
-namespace OvAnalytics::Hardware
+namespace LittleEngine::Analytics::Hardware
 {
 	/**
 	* The GPUInfo class will gather informations about the GPU usage

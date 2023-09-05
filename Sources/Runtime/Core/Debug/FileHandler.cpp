@@ -17,11 +17,11 @@ std::string const OvDebug::FileHandler::__DEFAULT_HEADER;
 std::string const OvDebug::FileHandler::__INFO_HEADER		= "[INFO] ";
 std::string const OvDebug::FileHandler::__WARNING_HEADER	= "[WARNING] ";
 std::string const OvDebug::FileHandler::__ERROR_HEADER		= "[ERROR] ";
-std::string OvDebug::FileHandler::__APP_LAUNCH_DATE			= OvTools::Time::Date::GetDateAsString();
+std::string OvDebug::FileHandler::__APP_LAUNCH_DATE			= LittleEngine::Time::Date::GetDateAsString();
 std::string const OvDebug::FileHandler::__LOG_EXTENSION		= ".ovlog";
 
 std::ofstream OvDebug::FileHandler::OUTPUT_FILE;
-std::string OvDebug::FileHandler::LOG_FILE_PATH = std::string(getenv("APPDATA")) + std::string("\\OverloadTech\\OvEditor\\Log\\") + __APP_LAUNCH_DATE + __LOG_EXTENSION;
+std::string OvDebug::FileHandler::LOG_FILE_PATH = std::string(getenv("APPDATA")) + std::string("\\OverloadTech\\LittleEditor\\Log\\") + __APP_LAUNCH_DATE + __LOG_EXTENSION;
 
 void OvDebug::FileHandler::Log(const LogData& p_logData)
 {

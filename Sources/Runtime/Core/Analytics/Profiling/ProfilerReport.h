@@ -9,7 +9,7 @@
 #include <vector>
 
 
-namespace OvAnalytics::Profiling
+namespace LittleEngine::Analytics::Profiling
 {
 	/**
 	* Contains profiling data about a running period

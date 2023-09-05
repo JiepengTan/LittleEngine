@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Selection
+namespace LittleEngine::UI::Widgets::Selection
 {
 	/**
 	* Checkbox widget that can be checked or not
@@ -31,6 +31,6 @@ namespace OvUI::Widgets::Selection
 	public:
 		bool value;
 		std::string label;
-		OvTools::Eventing::Event<bool> ValueChangedEvent;
+		LittleEngine::Eventing::Event<bool> ValueChangedEvent;
 	};
 }

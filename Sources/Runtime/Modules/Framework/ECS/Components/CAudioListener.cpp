@@ -7,37 +7,37 @@
 #include "Modules/Framework/ECS/Components/CAudioListener.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-OvCore::ECS::Components::CAudioListener::CAudioListener(ECS::Actor& p_owner) :
+LittleEngine::CAudioListener::CAudioListener(Actor& p_owner) :
 	AComponent(p_owner),
 	m_audioListener(owner->transform.GetFTransform())
 {
 	m_audioListener.SetEnabled(false);
 }
 
-std::string OvCore::ECS::Components::CAudioListener::GetName()
+std::string LittleEngine::CAudioListener::GetName()
 {
 	return "Audio Listener";
 }
 
-void OvCore::ECS::Components::CAudioListener::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioListener::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
 }
 
-void OvCore::ECS::Components::CAudioListener::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioListener::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
 }
 
-void OvCore::ECS::Components::CAudioListener::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAudioListener::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
 
 }
 
-void OvCore::ECS::Components::CAudioListener::OnEnable()
+void LittleEngine::CAudioListener::OnEnable()
 {
 	m_audioListener.SetEnabled(true);
 }
 
-void OvCore::ECS::Components::CAudioListener::OnDisable()
+void LittleEngine::CAudioListener::OnDisable()
 {
 	m_audioListener.SetEnabled(false);
 }

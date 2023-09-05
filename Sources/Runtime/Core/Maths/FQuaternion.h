@@ -6,13 +6,14 @@
 
 #pragma once
 
+#include "Core/Maths/FFloat.h"
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FMatrix3.h"
 #include "Core/Maths/FMatrix4.h"
 
 #include <string>
 
-namespace OvMaths
+namespace LittleEngine
 {
 
 	/**
@@ -21,10 +22,10 @@ namespace OvMaths
 	struct FQuaternion
 	{
 	public:
-		float x;
-		float y;
-		float z;
-		float w;
+		FFloat x;
+		FFloat y;
+		FFloat z;
+		FFloat w;
 
 		/**
 		* Return an identity quaternion

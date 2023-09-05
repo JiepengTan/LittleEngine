@@ -6,8 +6,9 @@
 
 #pragma once
 
+#include "Core/Maths/FFloat.h"
 
-namespace OvMaths
+namespace LittleEngine
 {
 	/**
 	* Mathematic representation of a 2D vector of floats
@@ -17,8 +18,8 @@ namespace OvMaths
 		static const FVector2 One;
 		static const FVector2 Zero;
 
-		float x;
-		float y;
+		FFloat x;
+		FFloat y;
 
 		/**
 		* Default constructor

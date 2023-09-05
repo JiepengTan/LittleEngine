@@ -13,7 +13,7 @@
 
 #include "Core/Analytics/Profiling/ProfilerReport.h"
 
-namespace OvAnalytics::Profiling
+namespace LittleEngine::Analytics::Profiling
 {
 	/* Forward declaration of the profiler spy structure */
 	struct ProfilerSpy;

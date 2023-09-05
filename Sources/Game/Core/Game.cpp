@@ -11,7 +11,7 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-OvGame::Core::Game::Game(Context & p_context) :
+LittleGame::Core::Game::Game(Context & p_context) :
 	m_context(p_context),
 	m_gameRenderer(p_context),
 	m_fpsCounter(*p_context.window)
@@ -34,12 +34,12 @@ OvGame::Core::Game::Game(Context & p_context) :
 	m_context.sceneManager.GetCurrentScene()->Play();
 }
 
-OvGame::Core::Game::~Game()
+LittleGame::Core::Game::~Game()
 {
 	m_context.sceneManager.UnloadCurrentScene();
 }
 
-void OvGame::Core::Game::PreUpdate()
+void LittleGame::Core::Game::PreUpdate()
 {
 	#ifdef _DEBUG
 	PROFILER_SPY("Pre-Update");
@@ -47,11 +47,11 @@ void OvGame::Core::Game::PreUpdate()
 	m_context.device->PollEvents();
 }
 
-void OvGame::Core::Game::Update(float p_deltaTime)
+void LittleGame::Core::Game::Update(float p_deltaTime)
 {
 	m_elapsed += p_deltaTime;
 
-	m_context.engineUBO->SetSubData(m_elapsed, 3 * sizeof(OvMaths::FMatrix4) + sizeof(OvMaths::FVector3));
+	m_context.engineUBO->SetSubData(m_elapsed, 3 * sizeof(LittleEngine::FMatrix4) + sizeof(LittleEngine::FVector3));
 
 	m_context.renderer->ClearFrameInfo();
 
@@ -91,12 +91,12 @@ void OvGame::Core::Game::Update(float p_deltaTime)
 
 	m_context.sceneManager.Update();
 
-	if  (m_context.inputManager->IsKeyPressed(OvWindowing::Inputs::EKey::KEY_F12))
+	if  (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_F12))
 		m_showDebugInformation = !m_showDebugInformation;
 
 	#ifdef _DEBUG
-	if (m_context.inputManager->IsKeyPressed(OvWindowing::Inputs::EKey::KEY_R))
-		OvRendering::Resources::Loaders::ShaderLoader::Recompile(*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
+	if (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_R))
+		LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
 	#endif
 
 	if (m_showDebugInformation)
@@ -110,7 +110,7 @@ void OvGame::Core::Game::Update(float p_deltaTime)
 	}
 }
 
-void OvGame::Core::Game::PostUpdate()
+void LittleGame::Core::Game::PostUpdate()
 {
 	#ifdef _DEBUG
 	PROFILER_SPY("Post-Update");

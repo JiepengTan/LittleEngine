@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Panels/PanelMenuBar.h"
 
-void OvUI::Panels::PanelMenuBar::_Draw_Impl()
+void LittleEngine::UI::Panels::PanelMenuBar::_Draw_Impl()
 {
 	if (!m_widgets.empty() && ImGui::BeginMainMenuBar())
 	{

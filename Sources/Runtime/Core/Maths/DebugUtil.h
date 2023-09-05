@@ -23,13 +23,13 @@ public:
 
     static void Dump(float val,bool isNewLine = false);
 
-    static void Dump(OvMaths::FVector2 matrix,bool isNewLine = false);
+    static void Dump(LittleEngine::FVector2 matrix,bool isNewLine = false);
 
-    static void Dump(OvMaths::FVector3 matrix,bool isNewLine = false);
+    static void Dump(LittleEngine::FVector3 matrix,bool isNewLine = false);
 
-    static void Dump(OvMaths::FVector4 matrix,bool isNewLine = false);
+    static void Dump(LittleEngine::FVector4 matrix,bool isNewLine = false);
 
-    static void Dump(OvMaths::FQuaternion matrix,bool isNewLine = false);
+    static void Dump(LittleEngine::FQuaternion matrix,bool isNewLine = false);
 
-    static void Dump(OvMaths::FMatrix4 matrix,bool isNewLine = false);
+    static void Dump(LittleEngine::FMatrix4 matrix,bool isNewLine = false);
 };

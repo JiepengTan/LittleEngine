@@ -14,14 +14,14 @@
 #include "../Editor/Core/EditorRenderer.h"
 #include "../Editor/Core/PanelsManager.h"
 
-#define EDITOR_EXEC(action)					OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().action
-#define EDITOR_BIND(method, ...)			std::bind(&OvEditor::Core::EditorActions::method, &OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>(), ##__VA_ARGS__)
-#define EDITOR_EVENT(target)				OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().target
-#define EDITOR_CONTEXT(instance)			OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().GetContext().instance
-#define EDITOR_RENDERER()					OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().GetRenderer()
-#define EDITOR_PANEL(type, id)				OvCore::Global::ServiceLocator::Get<OvEditor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
+#define EDITOR_EXEC(action)					LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().action
+#define EDITOR_BIND(method, ...)			std::bind(&LittleEditor::Core::EditorActions::method, &LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>(), ##__VA_ARGS__)
+#define EDITOR_EVENT(target)				LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().target
+#define EDITOR_CONTEXT(instance)			LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetContext().instance
+#define EDITOR_RENDERER()					LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetRenderer()
+#define EDITOR_PANEL(type, id)				LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
 
-namespace OvEditor::Core
+namespace LittleEditor::Core
 {
 	/**
 	* A set of editor actions
@@ -158,13 +158,13 @@ namespace OvEditor::Core
 		* @param p_focusOnCreation
 		* @param p_parent
 		*/
-		template<typename T> OvCore::ECS::Actor& CreateMonoComponentActor(bool p_focusOnCreation = true, OvCore::ECS::Actor* p_parent = nullptr);
+		template<typename T> LittleEngine::Actor& CreateMonoComponentActor(bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr);
 
 		/**
 		* Calculate the position where to spawn the actor using the current camera position and forward
 		* @param p_distanceToCamera
 		*/
-		OvMaths::FVector3 CalculateActorSpawnPoint(float p_distanceToCamera);
+		LittleEngine::FVector3 CalculateActorSpawnPoint(float p_distanceToCamera);
 
 		/**
 		* Create an empty actor
@@ -172,7 +172,7 @@ namespace OvEditor::Core
 		* @param p_parent
         * @param p_name
 		*/
-		OvCore::ECS::Actor&	CreateEmptyActor(bool p_focusOnCreation = true, OvCore::ECS::Actor* p_parent = nullptr, const std::string& p_name = "");
+		LittleEngine::Actor&	CreateEmptyActor(bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr, const std::string& p_name = "");
 
 		/**
 		* Create an actor with a model renderer and a material renderer. The model renderer with use the model identified
@@ -182,14 +182,14 @@ namespace OvEditor::Core
 		* @param p_parent
         * @param p_name
 		*/
-		OvCore::ECS::Actor&	CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation = true, OvCore::ECS::Actor* p_parent = nullptr, const std::string& p_name = "");
+		LittleEngine::Actor&	CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr, const std::string& p_name = "");
 
 		/**
 		* Destroy an actor from his scene
 		* @param p_focusOnCreation
 		* @param p_parent
 		*/
-		bool DestroyActor(OvCore::ECS::Actor& p_actor);
+		bool DestroyActor(LittleEngine::Actor& p_actor);
 
 		/**
 		* Duplicate an actor
@@ -197,7 +197,7 @@ namespace OvEditor::Core
 		* @param p_forcedParent
 		* @param bool
 		*/
-		void DuplicateActor(OvCore::ECS::Actor& p_toDuplicate, OvCore::ECS::Actor* p_forcedParent = nullptr, bool p_focus = true);
+		void DuplicateActor(LittleEngine::Actor& p_toDuplicate, LittleEngine::Actor* p_forcedParent = nullptr, bool p_focus = true);
 		#pragma endregion
 
 		#pragma region ACTOR_MANIPULATION
@@ -205,7 +205,7 @@ namespace OvEditor::Core
 		* Select an actor and show him in inspector
 		* @param p_target
 		*/
-		void SelectActor(OvCore::ECS::Actor& p_target);
+		void SelectActor(LittleEngine::Actor& p_target);
 
 		/**
 		* Unselect any selected actor and clearing the inspector
@@ -221,16 +221,16 @@ namespace OvEditor::Core
 		* Returns the selected actor. Make sur you verified that an actor is selected
 		* with IsAnyActorSelected() before calling this method
 		*/
-		OvCore::ECS::Actor&		GetSelectedActor() const;
+		LittleEngine::Actor&		GetSelectedActor() const;
 
 		/**
 		* Moves the camera to the target actor
 		*/
-		void					MoveToTarget(OvCore::ECS::Actor& p_target);
+		void					MoveToTarget(LittleEngine::Actor& p_target);
 		/**
 		* Select Asset
 		*/
-		void OnSelectAsset(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
+		void OnSelectAsset(LittleEngine::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
 		/**
 		* Unselect Asset 
 		*/
@@ -238,7 +238,7 @@ namespace OvEditor::Core
 		/**
 		* Try to Open Asset 
 		*/
-		void OpenAssetByFileType(OvTools::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
+		void OpenAssetByFileType(LittleEngine::Utils::PathParser::EFileType p_type,std::string p_path,bool m_protected);
 		void OpenAssetMaterial(std::string p_path,bool m_protected);
 		void OpenAssetScene(std::string p_path,bool m_protected);
 		void OpenAssetShader(std::string p_path,bool m_protected);
@@ -323,7 +323,7 @@ namespace OvEditor::Core
 		* @param p_newName
 		* @param p_fileType
 		*/
-		void PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, OvTools::Utils::PathParser::EFileType p_fileType);
+		void PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, LittleEngine::Utils::PathParser::EFileType p_fileType);
 		#pragma endregion
 
 		#pragma region SCENE
@@ -408,10 +408,10 @@ namespace OvEditor::Core
 		#pragma endregion
 
 	public:
-		OvTools::Eventing::Event<OvCore::ECS::Actor&> ActorSelectedEvent;
-		OvTools::Eventing::Event<OvCore::ECS::Actor&> ActorUnselectedEvent;
-		OvTools::Eventing::Event<EEditorMode> EditorModeChangedEvent;
-		OvTools::Eventing::Event<> PlayEvent;
+		LittleEngine::Eventing::Event<LittleEngine::Actor&> ActorSelectedEvent;
+		LittleEngine::Eventing::Event<LittleEngine::Actor&> ActorUnselectedEvent;
+		LittleEngine::Eventing::Event<EEditorMode> EditorModeChangedEvent;
+		LittleEngine::Eventing::Event<> PlayEvent;
 
 	private:
 		Context& m_context;

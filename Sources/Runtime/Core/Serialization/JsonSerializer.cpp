@@ -1,6 +1,6 @@
 #include "JsonSerializer.h"
 #include <assert.h>
-namespace OvCore
+namespace LittleEngine
 {
     template<>
     Json JsonSerializer::Write(const char& instance)

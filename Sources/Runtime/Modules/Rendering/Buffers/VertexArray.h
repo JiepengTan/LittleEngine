@@ -8,7 +8,7 @@
 
 #include "Modules/Rendering/Buffers/VertexBuffer.h"
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 
 

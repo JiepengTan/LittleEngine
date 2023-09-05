@@ -8,12 +8,12 @@
 
 #include "Modules/Rendering/Resources/Model.h"
 
-OvRendering::Resources::Parsers::AssimpParser OvRendering::Resources::Loaders::ModelLoader::__ASSIMP;
+LittleEngine::Rendering::Resources::Parsers::AssimpParser LittleEngine::Rendering::Resources::Loaders::ModelLoader::__ASSIMP;
 
 
 
-OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath,
-                                                                                    OvRendering::Resources::Parsers::EModelParserFlags p_parserFlags)
+LittleEngine::Rendering::Resources::Model* LittleEngine::Rendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath,
+                                                                                    LittleEngine::Rendering::Resources::Parsers::EModelParserFlags p_parserFlags)
 {
 	Model* result = new Model(p_filepath);
 	
@@ -30,7 +30,7 @@ OvRendering::Resources::Model* OvRendering::Resources::Loaders::ModelLoader::Cre
 
 
 
-void OvRendering::Resources::Loaders::ModelLoader::Reload(Model& p_model, const std::string& p_filePath, Parsers::EModelParserFlags p_parserFlags)
+void LittleEngine::Rendering::Resources::Loaders::ModelLoader::Reload(Model& p_model, const std::string& p_filePath, Parsers::EModelParserFlags p_parserFlags)
 {
 	Model* newModel = Create(p_filePath, p_parserFlags);
 
@@ -44,7 +44,7 @@ void OvRendering::Resources::Loaders::ModelLoader::Reload(Model& p_model, const 
 	}
 }
 
-bool OvRendering::Resources::Loaders::ModelLoader::Destroy(Model*& p_modelInstance)
+bool LittleEngine::Rendering::Resources::Loaders::ModelLoader::Destroy(Model*& p_modelInstance)
 {
 	if (p_modelInstance)
 	{

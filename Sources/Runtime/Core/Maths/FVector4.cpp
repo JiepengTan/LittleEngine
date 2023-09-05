@@ -9,23 +9,23 @@
 
 #include "Core/Maths/FVector4.h"
 
-const OvMaths::FVector4 OvMaths::FVector4::One(1.0f, 1.0f, 1.0f, 1.0f);
-const OvMaths::FVector4 OvMaths::FVector4::Zero(0.0f, 0.0f, 0.0f, 0.0f);
+const LittleEngine::FVector4 LittleEngine::FVector4::One(1.0f, 1.0f, 1.0f, 1.0f);
+const LittleEngine::FVector4 LittleEngine::FVector4::Zero(0.0f, 0.0f, 0.0f, 0.0f);
 
-OvMaths::FVector4::FVector4(float p_x, float p_y, float p_z, float p_w) : x(p_x), y(p_y), z(p_z), w(p_w)
+LittleEngine::FVector4::FVector4(float p_x, float p_y, float p_z, float p_w) : x(p_x), y(p_y), z(p_z), w(p_w)
 {
 }
 
-OvMaths::FVector4::FVector4(const FVector4& p_toCopy) : x(p_toCopy.x), y(p_toCopy.y), z(p_toCopy.z), w(p_toCopy.w)
+LittleEngine::FVector4::FVector4(const FVector4& p_toCopy) : x(p_toCopy.x), y(p_toCopy.y), z(p_toCopy.z), w(p_toCopy.w)
 {
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator-() const
+LittleEngine::FVector4 LittleEngine::FVector4::operator-() const
 {
 	return operator*(-1);
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator=(const FVector4& p_other)
+LittleEngine::FVector4 LittleEngine::FVector4::operator=(const FVector4& p_other)
 {
 	this->x = p_other.x;
 	this->y = p_other.y;
@@ -35,51 +35,51 @@ OvMaths::FVector4 OvMaths::FVector4::operator=(const FVector4& p_other)
 	return *this;
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator+(const FVector4& p_other) const
+LittleEngine::FVector4 LittleEngine::FVector4::operator+(const FVector4& p_other) const
 {
 	return Add(*this, p_other);
 }
 
-OvMaths::FVector4& OvMaths::FVector4::operator+=(const FVector4& p_other)
+LittleEngine::FVector4& LittleEngine::FVector4::operator+=(const FVector4& p_other)
 {
 	*this = Add(*this, p_other);
 	return *this;
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator-(const FVector4& p_other) const
+LittleEngine::FVector4 LittleEngine::FVector4::operator-(const FVector4& p_other) const
 {
 	return Substract(*this, p_other);
 }
 
-OvMaths::FVector4& OvMaths::FVector4::operator-=(const FVector4& p_other)
+LittleEngine::FVector4& LittleEngine::FVector4::operator-=(const FVector4& p_other)
 {
 	*this = Substract(*this, p_other);
 	return *this;
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator*(float p_scalar) const
+LittleEngine::FVector4 LittleEngine::FVector4::operator*(float p_scalar) const
 {
 	return Multiply(*this, p_scalar);
 }
 
-OvMaths::FVector4& OvMaths::FVector4::operator*=(float p_scalar)
+LittleEngine::FVector4& LittleEngine::FVector4::operator*=(float p_scalar)
 {
 	*this = Multiply(*this, p_scalar);
 	return *this;
 }
 
-OvMaths::FVector4 OvMaths::FVector4::operator/(float p_scalar) const
+LittleEngine::FVector4 LittleEngine::FVector4::operator/(float p_scalar) const
 {
 	return Divide(*this, p_scalar);
 }
 
-OvMaths::FVector4& OvMaths::FVector4::operator/=(float p_scalar)
+LittleEngine::FVector4& LittleEngine::FVector4::operator/=(float p_scalar)
 {
 	*this = Divide(*this, p_scalar);
 	return *this;
 }
 
-bool OvMaths::FVector4::operator==(const FVector4 & p_other)
+bool LittleEngine::FVector4::operator==(const FVector4 & p_other)
 {
 	return
 		this->x == p_other.x &&
@@ -88,12 +88,12 @@ bool OvMaths::FVector4::operator==(const FVector4 & p_other)
 		this->w == p_other.w;
 }
 
-bool OvMaths::FVector4::operator!=(const FVector4 & p_other)
+bool LittleEngine::FVector4::operator!=(const FVector4 & p_other)
 {
 	return !operator==(p_other);
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Add(const FVector4& p_left, const FVector4& p_right)
+LittleEngine::FVector4 LittleEngine::FVector4::Add(const FVector4& p_left, const FVector4& p_right)
 {
 	return FVector4
 	(
@@ -104,7 +104,7 @@ OvMaths::FVector4 OvMaths::FVector4::Add(const FVector4& p_left, const FVector4&
 	);
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Substract(const FVector4& p_left, const FVector4& p_right)
+LittleEngine::FVector4 LittleEngine::FVector4::Substract(const FVector4& p_left, const FVector4& p_right)
 {
 	return FVector4
 	(
@@ -115,7 +115,7 @@ OvMaths::FVector4 OvMaths::FVector4::Substract(const FVector4& p_left, const FVe
 	);
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Multiply(const FVector4& p_target, float p_scalar)
+LittleEngine::FVector4 LittleEngine::FVector4::Multiply(const FVector4& p_target, float p_scalar)
 {
 	return FVector4
 	(
@@ -126,7 +126,7 @@ OvMaths::FVector4 OvMaths::FVector4::Multiply(const FVector4& p_target, float p_
 	);
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Divide(const FVector4& p_left, float p_scalar)
+LittleEngine::FVector4 LittleEngine::FVector4::Divide(const FVector4& p_left, float p_scalar)
 {
 	FVector4 result(p_left);
 
@@ -141,17 +141,17 @@ OvMaths::FVector4 OvMaths::FVector4::Divide(const FVector4& p_left, float p_scal
 	return result;
 }
 
-float OvMaths::FVector4::Length(const FVector4& p_target)
+float LittleEngine::FVector4::Length(const FVector4& p_target)
 {
 	return sqrtf(p_target.x * p_target.x + p_target.y * p_target.y + p_target.z * p_target.z + p_target.w * p_target.w);
 }
 
-float OvMaths::FVector4::Dot(const FVector4& p_left, const FVector4& p_right)
+float LittleEngine::FVector4::Dot(const FVector4& p_left, const FVector4& p_right)
 {
 	return p_left.x * p_right.x + p_left.y * p_right.y + p_left.z * p_right.z + p_left.w * p_right.w;
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Normalize(const FVector4& p_target)
+LittleEngine::FVector4 LittleEngine::FVector4::Normalize(const FVector4& p_target)
 {
 	float length = Length(p_target);
 
@@ -173,7 +173,7 @@ OvMaths::FVector4 OvMaths::FVector4::Normalize(const FVector4& p_target)
 	}
 }
 
-OvMaths::FVector4 OvMaths::FVector4::Lerp(const FVector4& p_start, const FVector4& p_end, float p_alpha)
+LittleEngine::FVector4 LittleEngine::FVector4::Lerp(const FVector4& p_start, const FVector4& p_end, float p_alpha)
 {
 	return (p_start + (p_end - p_start) * p_alpha);
 }

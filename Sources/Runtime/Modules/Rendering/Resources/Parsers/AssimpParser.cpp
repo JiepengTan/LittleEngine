@@ -18,12 +18,12 @@
 #include "Modules/Rendering/Resources/Animation.h"
 #include "Modules/Rendering/Resources/Model.h"
 
-static OvMaths::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
+static LittleEngine::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 {
-    return *((OvMaths::FMatrix4*)(&p_from));
+    return *((LittleEngine::FMatrix4*)(&p_from));
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering::Resources::Animation* p_anim,
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadMissingBones(LittleEngine::Rendering::Resources::Animation* p_anim,
                                                                      aiAnimation* animation)
 {
     auto& boneInfoMap = *p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
@@ -49,7 +49,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadMissingBones(OvRendering
     }
 }
 
-bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,
+bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,
                                                                   EModelParserFlags p_parserFlags)
 {
     Assimp::Importer importer;
@@ -72,7 +72,7 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_a
 }
 
 
-void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
 {
     p_dest.name = p_src->mName.data;
     p_dest.transformation = ConvertMatrixToGLMFormat(p_src->mTransformation); // 直接内存映射
@@ -88,7 +88,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBo
 }
 
 
-bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string& p_fileName,
+bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string& p_fileName,
                                                               std::vector<Mesh*>& p_meshes,
                                                               std::vector<std::string>& p_materials,
                                                               EModelParserFlags p_parserFlags)
@@ -115,7 +115,7 @@ bool OvRendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, co
     return true;
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessMaterials(const aiScene* p_scene,
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessMaterials(const aiScene* p_scene,
                                                                      std::vector<std::string>& p_materials)
 {
     for (uint32_t i = 0; i < p_scene->mNumMaterials; ++i)
@@ -130,7 +130,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessMaterials(const aiSce
     }
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model, void* p_transform, aiNode* p_node,
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model, void* p_transform, aiNode* p_node,
                                                                 const aiScene* p_scene, std::vector<Mesh*>& p_meshes)
 {
     aiMatrix4x4 nodeTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform) * p_node->mTransformation;
@@ -157,7 +157,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model, 
 
 
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessVertexBoneInfo(OvRendering::Resources::Model* p_model, aiMesh* p_mesh, OvRendering::Geometry::VertexDataBuffer& p_verticesBuffer)
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessVertexBoneInfo(LittleEngine::Rendering::Resources::Model* p_model, aiMesh* p_mesh, LittleEngine::Rendering::Geometry::VertexDataBuffer& p_verticesBuffer)
 {
     if(p_mesh->mNumBones ==0) return;
     //1. calc vertex's boneId and weights
@@ -232,7 +232,7 @@ void OvRendering::Resources::Parsers::AssimpParser::ProcessVertexBoneInfo(OvRend
     }
 }
 
-void OvRendering::Resources::Parsers::AssimpParser::ProcessMesh(OvRendering::Resources::Model* p_model,
+void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessMesh(LittleEngine::Rendering::Resources::Model* p_model,
                                                                 void* p_transform,
                                                                 aiMesh* p_mesh, const aiScene* p_scene,
                                                                 Geometry::VertexDataBuffer& p_verticesBuffer,

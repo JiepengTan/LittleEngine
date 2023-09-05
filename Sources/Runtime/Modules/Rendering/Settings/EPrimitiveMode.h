@@ -8,7 +8,7 @@
 
 
 
-namespace OvRendering::Settings
+namespace LittleEngine::Rendering::Settings
 {
 	/**
 	* OpenGL primitive mode enum wrapper

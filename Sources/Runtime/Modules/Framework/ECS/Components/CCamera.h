@@ -9,9 +9,9 @@
 #include "Modules/Rendering/LowRenderer/Camera.h"
 #include "AComponent.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represents a camera entity. Its position will determine its view matrix
@@ -23,7 +23,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CCamera(ECS::Actor& p_owner);
+		CCamera(Actor& p_owner);
 		CCamera() = default;
 		/**
 		* Destructor
@@ -63,7 +63,7 @@ namespace OvCore::ECS::Components
 		* Sets the clear color of the camera to the given value
 		* @param p_value
 		*/
-		void SetClearColor(const OvMaths::FVector3& p_clearColor);
+		void SetClearColor(const LittleEngine::FVector3& p_clearColor);
 
 		/**
 		* Defines if the camera should apply frustum geometry culling in rendering
@@ -81,7 +81,7 @@ namespace OvCore::ECS::Components
         * Defines the projection mode the camera should adopt
         * @param p_projectionMode
         */
-        void SetProjectionMode(OvRendering::Settings::EProjectionMode p_projectionMode);
+        void SetProjectionMode(LittleEngine::Rendering::Settings::EProjectionMode p_projectionMode);
 
 		/**
 		* Returns the fov of the camera
@@ -106,7 +106,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the clear color of the camera
 		*/
-		const OvMaths::FVector3& GetClearColor() const;
+		const LittleEngine::FVector3& GetClearColor() const;
 
 		/**
 		* Returns true if the frustum geometry culling is enabled
@@ -121,12 +121,12 @@ namespace OvCore::ECS::Components
         /**
         * Returns the current projection mode
         */
-        OvRendering::Settings::EProjectionMode GetProjectionMode() const;
+        LittleEngine::Rendering::Settings::EProjectionMode GetProjectionMode() const;
 
 		/**
-		* Returns the OvRendering camera instance attached to this component
+		* Returns the LittleEngine::Rendering camera instance attached to this component
 		*/
-		OvRendering::LowRenderer::Camera& GetCamera();
+		LittleEngine::Rendering::LowRenderer::Camera& GetCamera();
 
 		/**
 		* Serialize the component
@@ -146,9 +146,9 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	private:
-		OvRendering::LowRenderer::Camera m_camera;
+		LittleEngine::Rendering::LowRenderer::Camera m_camera;
 	};
 }

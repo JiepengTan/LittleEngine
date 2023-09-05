@@ -11,7 +11,7 @@
 
 #include "Modules/Rendering/Settings/DriverSettings.h"
 
-namespace OvRendering::Context
+namespace LittleEngine::Rendering::Context
 {
 	/**
 	* The Driver represents the OpenGL context

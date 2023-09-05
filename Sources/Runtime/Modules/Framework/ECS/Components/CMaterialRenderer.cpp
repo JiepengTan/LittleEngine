@@ -19,7 +19,7 @@
 #include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 
-OvCore::ECS::Components::CMaterialRenderer::CMaterialRenderer(ECS::Actor & p_owner) : AComponent(p_owner)
+LittleEngine::CMaterialRenderer::CMaterialRenderer(Actor & p_owner) : AComponent(p_owner)
 {
 	m_materials.fill(nullptr);
 
@@ -29,28 +29,28 @@ OvCore::ECS::Components::CMaterialRenderer::CMaterialRenderer(ECS::Actor & p_own
 	UpdateMaterialList();
 }
 
-std::string OvCore::ECS::Components::CMaterialRenderer::GetName()
+std::string LittleEngine::CMaterialRenderer::GetName()
 {
 	return "Material Renderer";
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::FillWithMaterial(OvCore::Resources::Material & p_material)
+void LittleEngine::CMaterialRenderer::FillWithMaterial(LittleEngine::Resources::Material & p_material)
 {
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
 		m_materials[i] = &p_material;
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, OvCore::Resources::Material& p_material)
+void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material& p_material)
 {
 	m_materials[p_index] = &p_material;
 }
 
-OvCore::Resources::Material* OvCore::ECS::Components::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
+LittleEngine::Resources::Material* LittleEngine::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
 {
 	return m_materials.at(p_index);
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
+void LittleEngine::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
 {
 	if (p_index < m_materials.size())
 	{
@@ -58,30 +58,30 @@ void OvCore::ECS::Components::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p
 	}
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::RemoveMaterialByInstance(OvCore::Resources::Material& p_instance)
+void LittleEngine::CMaterialRenderer::RemoveMaterialByInstance(LittleEngine::Resources::Material& p_instance)
 {
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
 		if (m_materials[i] == &p_instance)
 			m_materials[i] = nullptr;
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::RemoveAllMaterials()
+void LittleEngine::CMaterialRenderer::RemoveAllMaterials()
 {
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
 		m_materials[i] = nullptr;
 }
 
-const OvMaths::FMatrix4 & OvCore::ECS::Components::CMaterialRenderer::GetUserMatrix() const
+const LittleEngine::FMatrix4 & LittleEngine::CMaterialRenderer::GetUserMatrix() const
 {
 	return m_userMatrix;
 }
 
-const OvCore::ECS::Components::CMaterialRenderer::MaterialList& OvCore::ECS::Components::CMaterialRenderer::GetMaterials() const
+const LittleEngine::CMaterialRenderer::MaterialList& LittleEngine::CMaterialRenderer::GetMaterials() const
 {
 	return m_materials;
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	tinyxml2::XMLNode* materialsNode = p_doc.NewElement("materials");
 	p_node->InsertEndChild(materialsNode);
@@ -91,11 +91,11 @@ void OvCore::ECS::Components::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocume
 
 	for (uint8_t i = 0; i < elementsToSerialize; ++i)
 	{
-		OvCore::Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
+		LittleEngine::Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
 	}
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	tinyxml2::XMLNode* materialsRoot = p_node->FirstChildElement("materials");
 	if (materialsRoot)
@@ -117,26 +117,26 @@ void OvCore::ECS::Components::CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocu
 	UpdateMaterialList();
 }
 
-std::array<OvUI::Widgets::AWidget*, 3> CustomMaterialDrawer(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvCore::Resources::Material*& p_data)
+std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Resources::Material*& p_data)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
-	std::array<OvUI::Widgets::AWidget*, 3> widgets;
+	std::array<LittleEngine::UI::Widgets::AWidget*, 3> widgets;
 
-	widgets[0] = &p_root.CreateWidget<OvUI::Widgets::Texts::TextColored>(p_name, GUIDrawer::TitleColor);
+	widgets[0] = &p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>(p_name, GUIDrawer::TitleColor);
 
 	std::string displayedText = (p_data ? p_data->path : std::string("Empty"));
-	auto & rightSide = p_root.CreateWidget<OvUI::Widgets::Layout::Group>();
+	auto & rightSide = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
-	auto& widget = rightSide.CreateWidget<OvUI::Widgets::Texts::Text>(displayedText);
+	auto& widget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(displayedText);
 
 	widgets[1] = &widget;
 
-	widget.AddPlugin<OvUI::Plugins::DDTarget<std::pair<std::string, OvUI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [&widget, &p_data](auto p_receivedData)
+	widget.AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<std::string, LittleEngine::UI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [&widget, &p_data](auto p_receivedData)
 	{
-		if (OvTools::Utils::PathParser::GetFileType(p_receivedData.first) == OvTools::Utils::PathParser::EFileType::MATERIAL)
+		if (LittleEngine::Utils::PathParser::GetFileType(p_receivedData.first) == LittleEngine::Utils::PathParser::EFileType::MATERIAL)
 		{
-			if (auto resource = OVSERVICE(OvCore::ResourceManagement::MaterialManager).GetResource(p_receivedData.first); resource)
+			if (auto resource = OVSERVICE(LittleEngine::ResourceManagement::MaterialManager).GetResource(p_receivedData.first); resource)
 			{
 				p_data = resource;
 				widget.content = p_receivedData.first;
@@ -146,7 +146,7 @@ std::array<OvUI::Widgets::AWidget*, 3> CustomMaterialDrawer(OvUI::Internal::Widg
 
 	widget.lineBreak = false;
 
-	auto & resetButton = rightSide.CreateWidget<OvUI::Widgets::Buttons::ButtonSmall>("Clear");
+	auto & resetButton = rightSide.CreateWidget<LittleEngine::UI::Widgets::Buttons::ButtonSmall>("Clear");
 	resetButton.idleBackgroundColor = GUIDrawer::ClearButtonColor;
 	resetButton.ClickedEvent += [&widget, &p_data]
 	{
@@ -159,9 +159,9 @@ std::array<OvUI::Widgets::AWidget*, 3> CustomMaterialDrawer(OvUI::Internal::Widg
 	return widgets;
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::OnInspector(OvUI::Internal::WidgetContainer & p_root)
+void LittleEngine::CMaterialRenderer::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
 		m_materialFields[i] = CustomMaterialDrawer(p_root, "Material", m_materials[i]);
@@ -169,7 +169,7 @@ void OvCore::ECS::Components::CMaterialRenderer::OnInspector(OvUI::Internal::Wid
 	UpdateMaterialList();
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::UpdateMaterialList()
+void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 {
 	if (auto modelRenderer = owner->GetComponent<CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
 	{
@@ -192,18 +192,18 @@ void OvCore::ECS::Components::CMaterialRenderer::UpdateMaterialList()
 			m_materialFields[i][0]->enabled = enabled;
 			m_materialFields[i][1]->enabled = enabled;
 			m_materialFields[i][2]->enabled = enabled;
-			reinterpret_cast<OvUI::Widgets::Texts::Text*>(m_materialFields[i][0])->content = m_materialNames[i];
+			reinterpret_cast<LittleEngine::UI::Widgets::Texts::Text*>(m_materialFields[i][0])->content = m_materialNames[i];
 		}
 	}
 }
 
-void OvCore::ECS::Components::CMaterialRenderer::SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float p_value)
+void LittleEngine::CMaterialRenderer::SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float p_value)
 {
 	if (p_row < 4 && p_column < 4)
 		m_userMatrix.data[4 * p_row + p_column] = p_value;
 }
 
-float OvCore::ECS::Components::CMaterialRenderer::GetUserMatrixElement(uint32_t p_row, uint32_t p_column) const
+float LittleEngine::CMaterialRenderer::GetUserMatrixElement(uint32_t p_row, uint32_t p_column) const
 {
 	if (p_row < 4 && p_column < 4)
 		return m_userMatrix.data[4 * p_row + p_column];

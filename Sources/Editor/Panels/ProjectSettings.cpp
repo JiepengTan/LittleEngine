@@ -14,11 +14,11 @@
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Modules/UI/Widgets/Buttons/Button.h"
 
-using namespace OvUI::Panels;
-using namespace OvUI::Widgets;
-using namespace OvCore::Helpers;
+using namespace LittleEngine::UI::Panels;
+using namespace LittleEngine::UI::Widgets;
+using namespace LittleEngine::Helpers;
 
-OvEditor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, bool p_opened, const OvUI::Settings::PanelWindowSettings & p_windowSettings) :
+LittleEditor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, bool p_opened, const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings) :
 	PanelWindow(p_title, p_opened, p_windowSettings),
 	m_projectFile(EDITOR_CONTEXT(projectSettings))
 {
@@ -39,7 +39,7 @@ OvEditor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, 
 		EDITOR_CONTEXT(ResetProjectSettings());
 	};
 
-	CreateWidget<OvUI::Widgets::Visual::Separator>();
+	CreateWidget<LittleEngine::UI::Widgets::Visual::Separator>();
 
 	{
 		/* Physics settings */

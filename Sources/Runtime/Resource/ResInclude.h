@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Resource/ResIncludeBasic.h"
 #include "Resource/ResIncludeAnimation.h"
 #include "Resource/ResIncludeAudio.h"

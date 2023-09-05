@@ -12,7 +12,7 @@
 #include "Modules/UI/Modules/Canvas.h"
 #include "Modules/UI/Styling/EStyle.h"
 
-namespace OvUI::Core
+namespace LittleEngine::UI::Core
 {
 	/**
 	* Handle the creation and drawing of the UI

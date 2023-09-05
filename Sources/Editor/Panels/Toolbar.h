@@ -9,9 +9,9 @@
 #include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 #include "Modules/UI/Panels/PanelWindow.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class Toolbar : public OvUI::Panels::PanelWindow
+	class Toolbar : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -24,7 +24,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -33,9 +33,9 @@ namespace OvEditor::Panels
 		void _Draw_Impl() override;
 
 	private:
-		OvUI::Widgets::Buttons::ButtonImage* m_playButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_pauseButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_stopButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_nextButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_playButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_pauseButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_stopButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_nextButton;
 	};
 }

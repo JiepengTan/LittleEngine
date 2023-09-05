@@ -13,7 +13,7 @@
 #include "Modules/UI/Widgets/Sliders/ESliderOrientation.h"
 #include "Modules/UI/Internal/Converter.h"
 
-namespace OvUI::Widgets::Sliders
+namespace LittleEngine::UI::Widgets::Sliders
 {
 	/**
 	* Slider widget of generic type
@@ -80,10 +80,10 @@ namespace OvUI::Widgets::Sliders
 		T max;
 		T value;
 		ESliderOrientation orientation;
-		OvMaths::FVector2 verticalModeSize; /* Only applied with ESliderOrientation::VERTICAL */
+		LittleEngine::FVector2 verticalModeSize; /* Only applied with ESliderOrientation::VERTICAL */
 		std::string label;
 		std::string format;
-		OvTools::Eventing::Event<T> ValueChangedEvent;
+		LittleEngine::Eventing::Event<T> ValueChangedEvent;
 
 	private:
 		ImGuiDataType m_dataType;

@@ -11,7 +11,7 @@
 #include "Modules/Rendering/Utils/Defines.h"
 
 #include "../Editor/Core/ProjectHub.h"
-#include "../Editor/Core/Application.h"
+#include "../Editor/Core/EditorApp.h"
 
 #undef APIENTRY
 #include "Windows.h"
@@ -28,7 +28,7 @@ void UpdateWorkingDirectory(const std::string& p_executablePath)
 {
 	if (!IsDebuggerPresent())
 	{
-		std::filesystem::current_path(OvTools::Utils::PathParser::GetContainingFolder(p_executablePath));
+		std::filesystem::current_path(LittleEngine::Utils::PathParser::GetContainingFolder(p_executablePath));
 	}
 }
 
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 	std::string projectName;
 
 	{
-		OvEditor::Core::ProjectHub hub;
+		LittleEditor::Core::ProjectHub hub;
 
 		if (argc < 2)
 		{
@@ -63,20 +63,20 @@ int main(int argc, char** argv)
 			// Project file given as argument ==> Open the project
 			std::string projectFile = argv[1];
 
-			if (OvTools::Utils::PathParser::GetExtension(projectFile) == "ovproject")
+			if (LittleEngine::Utils::PathParser::GetExtension(projectFile) == "ovproject")
 			{
 				ready = true;
-				projectPath = OvTools::Utils::PathParser::GetContainingFolder(projectFile);
-				projectName = OvTools::Utils::PathParser::GetElementName(projectFile);
-				OvTools::Utils::String::Replace(projectName, ".ovproject", "");
+				projectPath = LittleEngine::Utils::PathParser::GetContainingFolder(projectFile);
+				projectName = LittleEngine::Utils::PathParser::GetElementName(projectFile);
+				LittleEngine::Utils::String::Replace(projectName, ".ovproject", "");
 			}
 
 			hub.RegisterProject(projectPath);
 		}
 	}
 
-	OvCore::GlobalState::IsPlaying = false;
-	OvCore::GlobalState::IsEditorMode = true;
+	LittleEngine::GlobalState::IsPlaying = false;
+	LittleEngine::GlobalState::IsEditorMode = true;
 	if (ready)
 		TryRun(projectPath, projectName);
 
@@ -86,19 +86,19 @@ int main(int argc, char** argv)
 static void TryRun(const std::string& projectPath, const std::string& projectName)
 {
 	auto errorEvent =
-		[](OvWindowing::Context::EDeviceError, std::string errMsg)
+		[](LittleEngine::Windowing::Context::EDeviceError, std::string errMsg)
 		{
 			errMsg = "Overload requires OpenGL 4.3 or newer.\r\n" + errMsg;
 			MessageBox(0, errMsg.c_str(), "Overload", MB_OK | MB_ICONSTOP);
 		};
 
-	std::unique_ptr<OvEditor::Core::Application> app;
+	std::unique_ptr<LittleEditor::Core::EditorApp> app;
 
 	try
 	{
-		auto listenerId = OvWindowing::Context::Device::ErrorEvent += errorEvent;
-		app = std::make_unique<OvEditor::Core::Application>(projectPath, projectName);
-		OvWindowing::Context::Device::ErrorEvent -= listenerId;
+		auto listenerId = LittleEngine::Windowing::Context::Device::ErrorEvent += errorEvent;
+		app = std::make_unique<LittleEditor::Core::EditorApp>(projectPath, projectName);
+		LittleEngine::Windowing::Context::Device::ErrorEvent -= listenerId;
 	}
 	catch (...) {}
 	if (app)

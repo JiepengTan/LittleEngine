@@ -9,18 +9,18 @@
 #include "Modules/Audio/Core/AudioPlayer.h"
 #include "Modules/Audio/Entities/AudioSource.h"
 
-OvTools::Eventing::Event<OvAudio::Entities::AudioSource&> OvAudio::Entities::AudioSource::CreatedEvent;
-OvTools::Eventing::Event<OvAudio::Entities::AudioSource&> OvAudio::Entities::AudioSource::DestroyedEvent;
+LittleEngine::Eventing::Event<LittleEngine::Audio::Entities::AudioSource&> LittleEngine::Audio::Entities::AudioSource::CreatedEvent;
+LittleEngine::Eventing::Event<LittleEngine::Audio::Entities::AudioSource&> LittleEngine::Audio::Entities::AudioSource::DestroyedEvent;
 
-OvAudio::Entities::AudioSource::AudioSource(Core::AudioPlayer& p_audioPlayer) :
+LittleEngine::Audio::Entities::AudioSource::AudioSource(Core::AudioPlayer& p_audioPlayer) :
 	m_audioPlayer(p_audioPlayer),
-	m_transform(new OvMaths::FTransform()),
+	m_transform(new LittleEngine::FTransform()),
 	m_internalTransform(true)
 {
 	Setup();
 }
 
-OvAudio::Entities::AudioSource::AudioSource(Core::AudioPlayer& p_audioPlayer, OvMaths::FTransform& p_transform) :
+LittleEngine::Audio::Entities::AudioSource::AudioSource(Core::AudioPlayer& p_audioPlayer, LittleEngine::FTransform& p_transform) :
 	m_audioPlayer(p_audioPlayer),
 	m_transform(&p_transform),
 	m_internalTransform(false)
@@ -28,12 +28,12 @@ OvAudio::Entities::AudioSource::AudioSource(Core::AudioPlayer& p_audioPlayer, Ov
 	Setup();
 }
 
-void OvAudio::Entities::AudioSource::Setup()
+void LittleEngine::Audio::Entities::AudioSource::Setup()
 {
 	CreatedEvent.Invoke(*this);
 }
 
-OvAudio::Entities::AudioSource::~AudioSource()
+LittleEngine::Audio::Entities::AudioSource::~AudioSource()
 {
 	DestroyedEvent.Invoke(*this);
 
@@ -43,13 +43,13 @@ OvAudio::Entities::AudioSource::~AudioSource()
 		delete m_transform;
 }
 
-void OvAudio::Entities::AudioSource::UpdateTrackedSoundPosition()
+void LittleEngine::Audio::Entities::AudioSource::UpdateTrackedSoundPosition()
 {
 	if (IsTrackingSound())
 		m_trackedSound->GetTrack()->setPosition(reinterpret_cast<const irrklang::vec3df&>(m_transform->GetWorldPosition())); // FVector3 and vec3df have the same data layout
 }
 
-void OvAudio::Entities::AudioSource::ApplySourceSettingsToTrackedSound()
+void LittleEngine::Audio::Entities::AudioSource::ApplySourceSettingsToTrackedSound()
 {
 	m_trackedSound->GetTrack()->setVolume(m_volume);
 	m_trackedSound->GetTrack()->setPan(m_pan);
@@ -58,12 +58,12 @@ void OvAudio::Entities::AudioSource::ApplySourceSettingsToTrackedSound()
 	m_trackedSound->GetTrack()->setMinDistance(m_attenuationThreshold);
 }
 
-void OvAudio::Entities::AudioSource::SetSpatial(bool p_value)
+void LittleEngine::Audio::Entities::AudioSource::SetSpatial(bool p_value)
 {
 	m_spatial = p_value;
 }
 
-void OvAudio::Entities::AudioSource::SetAttenuationThreshold(float p_distance)
+void LittleEngine::Audio::Entities::AudioSource::SetAttenuationThreshold(float p_distance)
 {
 	m_attenuationThreshold = p_distance;
 
@@ -71,12 +71,12 @@ void OvAudio::Entities::AudioSource::SetAttenuationThreshold(float p_distance)
 		m_trackedSound->GetTrack()->setMinDistance(p_distance);
 }
 
-OvAudio::Tracking::SoundTracker* OvAudio::Entities::AudioSource::GetTrackedSound() const
+LittleEngine::Audio::Tracking::SoundTracker* LittleEngine::Audio::Entities::AudioSource::GetTrackedSound() const
 {
 	return m_trackedSound.get();
 }
 
-void OvAudio::Entities::AudioSource::SetVolume(float p_volume)
+void LittleEngine::Audio::Entities::AudioSource::SetVolume(float p_volume)
 {
 	m_volume = p_volume;
 
@@ -84,7 +84,7 @@ void OvAudio::Entities::AudioSource::SetVolume(float p_volume)
 		m_trackedSound->GetTrack()->setVolume(p_volume);
 }
 
-void OvAudio::Entities::AudioSource::SetPan(float p_pan)
+void LittleEngine::Audio::Entities::AudioSource::SetPan(float p_pan)
 {
 	m_pan = p_pan;
 
@@ -92,7 +92,7 @@ void OvAudio::Entities::AudioSource::SetPan(float p_pan)
 		m_trackedSound->GetTrack()->setPan(p_pan * -1.0f);
 }
 
-void OvAudio::Entities::AudioSource::SetLooped(bool p_looped)
+void LittleEngine::Audio::Entities::AudioSource::SetLooped(bool p_looped)
 {
 	m_looped = p_looped;
 
@@ -100,7 +100,7 @@ void OvAudio::Entities::AudioSource::SetLooped(bool p_looped)
 		m_trackedSound->GetTrack()->setIsLooped(p_looped);
 }
 
-void OvAudio::Entities::AudioSource::SetPitch(float p_pitch)
+void LittleEngine::Audio::Entities::AudioSource::SetPitch(float p_pitch)
 {
 	m_pitch = p_pitch;
 
@@ -108,42 +108,42 @@ void OvAudio::Entities::AudioSource::SetPitch(float p_pitch)
 		m_trackedSound->GetTrack()->setPlaybackSpeed(p_pitch < 0.01f ? 0.01f : p_pitch);
 }
 
-bool OvAudio::Entities::AudioSource::IsTrackingSound() const
+bool LittleEngine::Audio::Entities::AudioSource::IsTrackingSound() const
 {
 	return m_trackedSound.operator bool();
 }
 
-bool OvAudio::Entities::AudioSource::IsSpatial() const
+bool LittleEngine::Audio::Entities::AudioSource::IsSpatial() const
 {
 	return m_spatial;
 }
 
-float OvAudio::Entities::AudioSource::GetAttenuationThreshold() const
+float LittleEngine::Audio::Entities::AudioSource::GetAttenuationThreshold() const
 {
 	return m_attenuationThreshold;
 }
 
-float OvAudio::Entities::AudioSource::GetVolume() const
+float LittleEngine::Audio::Entities::AudioSource::GetVolume() const
 {
 	return m_volume;
 }
 
-float OvAudio::Entities::AudioSource::GetPan() const
+float LittleEngine::Audio::Entities::AudioSource::GetPan() const
 {
 	return m_pan;
 }
 
-bool OvAudio::Entities::AudioSource::IsLooped() const
+bool LittleEngine::Audio::Entities::AudioSource::IsLooped() const
 {
 	return m_looped;
 }
 
-float OvAudio::Entities::AudioSource::GetPitch() const
+float LittleEngine::Audio::Entities::AudioSource::GetPitch() const
 {
 	return m_pitch;
 }
 
-bool OvAudio::Entities::AudioSource::IsFinished() const
+bool LittleEngine::Audio::Entities::AudioSource::IsFinished() const
 {
 	if (IsTrackingSound())
 		return m_trackedSound->GetTrack()->isFinished();
@@ -151,7 +151,7 @@ bool OvAudio::Entities::AudioSource::IsFinished() const
 		return true;
 }
 
-void OvAudio::Entities::AudioSource::Play(const Resources::Sound& p_sound)
+void LittleEngine::Audio::Entities::AudioSource::Play(const Resources::Sound& p_sound)
 {
 	/* Stops and destroy the previous sound (If any) */
 	StopAndDestroyTrackedSound();
@@ -173,25 +173,25 @@ void OvAudio::Entities::AudioSource::Play(const Resources::Sound& p_sound)
 	}
 }
 
-void OvAudio::Entities::AudioSource::Resume()
+void LittleEngine::Audio::Entities::AudioSource::Resume()
 {
 	if (IsTrackingSound())
 		m_trackedSound->GetTrack()->setIsPaused(false);
 }
 
-void OvAudio::Entities::AudioSource::Pause()
+void LittleEngine::Audio::Entities::AudioSource::Pause()
 {
 	if (IsTrackingSound())
 		m_trackedSound->GetTrack()->setIsPaused(true);
 }
 
-void OvAudio::Entities::AudioSource::Stop()
+void LittleEngine::Audio::Entities::AudioSource::Stop()
 {
 	if (IsTrackingSound())
 		m_trackedSound->GetTrack()->stop();
 }
 
-void OvAudio::Entities::AudioSource::StopAndDestroyTrackedSound()
+void LittleEngine::Audio::Entities::AudioSource::StopAndDestroyTrackedSound()
 {
 	if (IsTrackingSound())
 	{

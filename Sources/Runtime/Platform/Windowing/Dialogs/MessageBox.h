@@ -14,7 +14,7 @@
 #undef ERROR
 #undef IGNORE
 
-namespace OvWindowing::Dialogs
+namespace LittleEngine::Windowing::Dialogs
 {
 	/**
 	* Displays a modal dialog box that contains a system icon,

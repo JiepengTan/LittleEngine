@@ -44,40 +44,40 @@
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "../Editor/Core/EditorActions.h"
 
-using namespace OvCore::ECS::Components;
-using namespace OvUI::Widgets;
+using namespace LittleEngine;
+using namespace LittleEngine::UI::Widgets;
 
-OvEditor::Panels::Inspector::Inspector
+LittleEditor::Panels::Inspector::Inspector
 (
 	const std::string& p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings & p_windowSettings
+	const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings
 ) : PanelWindow(p_title, p_opened, p_windowSettings)
 {
-	m_inspectorHeader = &CreateWidget<OvUI::Widgets::Layout::Group>();
+	m_inspectorHeader = &CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 	m_inspectorHeader->enabled = false;
-	m_actorInfo = &CreateWidget<OvUI::Widgets::Layout::Group>();
+	m_actorInfo = &CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
-	auto& headerColumns = m_inspectorHeader->CreateWidget<OvUI::Widgets::Layout::Columns<2>>();
+	auto& headerColumns = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 
 	/* Name field */
 	auto nameGatherer = [this] { return m_targetActor ? m_targetActor->GetName() : "%undef%"; };
 	auto nameProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetName(p_newName); };
-	OvCore::Helpers::GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
+	LittleEngine::Helpers::GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
 
 	/* Tag field */
 	auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
 	auto tagProvider = [this](const std::string & p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
-	OvCore::Helpers::GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
+	LittleEngine::Helpers::GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
 
 	/* Active field */
 	auto activeGatherer = [this] { return m_targetActor ? m_targetActor->IsSelfActive() : false; };
 	auto activeProvider = [this](bool p_active) { if (m_targetActor) m_targetActor->SetActive(p_active); };
-	OvCore::Helpers::GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
+	LittleEngine::Helpers::GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
 
 	/* Component select + button */
 	{
-		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<OvUI::Widgets::Selection::ComboBox>(0);
+		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(0);
 		componentSelectorWidget.lineBreak = false;
 		componentSelectorWidget.choices.emplace(0, "Model Renderer");
 		componentSelectorWidget.choices.emplace(1, "Camera");
@@ -94,9 +94,9 @@ OvEditor::Panels::Inspector::Inspector
 		componentSelectorWidget.choices.emplace(12, "Audio Listener");
 		componentSelectorWidget.choices.emplace(13, "CAnimator");
 
-		auto& addComponentButton = m_inspectorHeader->CreateWidget<OvUI::Widgets::Buttons::Button>("Add Component", OvMaths::FVector2{ 100.f, 0 });
-		addComponentButton.idleBackgroundColor = OvUI::Types::Color{ 0.7f, 0.5f, 0.f };
-		addComponentButton.textColor = OvUI::Types::Color::White;
+		auto& addComponentButton = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Add Component", LittleEngine::FVector2{ 100.f, 0 });
+		addComponentButton.idleBackgroundColor = LittleEngine::UI::Types::Color{ 0.7f, 0.5f, 0.f };
+		addComponentButton.textColor = LittleEngine::UI::Types::Color::White;
 		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
 		{
 			switch (componentSelectorWidget.currentChoice)
@@ -125,7 +125,7 @@ OvEditor::Panels::Inspector::Inspector
 			auto defineButtonsStates = [&addComponentButton](bool p_componentExists)
 			{
 				addComponentButton.disabled = p_componentExists;
-				addComponentButton.idleBackgroundColor = !p_componentExists ? OvUI::Types::Color{ 0.7f, 0.5f, 0.f } : OvUI::Types::Color{ 0.1f, 0.1f, 0.1f };
+				addComponentButton.idleBackgroundColor = !p_componentExists ? LittleEngine::UI::Types::Color{ 0.7f, 0.5f, 0.f } : LittleEngine::UI::Types::Color{ 0.1f, 0.1f, 0.1f };
 			};
 
 			switch (p_value)
@@ -151,22 +151,22 @@ OvEditor::Panels::Inspector::Inspector
 	}
 
 	
-	m_inspectorHeader->CreateWidget<OvUI::Widgets::Visual::Separator>();
-	m_destroyedListener = OvCore::ECS::Actor::DestroyedEvent += [this](OvCore::ECS::Actor& p_destroyed)
+	m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Visual::Separator>();
+	m_destroyedListener = LittleEngine::Actor::DestroyedEvent += [this](LittleEngine::Actor& p_destroyed)
 	{ 
 		if (&p_destroyed == m_targetActor)
 			UnFocus();
 	};
 }
 
-OvEditor::Panels::Inspector::~Inspector()
+LittleEditor::Panels::Inspector::~Inspector()
 {
-	OvCore::ECS::Actor::DestroyedEvent -= m_destroyedListener;
+	LittleEngine::Actor::DestroyedEvent -= m_destroyedListener;
 
 	UnFocus();
 }
 
-void OvEditor::Panels::Inspector::FocusActor(OvCore::ECS::Actor& p_target)
+void LittleEditor::Panels::Inspector::FocusActor(LittleEngine::Actor& p_target)
 {
 	if (m_targetActor)
 		UnFocus();
@@ -188,7 +188,7 @@ void OvEditor::Panels::Inspector::FocusActor(OvCore::ECS::Actor& p_target)
 	EDITOR_EVENT(ActorSelectedEvent).Invoke(*m_targetActor);
 }
 
-void OvEditor::Panels::Inspector::UnFocus()
+void LittleEditor::Panels::Inspector::UnFocus()
 {
 	if (m_targetActor && m_targetActor->IsAlive())
 	{
@@ -199,7 +199,7 @@ void OvEditor::Panels::Inspector::UnFocus()
 	SoftUnFocus();
 }
 
-void OvEditor::Panels::Inspector::SoftUnFocus()
+void LittleEditor::Panels::Inspector::SoftUnFocus()
 {
     if (m_targetActor)
     {
@@ -210,20 +210,20 @@ void OvEditor::Panels::Inspector::SoftUnFocus()
     }
 }
 
-OvCore::ECS::Actor * OvEditor::Panels::Inspector::GetTargetActor() const
+LittleEngine::Actor * LittleEditor::Panels::Inspector::GetTargetActor() const
 {
 	return m_targetActor;
 }
 
-void OvEditor::Panels::Inspector::CreateActorInspector(OvCore::ECS::Actor& p_target)
+void LittleEditor::Panels::Inspector::CreateActorInspector(LittleEngine::Actor& p_target)
 {
-	std::map<std::string, OvCore::ECS::Components::AComponent*> components;
+	std::map<std::string, LittleEngine::AComponent*> components;
 
 	for (auto component : p_target.GetComponents())
 		if (component->GetName() != "Transform")
 			components[component->GetName()] = component.get();
 
-	auto transform = p_target.GetComponent<OvCore::ECS::Components::CTransform>();
+	auto transform = p_target.GetComponent<LittleEngine::CTransform>();
 	if (transform)
 		DrawComponent(*transform);
 
@@ -231,25 +231,25 @@ void OvEditor::Panels::Inspector::CreateActorInspector(OvCore::ECS::Actor& p_tar
 		DrawComponent(*instance);
 }
 
-void OvEditor::Panels::Inspector::DrawComponent(OvCore::ECS::Components::AComponent& p_component)
+void LittleEditor::Panels::Inspector::DrawComponent(LittleEngine::AComponent& p_component)
 {
-	//if (auto inspectorItem = dynamic_cast<OvCore::API::IInspectorItem*>(&p_component); inspectorItem)
+	//if (auto inspectorItem = dynamic_cast<LittleEngine::API::IInspectorItem*>(&p_component); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<OvUI::Widgets::Layout::GroupCollapsable>(p_component.GetName());
-		header.closable = !dynamic_cast<OvCore::ECS::Components::CTransform*>(&p_component);
+		auto& header = m_actorInfo->CreateWidget<LittleEngine::UI::Widgets::Layout::GroupCollapsable>(p_component.GetName());
+		header.closable = !dynamic_cast<LittleEngine::CTransform*>(&p_component);
 		header.CloseEvent += [this, &header, &p_component]
 		{ 
 			if (p_component.owner->RemoveComponent(p_component))
 				m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
 		};
-		auto& columns = header.CreateWidget<OvUI::Widgets::Layout::Columns<2>>();
+		auto& columns = header.CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 		columns.widths[0] = 200;
 		p_component.OnInspector(columns);
 	}
 }
 
 
-void OvEditor::Panels::Inspector::Refresh()
+void LittleEditor::Panels::Inspector::Refresh()
 {
 	if (m_targetActor)
 	{

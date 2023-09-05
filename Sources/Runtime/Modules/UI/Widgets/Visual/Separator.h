@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/AWidget.h"
 
-namespace OvUI::Widgets::Visual
+namespace LittleEngine::UI::Widgets::Visual
 {
 	/**
 	* Simple widget that display a separator

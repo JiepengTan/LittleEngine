@@ -8,7 +8,7 @@
 
 #include "Platform/Windowing/Inputs/InputManager.h"
 
-OvWindowing::Inputs::InputManager::InputManager(Window& p_window) : m_window(p_window)
+LittleEngine::Windowing::Inputs::InputManager::InputManager(Window& p_window) : m_window(p_window)
 {
 	m_keyPressedListener = m_window.KeyPressedEvent.AddListener(std::bind(&InputManager::OnKeyPressed, this, std::placeholders::_1));
 	m_keyReleasedListener = m_window.KeyReleasedEvent.AddListener(std::bind(&InputManager::OnKeyReleased, this, std::placeholders::_1));
@@ -16,7 +16,7 @@ OvWindowing::Inputs::InputManager::InputManager(Window& p_window) : m_window(p_w
 	m_mouseButtonReleasedListener = m_window.MouseButtonReleasedEvent.AddListener(std::bind(&InputManager::OnMouseButtonReleased, this, std::placeholders::_1));
 }
 
-OvWindowing::Inputs::InputManager::~InputManager()
+LittleEngine::Windowing::Inputs::InputManager::~InputManager()
 {
 	m_window.KeyPressedEvent.RemoveListener(m_keyPressedListener);
 	m_window.KeyReleasedEvent.RemoveListener(m_keyReleasedListener);
@@ -24,7 +24,7 @@ OvWindowing::Inputs::InputManager::~InputManager()
 	m_window.MouseButtonReleasedEvent.RemoveListener(m_mouseButtonReleasedListener);
 }
 
-OvWindowing::Inputs::EKeyState OvWindowing::Inputs::InputManager::GetKeyState(EKey p_key) const
+LittleEngine::Windowing::Inputs::EKeyState LittleEngine::Windowing::Inputs::InputManager::GetKeyState(EKey p_key) const
 {
 	switch (glfwGetKey(m_window.GetGlfwWindow(), static_cast<int>(p_key)))
 	{
@@ -35,7 +35,7 @@ OvWindowing::Inputs::EKeyState OvWindowing::Inputs::InputManager::GetKeyState(EK
 	return EKeyState::KEY_UP;
 }
 
-OvWindowing::Inputs::EMouseButtonState OvWindowing::Inputs::InputManager::GetMouseButtonState(EMouseButton p_button) const
+LittleEngine::Windowing::Inputs::EMouseButtonState LittleEngine::Windowing::Inputs::InputManager::GetMouseButtonState(EMouseButton p_button) const
 {
 	switch (glfwGetMouseButton(m_window.GetGlfwWindow(), static_cast<int>(p_button)))
 	{
@@ -46,55 +46,55 @@ OvWindowing::Inputs::EMouseButtonState OvWindowing::Inputs::InputManager::GetMou
 	return EMouseButtonState::MOUSE_UP;
 }
 
-bool OvWindowing::Inputs::InputManager::IsKeyPressed(EKey p_key) const
+bool LittleEngine::Windowing::Inputs::InputManager::IsKeyPressed(EKey p_key) const
 {
 	return m_keyEvents.find(p_key) != m_keyEvents.end() && m_keyEvents.at(p_key) == EKeyState::KEY_DOWN;
 }
 
-bool OvWindowing::Inputs::InputManager::IsKeyReleased(EKey p_key) const
+bool LittleEngine::Windowing::Inputs::InputManager::IsKeyReleased(EKey p_key) const
 {
 	return m_keyEvents.find(p_key) != m_keyEvents.end() && m_keyEvents.at(p_key) == EKeyState::KEY_UP;
 }
 
-bool OvWindowing::Inputs::InputManager::IsMouseButtonPressed(EMouseButton p_button) const
+bool LittleEngine::Windowing::Inputs::InputManager::IsMouseButtonPressed(EMouseButton p_button) const
 {
 	return m_mouseButtonEvents.find(p_button) != m_mouseButtonEvents.end() && m_mouseButtonEvents.at(p_button) == EMouseButtonState::MOUSE_DOWN;
 }
 
-bool OvWindowing::Inputs::InputManager::IsMouseButtonReleased(EMouseButton p_button) const
+bool LittleEngine::Windowing::Inputs::InputManager::IsMouseButtonReleased(EMouseButton p_button) const
 {
 	return m_mouseButtonEvents.find(p_button) != m_mouseButtonEvents.end() && m_mouseButtonEvents.at(p_button) == EMouseButtonState::MOUSE_UP;
 }
 
-std::pair<double, double> OvWindowing::Inputs::InputManager::GetMousePosition() const
+std::pair<double, double> LittleEngine::Windowing::Inputs::InputManager::GetMousePosition() const
 {
 	std::pair<double, double> result;
 	glfwGetCursorPos(m_window.GetGlfwWindow(), &result.first, &result.second);
 	return result;
 }
 
-void OvWindowing::Inputs::InputManager::ClearEvents()
+void LittleEngine::Windowing::Inputs::InputManager::ClearEvents()
 {
 	m_keyEvents.clear();
 	m_mouseButtonEvents.clear();
 }
 
-void OvWindowing::Inputs::InputManager::OnKeyPressed(int p_key)
+void LittleEngine::Windowing::Inputs::InputManager::OnKeyPressed(int p_key)
 {
 	m_keyEvents[static_cast<EKey>(p_key)] = EKeyState::KEY_DOWN;
 }
 
-void OvWindowing::Inputs::InputManager::OnKeyReleased(int p_key)
+void LittleEngine::Windowing::Inputs::InputManager::OnKeyReleased(int p_key)
 {
 	m_keyEvents[static_cast<EKey>(p_key)] = EKeyState::KEY_UP;
 }
 
-void OvWindowing::Inputs::InputManager::OnMouseButtonPressed(int p_button)
+void LittleEngine::Windowing::Inputs::InputManager::OnMouseButtonPressed(int p_button)
 {
 	m_mouseButtonEvents[static_cast<EMouseButton>(p_button)] = EMouseButtonState::MOUSE_DOWN;
 }
 
-void OvWindowing::Inputs::InputManager::OnMouseButtonReleased(int p_button)
+void LittleEngine::Windowing::Inputs::InputManager::OnMouseButtonReleased(int p_button)
 {
 	m_mouseButtonEvents[static_cast<EMouseButton>(p_button)] = EMouseButtonState::MOUSE_UP;
 }

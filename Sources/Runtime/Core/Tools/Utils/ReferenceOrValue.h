@@ -8,7 +8,7 @@
 
 #include <variant>
 
-namespace OvTools::Utils
+namespace LittleEngine::Utils
 {
 	/**
 	* A simple class that can represent a reference or a value of the given type.

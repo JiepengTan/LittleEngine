@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvWindowing::Context
+namespace LittleEngine::Windowing::Context
 {
 	/**
 	* Some errors that the driver can return

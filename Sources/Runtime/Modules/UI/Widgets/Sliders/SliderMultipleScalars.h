@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Sliders
+namespace LittleEngine::UI::Widgets::Sliders
 {
 	/**
 	* Slider widget of multiple generic type
@@ -74,7 +74,7 @@ namespace OvUI::Widgets::Sliders
 		std::array<T, _Size> values;
 		std::string label;
 		std::string format;
-		OvTools::Eventing::Event<std::array<T, _Size>&> ValueChangedEvent;
+		LittleEngine::Eventing::Event<std::array<T, _Size>&> ValueChangedEvent;
 
 	protected:
 		ImGuiDataType_ m_dataType;

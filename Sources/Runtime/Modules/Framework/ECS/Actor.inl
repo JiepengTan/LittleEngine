@@ -8,12 +8,12 @@
 
 #include "Modules/Framework/ECS/Actor.h"
 
-namespace OvCore::ECS
+namespace LittleEngine
 {
 	template<typename T, typename ...Args>
-	inline T& OvCore::ECS::Actor::AddComponent(Args&& ...p_args)
+	inline T& LittleEngine::Actor::AddComponent(Args&& ...p_args)
 	{
-		static_assert(std::is_base_of<Components::AComponent, T>::value, "T should derive from AComponent");
+		static_assert(std::is_base_of<AComponent, T>::value, "T should derive from AComponent");
 
 		if (auto found = GetComponent<T>(); !found)
 		{
@@ -22,9 +22,9 @@ namespace OvCore::ECS
 			ComponentAddedEvent.Invoke(instance);
 			if (m_playing && IsActive())
 			{
-				reinterpret_cast<OvCore::ECS::Components::AComponent&>(instance).OnAwake();
-				reinterpret_cast<OvCore::ECS::Components::AComponent&>(instance).OnEnable();
-				reinterpret_cast<OvCore::ECS::Components::AComponent&>(instance).OnStart();
+				reinterpret_cast<LittleEngine::AComponent&>(instance).OnAwake();
+				reinterpret_cast<LittleEngine::AComponent&>(instance).OnEnable();
+				reinterpret_cast<LittleEngine::AComponent&>(instance).OnStart();
 			}
 			return instance;
 		}
@@ -35,10 +35,10 @@ namespace OvCore::ECS
 	}
 
 	template<typename T>
-	inline bool OvCore::ECS::Actor::RemoveComponent()
+	inline bool LittleEngine::Actor::RemoveComponent()
 	{
-		static_assert(std::is_base_of<Components::AComponent, T>::value, "T should derive from AComponent");
-		static_assert(!std::is_same<Components::CTransform, T>::value, "You can't remove a CTransform from an actor");
+		static_assert(std::is_base_of<AComponent, T>::value, "T should derive from AComponent");
+		static_assert(!std::is_same<CTransform, T>::value, "You can't remove a CTransform from an actor");
 
 		std::shared_ptr<T> result(nullptr);
 
@@ -59,7 +59,7 @@ namespace OvCore::ECS
 	template<typename T>
 	inline T* Actor::GetComponent()
 	{
-		static_assert(std::is_base_of<Components::AComponent, T>::value, "T should derive from AComponent");
+		static_assert(std::is_base_of<AComponent, T>::value, "T should derive from AComponent");
 
 		std::shared_ptr<T> result(nullptr);
 

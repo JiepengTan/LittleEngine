@@ -6,11 +6,11 @@
 
 #include "Modules/UI/Widgets/Layout/Spacing.h"
 
-OvUI::Widgets::Layout::Spacing::Spacing(uint16_t p_spaces) : spaces(p_spaces)
+LittleEngine::UI::Widgets::Layout::Spacing::Spacing(uint16_t p_spaces) : spaces(p_spaces)
 {
 }
 
-void OvUI::Widgets::Layout::Spacing::_Draw_Impl()
+void LittleEngine::UI::Widgets::Layout::Spacing::_Draw_Impl()
 {
 	for (uint16_t i = 0; i < spaces; ++i)
 	{

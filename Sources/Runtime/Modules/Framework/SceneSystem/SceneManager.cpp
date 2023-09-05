@@ -12,17 +12,17 @@
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 
-OvCore::SceneSystem::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
+LittleEngine::SceneSystem::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
 {
 	LoadEmptyScene();
 }
 
-OvCore::SceneSystem::SceneManager::~SceneManager()
+LittleEngine::SceneSystem::SceneManager::~SceneManager()
 {
 	UnloadCurrentScene();
 }
 
-void OvCore::SceneSystem::SceneManager::Update()
+void LittleEngine::SceneSystem::SceneManager::Update()
 {
 	if (m_delayedLoadCall)
 	{
@@ -31,7 +31,7 @@ void OvCore::SceneSystem::SceneManager::Update()
 	}
 }
 
-void OvCore::SceneSystem::SceneManager::LoadAndPlayDelayed(const std::string& p_path, bool p_absolute)
+void LittleEngine::SceneSystem::SceneManager::LoadAndPlayDelayed(const std::string& p_path, bool p_absolute)
 {
 	m_delayedLoadCall = [this, p_path, p_absolute]
 	{
@@ -42,7 +42,7 @@ void OvCore::SceneSystem::SceneManager::LoadAndPlayDelayed(const std::string& p_
 	};
 }
 
-void OvCore::SceneSystem::SceneManager::LoadEmptyScene()
+void LittleEngine::SceneSystem::SceneManager::LoadEmptyScene()
 {
 	UnloadCurrentScene();
 
@@ -51,7 +51,7 @@ void OvCore::SceneSystem::SceneManager::LoadEmptyScene()
 	SceneLoadEvent.Invoke();
 }
 
-void OvCore::SceneSystem::SceneManager::LoadEmptyLightedScene()
+void LittleEngine::SceneSystem::SceneManager::LoadEmptyLightedScene()
 {
 	UnloadCurrentScene();
 
@@ -60,20 +60,20 @@ void OvCore::SceneSystem::SceneManager::LoadEmptyLightedScene()
 	SceneLoadEvent.Invoke();
 
 	auto& directionalLight = m_currentScene->CreateActor("Directional Light");
-	directionalLight.AddComponent<ECS::Components::CDirectionalLight>().SetIntensity(0.75f);
+	directionalLight.AddComponent<CDirectionalLight>().SetIntensity(0.75f);
 	directionalLight.transform.SetLocalPosition({ 0.0f, 10.0f, 0.0f });
-	directionalLight.transform.SetLocalRotation(OvMaths::FQuaternion({ 120.0f, -40.0f, 0.0f }));
+	directionalLight.transform.SetLocalRotation(LittleEngine::FQuaternion({ 120.0f, -40.0f, 0.0f }));
 
 	auto& ambientLight = m_currentScene->CreateActor("Ambient Light");
-	ambientLight.AddComponent<ECS::Components::CAmbientSphereLight>().SetRadius(10000.0f);
+	ambientLight.AddComponent<CAmbientSphereLight>().SetRadius(10000.0f);
 
 	auto& camera = m_currentScene->CreateActor("Main Camera");
-	camera.AddComponent<ECS::Components::CCamera>();
+	camera.AddComponent<CCamera>();
 	camera.transform.SetLocalPosition({ 0.0f, 3.0f, 8.0f });
-	camera.transform.SetLocalRotation(OvMaths::FQuaternion({ 20.0f, 180.0f, 0.0f }));
+	camera.transform.SetLocalRotation(LittleEngine::FQuaternion({ 20.0f, 180.0f, 0.0f }));
 }
 
-bool OvCore::SceneSystem::SceneManager::LoadScene(const std::string& p_path, bool p_absolute)
+bool LittleEngine::SceneSystem::SceneManager::LoadScene(const std::string& p_path, bool p_absolute)
 {
 	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + p_path;
 
@@ -89,7 +89,7 @@ bool OvCore::SceneSystem::SceneManager::LoadScene(const std::string& p_path, boo
 	return false;
 }
 
-bool OvCore::SceneSystem::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
+bool LittleEngine::SceneSystem::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
 {
 	if (!p_doc.Error())
 	{
@@ -106,11 +106,11 @@ bool OvCore::SceneSystem::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocumen
 		}
 	}
 
-	OvWindowing::Dialogs::MessageBox message("Scene loading failed", "The scene you are trying to load was not found or corrupted", OvWindowing::Dialogs::MessageBox::EMessageType::ERROR, OvWindowing::Dialogs::MessageBox::EButtonLayout::OK, true);
+	LittleEngine::Windowing::Dialogs::MessageBox message("Scene loading failed", "The scene you are trying to load was not found or corrupted", LittleEngine::Windowing::Dialogs::MessageBox::EMessageType::ERROR, LittleEngine::Windowing::Dialogs::MessageBox::EButtonLayout::OK, true);
 	return false;
 }
 
-void OvCore::SceneSystem::SceneManager::UnloadCurrentScene()
+void LittleEngine::SceneSystem::SceneManager::UnloadCurrentScene()
 {
 	if (m_currentScene)
 	{
@@ -122,34 +122,34 @@ void OvCore::SceneSystem::SceneManager::UnloadCurrentScene()
 	ForgetCurrentSceneSourcePath();
 }
 
-bool OvCore::SceneSystem::SceneManager::HasCurrentScene() const
+bool LittleEngine::SceneSystem::SceneManager::HasCurrentScene() const
 {
 	return m_currentScene;
 }
 
-OvCore::SceneSystem::Scene* OvCore::SceneSystem::SceneManager::GetCurrentScene()
+LittleEngine::SceneSystem::Scene* LittleEngine::SceneSystem::SceneManager::GetCurrentScene()
 {
 	return m_currentScene;
 }
 
-std::string OvCore::SceneSystem::SceneManager::GetCurrentSceneSourcePath() const
+std::string LittleEngine::SceneSystem::SceneManager::GetCurrentSceneSourcePath() const
 {
 	return m_currentSceneSourcePath;
 }
 
-bool OvCore::SceneSystem::SceneManager::IsCurrentSceneLoadedFromDisk() const
+bool LittleEngine::SceneSystem::SceneManager::IsCurrentSceneLoadedFromDisk() const
 {
 	return m_currentSceneLoadedFromPath;
 }
 
-void OvCore::SceneSystem::SceneManager::StoreCurrentSceneSourcePath(const std::string& p_path)
+void LittleEngine::SceneSystem::SceneManager::StoreCurrentSceneSourcePath(const std::string& p_path)
 {
 	m_currentSceneSourcePath = p_path;
 	m_currentSceneLoadedFromPath = true;
 	CurrentSceneSourcePathChangedEvent.Invoke(m_currentSceneSourcePath);
 }
 
-void OvCore::SceneSystem::SceneManager::ForgetCurrentSceneSourcePath()
+void LittleEngine::SceneSystem::SceneManager::ForgetCurrentSceneSourcePath()
 {
 	m_currentSceneSourcePath = "";
 	m_currentSceneLoadedFromPath = false;

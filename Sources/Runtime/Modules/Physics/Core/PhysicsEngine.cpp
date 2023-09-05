@@ -12,12 +12,12 @@
 
 #include "Core/CoreInclude.h"
 
-using namespace OvPhysics::Tools;
-using namespace OvPhysics::Entities;
+using namespace LittleEngine::Physics::Tools;
+using namespace LittleEngine::Physics::Entities;
 
-std::map< std::pair<PhysicalObject*, PhysicalObject*>, bool> OvPhysics::Core::PhysicsEngine::m_collisionEvents;
+std::map< std::pair<PhysicalObject*, PhysicalObject*>, bool> LittleEngine::Physics::Core::PhysicsEngine::m_collisionEvents;
 
-OvPhysics::Core::PhysicsEngine::PhysicsEngine(const Settings::PhysicsSettings & p_settings)
+LittleEngine::Physics::Core::PhysicsEngine::PhysicsEngine(const Settings::PhysicsSettings & p_settings)
 {
 	m_collisionConfig = std::make_unique<btDefaultCollisionConfiguration>();
 	m_dispatcher = std::make_unique<btCollisionDispatcher>(m_collisionConfig.get());
@@ -31,21 +31,21 @@ OvPhysics::Core::PhysicsEngine::PhysicsEngine(const Settings::PhysicsSettings & 
 	SetCollisionCallback();
 }
 
-void OvPhysics::Core::PhysicsEngine::PreUpdate()
+void LittleEngine::Physics::Core::PhysicsEngine::PreUpdate()
 {
 	std::for_each(m_physicalObjects.begin(), m_physicalObjects.end(), std::mem_fn(&PhysicalObject::UpdateBtTransform));
 
 	ResetCollisionEvents();
 }
 
-void OvPhysics::Core::PhysicsEngine::PostUpdate()
+void LittleEngine::Physics::Core::PhysicsEngine::PostUpdate()
 {
 	std::for_each(m_physicalObjects.begin(), m_physicalObjects.end(), std::mem_fn(&PhysicalObject::UpdateFTransform));
 
 	CheckCollisionStopEvents();
 }
 
-bool OvPhysics::Core::PhysicsEngine::Update(float p_deltaTime)
+bool LittleEngine::Physics::Core::PhysicsEngine::Update(float p_deltaTime)
 {
 	PreUpdate();
 
@@ -58,9 +58,9 @@ bool OvPhysics::Core::PhysicsEngine::Update(float p_deltaTime)
 	return false;
 }
 
-std::optional<RaycastHit> OvPhysics::Core::PhysicsEngine::Raycast(OvMaths::FVector3 p_origin, OvMaths::FVector3 p_direction, float p_distance)
+std::optional<RaycastHit> LittleEngine::Physics::Core::PhysicsEngine::Raycast(LittleEngine::FVector3 p_origin, LittleEngine::FVector3 p_direction, float p_distance)
 {
-	if (p_direction == OvMaths::FVector3::Zero)
+	if (p_direction == LittleEngine::FVector3::Zero)
 		return {};
 
 	btVector3 origin = Tools::Conversion::ToBtVector3(p_origin);
@@ -75,7 +75,7 @@ std::optional<RaycastHit> OvPhysics::Core::PhysicsEngine::Raycast(OvMaths::FVect
 	if (ClosestRayCallback.hasHit())
 	{
 		// Get First Hit
-		resultHit.FirstResultObject = reinterpret_cast<OvPhysics::Entities::PhysicalObject*>(ClosestRayCallback.m_collisionObject->getUserPointer());
+		resultHit.FirstResultObject = reinterpret_cast<LittleEngine::Physics::Entities::PhysicalObject*>(ClosestRayCallback.m_collisionObject->getUserPointer());
 
 		// Try to get all Hit
 		btCollisionWorld::AllHitsRayResultCallback rayCallback(origin, target);
@@ -83,7 +83,7 @@ std::optional<RaycastHit> OvPhysics::Core::PhysicsEngine::Raycast(OvMaths::FVect
 
 		// Get all Hit
 		for (int i = 0; i < rayCallback.m_collisionObjects.size(); i++)
-			resultHit.ResultObjects.push_back(reinterpret_cast<OvPhysics::Entities::PhysicalObject*>(rayCallback.m_collisionObjects[i]->getUserPointer()));
+			resultHit.ResultObjects.push_back(reinterpret_cast<LittleEngine::Physics::Entities::PhysicalObject*>(rayCallback.m_collisionObjects[i]->getUserPointer()));
 
 		return resultHit;
 	}
@@ -91,17 +91,17 @@ std::optional<RaycastHit> OvPhysics::Core::PhysicsEngine::Raycast(OvMaths::FVect
 		return {};
 }
 
-void OvPhysics::Core::PhysicsEngine::SetGravity(const OvMaths::FVector3 & p_gravity)
+void LittleEngine::Physics::Core::PhysicsEngine::SetGravity(const LittleEngine::FVector3 & p_gravity)
 {
 	m_world->setGravity(Conversion::ToBtVector3(p_gravity));
 }
 
-OvMaths::FVector3 OvPhysics::Core::PhysicsEngine::GetGravity() const
+LittleEngine::FVector3 LittleEngine::Physics::Core::PhysicsEngine::GetGravity() const
 {
 	return Conversion::ToOvVector3(m_world->getGravity());
 }
 
-void OvPhysics::Core::PhysicsEngine::ListenToPhysicalObjects()
+void LittleEngine::Physics::Core::PhysicsEngine::ListenToPhysicalObjects()
 {
 	PhysicalObject::CreatedEvent += std::bind(static_cast<void(PhysicsEngine::*)(PhysicalObject&)>(&PhysicsEngine::Consider), this, std::placeholders::_1);
 	PhysicalObject::DestroyedEvent += std::bind(static_cast<void(PhysicsEngine::*)(PhysicalObject&)>(&PhysicsEngine::Unconsider), this, std::placeholders::_1);
@@ -110,12 +110,12 @@ void OvPhysics::Core::PhysicsEngine::ListenToPhysicalObjects()
 	PhysicalObject::UnconsiderEvent += std::bind(static_cast<void(PhysicsEngine::*)(btRigidBody&)>(&PhysicsEngine::Unconsider), this, std::placeholders::_1);
 }
 
-void OvPhysics::Core::PhysicsEngine::Consider(PhysicalObject& p_toConsider)
+void LittleEngine::Physics::Core::PhysicsEngine::Consider(PhysicalObject& p_toConsider)
 {
 	m_physicalObjects.push_back(std::ref(p_toConsider));
 }
 
-void OvPhysics::Core::PhysicsEngine::Unconsider(PhysicalObject& p_toUnconsider)
+void LittleEngine::Physics::Core::PhysicsEngine::Unconsider(PhysicalObject& p_toUnconsider)
 {
 	{
 		auto found = std::find_if(m_physicalObjects.begin(), m_physicalObjects.end(), [&p_toUnconsider](std::reference_wrapper<PhysicalObject> element)
@@ -144,23 +144,23 @@ void OvPhysics::Core::PhysicsEngine::Unconsider(PhysicalObject& p_toUnconsider)
 	}
 }
 
-void OvPhysics::Core::PhysicsEngine::Consider(btRigidBody& p_toConsider)
+void LittleEngine::Physics::Core::PhysicsEngine::Consider(btRigidBody& p_toConsider)
 {
 	m_world->addRigidBody(&p_toConsider);
 }
 
-void OvPhysics::Core::PhysicsEngine::Unconsider(btRigidBody& p_toUnconsider)
+void LittleEngine::Physics::Core::PhysicsEngine::Unconsider(btRigidBody& p_toUnconsider)
 {
 	m_world->removeRigidBody(&p_toUnconsider);
 }
 
-void OvPhysics::Core::PhysicsEngine::ResetCollisionEvents()
+void LittleEngine::Physics::Core::PhysicsEngine::ResetCollisionEvents()
 {
 	for (auto& element : m_collisionEvents)
 		element.second = false;
 }
 
-void OvPhysics::Core::PhysicsEngine::CheckCollisionStopEvents()
+void LittleEngine::Physics::Core::PhysicsEngine::CheckCollisionStopEvents()
 {
 	for (auto it = m_collisionEvents.begin(); it != m_collisionEvents.end();)
 	{
@@ -187,7 +187,7 @@ void OvPhysics::Core::PhysicsEngine::CheckCollisionStopEvents()
 	}
 }
 
-bool OvPhysics::Core::PhysicsEngine::CollisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+bool LittleEngine::Physics::Core::PhysicsEngine::CollisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
 	auto object1 = reinterpret_cast<PhysicalObject*>(obj1->getCollisionObject()->getUserPointer());
 	auto object2 = reinterpret_cast<PhysicalObject*>(obj2->getCollisionObject()->getUserPointer());
@@ -269,7 +269,7 @@ bool OvPhysics::Core::PhysicsEngine::CollisionCallback(btManifoldPoint& cp, cons
 	return false;
 }
 
-void OvPhysics::Core::PhysicsEngine::SetCollisionCallback()
+void LittleEngine::Physics::Core::PhysicsEngine::SetCollisionCallback()
 {
 	gContactAddedCallback = &PhysicsEngine::CollisionCallback;
 }

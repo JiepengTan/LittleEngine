@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Base class for any physical object
@@ -24,19 +24,19 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalObject(ECS::Actor& p_owner);
+		CPhysicalObject(Actor& p_owner);
 		CPhysicalObject() = default;
 		/**
 		* Add a force to the rigidbody
 		* @param p_force
 		*/
-		void AddForce(const OvMaths::FVector3& p_force);
+		void AddForce(const LittleEngine::FVector3& p_force);
 
 		/**
 		* Add an impulse to the rigidbody
 		* @param p_impulse
 		*/
-		void AddImpulse(const OvMaths::FVector3& p_impulse);
+		void AddImpulse(const LittleEngine::FVector3& p_impulse);
 
 		/**
 		* Clear forces
@@ -51,7 +51,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the collision detection mode of the physical object
 		*/
-		OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode GetCollisionDetectionMode() const;
+		LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode GetCollisionDetectionMode() const;
 
 		/**
 		* Returns the bounciness of the physical object
@@ -66,22 +66,22 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the linear velocity of the physical object
 		*/
-		OvMaths::FVector3 GetLinearVelocity() const;
+		LittleEngine::FVector3 GetLinearVelocity() const;
 
 		/**
 		* Returns the angular of the physical object
 		*/
-		OvMaths::FVector3 GetAngularVelocity() const;
+		LittleEngine::FVector3 GetAngularVelocity() const;
 
 		/**
 		* Returns the linear factor of the physical object
 		*/
-		OvMaths::FVector3 GetLinearFactor()	const;
+		LittleEngine::FVector3 GetLinearFactor()	const;
 
 		/**
 		* Returns the angular factor of the physical object
 		*/
-		OvMaths::FVector3 GetAngularFactor() const;
+		LittleEngine::FVector3 GetAngularFactor() const;
 
 		/**
 		* Returns true if the physical object is a trigger
@@ -96,7 +96,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the current activation state
 		*/
-		OvPhysics::Entities::PhysicalObject::EActivationState GetActivationState() const;
+		LittleEngine::Physics::Entities::PhysicalObject::EActivationState GetActivationState() const;
 
 		/**
 		* Defines a new mass for the physical object
@@ -108,7 +108,7 @@ namespace OvCore::ECS::Components
 		* Defines a new collision detection mode for the physical object
 		* @param p_mode
 		*/
-		void SetCollisionDetectionMode(OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode p_mode);
+		void SetCollisionDetectionMode(LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode p_mode);
 
 		/**
 		* Defines a new bounciness for the physical object
@@ -126,25 +126,25 @@ namespace OvCore::ECS::Components
 		* Defines a new linear velocity for the physical object
 		* @param p_linearVelocity
 		*/
-		void SetLinearVelocity(const OvMaths::FVector3& p_linearVelocity);
+		void SetLinearVelocity(const LittleEngine::FVector3& p_linearVelocity);
 
 		/**
 		* Defines a new angular velocity for the physical object
 		* @param p_angularVelocity
 		*/
-		void SetAngularVelocity(const OvMaths::FVector3& p_angularVelocity);
+		void SetAngularVelocity(const LittleEngine::FVector3& p_angularVelocity);
 
 		/**
 		* Defines a new linear factor for the physical object
 		* @param p_linearFactor
 		*/
-		void SetLinearFactor(const OvMaths::FVector3& p_linearFactor);
+		void SetLinearFactor(const LittleEngine::FVector3& p_linearFactor);
 
 		/**
 		* Defines a new angular factor for the physical object
 		* @param p_angularFactor
 		*/
-		void SetAngularFactor(const OvMaths::FVector3& p_angularFactor);
+		void SetAngularFactor(const LittleEngine::FVector3& p_angularFactor);
 
 		/**
 		* Defines if the physical object should be a trigger or not
@@ -162,7 +162,7 @@ namespace OvCore::ECS::Components
 		* Defines the new activation state for the physical object
 		* @param p_activationState
 		*/
-		void SetActivationState(OvPhysics::Entities::PhysicalObject::EActivationState p_activationState);
+		void SetActivationState(LittleEngine::Physics::Entities::PhysicalObject::EActivationState p_activationState);
 
 		/**
 		* Serialize the component
@@ -182,7 +182,7 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	protected:
 		template <typename T> T& GetPhysicalObjectAs() const { return *static_cast<T*>(m_physicalObject.get()); }
@@ -194,15 +194,15 @@ namespace OvCore::ECS::Components
 		virtual void OnDisable() override;
 
 	public:
-		OvTools::Eventing::Event<CPhysicalObject&> CollisionEnterEvent;
-		OvTools::Eventing::Event<CPhysicalObject&> CollisionStayEvent;
-		OvTools::Eventing::Event<CPhysicalObject&> CollisionExitEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionEnterEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionStayEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionExitEvent;
 
-		OvTools::Eventing::Event<CPhysicalObject&> TriggerEnterEvent;
-		OvTools::Eventing::Event<CPhysicalObject&> TriggerStayEvent;
-		OvTools::Eventing::Event<CPhysicalObject&> TriggerExitEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerEnterEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerStayEvent;
+		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerExitEvent;
 
 	protected:
-		std::unique_ptr<OvPhysics::Entities::PhysicalObject> m_physicalObject;
+		std::unique_ptr<LittleEngine::Physics::Entities::PhysicalObject> m_physicalObject;
 	};
 }

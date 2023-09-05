@@ -12,7 +12,7 @@
 
 
 
-namespace OvRendering::Entities
+namespace LittleEngine::Rendering::Entities
 {
 	/**
 	* Data structure that can represent any type of light
@@ -29,12 +29,12 @@ namespace OvRendering::Entities
 		* @param p_transform
 		* @param p_type
 		*/
-		Light(OvMaths::FTransform& p_tranform, Type p_type);
+		Light(LittleEngine::FTransform& p_tranform, Type p_type);
 
 		/**
 		* Generate the light matrix, ready to send to the GPU
 		*/
-		OvMaths::FMatrix4 GenerateMatrix() const;
+		LittleEngine::FMatrix4 GenerateMatrix() const;
 
 		/**
 		* Calculate the light effect range from the quadratic falloff equation
@@ -44,9 +44,9 @@ namespace OvRendering::Entities
 		/**
 		* Returns the light transform
 		*/
-		const OvMaths::FTransform& GetTransform() const;
+		const LittleEngine::FTransform& GetTransform() const;
 
-		OvMaths::FVector3	color		= { 1.f, 1.f, 1.f };
+		LittleEngine::FVector3	color		= { 1.f, 1.f, 1.f };
 		float				intensity	= 1.f;
 		float				constant	= 0.0f;
 		float				linear		= 0.0f;
@@ -56,6 +56,6 @@ namespace OvRendering::Entities
 		float				type		= 0.0f;
 
 	protected:
-		OvMaths::FTransform& m_transform;
+		LittleEngine::FTransform& m_transform;
 	};
 }

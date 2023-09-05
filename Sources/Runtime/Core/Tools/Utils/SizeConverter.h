@@ -11,7 +11,7 @@
 #include <string>
 
 
-namespace OvTools::Utils
+namespace LittleEngine::Utils
 {
     /*
     * Handles size conversions

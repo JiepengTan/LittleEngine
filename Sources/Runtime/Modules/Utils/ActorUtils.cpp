@@ -8,22 +8,22 @@
 #include "Modules/Rendering/ResourceManagement/ModelManager.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
-OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreatePlane(OvCore::ECS::Actor* p_parent, const std::string& p_name)
+LittleEngine::Actor* LittleEngine::ActorUtils::CreatePlane(LittleEngine::Actor* p_parent, const std::string& p_name)
 {
     return CreateActorWithModel("Plane",p_parent,p_name);
 }
-OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateCube(OvCore::ECS::Actor* p_parent, const std::string& p_name)
+LittleEngine::Actor* LittleEngine::ActorUtils::CreateCube(LittleEngine::Actor* p_parent, const std::string& p_name)
 {
     return CreateActorWithModel("Cube",p_parent,p_name);
 }
-OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateSphere(OvCore::ECS::Actor* p_parent, const std::string& p_name)
+LittleEngine::Actor* LittleEngine::ActorUtils::CreateSphere(LittleEngine::Actor* p_parent, const std::string& p_name)
 {
     return CreateActorWithModel("Sphere",p_parent,p_name);
 }
 
-OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateEmptyActor( OvCore::ECS::Actor* p_parent, const std::string& p_name)
+LittleEngine::Actor* LittleEngine::ActorUtils::CreateEmptyActor( LittleEngine::Actor* p_parent, const std::string& p_name)
 {
-    auto& sceneManager = OvCore::Global::ServiceLocator::Get<SceneSystem::SceneManager>();
+    auto& sceneManager = LittleEngine::Global::ServiceLocator::Get<SceneSystem::SceneManager>();
     const auto currentScene = sceneManager.GetCurrentScene();
     auto& instance = p_name.empty() ? currentScene->CreateActor() : currentScene->CreateActor(p_name);
 
@@ -31,21 +31,21 @@ OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateEmptyActor( OvCore::ECS::Acto
         instance.SetParent(*p_parent);
     return &instance;
 }
-OvCore::ECS::Actor* OvCore::ECS::ActorUtils::CreateActorWithModel(const std::string& p_modelName,
-                                                             OvCore::ECS::Actor* p_parent, const std::string& p_name)
+LittleEngine::Actor* LittleEngine::ActorUtils::CreateActorWithModel(const std::string& p_modelName,
+                                                             LittleEngine::Actor* p_parent, const std::string& p_name)
 {
     auto path= ":Models\\" + p_modelName + ".fbx";
     auto instance = CreateEmptyActor( p_parent, p_name);
 
-    auto& modelManager = OvCore::Global::ServiceLocator::Get<ResourceManagement::ModelManager>();
-    auto& modelRenderer = instance->AddComponent<OvCore::ECS::Components::CModelRenderer>();
+    auto& modelManager = LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ModelManager>();
+    auto& modelRenderer = instance->AddComponent<LittleEngine::CModelRenderer>();
 
     const auto model = modelManager[path];
     if (model)
         modelRenderer.SetModel(model);
 
-    auto& materialManager = OvCore::Global::ServiceLocator::Get<ResourceManagement::MaterialManager>();
-    auto& materialRenderer = instance->AddComponent<OvCore::ECS::Components::CMaterialRenderer>();
+    auto& materialManager = LittleEngine::Global::ServiceLocator::Get<ResourceManagement::MaterialManager>();
+    auto& materialRenderer = instance->AddComponent<LittleEngine::CMaterialRenderer>();
     const auto material = materialManager[":Materials\\Default.ovmat"];
     if (material)
         materialRenderer.FillWithMaterial(*material);

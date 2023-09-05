@@ -8,7 +8,7 @@
 
 #include "Modules/Rendering/Resources/Material.h"
 
-namespace OvCore::Resources::Loaders
+namespace LittleEngine::Resources::Loaders
 {
 	/**
 	* Handle the creation of materials

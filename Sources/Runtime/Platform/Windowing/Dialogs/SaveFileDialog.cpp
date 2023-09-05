@@ -8,11 +8,11 @@
 
 #include <Windows.h>
 
-OvWindowing::Dialogs::SaveFileDialog::SaveFileDialog(const std::string & p_dialogTitle) : FileDialog(GetSaveFileNameA, p_dialogTitle)
+LittleEngine::Windowing::Dialogs::SaveFileDialog::SaveFileDialog(const std::string & p_dialogTitle) : FileDialog(GetSaveFileNameA, p_dialogTitle)
 {
 }
 
-void OvWindowing::Dialogs::SaveFileDialog::Show(EExplorerFlags p_flags)
+void LittleEngine::Windowing::Dialogs::SaveFileDialog::Show(EExplorerFlags p_flags)
 {
 	FileDialog::Show(p_flags);
 
@@ -20,13 +20,13 @@ void OvWindowing::Dialogs::SaveFileDialog::Show(EExplorerFlags p_flags)
 		AddExtensionToFilePathAndName();
 }
 
-void OvWindowing::Dialogs::SaveFileDialog::DefineExtension(const std::string & p_label, const std::string & p_extension)
+void LittleEngine::Windowing::Dialogs::SaveFileDialog::DefineExtension(const std::string & p_label, const std::string & p_extension)
 {
 	m_filter = p_label + '\0' + '*' + p_extension + '\0';
 	m_extension = p_extension;
 }
 
-void OvWindowing::Dialogs::SaveFileDialog::AddExtensionToFilePathAndName()
+void LittleEngine::Windowing::Dialogs::SaveFileDialog::AddExtensionToFilePathAndName()
 {
 	if (m_filename.size() >= m_extension.size())
 	{

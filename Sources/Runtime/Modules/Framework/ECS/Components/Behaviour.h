@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* ABehaviour is the base class for any behaviour.
@@ -27,7 +27,7 @@ namespace OvCore::ECS::Components
 		* Constructor of a ABehaviour (Must be called by derived classes)
 		* @param p_owner
 		*/
-		Behaviour(ECS::Actor& p_owner, const std::string& p_name);
+		Behaviour(Actor& p_owner, const std::string& p_name);
 
 		/**
 		* Destructor
@@ -115,37 +115,37 @@ namespace OvCore::ECS::Components
 		* Called when the owner of this component enter in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionEnter(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionEnter(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Called when the owner of this component is in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionStay(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionStay(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Called when the owner of this component exit from collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionExit(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionExit(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Called when the owner of this component enter in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerEnter(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerEnter(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Called when the owner of this component is in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerStay(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerStay(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Called when the owner of this component exit from trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerExit(Components::CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerExit(CPhysicalObject& p_otherObject) override;
 
 		/**
 		* Serialize the behaviour
@@ -165,11 +165,11 @@ namespace OvCore::ECS::Components
 		* Defines how the behaviour should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer & p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root) override;
 
 	public:
-		static OvTools::Eventing::Event<Behaviour*> CreatedEvent;
-		static OvTools::Eventing::Event<Behaviour*> DestroyedEvent;
+		static LittleEngine::Eventing::Event<Behaviour*> CreatedEvent;
+		static LittleEngine::Eventing::Event<Behaviour*> DestroyedEvent;
 
 		const std::string name;
 

@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Drags/DragInt.h"
 
-OvUI::Widgets::Drags::DragInt::DragInt
+LittleEngine::UI::Widgets::Drags::DragInt::DragInt
 (
 	int p_min,
 	int p_max,

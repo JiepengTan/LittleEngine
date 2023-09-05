@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Panels/APanelTransformable.h"
 
-namespace OvUI::Panels
+namespace LittleEngine::UI::Panels
 {
 	/**
 	* A simple panel that is transformable and without decorations (No background)

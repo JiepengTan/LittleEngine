@@ -36,20 +36,20 @@ std::function<void()> Combine(std::function<void()> p_a, std::optional<std::func
 }
 
 template<class T>
-std::function<void()> ActorWithComponentCreationHandler(OvCore::ECS::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
+std::function<void()> ActorWithComponentCreationHandler(LittleEngine::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
 {
     return Combine(EDITOR_BIND(CreateMonoComponentActor<T>, true, p_parent), p_onItemClicked);
 }
 
-std::function<void()> ActorWithModelComponentCreationHandler(OvCore::ECS::Actor* p_parent, const std::string& p_modelName, std::optional<std::function<void()>> p_onItemClicked)
+std::function<void()> ActorWithModelComponentCreationHandler(LittleEngine::Actor* p_parent, const std::string& p_modelName, std::optional<std::function<void()>> p_onItemClicked)
 {
     return Combine(EDITOR_BIND(CreateActorWithModel, ":Models\\" + p_modelName + ".fbx", true, p_parent, p_modelName), p_onItemClicked);
 }
 
-void OvEditor::Utils::ActorCreationMenu::GenerateActorCreationMenu(OvUI::Widgets::Menu::MenuList& p_menuList, OvCore::ECS::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
+void LittleEditor::Utils::ActorCreationMenu::GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, LittleEngine::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
 {
-    using namespace OvUI::Widgets::Menu;
-    using namespace OvCore::ECS::Components;
+    using namespace LittleEngine::UI::Widgets::Menu;
+    using namespace LittleEngine;
 
     p_menuList.CreateWidget<MenuItem>("Create Empty").ClickedEvent += Combine(EDITOR_BIND(CreateEmptyActor, true, p_parent, ""), p_onItemClicked);
 

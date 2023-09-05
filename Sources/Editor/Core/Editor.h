@@ -18,7 +18,7 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-namespace OvEditor::Core
+namespace LittleEditor::Core
 {
 	/**
 	* Handle the editor logic
@@ -110,10 +110,10 @@ namespace OvEditor::Core
 
 	private:
 		uint64_t m_elapsedFrames = 0;
-		OvUI::Modules::Canvas			m_canvas;
-		OvEditor::Core::Context&		m_context;
-		OvEditor::Core::EditorRenderer	m_editorRenderer;
-		OvEditor::Core::PanelsManager	m_panelsManager;
-		OvEditor::Core::EditorActions	m_editorActions;
+		LittleEngine::UI::Modules::Canvas			m_canvas;
+		LittleEditor::Core::Context&		m_context;
+		LittleEditor::Core::EditorRenderer	m_editorRenderer;
+		LittleEditor::Core::PanelsManager	m_panelsManager;
+		LittleEditor::Core::EditorActions	m_editorActions;
 	};
 }

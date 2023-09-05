@@ -10,7 +10,7 @@
 
 #include "Modules/Framework/SceneSystem/Scene.h"
 
-namespace OvCore::SceneSystem
+namespace LittleEngine::SceneSystem
 {
 	/**
 	* The scene manager of the current scene
@@ -102,9 +102,9 @@ namespace OvCore::SceneSystem
 		void ForgetCurrentSceneSourcePath();
 
 	public:
-		OvTools::Eventing::Event<> SceneLoadEvent;
-		OvTools::Eventing::Event<> SceneUnloadEvent;
-		OvTools::Eventing::Event<const std::string&> CurrentSceneSourcePathChangedEvent;
+		LittleEngine::Eventing::Event<> SceneLoadEvent;
+		LittleEngine::Eventing::Event<> SceneUnloadEvent;
+		LittleEngine::Eventing::Event<const std::string&> CurrentSceneSourcePathChangedEvent;
 
 	private:
 		const std::string m_sceneRootFolder;

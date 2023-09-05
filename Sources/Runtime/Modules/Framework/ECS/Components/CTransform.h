@@ -14,9 +14,9 @@
 
 #include "AComponent.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represents the 3D transformations applied to an actor
@@ -30,7 +30,7 @@ namespace OvCore::ECS::Components
 		* @param p_localRotation
 		* @param p_localScale
 		*/
-		CTransform(ECS::Actor& p_owner, struct OvMaths::FVector3 p_localPosition = OvMaths::FVector3(0.0f, 0.0f, 0.0f), OvMaths::FQuaternion p_localRotation = OvMaths::FQuaternion::Identity, struct OvMaths::FVector3 p_localScale = OvMaths::FVector3(1.0f, 1.0f, 1.0f));
+		CTransform(Actor& p_owner, struct LittleEngine::FVector3 p_localPosition = LittleEngine::FVector3(0.0f, 0.0f, 0.0f), LittleEngine::FQuaternion p_localRotation = LittleEngine::FQuaternion::Identity, struct LittleEngine::FVector3 p_localScale = LittleEngine::FVector3(1.0f, 1.0f, 1.0f));
 		CTransform() = default;
 		/**
 		* Returns the name of the component
@@ -53,138 +53,138 @@ namespace OvCore::ECS::Components
 		* Check if the transform has a parent
 		*/
 		bool HasParent() const;
-		void SetWorldMatrix(OvMaths::FMatrix4 p_worldMatrix);
-		void SetLocalMatrix(OvMaths::FMatrix4 p_localMatrix);
+		void SetWorldMatrix(LittleEngine::FMatrix4 p_worldMatrix);
+		void SetLocalMatrix(LittleEngine::FMatrix4 p_localMatrix);
 		
 		/**
 		* Set the position of the transform in the local space
 		* @param p_newPosition
 		*/
-		void SetLocalPosition(struct OvMaths::FVector3 p_newPosition);
+		void SetLocalPosition(struct LittleEngine::FVector3 p_newPosition);
 
 		/**
 		* Set the rotation of the transform in the local space
 		* @param p_newRotation
 		*/
-		void SetLocalRotation(OvMaths::FQuaternion p_newRotation);
+		void SetLocalRotation(LittleEngine::FQuaternion p_newRotation);
 
 		/**
 		* Set the scale of the transform in the local space
 		* @param p_newScale
 		*/
-		void SetLocalScale(struct OvMaths::FVector3 p_newScale);
+		void SetLocalScale(struct LittleEngine::FVector3 p_newScale);
 
 	
 		/**
 		* Set the position of the transform in world space
 		* @param p_newPosition
 		*/
-		void SetWorldPosition(struct OvMaths::FVector3 p_newPosition);
+		void SetWorldPosition(struct LittleEngine::FVector3 p_newPosition);
 
 		/**
 		* Set the rotation of the transform in world space
 		* @param p_newRotation
 		*/
-		void SetWorldRotation(OvMaths::FQuaternion p_newRotation);
+		void SetWorldRotation(LittleEngine::FQuaternion p_newRotation);
 
 		/**
 		* Set the scale of the transform in world space
 		* @param p_newScale
 		*/
-		void SetWorldScale(struct OvMaths::FVector3 p_newScale);
+		void SetWorldScale(struct LittleEngine::FVector3 p_newScale);
 
 		/**
 		* Translate in the local space
 		* @param p_translation
 		*/
-		void TranslateLocal(const struct OvMaths::FVector3& p_translation);
+		void TranslateLocal(const struct LittleEngine::FVector3& p_translation);
 
 		/**
 		* Rotate in the local space
 		* @param p_rotation
 		*/
-		void RotateLocal(const OvMaths::FQuaternion& p_rotation);
+		void RotateLocal(const LittleEngine::FQuaternion& p_rotation);
 
 		/**
 		* Scale in the local space
 		* @param p_scale
 		*/
-		void ScaleLocal(const struct OvMaths::FVector3& p_scale);
+		void ScaleLocal(const struct LittleEngine::FVector3& p_scale);
 
 		/**
 		* Return the position in local space
 		*/
-		const OvMaths::FVector3& GetLocalPosition() const;
+		const LittleEngine::FVector3& GetLocalPosition() const;
 
 		/**
 		* Return the rotation in local space
 		*/
-		const OvMaths::FQuaternion& GetLocalRotation() const;
+		const LittleEngine::FQuaternion& GetLocalRotation() const;
 
 		/**
 		* Return the scale in local space
 		*/
-		const OvMaths::FVector3& GetLocalScale() const;
+		const LittleEngine::FVector3& GetLocalScale() const;
 
 		/**
 		* Return the position in world space
 		*/
-		const OvMaths::FVector3& GetWorldPosition() const;
+		const LittleEngine::FVector3& GetWorldPosition() const;
 
 		/**
 		* Return the rotation in world space
 		*/
-		const OvMaths::FQuaternion& GetWorldRotation() const;
+		const LittleEngine::FQuaternion& GetWorldRotation() const;
 
 		/**
 		* Return the scale in world space
 		*/
-		const OvMaths::FVector3& GetWorldScale() const;
+		const LittleEngine::FVector3& GetWorldScale() const;
 
 		/**
 		* Return the local matrix
 		*/
-		const OvMaths::FMatrix4& GetLocalMatrix() const;
+		const LittleEngine::FMatrix4& GetLocalMatrix() const;
 
 		/**
 		* Return the world matrix
 		*/
-		const OvMaths::FMatrix4& GetWorldMatrix() const;
+		const LittleEngine::FMatrix4& GetWorldMatrix() const;
 
 		/**
 		* Return the FTransform attached to the CTransform
 		*/
-		OvMaths::FTransform& GetFTransform();
+		LittleEngine::FTransform& GetFTransform();
 
 		/**
 		* Return the transform world forward
 		*/
-		OvMaths::FVector3 GetWorldForward() const;
+		LittleEngine::FVector3 GetWorldForward() const;
 
 		/**
 		* Return the transform world up
 		*/
-		OvMaths::FVector3 GetWorldUp() const;
+		LittleEngine::FVector3 GetWorldUp() const;
 
 		/**
 		* Return the transform world right
 		*/
-		OvMaths::FVector3 GetWorldRight() const;
+		LittleEngine::FVector3 GetWorldRight() const;
 
 		/**
 		* Return the transform local forward
 		*/
-		OvMaths::FVector3 GetLocalForward() const;
+		LittleEngine::FVector3 GetLocalForward() const;
 
 		/**
 		* Return the transform local up
 		*/
-		OvMaths::FVector3 GetLocalUp() const;
+		LittleEngine::FVector3 GetLocalUp() const;
 
 		/**
 		* Return the transform local right
 		*/
-		OvMaths::FVector3 GetLocalRight() const;
+		LittleEngine::FVector3 GetLocalRight() const;
 
 		/**
 		* Serialize the component
@@ -204,9 +204,9 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	private:
-		OvMaths::FTransform m_transform;
+		LittleEngine::FTransform m_transform;
 	};
 }

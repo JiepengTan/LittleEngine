@@ -10,7 +10,7 @@
 
 
 
-namespace OvAudio::Resources
+namespace LittleEngine::Audio::Resources
 {
 	namespace Loaders { class SoundLoader; }
 

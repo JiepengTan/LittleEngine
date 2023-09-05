@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/AWidget.h"
 
-namespace OvUI::Widgets
+namespace LittleEngine::UI::Widgets
 {
 	/**
 	* DataWidget are widgets that contains a value. It is very usefull in combination with

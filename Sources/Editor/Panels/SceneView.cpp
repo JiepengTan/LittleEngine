@@ -12,55 +12,55 @@
 #include "../Editor/Panels/GameView.h"
 #include "../Editor/Settings/EditorSettings.h"
 
-OvEditor::Panels::SceneView::SceneView
+LittleEditor::Panels::SceneView::SceneView
 (
 	const std::string& p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings& p_windowSettings
+	const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 ) : AViewControllable(p_title, p_opened, p_windowSettings, true),
 	m_sceneManager(EDITOR_CONTEXT(sceneManager))
 {
 	m_camera.SetClearColor({ 0.098f, 0.098f, 0.098f });
 	m_camera.SetFar(5000.0f);
 
-	m_image->AddPlugin<OvUI::Plugins::DDTarget<std::pair<std::string, OvUI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [this](auto p_data)
+	m_image->AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<std::string, LittleEngine::UI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [this](auto p_data)
 	{
 		std::string path = p_data.first;
 
-		switch (OvTools::Utils::PathParser::GetFileType(path))
+		switch (LittleEngine::Utils::PathParser::GetFileType(path))
 		{
-		case OvTools::Utils::PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
-		case OvTools::Utils::PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
+		case LittleEngine::Utils::PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
+		case LittleEngine::Utils::PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
 		}
 	};
 }
 
-void OvEditor::Panels::SceneView::Update(float p_deltaTime)
+void LittleEditor::Panels::SceneView::Update(float p_deltaTime)
 {
 	AViewControllable::Update(p_deltaTime);
 
-	using namespace OvWindowing::Inputs;
+	using namespace LittleEngine::Windowing::Inputs;
 
 	if (IsFocused() && !m_cameraController.IsRightMousePressed())
 	{
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_W))
 		{
-			m_currentOperation = OvEditor::Core::EGizmoOperation::TRANSLATE;
+			m_currentOperation = LittleEditor::Core::EGizmoOperation::TRANSLATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_E))
 		{
-			m_currentOperation = OvEditor::Core::EGizmoOperation::ROTATE;
+			m_currentOperation = LittleEditor::Core::EGizmoOperation::ROTATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_R))
 		{
-			m_currentOperation = OvEditor::Core::EGizmoOperation::SCALE;
+			m_currentOperation = LittleEditor::Core::EGizmoOperation::SCALE;
 		}
 	}
 }
 
-void OvEditor::Panels::SceneView::_Render_Impl()
+void LittleEditor::Panels::SceneView::_Render_Impl()
 {
 	PrepareCamera();
 
@@ -74,11 +74,11 @@ void OvEditor::Panels::SceneView::_Render_Impl()
 	baseRenderer.ApplyStateMask(glState);
 }
 
-void OvEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
+void LittleEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 	auto& currentScene = *m_sceneManager.GetCurrentScene();
-	auto& gameView = EDITOR_PANEL(OvEditor::Panels::GameView, "Game View");
+	auto& gameView = EDITOR_PANEL(LittleEditor::Panels::GameView, "Game View");
 
 	// If the game is playing, and ShowLightFrustumCullingInSceneView is true, apply the game view frustum culling to the scene view (For debugging purposes)
 	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Settings::EditorSettings::ShowLightFrustumCullingInSceneView)
@@ -98,7 +98,7 @@ void OvEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 
 	m_editorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
 	m_editorRenderer.RenderCameras();
-	m_camera.m_CameraType = OvRendering::Settings::ECameraType::Scene;
+	m_camera.m_CameraType = LittleEngine::Rendering::Settings::ECameraType::Scene;
 	// If the game is playing, and ShowGeometryFrustumCullingInSceneView is true, apply the game view frustum culling to the scene view (For debugging purposes)
 	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Settings::EditorSettings::ShowGeometryFrustumCullingInSceneView)
 	{
@@ -147,7 +147,7 @@ void OvEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 	m_fbo.Unbind();
 }
 
-void OvEditor::Panels::SceneView::RenderSceneForActorPicking()
+void LittleEditor::Panels::SceneView::RenderSceneForActorPicking()
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 
@@ -181,9 +181,9 @@ bool IsResizing()
 		cursor == ImGuiMouseCursor_ResizeAll;;
 }
 
-void OvEditor::Panels::SceneView::HandleActorPicking()
+void LittleEditor::Panels::SceneView::HandleActorPicking()
 {
-	using namespace OvWindowing::Inputs;
+	using namespace LittleEngine::Windowing::Inputs;
 
 	auto& inputManager = *EDITOR_CONTEXT(inputManager);
 
@@ -204,12 +204,12 @@ void OvEditor::Panels::SceneView::HandleActorPicking()
 
 		m_actorPickingFramebuffer.Bind();
 		uint8_t pixel[3];
-		EDITOR_CONTEXT(renderer)->ReadPixels(static_cast<int>(mouseX), static_cast<int>(mouseY), 1, 1, OvRendering::Settings::EPixelDataFormat::RGB, OvRendering::Settings::EPixelDataType::UNSIGNED_BYTE, pixel);
+		EDITOR_CONTEXT(renderer)->ReadPixels(static_cast<int>(mouseX), static_cast<int>(mouseY), 1, 1, LittleEngine::Rendering::Settings::EPixelDataFormat::RGB, LittleEngine::Rendering::Settings::EPixelDataType::UNSIGNED_BYTE, pixel);
 		m_actorPickingFramebuffer.Unbind();
 
 		uint32_t actorID = (0 << 24) | (pixel[2] << 16) | (pixel[1] << 8) | (pixel[0] << 0);
 		auto actorUnderMouse = EDITOR_CONTEXT(sceneManager).GetCurrentScene()->FindActorByID(actorID);
-		auto direction = m_gizmoOperations.IsPicking() ? m_gizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<OvEditor::Core::GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Core::GizmoBehaviour::EDirection>{};
+		auto direction = m_gizmoOperations.IsPicking() ? m_gizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<LittleEditor::Core::GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Core::GizmoBehaviour::EDirection>{};
 
 		m_highlightedActor = {};
 		m_highlightedGizmoDirection = {};

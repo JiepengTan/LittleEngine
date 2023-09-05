@@ -10,10 +10,10 @@
 #include "Core/CoreInclude.h"
 #include "Modules/Framework/ECS/Components/Behaviour.h"
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	template<typename ...Args>
-	inline void Components::Behaviour::LuaCall(const std::string& p_functionName, Args&& ...p_args)
+	inline void Behaviour::LuaCall(const std::string& p_functionName, Args&& ...p_args)
 	{
 		if (m_object.valid())
 		{

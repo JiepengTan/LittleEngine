@@ -10,7 +10,7 @@
 
 #include "Modules/Audio/Resources/Sound.h"
 
-namespace OvAudio::Resources::Loaders
+namespace LittleEngine::Audio::Resources::Loaders
 {
 	/**
 	* Handle the Mesh creation and destruction

@@ -6,6 +6,6 @@
 
 #include "../Editor/Core/PanelsManager.h"
 
-OvEditor::Core::PanelsManager::PanelsManager(OvUI::Modules::Canvas & p_canvas) : m_canvas(p_canvas)
+LittleEditor::Core::PanelsManager::PanelsManager(LittleEngine::UI::Modules::Canvas & p_canvas) : m_canvas(p_canvas)
 {
 }

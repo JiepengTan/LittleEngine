@@ -19,12 +19,12 @@
 #include "Modules/Rendering/Resources/Model.h"
 #include "Modules/Rendering/Resources/Texture.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class AssetProperties : public OvUI::Panels::PanelWindow
+	class AssetProperties : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
-		using EditableAssets = std::variant<OvRendering::Resources::Model*, OvRendering::Resources::Texture*>;
+		using EditableAssets = std::variant<LittleEngine::Rendering::Resources::Model*, LittleEngine::Rendering::Resources::Texture*>;
 
 		/**
 		* Constructor
@@ -36,7 +36,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -67,18 +67,18 @@ namespace OvEditor::Panels
 	private:
 		std::string m_resource;
 
-        OvTools::Eventing::Event<> m_targetChanged;
-        OvUI::Widgets::Layout::Group* m_settings = nullptr;
-        OvUI::Widgets::Layout::Group* m_info = nullptr;
-        OvUI::Widgets::Buttons::Button* m_applyButton = nullptr;
-        OvUI::Widgets::Buttons::Button* m_revertButton = nullptr;
-        OvUI::Widgets::Buttons::Button* m_previewButton = nullptr;
-        OvUI::Widgets::Buttons::Button* m_resetButton = nullptr;
-        OvUI::Widgets::AWidget* m_headerSeparator = nullptr;
-        OvUI::Widgets::AWidget* m_headerLineBreak = nullptr;
-		OvUI::Widgets::Layout::Columns<2>* m_settingsColumns = nullptr;
-		OvUI::Widgets::Layout::Columns<2>* m_infoColumns = nullptr;
-        OvUI::Widgets::Texts::Text* m_assetSelector = nullptr;
-		std::unique_ptr<OvTools::Filesystem::IniFile> m_metadata;
+        LittleEngine::Eventing::Event<> m_targetChanged;
+        LittleEngine::UI::Widgets::Layout::Group* m_settings = nullptr;
+        LittleEngine::UI::Widgets::Layout::Group* m_info = nullptr;
+        LittleEngine::UI::Widgets::Buttons::Button* m_applyButton = nullptr;
+        LittleEngine::UI::Widgets::Buttons::Button* m_revertButton = nullptr;
+        LittleEngine::UI::Widgets::Buttons::Button* m_previewButton = nullptr;
+        LittleEngine::UI::Widgets::Buttons::Button* m_resetButton = nullptr;
+        LittleEngine::UI::Widgets::AWidget* m_headerSeparator = nullptr;
+        LittleEngine::UI::Widgets::AWidget* m_headerLineBreak = nullptr;
+		LittleEngine::UI::Widgets::Layout::Columns<2>* m_settingsColumns = nullptr;
+		LittleEngine::UI::Widgets::Layout::Columns<2>* m_infoColumns = nullptr;
+        LittleEngine::UI::Widgets::Texts::Text* m_assetSelector = nullptr;
+		std::unique_ptr<LittleEngine::Filesystem::IniFile> m_metadata;
 	};
 }

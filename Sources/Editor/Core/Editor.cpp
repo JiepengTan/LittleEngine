@@ -24,12 +24,12 @@
 #include "../Editor/Panels/ProjectSettings.h"
 #include "../Editor/Panels/AssetProperties.h"
 
-using namespace OvCore::ResourceManagement;
-using namespace OvEditor::Panels;
-using namespace OvRendering::Resources::Loaders;
-using namespace OvRendering::Resources::Parsers;
+using namespace LittleEngine::ResourceManagement;
+using namespace LittleEditor::Panels;
+using namespace LittleEngine::Rendering::Resources::Loaders;
+using namespace LittleEngine::Rendering::Resources::Parsers;
 
-OvEditor::Core::Editor::Editor(Context& p_context) : 
+LittleEditor::Core::Editor::Editor(Context& p_context) : 
 	m_context(p_context),
 	m_editorRenderer(p_context),
 	m_panelsManager(m_canvas),
@@ -40,37 +40,37 @@ OvEditor::Core::Editor::Editor(Context& p_context) :
 	m_context.sceneManager.LoadEmptyLightedScene();
 }
 
-OvEditor::Core::Editor::~Editor()
+LittleEditor::Core::Editor::~Editor()
 {
 	m_context.sceneManager.UnloadCurrentScene();
 }
 
-void OvEditor::Core::Editor::SetupUI()
+void LittleEditor::Core::Editor::SetupUI()
 {
-	OvUI::Settings::PanelWindowSettings settings;
+	LittleEngine::UI::Settings::PanelWindowSettings settings;
 	settings.closable = true;
 	settings.collapsable = true;
 	settings.dockable = true;
 
-	m_panelsManager.CreatePanel<OvEditor::Panels::MenuBar>("Menu Bar");
-	m_panelsManager.CreatePanel<OvEditor::Panels::AssetBrowser>("Asset Browser", true, settings, m_context.engineAssetsPath, m_context.projectAssetsPath, m_context.projectScriptsPath);
-	m_panelsManager.CreatePanel<OvEditor::Panels::HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
-	m_panelsManager.CreatePanel<OvEditor::Panels::Profiler>("Profiler", true, settings, 0.25f);
-	m_panelsManager.CreatePanel<OvEditor::Panels::Console>("Console", true, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::Hierarchy>("Hierarchy", true, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::Inspector>("Inspector", true, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::SceneView>("Scene View", true, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::GameView>("Game View", true, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::AssetView>("Asset View", false, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::MaterialEditor>("Material Editor", false, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::ProjectSettings>("Project Settings", false, settings);
-	m_panelsManager.CreatePanel<OvEditor::Panels::AssetProperties>("Asset Properties", false, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::MenuBar>("Menu Bar");
+	m_panelsManager.CreatePanel<LittleEditor::Panels::AssetBrowser>("Asset Browser", true, settings, m_context.engineAssetsPath, m_context.projectAssetsPath, m_context.projectScriptsPath);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::Profiler>("Profiler", true, settings, 0.25f);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::Console>("Console", true, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::Hierarchy>("Hierarchy", true, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::Inspector>("Inspector", true, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::SceneView>("Scene View", true, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::GameView>("Game View", true, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::AssetView>("Asset View", false, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::MaterialEditor>("Material Editor", false, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::ProjectSettings>("Project Settings", false, settings);
+	m_panelsManager.CreatePanel<LittleEditor::Panels::AssetProperties>("Asset Properties", false, settings);
 
 	m_canvas.MakeDockspace(true);
 	m_context.uiManager->SetCanvas(m_canvas);
 }
 
-void OvEditor::Core::Editor::PreUpdate()
+void LittleEditor::Core::Editor::PreUpdate()
 {
 	PROFILER_SPY("Editor Pre-Update");
 
@@ -79,7 +79,7 @@ void OvEditor::Core::Editor::PreUpdate()
 	m_context.renderer->Clear();
 }
 
-void OvEditor::Core::Editor::Update(float p_deltaTime)
+void LittleEditor::Core::Editor::Update(float p_deltaTime)
 {
 	HandleGlobalShortcuts();
 	UpdateCurrentEditorMode(p_deltaTime);
@@ -90,17 +90,17 @@ void OvEditor::Core::Editor::Update(float p_deltaTime)
 	m_editorActions.ExecuteDelayedActions();
 }
 
-void OvEditor::Core::Editor::HandleGlobalShortcuts()
+void LittleEditor::Core::Editor::HandleGlobalShortcuts()
 {
 	// If the [Del] key is pressed while an actor is selected and the Scene View or Hierarchy is focused
-	if (m_context.inputManager->IsKeyPressed(OvWindowing::Inputs::EKey::KEY_DELETE) && EDITOR_EXEC(IsAnyActorSelected()) && (EDITOR_PANEL(SceneView, "Scene View").IsFocused() || EDITOR_PANEL(Hierarchy, "Hierarchy").IsFocused()))
+	if (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_DELETE) && EDITOR_EXEC(IsAnyActorSelected()) && (EDITOR_PANEL(SceneView, "Scene View").IsFocused() || EDITOR_PANEL(Hierarchy, "Hierarchy").IsFocused()))
 	{
 		EDITOR_EXEC(DestroyActor(EDITOR_EXEC(GetSelectedActor())));
 	}
 	
 }
 
-void OvEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)
+void LittleEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)
 {
 	if (auto editorMode = m_editorActions.GetCurrentEditorMode(); editorMode == EditorActions::EEditorMode::PLAY || editorMode == EditorActions::EEditorMode::FRAME_BY_FRAME)
 		UpdatePlayMode(p_deltaTime);
@@ -130,7 +130,7 @@ void OvEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)
 	}
 }
 
-void OvEditor::Core::Editor::UpdatePlayMode(float p_deltaTime)
+void LittleEditor::Core::Editor::UpdatePlayMode(float p_deltaTime)
 {
 	auto currentScene = m_context.sceneManager.GetCurrentScene();
 	bool simulationApplied = false;
@@ -161,27 +161,27 @@ void OvEditor::Core::Editor::UpdatePlayMode(float p_deltaTime)
 		m_context.audioEngine->Update();
 	}
 
-	ImGui::GetIO().DisableMouseUpdate = m_context.window->GetCursorMode() == OvWindowing::Cursor::ECursorMode::DISABLED;
+	ImGui::GetIO().DisableMouseUpdate = m_context.window->GetCursorMode() == LittleEngine::Windowing::Cursor::ECursorMode::DISABLED;
 
 	if (m_editorActions.GetCurrentEditorMode() == EditorActions::EEditorMode::FRAME_BY_FRAME)
 		m_editorActions.PauseGame();
 
-	if (m_context.inputManager->IsKeyPressed(OvWindowing::Inputs::EKey::KEY_ESCAPE))
+	if (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_ESCAPE))
 		m_editorActions.StopPlaying();
 }
 
-void OvEditor::Core::Editor::UpdateEditMode(float p_deltaTime)
+void LittleEditor::Core::Editor::UpdateEditMode(float p_deltaTime)
 {
-	if (m_context.inputManager->IsKeyPressed(OvWindowing::Inputs::EKey::KEY_F5))
+	if (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_F5))
 		m_editorActions.StartPlaying();
 }
 
-void OvEditor::Core::Editor::UpdateEditorPanels(float p_deltaTime)
+void LittleEditor::Core::Editor::UpdateEditorPanels(float p_deltaTime)
 {
-	auto& menuBar = m_panelsManager.GetPanelAs<OvEditor::Panels::MenuBar>("Menu Bar");
-	auto& profiler = m_panelsManager.GetPanelAs<OvEditor::Panels::Profiler>("Profiler");
-	auto& hardwareInfo = m_panelsManager.GetPanelAs<OvEditor::Panels::HardwareInfo>("Hardware Info");
-	auto& sceneView = m_panelsManager.GetPanelAs<OvEditor::Panels::SceneView>("Scene View");
+	auto& menuBar = m_panelsManager.GetPanelAs<LittleEditor::Panels::MenuBar>("Menu Bar");
+	auto& profiler = m_panelsManager.GetPanelAs<LittleEditor::Panels::Profiler>("Profiler");
+	auto& hardwareInfo = m_panelsManager.GetPanelAs<LittleEditor::Panels::HardwareInfo>("Hardware Info");
+	auto& sceneView = m_panelsManager.GetPanelAs<LittleEditor::Panels::SceneView>("Scene View");
 
 	menuBar.HandleShortcuts(p_deltaTime);
 
@@ -201,17 +201,17 @@ void OvEditor::Core::Editor::UpdateEditorPanels(float p_deltaTime)
 	}
 }
 
-void OvEditor::Core::Editor::PrepareRendering(float p_deltaTime)
+void LittleEditor::Core::Editor::PrepareRendering(float p_deltaTime)
 {
 	PROFILER_SPY("Engine UBO Update");
-	m_context.engineUBO->SetSubData(m_context.device->GetElapsedTime(), 3 * sizeof(OvMaths::FMatrix4) + sizeof(OvMaths::FVector3));
+	m_context.engineUBO->SetSubData(m_context.device->GetElapsedTime(), 3 * sizeof(LittleEngine::FMatrix4) + sizeof(LittleEngine::FVector3));
 }
 
-void OvEditor::Core::Editor::RenderViews(float p_deltaTime)
+void LittleEditor::Core::Editor::RenderViews(float p_deltaTime)
 {
-	auto& assetView = m_panelsManager.GetPanelAs<OvEditor::Panels::AssetView>("Asset View");
-	auto& sceneView = m_panelsManager.GetPanelAs<OvEditor::Panels::SceneView>("Scene View");
-	auto& gameView = m_panelsManager.GetPanelAs<OvEditor::Panels::GameView>("Game View");
+	auto& assetView = m_panelsManager.GetPanelAs<LittleEditor::Panels::AssetView>("Asset View");
+	auto& sceneView = m_panelsManager.GetPanelAs<LittleEditor::Panels::SceneView>("Scene View");
+	auto& gameView = m_panelsManager.GetPanelAs<LittleEditor::Panels::GameView>("Game View");
 
 	{
 		PROFILER_SPY("Editor Views Update");
@@ -249,14 +249,14 @@ void OvEditor::Core::Editor::RenderViews(float p_deltaTime)
 	m_context.lightSSBO->Unbind();
 }
 
-void OvEditor::Core::Editor::RenderEditorUI(float p_deltaTime)
+void LittleEditor::Core::Editor::RenderEditorUI(float p_deltaTime)
 {
 	PROFILER_SPY("Editor UI Rendering");
 
 	m_editorActions.GetRenderer().RenderUI();
 }
 
-void OvEditor::Core::Editor::PostUpdate()
+void LittleEditor::Core::Editor::PostUpdate()
 {
 	PROFILER_SPY("Editor Post-Update");
 

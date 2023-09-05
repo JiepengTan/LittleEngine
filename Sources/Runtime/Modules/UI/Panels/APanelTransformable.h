@@ -15,7 +15,7 @@
 #include "Modules/UI/Panels/APanel.h"
 #include "Modules/UI/Settings/Alignment.h"
 
-namespace OvUI::Panels
+namespace LittleEngine::UI::Panels
 {
 	/**
 	* APanelTransformable is a panel that is localized in the canvas
@@ -33,8 +33,8 @@ namespace OvUI::Panels
 		*/
 		APanelTransformable
 		(
-			const OvMaths::FVector2& p_defaultPosition = OvMaths::FVector2(-1.f, -1.f),
-			const OvMaths::FVector2& p_defaultSize = OvMaths::FVector2(-1.f, -1.f),
+			const LittleEngine::FVector2& p_defaultPosition = LittleEngine::FVector2(-1.f, -1.f),
+			const LittleEngine::FVector2& p_defaultSize = LittleEngine::FVector2(-1.f, -1.f),
 			Settings::EHorizontalAlignment p_defaultHorizontalAlignment = Settings::EHorizontalAlignment::LEFT,
 			Settings::EVerticalAlignment p_defaultVerticalAlignment = Settings::EVerticalAlignment::TOP,
 			bool p_ignoreConfigFile = false
@@ -44,13 +44,13 @@ namespace OvUI::Panels
 		* Defines the position of the panel
 		* @param p_position
 		*/
-		void SetPosition(const OvMaths::FVector2& p_position);
+		void SetPosition(const LittleEngine::FVector2& p_position);
 
 		/**
 		* Defines the size of the panel
 		* @param p_size
 		*/
-		void SetSize(const OvMaths::FVector2& p_size);
+		void SetSize(const LittleEngine::FVector2& p_size);
 
 		/**
 		* Defines the alignment of the panel
@@ -62,12 +62,12 @@ namespace OvUI::Panels
 		/**
 		* Returns the current position of the panel
 		*/
-		const OvMaths::FVector2& GetPosition() const;
+		const LittleEngine::FVector2& GetPosition() const;
 
 		/**
 		* Returns the current size of the panel
 		*/
-		const OvMaths::FVector2& GetSize() const;
+		const LittleEngine::FVector2& GetSize() const;
 
 		/**
 		* Returns the current horizontal alignment of the panel
@@ -84,7 +84,7 @@ namespace OvUI::Panels
 		virtual void _Draw_Impl() = 0;
 
 	private:
-		OvMaths::FVector2 CalculatePositionAlignmentOffset(bool p_default = false);
+		LittleEngine::FVector2 CalculatePositionAlignmentOffset(bool p_default = false);
 
 		void UpdatePosition();
 		void UpdateSize();
@@ -95,14 +95,14 @@ namespace OvUI::Panels
 		bool autoSize = true;
 
 	protected:
-		OvMaths::FVector2 m_defaultPosition;
-		OvMaths::FVector2 m_defaultSize;
+		LittleEngine::FVector2 m_defaultPosition;
+		LittleEngine::FVector2 m_defaultSize;
 		Settings::EHorizontalAlignment m_defaultHorizontalAlignment;
 		Settings::EVerticalAlignment m_defaultVerticalAlignment;
 		bool m_ignoreConfigFile;
 
-		OvMaths::FVector2 m_position = OvMaths::FVector2(0.0f, 0.0f);
-		OvMaths::FVector2 m_size = OvMaths::FVector2(0.0f, 0.0f);
+		LittleEngine::FVector2 m_position = LittleEngine::FVector2(0.0f, 0.0f);
+		LittleEngine::FVector2 m_size = LittleEngine::FVector2(0.0f, 0.0f);
 
 		bool m_positionChanged = false;
 		bool m_sizeChanged = false;

@@ -6,11 +6,11 @@
 #include "Modules/Utils/RenderUtils.h"
 #include "Modules/Rendering/Resources/Loaders/ShaderLoader.h"
 
-unsigned int OvCore::ECS::RenderUtils::_QuadVAO = 0;
-unsigned int OvCore::ECS::RenderUtils::_QuadVBO = 0;
-std::vector<OvCore::Resources::Material*>OvCore::ECS::RenderUtils:: _DebugMats;
+unsigned int LittleEngine::RenderUtils::_QuadVAO = 0;
+unsigned int LittleEngine::RenderUtils::_QuadVBO = 0;
+std::vector<LittleEngine::Resources::Material*>LittleEngine::RenderUtils:: _DebugMats;
 
-OvCore::Resources::Material* OvCore::ECS::RenderUtils::GetOrCreateDebugQuadMat()
+LittleEngine::Resources::Material* LittleEngine::RenderUtils::GetOrCreateDebugQuadMat()
 {
     if(_DebugMats.size()>0) return _DebugMats[0];
     auto vertstr = R"(
@@ -51,8 +51,8 @@ void main()
     //FragColor = vec4(1,0,0,1);
 })";
 
-    auto shader	= OvRendering::Resources::Loaders::ShaderLoader::CreateFromSource(vertstr, fragStr);
-    auto mat = new OvCore::Resources::Material();
+    auto shader	= LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateFromSource(vertstr, fragStr);
+    auto mat = new LittleEngine::Resources::Material();
     mat->SetDepthTest(false);
     mat->SetBlendable(false);
     mat->SetDepthWriting(false);
@@ -62,7 +62,7 @@ void main()
     return _DebugMats[0];
 }
 
-void OvCore::ECS::RenderUtils::DrawDebugQuad(OvRendering::Resources::Texture* p_tex)
+void LittleEngine::RenderUtils::DrawDebugQuad(LittleEngine::Rendering::Resources::Texture* p_tex)
 {
     auto material = GetOrCreateDebugQuadMat();
     if (material == nullptr) return;

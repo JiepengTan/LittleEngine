@@ -14,7 +14,7 @@
 #include "Platform/Windowing/Inputs/EMouseButton.h"
 #include "Platform/Windowing/Inputs/EMouseButtonState.h"
 
-namespace OvWindowing::Inputs
+namespace LittleEngine::Windowing::Inputs
 {
 	/**
 	* Handles inputs (Mouse and keyboard)
@@ -89,10 +89,10 @@ namespace OvWindowing::Inputs
 	private:
 		Window& m_window;
 
-		OvTools::Eventing::ListenerID m_keyPressedListener;
-		OvTools::Eventing::ListenerID m_keyReleasedListener;
-		OvTools::Eventing::ListenerID m_mouseButtonPressedListener;
-		OvTools::Eventing::ListenerID m_mouseButtonReleasedListener;
+		LittleEngine::Eventing::ListenerID m_keyPressedListener;
+		LittleEngine::Eventing::ListenerID m_keyReleasedListener;
+		LittleEngine::Eventing::ListenerID m_mouseButtonPressedListener;
+		LittleEngine::Eventing::ListenerID m_mouseButtonReleasedListener;
 
 		std::unordered_map<EKey, EKeyState>					m_keyEvents;
 		std::unordered_map<EMouseButton, EMouseButtonState>	m_mouseButtonEvents;

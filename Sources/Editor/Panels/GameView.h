@@ -10,11 +10,11 @@
 
 #include "../Editor/Panels/AView.h"
 
-namespace OvEditor::Core { class EditorRenderer; }
+namespace LittleEditor::Core { class EditorRenderer; }
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class GameView : public OvEditor::Panels::AView
+	class GameView : public LittleEditor::Panels::AView
 	{
 	public:
 		/**
@@ -27,7 +27,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -49,10 +49,10 @@ namespace OvEditor::Panels
 		/**
 		* Returns the game view camera frustum or nothing if the game isn't playing
 		*/
-		std::optional<OvRendering::Data::Frustum> GetActiveFrustum() const;
+		std::optional<LittleEngine::Rendering::Data::Frustum> GetActiveFrustum() const;
 
 	private:
-		OvCore::SceneSystem::SceneManager& m_sceneManager;
+		LittleEngine::SceneSystem::SceneManager& m_sceneManager;
 		bool m_hasCamera = false;
 	};
 }

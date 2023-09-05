@@ -8,7 +8,7 @@
 
 
 
-namespace OvRendering::Settings
+namespace LittleEngine::Rendering::Settings
 {
 	/**
 	* Represents some culling options

@@ -11,7 +11,7 @@
 #include "Modules/Rendering/Context/Driver.h"
 #include "Modules/Rendering/Resources/Texture.h"
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
     /**
     * Wraps Shadowmap
@@ -58,7 +58,7 @@ namespace OvRendering::Buffers
         */
         uint32_t GetTextureID();
 
-        OvRendering::Resources::Texture* GetTexture();
+        LittleEngine::Rendering::Resources::Texture* GetTexture();
         /**
         * Returns the ID of the OpenGL render buffer
         */

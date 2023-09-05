@@ -4,7 +4,7 @@
 #include <ostream>
 
 
-OvRendering::Geometry::VertexDataBuffer::VertexDataBuffer(int p_size, Geometry::EVertexDataFlags p_dataFlag):
+LittleEngine::Rendering::Geometry::VertexDataBuffer::VertexDataBuffer(int p_size, Geometry::EVertexDataFlags p_dataFlag):
     dataFlags(p_dataFlag)
 {
     count = p_size;
@@ -26,7 +26,7 @@ OvRendering::Geometry::VertexDataBuffer::VertexDataBuffer(int p_size, Geometry::
     }
 }
 
-OvRendering::Geometry::VertexDataBuffer::~VertexDataBuffer()
+LittleEngine::Rendering::Geometry::VertexDataBuffer::~VertexDataBuffer()
 {
     for (int i = 0; i < VERTEX_DATA_FLAGS_INDEX_COUNT; i++)
     {
@@ -40,7 +40,7 @@ OvRendering::Geometry::VertexDataBuffer::~VertexDataBuffer()
 }
 
 
-void* OvRendering::Geometry::VertexDataBuffer::GetDataPtr(Geometry::EVertexDataFlagsIndex type)
+void* LittleEngine::Rendering::Geometry::VertexDataBuffer::GetDataPtr(Geometry::EVertexDataFlagsIndex type)
 {
     if (dataPtrs[(int)type] != nullptr)
     {
@@ -49,7 +49,7 @@ void* OvRendering::Geometry::VertexDataBuffer::GetDataPtr(Geometry::EVertexDataF
     return nullptr;
 }
 
-void* OvRendering::Geometry::VertexDataBuffer::MoveDataPtr(Geometry::EVertexDataFlagsIndex type)
+void* LittleEngine::Rendering::Geometry::VertexDataBuffer::MoveDataPtr(Geometry::EVertexDataFlagsIndex type)
 {
     void* retPtr = dataPtrs[(int)type];
     dataPtrs[(int)type] = nullptr;

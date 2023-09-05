@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/AWidget.h"
 
-namespace OvUI::Widgets::Layout
+namespace LittleEngine::UI::Widgets::Layout
 {
 	/**
 	* Widget that adds an empty line to the panel

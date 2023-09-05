@@ -10,9 +10,9 @@
 #include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-using namespace OvPhysics::Entities;
+using namespace LittleEngine::Physics::Entities;
 
-OvCore::ECS::Components::CPhysicalSphere::CPhysicalSphere(ECS::Actor & p_owner) :
+LittleEngine::CPhysicalSphere::CPhysicalSphere(Actor & p_owner) :
 	CPhysicalObject(p_owner)
 {
 	m_physicalObject = std::make_unique<PhysicalSphere>(p_owner.transform.GetFTransform());
@@ -23,36 +23,36 @@ OvCore::ECS::Components::CPhysicalSphere::CPhysicalSphere(ECS::Actor & p_owner) 
 	Init();
 }
 
-std::string OvCore::ECS::Components::CPhysicalSphere::GetName()
+std::string LittleEngine::CPhysicalSphere::GetName()
 {
 	return "Physical Sphere";
 }
 
-void OvCore::ECS::Components::CPhysicalSphere::SetRadius(float p_radius)
+void LittleEngine::CPhysicalSphere::SetRadius(float p_radius)
 {
 	GetPhysicalObjectAs<PhysicalSphere>().SetRadius(p_radius);
 }
 
-float OvCore::ECS::Components::CPhysicalSphere::GetRadius() const
+float LittleEngine::CPhysicalSphere::GetRadius() const
 {
 	return GetPhysicalObjectAs<PhysicalSphere>().GetRadius();
 }
 
-void OvCore::ECS::Components::CPhysicalSphere::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalSphere::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnSerialize(p_doc, p_node);
 
 	Serializer::SerializeFloat(p_doc, p_node, "radius", GetRadius());
 }
 
-void OvCore::ECS::Components::CPhysicalSphere::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalSphere::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnDeserialize(p_doc, p_node);
 
 	SetRadius(Serializer::DeserializeFloat(p_doc, p_node, "radius"));
 }
 
-void OvCore::ECS::Components::CPhysicalSphere::OnInspector(OvUI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalSphere::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
 {
 	CPhysicalObject::OnInspector(p_root);
 

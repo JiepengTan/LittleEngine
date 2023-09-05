@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Panels/PanelUndecorated.h"
 
-void OvUI::Panels::PanelUndecorated::_Draw_Impl()
+void LittleEngine::UI::Panels::PanelUndecorated::_Draw_Impl()
 {
 	auto& style = ImGui::GetStyle();
 	ImVec2 previousPadding = style.WindowPadding;
@@ -31,7 +31,7 @@ void OvUI::Panels::PanelUndecorated::_Draw_Impl()
 	}
 }
 
-int OvUI::Panels::PanelUndecorated::CollectFlags()
+int LittleEngine::UI::Panels::PanelUndecorated::CollectFlags()
 {
 	ImGuiWindowFlags flags =
 		ImGuiWindowFlags_AlwaysUseWindowPadding |

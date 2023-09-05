@@ -8,7 +8,7 @@
 
 #include "Platform/Windowing/Dialogs/FileDialog.h"
 
-namespace OvWindowing::Dialogs
+namespace LittleEngine::Windowing::Dialogs
 {
 	/**
 	* Dialog window that asks the user to select a file from the disk

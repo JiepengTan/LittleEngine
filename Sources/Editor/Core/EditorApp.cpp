@@ -6,22 +6,22 @@
 
 #include "Core/Tools/Time/Clock.h"
 
-#include "../Editor/Core/Application.h"
+#include "../Editor/Core/EditorApp.h"
 
-OvEditor::Core::Application::Application(const std::string& p_projectPath, const std::string& p_projectName) :
+LittleEditor::Core::EditorApp::EditorApp(const std::string& p_projectPath, const std::string& p_projectName) :
 	m_context(p_projectPath, p_projectName),
 	m_editor(m_context)
 {
 	EDITOR_EXEC(LoadLastScene());
 }
 
-OvEditor::Core::Application::~Application()
+LittleEditor::Core::EditorApp::~EditorApp()
 {
 }
 
-void OvEditor::Core::Application::Run()
+void LittleEditor::Core::EditorApp::Run()
 {
-	OvTools::Time::Clock clock;
+	LittleEngine::Time::Clock clock;
 
 	while (IsRunning())
 	{
@@ -33,7 +33,7 @@ void OvEditor::Core::Application::Run()
 	}
 }
 
-bool OvEditor::Core::Application::IsRunning() const
+bool LittleEditor::Core::EditorApp::IsRunning() const
 {
 	return !m_context.window->ShouldClose();
 }

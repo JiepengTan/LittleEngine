@@ -10,7 +10,7 @@
 
 #include "Modules/Rendering/Context/Driver.h"
 
-OvRendering::Context::Driver::Driver(const Settings::DriverSettings& p_driverSettings)
+LittleEngine::Rendering::Context::Driver::Driver(const Settings::DriverSettings& p_driverSettings)
 {
 	InitGlew();
 	
@@ -33,12 +33,12 @@ OvRendering::Context::Driver::Driver(const Settings::DriverSettings& p_driverSet
 	glCullFace(GL_BACK);
 }
 
-bool OvRendering::Context::Driver::IsActive() const
+bool LittleEngine::Rendering::Context::Driver::IsActive() const
 {
 	return m_isActive;
 }
 
-void OvRendering::Context::Driver::GLDebugMessageCallback(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userParam)
+void LittleEngine::Rendering::Context::Driver::GLDebugMessageCallback(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userParam)
 {
 	// ignore non-significant error/warning codes
 	if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
@@ -92,7 +92,7 @@ void OvRendering::Context::Driver::GLDebugMessageCallback(uint32_t source, uint3
 	}
 }
 
-void OvRendering::Context::Driver::InitGlew()
+void LittleEngine::Rendering::Context::Driver::InitGlew()
 {
 	const GLenum error = glewInit();
 	if (error != GLEW_OK)

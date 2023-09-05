@@ -6,12 +6,12 @@
 
 #include "Modules/UI/Widgets/Selection/ColorPicker.h"
 
-OvUI::Widgets::Selection::ColorPicker::ColorPicker(bool p_enableAlpha, const Types::Color & p_defaultColor) :
+LittleEngine::UI::Widgets::Selection::ColorPicker::ColorPicker(bool p_enableAlpha, const Types::Color & p_defaultColor) :
 	DataWidget<Types::Color>(color), enableAlpha(p_enableAlpha), color(p_defaultColor)
 {
 }
 
-void OvUI::Widgets::Selection::ColorPicker::_Draw_Impl()
+void LittleEngine::UI::Widgets::Selection::ColorPicker::_Draw_Impl()
 {
 	int flags = !enableAlpha ? ImGuiColorEditFlags_NoAlpha : 0;
 	bool valueChanged = false;

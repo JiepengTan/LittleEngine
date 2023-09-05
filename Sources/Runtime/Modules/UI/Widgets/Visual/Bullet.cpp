@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Visual/Bullet.h"
 
-void OvUI::Widgets::Visual::Bullet::_Draw_Impl()
+void LittleEngine::UI::Widgets::Visual::Bullet::_Draw_Impl()
 {
 	ImGui::Bullet();
 }

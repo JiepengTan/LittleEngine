@@ -12,7 +12,7 @@
 
 #include "Modules/Audio/Entities/AudioSource.h"
 
-namespace OvAudio::Entities
+namespace LittleEngine::Audio::Entities
 {
 	/**
 	* Represents the ears of your application.
@@ -30,7 +30,7 @@ namespace OvAudio::Entities
 		* AudioListener constructor (External transform management)
 		* @param p_transform
 		*/
-		AudioListener(OvMaths::FTransform& p_transform);
+		AudioListener(LittleEngine::FTransform& p_transform);
 
 		/**
 		* AudioListener destructor
@@ -40,7 +40,7 @@ namespace OvAudio::Entities
 		/**
 		* Returns the AudioListener FTransform
 		*/
-		OvMaths::FTransform& GetTransform();
+		LittleEngine::FTransform& GetTransform();
 
 		/**
 		* Enable or disable the audio listener
@@ -58,12 +58,12 @@ namespace OvAudio::Entities
 
 	private:
 		/* Transform stuff */
-		OvMaths::FTransform* const		m_transform;
+		LittleEngine::FTransform* const		m_transform;
 		const bool						m_internalTransform;
 		bool							m_enabled = true;
 
 	public:
-		static OvTools::Eventing::Event<AudioListener&>	CreatedEvent;
-		static OvTools::Eventing::Event<AudioListener&>	DestroyedEvent;
+		static LittleEngine::Eventing::Event<AudioListener&>	CreatedEvent;
+		static LittleEngine::Eventing::Event<AudioListener&>	DestroyedEvent;
 	};
 }

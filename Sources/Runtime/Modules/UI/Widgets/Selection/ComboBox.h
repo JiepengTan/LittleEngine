@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Selection
+namespace LittleEngine::UI::Widgets::Selection
 {
 	/**
 	* Widget that can display a list of values that the user can select
@@ -34,6 +34,6 @@ namespace OvUI::Widgets::Selection
 		int currentChoice;
 
 	public:
-		OvTools::Eventing::Event<int> ValueChangedEvent;
+		LittleEngine::Eventing::Event<int> ValueChangedEvent;
 	};
 }

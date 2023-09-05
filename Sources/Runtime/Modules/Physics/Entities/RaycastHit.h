@@ -13,7 +13,7 @@
 
 #include "Modules/Physics/Entities/PhysicalObject.h"
 
-namespace OvPhysics::Entities
+namespace LittleEngine::Physics::Entities
 {
 	/**
 	* Data structure that holds raycast hit information

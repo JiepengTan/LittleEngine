@@ -4,8 +4,8 @@
 {{#include_headfiles}}
 #include "{{headfile_name}}"
 {{/include_headfiles}}
-namespace OvCore{
-    using namespace OvCore::ECS::Components;
+namespace LittleEngine{
+    using namespace LittleEngine;
     {{#class_defines}}
     template<>
     Json JsonSerializer::Write(const {{class_name}}& instance){

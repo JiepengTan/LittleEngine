@@ -19,10 +19,10 @@
 * the end of the scope where this macro get called
 */
 #define PROFILER_SPY(name)\
-		std::unique_ptr<OvAnalytics::Profiling::ProfilerSpy> __profiler_spy__ = \
-		OvAnalytics::Profiling::Profiler::IsEnabled() ? std::make_unique<OvAnalytics::Profiling::ProfilerSpy>(name) : nullptr
+		std::unique_ptr<LittleEngine::Analytics::Profiling::ProfilerSpy> __profiler_spy__ = \
+		LittleEngine::Analytics::Profiling::Profiler::IsEnabled() ? std::make_unique<LittleEngine::Analytics::Profiling::ProfilerSpy>(name) : nullptr
 
-namespace OvAnalytics::Profiling
+namespace LittleEngine::Analytics::Profiling
 {
 	/**
 	* A little informer that is created when PROFILER_SPY(name) is written.

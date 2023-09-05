@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Drags
+namespace LittleEngine::UI::Widgets::Drags
 {
 	/**
 	* Drag widget of generic type
@@ -67,7 +67,7 @@ namespace OvUI::Widgets::Drags
 		float speed;
 		std::string label;
 		std::string format;
-		OvTools::Eventing::Event<T> ValueChangedEvent;
+		LittleEngine::Eventing::Event<T> ValueChangedEvent;
 
 	private:
 		ImGuiDataType m_dataType;

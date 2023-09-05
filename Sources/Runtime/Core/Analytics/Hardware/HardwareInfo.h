@@ -14,7 +14,7 @@
 #include "Core/Analytics/Hardware/GPUInfo.h"
 #include "Core/Analytics/Hardware/RAMInfo.h"
 
-namespace OvAnalytics::Hardware
+namespace LittleEngine::Analytics::Hardware
 {
 	/**
 	* The hardware info class will gather informations about the hardware in real-time (CPU usage, GPU usage, RAM usage...)

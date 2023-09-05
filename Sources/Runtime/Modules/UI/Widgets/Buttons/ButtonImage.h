@@ -12,7 +12,7 @@
 #include "Modules/UI/Types/Color.h"
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Button widget with an image
@@ -25,7 +25,7 @@ namespace OvUI::Widgets::Buttons
 		* @param p_textureID
 		* @param p_size
 		*/
-		ButtonImage(uint32_t p_textureID, const OvMaths::FVector2& p_size);
+		ButtonImage(uint32_t p_textureID, const LittleEngine::FVector2& p_size);
 
 	protected:
 		void _Draw_Impl() override;
@@ -33,13 +33,13 @@ namespace OvUI::Widgets::Buttons
 	public:
 		bool disabled = false;
 
-		OvUI::Types::Color background = { 0, 0, 0, 0 };
-		OvUI::Types::Color tint = { 1, 1, 1, 1 };
+		LittleEngine::UI::Types::Color background = { 0, 0, 0, 0 };
+		LittleEngine::UI::Types::Color tint = { 1, 1, 1, 1 };
 
 		Internal::TextureID textureID;
-		OvMaths::FVector2 size;
+		LittleEngine::FVector2 size;
 		bool isAbsoluteOffset = false;
-		OvMaths::FVector2 offset;
+		LittleEngine::FVector2 offset;
 		
 	};
 }

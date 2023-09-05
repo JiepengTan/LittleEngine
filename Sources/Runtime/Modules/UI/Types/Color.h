@@ -7,7 +7,7 @@
 #pragma once
 
 
-namespace OvUI::Types
+namespace LittleEngine::UI::Types
 {
 	/**
 	* Data structur that contains color information in a 0.f to 1.f float format

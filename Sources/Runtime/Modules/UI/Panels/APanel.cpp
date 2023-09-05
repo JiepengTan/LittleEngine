@@ -8,20 +8,20 @@
 
 #include "Modules/UI/Panels/APanel.h"
 
-uint64_t OvUI::Panels::APanel::__PANEL_ID_INCREMENT = 0;
+uint64_t LittleEngine::UI::Panels::APanel::__PANEL_ID_INCREMENT = 0;
 
-OvUI::Panels::APanel::APanel()
+LittleEngine::UI::Panels::APanel::APanel()
 {
 	m_panelID = "##" + std::to_string(__PANEL_ID_INCREMENT++);
 }
 
-void OvUI::Panels::APanel::Draw()
+void LittleEngine::UI::Panels::APanel::Draw()
 {
 	if (enabled)
 		_Draw_Impl();
 }
 
-const std::string & OvUI::Panels::APanel::GetPanelID() const
+const std::string & LittleEngine::UI::Panels::APanel::GetPanelID() const
 {
 	return m_panelID;
 }

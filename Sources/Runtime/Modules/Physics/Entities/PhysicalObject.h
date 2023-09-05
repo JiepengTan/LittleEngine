@@ -19,9 +19,9 @@
 
 #include "Modules/Physics/Settings/BodySettings.h"
 
-namespace OvPhysics::Core { class PhysicsEngine; }
+namespace LittleEngine::Physics::Core { class PhysicsEngine; }
 
-namespace OvPhysics::Entities
+namespace LittleEngine::Physics::Entities
 {
 	/**
 	* Base class for any entity that is physical
@@ -29,7 +29,7 @@ namespace OvPhysics::Entities
 	class PhysicalObject
 	{
 	public:
-		friend class OvPhysics::Core::PhysicsEngine;
+		friend class LittleEngine::Physics::Core::PhysicsEngine;
 
 		/**
 		* Defines some collision detection modes that a physical object can have
@@ -62,7 +62,7 @@ namespace OvPhysics::Entities
 		* @param p_shapeType
 		* @param p_transform
 		*/
-		PhysicalObject(OvMaths::FTransform& p_transform);
+		PhysicalObject(LittleEngine::FTransform& p_transform);
 
 		/**
 		* PhysicalObject destructor (Free memory if the transform is internally managed)
@@ -73,13 +73,13 @@ namespace OvPhysics::Entities
 		* Add a force to the physical object
 		* @param p_force
 		*/
-		void AddForce(const OvMaths::FVector3& p_force);
+		void AddForce(const LittleEngine::FVector3& p_force);
 
 		/**
 		* Add an impulse to the physical object
 		* @param p_impulse
 		*/
-		void AddImpulse(const OvMaths::FVector3& p_impulse);
+		void AddImpulse(const LittleEngine::FVector3& p_impulse);
 
 		/**
 		* Clear forces
@@ -121,22 +121,22 @@ namespace OvPhysics::Entities
 		/**
 		* Returns the linear velocity of the physical object
 		*/
-		OvMaths::FVector3 GetLinearVelocity() const;
+		LittleEngine::FVector3 GetLinearVelocity() const;
 
 		/**
 		* Returns the angular of the physical object
 		*/
-		OvMaths::FVector3 GetAngularVelocity() const;
+		LittleEngine::FVector3 GetAngularVelocity() const;
 
 		/**
 		* Returns the linear factor of the physical object
 		*/
-		OvMaths::FVector3 GetLinearFactor()	const;
+		LittleEngine::FVector3 GetLinearFactor()	const;
 
 		/**
 		* Returns the angular factor of the physical object
 		*/
-		OvMaths::FVector3 GetAngularFactor() const;
+		LittleEngine::FVector3 GetAngularFactor() const;
 
 		/**
 		* Returns true if the physical object is a trigger
@@ -156,7 +156,7 @@ namespace OvPhysics::Entities
 		/**
 		* Returns a reference to the transform of the physical object
 		*/
-		OvMaths::FTransform& GetTransform();
+		LittleEngine::FTransform& GetTransform();
 
 		/**
 		* Defines a new mass for the physical object
@@ -186,25 +186,25 @@ namespace OvPhysics::Entities
 		* Defines a new linear velocity for the physical object
 		* @param p_linearVelocity
 		*/
-		void SetLinearVelocity(const OvMaths::FVector3& p_linearVelocity);
+		void SetLinearVelocity(const LittleEngine::FVector3& p_linearVelocity);
 
 		/**
 		* Defines a new angular velocity for the physical object
 		* @param p_angularVelocity
 		*/
-		void SetAngularVelocity(const OvMaths::FVector3& p_angularVelocity);
+		void SetAngularVelocity(const LittleEngine::FVector3& p_angularVelocity);
 
 		/**
 		* Defines a new linear factor for the physical object
 		* @param p_linearFactor
 		*/
-		void SetLinearFactor(const OvMaths::FVector3& p_linearFactor);
+		void SetLinearFactor(const LittleEngine::FVector3& p_linearFactor);
 
 		/**
 		* Defines a new angular factor for the physical object
 		* @param p_angularFactor
 		*/
-		void SetAngularFactor(const OvMaths::FVector3& p_angularFactor);
+		void SetAngularFactor(const LittleEngine::FVector3& p_angularFactor);
 
 		/**
 		* Defines if the physical object should be a trigger or not
@@ -250,7 +250,7 @@ namespace OvPhysics::Entities
 		void Init();
 		void RecreateBody();
 		void ApplyInertia();
-		virtual void SetLocalScaling(const OvMaths::FVector3& p_scaling) = 0;
+		virtual void SetLocalScaling(const LittleEngine::FVector3& p_scaling) = 0;
 		void Consider();
 		void Unconsider();
 
@@ -266,17 +266,17 @@ namespace OvPhysics::Entities
 		void					UpdateFTransform();
 
 	public:
-		OvTools::Eventing::Event<PhysicalObject&>			CollisionStartEvent;
-		OvTools::Eventing::Event<PhysicalObject&>			CollisionStayEvent;
-		OvTools::Eventing::Event<PhysicalObject&>			CollisionStopEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			CollisionStartEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			CollisionStayEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			CollisionStopEvent;
 
-		OvTools::Eventing::Event<PhysicalObject&>			TriggerStartEvent;
-		OvTools::Eventing::Event<PhysicalObject&>			TriggerStayEvent;
-		OvTools::Eventing::Event<PhysicalObject&>			TriggerStopEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			TriggerStartEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			TriggerStayEvent;
+		LittleEngine::Eventing::Event<PhysicalObject&>			TriggerStopEvent;
 
 	private:
 		/* Transform stuff */
-		OvMaths::FTransform* const		m_transform;
+		LittleEngine::FTransform* const		m_transform;
 		const bool						m_internalTransform;
 
 		/* Settings */
@@ -289,11 +289,11 @@ namespace OvPhysics::Entities
 
 		/* Other */
 		std::any m_userData;
-		OvMaths::FVector3 m_previousScale = { 0.0f, 0.0f, 0.0f };
-		static OvTools::Eventing::Event<PhysicalObject&>	CreatedEvent;
-		static OvTools::Eventing::Event<PhysicalObject&>	DestroyedEvent;
-		static OvTools::Eventing::Event<btRigidBody&>		ConsiderEvent;
-		static OvTools::Eventing::Event<btRigidBody&>		UnconsiderEvent;
+		LittleEngine::FVector3 m_previousScale = { 0.0f, 0.0f, 0.0f };
+		static LittleEngine::Eventing::Event<PhysicalObject&>	CreatedEvent;
+		static LittleEngine::Eventing::Event<PhysicalObject&>	DestroyedEvent;
+		static LittleEngine::Eventing::Event<btRigidBody&>		ConsiderEvent;
+		static LittleEngine::Eventing::Event<btRigidBody&>		UnconsiderEvent;
 
 		/* Bullet relatives */
 		std::unique_ptr<btMotionState>		m_motion;

@@ -15,9 +15,9 @@
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Buttons/Button.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class Profiler : public OvUI::Panels::PanelWindow
+	class Profiler : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -31,7 +31,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 			float p_frequency
 		);
 
@@ -49,8 +49,8 @@ namespace OvEditor::Panels
 		void Enable(bool p_value, bool p_disableLog = false);
 
 	private:
-		OvUI::Types::Color CalculateActionColor(double p_percentage) const;
-		std::string GenerateActionString(OvAnalytics::Profiling::ProfilerReport::Action& p_action);
+		LittleEngine::UI::Types::Color CalculateActionColor(double p_percentage) const;
+		std::string GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action& p_action);
 
 	private:
 		enum class EProfilingMode
@@ -64,13 +64,13 @@ namespace OvEditor::Panels
 		float m_fpsTimer = 0.f;
 		EProfilingMode m_profilingMode = EProfilingMode::DEFAULT;
 
-		OvAnalytics::Profiling::Profiler m_profiler;
+		LittleEngine::Analytics::Profiling::Profiler m_profiler;
 
-		OvUI::Widgets::AWidget* m_separator;
-		OvUI::Widgets::Buttons::Button* m_captureResumeButton;
-		OvUI::Widgets::Texts::TextColored* m_fpsText;
-		OvUI::Widgets::Texts::TextColored* m_elapsedFramesText;
-		OvUI::Widgets::Texts::TextColored* m_elapsedTimeText;
-		OvUI::Widgets::Layout::Columns<5>* m_actionList;
+		LittleEngine::UI::Widgets::AWidget* m_separator;
+		LittleEngine::UI::Widgets::Buttons::Button* m_captureResumeButton;
+		LittleEngine::UI::Widgets::Texts::TextColored* m_fpsText;
+		LittleEngine::UI::Widgets::Texts::TextColored* m_elapsedFramesText;
+		LittleEngine::UI::Widgets::Texts::TextColored* m_elapsedTimeText;
+		LittleEngine::UI::Widgets::Layout::Columns<5>* m_actionList;
 	};
 }

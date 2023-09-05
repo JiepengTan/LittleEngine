@@ -8,21 +8,21 @@
 
 #include "Core/Analytics/Hardware/HardwareInfo.h"
 
-using namespace OvUI::Panels;
-using namespace OvUI::Widgets;
+using namespace LittleEngine::UI::Panels;
+using namespace LittleEngine::UI::Widgets;
 
-OvEditor::Panels::HardwareInfo::HardwareInfo
+LittleEditor::Panels::HardwareInfo::HardwareInfo
 (
 	const std::string& p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+	const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 	float p_logFrequency,
 	size_t p_maxElements
 ) :
 	PanelWindow(p_title, p_opened, p_windowSettings),
 	m_logFrequency(p_logFrequency),
 	m_maxElements(p_maxElements),
-	m_hardwareInfo(new OvAnalytics::Hardware::HardwareInfo(m_logFrequency))
+	m_hardwareInfo(new LittleEngine::Analytics::Hardware::HardwareInfo(m_logFrequency))
 {
 	m_cpuUsage = &CreateWidget<Plots::PlotLines>();
 	m_gpuUsage = &CreateWidget<Plots::PlotLines>();
@@ -47,12 +47,12 @@ OvEditor::Panels::HardwareInfo::HardwareInfo
 	m_ramUsage->overlay = "RAM Usage (%)";
 }
 
-OvEditor::Panels::HardwareInfo::~HardwareInfo()
+LittleEditor::Panels::HardwareInfo::~HardwareInfo()
 {
 	delete m_hardwareInfo;
 }
 
-void OvEditor::Panels::HardwareInfo::Update(float p_deltaTime)
+void LittleEditor::Panels::HardwareInfo::Update(float p_deltaTime)
 {
 	m_hardwareInfo->Tick();
 
@@ -60,7 +60,7 @@ void OvEditor::Panels::HardwareInfo::Update(float p_deltaTime)
 
 	while (p_updateTimer >= m_logFrequency)
 	{
-		OvAnalytics::Hardware::HardwareReport report = m_hardwareInfo->GenerateReport();
+		LittleEngine::Analytics::Hardware::HardwareReport report = m_hardwareInfo->GenerateReport();
 
 		m_cpuUsage->data.push_back(report.CPULoad);
 		m_gpuUsage->data.push_back(report.GPULoad);

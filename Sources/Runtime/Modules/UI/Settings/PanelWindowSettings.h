@@ -7,7 +7,7 @@
 #pragma once
 
 
-namespace OvUI::Settings
+namespace LittleEngine::UI::Settings
 {
 	/**
 	* Data structure to send to the panel window constructor to define its settings

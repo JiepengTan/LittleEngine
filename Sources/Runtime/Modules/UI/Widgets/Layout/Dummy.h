@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/AWidget.h"
 
-namespace OvUI::Widgets::Layout
+namespace LittleEngine::UI::Widgets::Layout
 {
 	/**
 	* Dummy widget that takes the given size as space in the panel
@@ -22,12 +22,12 @@ namespace OvUI::Widgets::Layout
 		* Constructor
 		* @param p_size
 		*/
-		Dummy(const OvMaths::FVector2& p_size = { 0.0f, 0.0f });
+		Dummy(const LittleEngine::FVector2& p_size = { 0.0f, 0.0f });
 
 	protected:
 		void _Draw_Impl() override;
 
 	public:
-		OvMaths::FVector2 size;
+		LittleEngine::FVector2 size;
 	};
 }

@@ -11,9 +11,9 @@
 #include "Modules/Rendering/Context/Driver.h"
 #include "Modules/Rendering/Buffers/EAccessSpecifier.h"
 
-namespace OvRendering::Resources { class Shader; }
+namespace LittleEngine::Rendering::Resources { class Shader; }
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 	/**
 	* Wraps OpenGL SSBO

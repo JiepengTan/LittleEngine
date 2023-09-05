@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	/**
 	* Defines the types that a uniform can take

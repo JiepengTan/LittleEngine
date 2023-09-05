@@ -11,7 +11,7 @@
 
 #include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
 
-OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader::Create(const std::string& p_filepath, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	int textureWidth;
@@ -51,7 +51,7 @@ OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader:
 	}
 }
 
-OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader::CreateColor(uint32_t p_data, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateColor(uint32_t p_data, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -74,7 +74,7 @@ OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader:
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
-OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -97,7 +97,7 @@ OvRendering::Resources::Texture* OvRendering::Resources::Loaders::TextureLoader:
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
-void OvRendering::Resources::Loaders::TextureLoader::Reload(Texture& p_texture, const std::string& p_filePath, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+void LittleEngine::Rendering::Resources::Loaders::TextureLoader::Reload(Texture& p_texture, const std::string& p_filePath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	Texture* newTexture = Create(p_filePath, p_firstFilter, p_secondFilter, p_generateMipmap);
 
@@ -116,7 +116,7 @@ void OvRendering::Resources::Loaders::TextureLoader::Reload(Texture& p_texture, 
 	}
 }
 
-bool OvRendering::Resources::Loaders::TextureLoader::Destroy(Texture*& p_textureInstance)
+bool LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(Texture*& p_textureInstance)
 {
 	if (p_textureInstance)
 	{

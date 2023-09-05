@@ -10,11 +10,11 @@
 
 #include "Modules/UI/Plugins/IPlugin.h"
 
-#define TRY_GATHER(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) output = plugin->Gather();
-#define TRY_PROVIDE(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) plugin->Provide(output);
-#define TRY_NOTIFY_CHANGE(type)		if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) plugin->NotifyChange();
+#define TRY_GATHER(type, output)	if (auto plugin = GetPlugin<LittleEngine::UI::Plugins::DataDispatcher<type>>(); plugin) output = plugin->Gather();
+#define TRY_PROVIDE(type, output)	if (auto plugin = GetPlugin<LittleEngine::UI::Plugins::DataDispatcher<type>>(); plugin) plugin->Provide(output);
+#define TRY_NOTIFY_CHANGE(type)		if (auto plugin = GetPlugin<LittleEngine::UI::Plugins::DataDispatcher<type>>(); plugin) plugin->NotifyChange();
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
 	* Plugin that allow automatic data update of any DataWidget

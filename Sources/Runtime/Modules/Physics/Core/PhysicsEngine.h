@@ -14,10 +14,10 @@
 #include "Modules/Physics/Settings/PhysicsSettings.h"
 #include "Modules/Physics/Entities/RaycastHit.h"
 
-namespace OvPhysics::Core
+namespace LittleEngine::Physics::Core
 {
 	/**
-	* Main class of OvPhysics, it handles the creation of the physical world. It must be created
+	* Main class of LittleEngine::Physics, it handles the creation of the physical world. It must be created
 	* before any PhysicalObject to ensure PhysicalObject consideration
 	*/
 	class PhysicsEngine
@@ -42,18 +42,18 @@ namespace OvPhysics::Core
 		 * @param p_origin
 		 * @param p_end
 		 */
-		std::optional<Entities::RaycastHit> Raycast(OvMaths::FVector3 p_origin, OvMaths::FVector3 p_direction, float p_distance);
+		std::optional<Entities::RaycastHit> Raycast(LittleEngine::FVector3 p_origin, LittleEngine::FVector3 p_direction, float p_distance);
 
 		/**
 		* Defines the world gravity to apply
 		* @param p_gravity
 		*/
-		void SetGravity(const OvMaths::FVector3& p_gravity);
+		void SetGravity(const LittleEngine::FVector3& p_gravity);
 
 		/**
 		* Returns the current world gravity
 		*/
-		OvMaths::FVector3 GetGravity() const;
+		LittleEngine::FVector3 GetGravity() const;
 
 	private:
 		void PreUpdate();
@@ -61,8 +61,8 @@ namespace OvPhysics::Core
 
 		void ListenToPhysicalObjects();
 
-		void Consider(OvPhysics::Entities::PhysicalObject& p_toConsider);
-		void Unconsider(OvPhysics::Entities::PhysicalObject& p_toUnconsider);
+		void Consider(LittleEngine::Physics::Entities::PhysicalObject& p_toConsider);
+		void Unconsider(LittleEngine::Physics::Entities::PhysicalObject& p_toUnconsider);
 
 		void Consider(btRigidBody& p_toConsider);
 		void Unconsider(btRigidBody& p_toUnconsider);

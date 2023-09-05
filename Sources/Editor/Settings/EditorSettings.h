@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-namespace OvEditor::Settings
+namespace LittleEditor::Settings
 {
 	/**
 	* Accessible from anywhere editor settings
@@ -29,7 +29,7 @@ namespace OvEditor::Settings
 			/**
 			* Event called when the property value changes
 			*/
-			OvTools::Eventing::Event<T> OnValueChanged;
+			LittleEngine::Eventing::Event<T> OnValueChanged;
 
 			/**
 			* Assign a new value to the property

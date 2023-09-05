@@ -1,4 +1,4 @@
 #include "Core/Base/GlobalState.h"
 
-bool OvCore::GlobalState::IsPlaying = false;
-bool OvCore::GlobalState::IsEditorMode = false;
+bool LittleEngine::GlobalState::IsPlaying = false;
+bool LittleEngine::GlobalState::IsEditorMode = false;

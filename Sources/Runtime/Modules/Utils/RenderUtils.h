@@ -1,20 +1,20 @@
 #pragma once
 
-namespace OvCore::Resources
+namespace LittleEngine::Resources
 {
     class Material;
 }
-namespace OvCore::ECS
+namespace LittleEngine
 {
     class RenderUtils
     {
     private:
         static unsigned int _QuadVAO;
         static unsigned int _QuadVBO;
-        static std::vector<OvCore::Resources::Material*> _DebugMats;
-        static OvCore::Resources::Material*  GetOrCreateDebugQuadMat();
+        static std::vector<LittleEngine::Resources::Material*> _DebugMats;
+        static LittleEngine::Resources::Material*  GetOrCreateDebugQuadMat();
     public:
-        static void DrawDebugQuad(OvRendering::Resources::Texture* p_tex);
+        static void DrawDebugQuad(LittleEngine::Rendering::Resources::Texture* p_tex);
     };
 }
 

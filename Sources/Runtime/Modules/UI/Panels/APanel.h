@@ -11,7 +11,7 @@
 
 #include "Modules/UI/Internal/WidgetContainer.h"
 
-namespace OvUI::Panels
+namespace LittleEngine::UI::Panels
 {
 	/**
 	* A Panel is a component of a canvas. It is a sort of window in the UI

@@ -9,9 +9,9 @@
 #include "../Editor/Panels/AView.h"
 #include "../Editor/Core/CameraController.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class AViewControllable : public OvEditor::Panels::AView
+	class AViewControllable : public LittleEditor::Panels::AView
 	{
 	public:
 		/**
@@ -25,7 +25,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 			bool p_enableFocusInputs = false
 		);
 
@@ -38,9 +38,9 @@ namespace OvEditor::Panels
 		/**
 		* Returns the camera controller of the controllable view
 		*/
-		OvEditor::Core::CameraController& GetCameraController();
+		LittleEditor::Core::CameraController& GetCameraController();
 
 	protected:
-		OvEditor::Core::CameraController m_cameraController;
+		LittleEditor::Core::CameraController m_cameraController;
 	};
 }

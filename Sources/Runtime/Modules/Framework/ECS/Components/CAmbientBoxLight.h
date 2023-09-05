@@ -8,9 +8,9 @@
 
 #include "Modules/Framework/ECS/Components/CLight.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represents an ambient light with a box shape
@@ -22,7 +22,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CAmbientBoxLight(ECS::Actor& p_owner);
+		CAmbientBoxLight(Actor& p_owner);
 		CAmbientBoxLight() = default;
 		/**
 		* Returns the name of the component
@@ -32,13 +32,13 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the size of the box
 		*/
-		OvMaths::FVector3 GetSize() const;
+		LittleEngine::FVector3 GetSize() const;
 
 		/**
 		* Defines the size of the box
 		* @param p_size
 		*/
-		void SetSize(const OvMaths::FVector3& p_size);
+		void SetSize(const LittleEngine::FVector3& p_size);
 
 		/**
 		* Serialize the component
@@ -58,6 +58,6 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 	};
 }

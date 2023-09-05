@@ -9,7 +9,7 @@
 
 #include "Modules/UI/ImGui/imgui_internal.h"
 
-OvUI::Panels::PanelWindow::PanelWindow(const std::string& p_name, bool p_opened, const Settings::PanelWindowSettings& p_floatingPanelSettings) :
+LittleEngine::UI::Panels::PanelWindow::PanelWindow(const std::string& p_name, bool p_opened, const Settings::PanelWindowSettings& p_floatingPanelSettings) :
 	name(p_name),
 	resizable(p_floatingPanelSettings.resizable),
 	closable(p_floatingPanelSettings.closable),
@@ -28,7 +28,7 @@ OvUI::Panels::PanelWindow::PanelWindow(const std::string& p_name, bool p_opened,
 	autoSize = p_floatingPanelSettings.autoSize;
 }
 
-void OvUI::Panels::PanelWindow::Open()
+void LittleEngine::UI::Panels::PanelWindow::Open()
 {
 	if (!m_opened)
 	{
@@ -37,7 +37,7 @@ void OvUI::Panels::PanelWindow::Open()
 	}
 }
 
-void OvUI::Panels::PanelWindow::Close()
+void LittleEngine::UI::Panels::PanelWindow::Close()
 {
 	if (m_opened)
 	{
@@ -46,12 +46,12 @@ void OvUI::Panels::PanelWindow::Close()
 	}
 }
 
-void OvUI::Panels::PanelWindow::Focus()
+void LittleEngine::UI::Panels::PanelWindow::Focus()
 {
 	ImGui::SetWindowFocus((name + m_panelID).c_str());
 }
 
-void OvUI::Panels::PanelWindow::SetOpened(bool p_value)
+void LittleEngine::UI::Panels::PanelWindow::SetOpened(bool p_value)
 {
 	if (p_value != m_opened)
 	{
@@ -64,22 +64,22 @@ void OvUI::Panels::PanelWindow::SetOpened(bool p_value)
 	}
 }
 
-bool OvUI::Panels::PanelWindow::IsOpened() const
+bool LittleEngine::UI::Panels::PanelWindow::IsOpened() const
 {
 	return m_opened;
 }
 
-bool OvUI::Panels::PanelWindow::IsHovered() const
+bool LittleEngine::UI::Panels::PanelWindow::IsHovered() const
 {
 	return m_hovered;
 }
 
-bool OvUI::Panels::PanelWindow::IsFocused() const
+bool LittleEngine::UI::Panels::PanelWindow::IsFocused() const
 {
 	return m_focused;
 }
 
-bool OvUI::Panels::PanelWindow::IsAppearing() const
+bool LittleEngine::UI::Panels::PanelWindow::IsAppearing() const
 {
 	if (auto window = ImGui::FindWindowByName((name + GetPanelID()).c_str()); window)
 		return window->Appearing;
@@ -87,27 +87,27 @@ bool OvUI::Panels::PanelWindow::IsAppearing() const
 		return false;
 }
 
-void OvUI::Panels::PanelWindow::ScrollToBottom()
+void LittleEngine::UI::Panels::PanelWindow::ScrollToBottom()
 {
     m_mustScrollToBottom = true;
 }
 
-void OvUI::Panels::PanelWindow::ScrollToTop()
+void LittleEngine::UI::Panels::PanelWindow::ScrollToTop()
 {
     m_mustScrollToTop = true;
 }
 
-bool OvUI::Panels::PanelWindow::IsScrolledToBottom() const
+bool LittleEngine::UI::Panels::PanelWindow::IsScrolledToBottom() const
 {
     return m_scrolledToBottom;
 }
 
-bool OvUI::Panels::PanelWindow::IsScrolledToTop() const
+bool LittleEngine::UI::Panels::PanelWindow::IsScrolledToTop() const
 {
     return m_scrolledToTop;
 }
 
-void OvUI::Panels::PanelWindow::_Draw_Impl()
+void LittleEngine::UI::Panels::PanelWindow::_Draw_Impl()
 {
 	if (m_opened)
 	{

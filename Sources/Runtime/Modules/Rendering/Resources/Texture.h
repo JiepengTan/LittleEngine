@@ -13,8 +13,8 @@
 
 
 
-namespace OvRendering::Buffers { class ShadowmapBuffer; }
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Buffers { class ShadowmapBuffer; }
+namespace LittleEngine::Rendering::Resources
 {
 	namespace Loaders { class TextureLoader; }
 
@@ -24,7 +24,7 @@ namespace OvRendering::Resources
 	class Texture
 	{
 		friend class Loaders::TextureLoader;
-		friend class OvRendering::Buffers::ShadowmapBuffer;
+		friend class LittleEngine::Rendering::Buffers::ShadowmapBuffer;
 	public:
 		/**
 		* Bind the texture to the given slot

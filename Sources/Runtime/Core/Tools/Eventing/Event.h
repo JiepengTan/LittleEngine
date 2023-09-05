@@ -9,7 +9,7 @@
 #include <functional>
 
 
-namespace OvTools::Eventing
+namespace LittleEngine::Eventing
 {
 	/**
 	* The ID of a listener (Registered callback).

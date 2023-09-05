@@ -15,7 +15,7 @@
 #include "Modules/UI/Panels/APanel.h"
 #include "Modules/UI/Widgets/Menu/MenuList.h"
 
-namespace OvUI::Panels
+namespace LittleEngine::UI::Panels
 {
 	/**
 	* A simple panel that will be displayed on the top side of the canvas

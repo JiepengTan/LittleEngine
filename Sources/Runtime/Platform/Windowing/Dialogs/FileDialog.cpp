@@ -10,19 +10,19 @@
 
 #include "Platform/Windowing/Dialogs/FileDialog.h"
 
-OvWindowing::Dialogs::FileDialog::FileDialog(std::function<int(tagOFNA*)> p_callback, const std::string & p_dialogTitle) :
+LittleEngine::Windowing::Dialogs::FileDialog::FileDialog(std::function<int(tagOFNA*)> p_callback, const std::string & p_dialogTitle) :
 	m_callback(p_callback),
 	m_dialogTitle(p_dialogTitle),
 	m_initialDirectory("")
 {
 }
 
-void OvWindowing::Dialogs::FileDialog::SetInitialDirectory(const std::string & p_initialDirectory)
+void LittleEngine::Windowing::Dialogs::FileDialog::SetInitialDirectory(const std::string & p_initialDirectory)
 {
 	m_initialDirectory = p_initialDirectory;
 }
 
-void OvWindowing::Dialogs::FileDialog::Show(EExplorerFlags p_flags)
+void LittleEngine::Windowing::Dialogs::FileDialog::Show(EExplorerFlags p_flags)
 {
 	OPENFILENAME ofn;
 
@@ -58,32 +58,32 @@ void OvWindowing::Dialogs::FileDialog::Show(EExplorerFlags p_flags)
 	std::reverse(m_filename.begin(), m_filename.end());
 }
 
-bool OvWindowing::Dialogs::FileDialog::HasSucceeded() const
+bool LittleEngine::Windowing::Dialogs::FileDialog::HasSucceeded() const
 {
 	return m_succeeded;
 }
 
-std::string OvWindowing::Dialogs::FileDialog::GetSelectedFileName()
+std::string LittleEngine::Windowing::Dialogs::FileDialog::GetSelectedFileName()
 {
 	return m_filename;
 }
 
-std::string OvWindowing::Dialogs::FileDialog::GetSelectedFilePath()
+std::string LittleEngine::Windowing::Dialogs::FileDialog::GetSelectedFilePath()
 {
 	return m_filepath;
 }
 
-std::string OvWindowing::Dialogs::FileDialog::GetErrorInfo()
+std::string LittleEngine::Windowing::Dialogs::FileDialog::GetErrorInfo()
 {
 	return m_error;
 }
 
-bool OvWindowing::Dialogs::FileDialog::IsFileExisting() const
+bool LittleEngine::Windowing::Dialogs::FileDialog::IsFileExisting() const
 {
 	return std::filesystem::exists(m_filepath);
 }
 
-void OvWindowing::Dialogs::FileDialog::HandleError()
+void LittleEngine::Windowing::Dialogs::FileDialog::HandleError()
 {
 	switch (CommDlgExtendedError())
 	{

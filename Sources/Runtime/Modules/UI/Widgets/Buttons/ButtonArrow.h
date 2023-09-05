@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Button widget with an arrow image

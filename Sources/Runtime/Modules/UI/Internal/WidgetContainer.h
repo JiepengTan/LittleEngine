@@ -11,7 +11,7 @@
 #include "Modules/UI/Widgets/AWidget.h"
 #include "Modules/UI/Internal/EMemoryMode.h"
 
-namespace OvUI::Internal
+namespace LittleEngine::UI::Internal
 {
 	/**
 	* The base class for any widget container
@@ -73,10 +73,10 @@ namespace OvUI::Internal
 		/**
 		* Returns the widgets and their memory management mode
 		*/
-		std::vector<std::pair<OvUI::Widgets::AWidget*, Internal::EMemoryMode>>& GetWidgets();
+		std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>>& GetWidgets();
 
 	protected:
-		std::vector<std::pair<OvUI::Widgets::AWidget*, Internal::EMemoryMode>> m_widgets;
+		std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>> m_widgets;
         bool m_reversedDrawOrder = false;
 	};
 }

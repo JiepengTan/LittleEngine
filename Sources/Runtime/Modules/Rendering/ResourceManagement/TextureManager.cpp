@@ -9,40 +9,40 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-std::tuple<OvRendering::Settings::ETextureFilteringMode, OvRendering::Settings::ETextureFilteringMode, bool> GetAssetMetadata(const std::string& p_path)
+std::tuple<LittleEngine::Rendering::Settings::ETextureFilteringMode, LittleEngine::Rendering::Settings::ETextureFilteringMode, bool> GetAssetMetadata(const std::string& p_path)
 {
-	auto metaFile = OvTools::Filesystem::IniFile(p_path + ".meta");
+	auto metaFile = LittleEngine::Filesystem::IniFile(p_path + ".meta");
 
-	auto min = metaFile.GetOrDefault("MIN_FILTER", static_cast<int>(OvRendering::Settings::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
-	auto mag = metaFile.GetOrDefault("MAG_FILTER", static_cast<int>(OvRendering::Settings::ETextureFilteringMode::LINEAR));
+	auto min = metaFile.GetOrDefault("MIN_FILTER", static_cast<int>(LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
+	auto mag = metaFile.GetOrDefault("MAG_FILTER", static_cast<int>(LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR));
 	auto mipmap = metaFile.GetOrDefault("ENABLE_MIPMAPPING", true);
 
-	return { static_cast<OvRendering::Settings::ETextureFilteringMode>(min), static_cast<OvRendering::Settings::ETextureFilteringMode>(mag), mipmap };
+	return { static_cast<LittleEngine::Rendering::Settings::ETextureFilteringMode>(min), static_cast<LittleEngine::Rendering::Settings::ETextureFilteringMode>(mag), mipmap };
 }
 
-OvRendering::Resources::Texture* OvCore::ResourceManagement::TextureManager::CreateResource(const std::string & p_path)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::ResourceManagement::TextureManager::CreateResource(const std::string & p_path)
 {
 	std::string realPath = GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
-	OvRendering::Resources::Texture* texture = OvRendering::Resources::Loaders::TextureLoader::Create(realPath, min, mag, mipmap);
+	LittleEngine::Rendering::Resources::Texture* texture = LittleEngine::Rendering::Resources::Loaders::TextureLoader::Create(realPath, min, mag, mipmap);
 	if (texture)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(OvRendering::Resources::Texture, path)) = p_path; // Force the resource path to fit the given path
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(LittleEngine::Rendering::Resources::Texture, path)) = p_path; // Force the resource path to fit the given path
 
 	return texture;
 }
 
-void OvCore::ResourceManagement::TextureManager::DestroyResource(OvRendering::Resources::Texture* p_resource)
+void LittleEngine::ResourceManagement::TextureManager::DestroyResource(LittleEngine::Rendering::Resources::Texture* p_resource)
 {
-	OvRendering::Resources::Loaders::TextureLoader::Destroy(p_resource);
+	LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(p_resource);
 }
 
-void OvCore::ResourceManagement::TextureManager::ReloadResource(OvRendering::Resources::Texture* p_resource, const std::string& p_path)
+void LittleEngine::ResourceManagement::TextureManager::ReloadResource(LittleEngine::Rendering::Resources::Texture* p_resource, const std::string& p_path)
 {
 	std::string realPath = GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
-	OvRendering::Resources::Loaders::TextureLoader::Reload(*p_resource, realPath, min, mag, mipmap);
+	LittleEngine::Rendering::Resources::Loaders::TextureLoader::Reload(*p_resource, realPath, min, mag, mipmap);
 }

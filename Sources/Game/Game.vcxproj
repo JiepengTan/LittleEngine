@@ -82,7 +82,7 @@ EXIT /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Application.h" />
+    <ClInclude Include="Core\GameApp.h" />
     <ClInclude Include="Core\Context.h" />
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\GameRenderer.h" />
@@ -93,7 +93,7 @@ EXIT /B 0</Command>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Application.cpp" />
+    <ClCompile Include="Core\GameApp.cpp" />
     <ClCompile Include="Core\Context.cpp" />
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\GameRenderer.cpp" />

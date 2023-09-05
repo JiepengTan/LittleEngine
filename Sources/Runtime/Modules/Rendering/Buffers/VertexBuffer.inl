@@ -11,7 +11,7 @@
 
 #include "Modules/Rendering/Buffers/VertexBuffer.h"
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 	template <class T>
 	inline VertexBuffer<T>::VertexBuffer(void* p_data,size_t p_elementCount,size_t p_elemTypeSize)

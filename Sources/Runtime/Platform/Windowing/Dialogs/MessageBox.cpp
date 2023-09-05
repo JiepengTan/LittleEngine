@@ -10,7 +10,7 @@
 
 #undef MessageBox
 
-OvWindowing::Dialogs::MessageBox::MessageBox(std::string p_title, std::string p_message, EMessageType p_messageType, EButtonLayout p_buttonLayout, bool p_autoSpawn) :
+LittleEngine::Windowing::Dialogs::MessageBox::MessageBox(std::string p_title, std::string p_message, EMessageType p_messageType, EButtonLayout p_buttonLayout, bool p_autoSpawn) :
 	m_title(p_title),
 	m_message(p_message),
 	m_buttonLayout(p_buttonLayout),
@@ -20,12 +20,12 @@ OvWindowing::Dialogs::MessageBox::MessageBox(std::string p_title, std::string p_
 		Spawn();
 }
 
-const OvWindowing::Dialogs::MessageBox::EUserAction& OvWindowing::Dialogs::MessageBox::GetUserAction() const
+const LittleEngine::Windowing::Dialogs::MessageBox::EUserAction& LittleEngine::Windowing::Dialogs::MessageBox::GetUserAction() const
 {
 	return m_userResult;
 }
 
-void OvWindowing::Dialogs::MessageBox::Spawn()
+void LittleEngine::Windowing::Dialogs::MessageBox::Spawn()
 {
 	int msgboxID = MessageBoxA
 	(

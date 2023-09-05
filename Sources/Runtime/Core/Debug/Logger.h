@@ -81,7 +81,7 @@ namespace OvDebug
 		static void LogToHandlerMap(std::map<std::string, T>& p_map, const LogData& p_data, std::string p_id);
 
 	public:
-		static OvTools::Eventing::Event<const LogData&> LogEvent;
+		static LittleEngine::Eventing::Event<const LogData&> LogEvent;
 
 	private:
 		static std::map<std::string, ConsoleHandler>	CONSOLE_HANDLER_MAP;

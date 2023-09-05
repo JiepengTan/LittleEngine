@@ -3,7 +3,7 @@
 #include "{{headfile_name}}"
 {{/include_headfiles}}
 
-namespace OvCore::ECS::Components{
+namespace LittleEngine{
     {{#class_defines}}class {{class_name}};
     {{/class_defines}}
 namespace Reflection{
@@ -13,16 +13,16 @@ namespace Reflection{
         static const char* GetClassName(){ return "{{class_name}}";}
         static void* ConstructorWithJson(const Json& json_context){
             {{class_name}}* ret_instance= new {{class_name}};
-            OvCore::JsonSerializer::Read(json_context, *ret_instance);
+            LittleEngine::JsonSerializer::Read(json_context, *ret_instance);
             return ret_instance;
         }
         static Json WriteByName(void* instance){
-            return OvCore::JsonSerializer::Write(*({{class_name}}*)instance);
+            return LittleEngine::JsonSerializer::Write(*({{class_name}}*)instance);
         }
         // base class
-        static int Get{{class_name}}BaseClassReflectionInstanceList(OvCore::Reflection::ReflectionInstance* &out_list, void* instance){
+        static int Get{{class_name}}BaseClassReflectionInstanceList(LittleEngine::Reflection::ReflectionInstance* &out_list, void* instance){
             int count = {{class_base_class_size}};
-            {{#class_has_base}}out_list = new OvCore::Reflection::ReflectionInstance[count];
+            {{#class_has_base}}out_list = new LittleEngine::Reflection::ReflectionInstance[count];
             for (int i=0;i<count;++i){
             {{#class_base_class_defines}}
                out_list[i] = TypeMetaDef({{class_base_class_name}},static_cast<{{class_name}}*>(instance));
@@ -111,4 +111,4 @@ namespace TypeWrappersRegister{
 }//namespace TypeWrappersRegister
 
 }//namespace Reflection
-}//namespace OvCore::ECS::Components
+}//namespace LittleEngine

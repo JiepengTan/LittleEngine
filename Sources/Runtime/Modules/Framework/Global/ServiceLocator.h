@@ -11,9 +11,9 @@
 
 
 
-#define OVSERVICE(Type) OvCore::Global::ServiceLocator::Get<Type>()
+#define OVSERVICE(Type) LittleEngine::Global::ServiceLocator::Get<Type>()
 
-namespace OvCore::Global
+namespace LittleEngine::Global
 {
 	/**
 	* Provide a way to access to core services

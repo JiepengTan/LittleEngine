@@ -6,7 +6,7 @@
 
 #include "Core/Tools/Utils/String.h"
 
-bool OvTools::Utils::String::Replace(std::string & p_target, const std::string & p_from, const std::string & p_to)
+bool LittleEngine::Utils::String::Replace(std::string & p_target, const std::string & p_from, const std::string & p_to)
 {
 	size_t start_pos = p_target.find(p_from);
 
@@ -19,7 +19,7 @@ bool OvTools::Utils::String::Replace(std::string & p_target, const std::string &
 	return false;
 }
 
-void OvTools::Utils::String::ReplaceAll(std::string& p_target, const std::string& p_from, const std::string& p_to)
+void LittleEngine::Utils::String::ReplaceAll(std::string& p_target, const std::string& p_from, const std::string& p_to)
 {
 	if (p_from.empty()) return;
 
@@ -31,7 +31,7 @@ void OvTools::Utils::String::ReplaceAll(std::string& p_target, const std::string
 	}
 }
 
-std::string OvTools::Utils::String::GenerateUnique(const std::string& p_source, std::function<bool(std::string)> p_isAvailable)
+std::string LittleEngine::Utils::String::GenerateUnique(const std::string& p_source, std::function<bool(std::string)> p_isAvailable)
 {
     auto suffixlessSource = p_source;
 

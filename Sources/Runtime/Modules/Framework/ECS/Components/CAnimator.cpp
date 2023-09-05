@@ -17,19 +17,19 @@
 
 const int INIT_BONE_COUNT = 100;
 
-OvCore::ECS::Components::CAnimator::CAnimator(ECS::Actor& p_owner) :
+LittleEngine::CAnimator::CAnimator(Actor& p_owner) :
     AComponent(p_owner), m_currentTime(0), m_showDebugBones(false)
 {
     m_curAnim = nullptr;
     m_finalBoneMatrices.reserve(INIT_BONE_COUNT);
 }
 
-std::string OvCore::ECS::Components::CAnimator::GetName()
+std::string LittleEngine::CAnimator::GetName()
 {
     return "Animator";
 }
 
-void OvCore::ECS::Components::CAnimator::UnloadAnimations()
+void LittleEngine::CAnimator::UnloadAnimations()
 {
     for (auto bone : m_debugBones)
     {
@@ -47,39 +47,39 @@ void OvCore::ECS::Components::CAnimator::UnloadAnimations()
     m_curAnim = nullptr;
 }
 
-void OvCore::ECS::Components::CAnimator::LoadAnimations()
+void LittleEngine::CAnimator::LoadAnimations()
 {
     if (m_curAnim != nullptr) return;
-    //owner->transform.SetLocalScale(OvMaths::FVector3::One*0.01f);
+    //owner->transform.SetLocalScale(LittleEngine::FVector3::One*0.01f);
     auto mesh = owner->GetComponent<CModelRenderer>();
     if (mesh == nullptr) return;
     auto model = mesh->GetModel();
     if (model == nullptr) return;
-    auto& mgr = OvCore::Global::ServiceLocator::Get
-        <OvCore::ResourceManagement::AnimationManager>();
+    auto& mgr = LittleEngine::Global::ServiceLocator::Get
+        <LittleEngine::ResourceManagement::AnimationManager>();
     mgr.currentModel = model;
     auto anim = mgr.GetResource(m_animPath);
     m_curAnim = anim;
     for (int i = 0; i < m_curAnim->GetBoneCount(); i++)
-        m_finalBoneMatrices.push_back(OvMaths::FMatrix4::Identity);
+        m_finalBoneMatrices.push_back(LittleEngine::FMatrix4::Identity);
     if (anim && m_showDebugBones)
     {
         m_debugBoneRoot  = ActorUtils::CreateEmptyActor(owner, "BoneRoot");
-        CreateBoneActors(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
+        CreateBoneActors(m_curAnim->GetSkeletonRoot(), LittleEngine::FMatrix4::Identity);
         OVLOG("Creaet Actor Done ");
     }
 }
 
-void OvCore::ECS::Components::CAnimator::OnStart()
+void LittleEngine::CAnimator::OnStart()
 {
     LoadAnimations();
 }
 
-void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,
-                                                          OvMaths::FMatrix4 parentTransform)
+void LittleEngine::CAnimator::CreateBoneActors(const LittleEngine::Rendering::Resources::SkeletonBone& node,
+                                                          LittleEngine::FMatrix4 parentTransform)
 {
     std::string nodeName = node.name;
-    OvMaths::FMatrix4 globalTransformation = parentTransform * node.transformation;
+    LittleEngine::FMatrix4 globalTransformation = parentTransform * node.transformation;
     auto& boneInfoMap = *m_curAnim->GetBoneInfoMap();
     auto boneActor = ActorUtils::CreateCube(m_debugBoneRoot, nodeName);
     m_debugBones.push_back(boneActor);
@@ -87,30 +87,30 @@ void OvCore::ECS::Components::CAnimator::CreateBoneActors(const OvRendering::Res
     if (boneInfoMap.find(nodeName) != boneInfoMap.end())
     {
         id = boneInfoMap[nodeName].id;
-        const OvMaths::FMatrix4 offset = boneInfoMap[nodeName].offset;
+        const LittleEngine::FMatrix4 offset = boneInfoMap[nodeName].offset;
         m_finalBoneMatrices[id] = globalTransformation * offset;
         boneActor->transform.SetLocalMatrix(m_finalBoneMatrices[id]);
     }
-    boneActor->transform.SetLocalScale(OvMaths::FVector3::One * boneDrawSize);
+    boneActor->transform.SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
     m_boneId.push_back(id);
     for (int i = 0; i < node.childrenCount; i++)
         CreateBoneActors(node.children[i], globalTransformation);
 }
 
-void OvCore::ECS::Components::CAnimator::OnDestroy()
+void LittleEngine::CAnimator::OnDestroy()
 {
     UnloadAnimations();
 }
 
-void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
+void LittleEngine::CAnimator::UpVertexBufferCPU()
 {
     PROFILER_SPY("Animator::UpVertexBufferCPU");
     auto model = owner->GetComponent<CModelRenderer>()->GetModel();
     auto& boneMatrixs = m_finalBoneMatrices;
-    auto& structInfos = OvRendering::Geometry::VertexStructInfos;
-    auto& positionStructInfo = structInfos[(int)OvRendering::Geometry::EVertexDataFlagsIndex::position];
-    auto& boneIdStructInfo = structInfos[(int)OvRendering::Geometry::EVertexDataFlagsIndex::boneId];
-    auto& boneWeightStructInfo = structInfos[(int)OvRendering::Geometry::EVertexDataFlagsIndex::boneWeight];
+    auto& structInfos = LittleEngine::Rendering::Geometry::VertexStructInfos;
+    auto& positionStructInfo = structInfos[(int)LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::position];
+    auto& boneIdStructInfo = structInfos[(int)LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::boneId];
+    auto& boneWeightStructInfo = structInfos[(int)LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::boneWeight];
     auto elemSize = positionStructInfo.MemorySize();
     int boneCount = m_curAnim->GetBoneCount();
     for (auto mesh : model->GetMeshes())
@@ -131,8 +131,8 @@ void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
             int boneIdOffset = i * boneIdStructInfo.elemCount;
             int boneWeightOffset = i * boneWeightStructInfo.elemCount;
 
-            OvMaths::FVector3 rawPos;
-            OvMaths::FVector3 finalPos;
+            LittleEngine::FVector3 rawPos;
+            LittleEngine::FVector3 finalPos;
             // get raw local pos
             memcpy(&rawPos, rawPositions + vertexOffset, elemSize);
             // apply animation
@@ -150,7 +150,7 @@ void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
                         finalPos = rawPos;
                         break;
                     }
-                    finalPos += OvMaths::FMatrix4::MultiplyPoint(boneMatrixs[boneId], rawPos) * weight;
+                    finalPos += LittleEngine::FMatrix4::MultiplyPoint(boneMatrixs[boneId], rawPos) * weight;
                 }
             }
             else
@@ -165,7 +165,7 @@ void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
     }
 }
 
-void OvCore::ECS::Components::CAnimator::UpdateBonesGameObjects()
+void LittleEngine::CAnimator::UpdateBonesGameObjects()
 {
     PROFILER_SPY("Animator::UpdateBonesGameObjects");
     if(m_showDebugBones)
@@ -176,23 +176,23 @@ void OvCore::ECS::Components::CAnimator::UpdateBonesGameObjects()
             int i = item.second.id;
             if(i< m_boneId.size()&& m_boneId[i]>0)
             {
-                auto local2Model = OvMaths::FMatrix4::Inverse(item.second.offset);
-                auto modelPos = local2Model * OvMaths::FVector4(0,0,0,1);
+                auto local2Model = LittleEngine::FMatrix4::Inverse(item.second.offset);
+                auto modelPos = local2Model * LittleEngine::FVector4(0,0,0,1);
                 auto finalPos = m_finalBoneMatrices[m_boneId[i]] * modelPos;
-                m_debugBones[i]->transform.SetLocalPosition(OvMaths::FVector3(finalPos.x,finalPos.y,finalPos.z));
-                m_debugBones[i]->transform.SetLocalScale(OvMaths::FVector3::One * boneDrawSize);
+                m_debugBones[i]->transform.SetLocalPosition(LittleEngine::FVector3(finalPos.x,finalPos.y,finalPos.z));
+                m_debugBones[i]->transform.SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
             }
         }
     }
 }
 
-void OvCore::ECS::Components::CAnimator::UpdateBoneMatrix()
+void LittleEngine::CAnimator::UpdateBoneMatrix()
 {
     PROFILER_SPY("Animator::UpdateBoneMatrix");
-    CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
+    CalculateBoneTransform(m_curAnim->GetSkeletonRoot(), LittleEngine::FMatrix4::Identity);
 }
 
-void OvCore::ECS::Components::CAnimator::DumpAnimationLog()
+void LittleEngine::CAnimator::DumpAnimationLog()
 {
     int idx = 0;
     for (auto mat : m_finalBoneMatrices)
@@ -203,7 +203,7 @@ void OvCore::ECS::Components::CAnimator::DumpAnimationLog()
     DebugUtil::Flush();
 }
 
-void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
+void LittleEngine::CAnimator::OnUpdate(float dt)
 {
     PROFILER_SPY("Animator");
     if (m_curAnim)
@@ -218,25 +218,25 @@ void OvCore::ECS::Components::CAnimator::OnUpdate(float dt)
     }
 }
 
-void OvCore::ECS::Components::CAnimator::PlayAnimation(OvRendering::Resources::Animation* pAnimation)
+void LittleEngine::CAnimator::PlayAnimation(LittleEngine::Rendering::Resources::Animation* pAnimation)
 {
     m_curAnim = pAnimation;
     m_currentTime = 0.0f;
 }
 
-void OvCore::ECS::Components::CAnimator::CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node,
-                                                                const OvMaths::FMatrix4& parentTransform)
+void LittleEngine::CAnimator::CalculateBoneTransform(const LittleEngine::Rendering::Resources::SkeletonBone& node,
+                                                                const LittleEngine::FMatrix4& parentTransform)
 {
     std::string nodeName = node.name;
-    OvMaths::FMatrix4 nodeTransform = node.transformation;
-    OvRendering::Resources::BoneFrames* bone = m_curAnim->FindBone(nodeName);
+    LittleEngine::FMatrix4 nodeTransform = node.transformation;
+    LittleEngine::Rendering::Resources::BoneFrames* bone = m_curAnim->FindBone(nodeName);
     if (bone)
     {
         bone->Update(m_currentTime);
         nodeTransform = bone->GetLocalTransform();
     }
 
-    OvMaths::FMatrix4 globalTransformation = parentTransform * nodeTransform;
+    LittleEngine::FMatrix4 globalTransformation = parentTransform * nodeTransform;
 
     DebugUtil::Dump(" " + nodeName + " :" + (bone == nullptr ? "" : std::to_string(bone->GetBoneID())) + "=");
     DebugUtil::Dump(globalTransformation, true);
@@ -245,30 +245,30 @@ void OvCore::ECS::Components::CAnimator::CalculateBoneTransform(const OvRenderin
     if (boneInfoMap.find(nodeName) != boneInfoMap.end())
     {
         const int index = boneInfoMap[nodeName].id;
-        const OvMaths::FMatrix4 offset = boneInfoMap[nodeName].offset;
+        const LittleEngine::FMatrix4 offset = boneInfoMap[nodeName].offset;
         m_finalBoneMatrices[index] = globalTransformation * offset;
     }
     for (int i = 0; i < node.childrenCount; i++)
         CalculateBoneTransform(node.children[i], globalTransformation);
 }
 
-std::vector<OvMaths::FMatrix4>* OvCore::ECS::Components::CAnimator::GetFinalBoneMatrices()
+std::vector<LittleEngine::FMatrix4>* LittleEngine::CAnimator::GetFinalBoneMatrices()
 {
     return &m_finalBoneMatrices;
 }
 
 
-void OvCore::ECS::Components::CAnimator::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAnimator::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-    OvCore::Serializer::SerializeString(p_doc, p_node, "animPath", m_animPath);
+    LittleEngine::Serializer::SerializeString(p_doc, p_node, "animPath", m_animPath);
 }
 
-void OvCore::ECS::Components::CAnimator::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAnimator::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-    OvCore::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
+    LittleEngine::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
 }
 
-void OvCore::ECS::Components::CAnimator::ToggleBones()
+void LittleEngine::CAnimator::ToggleBones()
 {
     OVLOG("ToggleBones " + std::to_string(m_curAnim == nullptr));
     if (!m_curAnim)
@@ -281,9 +281,9 @@ void OvCore::ECS::Components::CAnimator::ToggleBones()
     }
 }
 
-void OvCore::ECS::Components::CAnimator::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAnimator::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
-    using namespace OvCore::Helpers;
+    using namespace LittleEngine::Helpers;
     GUIDrawer::DrawBoolean(p_root, "IsUpdateInEdit", IsUpdateInEdit);
     GUIDrawer::DrawAsset(p_root, "animPath", m_animPath);
     GUIDrawer::DrawScalar<float>(p_root, "currentTime", m_currentTime, 0.005f, GUIDrawer::_MIN_FLOAT,
@@ -291,6 +291,6 @@ void OvCore::ECS::Components::CAnimator::OnInspector(OvUI::Internal::WidgetConta
     GUIDrawer::DrawBoolean(p_root, "showDebugBones", m_showDebugBones);
     GUIDrawer::DrawScalar(p_root, "boneDrawSize", boneDrawSize);
 
-    auto& btn = p_root.CreateWidget<OvUI::Widgets::Buttons::Button>("CreateBones");
-    btn.ClickedEvent += std::bind(&OvCore::ECS::Components::CAnimator::ToggleBones, this);
+    auto& btn = p_root.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("CreateBones");
+    btn.ClickedEvent += std::bind(&LittleEngine::CAnimator::ToggleBones, this);
 }

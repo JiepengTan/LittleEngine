@@ -18,9 +18,9 @@
 #include "Modules/Audio/Tracking/SoundTracker.h"
 #include "Modules/Audio/Resources/Sound.h"
 
-namespace OvAudio::Core { class AudioPlayer; }
+namespace LittleEngine::Audio::Core { class AudioPlayer; }
 
-namespace OvAudio::Entities
+namespace LittleEngine::Audio::Entities
 {
 	/**
 	* Wrap Irrklang ISound
@@ -39,7 +39,7 @@ namespace OvAudio::Entities
 		* @param p_audioPlayer
 		* @param p_transform
 		*/
-		AudioSource(Core::AudioPlayer& p_audioPlayer, OvMaths::FTransform& p_transform);
+		AudioSource(Core::AudioPlayer& p_audioPlayer, LittleEngine::FTransform& p_transform);
 
 		/**
 		* AudioSource destructor
@@ -167,8 +167,8 @@ namespace OvAudio::Entities
 		void Setup();
 
 	public:
-		static OvTools::Eventing::Event<AudioSource&> CreatedEvent;
-		static OvTools::Eventing::Event<AudioSource&> DestroyedEvent;
+		static LittleEngine::Eventing::Event<AudioSource&> CreatedEvent;
+		static LittleEngine::Eventing::Event<AudioSource&> DestroyedEvent;
 
 	private:
 		Core::AudioPlayer& m_audioPlayer;
@@ -184,7 +184,7 @@ namespace OvAudio::Entities
 		float	m_attenuationThreshold	= 1.0f;
 
 		/* Transform stuff */
-		OvMaths::FTransform* const		m_transform;
+		LittleEngine::FTransform* const		m_transform;
 		const bool						m_internalTransform;
 	};
 }

@@ -61,9 +61,9 @@ void NormalizePlane(float frustum[6][4], int side)
 /////
 ///////////////////////////////// CALCULATE FRUSTUM \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-void OvRendering::Data::Frustum::CalculateFrustum(const OvMaths::FMatrix4& p_viewProjection)
+void LittleEngine::Rendering::Data::Frustum::CalculateFrustum(const LittleEngine::FMatrix4& p_viewProjection)
 {
-	auto columnMajorViewProjection = OvMaths::FMatrix4::Transpose(p_viewProjection);
+	auto columnMajorViewProjection = LittleEngine::FMatrix4::Transpose(p_viewProjection);
 	float const* clip = columnMajorViewProjection.data;
 
 	// Now we actually want to get the sides of the frustum.  To do this we take
@@ -138,7 +138,7 @@ void OvRendering::Data::Frustum::CalculateFrustum(const OvMaths::FMatrix4& p_vie
 /////
 ///////////////////////////////// POINT IN FRUSTUM \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool OvRendering::Data::Frustum::PointInFrustum(float x, float y, float z) const
+bool LittleEngine::Rendering::Data::Frustum::PointInFrustum(float x, float y, float z) const
 {
 	// If you remember the plane equation (A*x + B*y + C*z + D = 0), then the rest
 	// of this code should be quite obvious and easy to figure out yourself.
@@ -178,7 +178,7 @@ bool OvRendering::Data::Frustum::PointInFrustum(float x, float y, float z) const
 /////
 ///////////////////////////////// SPHERE IN FRUSTUM \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool OvRendering::Data::Frustum::SphereInFrustum(float x, float y, float z, float radius) const
+bool LittleEngine::Rendering::Data::Frustum::SphereInFrustum(float x, float y, float z, float radius) const
 {
 	// Now this function is almost identical to the PointInFrustum(), except we
 	// now have to deal with a radius around the point.  The point is the center of
@@ -212,7 +212,7 @@ bool OvRendering::Data::Frustum::SphereInFrustum(float x, float y, float z, floa
 /////
 ///////////////////////////////// CUBE IN FRUSTUM \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool OvRendering::Data::Frustum::CubeInFrustum(float x, float y, float z, float size) const
+bool LittleEngine::Rendering::Data::Frustum::CubeInFrustum(float x, float y, float z, float size) const
 {
 	// This test is a bit more work, but not too much more complicated.
 	// Basically, what is going on is, that we are given the center of the cube,
@@ -251,7 +251,7 @@ bool OvRendering::Data::Frustum::CubeInFrustum(float x, float y, float z, float 
 	return true;
 }
 
-bool OvRendering::Data::Frustum::BoundingSphereInFrustum(const OvRendering::Geometry::BoundingSphere& p_boundingSphere, const OvMaths::FTransform& p_transform) const
+bool LittleEngine::Rendering::Data::Frustum::BoundingSphereInFrustum(const LittleEngine::Rendering::Geometry::BoundingSphere& p_boundingSphere, const LittleEngine::FTransform& p_transform) const
 {
 	const auto& position = p_transform.GetWorldPosition();
 	const auto& rotation = p_transform.GetWorldRotation();
@@ -259,19 +259,19 @@ bool OvRendering::Data::Frustum::BoundingSphereInFrustum(const OvRendering::Geom
 
 	float maxScale = std::max(std::max(std::max(scale.x, scale.y), scale.z), 0.0f);
 	float scaledRadius = p_boundingSphere.radius * maxScale;
-	auto sphereOffset = OvMaths::FQuaternion::RotatePoint(p_boundingSphere.position, rotation) * maxScale;
+	auto sphereOffset = LittleEngine::FQuaternion::RotatePoint(p_boundingSphere.position, rotation) * maxScale;
 
-	OvMaths::FVector3 worldCenter = position + sphereOffset;
+	LittleEngine::FVector3 worldCenter = position + sphereOffset;
 
 	return SphereInFrustum(worldCenter.x, worldCenter.y, worldCenter.z, scaledRadius);
 }
 
-std::array<float, 4> OvRendering::Data::Frustum::GetNearPlane() const
+std::array<float, 4> LittleEngine::Rendering::Data::Frustum::GetNearPlane() const
 {
 	return { m_frustum[FRONT][0], m_frustum[FRONT][1], m_frustum[FRONT][2], m_frustum[FRONT][3] };
 }
 
-std::array<float, 4> OvRendering::Data::Frustum::GetFarPlane() const
+std::array<float, 4> LittleEngine::Rendering::Data::Frustum::GetFarPlane() const
 {
 	return { m_frustum[BACK][0], m_frustum[BACK][1], m_frustum[BACK][2], m_frustum[BACK][3] };
 }

@@ -15,9 +15,9 @@
 
 #include "Core/Tools/Utils/PathParser.h"
 
-std::string OvRendering::Resources::Loaders::ShaderLoader::__FILE_TRACE;
+std::string LittleEngine::Rendering::Resources::Loaders::ShaderLoader::__FILE_TRACE;
 
-OvRendering::Resources::Shader* OvRendering::Resources::Loaders::ShaderLoader::Create(const std::string& p_filePath)
+LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Create(const std::string& p_filePath)
 {
 	__FILE_TRACE = p_filePath;
 
@@ -31,7 +31,7 @@ OvRendering::Resources::Shader* OvRendering::Resources::Loaders::ShaderLoader::C
 	return nullptr;
 }
 
-OvRendering::Resources::Shader* OvRendering::Resources::Loaders::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
 {
 	uint32_t programID = CreateProgram(p_vertexShader, p_fragmentShader);
 
@@ -41,7 +41,7 @@ OvRendering::Resources::Shader* OvRendering::Resources::Loaders::ShaderLoader::C
 	return nullptr;
 }
 
-void OvRendering::Resources::Loaders::ShaderLoader::Recompile(Shader& p_shader, const std::string& p_filePath)
+void LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(Shader& p_shader, const std::string& p_filePath)
 {
 	__FILE_TRACE = p_filePath;
 
@@ -71,7 +71,7 @@ void OvRendering::Resources::Loaders::ShaderLoader::Recompile(Shader& p_shader, 
 	}
 }
 
-bool OvRendering::Resources::Loaders::ShaderLoader::Destroy(Shader*& p_shader)
+bool LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(Shader*& p_shader)
 {
 	if (p_shader)
 	{
@@ -99,7 +99,7 @@ void ReadFileAndHandleIncludes(std::stringstream& output, std::string p_filepath
 		if (lineSize > includePrefixSize && line.find(INCLUDE_PREFIX) != std::string::npos)
 		{
 			std::string toIncludeFilePath = line.substr(includePrefixSize + 1, lineSize - includePrefixSize - 2);
-			std::string fullPath = OvTools::Utils::PathParser::GetContainingFolder(p_filepath) + toIncludeFilePath;
+			std::string fullPath = LittleEngine::Utils::PathParser::GetContainingFolder(p_filepath) + toIncludeFilePath;
 			ReadFileAndHandleIncludes(output, fullPath);
 		}
 		else
@@ -109,7 +109,7 @@ void ReadFileAndHandleIncludes(std::stringstream& output, std::string p_filepath
 	}
 }
 
-std::pair<std::string, std::string> OvRendering::Resources::Loaders::ShaderLoader::ParseShader(const std::string& p_filePath)
+std::pair<std::string, std::string> LittleEngine::Rendering::Resources::Loaders::ShaderLoader::ParseShader(const std::string& p_filePath)
 {
 	std::stringstream source;
 	ReadFileAndHandleIncludes(source, p_filePath);
@@ -142,7 +142,7 @@ std::pair<std::string, std::string> OvRendering::Resources::Loaders::ShaderLoade
 	};
 }
 
-uint32_t OvRendering::Resources::Loaders::ShaderLoader::CreateProgram(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateProgram(const std::string& p_vertexShader, const std::string& p_fragmentShader)
 {
 	const uint32_t program = glCreateProgram();
 
@@ -181,7 +181,7 @@ uint32_t OvRendering::Resources::Loaders::ShaderLoader::CreateProgram(const std:
 	return program;
 }
 
-uint32_t OvRendering::Resources::Loaders::ShaderLoader::CompileShader(uint32_t p_type, const std::string& p_source)
+uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CompileShader(uint32_t p_type, const std::string& p_source)
 {
 	const uint32_t id = glCreateShader(p_type);
 

@@ -19,9 +19,9 @@
 #include "../Editor/Panels/Hierarchy.h"
 #include "../Editor/Panels/AssetBrowser.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class Inspector : public OvUI::Panels::PanelWindow
+	class Inspector : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -34,7 +34,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -46,7 +46,7 @@ namespace OvEditor::Panels
 		* Focus the given actor
 		* @param p_target
 		*/
-		void FocusActor(OvCore::ECS::Actor& p_target);
+		void FocusActor(LittleEngine::Actor& p_target);
 
 		/**
 		* Unfocus the currently targeted actor
@@ -61,17 +61,17 @@ namespace OvEditor::Panels
 		/**
 		* Returns the currently selected actor
 		*/
-		OvCore::ECS::Actor* GetTargetActor() const;
+		LittleEngine::Actor* GetTargetActor() const;
 
 		/**
 		* Create the actor inspector for the given actor
 		*/
-		void CreateActorInspector(OvCore::ECS::Actor& p_target);
+		void CreateActorInspector(LittleEngine::Actor& p_target);
 
 		/**
 		* Draw the given component in inspector
 		*/
-		void DrawComponent(OvCore::ECS::Components::AComponent& p_component);
+		void DrawComponent(LittleEngine::AComponent& p_component);
 
 		/**
 		* Refresh the inspector
@@ -79,11 +79,11 @@ namespace OvEditor::Panels
 		void Refresh();
 
 	private:
-		OvCore::ECS::Actor* m_targetActor = nullptr;
-		OvUI::Widgets::Layout::Group* m_actorInfo;
-		OvUI::Widgets::Layout::Group* m_inspectorHeader;
-		OvUI::Widgets::Selection::ComboBox* m_componentSelectorWidget;
-        OvUI::Widgets::InputFields::InputText* m_scriptSelectorWidget;
+		LittleEngine::Actor* m_targetActor = nullptr;
+		LittleEngine::UI::Widgets::Layout::Group* m_actorInfo;
+		LittleEngine::UI::Widgets::Layout::Group* m_inspectorHeader;
+		LittleEngine::UI::Widgets::Selection::ComboBox* m_componentSelectorWidget;
+        LittleEngine::UI::Widgets::InputFields::InputText* m_scriptSelectorWidget;
 
 		uint64_t m_componentAddedListener	= 0;
 		uint64_t m_componentRemovedListener = 0;

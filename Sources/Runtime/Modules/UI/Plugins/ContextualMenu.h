@@ -11,7 +11,7 @@
 #include "Modules/UI/Widgets/Menu/MenuList.h"
 #include "Modules/UI/Widgets/Menu/MenuItem.h"
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
 	* A simple plugin that will show a contextual menu on right click

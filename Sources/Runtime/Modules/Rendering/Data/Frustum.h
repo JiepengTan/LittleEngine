@@ -14,7 +14,7 @@
 
 #include "Modules/Rendering/Geometry/BoundingSphere.h"
 
-namespace OvRendering::Data
+namespace LittleEngine::Rendering::Data
 {
 	/**
 	* Mathematic representation of a 3D frustum
@@ -26,7 +26,7 @@ namespace OvRendering::Data
 		* Update frustum values
 		* @param p_viewProjection
 		*/ 
-		void CalculateFrustum(const OvMaths::FMatrix4& p_viewProjection);
+		void CalculateFrustum(const LittleEngine::FMatrix4& p_viewProjection);
 
 		/**
 		* Returns true if the given point is in frustum
@@ -59,7 +59,7 @@ namespace OvRendering::Data
 		* @param p_boundingSphere
 		* @param p_transform
 		*/
-		bool BoundingSphereInFrustum(const OvRendering::Geometry::BoundingSphere& p_boundingSphere, const OvMaths::FTransform& p_transform) const;
+		bool BoundingSphereInFrustum(const LittleEngine::Rendering::Geometry::BoundingSphere& p_boundingSphere, const LittleEngine::FTransform& p_transform) const;
 
 		/**
 		* Returns the near plane

@@ -9,15 +9,15 @@
 #include "Core/CoreInclude.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
 
-using namespace OvUI::Panels;
-using namespace OvUI::Widgets;
-using namespace OvUI::Types;
+using namespace LittleEngine::UI::Panels;
+using namespace LittleEngine::UI::Widgets;
+using namespace LittleEngine::UI::Types;
 
-OvEditor::Panels::Profiler::Profiler
+LittleEditor::Panels::Profiler::Profiler
 (
 	const std::string& p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+	const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 	float p_frequency
 ) :
 	PanelWindow(p_title, p_opened, p_windowSettings),
@@ -38,14 +38,14 @@ OvEditor::Panels::Profiler::Profiler
 	};
 	m_elapsedFramesText = &CreateWidget<Texts::TextColored>("", Color(1.f, 0.8f, 0.01f, 1));
 	m_elapsedTimeText = &CreateWidget<Texts::TextColored>("", Color(1.f, 0.8f, 0.01f, 1));
-	m_separator = &CreateWidget<OvUI::Widgets::Visual::Separator>();
+	m_separator = &CreateWidget<LittleEngine::UI::Widgets::Visual::Separator>();
 	m_actionList = &CreateWidget<Layout::Columns<5>>();
 	m_actionList->widths = { 300.f, 100.f, 100.f, 100.f, 200.f };
 
 	Enable(false, true);
 }
 
-void OvEditor::Panels::Profiler::Update(float p_deltaTime)
+void LittleEditor::Panels::Profiler::Update(float p_deltaTime)
 {
 	m_timer += p_deltaTime;
 	m_fpsTimer += p_deltaTime;
@@ -64,7 +64,7 @@ void OvEditor::Panels::Profiler::Update(float p_deltaTime)
 		{
 			if (m_profilingMode == EProfilingMode::DEFAULT)
 			{
-				OvAnalytics::Profiling::ProfilerReport report = m_profiler.GenerateReport();
+				LittleEngine::Analytics::Profiling::ProfilerReport report = m_profiler.GenerateReport();
 				m_profiler.ClearHistory();
 				m_actionList->RemoveAllWidgets();
 
@@ -93,7 +93,7 @@ void OvEditor::Panels::Profiler::Update(float p_deltaTime)
 	}
 }
 
-void OvEditor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
+void LittleEditor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
 {
 	if (p_value)
 	{
@@ -116,7 +116,7 @@ void OvEditor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
 	m_separator->enabled = p_value;
 }
 
-OvUI::Types::Color OvEditor::Panels::Profiler::CalculateActionColor(double p_percentage) const
+LittleEngine::UI::Types::Color LittleEditor::Panels::Profiler::CalculateActionColor(double p_percentage) const
 {
 	if (p_percentage <= 25.0f)		return { 0.0f, 1.0f, 0.0f, 1.0f };
 	else if (p_percentage <= 50.0f) return { 1.0f, 1.0f, 0.0f, 1.0f };
@@ -124,7 +124,7 @@ OvUI::Types::Color OvEditor::Panels::Profiler::CalculateActionColor(double p_per
 	else							return { 1.0f, 0.0f, 0.0f, 1.0f };
 }
 
-std::string OvEditor::Panels::Profiler::GenerateActionString(OvAnalytics::Profiling::ProfilerReport::Action & p_action)
+std::string LittleEditor::Panels::Profiler::GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action & p_action)
 {
 	std::string result;
 

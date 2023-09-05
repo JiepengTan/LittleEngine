@@ -13,7 +13,7 @@
 #include "Modules/UI/Panels/APanelTransformable.h"
 #include "Modules/UI/Settings/PanelWindowSettings.h"
 
-namespace OvUI::Panels
+namespace LittleEngine::UI::Panels
 {
 	/**
 	* A PanelWindow is a panel that is localized and behave like a window (Movable, resizable...)
@@ -101,8 +101,8 @@ namespace OvUI::Panels
 	public:
 		std::string name;
 
-		OvMaths::FVector2 minSize = { 0.f, 0.f };
-		OvMaths::FVector2 maxSize = { 0.f, 0.f };
+		LittleEngine::FVector2 minSize = { 0.f, 0.f };
+		LittleEngine::FVector2 maxSize = { 0.f, 0.f };
 
 		bool resizable = true;
 		bool closable = false;
@@ -118,8 +118,8 @@ namespace OvUI::Panels
 		bool allowInputs = true;
 		bool titleBar = true;
 
-		OvTools::Eventing::Event<> OpenEvent;
-		OvTools::Eventing::Event<> CloseEvent;
+		LittleEngine::Eventing::Event<> OpenEvent;
+		LittleEngine::Eventing::Event<> CloseEvent;
 
 	private:
 		bool m_opened;

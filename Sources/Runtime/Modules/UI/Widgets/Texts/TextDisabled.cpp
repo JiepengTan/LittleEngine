@@ -6,12 +6,12 @@
 
 #include "Modules/UI/Widgets/Texts/TextDisabled.h"
 
-OvUI::Widgets::Texts::TextDisabled::TextDisabled(const std::string & p_content) :
+LittleEngine::UI::Widgets::Texts::TextDisabled::TextDisabled(const std::string & p_content) :
 	Text(p_content)
 {
 }
 
-void OvUI::Widgets::Texts::TextDisabled::_Draw_Impl()
+void LittleEngine::UI::Widgets::Texts::TextDisabled::_Draw_Impl()
 {
 	ImGui::TextDisabled(content.c_str());
 }

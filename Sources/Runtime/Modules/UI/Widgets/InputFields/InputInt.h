@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/InputFields/InputSingleScalar.h"
 
-namespace OvUI::Widgets::InputFields
+namespace LittleEngine::UI::Widgets::InputFields
 {
 	/**
 	* Input widget of type int

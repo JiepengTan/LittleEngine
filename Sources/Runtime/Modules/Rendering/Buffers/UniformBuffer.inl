@@ -10,7 +10,7 @@
 
 #include "Modules/Rendering/Buffers/UniformBuffer.h"
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 	template<typename T>
 	inline void UniformBuffer::SetSubData(const T& p_data, size_t p_offsetInOut)

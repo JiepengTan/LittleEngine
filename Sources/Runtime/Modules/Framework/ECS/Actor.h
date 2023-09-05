@@ -17,12 +17,12 @@
 #include "Modules/Framework/ECS/Components/Behaviour.h"
 #include "Modules/Framework/API/ISerializable.h"
 
-namespace OvCore::SceneSystem
+namespace LittleEngine::SceneSystem
 {
 	class Scene;
 }
 
-namespace OvCore::ECS
+namespace LittleEngine
 {
 	enum EActorAliveState
 	{
@@ -152,37 +152,37 @@ namespace OvCore::ECS
 		* Called when the actor enter in collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionEnter(Components::CPhysicalObject& p_otherObject);
+		void OnCollisionEnter(CPhysicalObject& p_otherObject);
 
 		/**
 		* Called when the actor is in collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionStay(Components::CPhysicalObject& p_otherObject);
+		void OnCollisionStay(CPhysicalObject& p_otherObject);
 
 		/**
 		* Called when the actor exit from collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionExit(Components::CPhysicalObject& p_otherObject);
+		void OnCollisionExit(CPhysicalObject& p_otherObject);
 
 		/**
 		* Called when the actor enter in trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerEnter(Components::CPhysicalObject& p_otherObject);
+		void OnTriggerEnter(CPhysicalObject& p_otherObject);
 
 		/**
 		* Called when the actor is in trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerStay(Components::CPhysicalObject& p_otherObject);
+		void OnTriggerStay(CPhysicalObject& p_otherObject);
 
 		/**
 		* Called when the actor exit from trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerExit(Components::CPhysicalObject& p_otherObject);
+		void OnTriggerExit(CPhysicalObject& p_otherObject);
 
 		/**
 		* Add a component to the actor (Or return the component if already existing)
@@ -201,7 +201,7 @@ namespace OvCore::ECS
 		* Remove the component by refering to the given instance
 		* @param p_component
 		*/
-		bool RemoveComponent(OvCore::ECS::Components::AComponent& p_component);
+		bool RemoveComponent(LittleEngine::AComponent& p_component);
 
 		/**
 		* Try to get the given component (Returns nullptr on failure)
@@ -212,7 +212,7 @@ namespace OvCore::ECS
 		/**
 		* Returns a reference to the vector of components
 		*/
-		std::vector<std::shared_ptr<Components::AComponent>>& GetComponents();
+		std::vector<std::shared_ptr<AComponent>>& GetComponents();
 
 
 		/**
@@ -311,14 +311,14 @@ namespace OvCore::ECS
 		
 	public:
 		/* Some events that are triggered when an action occur on the actor instance */
-		OvTools::Eventing::Event<Components::AComponent&>	ComponentAddedEvent;
-		OvTools::Eventing::Event<Components::AComponent&>	ComponentRemovedEvent;
+		LittleEngine::Eventing::Event<AComponent&>	ComponentAddedEvent;
+		LittleEngine::Eventing::Event<AComponent&>	ComponentRemovedEvent;
 
 		/* Some events that are triggered when an action occur on any actor */
-		static OvTools::Eventing::Event<Actor&>				DestroyedEvent;
-		static OvTools::Eventing::Event<Actor&>				CreatedEvent;
-		static OvTools::Eventing::Event<Actor&, Actor&>		AttachEvent;
-		static OvTools::Eventing::Event<Actor&>				DettachEvent;
+		static LittleEngine::Eventing::Event<Actor&>				DestroyedEvent;
+		static LittleEngine::Eventing::Event<Actor&>				CreatedEvent;
+		static LittleEngine::Eventing::Event<Actor&, Actor&>		AttachEvent;
+		static LittleEngine::Eventing::Event<Actor&>				DettachEvent;
 	private:
 		/* Settings */
 		std::string		m_name;
@@ -339,12 +339,12 @@ namespace OvCore::ECS
 		std::vector<Actor*>		m_children;
 
 		/* Actors components */
-		std::vector<std::shared_ptr<Components::AComponent>> m_components;
-		std::vector<std::shared_ptr<Components::AComponent>> m_tempComponents;
+		std::vector<std::shared_ptr<AComponent>> m_components;
+		std::vector<std::shared_ptr<AComponent>> m_tempComponents;
 	private:
-		std::vector<std::shared_ptr<Components::AComponent>>& GetComponentsCopy(std::vector<std::shared_ptr<Components::AComponent>>& comps);
+		std::vector<std::shared_ptr<AComponent>>& GetComponentsCopy(std::vector<std::shared_ptr<AComponent>>& comps);
 	public:
-		Components::CTransform& transform;
+		CTransform& transform;
 	};
 }
 

@@ -8,7 +8,7 @@
 
 
 
-namespace OvAnalytics::Hardware
+namespace LittleEngine::Analytics::Hardware
 {
 	/**
 	* HardwareReport contains a set of data calculated by HardwareInfo

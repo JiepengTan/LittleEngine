@@ -10,7 +10,7 @@
 #include <functional>
 
 
-namespace OvTools::Utils
+namespace LittleEngine::Utils
 {
 	/*
 	* Handle random numbers generation

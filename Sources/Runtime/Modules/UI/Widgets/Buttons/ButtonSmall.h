@@ -11,7 +11,7 @@
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 #include "Modules/UI/Types/Color.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Small button widget

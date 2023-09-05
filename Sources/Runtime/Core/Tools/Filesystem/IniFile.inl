@@ -10,7 +10,7 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-namespace OvTools::Filesystem
+namespace LittleEngine::Filesystem
 {
 	template<typename T>
 	inline T IniFile::Get(const std::string& p_key)

@@ -14,7 +14,7 @@
 
 #include "Modules/UI/Plugins/IPlugin.h"
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
 	* Represents a drag and drop target
@@ -75,9 +75,9 @@ namespace OvUI::Plugins
 
 	public:
 		std::string identifier;
-		OvTools::Eventing::Event<T> DataReceivedEvent;
-		OvTools::Eventing::Event<> HoverStartEvent;
-		OvTools::Eventing::Event<> HoverEndEvent;
+		LittleEngine::Eventing::Event<T> DataReceivedEvent;
+		LittleEngine::Eventing::Event<> HoverStartEvent;
+		LittleEngine::Eventing::Event<> HoverEndEvent;
 
 		bool showYellowRect = true;
 

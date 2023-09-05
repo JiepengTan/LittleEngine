@@ -9,7 +9,7 @@
 #include "Modules/Rendering/Core/Renderer.h"
 #include "Modules/Rendering/Resources/Mesh.h"
 
-namespace OvRendering::Core
+namespace LittleEngine::Rendering::Core
 {
 	/**
 	* The ShapeDrawer handles the drawing of basic shapes
@@ -21,7 +21,7 @@ namespace OvRendering::Core
 		* Creates the ShapeDrawer instance. It needs a renderer
 		* @param p_renderer
 		*/
-		ShapeDrawer(OvRendering::Core::Renderer& p_renderer);
+		ShapeDrawer(LittleEngine::Rendering::Core::Renderer& p_renderer);
 
 		/**
 		* Destructor
@@ -32,7 +32,7 @@ namespace OvRendering::Core
 		* Defines the view projection to use when drawing
 		* @param p_viewProjection
 		*/
-		void SetViewProjection(const OvMaths::FMatrix4& p_viewProjection);
+		void SetViewProjection(const LittleEngine::FMatrix4& p_viewProjection);
 
 		/**
 		* Draw a line in world space
@@ -41,7 +41,7 @@ namespace OvRendering::Core
 		* @param p_color
 		* @param p_lineWidth
 		*/
-		void DrawLine(const OvMaths::FVector3& p_start, const OvMaths::FVector3& p_end, const OvMaths::FVector3& p_color, float p_lineWidth = 1.0f);
+		void DrawLine(const LittleEngine::FVector3& p_start, const LittleEngine::FVector3& p_end, const LittleEngine::FVector3& p_color, float p_lineWidth = 1.0f);
 
 		/**
 		* Draw a grid in world space
@@ -53,12 +53,12 @@ namespace OvRendering::Core
 		* @param p_fadeThreshold
 		* @param p_lineWidth
 		*/
-		void DrawGrid(const OvMaths::FVector3& p_viewPos, const OvMaths::FVector3& p_color, int32_t p_gridSize = 50, float p_linear = 0.0f, float p_quadratic = 0.0f, float p_fadeThreshold = 0.0f, float p_lineWidth = 1.0f);
+		void DrawGrid(const LittleEngine::FVector3& p_viewPos, const LittleEngine::FVector3& p_color, int32_t p_gridSize = 50, float p_linear = 0.0f, float p_quadratic = 0.0f, float p_fadeThreshold = 0.0f, float p_lineWidth = 1.0f);
 
 	private:
-		OvRendering::Resources::Shader* m_lineShader = nullptr;
-		OvRendering::Resources::Shader* m_gridShader = nullptr;
-		OvRendering::Resources::Mesh* m_lineMesh = nullptr;
-		OvRendering::Core::Renderer& m_renderer;
+		LittleEngine::Rendering::Resources::Shader* m_lineShader = nullptr;
+		LittleEngine::Rendering::Resources::Shader* m_gridShader = nullptr;
+		LittleEngine::Rendering::Resources::Mesh* m_lineMesh = nullptr;
+		LittleEngine::Rendering::Core::Renderer& m_renderer;
 	};
 }

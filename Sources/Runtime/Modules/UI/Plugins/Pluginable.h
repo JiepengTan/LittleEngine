@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Plugins/IPlugin.h"
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
 	* Inherit from this class to make your class "Pluginable" (Able to have plugins)

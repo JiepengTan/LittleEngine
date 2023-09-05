@@ -4,7 +4,7 @@
 #include "Core/Maths/FMatrix4.h"
 
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 
     class Skeleton

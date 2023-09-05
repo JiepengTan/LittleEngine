@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/Texts/Text.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Simple widget to display a selectable text on a panel
@@ -33,8 +33,8 @@ namespace OvUI::Widgets::Texts
 		bool selected;
 		bool disabled;
 
-		OvTools::Eventing::Event<bool> ClickedEvent;
-		OvTools::Eventing::Event<> SelectedEvent;
-		OvTools::Eventing::Event<> UnselectedEvent;
+		LittleEngine::Eventing::Event<bool> ClickedEvent;
+		LittleEngine::Eventing::Event<> SelectedEvent;
+		LittleEngine::Eventing::Event<> UnselectedEvent;
 	};
 }

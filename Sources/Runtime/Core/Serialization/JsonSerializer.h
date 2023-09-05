@@ -4,7 +4,7 @@
 
 #include <cassert>
 
-namespace OvCore
+namespace LittleEngine
 {
     template<typename...>
     inline constexpr bool always_false = false;

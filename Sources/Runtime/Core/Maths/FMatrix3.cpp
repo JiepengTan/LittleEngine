@@ -10,22 +10,22 @@
 
 #include "Core/Maths/FMatrix3.h"
 
-const OvMaths::FMatrix3 OvMaths::FMatrix3::Identity = OvMaths::FMatrix3(1.0f, 0.0f, 0.0f,
+const LittleEngine::FMatrix3 LittleEngine::FMatrix3::Identity = LittleEngine::FMatrix3(1.0f, 0.0f, 0.0f,
 	0.0f, 1.0f, 0.0f,
 	0.0f, 0.0f, 1.0f);
 
-OvMaths::FMatrix3::FMatrix3()
+LittleEngine::FMatrix3::FMatrix3()
 {
 	memcpy(data, Identity.data, 9 * sizeof(float));
 }
 
-OvMaths::FMatrix3::FMatrix3(float p_value)
+LittleEngine::FMatrix3::FMatrix3(float p_value)
 {
 	for (float& element : data)
 		element = p_value;
 }
 
-OvMaths::FMatrix3::FMatrix3(float p_element1, float p_element2, float p_element3, float p_element4, float p_element5, float p_element6, float p_element7, float p_element8, float p_element9)
+LittleEngine::FMatrix3::FMatrix3(float p_element1, float p_element2, float p_element3, float p_element4, float p_element5, float p_element6, float p_element7, float p_element8, float p_element9)
 {
 	data[0] = p_element1;
 	data[1] = p_element2;
@@ -38,94 +38,94 @@ OvMaths::FMatrix3::FMatrix3(float p_element1, float p_element2, float p_element3
 	data[8] = p_element9;
 }
 
-OvMaths::FMatrix3::FMatrix3(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3::FMatrix3(const LittleEngine::FMatrix3& p_other)
 {
 	*this = p_other;
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator=(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator=(const LittleEngine::FMatrix3& p_other)
 {
 	memcpy(this->data, p_other.data, 9 * sizeof(float));
 	return *this;
 }
 
-bool OvMaths::FMatrix3::operator==(const OvMaths::FMatrix3& p_other)
+bool LittleEngine::FMatrix3::operator==(const LittleEngine::FMatrix3& p_other)
 {
 	return AreEquals(*this, p_other);
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::operator+(const OvMaths::FMatrix3& p_other) const
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::operator+(const LittleEngine::FMatrix3& p_other) const
 {
 	return Add(*this, p_other);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator+=(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator+=(const LittleEngine::FMatrix3& p_other)
 {
 	*this = Add(*this, p_other);
 	return *this;
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::operator-(const OvMaths::FMatrix3& p_other) const
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::operator-(const LittleEngine::FMatrix3& p_other) const
 {
 	return Subtract(*this, p_other);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator-=(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator-=(const LittleEngine::FMatrix3& p_other)
 {
 	*this = Subtract(*this, p_other);
 	return *this;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::operator*(float p_scalar) const
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::operator*(float p_scalar) const
 {
 	return Multiply(*this, p_scalar);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator*=(float p_scalar)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator*=(float p_scalar)
 {
 	*this = Multiply(*this, p_scalar);
 	return *this;
 }
 
-OvMaths::FVector3 OvMaths::FMatrix3::operator*(const FVector3& p_vector) const
+LittleEngine::FVector3 LittleEngine::FMatrix3::operator*(const FVector3& p_vector) const
 {
 	return Multiply(*this, p_vector);
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::operator*(const OvMaths::FMatrix3& p_other) const
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::operator*(const LittleEngine::FMatrix3& p_other) const
 {
 	return Multiply(*this, p_other);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator*=(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator*=(const LittleEngine::FMatrix3& p_other)
 {
 	*this = Multiply(*this, p_other);
 	return *this;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::operator/(float p_scalar) const
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::operator/(float p_scalar) const
 {
 	return Divide(*this, p_scalar);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator/=(float p_scalar)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator/=(float p_scalar)
 {
 	*this = Divide(*this, p_scalar);
 	return *this;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::operator/(const OvMaths::FMatrix3& p_other) const
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::operator/(const LittleEngine::FMatrix3& p_other) const
 {
 	return Divide(*this, p_other);
 }
 
-OvMaths::FMatrix3& OvMaths::FMatrix3::operator/=(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3& LittleEngine::FMatrix3::operator/=(const LittleEngine::FMatrix3& p_other)
 {
 	*this = Divide(*this, p_other);
 	return *this;
 }
 
-float& OvMaths::FMatrix3::operator()(uint8_t p_row, uint8_t p_column)
+float& LittleEngine::FMatrix3::operator()(uint8_t p_row, uint8_t p_column)
 {
 	if (p_row >= 3 || p_column >= 3)
 		throw std::out_of_range(
@@ -133,12 +133,12 @@ float& OvMaths::FMatrix3::operator()(uint8_t p_row, uint8_t p_column)
 	return data[3 * p_row + p_column];
 }
 
-bool OvMaths::FMatrix3::AreEquals(const OvMaths::FMatrix3& p_left, const OvMaths::FMatrix3& p_right)
+bool LittleEngine::FMatrix3::AreEquals(const LittleEngine::FMatrix3& p_left, const LittleEngine::FMatrix3& p_right)
 {
 	return memcmp(&p_left, &p_right, 9 * sizeof(float)) == 0;
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Add(const OvMaths::FMatrix3 & p_left, float p_scalar)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Add(const LittleEngine::FMatrix3 & p_left, float p_scalar)
 {
 	FMatrix3 result(p_left);
 	for (uint8_t i = 0; i < 9; ++i)
@@ -146,7 +146,7 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Add(const OvMaths::FMatrix3 & p_left, floa
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Add(const OvMaths::FMatrix3& p_left, const OvMaths::FMatrix3 & p_right)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Add(const LittleEngine::FMatrix3& p_left, const LittleEngine::FMatrix3 & p_right)
 {
 	FMatrix3 result(p_left);
 	for (uint8_t i = 0; i < 9; ++i)
@@ -154,7 +154,7 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Add(const OvMaths::FMatrix3& p_left, const
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::Subtract(const OvMaths::FMatrix3& p_left, float p_scalar)
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::Subtract(const LittleEngine::FMatrix3& p_left, float p_scalar)
 {
 	FMatrix3 result(p_left);
 	for (float& element : result.data)
@@ -164,7 +164,7 @@ OvMaths::FMatrix3 OvMaths::FMatrix3::Subtract(const OvMaths::FMatrix3& p_left, f
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Subtract(const OvMaths::FMatrix3& p_left, const OvMaths::FMatrix3& p_right)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Subtract(const LittleEngine::FMatrix3& p_left, const LittleEngine::FMatrix3& p_right)
 {
 	FMatrix3 result(p_left);
 	for (uint8_t i = 0; i < 9; ++i)
@@ -172,7 +172,7 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Subtract(const OvMaths::FMatrix3& p_left, 
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_left, float p_scalar)
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::Multiply(const LittleEngine::FMatrix3& p_left, float p_scalar)
 {
 	FMatrix3 result(p_left);
 	for (float& element : result.data)
@@ -182,7 +182,7 @@ OvMaths::FMatrix3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_left, f
 	return result;
 }
 
-OvMaths::FVector3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_matrix, const FVector3& p_vector)
+LittleEngine::FVector3 LittleEngine::FMatrix3::Multiply(const LittleEngine::FMatrix3& p_matrix, const FVector3& p_vector)
 {
 	FVector3 result;
 	result.x = ((p_matrix.data[0] * p_vector.x) + (p_matrix.data[1] * p_vector.y) + (p_matrix.data[2] *
@@ -195,7 +195,7 @@ OvMaths::FVector3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_matrix,
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_left, const OvMaths::FMatrix3& p_right)
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::Multiply(const LittleEngine::FMatrix3& p_left, const LittleEngine::FMatrix3& p_right)
 {
 	return FMatrix3(
 		(p_left.data[0] * p_right.data[0]) + (p_left.data[1] * p_right.data[3]) + (p_left.data[2
@@ -220,7 +220,7 @@ OvMaths::FMatrix3 OvMaths::FMatrix3::Multiply(const OvMaths::FMatrix3& p_left, c
 		] * p_right.data[8]));
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Divide(const OvMaths::FMatrix3& p_left, float p_scalar)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Divide(const LittleEngine::FMatrix3& p_left, float p_scalar)
 {
 	FMatrix3 result(p_left);
 	for (float& element : result.data)
@@ -230,24 +230,24 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Divide(const OvMaths::FMatrix3& p_left, fl
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Divide(const OvMaths::FMatrix3& p_left, const OvMaths::FMatrix3 & p_right)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Divide(const LittleEngine::FMatrix3& p_left, const LittleEngine::FMatrix3 & p_right)
 {
 	return p_left * Inverse(p_right);
 }
 
-bool OvMaths::FMatrix3::IsIdentity(const OvMaths::FMatrix3& p_matrix)
+bool LittleEngine::FMatrix3::IsIdentity(const LittleEngine::FMatrix3& p_matrix)
 { 
 	return memcmp(Identity.data, p_matrix.data, 9 * sizeof(float)) == 0;
 }
 
-float OvMaths::FMatrix3::Determinant(const OvMaths::FMatrix3& p_matrix)
+float LittleEngine::FMatrix3::Determinant(const LittleEngine::FMatrix3& p_matrix)
 {
 	return p_matrix.data[0] * (p_matrix.data[4] * p_matrix.data[8] - p_matrix.data[5] * p_matrix.data[7])
 		- p_matrix.data[3] * (p_matrix.data[1] * p_matrix.data[8] - p_matrix.data[2] * p_matrix.data[7])
 		+ p_matrix.data[6] * (p_matrix.data[1] * p_matrix.data[5] - p_matrix.data[2] * p_matrix.data[4]);
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Transpose(const OvMaths::FMatrix3& p_matrix)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Transpose(const LittleEngine::FMatrix3& p_matrix)
 {
 	FMatrix3 result;
 
@@ -266,7 +266,7 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Transpose(const OvMaths::FMatrix3& p_matri
 	return result;
 } 
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Cofactor(const OvMaths::FMatrix3& p_matrix)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Cofactor(const LittleEngine::FMatrix3& p_matrix)
 {
 	return FMatrix3(
 		((p_matrix.data[4] * p_matrix.data[8]) - (p_matrix.data[5] * p_matrix.data[7])), //0
@@ -280,7 +280,7 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Cofactor(const OvMaths::FMatrix3& p_matrix
 		((p_matrix.data[0] * p_matrix.data[4]) - (p_matrix.data[1] * p_matrix.data[3]))); //8
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Minor(const OvMaths::FMatrix3& p_matrix)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Minor(const LittleEngine::FMatrix3& p_matrix)
 {
 	return FMatrix3(
 		((p_matrix.data[4] * p_matrix.data[8]) - (p_matrix.data[5] * p_matrix.data[7])), //0
@@ -294,12 +294,12 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Minor(const OvMaths::FMatrix3& p_matrix)
 		((p_matrix.data[0] * p_matrix.data[4]) - (p_matrix.data[1] * p_matrix.data[3]))); //8
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Adjoint(const OvMaths::FMatrix3& p_other)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Adjoint(const LittleEngine::FMatrix3& p_other)
 {
 	return Transpose(Cofactor(p_other));
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Inverse(const OvMaths::FMatrix3& p_matrix)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Inverse(const LittleEngine::FMatrix3& p_matrix)
 {
 	const float determinant = Determinant(p_matrix);
 	if (determinant == 0)
@@ -308,43 +308,43 @@ OvMaths::FMatrix3 OvMaths ::FMatrix3::Inverse(const OvMaths::FMatrix3& p_matrix)
 	return Adjoint(p_matrix) / determinant;
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::Translation(const FVector2& p_translation)
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::Translation(const FVector2& p_translation)
 {
 	return FMatrix3(1, 0, p_translation.x,
 					0, 1, p_translation.y,
 					0, 0, 1);
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Translate(const OvMaths::FMatrix3& p_matrix, const FVector2& p_translation)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Translate(const LittleEngine::FMatrix3& p_matrix, const FVector2& p_translation)
 {
 	return p_matrix * Translation(p_translation);
 }
 
-OvMaths::FMatrix3 OvMaths::FMatrix3::Rotation(float p_rotation)
+LittleEngine::FMatrix3 LittleEngine::FMatrix3::Rotation(float p_rotation)
 {
 	return FMatrix3(std::cos(p_rotation), -std::sin(p_rotation), 0,
 					std::sin(p_rotation), std::cos(p_rotation), 0,
 					0, 0, 1);
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Rotate(const OvMaths::FMatrix3& p_matrix, float p_rotation)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Rotate(const LittleEngine::FMatrix3& p_matrix, float p_rotation)
 {
 	return p_matrix * Rotation(p_rotation);
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Scaling(const FVector2 & p_scale)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Scaling(const FVector2 & p_scale)
 {
 	return FMatrix3(p_scale.x, 0, 0,
 					0, p_scale.y, 0,
 					0, 0, 1);
 }
 
-OvMaths::FMatrix3 OvMaths ::FMatrix3::Scale(const OvMaths::FMatrix3 & p_matrix, const FVector2 & p_scale)
+LittleEngine::FMatrix3 LittleEngine ::FMatrix3::Scale(const LittleEngine::FMatrix3 & p_matrix, const FVector2 & p_scale)
 {
 	return p_matrix * Scaling(p_scale);
 }
 
-OvMaths::FVector3 OvMaths::FMatrix3::GetRow(const FMatrix3& p_matrix, uint8_t p_row) 
+LittleEngine::FVector3 LittleEngine::FMatrix3::GetRow(const FMatrix3& p_matrix, uint8_t p_row) 
 {
 	if (p_row >= 3)
 		throw std::out_of_range("Invalid index : " + std::to_string(p_row) + " is out of range");
@@ -352,7 +352,7 @@ OvMaths::FVector3 OvMaths::FMatrix3::GetRow(const FMatrix3& p_matrix, uint8_t p_
 	return FVector3(p_matrix.data[p_row * 3], p_matrix.data[p_row * 3 + 1], p_matrix.data[p_row * 3 + 2]);
 }
 
-OvMaths::FVector3 OvMaths::FMatrix3::GetColumn(const FMatrix3& p_matrix, uint8_t p_column)
+LittleEngine::FVector3 LittleEngine::FMatrix3::GetColumn(const FMatrix3& p_matrix, uint8_t p_column)
 {
 	if (p_column >= 3)
 		throw std::out_of_range("Invalid index : " + std::to_string(p_column) + " is out of range");

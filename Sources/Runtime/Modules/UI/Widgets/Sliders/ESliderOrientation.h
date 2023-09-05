@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvUI::Widgets::Sliders
+namespace LittleEngine::UI::Widgets::Sliders
 {
 	/**
 	* Defines the slider orientation

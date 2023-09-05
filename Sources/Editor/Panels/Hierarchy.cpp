@@ -33,68 +33,68 @@
 
 #include "../Editor/Utils/ActorCreationMenu.h"
 
-class HierarchyContextualMenu : public OvUI::Plugins::ContextualMenu
+class HierarchyContextualMenu : public LittleEngine::UI::Plugins::ContextualMenu
 {
 public:
-    HierarchyContextualMenu(OvCore::ECS::Actor* p_target, OvUI::Widgets::Layout::TreeNode& p_treeNode, bool p_panelMenu = false) :
+    HierarchyContextualMenu(LittleEngine::Actor* p_target, LittleEngine::UI::Widgets::Layout::TreeNode& p_treeNode, bool p_panelMenu = false) :
         m_target(p_target),
         m_treeNode(p_treeNode)
     {
-        using namespace OvUI::Panels;
-        using namespace OvUI::Widgets;
-        using namespace OvUI::Widgets::Menu;
-        using namespace OvCore::ECS::Components;
+        using namespace LittleEngine::UI::Panels;
+        using namespace LittleEngine::UI::Widgets;
+        using namespace LittleEngine::UI::Widgets::Menu;
+        using namespace LittleEngine;
 
         if (m_target)
         {
-            auto& focusButton = CreateWidget<OvUI::Widgets::Menu::MenuItem>("Focus");
+            auto& focusButton = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuItem>("Focus");
             focusButton.ClickedEvent += [this]
             {
                 EDITOR_EXEC(MoveToTarget(*m_target));
             };
 
-            auto& duplicateButton = CreateWidget<OvUI::Widgets::Menu::MenuItem>("Duplicate");
+            auto& duplicateButton = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuItem>("Duplicate");
             duplicateButton.ClickedEvent += [this]
             {
                 EDITOR_EXEC(DelayAction(EDITOR_BIND(DuplicateActor, std::ref(*m_target), nullptr, true), 0));
             };
 
-            auto& deleteButton = CreateWidget<OvUI::Widgets::Menu::MenuItem>("Delete");
+            auto& deleteButton = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuItem>("Delete");
             deleteButton.ClickedEvent += [this]
             {
                 EDITOR_EXEC(DestroyActor(std::ref(*m_target)));
             };
         }
 
-		auto& createActor = CreateWidget<OvUI::Widgets::Menu::MenuList>("Create...");
-        OvEditor::Utils::ActorCreationMenu::GenerateActorCreationMenu(createActor, m_target, std::bind(&OvUI::Widgets::Layout::TreeNode::Open, &m_treeNode));
+		auto& createActor = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuList>("Create...");
+        LittleEditor::Utils::ActorCreationMenu::GenerateActorCreationMenu(createActor, m_target, std::bind(&LittleEngine::UI::Widgets::Layout::TreeNode::Open, &m_treeNode));
 	}
 
 	virtual void Execute() override
 	{
 		if (m_widgets.size() > 0)
-			OvUI::Plugins::ContextualMenu::Execute();
+			LittleEngine::UI::Plugins::ContextualMenu::Execute();
 	}
 
 private:
-	OvCore::ECS::Actor* m_target;
-	OvUI::Widgets::Layout::TreeNode& m_treeNode;
+	LittleEngine::Actor* m_target;
+	LittleEngine::UI::Widgets::Layout::TreeNode& m_treeNode;
 };
 
-void ExpandTreeNode(OvUI::Widgets::Layout::TreeNode& p_toExpand, const OvUI::Widgets::Layout::TreeNode* p_root)
+void ExpandTreeNode(LittleEngine::UI::Widgets::Layout::TreeNode& p_toExpand, const LittleEngine::UI::Widgets::Layout::TreeNode* p_root)
 {
 	p_toExpand.Open();
 
 	if (&p_toExpand != p_root && p_toExpand.HasParent())
 	{
-		ExpandTreeNode(*static_cast<OvUI::Widgets::Layout::TreeNode*>(p_toExpand.GetParent()), p_root);
+		ExpandTreeNode(*static_cast<LittleEngine::UI::Widgets::Layout::TreeNode*>(p_toExpand.GetParent()), p_root);
 	}
 }
 
-std::vector<OvUI::Widgets::Layout::TreeNode*> nodesToCollapse;
-std::vector<OvUI::Widgets::Layout::TreeNode*> founds;
+std::vector<LittleEngine::UI::Widgets::Layout::TreeNode*> nodesToCollapse;
+std::vector<LittleEngine::UI::Widgets::Layout::TreeNode*> founds;
 
-void ExpandTreeNodeAndEnable(OvUI::Widgets::Layout::TreeNode& p_toExpand, const OvUI::Widgets::Layout::TreeNode* p_root)
+void ExpandTreeNodeAndEnable(LittleEngine::UI::Widgets::Layout::TreeNode& p_toExpand, const LittleEngine::UI::Widgets::Layout::TreeNode* p_root)
 {
 	if (!p_toExpand.IsOpened())
 	{
@@ -106,18 +106,18 @@ void ExpandTreeNodeAndEnable(OvUI::Widgets::Layout::TreeNode& p_toExpand, const 
 
 	if (&p_toExpand != p_root && p_toExpand.HasParent())
 	{
-		ExpandTreeNodeAndEnable(*static_cast<OvUI::Widgets::Layout::TreeNode*>(p_toExpand.GetParent()), p_root);
+		ExpandTreeNodeAndEnable(*static_cast<LittleEngine::UI::Widgets::Layout::TreeNode*>(p_toExpand.GetParent()), p_root);
 	}
 }
 
-OvEditor::Panels::Hierarchy::Hierarchy
+LittleEditor::Panels::Hierarchy::Hierarchy
 (
 	const std::string & p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings& p_windowSettings
+	const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 ) : PanelWindow(p_title, p_opened, p_windowSettings)
 {
-	auto& searchBar = CreateWidget<OvUI::Widgets::InputFields::InputText>();
+	auto& searchBar = CreateWidget<LittleEngine::UI::Widgets::InputFields::InputText>();
 	searchBar.ContentChangedEvent += [this](const std::string& p_content)
 	{
 		founds.clear();
@@ -150,7 +150,7 @@ OvEditor::Panels::Hierarchy::Hierarchy
 
 			if (node->HasParent())
 			{
-				ExpandTreeNodeAndEnable(*static_cast<OvUI::Widgets::Layout::TreeNode*>(node->GetParent()), m_sceneRoot);
+				ExpandTreeNodeAndEnable(*static_cast<LittleEngine::UI::Widgets::Layout::TreeNode*>(node->GetParent()), m_sceneRoot);
 			}
 		}
 
@@ -165,9 +165,9 @@ OvEditor::Panels::Hierarchy::Hierarchy
 		}
 	};
 
-	m_sceneRoot = &CreateWidget<OvUI::Widgets::Layout::TreeNode>("Root", true);
-	static_cast<OvUI::Widgets::Layout::TreeNode*>(m_sceneRoot)->Open();
-	m_sceneRoot->AddPlugin<OvUI::Plugins::DDTarget<std::pair<OvCore::ECS::Actor*, OvUI::Widgets::Layout::TreeNode*>>>("Actor").DataReceivedEvent += [this](std::pair<OvCore::ECS::Actor*, OvUI::Widgets::Layout::TreeNode*> p_element)
+	m_sceneRoot = &CreateWidget<LittleEngine::UI::Widgets::Layout::TreeNode>("Root", true);
+	static_cast<LittleEngine::UI::Widgets::Layout::TreeNode*>(m_sceneRoot)->Open();
+	m_sceneRoot->AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<LittleEngine::Actor*, LittleEngine::UI::Widgets::Layout::TreeNode*>>>("Actor").DataReceivedEvent += [this](std::pair<LittleEngine::Actor*, LittleEngine::UI::Widgets::Layout::TreeNode*> p_element)
 	{
 		if (p_element.second->HasParent())
 			p_element.second->GetParent()->UnconsiderWidget(*p_element.second);
@@ -180,14 +180,14 @@ OvEditor::Panels::Hierarchy::Hierarchy
 
 	EDITOR_EVENT(ActorUnselectedEvent) += std::bind(&Hierarchy::UnselectActorsWidgets, this);
 	EDITOR_CONTEXT(sceneManager).SceneUnloadEvent += std::bind(&Hierarchy::Clear, this);
-	OvCore::ECS::Actor::CreatedEvent += std::bind(&Hierarchy::AddActorByInstance, this, std::placeholders::_1);
-	OvCore::ECS::Actor::DestroyedEvent += std::bind(&Hierarchy::DeleteActorByInstance, this, std::placeholders::_1);
+	LittleEngine::Actor::CreatedEvent += std::bind(&Hierarchy::AddActorByInstance, this, std::placeholders::_1);
+	LittleEngine::Actor::DestroyedEvent += std::bind(&Hierarchy::DeleteActorByInstance, this, std::placeholders::_1);
 	EDITOR_EVENT(ActorSelectedEvent) += std::bind(&Hierarchy::SelectActorByInstance, this, std::placeholders::_1);
-	OvCore::ECS::Actor::AttachEvent += std::bind(&Hierarchy::AttachActorToParent, this, std::placeholders::_1);
-	OvCore::ECS::Actor::DettachEvent += std::bind(&Hierarchy::DetachFromParent, this, std::placeholders::_1);
+	LittleEngine::Actor::AttachEvent += std::bind(&Hierarchy::AttachActorToParent, this, std::placeholders::_1);
+	LittleEngine::Actor::DettachEvent += std::bind(&Hierarchy::DetachFromParent, this, std::placeholders::_1);
 }
 
-void OvEditor::Panels::Hierarchy::Clear()
+void LittleEditor::Panels::Hierarchy::Clear()
 {
 	EDITOR_EXEC(UnselectActor());
 
@@ -195,20 +195,20 @@ void OvEditor::Panels::Hierarchy::Clear()
 	m_widgetActorLink.clear();
 }
 
-void OvEditor::Panels::Hierarchy::UnselectActorsWidgets()
+void LittleEditor::Panels::Hierarchy::UnselectActorsWidgets()
 {
 	for (auto& widget : m_widgetActorLink)
 		widget.second->selected = false;
 }
 
-void OvEditor::Panels::Hierarchy::SelectActorByInstance(OvCore::ECS::Actor& p_actor)
+void LittleEditor::Panels::Hierarchy::SelectActorByInstance(LittleEngine::Actor& p_actor)
 {
 	if (auto result = m_widgetActorLink.find(&p_actor); result != m_widgetActorLink.end())
 		if (result->second)
 			SelectActorByWidget(*result->second);
 }
 
-void OvEditor::Panels::Hierarchy::SelectActorByWidget(OvUI::Widgets::Layout::TreeNode & p_widget)
+void LittleEditor::Panels::Hierarchy::SelectActorByWidget(LittleEngine::UI::Widgets::Layout::TreeNode & p_widget)
 {
 	UnselectActorsWidgets();
 
@@ -216,11 +216,11 @@ void OvEditor::Panels::Hierarchy::SelectActorByWidget(OvUI::Widgets::Layout::Tre
 
 	if (p_widget.HasParent())
 	{
-		ExpandTreeNode(*static_cast<OvUI::Widgets::Layout::TreeNode*>(p_widget.GetParent()), m_sceneRoot);
+		ExpandTreeNode(*static_cast<LittleEngine::UI::Widgets::Layout::TreeNode*>(p_widget.GetParent()), m_sceneRoot);
 	}
 }
 
-void OvEditor::Panels::Hierarchy::AttachActorToParent(OvCore::ECS::Actor & p_actor)
+void LittleEditor::Panels::Hierarchy::AttachActorToParent(LittleEngine::Actor & p_actor)
 {
 	auto actorWidget = m_widgetActorLink.find(&p_actor);
 
@@ -240,7 +240,7 @@ void OvEditor::Panels::Hierarchy::AttachActorToParent(OvCore::ECS::Actor & p_act
 	}
 }
 
-void OvEditor::Panels::Hierarchy::DetachFromParent(OvCore::ECS::Actor & p_actor)
+void LittleEditor::Panels::Hierarchy::DetachFromParent(LittleEngine::Actor & p_actor)
 {
 	if (auto actorWidget = m_widgetActorLink.find(&p_actor); actorWidget != m_widgetActorLink.end())
 	{
@@ -261,7 +261,7 @@ void OvEditor::Panels::Hierarchy::DetachFromParent(OvCore::ECS::Actor & p_actor)
 	}
 }
 
-void OvEditor::Panels::Hierarchy::DeleteActorByInstance(OvCore::ECS::Actor& p_actor)
+void LittleEditor::Panels::Hierarchy::DeleteActorByInstance(LittleEngine::Actor& p_actor)
 {
 	if (auto result = m_widgetActorLink.find(&p_actor); result != m_widgetActorLink.end())
 	{
@@ -274,13 +274,13 @@ void OvEditor::Panels::Hierarchy::DeleteActorByInstance(OvCore::ECS::Actor& p_ac
 	}
 }
 
-void OvEditor::Panels::Hierarchy::AddActorByInstance(OvCore::ECS::Actor & p_actor)
+void LittleEditor::Panels::Hierarchy::AddActorByInstance(LittleEngine::Actor & p_actor)
 {
-	auto& textSelectable = m_sceneRoot->CreateWidget<OvUI::Widgets::Layout::TreeNode>(p_actor.GetName(), true);
+	auto& textSelectable = m_sceneRoot->CreateWidget<LittleEngine::UI::Widgets::Layout::TreeNode>(p_actor.GetName(), true);
 	textSelectable.leaf = true;
 	textSelectable.AddPlugin<HierarchyContextualMenu>(&p_actor, textSelectable);
-	textSelectable.AddPlugin<OvUI::Plugins::DDSource<std::pair<OvCore::ECS::Actor*, OvUI::Widgets::Layout::TreeNode*>>>("Actor", "Attach to...", std::make_pair(&p_actor, &textSelectable));
-	textSelectable.AddPlugin<OvUI::Plugins::DDTarget<std::pair<OvCore::ECS::Actor*, OvUI::Widgets::Layout::TreeNode*>>>("Actor").DataReceivedEvent += [&p_actor, &textSelectable](std::pair<OvCore::ECS::Actor*, OvUI::Widgets::Layout::TreeNode*> p_element)
+	textSelectable.AddPlugin<LittleEngine::UI::Plugins::DDSource<std::pair<LittleEngine::Actor*, LittleEngine::UI::Widgets::Layout::TreeNode*>>>("Actor", "Attach to...", std::make_pair(&p_actor, &textSelectable));
+	textSelectable.AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<LittleEngine::Actor*, LittleEngine::UI::Widgets::Layout::TreeNode*>>>("Actor").DataReceivedEvent += [&p_actor, &textSelectable](std::pair<LittleEngine::Actor*, LittleEngine::UI::Widgets::Layout::TreeNode*> p_element)
 	{
 		if (p_element.second->HasParent())
 			p_element.second->GetParent()->UnconsiderWidget(*p_element.second);
@@ -289,9 +289,9 @@ void OvEditor::Panels::Hierarchy::AddActorByInstance(OvCore::ECS::Actor & p_acto
 
 		p_element.first->SetParent(p_actor);
 	};
-	auto& dispatcher = textSelectable.AddPlugin<OvUI::Plugins::DataDispatcher<std::string>>();
+	auto& dispatcher = textSelectable.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::string>>();
 
-	OvCore::ECS::Actor* targetPtr = &p_actor;
+	LittleEngine::Actor* targetPtr = &p_actor;
 	dispatcher.RegisterGatherer([targetPtr] { return targetPtr->GetName(); });
 
 	m_widgetActorLink[targetPtr] = &textSelectable;

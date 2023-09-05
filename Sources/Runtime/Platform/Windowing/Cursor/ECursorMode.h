@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvWindowing::Cursor
+namespace LittleEngine::Windowing::Cursor
 {
 	/**
 	* Some cursor modes.

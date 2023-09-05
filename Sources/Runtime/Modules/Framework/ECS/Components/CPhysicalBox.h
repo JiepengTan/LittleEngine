@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represent a physical object with a box shape
@@ -24,7 +24,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalBox(ECS::Actor& p_owner);
+		CPhysicalBox(Actor& p_owner);
 		CPhysicalBox() = default;
 		/**
 		* Returns the name of the component
@@ -35,12 +35,12 @@ namespace OvCore::ECS::Components
 		* Defines the size of the box shape
 		* @param p_size
 		*/
-		void SetSize(const OvMaths::FVector3& p_size);
+		void SetSize(const LittleEngine::FVector3& p_size);
 
 		/**
 		* Returns the size of the box shape
 		*/
-		OvMaths::FVector3 GetSize() const;
+		LittleEngine::FVector3 GetSize() const;
 
 		/**
 		* Serialize the component
@@ -60,6 +60,6 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 	};
 }

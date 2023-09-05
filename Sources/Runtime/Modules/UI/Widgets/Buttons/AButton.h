@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/AWidget.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Base class for any button widget
@@ -23,6 +23,6 @@ namespace OvUI::Widgets::Buttons
 		void _Draw_Impl() override = 0;
 
 	public:
-		OvTools::Eventing::Event<> ClickedEvent;
+		LittleEngine::Eventing::Event<> ClickedEvent;
 	};
 }

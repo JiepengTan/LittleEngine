@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-namespace OvUI::Internal
+namespace LittleEngine::UI::Internal
 {
 	/**
 	* Simple union necessary for imgui textureID

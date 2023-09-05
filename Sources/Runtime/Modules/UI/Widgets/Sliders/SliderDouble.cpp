@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Sliders/SliderDouble.h"
 
-OvUI::Widgets::Sliders::SliderDouble::SliderDouble
+LittleEngine::UI::Widgets::Sliders::SliderDouble::SliderDouble
 (
 	double p_min,
 	double p_max,

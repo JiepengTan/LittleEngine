@@ -16,7 +16,7 @@
 #include "Modules/UI/ImGui/imgui_impl_glfw.h"
 #include "Modules/UI/ImGui/imgui_impl_opengl3.h"
 
-namespace OvUI::Modules
+namespace LittleEngine::UI::Modules
 {
 	/**
 	* A Canvas represents the whole frame available for UI drawing

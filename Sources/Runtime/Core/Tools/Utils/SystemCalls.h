@@ -9,7 +9,7 @@
 #include <string>
 
 
-namespace OvTools::Utils
+namespace LittleEngine::Utils
 {
 	class SystemCalls
 	{

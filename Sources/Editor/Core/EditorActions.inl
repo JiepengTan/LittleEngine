@@ -8,10 +8,10 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-namespace OvEditor::Core
+namespace LittleEditor::Core
 {
 	template<typename T>
-	inline OvCore::ECS::Actor & EditorActions::CreateMonoComponentActor(bool p_focusOnCreation, OvCore::ECS::Actor* p_parent)
+	inline LittleEngine::Actor & EditorActions::CreateMonoComponentActor(bool p_focusOnCreation, LittleEngine::Actor* p_parent)
 	{
 		auto& instance = CreateEmptyActor(false, p_parent);
 

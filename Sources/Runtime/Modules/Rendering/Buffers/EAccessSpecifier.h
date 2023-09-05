@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 	/**
 	* Defines some access hints that buffers can use

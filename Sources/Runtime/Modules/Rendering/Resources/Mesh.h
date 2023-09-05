@@ -16,13 +16,13 @@
 #include "Modules/Rendering/Geometry/Vertex.h"
 #include "Modules/Rendering/Geometry/BoundingSphere.h"
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 
 
 	
 	/**
-	* Standard mesh of OvRendering
+	* Standard mesh of LittleEngine::Rendering
 	*/
 	class Mesh : public IMesh
 	{
@@ -72,7 +72,7 @@ namespace OvRendering::Resources
 		/**
 		* Returns the bounding sphere of the mesh
 		*/
-		const OvRendering::Geometry::BoundingSphere& GetBoundingSphere() const;
+		const LittleEngine::Rendering::Geometry::BoundingSphere& GetBoundingSphere() const;
 		
 		float* GetAnimatedPositions()const;
 		float* GetPositions() const;

@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Texts/Text.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Simple widget to display a long text with word-wrap on a panel

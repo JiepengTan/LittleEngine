@@ -8,12 +8,12 @@
 #include "Modules/UI/Internal/Converter.h"
 #include "Modules/UI/ImGui/imgui_internal.h"
 
-OvUI::Widgets::Buttons::ButtonImage::ButtonImage(uint32_t p_textureID, const OvMaths::FVector2 & p_size) :
+LittleEngine::UI::Widgets::Buttons::ButtonImage::ButtonImage(uint32_t p_textureID, const LittleEngine::FVector2 & p_size) :
 	textureID{ p_textureID }, size(p_size)
 {
 }
 
-void OvUI::Widgets::Buttons::ButtonImage::_Draw_Impl()
+void LittleEngine::UI::Widgets::Buttons::ButtonImage::_Draw_Impl()
 {
 	ImVec4 bg = Internal::Converter::ToImVec4(background);
 	ImVec4 tn = Internal::Converter::ToImVec4(tint);

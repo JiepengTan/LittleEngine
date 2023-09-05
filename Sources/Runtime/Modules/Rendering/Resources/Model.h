@@ -11,12 +11,12 @@
 #include <string>
 #include "Modules/Rendering/Resources/AnimationData.h"
 #include "Modules/Rendering/Resources/Mesh.h"
-namespace OvRendering::Resources::Loaders
+namespace LittleEngine::Rendering::Resources::Loaders
 {
 	class ModelLoader;
 }
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 
 	/**
@@ -24,7 +24,7 @@ namespace OvRendering::Resources
 	*/
 	class Model
 	{
-		friend class OvRendering::Resources::Loaders::ModelLoader;
+		friend class LittleEngine::Rendering::Resources::Loaders::ModelLoader;
 
 	public:
 		/**
@@ -40,7 +40,7 @@ namespace OvRendering::Resources
 		/**
 		* Returns the bounding sphere of the model
 		*/
-		const OvRendering::Geometry::BoundingSphere& GetBoundingSphere() const;
+		const LittleEngine::Rendering::Geometry::BoundingSphere& GetBoundingSphere() const;
 
 	private:
 		Model(const std::string& p_path);
@@ -51,7 +51,7 @@ namespace OvRendering::Resources
 	public:
 		const std::string path;
 		int& GetBoneCount() { return m_BoneCounter; }
-		std::map<std::string, OvRendering::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
+		std::map<std::string, LittleEngine::Rendering::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
 		bool isSkinMesh;
 		
 	private:
@@ -59,7 +59,7 @@ namespace OvRendering::Resources
 		std::vector<std::string> m_materialNames;
 
 		Geometry::BoundingSphere m_boundingSphere;
-		std::map<std::string, OvRendering::Resources::BoneInfo> m_name2BoneInfo;
+		std::map<std::string, LittleEngine::Rendering::Resources::BoneInfo> m_name2BoneInfo;
 		int m_BoneCounter = 0;
 	};
 }

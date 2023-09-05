@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/Texts/Text.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Widget to display text on a panel that is also clickable
@@ -28,7 +28,7 @@ namespace OvUI::Widgets::Texts
 		virtual void _Draw_Impl() override;
 
 	public:
-		OvTools::Eventing::Event<> ClickedEvent;
-		OvTools::Eventing::Event<> DoubleClickedEvent;
+		LittleEngine::Eventing::Event<> ClickedEvent;
+		LittleEngine::Eventing::Event<> DoubleClickedEvent;
 	};
 }

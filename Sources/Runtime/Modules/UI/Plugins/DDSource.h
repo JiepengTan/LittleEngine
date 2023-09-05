@@ -14,7 +14,7 @@
 
 #include "Modules/UI/Plugins/IPlugin.h"
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
 	* Represents a drag and drop source
@@ -82,8 +82,8 @@ namespace OvUI::Plugins
 		std::string identifier;
 		std::string tooltip;
 		T data;
-		OvTools::Eventing::Event<> DragStartEvent;
-		OvTools::Eventing::Event<> DragStopEvent;
+		LittleEngine::Eventing::Event<> DragStartEvent;
+		LittleEngine::Eventing::Event<> DragStopEvent;
 
 		bool hasTooltip = true;
 

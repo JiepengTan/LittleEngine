@@ -13,129 +13,129 @@
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
-OvCore::ECS::Components::CAudioSource::CAudioSource(ECS::Actor& p_owner) :
+LittleEngine::CAudioSource::CAudioSource(Actor& p_owner) :
 	AComponent(p_owner),
-	m_audioSource(OvCore::Global::ServiceLocator::Get<OvAudio::Core::AudioPlayer>(), owner->transform.GetFTransform())
+	m_audioSource(LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioPlayer>(), owner->transform.GetFTransform())
 {
 }
 
-std::string OvCore::ECS::Components::CAudioSource::GetName()
+std::string LittleEngine::CAudioSource::GetName()
 {
 	return "Audio Source";
 }
 
-void OvCore::ECS::Components::CAudioSource::SetSound(OvAudio::Resources::Sound* p_sound)
+void LittleEngine::CAudioSource::SetSound(LittleEngine::Audio::Resources::Sound* p_sound)
 {
 	m_sound = p_sound;
 }
 
-void OvCore::ECS::Components::CAudioSource::SetAutoplay(bool p_autoplay)
+void LittleEngine::CAudioSource::SetAutoplay(bool p_autoplay)
 {
 	m_autoPlay = p_autoplay;
 }
 
-void OvCore::ECS::Components::CAudioSource::SetVolume(float p_volume)
+void LittleEngine::CAudioSource::SetVolume(float p_volume)
 {
 	m_audioSource.SetVolume(p_volume);
 }
 
-void OvCore::ECS::Components::CAudioSource::SetPan(float p_pan)
+void LittleEngine::CAudioSource::SetPan(float p_pan)
 {
 	m_audioSource.SetPan(p_pan);
 }
 
-void OvCore::ECS::Components::CAudioSource::SetLooped(bool p_looped)
+void LittleEngine::CAudioSource::SetLooped(bool p_looped)
 {
 	m_audioSource.SetLooped(p_looped);
 }
 
-void OvCore::ECS::Components::CAudioSource::SetPitch(float p_pitch)
+void LittleEngine::CAudioSource::SetPitch(float p_pitch)
 {
 	m_audioSource.SetPitch(p_pitch);
 }
 
-void OvCore::ECS::Components::CAudioSource::SetSpatial(bool p_value)
+void LittleEngine::CAudioSource::SetSpatial(bool p_value)
 {
 	m_audioSource.SetSpatial(p_value);
 }
 
-void OvCore::ECS::Components::CAudioSource::SetAttenuationThreshold(float p_distance)
+void LittleEngine::CAudioSource::SetAttenuationThreshold(float p_distance)
 {
 	m_audioSource.SetAttenuationThreshold(p_distance);
 }
 
-OvAudio::Resources::Sound* OvCore::ECS::Components::CAudioSource::GetSound() const
+LittleEngine::Audio::Resources::Sound* LittleEngine::CAudioSource::GetSound() const
 {
 	return m_sound;
 }
 
-bool OvCore::ECS::Components::CAudioSource::IsAutoplayed() const
+bool LittleEngine::CAudioSource::IsAutoplayed() const
 {
 	return m_autoPlay;
 }
 
-float OvCore::ECS::Components::CAudioSource::GetVolume() const
+float LittleEngine::CAudioSource::GetVolume() const
 {
 	return m_audioSource.GetVolume();
 }
 
-float OvCore::ECS::Components::CAudioSource::GetPan() const
+float LittleEngine::CAudioSource::GetPan() const
 {
 	return m_audioSource.GetPan();
 }
 
-bool OvCore::ECS::Components::CAudioSource::IsLooped() const
+bool LittleEngine::CAudioSource::IsLooped() const
 {
 	return m_audioSource.IsLooped();
 }
 
-float OvCore::ECS::Components::CAudioSource::GetPitch() const
+float LittleEngine::CAudioSource::GetPitch() const
 {
 	return m_audioSource.GetPitch();
 }
 
-bool OvCore::ECS::Components::CAudioSource::IsFinished() const
+bool LittleEngine::CAudioSource::IsFinished() const
 {
 	return m_audioSource.IsFinished();
 }
 
-bool OvCore::ECS::Components::CAudioSource::IsSpatial() const
+bool LittleEngine::CAudioSource::IsSpatial() const
 {
 	return m_audioSource.IsSpatial();
 }
 
-float OvCore::ECS::Components::CAudioSource::GetAttenuationThreshold() const
+float LittleEngine::CAudioSource::GetAttenuationThreshold() const
 {
 	return m_audioSource.GetAttenuationThreshold();
 }
 
-void OvCore::ECS::Components::CAudioSource::Play()
+void LittleEngine::CAudioSource::Play()
 {
 	if (owner->IsActive() && m_sound)
 		m_audioSource.Play(*m_sound);
 }
 
-void OvCore::ECS::Components::CAudioSource::Pause()
+void LittleEngine::CAudioSource::Pause()
 {
 	if (owner->IsActive())
 		m_audioSource.Pause();
 }
 
-void OvCore::ECS::Components::CAudioSource::Resume()
+void LittleEngine::CAudioSource::Resume()
 {
 	if (owner->IsActive())
 		m_audioSource.Resume();
 }
 
-void OvCore::ECS::Components::CAudioSource::Stop()
+void LittleEngine::CAudioSource::Stop()
 {
 	if (owner->IsActive())
 		m_audioSource.Stop();
 }
 
-void OvCore::ECS::Components::CAudioSource::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioSource::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	Serializer::SerializeBoolean(p_doc, p_node, "autoplay", m_autoPlay);
 	Serializer::SerializeBoolean(p_doc, p_node, "spatial", IsSpatial());
@@ -147,9 +147,9 @@ void OvCore::ECS::Components::CAudioSource::OnSerialize(tinyxml2::XMLDocument& p
 	Serializer::SerializeSound(p_doc, p_node, "audio_clip", m_sound);
 }
 
-void OvCore::ECS::Components::CAudioSource::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioSource::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	Serializer::DeserializeBoolean(p_doc, p_node, "autoplay", m_autoPlay);
 	SetSpatial(Serializer::DeserializeBoolean(p_doc, p_node, "spatial"));
@@ -161,10 +161,10 @@ void OvCore::ECS::Components::CAudioSource::OnDeserialize(tinyxml2::XMLDocument&
 	Serializer::DeserializeSound(p_doc, p_node, "audio_clip", m_sound);
 }
 
-void OvCore::ECS::Components::CAudioSource::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAudioSource::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
-	using namespace OvAudio::Entities;
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Audio::Entities;
+	using namespace LittleEngine::Helpers;
 
 	GUIDrawer::DrawSound(p_root, "Sound", m_sound);
 	GUIDrawer::DrawBoolean(p_root, "Auto-play", m_autoPlay);
@@ -176,24 +176,24 @@ void OvCore::ECS::Components::CAudioSource::OnInspector(OvUI::Internal::WidgetCo
 	GUIDrawer::DrawScalar<float>(p_root, "Attenuation threshold", std::bind(&CAudioSource::GetAttenuationThreshold, this), std::bind(&CAudioSource::SetAttenuationThreshold, this, std::placeholders::_1), 0.5f);
 
 	GUIDrawer::CreateTitle(p_root, "Spatial graph");
-	auto& graph = p_root.CreateWidget<OvUI::Widgets::Plots::PlotLines>(std::vector<float>(), -0.1f, 1.1f);
+	auto& graph = p_root.CreateWidget<LittleEngine::UI::Widgets::Plots::PlotLines>(std::vector<float>(), -0.1f, 1.1f);
 
 	graph.size.y = 75.0f;
 
-	auto& graphDispacther = graph.AddPlugin<OvUI::Plugins::DataDispatcher<std::vector<float>>>();
+	auto& graphDispacther = graph.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::vector<float>>>();
 	graphDispacther.RegisterGatherer([this, &graph]()->std::vector<float>
 	{ 
 		auto lerp = [](float a, float b, float t) { return a + t * (b - a); };
 
 		std::vector<float> result;
 
-		OvMaths::FVector3 listenerPosition(0.0f, 0.0f, 0.0f);
-		bool playMode = OvCore::Global::ServiceLocator::Get<SceneSystem::SceneManager>().GetCurrentScene()->IsPlaying();
-		auto listenerInfo = OvCore::Global::ServiceLocator::Get<OvAudio::Core::AudioEngine>().GetListenerInformation(!playMode);
+		LittleEngine::FVector3 listenerPosition(0.0f, 0.0f, 0.0f);
+		bool playMode = LittleEngine::Global::ServiceLocator::Get<SceneSystem::SceneManager>().GetCurrentScene()->IsPlaying();
+		auto listenerInfo = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioEngine>().GetListenerInformation(!playMode);
 		if (listenerInfo.has_value())
 			listenerPosition = listenerInfo.value().first;
 
-		float distanceToListener = OvMaths::FVector3::Distance(listenerPosition, owner->transform.GetWorldPosition());
+		float distanceToListener = LittleEngine::FVector3::Distance(listenerPosition, owner->transform.GetWorldPosition());
 
 		for (float graphX = 0.0f; graphX < 50.0f; graphX += 0.25f)
 		{
@@ -212,13 +212,13 @@ void OvCore::ECS::Components::CAudioSource::OnInspector(OvUI::Internal::WidgetCo
 	});
 }
 
-void OvCore::ECS::Components::CAudioSource::OnEnable()
+void LittleEngine::CAudioSource::OnEnable()
 {
 	if (m_autoPlay)
 		Play();
 }
 
-void OvCore::ECS::Components::CAudioSource::OnDisable()
+void LittleEngine::CAudioSource::OnDisable()
 {
 	m_audioSource.Stop();
 }

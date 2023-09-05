@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Time/Date.h"
 
-std::string OvTools::Time::Date::GetDateAsString()
+std::string LittleEngine::Time::Date::GetDateAsString()
 {
 	std::string date;
 	const auto now = time(nullptr);

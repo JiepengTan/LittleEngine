@@ -8,17 +8,17 @@
 
 #include <functional>
 
-namespace OvUI::Widgets::Menu
+namespace LittleEngine::UI::Widgets::Menu
 {
     class MenuList;
 }
 
-namespace OvCore::ECS
+namespace LittleEngine
 {
     class Actor;
 }
 
-namespace OvEditor::Utils
+namespace LittleEditor::Utils
 {
     /**
     * Class exposing tools to generate an actor creation menu
@@ -38,6 +38,6 @@ namespace OvEditor::Utils
         * @param p_parent
         * @param p_onItemClicked
         */
-        static void GenerateActorCreationMenu(OvUI::Widgets::Menu::MenuList& p_menuList, OvCore::ECS::Actor* p_parent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
+        static void GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, LittleEngine::Actor* p_parent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
     };
 }

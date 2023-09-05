@@ -6,12 +6,12 @@
 
 #include "Modules/UI/Widgets/Menu/MenuItem.h"
 
-OvUI::Widgets::Menu::MenuItem::MenuItem(const std::string & p_name, const std::string & p_shortcut, bool p_checkable, bool p_checked) :
+LittleEngine::UI::Widgets::Menu::MenuItem::MenuItem(const std::string & p_name, const std::string & p_shortcut, bool p_checkable, bool p_checked) :
 	DataWidget(m_selected), name(p_name), shortcut(p_shortcut), checkable(p_checkable), checked(p_checked)
 {
 }
 
-void OvUI::Widgets::Menu::MenuItem::_Draw_Impl()
+void LittleEngine::UI::Widgets::Menu::MenuItem::_Draw_Impl()
 {
 	bool previousValue = checked;
 

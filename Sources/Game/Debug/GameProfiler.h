@@ -17,12 +17,12 @@
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Buttons/Button.h"
 
-namespace OvGame::Debug
+namespace LittleGame::Debug
 {
 	/**
 	* Panel that display profiling information
 	*/
-	class GameProfiler : public OvUI::Panels::PanelUndecorated
+	class GameProfiler : public LittleEngine::UI::Panels::PanelUndecorated
 	{
 	public:
 		/**
@@ -30,7 +30,7 @@ namespace OvGame::Debug
 		* @param p_window
 		* @param p_frequency
 		*/
-		GameProfiler(OvWindowing::Window& p_window, float p_frequency);
+		GameProfiler(LittleEngine::Windowing::Window& p_window, float p_frequency);
 
 		/**
 		* Update the data
@@ -40,21 +40,21 @@ namespace OvGame::Debug
 	
 
 	private:
-		OvUI::Types::Color CalculateActionColor(double p_percentage) const;
-		std::string GenerateActionString(OvAnalytics::Profiling::ProfilerReport::Action& p_action);
+		LittleEngine::UI::Types::Color CalculateActionColor(double p_percentage) const;
+		std::string GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action& p_action);
 
 	private:
 
 		float m_frequency;
 		float m_timer = 0.f;
 
-		OvAnalytics::Profiling::Profiler m_profiler;
+		LittleEngine::Analytics::Profiling::Profiler m_profiler;
 
-		OvWindowing::Window& m_window;
-		OvUI::Widgets::AWidget* m_separator;
-		OvUI::Widgets::Texts::TextColored* m_elapsedFramesText;
-		OvUI::Widgets::Texts::TextColored* m_elapsedTimeText;
-		OvUI::Widgets::Layout::Group* m_actionList;
+		LittleEngine::Windowing::Window& m_window;
+		LittleEngine::UI::Widgets::AWidget* m_separator;
+		LittleEngine::UI::Widgets::Texts::TextColored* m_elapsedFramesText;
+		LittleEngine::UI::Widgets::Texts::TextColored* m_elapsedTimeText;
+		LittleEngine::UI::Widgets::Layout::Group* m_actionList;
 	};
 }
 

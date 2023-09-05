@@ -24,50 +24,50 @@
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "Modules/Framework/SceneSystem/Scene.h"
 
-OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::DestroyedEvent;
-OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::CreatedEvent;
-OvTools::Eventing::Event<OvCore::ECS::Actor&, OvCore::ECS::Actor&> OvCore::ECS::Actor::AttachEvent;
-OvTools::Eventing::Event<OvCore::ECS::Actor&> OvCore::ECS::Actor::DettachEvent;
+LittleEngine::Eventing::Event<LittleEngine::Actor&> LittleEngine::Actor::DestroyedEvent;
+LittleEngine::Eventing::Event<LittleEngine::Actor&> LittleEngine::Actor::CreatedEvent;
+LittleEngine::Eventing::Event<LittleEngine::Actor&, LittleEngine::Actor&> LittleEngine::Actor::AttachEvent;
+LittleEngine::Eventing::Event<LittleEngine::Actor&> LittleEngine::Actor::DettachEvent;
 
-OvCore::ECS::Actor::Actor(SceneSystem::Scene* p_scene, int64_t p_actorID, const std::string & p_name, const std::string & p_tag, bool& p_playing) :
+LittleEngine::Actor::Actor(SceneSystem::Scene* p_scene, int64_t p_actorID, const std::string & p_name, const std::string & p_tag, bool& p_playing) :
 	Owner(p_scene),
 	m_aliveState(EActorAliveState::Alive),
 	m_name(p_name),
 	m_tag(p_tag),
 	m_playing(p_playing),
 	m_actorID(p_actorID),
-	transform(AddComponent<Components::CTransform>())
+	transform(AddComponent<CTransform>())
 {
 	OVLOG( "scene " + std::to_string(p_scene->GetSceneId()) +  " Create Actor " + std::to_string(p_actorID) + "  name =" + p_name);
 	CreatedEvent.Invoke(*this);
 }
 
-OvCore::ECS::Actor::~Actor()
+LittleEngine::Actor::~Actor()
 {
 	
 }
 
-const std::string & OvCore::ECS::Actor::GetName() const
+const std::string & LittleEngine::Actor::GetName() const
 {
 	return m_name;
 }
 
-const std::string & OvCore::ECS::Actor::GetTag() const
+const std::string & LittleEngine::Actor::GetTag() const
 {
 	return m_tag;
 }
 
-void OvCore::ECS::Actor::SetName(const std::string & p_name)
+void LittleEngine::Actor::SetName(const std::string & p_name)
 {
 	m_name = p_name;
 }
 
-void OvCore::ECS::Actor::SetTag(const std::string & p_tag)
+void LittleEngine::Actor::SetTag(const std::string & p_tag)
 {
 	m_tag = p_tag;
 }
 
-void OvCore::ECS::Actor::SetActive(bool p_active)
+void LittleEngine::Actor::SetActive(bool p_active)
 {
 	if (p_active != m_active)
 	{
@@ -77,27 +77,27 @@ void OvCore::ECS::Actor::SetActive(bool p_active)
 	}
 }
 
-bool OvCore::ECS::Actor::IsSelfActive() const
+bool LittleEngine::Actor::IsSelfActive() const
 {
 	return m_active;
 }
 
-bool OvCore::ECS::Actor::IsActive() const
+bool LittleEngine::Actor::IsActive() const
 {
 	return m_active && (m_parent ? m_parent->IsActive() : true);
 }
 
-void OvCore::ECS::Actor::SetID(int64_t p_id)
+void LittleEngine::Actor::SetID(int64_t p_id)
 {
 	m_actorID = p_id;
 }
 
-int64_t OvCore::ECS::Actor::GetID() const
+int64_t LittleEngine::Actor::GetID() const
 {
 	return m_actorID;
 }
 
-void OvCore::ECS::Actor::SetParent(Actor& p_parent)
+void LittleEngine::Actor::SetParent(Actor& p_parent)
 {
 	DetachFromParent();
 
@@ -112,7 +112,7 @@ void OvCore::ECS::Actor::SetParent(Actor& p_parent)
 	AttachEvent.Invoke(*this, p_parent);
 }
 
-void OvCore::ECS::Actor::DetachFromParent()
+void LittleEngine::Actor::DetachFromParent()
 {
 	DettachEvent.Invoke(*this);
 
@@ -131,26 +131,26 @@ void OvCore::ECS::Actor::DetachFromParent()
 	transform.RemoveParent();
 }
 
-bool OvCore::ECS::Actor::HasParent() const
+bool LittleEngine::Actor::HasParent() const
 {
 	return m_parent;
 }
 
-OvCore::ECS::Actor * OvCore::ECS::Actor::GetParent() const
+LittleEngine::Actor * LittleEngine::Actor::GetParent() const
 {
 	return m_parent;
 }
 
-int64_t OvCore::ECS::Actor::GetParentID() const
+int64_t LittleEngine::Actor::GetParentID() const
 {
 	return m_parentID;
 }
 
-std::vector<OvCore::ECS::Actor*>& OvCore::ECS::Actor::GetChildren()
+std::vector<LittleEngine::Actor*>& LittleEngine::Actor::GetChildren()
 {
 	return m_children;
 }
-bool OvCore::ECS::Actor::Destroy()
+bool LittleEngine::Actor::Destroy()
 {
 	if(!IsAlive()) return false;
 	Owner->DestroyActor(*this);
@@ -159,33 +159,33 @@ bool OvCore::ECS::Actor::Destroy()
 	return true;
 }
 
-void OvCore::ECS::Actor::MarkAsDestroying()
+void LittleEngine::Actor::MarkAsDestroying()
 {
 	m_aliveState = EActorAliveState::Destroying;
 }
-void OvCore::ECS::Actor::MarkAsDestroyed()
+void LittleEngine::Actor::MarkAsDestroyed()
 {
 	m_aliveState = EActorAliveState::Destroyed;
 }
-bool OvCore::ECS::Actor::IsAlive() const
+bool LittleEngine::Actor::IsAlive() const
 {
 	return m_aliveState == EActorAliveState::Alive ;
 }
-bool OvCore::ECS::Actor::IsDestroying()const
+bool LittleEngine::Actor::IsDestroying()const
 {
 	return m_aliveState == EActorAliveState::Destroying ;
 }
-bool OvCore::ECS::Actor::IsDestroyed()const
+bool LittleEngine::Actor::IsDestroyed()const
 {
 	return m_aliveState == EActorAliveState::Destroyed ;
 }
-void OvCore::ECS::Actor::SetSleeping(bool p_sleeping)
+void LittleEngine::Actor::SetSleeping(bool p_sleeping)
 {
 	m_sleeping = p_sleeping;
 }
 
-std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& OvCore::ECS::Actor::GetComponentsCopy(
-	std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& comps)
+std::vector<std::shared_ptr<LittleEngine::AComponent>>& LittleEngine::Actor::GetComponentsCopy(
+	std::vector<std::shared_ptr<LittleEngine::AComponent>>& comps)
 {
 	m_tempComponents.clear();
 	for (auto ident : comps){
@@ -194,7 +194,7 @@ std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& OvCore::ECS::
 	return m_tempComponents;
 }
 
-void OvCore::ECS::Actor::OnAwake()
+void LittleEngine::Actor::OnAwake()
 {
 	if(m_awaked) return;
 	m_awaked = true;
@@ -202,7 +202,7 @@ void OvCore::ECS::Actor::OnAwake()
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnAwake(); });
 }
 
-void OvCore::ECS::Actor::OnStart()
+void LittleEngine::Actor::OnStart()
 {
 	if(m_started) return;
 	m_started = true;
@@ -210,19 +210,19 @@ void OvCore::ECS::Actor::OnStart()
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnStart(); });
 }
 
-void OvCore::ECS::Actor::OnEnable()
+void LittleEngine::Actor::OnEnable()
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnEnable(); });
 }
 
-void OvCore::ECS::Actor::OnDisable()
+void LittleEngine::Actor::OnDisable()
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnDisable(); });
 }
 
-void OvCore::ECS::Actor::OnDestroy()
+void LittleEngine::Actor::OnDestroy()
 {
 	if (!m_sleeping)
 	{
@@ -233,7 +233,7 @@ void OvCore::ECS::Actor::OnDestroy()
 	
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnDestroy(); });
-	std::for_each(comps.begin(), comps.end(), [&](std::shared_ptr<Components::AComponent> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
+	std::for_each(comps.begin(), comps.end(), [&](std::shared_ptr<AComponent> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
 
 	DetachFromParent();
 	
@@ -243,7 +243,7 @@ void OvCore::ECS::Actor::OnDestroy()
 	m_children.clear();
 }
 
-void OvCore::ECS::Actor::OnUpdate(float p_deltaTime)
+void LittleEngine::Actor::OnUpdate(float p_deltaTime)
 {
 	if (IsAlive()&& IsActive())
 	{
@@ -252,7 +252,7 @@ void OvCore::ECS::Actor::OnUpdate(float p_deltaTime)
 	}
 }
 
-void OvCore::ECS::Actor::OnFixedUpdate(float p_deltaTime)
+void LittleEngine::Actor::OnFixedUpdate(float p_deltaTime)
 {
 	if (IsAlive()&&IsActive())
 	{
@@ -261,7 +261,7 @@ void OvCore::ECS::Actor::OnFixedUpdate(float p_deltaTime)
 	}
 }
 
-void OvCore::ECS::Actor::OnLateUpdate(float p_deltaTime)
+void LittleEngine::Actor::OnLateUpdate(float p_deltaTime)
 {
 	if (IsAlive()&&IsActive())
 	{
@@ -270,43 +270,43 @@ void OvCore::ECS::Actor::OnLateUpdate(float p_deltaTime)
 	}
 }
 
-void OvCore::ECS::Actor::OnCollisionEnter(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnCollisionEnter(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionEnter(p_otherObject); });
 }
 
-void OvCore::ECS::Actor::OnCollisionStay(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnCollisionStay(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionStay(p_otherObject); });
 }
 
-void OvCore::ECS::Actor::OnCollisionExit(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnCollisionExit(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnCollisionExit(p_otherObject); });
 }
 
-void OvCore::ECS::Actor::OnTriggerEnter(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnTriggerEnter(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerEnter(p_otherObject); });
 }
 
-void OvCore::ECS::Actor::OnTriggerStay(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnTriggerStay(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerStay(p_otherObject); });
 }
 
-void OvCore::ECS::Actor::OnTriggerExit(Components::CPhysicalObject& p_otherObject)
+void LittleEngine::Actor::OnTriggerExit(CPhysicalObject& p_otherObject)
 {
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerExit(p_otherObject); });
 }
 
-bool OvCore::ECS::Actor::RemoveComponent(OvCore::ECS::Components::AComponent& p_component)
+bool LittleEngine::Actor::RemoveComponent(LittleEngine::AComponent& p_component)
 {
 	for (auto it = m_components.begin(); it != m_components.end(); ++it)
 	{
@@ -320,22 +320,22 @@ bool OvCore::ECS::Actor::RemoveComponent(OvCore::ECS::Components::AComponent& p_
 	return false;
 }
 
-std::vector<std::shared_ptr<OvCore::ECS::Components::AComponent>>& OvCore::ECS::Actor::GetComponents()
+std::vector<std::shared_ptr<LittleEngine::AComponent>>& LittleEngine::Actor::GetComponents()
 {
 	return m_components;
 }
 
 
-void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
+void LittleEngine::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
 	tinyxml2::XMLNode* actorNode = p_doc.NewElement("actor");
 	p_actorsRoot->InsertEndChild(actorNode);
 
-	OvCore::Serializer::SerializeString(p_doc, actorNode, "name", m_name);
-	OvCore::Serializer::SerializeString(p_doc, actorNode, "tag", m_tag);
-	OvCore::Serializer::SerializeBoolean(p_doc, actorNode, "active", m_active);
-	OvCore::Serializer::SerializeInt64(p_doc, actorNode, "id", m_actorID);
-	OvCore::Serializer::SerializeInt64(p_doc, actorNode, "parent", m_parentID);
+	LittleEngine::Serializer::SerializeString(p_doc, actorNode, "name", m_name);
+	LittleEngine::Serializer::SerializeString(p_doc, actorNode, "tag", m_tag);
+	LittleEngine::Serializer::SerializeBoolean(p_doc, actorNode, "active", m_active);
+	LittleEngine::Serializer::SerializeInt64(p_doc, actorNode, "id", m_actorID);
+	LittleEngine::Serializer::SerializeInt64(p_doc, actorNode, "parent", m_parentID);
 
 	tinyxml2::XMLNode* componentsNode = p_doc.NewElement("components");
 	actorNode->InsertEndChild(componentsNode);
@@ -347,7 +347,7 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 		componentsNode->InsertEndChild(componentNode);
 
 		/* Component type */
-		OvCore::Serializer::SerializeString(p_doc, componentNode, "type", typeid(*component).name());
+		LittleEngine::Serializer::SerializeString(p_doc, componentNode, "type", typeid(*component).name());
 
 		/* Data node (Will be passed to the component) */
 		tinyxml2::XMLElement* data = p_doc.NewElement("data");
@@ -360,13 +360,13 @@ void OvCore::ECS::Actor::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XM
 	tinyxml2::XMLNode* behavioursNode = p_doc.NewElement("behaviours");
 	actorNode->InsertEndChild(behavioursNode);
 }
-void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
+void LittleEngine::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_actorsRoot)
 {
-	OvCore::Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
-	OvCore::Serializer::DeserializeString(p_doc, p_actorsRoot, "tag", m_tag);
-	OvCore::Serializer::DeserializeBoolean(p_doc, p_actorsRoot, "active", m_active);
-	OvCore::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "id", m_actorID);
-	OvCore::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "parent", m_parentID);
+	LittleEngine::Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
+	LittleEngine::Serializer::DeserializeString(p_doc, p_actorsRoot, "tag", m_tag);
+	LittleEngine::Serializer::DeserializeBoolean(p_doc, p_actorsRoot, "active", m_active);
+	LittleEngine::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "id", m_actorID);
+	LittleEngine::Serializer::DeserializeInt64(p_doc, p_actorsRoot, "parent", m_parentID);
 
 	{
 		tinyxml2::XMLNode* componentsRoot = p_actorsRoot->FirstChildElement("components");
@@ -377,24 +377,24 @@ void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::
 			while (currentComponent)
 			{
 				std::string componentType = currentComponent->FirstChildElement("type")->GetText();
-				OvCore::ECS::Components::AComponent* component = nullptr;
+				LittleEngine::AComponent* component = nullptr;
 
 				// TODO: Use component name instead of typeid (unsafe)
-				if (componentType == typeid(Components::CTransform).name())			component = &transform;
-				else if (componentType == typeid(Components::CPhysicalBox).name())			component = &AddComponent<OvCore::ECS::Components::CPhysicalBox>();
-				else if (componentType == typeid(Components::CPhysicalSphere).name())		component = &AddComponent<OvCore::ECS::Components::CPhysicalSphere>();
-				else if (componentType == typeid(Components::CPhysicalCapsule).name())		component = &AddComponent<OvCore::ECS::Components::CPhysicalCapsule>();
-				else if (componentType == typeid(Components::CModelRenderer).name())			component = &AddComponent<OvCore::ECS::Components::CModelRenderer>();
-				else if (componentType == typeid(Components::CCamera).name())				component = &AddComponent<OvCore::ECS::Components::CCamera>();
-				else if (componentType == typeid(Components::CMaterialRenderer).name())		component = &AddComponent<OvCore::ECS::Components::CMaterialRenderer>();
-				else if (componentType == typeid(Components::CAudioSource).name())			component = &AddComponent<OvCore::ECS::Components::CAudioSource>();
-				else if (componentType == typeid(Components::CAudioListener).name())		component = &AddComponent<OvCore::ECS::Components::CAudioListener>();
-				else if (componentType == typeid(Components::CPointLight).name())			component = &AddComponent<OvCore::ECS::Components::CPointLight>();
-				else if (componentType == typeid(Components::CDirectionalLight).name())		component = &AddComponent<OvCore::ECS::Components::CDirectionalLight>();
-				else if (componentType == typeid(Components::CSpotLight).name())			component = &AddComponent<OvCore::ECS::Components::CSpotLight>();
-				else if (componentType == typeid(Components::CAmbientBoxLight).name())		component = &AddComponent<OvCore::ECS::Components::CAmbientBoxLight>();
-				else if (componentType == typeid(Components::CAmbientSphereLight).name())	component = &AddComponent<OvCore::ECS::Components::CAmbientSphereLight>();
-				else if (componentType == typeid(Components::CAnimator).name())				component = &AddComponent<OvCore::ECS::Components::CAnimator>();
+				if (componentType == typeid(CTransform).name())			component = &transform;
+				else if (componentType == typeid(CPhysicalBox).name())			component = &AddComponent<LittleEngine::CPhysicalBox>();
+				else if (componentType == typeid(CPhysicalSphere).name())		component = &AddComponent<LittleEngine::CPhysicalSphere>();
+				else if (componentType == typeid(CPhysicalCapsule).name())		component = &AddComponent<LittleEngine::CPhysicalCapsule>();
+				else if (componentType == typeid(CModelRenderer).name())			component = &AddComponent<LittleEngine::CModelRenderer>();
+				else if (componentType == typeid(CCamera).name())				component = &AddComponent<LittleEngine::CCamera>();
+				else if (componentType == typeid(CMaterialRenderer).name())		component = &AddComponent<LittleEngine::CMaterialRenderer>();
+				else if (componentType == typeid(CAudioSource).name())			component = &AddComponent<LittleEngine::CAudioSource>();
+				else if (componentType == typeid(CAudioListener).name())		component = &AddComponent<LittleEngine::CAudioListener>();
+				else if (componentType == typeid(CPointLight).name())			component = &AddComponent<LittleEngine::CPointLight>();
+				else if (componentType == typeid(CDirectionalLight).name())		component = &AddComponent<LittleEngine::CDirectionalLight>();
+				else if (componentType == typeid(CSpotLight).name())			component = &AddComponent<LittleEngine::CSpotLight>();
+				else if (componentType == typeid(CAmbientBoxLight).name())		component = &AddComponent<LittleEngine::CAmbientBoxLight>();
+				else if (componentType == typeid(CAmbientSphereLight).name())	component = &AddComponent<LittleEngine::CAmbientSphereLight>();
+				else if (componentType == typeid(CAnimator).name())				component = &AddComponent<LittleEngine::CAnimator>();
 
 				if (component)
 					component->OnDeserialize(p_doc, currentComponent->FirstChildElement("data"));
@@ -405,7 +405,7 @@ void OvCore::ECS::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::
 	}
 }
 
-void OvCore::ECS::Actor::RecursiveActiveUpdate()
+void LittleEngine::Actor::RecursiveActiveUpdate()
 {
 	bool isActive = IsActive();
 
@@ -430,7 +430,7 @@ void OvCore::ECS::Actor::RecursiveActiveUpdate()
 		child->RecursiveActiveUpdate();
 }
 
-void OvCore::ECS::Actor::RecursiveWasActiveUpdate()
+void LittleEngine::Actor::RecursiveWasActiveUpdate()
 {
 	m_wasActive = IsActive();
 	for (auto child : m_children)

@@ -10,7 +10,7 @@
 
 #include "Modules/Rendering/Buffers/VertexArray.h"
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	/**
 	* Interface for any mesh

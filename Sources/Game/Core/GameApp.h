@@ -6,28 +6,26 @@
 
 #pragma once
 
-#include "../Editor/Core/Context.h"
-#include "../Editor/Core/Editor.h"
+#include "../Game/Core/Context.h"
+#include "../Game/Core/Game.h"
 
-namespace OvEditor::Core
+namespace LittleGame::Core
 {
 	/**
-	* Entry point of OvEditor
+	* Entry point of LittleGame
 	*/
-	class Application
+	class GameApp
 	{
 	public:
 		/**
 		* Constructor
-		* @param p_projectPath
-		* @param p_projectName
 		*/
-		Application(const std::string& p_projectPath, const std::string& p_projectName);
+		GameApp();
 
 		/**
 		* Destructor
 		*/
-		~Application();
+		~GameApp();
 
 		/**
 		* Run the app
@@ -41,6 +39,6 @@ namespace OvEditor::Core
 
 	private:
 		Context m_context;
-		Editor m_editor;
+		Game m_game;
 	};
 }

@@ -16,7 +16,7 @@
 #include "Core/Maths/FVector4.h"
 
 
-namespace OvMaths
+namespace LittleEngine
 {
 
 	/**
@@ -29,7 +29,7 @@ namespace OvMaths
 	*/
 	struct FMatrix4
 	{
-		float data[16];
+		FFloat data[16];
 		static const FMatrix4 Identity;
 
 		/**
@@ -202,13 +202,13 @@ namespace OvMaths
 		* @param p_matrix
 		* @param p_vector
 		*/
-	    static OvMaths::FVector3 MultiplyPoint(const FMatrix4& p_matrix, const FVector3& p_vector);
+	    static LittleEngine::FVector3 MultiplyPoint(const FMatrix4& p_matrix, const FVector3& p_vector);
 		/**
 		* Vector Product vec3 : no transform
 		* @param p_matrix
 		* @param p_vector
 		*/
-		static OvMaths::FVector3 MultiplyVector(const FMatrix4& p_matrix, const FVector3& p_vector);
+		static LittleEngine::FVector3 MultiplyVector(const FMatrix4& p_matrix, const FVector3& p_vector);
 		
 		/**
 		* Scalar Product
@@ -402,8 +402,8 @@ namespace OvMaths
 		* @param p_upY
 		* @param p_upZ
 		*/
-		static FMatrix4 CreateView(OvMaths::FTransform& trans);
-		static FMatrix4 CreateView(OvMaths::FVector3 eye, OvMaths::FVector3 look, OvMaths::FVector3 up);
+		static FMatrix4 CreateView(LittleEngine::FTransform& trans);
+		static FMatrix4 CreateView(LittleEngine::FVector3 eye, LittleEngine::FVector3 look, LittleEngine::FVector3 up);
 		/**
 		* Return frustum matrix
 		* @param p_left

@@ -7,10 +7,10 @@
 #include "Modules/UI/Panels/APanelTransformable.h"
 #include "Modules/UI/Internal/Converter.h"
 
-OvUI::Panels::APanelTransformable::APanelTransformable
+LittleEngine::UI::Panels::APanelTransformable::APanelTransformable
 (
-	const OvMaths::FVector2& p_defaultPosition,
-	const OvMaths::FVector2& p_defaultSize,
+	const LittleEngine::FVector2& p_defaultPosition,
+	const LittleEngine::FVector2& p_defaultSize,
 	Settings::EHorizontalAlignment p_defaultHorizontalAlignment,
 	Settings::EVerticalAlignment p_defaultVerticalAlignment,
 	bool p_ignoreConfigFile
@@ -23,64 +23,64 @@ OvUI::Panels::APanelTransformable::APanelTransformable
 {
 }
 
-void OvUI::Panels::APanelTransformable::SetPosition(const OvMaths::FVector2& p_position)
+void LittleEngine::UI::Panels::APanelTransformable::SetPosition(const LittleEngine::FVector2& p_position)
 {
 	m_position = p_position;
 	m_positionChanged = true;
 }
 
-void OvUI::Panels::APanelTransformable::SetSize(const OvMaths::FVector2& p_size)
+void LittleEngine::UI::Panels::APanelTransformable::SetSize(const LittleEngine::FVector2& p_size)
 {
 	m_size = p_size;
 	m_sizeChanged = true;
 }
 
-void OvUI::Panels::APanelTransformable::SetAlignment(Settings::EHorizontalAlignment p_horizontalAlignment, Settings::EVerticalAlignment p_verticalAligment)
+void LittleEngine::UI::Panels::APanelTransformable::SetAlignment(Settings::EHorizontalAlignment p_horizontalAlignment, Settings::EVerticalAlignment p_verticalAligment)
 {
 	m_horizontalAlignment = p_horizontalAlignment;
 	m_verticalAlignment = p_verticalAligment;
 	m_alignmentChanged = true;
 }
 
-const OvMaths::FVector2 & OvUI::Panels::APanelTransformable::GetPosition() const
+const LittleEngine::FVector2 & LittleEngine::UI::Panels::APanelTransformable::GetPosition() const
 {
 	return m_position;
 }
 
-const OvMaths::FVector2 & OvUI::Panels::APanelTransformable::GetSize() const
+const LittleEngine::FVector2 & LittleEngine::UI::Panels::APanelTransformable::GetSize() const
 {
 	return m_size;
 }
 
-OvUI::Settings::EHorizontalAlignment OvUI::Panels::APanelTransformable::GetHorizontalAlignment() const
+LittleEngine::UI::Settings::EHorizontalAlignment LittleEngine::UI::Panels::APanelTransformable::GetHorizontalAlignment() const
 {
 	return m_horizontalAlignment;
 }
 
-OvUI::Settings::EVerticalAlignment OvUI::Panels::APanelTransformable::GetVerticalAlignment() const
+LittleEngine::UI::Settings::EVerticalAlignment LittleEngine::UI::Panels::APanelTransformable::GetVerticalAlignment() const
 {
 	return m_verticalAlignment;
 }
 
-void OvUI::Panels::APanelTransformable::UpdatePosition()
+void LittleEngine::UI::Panels::APanelTransformable::UpdatePosition()
 {
 	if (m_defaultPosition.x != -1.f && m_defaultPosition.y != 1.f)
 	{
-		OvMaths::FVector2 offsettedDefaultPos = m_defaultPosition + CalculatePositionAlignmentOffset(true);
+		LittleEngine::FVector2 offsettedDefaultPos = m_defaultPosition + CalculatePositionAlignmentOffset(true);
 		ImGui::SetWindowPos(Internal::Converter::ToImVec2(offsettedDefaultPos), m_ignoreConfigFile ? ImGuiCond_Once : ImGuiCond_FirstUseEver);
 	}
 
 	if (m_positionChanged || m_alignmentChanged)
 	{
-		OvMaths::FVector2 offset = CalculatePositionAlignmentOffset(false);
-		OvMaths::FVector2 offsettedPos(m_position.x + offset.x, m_position.y + offset.y);
+		LittleEngine::FVector2 offset = CalculatePositionAlignmentOffset(false);
+		LittleEngine::FVector2 offsettedPos(m_position.x + offset.x, m_position.y + offset.y);
 		ImGui::SetWindowPos(Internal::Converter::ToImVec2(offsettedPos), ImGuiCond_Always);
 		m_positionChanged = false;
 		m_alignmentChanged = false;
 	}
 }
 
-void OvUI::Panels::APanelTransformable::UpdateSize()
+void LittleEngine::UI::Panels::APanelTransformable::UpdateSize()
 {
 	/*
 	if (m_defaultSize.x != -1.f && m_defaultSize.y != 1.f)
@@ -93,17 +93,17 @@ void OvUI::Panels::APanelTransformable::UpdateSize()
 	}
 }
 
-void OvUI::Panels::APanelTransformable::CopyImGuiPosition()
+void LittleEngine::UI::Panels::APanelTransformable::CopyImGuiPosition()
 {
 	m_position = Internal::Converter::ToFVector2(ImGui::GetWindowPos());
 }
 
-void OvUI::Panels::APanelTransformable::CopyImGuiSize()
+void LittleEngine::UI::Panels::APanelTransformable::CopyImGuiSize()
 {
 	m_size = Internal::Converter::ToFVector2(ImGui::GetWindowSize());
 }
 
-void OvUI::Panels::APanelTransformable::Update()
+void LittleEngine::UI::Panels::APanelTransformable::Update()
 {
 	if (!m_firstFrame)
 	{
@@ -118,26 +118,26 @@ void OvUI::Panels::APanelTransformable::Update()
 	m_firstFrame = false;
 }
 
-OvMaths::FVector2 OvUI::Panels::APanelTransformable::CalculatePositionAlignmentOffset(bool p_default)
+LittleEngine::FVector2 LittleEngine::UI::Panels::APanelTransformable::CalculatePositionAlignmentOffset(bool p_default)
 {
-	OvMaths::FVector2 result(0.0f, 0.0f);
+	LittleEngine::FVector2 result(0.0f, 0.0f);
 
 	switch (p_default ? m_defaultHorizontalAlignment : m_horizontalAlignment)
 	{
-	case OvUI::Settings::EHorizontalAlignment::CENTER:
+	case LittleEngine::UI::Settings::EHorizontalAlignment::CENTER:
 		result.x -= m_size.x / 2.0f;
 		break;
-	case OvUI::Settings::EHorizontalAlignment::RIGHT:
+	case LittleEngine::UI::Settings::EHorizontalAlignment::RIGHT:
 		result.x -= m_size.x;
 		break;
 	}
 
 	switch (p_default ? m_defaultVerticalAlignment : m_verticalAlignment)
 	{
-	case OvUI::Settings::EVerticalAlignment::MIDDLE:
+	case LittleEngine::UI::Settings::EVerticalAlignment::MIDDLE:
 		result.y -= m_size.y / 2.0f;
 		break;
-	case OvUI::Settings::EVerticalAlignment::BOTTOM:
+	case LittleEngine::UI::Settings::EVerticalAlignment::BOTTOM:
 		result.y -= m_size.y;
 		break;
 	}

@@ -13,7 +13,7 @@
 #include "Modules/UI/Types/Color.h"
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Button widget of a single color (Color palette element)
@@ -28,7 +28,7 @@ namespace OvUI::Widgets::Buttons
 		* @param p_size
 		* @param p_enableAlpha
 		*/
-		ButtonColored(const std::string& p_label = "", const Types::Color& p_color = {}, const OvMaths::FVector2& p_size =OvMaths::FVector2(0.f, 0.f), bool p_enableAlpha = true);
+		ButtonColored(const std::string& p_label = "", const Types::Color& p_color = {}, const LittleEngine::FVector2& p_size =LittleEngine::FVector2(0.f, 0.f), bool p_enableAlpha = true);
 
 	protected:
 		void _Draw_Impl() override;
@@ -36,7 +36,7 @@ namespace OvUI::Widgets::Buttons
 	public:
 		std::string label;
 		Types::Color color;
-		OvMaths::FVector2 size;
+		LittleEngine::FVector2 size;
 		bool enableAlpha;
 	};
 }

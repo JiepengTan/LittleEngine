@@ -12,7 +12,7 @@
 #include "Modules/UI/ImGui/imgui.h"
 #include "Modules/UI/Types/Color.h"
 
-namespace OvUI::Internal
+namespace LittleEngine::UI::Internal
 {
 	/**
 	* Handles imgui conversion to/from overload types
@@ -41,12 +41,12 @@ namespace OvUI::Internal
 		* Convert the given FVector2 to ImVec2
 		* @param p_value
 		*/
-		static ImVec2 ToImVec2(const OvMaths::FVector2& p_value);
+		static ImVec2 ToImVec2(const LittleEngine::FVector2& p_value);
 
 		/**
 		* Convert the given ImVec2 to FVector2
 		* @param p_value
 		*/
-		static OvMaths::FVector2 ToFVector2(const ImVec2& p_value);
+		static LittleEngine::FVector2 ToFVector2(const ImVec2& p_value);
 	};
 }

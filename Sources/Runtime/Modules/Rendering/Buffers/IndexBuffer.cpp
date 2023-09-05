@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-OvRendering::Buffers::IndexBuffer::IndexBuffer(unsigned int* p_data, size_t p_elements)
+LittleEngine::Rendering::Buffers::IndexBuffer::IndexBuffer(unsigned int* p_data, size_t p_elements)
 {
 	glGenBuffers(1, &m_bufferID);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_bufferID);
@@ -19,26 +19,26 @@ OvRendering::Buffers::IndexBuffer::IndexBuffer(unsigned int* p_data, size_t p_el
 	
 }
 
-OvRendering::Buffers::IndexBuffer::IndexBuffer(std::vector<uint32_t>& p_data) : IndexBuffer(p_data.data(), p_data.size())
+LittleEngine::Rendering::Buffers::IndexBuffer::IndexBuffer(std::vector<uint32_t>& p_data) : IndexBuffer(p_data.data(), p_data.size())
 {
 }
 
-OvRendering::Buffers::IndexBuffer::~IndexBuffer()
+LittleEngine::Rendering::Buffers::IndexBuffer::~IndexBuffer()
 {
 	glDeleteBuffers(1, &m_bufferID);
 }
 
-void OvRendering::Buffers::IndexBuffer::Bind()
+void LittleEngine::Rendering::Buffers::IndexBuffer::Bind()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_bufferID);
 }
 
-void OvRendering::Buffers::IndexBuffer::Unbind()
+void LittleEngine::Rendering::Buffers::IndexBuffer::Unbind()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-uint32_t OvRendering::Buffers::IndexBuffer::GetID()
+uint32_t LittleEngine::Rendering::Buffers::IndexBuffer::GetID()
 {
 	return m_bufferID;
 }

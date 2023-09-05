@@ -13,7 +13,7 @@
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 #include "Modules/UI/Types/Color.h"
 
-namespace OvUI::Widgets::Buttons
+namespace LittleEngine::UI::Widgets::Buttons
 {
 	/**
 	* Simple button widget
@@ -27,14 +27,14 @@ namespace OvUI::Widgets::Buttons
 		* @param p_size
 		* @param p_disabled
 		*/
-		Button(const std::string& p_label = "", const OvMaths::FVector2& p_size = OvMaths::FVector2(0.f, 0.f), bool p_disabled = false);
+		Button(const std::string& p_label = "", const LittleEngine::FVector2& p_size = LittleEngine::FVector2(0.f, 0.f), bool p_disabled = false);
 
 	protected:
 		void _Draw_Impl() override;
 
 	public:
 		std::string label;
-		OvMaths::FVector2 size;
+		LittleEngine::FVector2 size;
 		bool disabled = false;
 
 		Types::Color idleBackgroundColor;

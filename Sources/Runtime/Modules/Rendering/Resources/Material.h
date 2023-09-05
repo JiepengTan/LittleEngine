@@ -14,7 +14,7 @@
 #include "Modules/Framework/API/ISerializable.h"
 
 
-namespace OvCore::Resources
+namespace LittleEngine::Resources
 {
 	/**
 	* A material is a combination of a shader and some settings (Material settings and shader settings)
@@ -26,7 +26,7 @@ namespace OvCore::Resources
 		* Defines the shader to attach to this material instance
 		* @param p_shader
 		*/
-		void SetShader(OvRendering::Resources::Shader* p_shader);
+		void SetShader(LittleEngine::Rendering::Resources::Shader* p_shader);
 
 		/**
 		* Fill uniform with default uniform values
@@ -37,7 +37,7 @@ namespace OvCore::Resources
 		* Bind the material and send its uniform data to the GPU
 		* @parma p_emptyTexture (The texture to use if a texture uniform is nullptr)
 		*/
-		void Bind(OvRendering::Resources::Texture* p_emptyTexture);
+		void Bind(LittleEngine::Rendering::Resources::Texture* p_emptyTexture);
 
 		/**
 		* Unbind the material
@@ -60,7 +60,7 @@ namespace OvCore::Resources
 		/**
 		* Returns the attached shader
 		*/
-		OvRendering::Resources::Shader*& GetShader();
+		LittleEngine::Rendering::Resources::Shader*& GetShader();
 
 		/**
 		* Returns true if the material has a shader attached
@@ -171,7 +171,7 @@ namespace OvCore::Resources
 		const std::string path;
 
 	private:
-		OvRendering::Resources::Shader* m_shader = nullptr;
+		LittleEngine::Rendering::Resources::Shader* m_shader = nullptr;
 		std::map<std::string, std::any> m_uniformsData;
 
 		bool m_blendable		= false;

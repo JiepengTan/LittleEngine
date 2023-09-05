@@ -9,7 +9,7 @@
 #include <functional>
 
 
-namespace OvMaths::Internal
+namespace LittleEngine::Internal
 {
 	/**
 	* The TransformNotifier is a simple notification system used by transform to send notifications to his children

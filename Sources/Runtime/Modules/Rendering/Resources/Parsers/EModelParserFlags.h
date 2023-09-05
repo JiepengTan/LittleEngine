@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvRendering::Resources::Parsers
+namespace LittleEngine::Rendering::Resources::Parsers
 {
 	/**
 	* Some flags that can be used for model parsing

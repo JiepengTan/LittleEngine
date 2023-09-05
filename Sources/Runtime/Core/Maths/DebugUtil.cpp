@@ -39,7 +39,7 @@ void DebugUtil::Dump(float val, bool isNewLine)
     if(isNewLine) _dumpStream<<std::endl;
 }
 
-void DebugUtil::Dump(OvMaths::FVector2 matrix, bool isNewLine)
+void DebugUtil::Dump(LittleEngine::FVector2 matrix, bool isNewLine)
 {
     Dump("(");
     Dump(matrix.x);
@@ -49,19 +49,7 @@ void DebugUtil::Dump(OvMaths::FVector2 matrix, bool isNewLine)
     if(isNewLine) _dumpStream<<std::endl;
 }
 
-void DebugUtil::Dump(OvMaths::FVector3 matrix, bool isNewLine)
-{
-    Dump("(");
-    Dump(matrix.x);
-    Dump(",");
-    Dump(matrix.y);
-    Dump(",");
-    Dump(matrix.z);
-    Dump(")");
-    if(isNewLine) _dumpStream<<std::endl;
-}
-
-void DebugUtil::Dump(OvMaths::FVector4 matrix, bool isNewLine)
+void DebugUtil::Dump(LittleEngine::FVector3 matrix, bool isNewLine)
 {
     Dump("(");
     Dump(matrix.x);
@@ -69,13 +57,11 @@ void DebugUtil::Dump(OvMaths::FVector4 matrix, bool isNewLine)
     Dump(matrix.y);
     Dump(",");
     Dump(matrix.z);
-    Dump(",");
-    Dump(matrix.w);
     Dump(")");
     if(isNewLine) _dumpStream<<std::endl;
 }
 
-void DebugUtil::Dump(OvMaths::FQuaternion matrix, bool isNewLine)
+void DebugUtil::Dump(LittleEngine::FVector4 matrix, bool isNewLine)
 {
     Dump("(");
     Dump(matrix.x);
@@ -89,7 +75,21 @@ void DebugUtil::Dump(OvMaths::FQuaternion matrix, bool isNewLine)
     if(isNewLine) _dumpStream<<std::endl;
 }
 
-void DebugUtil::Dump(OvMaths::FMatrix4 matrix, bool isNewLine)
+void DebugUtil::Dump(LittleEngine::FQuaternion matrix, bool isNewLine)
+{
+    Dump("(");
+    Dump(matrix.x);
+    Dump(",");
+    Dump(matrix.y);
+    Dump(",");
+    Dump(matrix.z);
+    Dump(",");
+    Dump(matrix.w);
+    Dump(")");
+    if(isNewLine) _dumpStream<<std::endl;
+}
+
+void DebugUtil::Dump(LittleEngine::FMatrix4 matrix, bool isNewLine)
 {
     for (int i=0;i<16;i++)
     {

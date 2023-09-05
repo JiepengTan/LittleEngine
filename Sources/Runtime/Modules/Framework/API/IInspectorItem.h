@@ -11,7 +11,7 @@
 #include "Modules/Framework/API/ISerializable.h"
 #include "Modules/Utils/GUIDrawer.h"
 
-namespace OvCore::API
+namespace LittleEngine::API
 {
 	/**
 	* IInspectorItem is an interface to any class that is serializable and drawable on inspector
@@ -23,6 +23,6 @@ namespace OvCore::API
 		* Called when the inspector needs to create the UI elements for the given IInspectorItem
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) = 0;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) = 0;
 	};
 }

@@ -11,7 +11,7 @@
 
 #include "Modules/Audio/Tracking/SoundStopEventBinder.h"
 
-namespace OvAudio::Tracking
+namespace LittleEngine::Audio::Tracking
 {
 	/**
 	* Track a playing sound and allow the modification of its settings
@@ -39,7 +39,7 @@ namespace OvAudio::Tracking
 		/**
 		* FinishedEvent is called when the track get stopped/finished
 		*/
-		OvTools::Eventing::Event<> StopEvent;
+		LittleEngine::Eventing::Event<> StopEvent;
 
 	private:
 		irrklang::ISound* const m_track = nullptr;

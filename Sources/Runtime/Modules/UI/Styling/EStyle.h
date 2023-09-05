@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvUI::Styling
+namespace LittleEngine::UI::Styling
 {
 	/**
 	* Some styles that you can use to modify the UI looks

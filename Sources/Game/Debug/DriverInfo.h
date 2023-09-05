@@ -14,12 +14,12 @@
 #include "Modules/UI/Panels/PanelUndecorated.h"
 #include "Modules/UI/Widgets/Texts/TextColored.h"
 
-namespace OvGame::Debug
+namespace LittleGame::Debug
 {
 	/**
 	* Panel that display information about the driver (hardware and software)
 	*/
-	class DriverInfo : public OvUI::Panels::PanelUndecorated
+	class DriverInfo : public LittleEngine::UI::Panels::PanelUndecorated
 	{
 	public:
 		/**
@@ -27,7 +27,7 @@ namespace OvGame::Debug
 		* @param p_renderer
 		* @param p_window
 		*/
-		DriverInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window);
+		DriverInfo(LittleEngine::Rendering::Core::Renderer& p_renderer, LittleEngine::Windowing::Window& p_window);
 	};
 }
 

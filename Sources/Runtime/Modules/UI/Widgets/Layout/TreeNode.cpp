@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Layout/TreeNode.h"
 
-OvUI::Widgets::Layout::TreeNode::TreeNode(const std::string & p_name, bool p_arrowClickToOpen) :
+LittleEngine::UI::Widgets::Layout::TreeNode::TreeNode(const std::string & p_name, bool p_arrowClickToOpen) :
 	DataWidget(name),
 	name(p_name),
 	m_arrowClickToOpen(p_arrowClickToOpen)
@@ -14,24 +14,24 @@ OvUI::Widgets::Layout::TreeNode::TreeNode(const std::string & p_name, bool p_arr
 	m_autoExecutePlugins = false;
 }
 
-void OvUI::Widgets::Layout::TreeNode::Open()
+void LittleEngine::UI::Widgets::Layout::TreeNode::Open()
 {
 	m_shouldOpen = true;
 	m_shouldClose = false;
 }
 
-void OvUI::Widgets::Layout::TreeNode::Close()
+void LittleEngine::UI::Widgets::Layout::TreeNode::Close()
 {
 	m_shouldClose = true;
 	m_shouldOpen = false;
 }
 
-bool OvUI::Widgets::Layout::TreeNode::IsOpened() const
+bool LittleEngine::UI::Widgets::Layout::TreeNode::IsOpened() const
 {
 	return m_opened;
 }
 
-void OvUI::Widgets::Layout::TreeNode::_Draw_Impl()
+void LittleEngine::UI::Widgets::Layout::TreeNode::_Draw_Impl()
 {
 	bool prevOpened = m_opened;
 

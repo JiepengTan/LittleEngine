@@ -8,12 +8,12 @@
 #include "Core/Maths/FMatrix4.h"
 #include "Modules/Framework/ECS/Components/AComponent.h"
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	class Animation;
 	class Skeleton;
 }
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	REFLECTION_TYPE(CAnimator)
 	CLASS (CAnimator : public AComponent, WhiteListFields)
@@ -21,7 +21,7 @@ namespace OvCore::ECS::Components
 		REFLECTION_BODY(CAnimator)
 	public:
 		CAnimator() = default;
-		CAnimator(ECS::Actor& p_owner);
+		CAnimator(Actor& p_owner);
 		~CAnimator() =default;
 		std::string GetName() override;
 		void OnStart() override;
@@ -33,7 +33,7 @@ namespace OvCore::ECS::Components
 		void UpdateBonesGameObjects();
 		void UpdateBoneMatrix();
 		void DumpAnimationLog();
-		void PlayAnimation(OvRendering::Resources::Animation* pAnimation);
+		void PlayAnimation(LittleEngine::Rendering::Resources::Animation* pAnimation);
 		/**
 		* Serialize the component
 		* @param p_doc
@@ -52,22 +52,22 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 		
-		std::vector<OvMaths::FMatrix4>* GetFinalBoneMatrices();
+		std::vector<LittleEngine::FMatrix4>* GetFinalBoneMatrices();
 
 		void ToggleBones();
 
 	private:
-		void CalculateBoneTransform(const OvRendering::Resources::SkeletonBone& node, const OvMaths::FMatrix4&  parentTransform);
-		void CreateBoneActors(const OvRendering::Resources::SkeletonBone& node,  OvMaths::FMatrix4  parentTransform);
+		void CalculateBoneTransform(const LittleEngine::Rendering::Resources::SkeletonBone& node, const LittleEngine::FMatrix4&  parentTransform);
+		void CreateBoneActors(const LittleEngine::Rendering::Resources::SkeletonBone& node,  LittleEngine::FMatrix4  parentTransform);
 	private:
         META(Enable)
 		float m_currentTime;
 		bool m_showDebugBones;
-		OvRendering::Resources::Animation* m_curAnim;
+		LittleEngine::Rendering::Resources::Animation* m_curAnim;
 
-		std::vector<OvMaths::FMatrix4> m_finalBoneMatrices;
+		std::vector<LittleEngine::FMatrix4> m_finalBoneMatrices;
 		// debug infos
 	private:
 		std::vector<Actor*> m_debugBones;

@@ -1,10 +1,9 @@
 #pragma once
 
-namespace OvCore
+namespace LittleEngine
 {
     struct GlobalState
     {
-        
     public:
         static bool IsEditorMode;
         static bool IsPlaying;

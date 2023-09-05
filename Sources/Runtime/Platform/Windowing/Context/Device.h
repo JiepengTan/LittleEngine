@@ -16,7 +16,7 @@
 #include "Platform/Windowing/Settings/DeviceSettings.h"
 #include "Platform/Windowing/Cursor/ECursorShape.h"
 
-namespace OvWindowing::Context
+namespace LittleEngine::Windowing::Context
 {
 	/**
 	* The Device represents the windowing context. It is necessary to create a device
@@ -28,7 +28,7 @@ namespace OvWindowing::Context
 		/**
 		* Bind a listener to this event to receive device errors
 		*/
-		static OvTools::Eventing::Event<EDeviceError, std::string> ErrorEvent;
+		static LittleEngine::Eventing::Event<EDeviceError, std::string> ErrorEvent;
 
 		/**
 		* The constructor of the device will take care about GLFW initialization

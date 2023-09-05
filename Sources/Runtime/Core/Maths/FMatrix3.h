@@ -11,14 +11,14 @@
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FVector2.h"
 
-namespace OvMaths
+namespace LittleEngine
 {
 	/**
 	* Mathematic representation of a 3x3 Matrix of floats
 	*/
 	struct FMatrix3
 	{
-		float data[9];
+		FFloat data[9];
 		static const FMatrix3 Identity;
 
 		/**

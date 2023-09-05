@@ -9,7 +9,7 @@
 #include "Modules/Rendering/Buffers/ShaderStorageBuffer.h"
 #include "UniformBuffer.h"
 
-namespace OvRendering::Buffers
+namespace LittleEngine::Rendering::Buffers
 {
 	template<typename T>
 	inline void ShaderStorageBuffer::SendBlocks(T* p_data, size_t p_size)

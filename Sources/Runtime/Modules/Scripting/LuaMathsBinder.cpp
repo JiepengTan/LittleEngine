@@ -6,6 +6,6 @@
 
 #include "Modules/Scripting/LuaMathsBinder.h"
 
-void OvCore::Scripting::LuaMathsBinder::BindMaths(sol::state & p_luaState)
+void LittleEngine::Scripting::LuaMathsBinder::BindMaths(sol::state & p_luaState)
 {
 }

@@ -14,12 +14,12 @@
 #include "Modules/UI/Panels/PanelUndecorated.h"
 #include "Modules/UI/Widgets/Texts/TextColored.h"
 
-namespace OvGame::Debug
+namespace LittleGame::Debug
 {
 	/**
 	* Panel that display information about the frame
 	*/
-	class FrameInfo : public OvUI::Panels::PanelUndecorated
+	class FrameInfo : public LittleEngine::UI::Panels::PanelUndecorated
 	{
 	public:
 		/**
@@ -27,7 +27,7 @@ namespace OvGame::Debug
 		* @param p_renderer
 		* @param p_window
 		*/
-		FrameInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window);
+		FrameInfo(LittleEngine::Rendering::Core::Renderer& p_renderer, LittleEngine::Windowing::Window& p_window);
 
 		/**
 		* Update the data
@@ -36,10 +36,10 @@ namespace OvGame::Debug
 		void Update(float p_deltaTime);
 
 	private:
-		OvRendering::Core::Renderer&	m_renderer;
-		OvWindowing::Window&			m_window;
+		LittleEngine::Rendering::Core::Renderer&	m_renderer;
+		LittleEngine::Windowing::Window&			m_window;
 
-		OvUI::Widgets::Texts::TextColored* m_frameInfo[3];
+		LittleEngine::UI::Widgets::Texts::TextColored* m_frameInfo[3];
 	};
 }
 

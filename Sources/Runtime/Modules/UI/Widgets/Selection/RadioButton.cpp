@@ -6,30 +6,30 @@
 
 #include "Modules/UI/Widgets/Selection/RadioButton.h"
 
-OvUI::Widgets::Selection::RadioButton::RadioButton(bool p_selected, const std::string & p_label) :
+LittleEngine::UI::Widgets::Selection::RadioButton::RadioButton(bool p_selected, const std::string & p_label) :
 	DataWidget<bool>(m_selected), label(p_label)
 {
 	if (p_selected)
 		Select();
 }
 
-void OvUI::Widgets::Selection::RadioButton::Select()
+void LittleEngine::UI::Widgets::Selection::RadioButton::Select()
 {
 	m_selected = true;
 	ClickedEvent.Invoke(m_radioID);
 }
 
-bool OvUI::Widgets::Selection::RadioButton::IsSelected() const
+bool LittleEngine::UI::Widgets::Selection::RadioButton::IsSelected() const
 {
 	return m_selected;
 }
 
-bool OvUI::Widgets::Selection::RadioButton::GetRadioID() const
+bool LittleEngine::UI::Widgets::Selection::RadioButton::GetRadioID() const
 {
 	return m_radioID;
 }
 
-void OvUI::Widgets::Selection::RadioButton::_Draw_Impl()
+void LittleEngine::UI::Widgets::Selection::RadioButton::_Draw_Impl()
 {
 	if (ImGui::RadioButton((label + m_widgetID).c_str(), m_selected))
 	{

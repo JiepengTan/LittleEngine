@@ -11,7 +11,7 @@
 #include "Core/Maths/FMatrix4.h"
 #include "Core/Maths/FVector3.h"
 
-namespace OvMaths
+namespace LittleEngine
 {
 	/**
 	* Mathematic representation of a 3D transformation with float precision

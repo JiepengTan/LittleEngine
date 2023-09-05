@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvUI::Internal
+namespace LittleEngine::UI::Internal
 {
 	/**
 	* Defines how the memory should be managed

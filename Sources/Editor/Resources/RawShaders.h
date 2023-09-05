@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace OvEditor::Resources
+namespace LittleEditor::Resources
 {
 	/**
 	* Defines some editor shaders

@@ -13,7 +13,7 @@
 #include "Modules/UI/Internal/WidgetContainer.h"
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Layout
+namespace LittleEngine::UI::Widgets::Layout
 {
 	/**
 	* Widget that allow columnification
@@ -51,10 +51,10 @@ namespace OvUI::Widgets::Layout
 		bool selected = false;
 		bool leaf = false;
 
-		OvTools::Eventing::Event<> ClickedEvent;
-		OvTools::Eventing::Event<> DoubleClickedEvent;
-		OvTools::Eventing::Event<> OpenedEvent;
-		OvTools::Eventing::Event<> ClosedEvent;
+		LittleEngine::Eventing::Event<> ClickedEvent;
+		LittleEngine::Eventing::Event<> DoubleClickedEvent;
+		LittleEngine::Eventing::Event<> OpenedEvent;
+		LittleEngine::Eventing::Event<> ClosedEvent;
 
 	private:
 		bool m_arrowClickToOpen = false;

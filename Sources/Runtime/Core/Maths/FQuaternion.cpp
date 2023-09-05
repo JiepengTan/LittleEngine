@@ -16,30 +16,30 @@
 #define TO_RADIANS(value) value * PI / 180.f
 #define TO_DEGREES(value) value * 180.f / PI
 
-const OvMaths::FQuaternion OvMaths::FQuaternion::Identity = OvMaths::FQuaternion(0.0f, 0.0f, 0.0f, 1.0f);
+const LittleEngine::FQuaternion LittleEngine::FQuaternion::Identity = LittleEngine::FQuaternion(0.0f, 0.0f, 0.0f, 1.0f);
 
-OvMaths::FQuaternion::FQuaternion() :
+LittleEngine::FQuaternion::FQuaternion() :
 	x(0.0f), y(0.0f), z(0.0f), w(1.0f)
 {
 
 }
 
-OvMaths::FQuaternion::FQuaternion(float p_real) :
+LittleEngine::FQuaternion::FQuaternion(float p_real) :
 	x(0.0f), y(0.0f), z(0.0f), w(p_real)
 {
 }
 
-OvMaths::FQuaternion::FQuaternion(float p_x, float p_y, float p_z, float p_w) :
+LittleEngine::FQuaternion::FQuaternion(float p_x, float p_y, float p_z, float p_w) :
 	x(p_x), y(p_y), z(p_z), w(p_w)
 {
 }
 
-OvMaths::FQuaternion::FQuaternion(const FQuaternion & p_other) :
+LittleEngine::FQuaternion::FQuaternion(const FQuaternion & p_other) :
 	x(p_other.x), y(p_other.y), z(p_other.z), w(p_other.w)
 {
 }
 
-OvMaths::FQuaternion::FQuaternion(const FMatrix3& p_rotationMatrix)
+LittleEngine::FQuaternion::FQuaternion(const FMatrix3& p_rotationMatrix)
 {
 	float trace = p_rotationMatrix.data[0] + p_rotationMatrix.data[4] + p_rotationMatrix.data[8];
 	if (trace > 0.0f)
@@ -80,7 +80,7 @@ OvMaths::FQuaternion::FQuaternion(const FMatrix3& p_rotationMatrix)
 	}
 }
 
-OvMaths::FQuaternion::FQuaternion(const FMatrix4 & p_rotationMatrix)
+LittleEngine::FQuaternion::FQuaternion(const FMatrix4 & p_rotationMatrix)
 {
 	float halfSquare;
 
@@ -148,7 +148,7 @@ OvMaths::FQuaternion::FQuaternion(const FMatrix4 & p_rotationMatrix)
 	}
 }
 
-OvMaths::FQuaternion::FQuaternion(const FVector3 & p_euler)
+LittleEngine::FQuaternion::FQuaternion(const FVector3 & p_euler)
 {
 	/* Degree to radians then times 0.5f = 0.0087f */
 	float yaw	= TO_RADIANS(p_euler.z) * 0.5f;
@@ -168,11 +168,11 @@ OvMaths::FQuaternion::FQuaternion(const FVector3 & p_euler)
 	w = cr * cp * cy + sr * sp * sy;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::LookAt(const FVector3& p_forward, const FVector3& p_up)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::LookAt(const FVector3& p_forward, const FVector3& p_up)
 {
-	auto vector = OvMaths::FVector3::Normalize(p_forward);
-	auto vector2 = OvMaths::FVector3::Normalize(OvMaths::FVector3::Cross(p_up, vector));
-	auto vector3 = OvMaths::FVector3::Cross(vector, vector2);
+	auto vector = LittleEngine::FVector3::Normalize(p_forward);
+	auto vector2 = LittleEngine::FVector3::Normalize(LittleEngine::FVector3::Cross(p_up, vector));
+	auto vector3 = LittleEngine::FVector3::Cross(vector, vector2);
 	auto m00 = vector2.x;
 	auto m01 = vector2.y;
 	auto m02 = vector2.z;
@@ -185,7 +185,7 @@ OvMaths::FQuaternion OvMaths::FQuaternion::LookAt(const FVector3& p_forward, con
 
 
 	float num8 = (m00 + m11) + m22;
-	auto quaternion = OvMaths::FQuaternion::Identity;
+	auto quaternion = LittleEngine::FQuaternion::Identity;
 	if (num8 > 0.f)
 	{
 		auto num = sqrt(num8 + 1.f);
@@ -225,22 +225,22 @@ OvMaths::FQuaternion OvMaths::FQuaternion::LookAt(const FVector3& p_forward, con
 	return quaternion;
 }
 
-bool OvMaths::FQuaternion::IsIdentity(const FQuaternion & p_target)
+bool LittleEngine::FQuaternion::IsIdentity(const FQuaternion & p_target)
 {
 	return p_target.w == 1.0f && Length(p_target) == 1.0f;
 }
 
-bool OvMaths::FQuaternion::IsPure(const FQuaternion & p_target)
+bool LittleEngine::FQuaternion::IsPure(const FQuaternion & p_target)
 {
 	return p_target.w == 0.0f && (p_target.x != 0.0f || p_target.y != 0.0f || p_target.z != 0.0f);
 }
 
-bool OvMaths::FQuaternion::IsNormalized(const FQuaternion & p_target)
+bool LittleEngine::FQuaternion::IsNormalized(const FQuaternion & p_target)
 {
 	return abs(Length(p_target) - 1.0f) < 0.0001f;
 }
 
-float OvMaths::FQuaternion::DotProduct(const FQuaternion & p_left, const FQuaternion & p_right)
+float LittleEngine::FQuaternion::DotProduct(const FQuaternion & p_left, const FQuaternion & p_right)
 {
 	return 
 		p_left.x * p_right.x +
@@ -249,27 +249,27 @@ float OvMaths::FQuaternion::DotProduct(const FQuaternion & p_left, const FQuater
 		p_left.w * p_right.w;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Normalize(const FQuaternion & p_target)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Normalize(const FQuaternion & p_target)
 {
 	return p_target / Length(p_target);
 }
 
-float OvMaths::FQuaternion::Length(const FQuaternion & p_target)
+float LittleEngine::FQuaternion::Length(const FQuaternion & p_target)
 {
 	return sqrtf(LengthSquare(p_target));
 }
 
-float OvMaths::FQuaternion::LengthSquare(const FQuaternion & p_target)
+float LittleEngine::FQuaternion::LengthSquare(const FQuaternion & p_target)
 {
 	return p_target.x * p_target.x + p_target.y * p_target.y + p_target.z * p_target.z + p_target.w * p_target.w;
 }
 
-float OvMaths::FQuaternion::GetAngle(const FQuaternion & p_target)
+float LittleEngine::FQuaternion::GetAngle(const FQuaternion & p_target)
 {
 	return 2.0f * acos(p_target.w);
 }
 
-OvMaths::FVector3 OvMaths::FQuaternion::GetRotationAxis(const FQuaternion & p_target)
+LittleEngine::FVector3 LittleEngine::FQuaternion::GetRotationAxis(const FQuaternion & p_target)
 {
 	const float S = sqrt(std::max(1.f - (p_target.w * p_target.w), 0.f));
 
@@ -281,33 +281,33 @@ OvMaths::FVector3 OvMaths::FQuaternion::GetRotationAxis(const FQuaternion & p_ta
 	return FVector3(1.f, 0.f, 0.f);
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Inverse(const FQuaternion & p_target)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Inverse(const FQuaternion & p_target)
 {
 	return Conjugate(p_target) / LengthSquare(p_target);
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Conjugate(const FQuaternion & p_target)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Conjugate(const FQuaternion & p_target)
 {
 	return { -p_target.x, -p_target.y, -p_target.z, p_target.w };
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Square(const FQuaternion & p_target)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Square(const FQuaternion & p_target)
 {
 	return p_target * p_target;
 }
 
-std::pair<OvMaths::FVector3, float> OvMaths::FQuaternion::GetAxisAndAngle(const FQuaternion & p_target)
+std::pair<LittleEngine::FVector3, float> LittleEngine::FQuaternion::GetAxisAndAngle(const FQuaternion & p_target)
 {
 	return std::pair<FVector3, float>(GetRotationAxis(p_target), GetAngle(p_target));
 }
 
-float OvMaths::FQuaternion::AngularDistance(const FQuaternion& p_left, const FQuaternion & p_right)
+float LittleEngine::FQuaternion::AngularDistance(const FQuaternion& p_left, const FQuaternion & p_right)
 {
 	float innerProd = (p_left | p_right);
 	return acos((2.0f * innerProd * innerProd) - 1.0f);
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Lerp(const FQuaternion& p_start, const FQuaternion& p_end, float p_alpha)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Lerp(const FQuaternion& p_start, const FQuaternion& p_end, float p_alpha)
 {
 	p_alpha = std::clamp(p_alpha, 0.f, 1.f);
 
@@ -331,7 +331,7 @@ OvMaths::FQuaternion OvMaths::FQuaternion::Lerp(const FQuaternion& p_start, cons
 	return FQuaternion::Normalize(q);
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Slerp(const FQuaternion& p_start, const FQuaternion& p_end, float p_alpha)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Slerp(const FQuaternion& p_start, const FQuaternion& p_end, float p_alpha)
 {
 	FQuaternion from = p_start;
 	FQuaternion to = p_end;
@@ -360,12 +360,12 @@ OvMaths::FQuaternion OvMaths::FQuaternion::Slerp(const FQuaternion& p_start, con
 	}
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::Nlerp(const FQuaternion & p_start, const FQuaternion & p_end, float p_alpha)
+LittleEngine::FQuaternion LittleEngine::FQuaternion::Nlerp(const FQuaternion & p_start, const FQuaternion & p_end, float p_alpha)
 {
 	return Normalize(Lerp(p_start, p_end, p_alpha));
 }
 
-OvMaths::FVector3 OvMaths::FQuaternion::RotatePoint(const FVector3& p_point, const FQuaternion& p_quaternion)
+LittleEngine::FVector3 LittleEngine::FQuaternion::RotatePoint(const FVector3& p_point, const FQuaternion& p_quaternion)
 {
 	FVector3 Q(p_quaternion.x, p_quaternion.y, p_quaternion.z);
 	FVector3 T = FVector3::Cross(Q, p_point) * 2.0f;
@@ -373,13 +373,13 @@ OvMaths::FVector3 OvMaths::FQuaternion::RotatePoint(const FVector3& p_point, con
 	return p_point + (T * p_quaternion.w) + FVector3::Cross(Q, T);
 }
 
-OvMaths::FVector3 OvMaths::FQuaternion::RotatePoint(const FVector3 & p_point, const FQuaternion & p_quaternion, const FVector3 & p_pivot)
+LittleEngine::FVector3 LittleEngine::FQuaternion::RotatePoint(const FVector3 & p_point, const FQuaternion & p_quaternion, const FVector3 & p_pivot)
 {
 	FVector3 toRotate = p_point - p_pivot;
 	return RotatePoint(toRotate, p_quaternion);
 }
 
-OvMaths::FVector3 OvMaths::FQuaternion::EulerAngles(const FQuaternion& p_target)
+LittleEngine::FVector3 LittleEngine::FQuaternion::EulerAngles(const FQuaternion& p_target)
 {
 	// This is a kind of hack because when the input Quaternion is {0.5f, 0.5f, -0.5f, 0.5f} or
 	// {0.5f, 0.5f, 0.5f, -0.5f}, the output value is incorrect.
@@ -407,7 +407,7 @@ OvMaths::FVector3 OvMaths::FQuaternion::EulerAngles(const FQuaternion& p_target)
 	return TO_DEGREES(FVector3(roll, pitch, yaw)); // XYZ
 }
 
-OvMaths::FMatrix3 OvMaths::FQuaternion::ToMatrix3(const FQuaternion & p_target)
+LittleEngine::FMatrix3 LittleEngine::FQuaternion::ToMatrix3(const FQuaternion & p_target)
 {
 	if (!IsNormalized(p_target))
 		throw std::logic_error("Cannot convert non-normalized quaternions to Matrix4");
@@ -435,7 +435,7 @@ OvMaths::FMatrix3 OvMaths::FQuaternion::ToMatrix3(const FQuaternion & p_target)
 	return converted;
 }
 
-OvMaths::FMatrix4 OvMaths::FQuaternion::ToMatrix4(const FQuaternion & p_target)
+LittleEngine::FMatrix4 LittleEngine::FQuaternion::ToMatrix4(const FQuaternion & p_target)
 {
 	if (!IsNormalized(p_target))
 		throw std::logic_error("Cannot convert non-normalized quaternions to Matrix4");
@@ -452,23 +452,23 @@ OvMaths::FMatrix4 OvMaths::FQuaternion::ToMatrix4(const FQuaternion & p_target)
 	return converted;
 }
 
-bool OvMaths::FQuaternion::operator==(const FQuaternion& p_otherQuat) const
+bool LittleEngine::FQuaternion::operator==(const FQuaternion& p_otherQuat) const
 {
 	return x == p_otherQuat.x && y == p_otherQuat.x && z == p_otherQuat.z && w == p_otherQuat.w;
 }
 
-bool OvMaths::FQuaternion::operator!=(const FQuaternion& p_otherQuat) const
+bool LittleEngine::FQuaternion::operator!=(const FQuaternion& p_otherQuat) const
 {
 	return x != p_otherQuat.x || y != p_otherQuat.x || z != p_otherQuat.z || w != p_otherQuat.w;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::operator+(const FQuaternion& p_otherQuat) const
+LittleEngine::FQuaternion LittleEngine::FQuaternion::operator+(const FQuaternion& p_otherQuat) const
 {
 	return FQuaternion(x + p_otherQuat.x, y + p_otherQuat.x,
 		z + p_otherQuat.z, w + p_otherQuat.w);
 }
 
-OvMaths::FQuaternion& OvMaths::FQuaternion::operator+=(const FQuaternion& p_otherQuat)
+LittleEngine::FQuaternion& LittleEngine::FQuaternion::operator+=(const FQuaternion& p_otherQuat)
 {
 	x += p_otherQuat.x;
 	y += p_otherQuat.x;
@@ -477,13 +477,13 @@ OvMaths::FQuaternion& OvMaths::FQuaternion::operator+=(const FQuaternion& p_othe
 	return *this;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::operator-(const FQuaternion& p_otherQuat) const
+LittleEngine::FQuaternion LittleEngine::FQuaternion::operator-(const FQuaternion& p_otherQuat) const
 {
 	return FQuaternion(x - p_otherQuat.x, y - p_otherQuat.x,
 		z - p_otherQuat.z, w - p_otherQuat.w);
 }
 
-OvMaths::FQuaternion& OvMaths::FQuaternion::operator-=(const FQuaternion& p_otherQuat)
+LittleEngine::FQuaternion& LittleEngine::FQuaternion::operator-=(const FQuaternion& p_otherQuat)
 {
 	x -= p_otherQuat.x;
 	y -= p_otherQuat.x;
@@ -492,13 +492,13 @@ OvMaths::FQuaternion& OvMaths::FQuaternion::operator-=(const FQuaternion& p_othe
 	return *this;
 }
 
-float OvMaths::FQuaternion::operator|(const FQuaternion& p_otherQuat) const
+float LittleEngine::FQuaternion::operator|(const FQuaternion& p_otherQuat) const
 {
 	return (x * p_otherQuat.x + y * p_otherQuat.x + z *
 		p_otherQuat.z + w * p_otherQuat.w);
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::operator*(const float p_scale) const
+LittleEngine::FQuaternion LittleEngine::FQuaternion::operator*(const float p_scale) const
 {
 	FQuaternion result(*this);
 	result.x *= p_scale;
@@ -509,7 +509,7 @@ OvMaths::FQuaternion OvMaths::FQuaternion::operator*(const float p_scale) const
 	return result;
 }
 
-OvMaths::FQuaternion& OvMaths::FQuaternion::operator*=(const float p_scale)
+LittleEngine::FQuaternion& LittleEngine::FQuaternion::operator*=(const float p_scale)
 {
 	x *= p_scale;
 	y *= p_scale;
@@ -519,7 +519,7 @@ OvMaths::FQuaternion& OvMaths::FQuaternion::operator*=(const float p_scale)
 	return *this;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::operator*(const FQuaternion& p_otherQuat) const
+LittleEngine::FQuaternion LittleEngine::FQuaternion::operator*(const FQuaternion& p_otherQuat) const
 {
 	return FQuaternion
 	(
@@ -530,7 +530,7 @@ OvMaths::FQuaternion OvMaths::FQuaternion::operator*(const FQuaternion& p_otherQ
 	);
 }
 
-OvMaths::FQuaternion& OvMaths::FQuaternion::operator*=(const FQuaternion& p_otherQuat)
+LittleEngine::FQuaternion& LittleEngine::FQuaternion::operator*=(const FQuaternion& p_otherQuat)
 {
 	FQuaternion temp(
 		x * p_otherQuat.w + y * p_otherQuat.z - z * p_otherQuat.x +
@@ -550,7 +550,7 @@ OvMaths::FQuaternion& OvMaths::FQuaternion::operator*=(const FQuaternion& p_othe
 	return *this;
 }
 
-OvMaths::FVector3 OvMaths::FQuaternion::operator*(const FVector3& p_toMultiply) const
+LittleEngine::FVector3 LittleEngine::FQuaternion::operator*(const FVector3& p_toMultiply) const
 {
 	const float num = x * 2.0f;
 	const float num2 = y * 2.0f;
@@ -574,12 +574,12 @@ OvMaths::FVector3 OvMaths::FQuaternion::operator*(const FVector3& p_toMultiply) 
 	return result;
 }
 
-OvMaths::FMatrix3 OvMaths::FQuaternion::operator*(const FMatrix3& p_multiply) const
+LittleEngine::FMatrix3 LittleEngine::FQuaternion::operator*(const FMatrix3& p_multiply) const
 {
 	return (ToMatrix3(*this) * p_multiply);
 }
 
-OvMaths::FQuaternion& OvMaths::FQuaternion::operator/=(const float p_scale)
+LittleEngine::FQuaternion& LittleEngine::FQuaternion::operator/=(const float p_scale)
 {
 	const float reciprocate = 1.0f / p_scale;
 	x *= reciprocate;
@@ -590,7 +590,7 @@ OvMaths::FQuaternion& OvMaths::FQuaternion::operator/=(const float p_scale)
 	return *this;
 }
 
-OvMaths::FQuaternion OvMaths::FQuaternion::operator/(const float p_scale) const
+LittleEngine::FQuaternion LittleEngine::FQuaternion::operator/(const float p_scale) const
 {
 	FQuaternion temp(*this);
 	const float reciprocate = 1.0f / p_scale;

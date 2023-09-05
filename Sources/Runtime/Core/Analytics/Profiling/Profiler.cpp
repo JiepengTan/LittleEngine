@@ -12,20 +12,20 @@
 #include "Core/Analytics/Profiling/Profiler.h"
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-bool											OvAnalytics::Profiling::Profiler::__ENABLED;
-std::mutex										OvAnalytics::Profiling::Profiler::__SAVE_MUTEX;
-std::unordered_map<std::string, double>			OvAnalytics::Profiling::Profiler::__ELPASED_HISTORY;
-std::unordered_map<std::string, uint64_t>		OvAnalytics::Profiling::Profiler::__CALLS_COUNTER;
-std::vector<std::thread::id>					OvAnalytics::Profiling::Profiler::__WORKING_THREADS;
-uint32_t										OvAnalytics::Profiling::Profiler::__ELAPSED_FRAMES;
+bool											LittleEngine::Analytics::Profiling::Profiler::__ENABLED;
+std::mutex										LittleEngine::Analytics::Profiling::Profiler::__SAVE_MUTEX;
+std::unordered_map<std::string, double>			LittleEngine::Analytics::Profiling::Profiler::__ELPASED_HISTORY;
+std::unordered_map<std::string, uint64_t>		LittleEngine::Analytics::Profiling::Profiler::__CALLS_COUNTER;
+std::vector<std::thread::id>					LittleEngine::Analytics::Profiling::Profiler::__WORKING_THREADS;
+uint32_t										LittleEngine::Analytics::Profiling::Profiler::__ELAPSED_FRAMES;
 
-OvAnalytics::Profiling::Profiler::Profiler()
+LittleEngine::Analytics::Profiling::Profiler::Profiler()
 {
 	m_lastTime = std::chrono::high_resolution_clock::now();
 	__ENABLED = false;
 }
 
-OvAnalytics::Profiling::ProfilerReport OvAnalytics::Profiling::Profiler::GenerateReport()
+LittleEngine::Analytics::Profiling::ProfilerReport LittleEngine::Analytics::Profiling::Profiler::GenerateReport()
 {
 	ProfilerReport report;
 
@@ -51,7 +51,7 @@ OvAnalytics::Profiling::ProfilerReport OvAnalytics::Profiling::Profiler::Generat
 	return report;
 }
 
-void OvAnalytics::Profiling::Profiler::ClearHistory()
+void LittleEngine::Analytics::Profiling::Profiler::ClearHistory()
 {
 	__ELPASED_HISTORY.clear();
 	__CALLS_COUNTER.clear();
@@ -61,7 +61,7 @@ void OvAnalytics::Profiling::Profiler::ClearHistory()
 	m_lastTime = std::chrono::high_resolution_clock::now();
 }
 
-void OvAnalytics::Profiling::Profiler::Update(float p_deltaTime)
+void LittleEngine::Analytics::Profiling::Profiler::Update(float p_deltaTime)
 {
 	if (IsEnabled())
 	{
@@ -69,7 +69,7 @@ void OvAnalytics::Profiling::Profiler::Update(float p_deltaTime)
 	}
 }
 
-void OvAnalytics::Profiling::Profiler::Save(OvAnalytics::Profiling::ProfilerSpy& p_spy)
+void LittleEngine::Analytics::Profiling::Profiler::Save(LittleEngine::Analytics::Profiling::ProfilerSpy& p_spy)
 {
 	__SAVE_MUTEX.lock();
 
@@ -98,22 +98,22 @@ void OvAnalytics::Profiling::Profiler::Save(OvAnalytics::Profiling::ProfilerSpy&
 	__SAVE_MUTEX.unlock();
 }
 
-bool OvAnalytics::Profiling::Profiler::IsEnabled()
+bool LittleEngine::Analytics::Profiling::Profiler::IsEnabled()
 {
 	return __ENABLED;
 }
 
-void OvAnalytics::Profiling::Profiler::ToggleEnable()
+void LittleEngine::Analytics::Profiling::Profiler::ToggleEnable()
 {
 	__ENABLED = !__ENABLED;
 }
 
-void OvAnalytics::Profiling::Profiler::Enable()
+void LittleEngine::Analytics::Profiling::Profiler::Enable()
 {
 	__ENABLED = true;
 }
 
-void OvAnalytics::Profiling::Profiler::Disable()
+void LittleEngine::Analytics::Profiling::Profiler::Disable()
 {
 	__ENABLED = false;
 }

@@ -14,11 +14,11 @@
 #include "Core/Maths/FQuaternion.h"
 
 using namespace std;
-using namespace OvMaths;
+using namespace LittleEngine;
 
 
-OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, const aiNodeAnim* channel):
-    m_LocalTransform(OvMaths::FMatrix4::Identity),
+LittleEngine::Rendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, const aiNodeAnim* channel):
+    m_LocalTransform(LittleEngine::FMatrix4::Identity),
     m_Name(name),
     m_ID(ID)
 {
@@ -29,7 +29,7 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiVector3D aiPosition = channel->mPositionKeys[positionIndex].mValue;
         float timeStamp = (float)channel->mPositionKeys[positionIndex].mTime;
         KeyPosition data;
-        data.position = OvMaths::FVector3(aiPosition.x, aiPosition.y, aiPosition.z) ;
+        data.position = LittleEngine::FVector3(aiPosition.x, aiPosition.y, aiPosition.z) ;
         data.timeStamp = timeStamp;
         m_Positions.push_back(data);
     }
@@ -40,7 +40,7 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiQuaternion aiOrientation = channel->mRotationKeys[rotationIndex].mValue;
         float timeStamp = (float)channel->mRotationKeys[rotationIndex].mTime;
         KeyRotation data;
-        data.orientation = OvMaths::FQuaternion(aiOrientation.x, aiOrientation.y, aiOrientation.z,aiOrientation.w);
+        data.orientation = LittleEngine::FQuaternion(aiOrientation.x, aiOrientation.y, aiOrientation.z,aiOrientation.w);
         data.timeStamp = timeStamp;
         m_Rotations.push_back(data);
     }
@@ -51,22 +51,22 @@ OvRendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, 
         aiVector3D scale = channel->mScalingKeys[keyIndex].mValue;
         float timeStamp = (float)channel->mScalingKeys[keyIndex].mTime;
         KeyScale data;
-        data.scale = OvMaths::FVector3(scale.x, scale.y, scale.z) ;
+        data.scale = LittleEngine::FVector3(scale.x, scale.y, scale.z) ;
         data.timeStamp = timeStamp;
         m_Scales.push_back(data);
     }
 }
 
-void OvRendering::Resources::BoneFrames::Update(float animationTime)
+void LittleEngine::Rendering::Resources::BoneFrames::Update(float animationTime)
 {
-    OvMaths::FMatrix4 translation = InterpolatePosition(animationTime);
-    OvMaths::FMatrix4 rotation = InterpolateRotation(animationTime);
-    OvMaths::FMatrix4 scale = InterpolateScaling(animationTime);
+    LittleEngine::FMatrix4 translation = InterpolatePosition(animationTime);
+    LittleEngine::FMatrix4 rotation = InterpolateRotation(animationTime);
+    LittleEngine::FMatrix4 scale = InterpolateScaling(animationTime);
     m_LocalTransform = translation * rotation * scale;
 }
 
 
-int OvRendering::Resources::BoneFrames::GetPositionIndex(float animationTime)
+int LittleEngine::Rendering::Resources::BoneFrames::GetPositionIndex(float animationTime)
 {
     for (int index = 0; index < m_NumPositions - 1; ++index)
     {
@@ -76,7 +76,7 @@ int OvRendering::Resources::BoneFrames::GetPositionIndex(float animationTime)
     return 0;
 }
 
-int OvRendering::Resources::BoneFrames::GetRotationIndex(float animationTime)
+int LittleEngine::Rendering::Resources::BoneFrames::GetRotationIndex(float animationTime)
 {
     for (int index = 0; index < m_NumRotations - 1; ++index)
     {
@@ -86,7 +86,7 @@ int OvRendering::Resources::BoneFrames::GetRotationIndex(float animationTime)
     return 0;
 }
 
-int OvRendering::Resources::BoneFrames::GetScaleIndex(float animationTime)
+int LittleEngine::Rendering::Resources::BoneFrames::GetScaleIndex(float animationTime)
 {
     for (int index = 0; index < m_NumScalings - 1; ++index)
     {
@@ -97,7 +97,7 @@ int OvRendering::Resources::BoneFrames::GetScaleIndex(float animationTime)
 }
 
 
-float OvRendering::Resources::BoneFrames::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
+float LittleEngine::Rendering::Resources::BoneFrames::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
 {
     float scaleFactor = 0.0f;
     float midWayLength = animationTime - lastTimeStamp;
@@ -106,10 +106,10 @@ float OvRendering::Resources::BoneFrames::GetScaleFactor(float lastTimeStamp, fl
     return scaleFactor;
 }
 
-OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolatePosition(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolatePosition(float animationTime)
 {
     if (1 == m_NumPositions)
-        return FMatrix4::Translate(OvMaths::FMatrix4::Identity, m_Positions[0].position);
+        return FMatrix4::Translate(LittleEngine::FMatrix4::Identity, m_Positions[0].position);
 
     int p0Index = GetPositionIndex(animationTime);
     int p1Index = p0Index + 1;
@@ -120,7 +120,7 @@ OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolatePosition(float 
     return FMatrix4::Translate(FMatrix4::Identity, finalPosition);
 }
 
-OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolateRotation(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolateRotation(float animationTime)
 {
     if (1 == m_NumRotations)
     {
@@ -138,10 +138,10 @@ OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolateRotation(float 
     return FQuaternion::ToMatrix4(finalRotation);
 }
 
-OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolateScaling(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolateScaling(float animationTime)
 {
     if (1 == m_NumScalings)
-        return FMatrix4::Scale(OvMaths::FMatrix4::Identity, m_Scales[0].scale);
+        return FMatrix4::Scale(LittleEngine::FMatrix4::Identity, m_Scales[0].scale);
 
     int p0Index = GetScaleIndex(animationTime);
     int p1Index = p0Index + 1;
@@ -149,12 +149,12 @@ OvMaths::FMatrix4 OvRendering::Resources::BoneFrames::InterpolateScaling(float a
                                        m_Scales[p1Index].timeStamp, animationTime);
     FVector3 finalScale = FVector3::Lerp(m_Scales[p0Index].scale, m_Scales[p1Index].scale
                                          , scaleFactor);
-    return FMatrix4::Scale(OvMaths::FMatrix4::Identity, finalScale);
+    return FMatrix4::Scale(LittleEngine::FMatrix4::Identity, finalScale);
 }
 
 
 
-OvRendering::Resources::BoneFrames* OvRendering::Resources::Animation::FindBone(const std::string& name)
+LittleEngine::Rendering::Resources::BoneFrames* LittleEngine::Rendering::Resources::Animation::FindBone(const std::string& name)
 {
     auto iter = std::find_if(m_Bones.begin(), m_Bones.end(),
                              [&](const BoneFrames& Bone)

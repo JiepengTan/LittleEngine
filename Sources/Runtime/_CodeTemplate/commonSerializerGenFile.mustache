@@ -3,11 +3,11 @@
 #include "{{headfile_name}}"
 {{/include_headfiles}}
 
-namespace OvCore{
-    using namespace OvCore::ECS::Components;
+namespace LittleEngine{
+    using namespace LittleEngine;
     {{#class_defines}}template<>
-    Json OvCore::JsonSerializer::Write(const {{class_name}}& instance);
+    Json LittleEngine::JsonSerializer::Write(const {{class_name}}& instance);
     template<>
-    {{class_name}}& OvCore::JsonSerializer::Read(const Json& json_context, {{class_name}}& instance);
+    {{class_name}}& LittleEngine::JsonSerializer::Read(const Json& json_context, {{class_name}}& instance);
     {{/class_defines}}
 }//namespace

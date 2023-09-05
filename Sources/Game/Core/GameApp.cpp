@@ -6,21 +6,21 @@
 
 #include "Core/Tools/Time/Clock.h"
 
-#include "../Game/Core/Application.h"
+#include "../Game/Core/GameApp.h"
 
-OvGame::Core::Application::Application() :
+LittleGame::Core::GameApp::GameApp() :
 	m_game(m_context)
 {
 
 }
 
-OvGame::Core::Application::~Application()
+LittleGame::Core::GameApp::~GameApp()
 {
 }
 
-void OvGame::Core::Application::Run()
+void LittleGame::Core::GameApp::Run()
 {
-	OvTools::Time::Clock clock;
+	LittleEngine::Time::Clock clock;
 
 	while (IsRunning())
 	{
@@ -32,7 +32,7 @@ void OvGame::Core::Application::Run()
 	}
 }
 
-bool OvGame::Core::Application::IsRunning() const
+bool LittleGame::Core::GameApp::IsRunning() const
 {
 	return !m_context.window->ShouldClose();
 }

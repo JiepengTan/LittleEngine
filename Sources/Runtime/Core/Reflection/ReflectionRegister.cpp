@@ -5,7 +5,7 @@
 
 #include "_Generated/Reflection/AllReflection.h"
 #include "_Generated/Serializer/AllSerializer.ipp"
-namespace OvCore
+namespace LittleEngine
 {
     namespace Reflection
     {

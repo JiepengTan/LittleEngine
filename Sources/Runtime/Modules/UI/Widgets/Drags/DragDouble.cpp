@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Drags/DragDouble.h"
 
-OvUI::Widgets::Drags::DragDouble::DragDouble
+LittleEngine::UI::Widgets::Drags::DragDouble::DragDouble
 (
 	double p_min,
 	double p_max,

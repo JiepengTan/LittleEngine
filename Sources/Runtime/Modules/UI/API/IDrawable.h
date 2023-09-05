@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvUI::API
+namespace LittleEngine::UI::API
 {
 	/**
 	* Interface for any drawable class

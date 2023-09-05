@@ -6,7 +6,7 @@
 
 #include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
 
-OvCore::Resources::Material * OvCore::Resources::Loaders::MaterialLoader::Create(const std::string & p_path)
+LittleEngine::Resources::Material * LittleEngine::Resources::Loaders::MaterialLoader::Create(const std::string & p_path)
 {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(p_path.c_str());
@@ -26,7 +26,7 @@ OvCore::Resources::Material * OvCore::Resources::Loaders::MaterialLoader::Create
 	}
 }
 
-void OvCore::Resources::Loaders::MaterialLoader::Reload(Material& p_material, const std::string& p_path)
+void LittleEngine::Resources::Loaders::MaterialLoader::Reload(Material& p_material, const std::string& p_path)
 {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(p_path.c_str());
@@ -38,7 +38,7 @@ void OvCore::Resources::Loaders::MaterialLoader::Reload(Material& p_material, co
 	}
 }
 
-void OvCore::Resources::Loaders::MaterialLoader::Save(Material& p_material, const std::string& p_path)
+void LittleEngine::Resources::Loaders::MaterialLoader::Save(Material& p_material, const std::string& p_path)
 {
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLNode* node = doc.NewElement("root");
@@ -52,7 +52,7 @@ void OvCore::Resources::Loaders::MaterialLoader::Save(Material& p_material, cons
 		OVLOG_ERROR("[MATERIAL] \"" + p_path + "\": Failed to save");
 }
 
-bool OvCore::Resources::Loaders::MaterialLoader::Destroy(Material *& p_material)
+bool LittleEngine::Resources::Loaders::MaterialLoader::Destroy(Material *& p_material)
 {
 	if (p_material)
 	{

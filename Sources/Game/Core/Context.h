@@ -31,7 +31,7 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-namespace OvGame::Core
+namespace LittleGame::Core
 {
 	/**
 	* The Context handle the engine features setup
@@ -54,27 +54,27 @@ namespace OvGame::Core
 		const std::string projectAssetsPath;
 		const std::string projectScriptsPath;
 
-		std::unique_ptr<OvWindowing::Context::Device>				device;
-		std::unique_ptr<OvWindowing::Window>						window;
-		std::unique_ptr<OvWindowing::Inputs::InputManager>			inputManager;
-		std::unique_ptr<OvRendering::Context::Driver>				driver;
-		std::unique_ptr<OvCore::ECS::SceneRenderer>						renderer;
-		std::unique_ptr<OvUI::Core::UIManager>						uiManager;
-		std::unique_ptr<OvPhysics::Core::PhysicsEngine>				physicsEngine;
-		std::unique_ptr<OvAudio::Core::AudioEngine>					audioEngine;
-		std::unique_ptr<OvAudio::Core::AudioPlayer>					audioPlayer;
-		std::unique_ptr<OvCore::Scripting::ScriptInterpreter>		scriptInterpreter;
-		std::unique_ptr<OvRendering::Buffers::UniformBuffer>		engineUBO;
-		std::unique_ptr<OvRendering::Buffers::ShaderStorageBuffer>	lightSSBO;
+		std::unique_ptr<LittleEngine::Windowing::Context::Device>				device;
+		std::unique_ptr<LittleEngine::Windowing::Window>						window;
+		std::unique_ptr<LittleEngine::Windowing::Inputs::InputManager>			inputManager;
+		std::unique_ptr<LittleEngine::Rendering::Context::Driver>				driver;
+		std::unique_ptr<LittleEngine::SceneRenderer>						renderer;
+		std::unique_ptr<LittleEngine::UI::Core::UIManager>						uiManager;
+		std::unique_ptr<LittleEngine::Physics::Core::PhysicsEngine>				physicsEngine;
+		std::unique_ptr<LittleEngine::Audio::Core::AudioEngine>					audioEngine;
+		std::unique_ptr<LittleEngine::Audio::Core::AudioPlayer>					audioPlayer;
+		std::unique_ptr<LittleEngine::Scripting::ScriptInterpreter>		scriptInterpreter;
+		std::unique_ptr<LittleEngine::Rendering::Buffers::UniformBuffer>		engineUBO;
+		std::unique_ptr<LittleEngine::Rendering::Buffers::ShaderStorageBuffer>	lightSSBO;
 
-		OvCore::SceneSystem::SceneManager sceneManager;
+		LittleEngine::SceneSystem::SceneManager sceneManager;
 
-		OvCore::ResourceManagement::ModelManager	modelManager;
-		OvCore::ResourceManagement::TextureManager	textureManager;
-		OvCore::ResourceManagement::ShaderManager	shaderManager;
-		OvCore::ResourceManagement::MaterialManager	materialManager;
-		OvCore::ResourceManagement::SoundManager	soundManager;
+		LittleEngine::ResourceManagement::ModelManager	modelManager;
+		LittleEngine::ResourceManagement::TextureManager	textureManager;
+		LittleEngine::ResourceManagement::ShaderManager	shaderManager;
+		LittleEngine::ResourceManagement::MaterialManager	materialManager;
+		LittleEngine::ResourceManagement::SoundManager	soundManager;
 		
-		OvTools::Filesystem::IniFile projectSettings;
+		LittleEngine::Filesystem::IniFile projectSettings;
 	};
 }

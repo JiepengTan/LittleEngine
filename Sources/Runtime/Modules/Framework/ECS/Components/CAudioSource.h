@@ -11,9 +11,9 @@
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represents an audio source. Its position in the world is important if the spatial sound settings is on
@@ -25,7 +25,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CAudioSource(ECS::Actor& p_owner);
+		CAudioSource(Actor& p_owner);
 		CAudioSource() = default;
 		/**
 		* Returns the name of the component
@@ -36,7 +36,7 @@ namespace OvCore::ECS::Components
 		* Defines the sound to play on the audio source
 		* @param p_sound
 		*/
-		void SetSound(OvAudio::Resources::Sound* p_sound);
+		void SetSound(LittleEngine::Audio::Resources::Sound* p_sound);
 
 		/**
 		* Defines if the audio source should autoplay (Play sound on enable)
@@ -82,7 +82,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the sound attached to the audio source
 		*/
-		OvAudio::Resources::Sound* GetSound() const;
+		LittleEngine::Audio::Resources::Sound* GetSound() const;
 
 		/**
 		* Returns true if the audio source should call "Play" OnEnable
@@ -162,15 +162,15 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	private:
 		virtual void OnEnable() override;
 		virtual void OnDisable() override;
 
 	private:
-		OvAudio::Resources::Sound* m_sound = nullptr;
-		OvAudio::Entities::AudioSource m_audioSource;
+		LittleEngine::Audio::Resources::Sound* m_sound = nullptr;
+		LittleEngine::Audio::Entities::AudioSource m_audioSource;
 		bool m_autoPlay = false;
 	};
 }

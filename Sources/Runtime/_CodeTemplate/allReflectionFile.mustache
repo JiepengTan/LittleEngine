@@ -6,7 +6,7 @@
 {{/include_headfiles}}
 
 
-void OvCore::Reflection::TypeMetaRegister::MetaRegister(){
-    {{#sourefile_names}}OvCore::ECS::Components::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
+void LittleEngine::Reflection::TypeMetaRegister::MetaRegister(){
+    {{#sourefile_names}}LittleEngine::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
     {{/sourefile_names}}
 }

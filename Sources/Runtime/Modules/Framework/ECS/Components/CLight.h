@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Base class for any light
@@ -24,17 +24,17 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CLight(ECS::Actor& p_owner);
+		CLight(Actor& p_owner);
 		CLight() = default;
 		/**
 		* Returns light data
 		*/
-		const OvRendering::Entities::Light& GetData() const;
+		const LittleEngine::Rendering::Entities::Light& GetData() const;
 
 		/**
 		* Returns light color
 		*/
-		const OvMaths::FVector3& GetColor() const;
+		const LittleEngine::FVector3& GetColor() const;
 
 		/**
 		* Returns light intensity
@@ -44,7 +44,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns light type
 		*/
-		OvRendering::Entities::Light::Type GetLightType();
+		LittleEngine::Rendering::Entities::Light::Type GetLightType();
 		
 		/**
 		* Is directional light
@@ -55,7 +55,7 @@ namespace OvCore::ECS::Components
 		* Defines a new color for the light
 		* @param p_color
 		*/
-		void SetColor(const OvMaths::FVector3& p_color);
+		void SetColor(const LittleEngine::FVector3& p_color);
 
 		/**
 		* Defines the intensity for the light
@@ -81,9 +81,9 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 		
 	protected:
-		OvRendering::Entities::Light m_data;
+		LittleEngine::Rendering::Entities::Light m_data;
 	};
 }

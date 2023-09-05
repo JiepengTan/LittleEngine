@@ -6,8 +6,9 @@
 
 #pragma once
 
+#include "Core/Maths/FFloat.h"
 
-namespace OvMaths
+namespace LittleEngine
 {
 	
 	/**
@@ -18,10 +19,10 @@ namespace OvMaths
 		static const FVector4 One;
 		static const FVector4 Zero;
 
-		float x;
-		float y;
-		float z;
-		float w;
+		FFloat x;
+		FFloat y;
+		FFloat z;
+		FFloat w;
 
 		/**
 		* Default constructor

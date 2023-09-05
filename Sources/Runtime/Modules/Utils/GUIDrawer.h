@@ -21,24 +21,24 @@
 
 
 
-namespace OvCore::Resources
+namespace LittleEngine::Resources
 {
 	class Material;
 }
 
-namespace OvAudio::Resources
+namespace LittleEngine::Audio::Resources
 {
 	class Sound;
 }
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	class Model;
 	class Shader;
 	class Texture;
 }
 
-namespace OvCore::Helpers
+namespace LittleEngine::Helpers
 {
 	/**
 	* Provide some helpers to draw UI elements
@@ -46,8 +46,8 @@ namespace OvCore::Helpers
 	class GUIDrawer
 	{
 	public:
-		static const OvUI::Types::Color TitleColor;
-		static const OvUI::Types::Color ClearButtonColor;
+		static const LittleEngine::UI::Types::Color TitleColor;
+		static const LittleEngine::UI::Types::Color ClearButtonColor;
 
 		static const float _MIN_FLOAT;
 		static const float _MAX_FLOAT;
@@ -56,41 +56,41 @@ namespace OvCore::Helpers
 		* Defines the texture to use when there is no texture in a texture resource field
 		* @param p_emptyTexture
 		*/
-		static void ProvideEmptyTexture(OvRendering::Resources::Texture& p_emptyTexture);
+		static void ProvideEmptyTexture(LittleEngine::Rendering::Resources::Texture& p_emptyTexture);
 
 		/**
 		* Draw a title with the title color
 		* @param p_root
 		* @param p_name
 		*/
-		static void CreateTitle(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name);
+		static void CreateTitle(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name);
 	
 		template <typename T>
-		static void DrawScalar(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, T& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
-		static void DrawBoolean(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, bool& p_data);
-		static void DrawVec2(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvMaths::FVector2& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawVec3(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvMaths::FVector3& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawVec4(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvMaths::FVector4& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawQuat(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvMaths::FQuaternion& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawString(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::string& p_data);
-		static void DrawColor(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvUI::Types::Color& p_color, bool p_hasAlpha = false);
-		static OvUI::Widgets::Texts::Text& DrawMesh(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvRendering::Resources::Model*& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
-		static OvUI::Widgets::Visual::Image& DrawTexture(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvRendering::Resources::Texture*& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
-		static OvUI::Widgets::Texts::Text& DrawShader(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvRendering::Resources::Shader*& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
-		static OvUI::Widgets::Texts::Text& DrawMaterial(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvCore::Resources::Material*& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
-		static OvUI::Widgets::Texts::Text& DrawSound(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, OvAudio::Resources::Sound*& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
-		static OvUI::Widgets::Texts::Text& DrawAsset(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::string& p_data, OvTools::Eventing::Event<>* p_updateNotifier = nullptr);
+		static void DrawScalar(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, T& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
+		static void DrawBoolean(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, bool& p_data);
+		static void DrawVec2(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FVector2& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawVec3(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FVector3& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawVec4(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FVector4& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawQuat(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FQuaternion& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawString(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::string& p_data);
+		static void DrawColor(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::UI::Types::Color& p_color, bool p_hasAlpha = false);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawMesh(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Rendering::Resources::Model*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Rendering::Resources::Texture*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawShader(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Rendering::Resources::Shader*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawMaterial(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Resources::Material*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawSound(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Audio::Resources::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawAsset(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::string& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 
 		template <typename T>
-		static void DrawScalar(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<T(void)> p_gatherer, std::function<void(T)> p_provider, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
-		static void DrawBoolean(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<bool(void)> p_gatherer, std::function<void(bool)> p_provider);
-		static void DrawVec2(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<OvMaths::FVector2(void)> p_gatherer, std::function<void(OvMaths::FVector2)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawVec3(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<OvMaths::FVector3(void)> p_gatherer, std::function<void(OvMaths::FVector3)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawVec4(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<OvMaths::FVector4(void)> p_gatherer, std::function<void(OvMaths::FVector4)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawQuat(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<OvMaths::FQuaternion(void)> p_gatherer, std::function<void(OvMaths::FQuaternion)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static void DrawDDString(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<std::string(void)> p_gatherer, std::function<void(std::string)> p_provider, const std::string& p_identifier);
-		static void DrawString(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<std::string(void)> p_gatherer, std::function<void(std::string)> p_provider);
-		static void DrawColor(OvUI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<OvUI::Types::Color(void)> p_gatherer, std::function<void(OvUI::Types::Color)> p_provider, bool p_hasAlpha = false);
+		static void DrawScalar(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<T(void)> p_gatherer, std::function<void(T)> p_provider, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
+		static void DrawBoolean(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<bool(void)> p_gatherer, std::function<void(bool)> p_provider);
+		static void DrawVec2(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<LittleEngine::FVector2(void)> p_gatherer, std::function<void(LittleEngine::FVector2)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawVec3(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<LittleEngine::FVector3(void)> p_gatherer, std::function<void(LittleEngine::FVector3)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawVec4(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<LittleEngine::FVector4(void)> p_gatherer, std::function<void(LittleEngine::FVector4)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawQuat(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<LittleEngine::FQuaternion(void)> p_gatherer, std::function<void(LittleEngine::FQuaternion)> p_provider, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static void DrawDDString(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<std::string(void)> p_gatherer, std::function<void(std::string)> p_provider, const std::string& p_identifier);
+		static void DrawString(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<std::string(void)> p_gatherer, std::function<void(std::string)> p_provider);
+		static void DrawColor(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, std::function<LittleEngine::UI::Types::Color(void)> p_gatherer, std::function<void(LittleEngine::UI::Types::Color)> p_provider, bool p_hasAlpha = false);
 
 		template <typename T>
 		static ImGuiDataType_ GetDataType();
@@ -99,7 +99,7 @@ namespace OvCore::Helpers
 		static std::string GetFormat();
 
 	private:
-		static OvRendering::Resources::Texture* __EMPTY_TEXTURE;
+		static LittleEngine::Rendering::Resources::Texture* __EMPTY_TEXTURE;
 	};
 }
 

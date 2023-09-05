@@ -13,7 +13,7 @@
 #include "Modules/UI/Core/UIManager.h"
 #include "Modules/UI/Panels/PanelWindow.h"
 
-namespace OvEditor::Core
+namespace LittleEditor::Core
 {
 	/**
 	* A simple panel that allow the user to select the project to launch
@@ -43,14 +43,14 @@ namespace OvEditor::Core
 		void RegisterProject(const std::string& p_path);
 
 	private:
-		std::unique_ptr<OvWindowing::Context::Device>		m_device;
-		std::unique_ptr<OvWindowing::Window>				m_window;
-		std::unique_ptr<OvRendering::Context::Driver>		m_driver;
-		std::unique_ptr<OvRendering::Core::Renderer>		m_renderer;
-		std::unique_ptr<OvUI::Core::UIManager>				m_uiManager;
+		std::unique_ptr<LittleEngine::Windowing::Context::Device>		m_device;
+		std::unique_ptr<LittleEngine::Windowing::Window>				m_window;
+		std::unique_ptr<LittleEngine::Rendering::Context::Driver>		m_driver;
+		std::unique_ptr<LittleEngine::Rendering::Core::Renderer>		m_renderer;
+		std::unique_ptr<LittleEngine::UI::Core::UIManager>				m_uiManager;
 
-		OvUI::Modules::Canvas m_canvas;
-		std::unique_ptr<OvUI::Panels::PanelWindow>			m_mainPanel;
+		LittleEngine::UI::Modules::Canvas m_canvas;
+		std::unique_ptr<LittleEngine::UI::Panels::PanelWindow>			m_mainPanel;
 
 		std::string m_projectPath = "";
 		std::string m_projectName = "";

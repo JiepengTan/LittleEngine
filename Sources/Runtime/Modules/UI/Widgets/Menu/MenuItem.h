@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Menu
+namespace LittleEngine::UI::Widgets::Menu
 {
 	/**
 	* Widget that can be added to a menu list. It is clickable and can be checkable
@@ -35,8 +35,8 @@ namespace OvUI::Widgets::Menu
 		std::string shortcut;
 		bool checkable;
 		bool checked;
-		OvTools::Eventing::Event<> ClickedEvent;
-		OvTools::Eventing::Event<bool> ValueChangedEvent;
+		LittleEngine::Eventing::Event<> ClickedEvent;
+		LittleEngine::Eventing::Event<bool> ValueChangedEvent;
 
 	private:
 		bool m_selected;

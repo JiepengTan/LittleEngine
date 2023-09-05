@@ -9,7 +9,7 @@
 #include "Modules/UI/Widgets/AWidget.h"
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Simple widget to display text on a panel

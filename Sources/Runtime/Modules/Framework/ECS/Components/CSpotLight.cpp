@@ -14,70 +14,70 @@
 
 #include "Modules/Framework/ECS/Components/CSpotLight.h"
 
-OvCore::ECS::Components::CSpotLight::CSpotLight(ECS::Actor & p_owner) :
+LittleEngine::CSpotLight::CSpotLight(Actor & p_owner) :
 	CLight(p_owner)
 {
-	m_data.type = static_cast<float>(OvRendering::Entities::Light::Type::SPOT);
+	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::SPOT);
 }
 
-std::string OvCore::ECS::Components::CSpotLight::GetName()
+std::string LittleEngine::CSpotLight::GetName()
 {
 	return "Spot Light";
 }
 
-float OvCore::ECS::Components::CSpotLight::GetConstant() const
+float LittleEngine::CSpotLight::GetConstant() const
 {
 	return m_data.constant;
 }
 
-float OvCore::ECS::Components::CSpotLight::GetLinear() const
+float LittleEngine::CSpotLight::GetLinear() const
 {
 	return m_data.linear;
 }
 
-float OvCore::ECS::Components::CSpotLight::GetQuadratic() const
+float LittleEngine::CSpotLight::GetQuadratic() const
 {
 	return m_data.quadratic;
 }
 
-float OvCore::ECS::Components::CSpotLight::GetCutoff() const
+float LittleEngine::CSpotLight::GetCutoff() const
 {
 	return m_data.cutoff;
 }
 
-float OvCore::ECS::Components::CSpotLight::GetOuterCutoff() const
+float LittleEngine::CSpotLight::GetOuterCutoff() const
 {
 	return m_data.outerCutoff;
 }
 
-void OvCore::ECS::Components::CSpotLight::SetConstant(float p_constant)
+void LittleEngine::CSpotLight::SetConstant(float p_constant)
 {
 	m_data.constant = p_constant;
 }
 
-void OvCore::ECS::Components::CSpotLight::SetLinear(float p_linear)
+void LittleEngine::CSpotLight::SetLinear(float p_linear)
 {
 	m_data.linear = p_linear;
 }
 
-void OvCore::ECS::Components::CSpotLight::SetQuadratic(float p_quadratic)
+void LittleEngine::CSpotLight::SetQuadratic(float p_quadratic)
 {
 	m_data.quadratic = p_quadratic;
 }
 
-void OvCore::ECS::Components::CSpotLight::SetCutoff(float p_cutoff)
+void LittleEngine::CSpotLight::SetCutoff(float p_cutoff)
 {
 	m_data.cutoff = p_cutoff;
 }
 
-void OvCore::ECS::Components::CSpotLight::SetOuterCutoff(float p_outerCutoff)
+void LittleEngine::CSpotLight::SetOuterCutoff(float p_outerCutoff)
 {
 	m_data.outerCutoff = p_outerCutoff;
 }
 
-void OvCore::ECS::Components::CSpotLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CSpotLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnSerialize(p_doc, p_node);
 
@@ -88,9 +88,9 @@ void OvCore::ECS::Components::CSpotLight::OnSerialize(tinyxml2::XMLDocument & p_
 	Serializer::SerializeFloat(p_doc, p_node, "outercutoff", m_data.outerCutoff);
 }
 
-void OvCore::ECS::Components::CSpotLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CSpotLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnDeserialize(p_doc, p_node);
 
@@ -101,9 +101,9 @@ void OvCore::ECS::Components::CSpotLight::OnDeserialize(tinyxml2::XMLDocument & 
 	Serializer::DeserializeFloat(p_doc, p_node, "outercutoff", m_data.outerCutoff);
 }
 
-void OvCore::ECS::Components::CSpotLight::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CSpotLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
-	using namespace OvCore::Helpers;
+	using namespace LittleEngine::Helpers;
 
 	CLight::OnInspector(p_root);
 
@@ -111,19 +111,19 @@ void OvCore::ECS::Components::CSpotLight::OnInspector(OvUI::Internal::WidgetCont
 	GUIDrawer::DrawScalar<float>(p_root, "Outer Cut-Off", m_data.outerCutoff, 0.1f, 0.f, 180.f);
 
 	GUIDrawer::CreateTitle(p_root, "Fall-off presets");
-	auto& presetsRoot = p_root.CreateWidget<OvUI::Widgets::Layout::Group>();
+	auto& presetsRoot = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
-	auto& constantPreset = presetsRoot.CreateWidget<OvUI::Widgets::Buttons::Button>("Constant");
+	auto& constantPreset = presetsRoot.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Constant");
 	constantPreset.ClickedEvent += [this] { m_data.constant = 1.f, m_data.linear = m_data.quadratic = 0.f; };
 	constantPreset.lineBreak = false;
 	constantPreset.idleBackgroundColor = { 0.7f, 0.5f, 0.f };
 
-	auto& linearPreset = presetsRoot.CreateWidget<OvUI::Widgets::Buttons::Button>("Linear");
+	auto& linearPreset = presetsRoot.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Linear");
 	linearPreset.ClickedEvent += [this] { m_data.linear = 1.f, m_data.constant = m_data.quadratic = 0.f; };
 	linearPreset.lineBreak = false;
 	linearPreset.idleBackgroundColor = { 0.7f, 0.5f, 0.f };
 
-	auto& quadraticPreset = presetsRoot.CreateWidget<OvUI::Widgets::Buttons::Button>("Quadratic");
+	auto& quadraticPreset = presetsRoot.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Quadratic");
 	quadraticPreset.ClickedEvent += [this] { m_data.quadratic = 1.f, m_data.constant = m_data.linear = 0.f; };
 	quadraticPreset.idleBackgroundColor = { 0.7f, 0.5f, 0.f };
 

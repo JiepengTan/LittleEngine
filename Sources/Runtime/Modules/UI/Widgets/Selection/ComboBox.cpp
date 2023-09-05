@@ -8,13 +8,13 @@
 
 #include "Modules/UI/Widgets/Selection/ComboBox.h"
 
-OvUI::Widgets::Selection::ComboBox::ComboBox(int p_currentChoice) :
+LittleEngine::UI::Widgets::Selection::ComboBox::ComboBox(int p_currentChoice) :
 	DataWidget<int>(currentChoice), currentChoice(p_currentChoice)
 {
 
 }
 
-void OvUI::Widgets::Selection::ComboBox::_Draw_Impl()
+void LittleEngine::UI::Widgets::Selection::ComboBox::_Draw_Impl()
 {
 	if (choices.find(currentChoice) == choices.end())
 		currentChoice = choices.begin()->first;

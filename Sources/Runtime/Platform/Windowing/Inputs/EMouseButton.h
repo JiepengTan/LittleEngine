@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvWindowing::Inputs
+namespace LittleEngine::Windowing::Inputs
 {
 	/**
 	* Mouse buttons

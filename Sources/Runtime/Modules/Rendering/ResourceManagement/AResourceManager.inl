@@ -10,7 +10,7 @@
 
 #include "Modules/Rendering/ResourceManagement/AResourceManager.h"
 
-namespace OvCore::ResourceManagement
+namespace LittleEngine::ResourceManagement
 {
 	template<typename T>
 	inline T* AResourceManager<T>::LoadResource(const std::string & p_path)

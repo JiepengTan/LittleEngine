@@ -15,7 +15,7 @@
 #include "../Editor/Panels/Hierarchy.h"
 #include "../Editor/Panels/AView.h"
 
-namespace OvEditor::Core
+namespace LittleEditor::Core
 {
 	/**
 	* A simple camera controller used to navigate into views
@@ -33,10 +33,10 @@ namespace OvEditor::Core
 		*/
 		CameraController
 		(
-			OvEditor::Panels::AView& p_view,
-			OvRendering::LowRenderer::Camera& p_camera,
-			OvMaths::FVector3& p_position,
-			OvMaths::FQuaternion& p_rotation,
+			LittleEditor::Panels::AView& p_view,
+			LittleEngine::Rendering::LowRenderer::Camera& p_camera,
+			LittleEngine::FVector3& p_position,
+			LittleEngine::FQuaternion& p_rotation,
 			bool p_enableFocusInputs = false
 		);
 
@@ -50,7 +50,7 @@ namespace OvEditor::Core
 		* Asks the camera to move to the target actor
 		* @param p_target
 		*/
-		void MoveToTarget(OvCore::ECS::Actor& p_target);
+		void MoveToTarget(LittleEngine::Actor& p_target);
 
 		/**
 		* Defines the speed of the camera
@@ -67,23 +67,23 @@ namespace OvEditor::Core
 		* Defines the position of the camera
 		* @param p_position
 		*/
-		void SetPosition(const OvMaths::FVector3& p_position);
+		void SetPosition(const LittleEngine::FVector3& p_position);
 
 		/**
 		* Defines the rotation of the camera
 		* @param p_rotation
 		*/
-		void SetRotation(const OvMaths::FQuaternion& p_rotation);
+		void SetRotation(const LittleEngine::FQuaternion& p_rotation);
 
 		/**
 		* Returns the position of the camera
 		*/
-		const OvMaths::FVector3& GetPosition() const;
+		const LittleEngine::FVector3& GetPosition() const;
 
 		/**
 		* Returns the position of the camera
 		*/
-		const OvMaths::FQuaternion& GetRotation() const;
+		const LittleEngine::FQuaternion& GetRotation() const;
 
 		/**
 		* Returns true if the right mouse click is being pressed
@@ -91,23 +91,23 @@ namespace OvEditor::Core
 		bool IsRightMousePressed() const;
 
 	private:
-		void HandleCameraPanning(const OvMaths::FVector2& p_mouseOffset, bool p_firstMouse);
-		void HandleCameraOrbit(const OvMaths::FVector2& p_mouseOffset, bool p_firstMouse);
-		void HandleCameraFPSMouse(const OvMaths::FVector2& p_mouseOffset, bool p_firstMouse);
+		void HandleCameraPanning(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse);
+		void HandleCameraOrbit(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse);
+		void HandleCameraFPSMouse(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse);
 
 		void HandleCameraZoom();
 		void HandleCameraFPSKeyboard(float p_deltaTime);
 		void UpdateMouseState();
 
 	private:
-		OvWindowing::Inputs::InputManager& m_inputManager;
-		OvWindowing::Window& m_window;
-		OvEditor::Panels::AView& m_view;
-		OvRendering::LowRenderer::Camera& m_camera;
-		OvMaths::FVector3& m_cameraPosition;
-		OvMaths::FQuaternion& m_cameraRotation;
+		LittleEngine::Windowing::Inputs::InputManager& m_inputManager;
+		LittleEngine::Windowing::Window& m_window;
+		LittleEditor::Panels::AView& m_view;
+		LittleEngine::Rendering::LowRenderer::Camera& m_camera;
+		LittleEngine::FVector3& m_cameraPosition;
+		LittleEngine::FQuaternion& m_cameraRotation;
 
-		std::queue<std::tuple<OvMaths::FVector3, OvMaths::FQuaternion>> m_cameraDestinations;
+		std::queue<std::tuple<LittleEngine::FVector3, LittleEngine::FQuaternion>> m_cameraDestinations;
 
 		bool m_enableFocusInputs;
 
@@ -115,15 +115,15 @@ namespace OvEditor::Core
 		bool m_middleMousePressed = false;
 		bool m_rightMousePressed = false;
 
-		OvMaths::FVector3 m_targetSpeed;
-		OvMaths::FVector3 m_currentMovementSpeed;
+		LittleEngine::FVector3 m_targetSpeed;
+		LittleEngine::FVector3 m_currentMovementSpeed;
 
-		OvMaths::FTransform* m_orbitTarget = nullptr;
-		OvMaths::FVector3 m_orbitStartOffset;
+		LittleEngine::FTransform* m_orbitTarget = nullptr;
+		LittleEngine::FVector3 m_orbitStartOffset;
 		bool m_firstMouse = true;
 		double m_lastMousePosX = 0.0;
 		double m_lastMousePosY = 0.0;
-		OvMaths::FVector3 m_ypr;
+		LittleEngine::FVector3 m_ypr;
 		float m_mouseSensitivity = 0.12f;
 		float m_cameraDragSpeed = 0.03f;
 		float m_cameraOrbitSpeed = 0.5f;

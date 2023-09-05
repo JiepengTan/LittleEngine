@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/InputFields/InputMultipleScalars.h"
 
-namespace OvUI::Widgets::InputFields
+namespace LittleEngine::UI::Widgets::InputFields
 {
 	/**
 	* Input widget of multiple type double

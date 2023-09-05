@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Drags/DragMultipleScalars.h"
 
-namespace OvUI::Widgets::Drags
+namespace LittleEngine::UI::Widgets::Drags
 {
 	/**
 	* Drag widget of multiple type double

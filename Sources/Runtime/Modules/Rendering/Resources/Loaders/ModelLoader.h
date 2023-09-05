@@ -10,11 +10,11 @@
 
 #include "Modules/Rendering/Resources/Parsers/AssimpParser.h"
 #include "Modules/Rendering/Resources/Model.h"
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	class Model;
 }
-namespace OvRendering::Resources::Loaders
+namespace LittleEngine::Rendering::Resources::Loaders
 {
 	/**
 	* Handle the Model creation and destruction

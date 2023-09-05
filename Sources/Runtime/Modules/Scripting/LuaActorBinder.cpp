@@ -9,7 +9,7 @@
 #include "Modules/Framework/ECS/Actor.h"
 
  
-void OvCore::Scripting::LuaActorBinder::BindActor(sol::state & p_luaState)
+void LittleEngine::Scripting::LuaActorBinder::BindActor(sol::state & p_luaState)
 { 
 } 
  

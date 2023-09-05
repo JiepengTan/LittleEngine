@@ -11,11 +11,11 @@
 #include "Modules/UI/Widgets/Menu/MenuItem.h"
 #include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class MenuBar : public OvUI::Panels::PanelMenuBar
+	class MenuBar : public LittleEngine::UI::Panels::PanelMenuBar
 	{
-		using PanelMap = std::unordered_map<std::string, std::pair<std::reference_wrapper<OvUI::Panels::PanelWindow>, std::reference_wrapper<OvUI::Widgets::Menu::MenuItem>>>;
+		using PanelMap = std::unordered_map<std::string, std::pair<std::reference_wrapper<LittleEngine::UI::Panels::PanelWindow>, std::reference_wrapper<LittleEngine::UI::Widgets::Menu::MenuItem>>>;
 
 	public:
 		/**
@@ -32,7 +32,7 @@ namespace OvEditor::Panels
 		/**
 		* Register a panel to the menu bar window menu
 		*/
-		void RegisterPanel(const std::string& p_name, OvUI::Panels::PanelWindow& p_panel);
+		void RegisterPanel(const std::string& p_name, LittleEngine::UI::Panels::PanelWindow& p_panel);
 
 	private:
 		void CreateFileMenu();
@@ -46,14 +46,14 @@ namespace OvEditor::Panels
 		void CreateToolbar();
 		void UpdateToggleableItems();
 		void OpenEveryWindows(bool p_state);
-		OvUI::Widgets::Buttons::ButtonImage* CreateToolbarItem(std::string p_name,float& p_offset);
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* CreateToolbarItem(std::string p_name,float& p_offset);
 	private:
 		PanelMap m_panels;
 		const std::string PorjectSettingName = "Project Settings";
-		OvUI::Widgets::Menu::MenuList* m_windowMenu = nullptr;
-		OvUI::Widgets::Menu::MenuList* m_editMenu = nullptr;
-		OvUI::Widgets::Buttons::ButtonImage* m_playButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_pauseButton;
-		OvUI::Widgets::Buttons::ButtonImage* m_nextButton;
+		LittleEngine::UI::Widgets::Menu::MenuList* m_windowMenu = nullptr;
+		LittleEngine::UI::Widgets::Menu::MenuList* m_editMenu = nullptr;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_playButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_pauseButton;
+		LittleEngine::UI::Widgets::Buttons::ButtonImage* m_nextButton;
 	};
 }

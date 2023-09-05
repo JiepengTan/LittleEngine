@@ -92,7 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Application.h" />
+    <ClInclude Include="Core\EditorApp.h" />
     <ClInclude Include="Core\CameraController.h" />
     <ClInclude Include="Core\Context.h" />
     <ClInclude Include="Core\Editor.h" />
@@ -126,7 +126,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Application.cpp" />
+    <ClCompile Include="Core\EditorApp.cpp" />
     <ClCompile Include="Core\CameraController.cpp" />
     <ClCompile Include="Core\Context.cpp" />
     <ClCompile Include="Core\Editor.cpp" />

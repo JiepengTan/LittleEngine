@@ -16,7 +16,7 @@
 #include "Modules/Rendering/Data/Frustum.h"
 #include "Modules/Rendering/Settings/EProjectionMode.h"
 
-namespace OvRendering::LowRenderer
+namespace LittleEngine::Rendering::LowRenderer
 {
 	/**
 	* Represents a camera. Wraps projection and view calculation based on applied rotation and the given positions
@@ -36,7 +36,7 @@ namespace OvRendering::LowRenderer
 		* @param p_position
 		* @param p_rotation
 		*/
-		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const OvMaths::FVector3& p_position, const OvMaths::FQuaternion& p_rotation);
+		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const LittleEngine::FVector3& p_position, const LittleEngine::FQuaternion& p_rotation);
 
 		/**
 		* Calculate and cache the result projection matrix
@@ -50,7 +50,7 @@ namespace OvRendering::LowRenderer
 		* @param p_position
 		* @param p_rotation
 		*/
-		void CacheViewMatrix(const OvMaths::FVector3& p_position, const OvMaths::FQuaternion& p_rotation);
+		void CacheViewMatrix(const LittleEngine::FVector3& p_position, const LittleEngine::FQuaternion& p_rotation);
 
 		/**
 		* Calculate and cache the result frustum.
@@ -58,7 +58,7 @@ namespace OvRendering::LowRenderer
 		* @param p_view
 		* @param p_projection
 		*/
-		void CacheFrustum(const OvMaths::FMatrix4& p_view, const OvMaths::FMatrix4& p_projection);
+		void CacheFrustum(const LittleEngine::FMatrix4& p_view, const LittleEngine::FMatrix4& p_projection);
 
 		/**
 		* Returns the fov of the camera
@@ -83,22 +83,22 @@ namespace OvRendering::LowRenderer
 		/**
 		* Returns the clear color of the camera
 		*/
-		const OvMaths::FVector3& GetClearColor() const;
+		const LittleEngine::FVector3& GetClearColor() const;
 
 		/**
 		* Returns the cached projection matrix
 		*/
-		const OvMaths::FMatrix4& GetProjectionMatrix() const;
+		const LittleEngine::FMatrix4& GetProjectionMatrix() const;
 
 		/**
 		* Returns the cached view matrix
 		*/
-		const OvMaths::FMatrix4& GetViewMatrix() const;
+		const LittleEngine::FMatrix4& GetViewMatrix() const;
 
 		/**
 		* Retursn the cached frustum
 		*/
-		const OvRendering::Data::Frustum& GetFrustum() const;
+		const LittleEngine::Rendering::Data::Frustum& GetFrustum() const;
 
 		/**
 		* Returns true if the frustum culling for geometry is enabled
@@ -113,7 +113,7 @@ namespace OvRendering::LowRenderer
         /**
         * Returns the current projection mode
         */
-        OvRendering::Settings::EProjectionMode GetProjectionMode() const;
+        LittleEngine::Rendering::Settings::EProjectionMode GetProjectionMode() const;
 
 		/**
 		* Sets the fov of the camera to the given value
@@ -143,7 +143,7 @@ namespace OvRendering::LowRenderer
 		* Sets the clear color of the camera to the given value
 		* @param p_value
 		*/
-		void SetClearColor(const OvMaths::FVector3& p_clearColor);
+		void SetClearColor(const LittleEngine::FVector3& p_clearColor);
 
 		/**
 		* Defines if the camera should apply frustum culling to geometry while rendering
@@ -161,28 +161,28 @@ namespace OvRendering::LowRenderer
         * Defines the projection mode the camera should adopt
         * @param p_projectionMode
         */
-        void SetProjectionMode(OvRendering::Settings::EProjectionMode p_projectionMode);
+        void SetProjectionMode(LittleEngine::Rendering::Settings::EProjectionMode p_projectionMode);
 
 	private:
-		OvMaths::FMatrix4 CalculateProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight) const;
-		OvMaths::FMatrix4 CalculateViewMatrix(const OvMaths::FVector3& p_position, const OvMaths::FQuaternion& p_rotation) const;
+		LittleEngine::FMatrix4 CalculateProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight) const;
+		LittleEngine::FMatrix4 CalculateViewMatrix(const LittleEngine::FVector3& p_position, const LittleEngine::FQuaternion& p_rotation) const;
 
 	private:
-		OvRendering::Data::Frustum m_frustum;
-		OvMaths::FMatrix4 m_viewMatrix;
-		OvMaths::FMatrix4 m_projectionMatrix;
-        OvRendering::Settings::EProjectionMode m_projectionMode;
+		LittleEngine::Rendering::Data::Frustum m_frustum;
+		LittleEngine::FMatrix4 m_viewMatrix;
+		LittleEngine::FMatrix4 m_projectionMatrix;
+        LittleEngine::Rendering::Settings::EProjectionMode m_projectionMode;
 
 		float m_fov;
         float m_size;
 		float m_near;
 		float m_far;
 		
-		OvMaths::FVector3 m_clearColor;
+		LittleEngine::FVector3 m_clearColor;
 
 		bool m_frustumGeometryCulling;
 		bool m_frustumLightCulling;
 	public:
-		OvRendering::Settings::ECameraType m_CameraType;
+		LittleEngine::Rendering::Settings::ECameraType m_CameraType;
 	};
 }

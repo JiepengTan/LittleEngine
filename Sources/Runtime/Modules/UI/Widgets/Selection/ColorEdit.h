@@ -11,7 +11,7 @@
 #include "Modules/UI/Widgets/DataWidget.h"
 #include "Modules/UI/Types/Color.h"
 
-namespace OvUI::Widgets::Selection
+namespace LittleEngine::UI::Widgets::Selection
 {
 	/**
 	* Widget that can open a color picker on click
@@ -32,6 +32,6 @@ namespace OvUI::Widgets::Selection
 	public:
 		bool enableAlpha;
 		Types::Color color;
-		OvTools::Eventing::Event<Types::Color&> ColorChangedEvent;
+		LittleEngine::Eventing::Event<Types::Color&> ColorChangedEvent;
 	};
 }

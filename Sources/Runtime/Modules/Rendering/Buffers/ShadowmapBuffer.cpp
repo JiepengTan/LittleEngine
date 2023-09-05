@@ -13,7 +13,7 @@
 #include "Core/CoreInclude.h"
 
 
-OvRendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_width, uint16_t p_height)
+LittleEngine::Rendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_width, uint16_t p_height)
 {
 	m_width = p_width;
 	m_height = p_height;
@@ -41,7 +41,7 @@ OvRendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_width, uint16_
 	Resize(m_width, m_height);
 }
 
-OvRendering::Buffers::ShadowmapBuffer::~ShadowmapBuffer()
+LittleEngine::Rendering::Buffers::ShadowmapBuffer::~ShadowmapBuffer()
 {
 	/* Destroy OpenGL objects */
 	glDeleteBuffers(1, &m_bufferID);
@@ -50,19 +50,19 @@ OvRendering::Buffers::ShadowmapBuffer::~ShadowmapBuffer()
 	delete m_texturePtr;
 }
 
-void OvRendering::Buffers::ShadowmapBuffer::Bind()
+void LittleEngine::Rendering::Buffers::ShadowmapBuffer::Bind()
 {
 	glViewport(0, 0, m_width, m_height);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_bufferID);
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-void OvRendering::Buffers::ShadowmapBuffer::Unbind()
+void LittleEngine::Rendering::Buffers::ShadowmapBuffer::Unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void OvRendering::Buffers::ShadowmapBuffer::Resize(uint16_t p_width, uint16_t p_height)
+void LittleEngine::Rendering::Buffers::ShadowmapBuffer::Resize(uint16_t p_width, uint16_t p_height)
 {
 	m_width = p_width;
 	m_height = p_height;
@@ -79,22 +79,22 @@ void OvRendering::Buffers::ShadowmapBuffer::Resize(uint16_t p_width, uint16_t p_
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-uint32_t OvRendering::Buffers::ShadowmapBuffer::GetID()
+uint32_t LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetID()
 {
 	return m_bufferID;
 }
 
-uint32_t OvRendering::Buffers::ShadowmapBuffer::GetTextureID()
+uint32_t LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetTextureID()
 {
 	return m_renderTexture;
 }
 
-OvRendering::Resources::Texture* OvRendering::Buffers::ShadowmapBuffer::GetTexture()
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetTexture()
 {
 	return m_texturePtr;
 }
 
-uint32_t OvRendering::Buffers::ShadowmapBuffer::GetRenderBufferID()
+uint32_t LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetRenderBufferID()
 {
 	return m_depthStencilBuffer;
 }

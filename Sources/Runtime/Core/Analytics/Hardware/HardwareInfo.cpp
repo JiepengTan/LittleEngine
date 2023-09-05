@@ -8,7 +8,7 @@
 
 #include "Core/Analytics/Hardware/HardwareInfo.h"
 
-OvAnalytics::Hardware::HardwareInfo::HardwareInfo(double p_timeInterval) :
+LittleEngine::Analytics::Hardware::HardwareInfo::HardwareInfo(double p_timeInterval) :
 	m_timeInterval(p_timeInterval),
 	m_timer(0.0f),
 	m_cpuUsage(0.0f),
@@ -16,7 +16,7 @@ OvAnalytics::Hardware::HardwareInfo::HardwareInfo(double p_timeInterval) :
 {
 }
 
-OvAnalytics::Hardware::HardwareReport OvAnalytics::Hardware::HardwareInfo::GenerateReport()
+LittleEngine::Analytics::Hardware::HardwareReport LittleEngine::Analytics::Hardware::HardwareInfo::GenerateReport()
 {
 	return HardwareReport
 	{
@@ -28,7 +28,7 @@ OvAnalytics::Hardware::HardwareReport OvAnalytics::Hardware::HardwareInfo::Gener
 	};
 }
 
-void OvAnalytics::Hardware::HardwareInfo::Tick()
+void LittleEngine::Analytics::Hardware::HardwareInfo::Tick()
 {
 	m_currentTime = std::chrono::steady_clock::now();
 	m_elapsedTime = m_currentTime - m_previousTime;
@@ -46,7 +46,7 @@ void OvAnalytics::Hardware::HardwareInfo::Tick()
 	m_previousTime = m_currentTime;
 }
 
-void OvAnalytics::Hardware::HardwareInfo::Update()
+void LittleEngine::Analytics::Hardware::HardwareInfo::Update()
 {
 	m_cpuUsage = m_cpuInfo.CalculateCPULoad();
 	m_gpuUsage = m_gpuInfo.CalculateGPULoad();

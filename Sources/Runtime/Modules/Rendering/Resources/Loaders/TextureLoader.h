@@ -12,7 +12,7 @@
 #include "Modules/Rendering/Resources/Texture.h"
 
 
-namespace OvRendering::Resources::Loaders
+namespace LittleEngine::Rendering::Resources::Loaders
 {
 	/**
 	* Handle the Texture creation and destruction
@@ -32,7 +32,7 @@ namespace OvRendering::Resources::Loaders
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static Texture* Create(const std::string& p_filepath, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Texture* Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
 		/**
 		* Create a texture from a single pixel color
@@ -41,7 +41,7 @@ namespace OvRendering::Resources::Loaders
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static Texture* CreateColor(uint32_t p_data, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Texture* CreateColor(uint32_t p_data, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
 		/**
 		* Create a texture from memory
@@ -52,7 +52,7 @@ namespace OvRendering::Resources::Loaders
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
 		/**
 		* Reload a texture from file
@@ -62,7 +62,7 @@ namespace OvRendering::Resources::Loaders
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static void Reload(Texture& p_texture, const std::string& p_filePath, OvRendering::Settings::ETextureFilteringMode p_firstFilter, OvRendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static void Reload(Texture& p_texture, const std::string& p_filePath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
 		/**
 		* Destroy a texture

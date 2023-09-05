@@ -11,10 +11,10 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-namespace OvAudio::Tracking
+namespace LittleEngine::Audio::Tracking
 {
 	/**
-	* This class is an interface between irrklang sound stop event and OvTools event
+	* This class is an interface between irrklang sound stop event and LittleEngine event
 	*/
 	class SoundStopEventBinder : public irrklang::ISoundStopEventReceiver
 	{
@@ -23,7 +23,7 @@ namespace OvAudio::Tracking
 		* Constructor
 		* @param p_soundFinishedEvent
 		*/
-		SoundStopEventBinder(OvTools::Eventing::Event<>& p_soundFinishedEvent);
+		SoundStopEventBinder(LittleEngine::Eventing::Event<>& p_soundFinishedEvent);
 
 		/**
 		* Called when the sound is stopped
@@ -34,6 +34,6 @@ namespace OvAudio::Tracking
 		virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData) override;
 
 	private:
-		OvTools::Eventing::Event<>& SoundFinishedEvent;
+		LittleEngine::Eventing::Event<>& SoundFinishedEvent;
 	};
 }

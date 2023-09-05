@@ -11,7 +11,7 @@
 #include "Platform/Windowing/Cursor/ECursorShape.h"
 #include "Platform/Windowing/Cursor/ECursorMode.h"
 
-namespace OvWindowing::Settings
+namespace LittleEngine::Windowing::Settings
 {
 	/**
 	* Contains window settings

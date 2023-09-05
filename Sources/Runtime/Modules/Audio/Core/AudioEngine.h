@@ -13,7 +13,7 @@
 #include "Modules/Audio/Entities/AudioSource.h"
 #include "Modules/Audio/Entities/AudioListener.h"
 
-namespace OvAudio::Core
+namespace LittleEngine::Audio::Core
 {
 	/**
 	* Handle the creation of the Audio context
@@ -67,7 +67,7 @@ namespace OvAudio::Core
 		* Format: std::tuple<Active, Position, Direction>
 		* @parma p_considerDisabled
 		*/
-		std::optional<std::pair<OvMaths::FVector3, OvMaths::FVector3>> GetListenerInformation(bool p_considerDisabled = false) const;
+		std::optional<std::pair<LittleEngine::FVector3, LittleEngine::FVector3>> GetListenerInformation(bool p_considerDisabled = false) const;
 
 	private:
 		void Consider(Entities::AudioSource& p_audioSource);

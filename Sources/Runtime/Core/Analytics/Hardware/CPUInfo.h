@@ -9,7 +9,7 @@
 #include <Windows.h>
 #include <stdint.h>
 
-namespace OvAnalytics::Hardware
+namespace LittleEngine::Analytics::Hardware
 {
 	/**
 	* The CPUInfo class will gather informations about the CPU usage

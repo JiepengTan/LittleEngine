@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Internal/WidgetContainer.h"
 
-namespace OvUI::Widgets::Layout
+namespace LittleEngine::UI::Widgets::Layout
 {
 	/**
 	* Widget that allow columnification

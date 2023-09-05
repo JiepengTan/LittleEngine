@@ -3,7 +3,7 @@
 #include <cstring>
 #include <map>
 
-namespace OvCore
+namespace LittleEngine
 {
     namespace Reflection
     {

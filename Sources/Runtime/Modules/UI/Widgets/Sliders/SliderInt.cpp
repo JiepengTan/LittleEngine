@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Sliders/SliderInt.h"
 
-OvUI::Widgets::Sliders::SliderInt::SliderInt
+LittleEngine::UI::Widgets::Sliders::SliderInt::SliderInt
 (
 	int p_min,
 	int p_max,

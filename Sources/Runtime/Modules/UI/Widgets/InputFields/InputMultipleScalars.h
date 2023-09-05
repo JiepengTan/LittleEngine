@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::InputFields
+namespace LittleEngine::UI::Widgets::InputFields
 {
 	/**
 	* Input widget of multiple generic type
@@ -82,8 +82,8 @@ namespace OvUI::Widgets::InputFields
 		std::string label;
 		std::string format;
 		bool selectAllOnClick;
-		OvTools::Eventing::Event<std::array<T, _Size>&> ContentChangedEvent;
-		OvTools::Eventing::Event<std::array<T, _Size>&> EnterPressedEvent;
+		LittleEngine::Eventing::Event<std::array<T, _Size>&> ContentChangedEvent;
+		LittleEngine::Eventing::Event<std::array<T, _Size>&> EnterPressedEvent;
 
 	private:
 		ImGuiDataType m_dataType;

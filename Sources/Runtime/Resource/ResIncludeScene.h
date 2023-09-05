@@ -1,7 +1,7 @@
-﻿#pragma once
+#pragma once
 #include "Resource/ResIncludeBasic.h"
 #ifdef false
-namespace OvCore
+namespace LittleEngine
 {
     REFLECTION_TYPE(ResComponent)
     CLASS(ResComponent: public ResData, Fields)
@@ -15,7 +15,7 @@ namespace OvCore
     {
         REFLECTION_BODY(ResActor)
     public:
-        std::vector<OvCore::Reflection::ReflectionPtr<OvCore::ECS::Components::AComponent>> components;
+        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
     };
     
     REFLECTION_TYPE(ResActor)
@@ -23,14 +23,14 @@ namespace OvCore
     {
         REFLECTION_BODY(ResActor)
         public:
-        std::vector<OvCore::Reflection::ReflectionPtr<OvCore::ECS::Components::AComponent>> components;
+        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
     };
     REFLECTION_TYPE(ResActor)
     CLASS(ResScene: public ResObject, Fields)
     {
         REFLECTION_BODY(ResActor)
         public:
-        std::vector<OvCore::Reflection::ReflectionPtr<OvCore::ECS::Components::AComponent>> components;
+        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
     };
 }
 

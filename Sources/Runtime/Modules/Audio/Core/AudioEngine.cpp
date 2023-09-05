@@ -10,12 +10,12 @@
 
 #include <irrklang/irrKlang.h>
 
-OvAudio::Core::AudioEngine::AudioEngine(const std::string & p_workingDirectory) : m_workingDirectory(p_workingDirectory)
+LittleEngine::Audio::Core::AudioEngine::AudioEngine(const std::string & p_workingDirectory) : m_workingDirectory(p_workingDirectory)
 {
 	m_irrklangEngine = irrklang::createIrrKlangDevice();
 
-	using AudioSourceReceiver	= void(AudioEngine::*)(OvAudio::Entities::AudioSource&);
-	using AudioListenerReceiver = void(AudioEngine::*)(OvAudio::Entities::AudioListener&);
+	using AudioSourceReceiver	= void(AudioEngine::*)(LittleEngine::Audio::Entities::AudioSource&);
+	using AudioListenerReceiver = void(AudioEngine::*)(LittleEngine::Audio::Entities::AudioListener&);
 
 	Entities::AudioSource::CreatedEvent		+= std::bind(static_cast<AudioSourceReceiver>(&AudioEngine::Consider), this, std::placeholders::_1);
 	Entities::AudioSource::DestroyedEvent	+= std::bind(static_cast<AudioSourceReceiver>(&AudioEngine::Unconsider), this, std::placeholders::_1);
@@ -23,18 +23,18 @@ OvAudio::Core::AudioEngine::AudioEngine(const std::string & p_workingDirectory) 
 	Entities::AudioListener::DestroyedEvent	+= std::bind(static_cast<AudioListenerReceiver>(&AudioEngine::Unconsider), this, std::placeholders::_1);
 }
 
-OvAudio::Core::AudioEngine::~AudioEngine()
+LittleEngine::Audio::Core::AudioEngine::~AudioEngine()
 {
 	m_irrklangEngine->drop();
 }
 
-void OvAudio::Core::AudioEngine::Update()
+void LittleEngine::Audio::Core::AudioEngine::Update()
 {
 	/* Update tracked sounds */
 	std::for_each(m_audioSources.begin(), m_audioSources.end(), std::mem_fn(&Entities::AudioSource::UpdateTrackedSoundPosition));
 
 	/* Defines the listener position using the last listener created (If any) */
-	std::optional<std::pair<OvMaths::FVector3, OvMaths::FVector3>> listener = GetListenerInformation();
+	std::optional<std::pair<LittleEngine::FVector3, LittleEngine::FVector3>> listener = GetListenerInformation();
 	if (listener.has_value())
 	{
 		m_irrklangEngine->setListenerPosition
@@ -49,7 +49,7 @@ void OvAudio::Core::AudioEngine::Update()
 	}
 }
 
-void OvAudio::Core::AudioEngine::Suspend()
+void LittleEngine::Audio::Core::AudioEngine::Suspend()
 {
 	std::for_each(m_audioSources.begin(), m_audioSources.end(), [this](std::reference_wrapper<Entities::AudioSource> p_audioSource)
 	{
@@ -63,29 +63,29 @@ void OvAudio::Core::AudioEngine::Suspend()
 	m_suspended = true;
 }
 
-void OvAudio::Core::AudioEngine::Unsuspend()
+void LittleEngine::Audio::Core::AudioEngine::Unsuspend()
 {
 	std::for_each(m_suspendedAudioSources.begin(), m_suspendedAudioSources.end(), std::mem_fn(&Entities::AudioSource::Resume));
 	m_suspendedAudioSources.clear();
 	m_suspended = false;
 }
 
-bool OvAudio::Core::AudioEngine::IsSuspended() const
+bool LittleEngine::Audio::Core::AudioEngine::IsSuspended() const
 {
 	return m_suspended;
 }
 
-const std::string& OvAudio::Core::AudioEngine::GetWorkingDirectory() const
+const std::string& LittleEngine::Audio::Core::AudioEngine::GetWorkingDirectory() const
 {
 	return m_workingDirectory;
 }
 
-irrklang::ISoundEngine * OvAudio::Core::AudioEngine::GetIrrklangEngine() const
+irrklang::ISoundEngine * LittleEngine::Audio::Core::AudioEngine::GetIrrklangEngine() const
 {
 	return m_irrklangEngine;
 }
 
-std::optional<std::pair<OvMaths::FVector3, OvMaths::FVector3>> OvAudio::Core::AudioEngine::GetListenerInformation(bool p_considerDisabled) const
+std::optional<std::pair<LittleEngine::FVector3, LittleEngine::FVector3>> LittleEngine::Audio::Core::AudioEngine::GetListenerInformation(bool p_considerDisabled) const
 {
 	for (auto listener : m_audioListeners)
 	{
@@ -103,17 +103,17 @@ std::optional<std::pair<OvMaths::FVector3, OvMaths::FVector3>> OvAudio::Core::Au
 	return {};
 }
 
-void OvAudio::Core::AudioEngine::Consider(OvAudio::Entities::AudioSource & p_audioSource)
+void LittleEngine::Audio::Core::AudioEngine::Consider(LittleEngine::Audio::Entities::AudioSource & p_audioSource)
 {
 	m_audioSources.push_back(std::ref(p_audioSource));
 }
 
-void OvAudio::Core::AudioEngine::Consider(OvAudio::Entities::AudioListener & p_audioListener)
+void LittleEngine::Audio::Core::AudioEngine::Consider(LittleEngine::Audio::Entities::AudioListener & p_audioListener)
 {
 	m_audioListeners.push_back(std::ref(p_audioListener));
 }
 
-void OvAudio::Core::AudioEngine::Unconsider(OvAudio::Entities::AudioSource & p_audioSource)
+void LittleEngine::Audio::Core::AudioEngine::Unconsider(LittleEngine::Audio::Entities::AudioSource & p_audioSource)
 {
 	auto found = std::find_if(m_audioSources.begin(), m_audioSources.end(), [&p_audioSource](std::reference_wrapper<Entities::AudioSource> element)
 	{
@@ -135,7 +135,7 @@ void OvAudio::Core::AudioEngine::Unconsider(OvAudio::Entities::AudioSource & p_a
 	}
 }
 
-void OvAudio::Core::AudioEngine::Unconsider(OvAudio::Entities::AudioListener & p_audioListener)
+void LittleEngine::Audio::Core::AudioEngine::Unconsider(LittleEngine::Audio::Entities::AudioListener & p_audioListener)
 {
 	auto found = std::find_if(m_audioListeners.begin(), m_audioListeners.end(), [&p_audioListener](std::reference_wrapper<Entities::AudioListener> element)
 	{

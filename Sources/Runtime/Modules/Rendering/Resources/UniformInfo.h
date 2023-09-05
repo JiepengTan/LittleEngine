@@ -11,7 +11,7 @@
 
 #include "Modules/Rendering/Resources/UniformType.h"
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 	/**
 	* Data structure containing information about a uniform

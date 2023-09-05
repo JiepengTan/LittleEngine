@@ -9,7 +9,7 @@
 #include "Modules/UI/Widgets/Texts/Text.h"
 #include "Modules/UI/Types/Color.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Widget to display text on a panel that can be colored

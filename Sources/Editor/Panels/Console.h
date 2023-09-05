@@ -12,9 +12,9 @@
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Texts/TextColored.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class Console : public OvUI::Panels::PanelWindow
+	class Console : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -27,7 +27,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -64,8 +64,8 @@ namespace OvEditor::Panels
 		void SetShowErrorLogs(bool p_value);
 
 	private:
-		OvUI::Widgets::Layout::Group* m_logGroup;
-		std::unordered_map<OvUI::Widgets::Texts::TextColored*, OvDebug::ELogLevel> m_logTextWidgets;
+		LittleEngine::UI::Widgets::Layout::Group* m_logGroup;
+		std::unordered_map<LittleEngine::UI::Widgets::Texts::TextColored*, OvDebug::ELogLevel> m_logTextWidgets;
 
 		bool m_clearOnPlay = true;
 		bool m_showDefaultLog = true;

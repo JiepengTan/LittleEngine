@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvUI::Settings
+namespace LittleEngine::UI::Settings
 {
 	/**
 	* Defines horizontal alignments

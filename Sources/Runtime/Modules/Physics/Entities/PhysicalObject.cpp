@@ -9,32 +9,32 @@
 #include "Modules/Physics/Tools/Conversion.h"
 #include "Core/CoreInclude.h"
 
-using namespace OvPhysics::Tools;
-using namespace OvPhysics::Settings;
+using namespace LittleEngine::Physics::Tools;
+using namespace LittleEngine::Physics::Settings;
 
-OvTools::Eventing::Event<OvPhysics::Entities::PhysicalObject&>	OvPhysics::Entities::PhysicalObject::CreatedEvent;
-OvTools::Eventing::Event<OvPhysics::Entities::PhysicalObject&>	OvPhysics::Entities::PhysicalObject::DestroyedEvent;
-OvTools::Eventing::Event<btRigidBody&>							OvPhysics::Entities::PhysicalObject::ConsiderEvent;
-OvTools::Eventing::Event<btRigidBody&>							OvPhysics::Entities::PhysicalObject::UnconsiderEvent;
+LittleEngine::Eventing::Event<LittleEngine::Physics::Entities::PhysicalObject&>	LittleEngine::Physics::Entities::PhysicalObject::CreatedEvent;
+LittleEngine::Eventing::Event<LittleEngine::Physics::Entities::PhysicalObject&>	LittleEngine::Physics::Entities::PhysicalObject::DestroyedEvent;
+LittleEngine::Eventing::Event<btRigidBody&>							LittleEngine::Physics::Entities::PhysicalObject::ConsiderEvent;
+LittleEngine::Eventing::Event<btRigidBody&>							LittleEngine::Physics::Entities::PhysicalObject::UnconsiderEvent;
 
-OvPhysics::Entities::PhysicalObject::PhysicalObject() :
-	m_transform(new OvMaths::FTransform()),
+LittleEngine::Physics::Entities::PhysicalObject::PhysicalObject() :
+	m_transform(new LittleEngine::FTransform()),
 	m_internalTransform(true)
 {
-	CollisionStartEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	CollisionStartEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		UpdateBtTransform();
 	};
 }
 
-OvPhysics::Entities::PhysicalObject::PhysicalObject(OvMaths::FTransform& p_transform) :
+LittleEngine::Physics::Entities::PhysicalObject::PhysicalObject(LittleEngine::FTransform& p_transform) :
 	m_transform(&p_transform),
 	m_internalTransform(false)
 {
 
 }
 
-OvPhysics::Entities::PhysicalObject::~PhysicalObject()
+LittleEngine::Physics::Entities::PhysicalObject::~PhysicalObject()
 {
 	DestroyBody();
 	PhysicalObject::DestroyedEvent.Invoke(*this);
@@ -43,104 +43,104 @@ OvPhysics::Entities::PhysicalObject::~PhysicalObject()
 		delete m_transform;
 }
 
-void OvPhysics::Entities::PhysicalObject::Init()
+void LittleEngine::Physics::Entities::PhysicalObject::Init()
 {
 	PhysicalObject::CreatedEvent.Invoke(*this);
 	CreateBody({});
 }
 
-void OvPhysics::Entities::PhysicalObject::AddForce(const OvMaths::FVector3& p_force)
+void LittleEngine::Physics::Entities::PhysicalObject::AddForce(const LittleEngine::FVector3& p_force)
 {
 	m_body->applyCentralForce(Conversion::ToBtVector3(p_force));
 }
 
-void OvPhysics::Entities::PhysicalObject::AddImpulse(const OvMaths::FVector3& p_impulse)
+void LittleEngine::Physics::Entities::PhysicalObject::AddImpulse(const LittleEngine::FVector3& p_impulse)
 {
 	m_body->applyCentralImpulse(Conversion::ToBtVector3(p_impulse));
 }
 
-void OvPhysics::Entities::PhysicalObject::ClearForces()
+void LittleEngine::Physics::Entities::PhysicalObject::ClearForces()
 {
 	m_body->clearForces();
 }
 
-void OvPhysics::Entities::PhysicalObject::AddFlag(btCollisionObject::CollisionFlags p_flag)
+void LittleEngine::Physics::Entities::PhysicalObject::AddFlag(btCollisionObject::CollisionFlags p_flag)
 {
 	m_body->setCollisionFlags(m_body->getCollisionFlags() | p_flag);
 }
 
-void OvPhysics::Entities::PhysicalObject::RemoveFlag(btCollisionObject::CollisionFlags p_flag)
+void LittleEngine::Physics::Entities::PhysicalObject::RemoveFlag(btCollisionObject::CollisionFlags p_flag)
 {
 	m_body->setCollisionFlags(m_body->getCollisionFlags() & ~p_flag);
 }
 
-float OvPhysics::Entities::PhysicalObject::GetMass() const
+float LittleEngine::Physics::Entities::PhysicalObject::GetMass() const
 {
 	return m_mass;
 }
 
-const OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode& OvPhysics::Entities::PhysicalObject::GetCollisionDetectionMode() const
+const LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode& LittleEngine::Physics::Entities::PhysicalObject::GetCollisionDetectionMode() const
 {
 	return m_collisionMode;
 }
 
-float OvPhysics::Entities::PhysicalObject::GetBounciness() const
+float LittleEngine::Physics::Entities::PhysicalObject::GetBounciness() const
 {
 	return m_body->getRestitution();
 }
 
-float OvPhysics::Entities::PhysicalObject::GetFriction() const
+float LittleEngine::Physics::Entities::PhysicalObject::GetFriction() const
 {
 	return m_body->getFriction();
 }
 
-OvMaths::FVector3 OvPhysics::Entities::PhysicalObject::GetLinearVelocity() const
+LittleEngine::FVector3 LittleEngine::Physics::Entities::PhysicalObject::GetLinearVelocity() const
 {
 	return Conversion::ToOvVector3(m_body->getLinearVelocity());
 }
 
-OvMaths::FVector3 OvPhysics::Entities::PhysicalObject::GetAngularVelocity() const
+LittleEngine::FVector3 LittleEngine::Physics::Entities::PhysicalObject::GetAngularVelocity() const
 {
 	return Conversion::ToOvVector3(m_body->getAngularVelocity());
 }
 
-OvMaths::FVector3 OvPhysics::Entities::PhysicalObject::GetLinearFactor() const
+LittleEngine::FVector3 LittleEngine::Physics::Entities::PhysicalObject::GetLinearFactor() const
 {
 	return Conversion::ToOvVector3(m_body->getLinearFactor());
 }
 
-OvMaths::FVector3 OvPhysics::Entities::PhysicalObject::GetAngularFactor() const
+LittleEngine::FVector3 LittleEngine::Physics::Entities::PhysicalObject::GetAngularFactor() const
 {
 	return Conversion::ToOvVector3(m_body->getAngularFactor());
 }
 
-bool OvPhysics::Entities::PhysicalObject::IsTrigger() const
+bool LittleEngine::Physics::Entities::PhysicalObject::IsTrigger() const
 {
 	return m_trigger;
 }
 
-bool OvPhysics::Entities::PhysicalObject::IsKinematic() const
+bool LittleEngine::Physics::Entities::PhysicalObject::IsKinematic() const
 {
 	return m_kinematic;
 }
 
-OvPhysics::Entities::PhysicalObject::EActivationState OvPhysics::Entities::PhysicalObject::GetActivationState() const
+LittleEngine::Physics::Entities::PhysicalObject::EActivationState LittleEngine::Physics::Entities::PhysicalObject::GetActivationState() const
 {
 	return static_cast<EActivationState>(m_body->getActivationState());
 }
 
-OvMaths::FTransform& OvPhysics::Entities::PhysicalObject::GetTransform()
+LittleEngine::FTransform& LittleEngine::Physics::Entities::PhysicalObject::GetTransform()
 {
 	return *m_transform;
 }
 
-void OvPhysics::Entities::PhysicalObject::SetMass(float p_mass)
+void LittleEngine::Physics::Entities::PhysicalObject::SetMass(float p_mass)
 {
 	m_mass = p_mass;
 	ApplyInertia();
 }
 
-void OvPhysics::Entities::PhysicalObject::SetCollisionDetectionMode(ECollisionDetectionMode p_mode)
+void LittleEngine::Physics::Entities::PhysicalObject::SetCollisionDetectionMode(ECollisionDetectionMode p_mode)
 {
 	m_collisionMode = p_mode;
 
@@ -157,37 +157,37 @@ void OvPhysics::Entities::PhysicalObject::SetCollisionDetectionMode(ECollisionDe
 	}
 }
 
-void OvPhysics::Entities::PhysicalObject::SetBounciness(float p_bounciness)
+void LittleEngine::Physics::Entities::PhysicalObject::SetBounciness(float p_bounciness)
 {
 	m_body->setRestitution(p_bounciness);
 }
 
-void OvPhysics::Entities::PhysicalObject::SetFriction(float p_friction)
+void LittleEngine::Physics::Entities::PhysicalObject::SetFriction(float p_friction)
 {
 	m_body->setFriction(p_friction);
 }
 
-void OvPhysics::Entities::PhysicalObject::SetLinearVelocity(const OvMaths::FVector3 & p_linearVelocity)
+void LittleEngine::Physics::Entities::PhysicalObject::SetLinearVelocity(const LittleEngine::FVector3 & p_linearVelocity)
 {
 	m_body->setLinearVelocity(Conversion::ToBtVector3(p_linearVelocity));
 }
 
-void OvPhysics::Entities::PhysicalObject::SetAngularVelocity(const OvMaths::FVector3 & p_angularVelocity)
+void LittleEngine::Physics::Entities::PhysicalObject::SetAngularVelocity(const LittleEngine::FVector3 & p_angularVelocity)
 {
 	m_body->setAngularVelocity(Conversion::ToBtVector3(p_angularVelocity));
 }
 
-void OvPhysics::Entities::PhysicalObject::SetLinearFactor(const OvMaths::FVector3 & p_linearFactor)
+void LittleEngine::Physics::Entities::PhysicalObject::SetLinearFactor(const LittleEngine::FVector3 & p_linearFactor)
 {
 	m_body->setLinearFactor(Conversion::ToBtVector3(p_linearFactor));
 }
 
-void OvPhysics::Entities::PhysicalObject::SetAngularFactor(const OvMaths::FVector3 & p_angularFactor)
+void LittleEngine::Physics::Entities::PhysicalObject::SetAngularFactor(const LittleEngine::FVector3 & p_angularFactor)
 {
 	m_body->setAngularFactor(Conversion::ToBtVector3(p_angularFactor));
 }
 
-void OvPhysics::Entities::PhysicalObject::SetTrigger(bool p_trigger)
+void LittleEngine::Physics::Entities::PhysicalObject::SetTrigger(bool p_trigger)
 {
 	if (p_trigger)
 		AddFlag(btCollisionObject::CF_NO_CONTACT_RESPONSE);
@@ -197,26 +197,26 @@ void OvPhysics::Entities::PhysicalObject::SetTrigger(bool p_trigger)
 	m_trigger = p_trigger;
 }
 
-void OvPhysics::Entities::PhysicalObject::SetKinematic(bool p_kinematic)
+void LittleEngine::Physics::Entities::PhysicalObject::SetKinematic(bool p_kinematic)
 {
 	m_kinematic = p_kinematic;
 
 	if (m_kinematic)
 	{
 		ClearForces();
-		SetLinearVelocity(OvMaths::FVector3::Zero);
-		SetAngularVelocity(OvMaths::FVector3::Zero);
+		SetLinearVelocity(LittleEngine::FVector3::Zero);
+		SetAngularVelocity(LittleEngine::FVector3::Zero);
 	}
 
 	RecreateBody();
 }
 
-void OvPhysics::Entities::PhysicalObject::SetActivationState(EActivationState p_activationState)
+void LittleEngine::Physics::Entities::PhysicalObject::SetActivationState(EActivationState p_activationState)
 {
 	m_body->setActivationState(static_cast<int>(p_activationState));
 }
 
-void OvPhysics::Entities::PhysicalObject::SetEnabled(bool p_enabled)
+void LittleEngine::Physics::Entities::PhysicalObject::SetEnabled(bool p_enabled)
 {
 	m_enabled = p_enabled;
 
@@ -226,16 +226,16 @@ void OvPhysics::Entities::PhysicalObject::SetEnabled(bool p_enabled)
 		Consider();
 }
 
-bool OvPhysics::Entities::PhysicalObject::IsEnabled() const
+bool LittleEngine::Physics::Entities::PhysicalObject::IsEnabled() const
 {
 	return m_enabled;
 }
 
-void OvPhysics::Entities::PhysicalObject::UpdateBtTransform()
+void LittleEngine::Physics::Entities::PhysicalObject::UpdateBtTransform()
 {
 	m_body->setWorldTransform(Conversion::ToBtTransform(*m_transform));
 
-	if (OvMaths::FVector3::Distance(m_transform->GetWorldScale(), m_previousScale) >= 0.01f)
+	if (LittleEngine::FVector3::Distance(m_transform->GetWorldScale(), m_previousScale) >= 0.01f)
 	{
 		m_previousScale = m_transform->GetWorldScale();
 		SetLocalScaling({ abs(m_previousScale.x), abs(m_previousScale.y), abs(m_previousScale.z) });
@@ -243,7 +243,7 @@ void OvPhysics::Entities::PhysicalObject::UpdateBtTransform()
 	}
 }
 
-void OvPhysics::Entities::PhysicalObject::UpdateFTransform()
+void LittleEngine::Physics::Entities::PhysicalObject::UpdateFTransform()
 {
 	if (!m_kinematic)
 	{
@@ -253,17 +253,17 @@ void OvPhysics::Entities::PhysicalObject::UpdateFTransform()
 	}
 }
 
-void OvPhysics::Entities::PhysicalObject::RecreateBody()
+void LittleEngine::Physics::Entities::PhysicalObject::RecreateBody()
 {
 	CreateBody(DestroyBody());
 }
 
-void OvPhysics::Entities::PhysicalObject::ApplyInertia()
+void LittleEngine::Physics::Entities::PhysicalObject::ApplyInertia()
 {
 	m_body->setMassProps(m_kinematic ? 0.0f : std::max(0.0000001f, m_mass), m_kinematic ? btVector3(0.0f, 0.0f, 0.0f) : CalculateInertia());
 }
 
-void OvPhysics::Entities::PhysicalObject::Consider()
+void LittleEngine::Physics::Entities::PhysicalObject::Consider()
 {
 	if (!m_considered)
 	{
@@ -272,7 +272,7 @@ void OvPhysics::Entities::PhysicalObject::Consider()
 	}
 }
 
-void OvPhysics::Entities::PhysicalObject::Unconsider()
+void LittleEngine::Physics::Entities::PhysicalObject::Unconsider()
 {
 	if (m_considered)
 	{
@@ -281,7 +281,7 @@ void OvPhysics::Entities::PhysicalObject::Unconsider()
 	}
 }
 
-void OvPhysics::Entities::PhysicalObject::CreateBody(const Settings::BodySettings & p_bodySettings)
+void LittleEngine::Physics::Entities::PhysicalObject::CreateBody(const Settings::BodySettings & p_bodySettings)
 {
 	m_motion = std::make_unique<btDefaultMotionState>(Tools::Conversion::ToBtTransform(*m_transform));
 
@@ -308,7 +308,7 @@ void OvPhysics::Entities::PhysicalObject::CreateBody(const Settings::BodySetting
 		Consider();
 }
 
-OvPhysics::Settings::BodySettings OvPhysics::Entities::PhysicalObject::DestroyBody()
+LittleEngine::Physics::Settings::BodySettings LittleEngine::Physics::Entities::PhysicalObject::DestroyBody()
 {
 	BodySettings result
 	{
@@ -330,7 +330,7 @@ OvPhysics::Settings::BodySettings OvPhysics::Entities::PhysicalObject::DestroyBo
 	return result;
 }
 
-btVector3 OvPhysics::Entities::PhysicalObject::CalculateInertia() const
+btVector3 LittleEngine::Physics::Entities::PhysicalObject::CalculateInertia() const
 {
 	btVector3 result = { 0.f, 0.f, 0.f };
 
@@ -340,7 +340,7 @@ btVector3 OvPhysics::Entities::PhysicalObject::CalculateInertia() const
 	return result;
 }
 
-btRigidBody& OvPhysics::Entities::PhysicalObject::GetBody()
+btRigidBody& LittleEngine::Physics::Entities::PhysicalObject::GetBody()
 {
 	return *m_body;
 }

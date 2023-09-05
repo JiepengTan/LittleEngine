@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/Layout/Group.h"
 
-namespace OvUI::Widgets::Layout
+namespace LittleEngine::UI::Widgets::Layout
 {
 	/**
 	* Widget that can contains other widgets and is collapsable
@@ -33,7 +33,7 @@ namespace OvUI::Widgets::Layout
 		std::string name;
 		bool closable = false;
 		bool opened = true;
-		OvTools::Eventing::Event<> CloseEvent;
-		OvTools::Eventing::Event<> OpenEvent;
+		LittleEngine::Eventing::Event<> CloseEvent;
+		LittleEngine::Eventing::Event<> OpenEvent;
 	};
 }

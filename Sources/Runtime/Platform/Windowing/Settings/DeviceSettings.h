@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace OvWindowing::Settings
+namespace LittleEngine::Windowing::Settings
 {
 	/**
 	* Contains device settings

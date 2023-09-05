@@ -7,7 +7,7 @@
 #include "Modules/Scripting/LuaGlobalsBinder.h"
 
 
-void OvCore::Scripting::LuaGlobalsBinder::BindGlobals(sol::state & p_luaState)
+void LittleEngine::Scripting::LuaGlobalsBinder::BindGlobals(sol::state & p_luaState)
 {
 	
 }

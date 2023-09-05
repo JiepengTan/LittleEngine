@@ -14,7 +14,7 @@
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/ECS/Components/CLight.h"
 
-namespace OvCore::SceneSystem
+namespace LittleEngine::SceneSystem
 {
 	/**
 	* The scene is a set of actors
@@ -28,9 +28,9 @@ namespace OvCore::SceneSystem
 		*/
 		struct FastAccessComponents
 		{
-			std::vector<ECS::Components::CModelRenderer*>	modelRenderers;
-			std::vector<ECS::Components::CCamera*>			cameras;
-			std::vector<ECS::Components::CLight*>			lights;
+			std::vector<CModelRenderer*>	modelRenderers;
+			std::vector<CCamera*>			cameras;
+			std::vector<CLight*>			lights;
 		};
 
 		/**
@@ -74,20 +74,20 @@ namespace OvCore::SceneSystem
 		/**
 		* Create an actor with a default name and return a reference to it.
 		*/
-		ECS::Actor& CreateActor();
+		Actor& CreateActor();
 
 		/**
 		* Create an actor with the given name and return a reference to it.
 		* @param p_name
 		* @param p_tag
 		*/
-		ECS::Actor& CreateActor(const std::string& p_name, const std::string& p_tag = "");
+		Actor& CreateActor(const std::string& p_name, const std::string& p_tag = "");
 
 		/**
 		* Destroy and actor and return true on success
 		* @param p_target (The actor to remove from the scene)
 		*/
-		bool DestroyActor(ECS::Actor& p_target);
+		bool DestroyActor(Actor& p_target);
 
 		/**
 		* Collect garbages by removing Destroyed-marked actors
@@ -98,48 +98,48 @@ namespace OvCore::SceneSystem
 		* Return the first actor identified by the given name, or nullptr on fail
 		* @param p_name
 		*/
-		ECS::Actor* FindActorByName(const std::string& p_name);
+		Actor* FindActorByName(const std::string& p_name);
 
 		/**
 		* Return the first actor identified by the given tag, or nullptr on fail
 		* @param p_tag
 		*/
-		ECS::Actor* FindActorByTag(const std::string& p_tag);
+		Actor* FindActorByTag(const std::string& p_tag);
 
 		/**
 		* Return the actor identified by the given ID (Returns 0 on fail)
 		* @param p_id
 		*/
-		ECS::Actor* FindActorByID(int64_t p_id);
+		Actor* FindActorByID(int64_t p_id);
 
 		/**
 		* Return every actors identified by the given name
 		* @param p_name
 		*/
-		std::vector<std::reference_wrapper<ECS::Actor>> FindActorsByName(const std::string& p_name);
+		std::vector<std::reference_wrapper<Actor>> FindActorsByName(const std::string& p_name);
 
 		/**
 		* Return every actors identified by the given tag
 		* @param p_tag
 		*/
-		std::vector<std::reference_wrapper<ECS::Actor>> FindActorsByTag(const std::string& p_tag);
+		std::vector<std::reference_wrapper<Actor>> FindActorsByTag(const std::string& p_tag);
 
 		/**
 		* Callback method called everytime a component is added on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentAdded(ECS::Components::AComponent& p_compononent);
+		void OnComponentAdded(AComponent& p_compononent);
 
 		/**
 		* Callback method called everytime a component is removed on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentRemoved(ECS::Components::AComponent& p_compononent);
+		void OnComponentRemoved(AComponent& p_compononent);
 
 		/**
 		* Return a reference on the actor map
 		*/
-		std::vector<OvCore::ECS::Actor*>& GetActors();
+		std::vector<LittleEngine::Actor*>& GetActors();
 
 		/**
 		* Return the fast access components data structure
@@ -160,15 +160,15 @@ namespace OvCore::SceneSystem
 		*/
 		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
 
-		std::vector<ECS::Actor*>& GetActorsCopy(std::vector<ECS::Actor*>& p_vec);
+		std::vector<Actor*>& GetActorsCopy(std::vector<Actor*>& p_vec);
 
 		int GetSceneId(){ return m_sceneId;}
 	private:
 		int64_t m_availableID = 1;
 		bool m_isPlaying = false;
-		std::vector<ECS::Actor*> m_actors;
-		std::vector<ECS::Actor*> m_tempActors;
-		std::vector<ECS::Actor*> m_tempDeleteActors;
+		std::vector<Actor*> m_actors;
+		std::vector<Actor*> m_tempActors;
+		std::vector<Actor*> m_tempDeleteActors;
 
 		FastAccessComponents m_fastAccessComponents;
 		int m_sceneId;

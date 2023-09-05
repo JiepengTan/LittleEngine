@@ -8,11 +8,11 @@
 
 #include <Windows.h>
 
-OvWindowing::Dialogs::OpenFileDialog::OpenFileDialog(const std::string & p_dialogTitle) : FileDialog(GetOpenFileNameA, p_dialogTitle)
+LittleEngine::Windowing::Dialogs::OpenFileDialog::OpenFileDialog(const std::string & p_dialogTitle) : FileDialog(GetOpenFileNameA, p_dialogTitle)
 {
 }
 
-void OvWindowing::Dialogs::OpenFileDialog::AddFileType(const std::string & p_label, const std::string & p_filter)
+void LittleEngine::Windowing::Dialogs::OpenFileDialog::AddFileType(const std::string & p_label, const std::string & p_filter)
 {
 	m_filter += p_label + '\0' + p_filter + '\0';
 }

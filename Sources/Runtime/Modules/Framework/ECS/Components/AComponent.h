@@ -11,9 +11,9 @@
 #include "Core/Serialization/JsonSerializer.h"
 #include "Modules/Framework/API/IInspectorItem.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	class CPhysicalObject;
 	/**
@@ -30,7 +30,7 @@ namespace OvCore::ECS::Components
 		* Constructor of a AComponent (Must be called by derived classes)
 		* @param p_owner
 		*/
-		AComponent(ECS::Actor& p_owner);
+		AComponent(Actor& p_owner);
 
 		/**
 		* Destroying a AComponent will call dervied classes destructors
@@ -86,48 +86,48 @@ namespace OvCore::ECS::Components
 		* Called when the owner of this component enter in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionEnter(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnCollisionEnter(CPhysicalObject& p_otherObject) {}
 
 		/**
 		* Called when the owner of this component is in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionStay(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnCollisionStay(CPhysicalObject& p_otherObject) {}
 
 		/**
 		* Called when the owner of this component exit from collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionExit(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnCollisionExit(CPhysicalObject& p_otherObject) {}
 
 		/**
 		* Called when the owner of this component enter in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerEnter(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnTriggerEnter(CPhysicalObject& p_otherObject) {}
 
 		/**
 		* Called when the owner of this component is in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerStay(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnTriggerStay(CPhysicalObject& p_otherObject) {}
 
 		/**
 		* Called when the owner of this component exit from trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerExit(Components::CPhysicalObject& p_otherObject) {}
+		virtual void OnTriggerExit(CPhysicalObject& p_otherObject) {}
 		
 		/**
 		* Returns the name of the component
 		*/
 		virtual std::string GetName() {return "Error Component!";}
 		
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root){}
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root){}
 		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node){}
 		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node){}
 	public:
-		ECS::Actor* owner;
+		Actor* owner;
         META(Enable)
 		bool IsUpdateInEdit;
 	};

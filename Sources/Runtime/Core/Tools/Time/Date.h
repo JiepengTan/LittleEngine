@@ -9,7 +9,7 @@
 #include <string>
 
 
-namespace OvTools::Time
+namespace LittleEngine::Time
 {
 	/*
 	* Date system to get the current date in a string format

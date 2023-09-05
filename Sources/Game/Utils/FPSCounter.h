@@ -11,19 +11,19 @@
 
 #include "Platform/Windowing/Window.h"
 
-namespace OvGame::Utils
+namespace LittleGame::Utils
 {
 	/**
 	* Panel that display the framerate
 	*/
-	class FPSCounter : public OvUI::Panels::PanelUndecorated
+	class FPSCounter : public LittleEngine::UI::Panels::PanelUndecorated
 	{
 	public:
 		/**
 		* Constructor
 		* @param p_window
 		*/
-		FPSCounter(OvWindowing::Window& p_window);
+		FPSCounter(LittleEngine::Windowing::Window& p_window);
 
 		/**
 		* Update the data
@@ -32,9 +32,9 @@ namespace OvGame::Utils
 		void Update(float p_deltaTime);
 
 	private:
-		OvUI::Widgets::Texts::TextColored m_text;
+		LittleEngine::UI::Widgets::Texts::TextColored m_text;
 
-		OvWindowing::Window& m_window;
+		LittleEngine::Windowing::Window& m_window;
 		float m_elapsed = 0.0f;
 		uint32_t m_frames = 0;
 	};

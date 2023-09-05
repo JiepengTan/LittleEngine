@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Texts/Text.h"
 
-namespace OvUI::Widgets::Texts
+namespace LittleEngine::UI::Widgets::Texts
 {
 	/**
 	* Widget to display a disabled text on a panel

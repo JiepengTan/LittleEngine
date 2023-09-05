@@ -10,11 +10,11 @@
 #include "Modules/UI/Widgets/Plots/PlotLines.h"
 #include "Modules/UI/Widgets/Plots/PlotHistogram.h"
 
-namespace OvAnalytics::Hardware { class HardwareInfo; }
+namespace LittleEngine::Analytics::Hardware { class HardwareInfo; }
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class HardwareInfo : public OvUI::Panels::PanelWindow
+	class HardwareInfo : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -30,7 +30,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 			float p_logFrequency,
 			size_t p_maxElements
 		);
@@ -50,9 +50,9 @@ namespace OvEditor::Panels
 		float p_updateTimer = 0.f;
 		float m_logFrequency;
 		size_t m_maxElements;
-		OvUI::Widgets::Plots::APlot* m_cpuUsage;
-		OvUI::Widgets::Plots::APlot* m_gpuUsage;
-		OvUI::Widgets::Plots::APlot* m_ramUsage;
-		OvAnalytics::Hardware::HardwareInfo* m_hardwareInfo;
+		LittleEngine::UI::Widgets::Plots::APlot* m_cpuUsage;
+		LittleEngine::UI::Widgets::Plots::APlot* m_gpuUsage;
+		LittleEngine::UI::Widgets::Plots::APlot* m_ramUsage;
+		LittleEngine::Analytics::Hardware::HardwareInfo* m_hardwareInfo;
 	};
 }

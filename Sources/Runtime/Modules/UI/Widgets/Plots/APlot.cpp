@@ -6,12 +6,12 @@
 
 #include "Modules/UI/Widgets/Plots/APlot.h"
 
-OvUI::Widgets::Plots::APlot::APlot
+LittleEngine::UI::Widgets::Plots::APlot::APlot
 (
 	const std::vector<float>& p_data,
 	float p_minScale,
 	float p_maxScale,
-	const OvMaths::FVector2& p_size,
+	const LittleEngine::FVector2& p_size,
 	const std::string& p_overlay,
 	const std::string& p_label,
 	int p_forceHover

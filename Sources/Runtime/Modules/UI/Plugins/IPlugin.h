@@ -7,10 +7,10 @@
 #pragma once
 
 
-namespace OvUI::Plugins
+namespace LittleEngine::UI::Plugins
 {
 	/**
-	* Interface to any plugin of OvUI.
+	* Interface to any plugin of LittleEngine::UI.
 	* A plugin is basically a behaviour that you can plug to a widget
 	*/
 	class IPlugin

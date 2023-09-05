@@ -8,7 +8,7 @@
 
 #include "Modules/Rendering/Resources/Shader.h"
 
-namespace OvRendering::Resources::Loaders
+namespace LittleEngine::Rendering::Resources::Loaders
 {
 	/**
 	* Handle the Shader creation and destruction

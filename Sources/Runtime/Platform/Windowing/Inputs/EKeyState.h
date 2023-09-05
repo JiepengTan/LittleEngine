@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace OvWindowing::Inputs
+namespace LittleEngine::Windowing::Inputs
 {
 	/**
 	* Defines some states that can be applied to keyboard keys

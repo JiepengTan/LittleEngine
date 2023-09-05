@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Sliders/SliderFloat.h"
 
-OvUI::Widgets::Sliders::SliderFloat::SliderFloat
+LittleEngine::UI::Widgets::Sliders::SliderFloat::SliderFloat
 (
 	float p_min,
 	float p_max,

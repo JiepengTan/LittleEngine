@@ -7,7 +7,7 @@
 #include "Core/CoreInclude.h"
 #include "Core/Tools/Time/Date.h"
 
-OvTools::Eventing::Event<const OvDebug::LogData&> OvDebug::Logger::LogEvent;
+LittleEngine::Eventing::Event<const OvDebug::LogData&> OvDebug::Logger::LogEvent;
 
 std::map<std::string, OvDebug::ConsoleHandler>	OvDebug::Logger::CONSOLE_HANDLER_MAP;
 std::map<std::string, OvDebug::FileHandler>		OvDebug::Logger::FILE_HANDLER_MAP;
@@ -15,7 +15,7 @@ std::map<std::string, OvDebug::HistoryHandler>	OvDebug::Logger::HISTORY_HANDLER_
 
 void OvDebug::Logger::Log(const std::string& p_message, ELogLevel p_logLevel, ELogMode p_logMode, std::string p_handlerId)
 {
-	LogData logData{ p_message, p_logLevel, OvTools::Time::Date::GetDateAsString() };
+	LogData logData{ p_message, p_logLevel, LittleEngine::Time::Date::GetDateAsString() };
 
 	switch (p_logMode)
 	{

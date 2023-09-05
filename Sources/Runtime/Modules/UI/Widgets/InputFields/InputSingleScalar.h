@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::InputFields
+namespace LittleEngine::UI::Widgets::InputFields
 {
 	/**
 	* Input widget of generic type
@@ -70,8 +70,8 @@ namespace OvUI::Widgets::InputFields
 		std::string label;
 		std::string format;
 		bool selectAllOnClick;
-		OvTools::Eventing::Event<T> ContentChangedEvent;
-		OvTools::Eventing::Event<T> EnterPressedEvent;
+		LittleEngine::Eventing::Event<T> ContentChangedEvent;
+		LittleEngine::Eventing::Event<T> EnterPressedEvent;
 
 	private:
 		ImGuiDataType m_dataType;

@@ -10,9 +10,9 @@
 #include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-using namespace OvPhysics::Entities;
+using namespace LittleEngine::Physics::Entities;
 
-OvCore::ECS::Components::CPhysicalCapsule::CPhysicalCapsule(ECS::Actor & p_owner) :
+LittleEngine::CPhysicalCapsule::CPhysicalCapsule(Actor & p_owner) :
 	CPhysicalObject(p_owner)
 {
 	m_physicalObject = std::make_unique<PhysicalCapsule>(p_owner.transform.GetFTransform());
@@ -23,32 +23,32 @@ OvCore::ECS::Components::CPhysicalCapsule::CPhysicalCapsule(ECS::Actor & p_owner
 	Init();
 }
 
-std::string OvCore::ECS::Components::CPhysicalCapsule::GetName()
+std::string LittleEngine::CPhysicalCapsule::GetName()
 {
 	return "Physical Capsule";
 }
 
-void OvCore::ECS::Components::CPhysicalCapsule::SetRadius(float p_radius)
+void LittleEngine::CPhysicalCapsule::SetRadius(float p_radius)
 {
 	GetPhysicalObjectAs<PhysicalCapsule>().SetRadius(p_radius);
 }
 
-void OvCore::ECS::Components::CPhysicalCapsule::SetHeight(float p_height)
+void LittleEngine::CPhysicalCapsule::SetHeight(float p_height)
 {
 	GetPhysicalObjectAs<PhysicalCapsule>().SetHeight(p_height);
 }
 
-float OvCore::ECS::Components::CPhysicalCapsule::GetRadius() const
+float LittleEngine::CPhysicalCapsule::GetRadius() const
 {
 	return GetPhysicalObjectAs<PhysicalCapsule>().GetRadius();
 }
 
-float OvCore::ECS::Components::CPhysicalCapsule::GetHeight() const
+float LittleEngine::CPhysicalCapsule::GetHeight() const
 {
 	return GetPhysicalObjectAs<PhysicalCapsule>().GetHeight();
 }
 
-void OvCore::ECS::Components::CPhysicalCapsule::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalCapsule::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnSerialize(p_doc, p_node);
 
@@ -56,7 +56,7 @@ void OvCore::ECS::Components::CPhysicalCapsule::OnSerialize(tinyxml2::XMLDocumen
 	Serializer::SerializeFloat(p_doc, p_node, "height", GetHeight());
 }
 
-void OvCore::ECS::Components::CPhysicalCapsule::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalCapsule::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	CPhysicalObject::OnDeserialize(p_doc, p_node);
 
@@ -64,7 +64,7 @@ void OvCore::ECS::Components::CPhysicalCapsule::OnDeserialize(tinyxml2::XMLDocum
 	SetHeight(Serializer::DeserializeFloat(p_doc, p_node, "height"));
 }
 
-void OvCore::ECS::Components::CPhysicalCapsule::OnInspector(OvUI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalCapsule::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
 {
 	CPhysicalObject::OnInspector(p_root);
 

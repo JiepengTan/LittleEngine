@@ -6,5 +6,5 @@
 
 #include "Modules/Framework/Global/ServiceLocator.h"
 
-std::unordered_map<size_t, std::any> OvCore::Global::ServiceLocator::__SERVICES;
+std::unordered_map<size_t, std::any> LittleEngine::Global::ServiceLocator::__SERVICES;
 

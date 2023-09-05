@@ -8,21 +8,21 @@
 
 #include "../Game/Debug/FrameInfo.h"
 
-OvGame::Debug::FrameInfo::FrameInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window) :
+LittleGame::Debug::FrameInfo::FrameInfo(LittleEngine::Rendering::Core::Renderer& p_renderer, LittleEngine::Windowing::Window& p_window) :
 	m_renderer(p_renderer),
 	m_window(p_window)
 {
-	m_defaultHorizontalAlignment = OvUI::Settings::EHorizontalAlignment::LEFT;
-	m_defaultVerticalAlignment = OvUI::Settings::EVerticalAlignment::BOTTOM;
+	m_defaultHorizontalAlignment = LittleEngine::UI::Settings::EHorizontalAlignment::LEFT;
+	m_defaultVerticalAlignment = LittleEngine::UI::Settings::EVerticalAlignment::BOTTOM;
 	m_defaultPosition.x = static_cast<float>(p_window.GetSize().first) - 10.f;
 	m_defaultPosition.y = static_cast<float>(p_window.GetSize().second) - 10.f;
 
-	m_frameInfo[0] = &CreateWidget<OvUI::Widgets::Texts::TextColored>("", OvUI::Types::Color::Yellow);
-	m_frameInfo[1] = &CreateWidget<OvUI::Widgets::Texts::TextColored>("", OvUI::Types::Color::Yellow);
-	m_frameInfo[2] = &CreateWidget<OvUI::Widgets::Texts::TextColored>("", OvUI::Types::Color::Yellow);
+	m_frameInfo[0] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
+	m_frameInfo[1] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
+	m_frameInfo[2] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
 }
 
-void OvGame::Debug::FrameInfo::Update(float p_deltaTime)
+void LittleGame::Debug::FrameInfo::Update(float p_deltaTime)
 {
 	auto& frameInfo = m_renderer.GetFrameInfo();
 
@@ -31,7 +31,7 @@ void OvGame::Debug::FrameInfo::Update(float p_deltaTime)
 	m_frameInfo[2]->content = "Instances: " + std::to_string(frameInfo.instanceCount);
 
 	SetPosition({ 10.0f , static_cast<float>(m_window.GetSize().second) - 10.f });
-	SetAlignment(OvUI::Settings::EHorizontalAlignment::LEFT, OvUI::Settings::EVerticalAlignment::BOTTOM);
+	SetAlignment(LittleEngine::UI::Settings::EHorizontalAlignment::LEFT, LittleEngine::UI::Settings::EVerticalAlignment::BOTTOM);
 }
 
 #endif

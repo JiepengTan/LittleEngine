@@ -12,7 +12,7 @@
 
 #include "../Game/Core/Context.h"
 
-namespace OvGame::Core
+namespace LittleGame::Core
 {
 	/**
 	* Handle the rendering of the game scene
@@ -35,22 +35,22 @@ namespace OvGame::Core
 		* Update the engine UBO
 		* @param p_mainCamera
 		*/
-		void UpdateEngineUBO(OvCore::ECS::Components::CCamera& p_mainCamera);
+		void UpdateEngineUBO(LittleEngine::CCamera& p_mainCamera);
 
 		/**
 		* Update the light SSBO with the current scene
 		* @param p_scene
 		*/
-		void UpdateLights(OvCore::SceneSystem::Scene& p_scene);
+		void UpdateLights(LittleEngine::SceneSystem::Scene& p_scene);
 
 		/**
 		* Update the light SSBO with the current scene (Lights outside of the given frustum are culled)
 		* @param p_scene
 		*/
-		void UpdateLightsInFrustum(OvCore::SceneSystem::Scene& p_scene, const OvRendering::Data::Frustum& p_frustum);
+		void UpdateLightsInFrustum(LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
 
 	private:
 		Context& m_context;
-		OvCore::Resources::Material m_emptyMaterial;
+		LittleEngine::Resources::Material m_emptyMaterial;
 	};
 }

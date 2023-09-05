@@ -13,14 +13,14 @@
 #include "Modules/Rendering/Buffers/Framebuffer.h"
 #include "Modules/Rendering/LowRenderer/Camera.h"
 
-namespace OvEditor::Core { class EditorRenderer; }
+namespace LittleEditor::Core { class EditorRenderer; }
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
 	/**
 	* Base class for any view
 	*/
-	class AView : public OvUI::Panels::PanelWindow
+	class AView : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -33,7 +33,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -61,28 +61,28 @@ namespace OvEditor::Panels
 		* Defines the camera position
 		* @param p_position
 		*/
-		void SetCameraPosition(const OvMaths::FVector3& p_position);
+		void SetCameraPosition(const LittleEngine::FVector3& p_position);
 
 		/**
 		* Defines the camera rotation
 		* @param p_rotation
 		*/
-		void SetCameraRotation(const OvMaths::FQuaternion& p_rotation);
+		void SetCameraRotation(const LittleEngine::FQuaternion& p_rotation);
 
 		/**
 		* Returns the camera position
 		*/
-		const OvMaths::FVector3& GetCameraPosition() const;
+		const LittleEngine::FVector3& GetCameraPosition() const;
 
 		/**
 		* Returns the camera rotation
 		*/
-		const OvMaths::FQuaternion& GetCameraRotation() const;
+		const LittleEngine::FQuaternion& GetCameraRotation() const;
 
 		/**
 		* Returns the camera used by this view
 		*/
-		OvRendering::LowRenderer::Camera& GetCamera();
+		LittleEngine::Rendering::LowRenderer::Camera& GetCamera();
 
 		/**
 		* Returns the size of the panel ignoring its titlebar height
@@ -92,13 +92,13 @@ namespace OvEditor::Panels
 		/**
 		* Returns the grid color of the view
 		*/
-		const OvMaths::FVector3& GetGridColor() const;
+		const LittleEngine::FVector3& GetGridColor() const;
 
 		/**
 		* Defines the grid color of the view
 		* @param p_color
 		*/
-		void SetGridColor(const OvMaths::FVector3& p_color);
+		void SetGridColor(const LittleEngine::FVector3& p_color);
 
 		/**
 		* Fill the UBO using the view settings
@@ -112,14 +112,14 @@ namespace OvEditor::Panels
 		void PrepareCamera();
 
 	protected:
-		OvEditor::Core::EditorRenderer& m_editorRenderer;
-		OvRendering::LowRenderer::Camera m_camera;
-		OvMaths::FVector3 m_cameraPosition;
-		OvMaths::FQuaternion m_cameraRotation;
-		OvUI::Widgets::Visual::Image* m_image;
+		LittleEditor::Core::EditorRenderer& m_editorRenderer;
+		LittleEngine::Rendering::LowRenderer::Camera m_camera;
+		LittleEngine::FVector3 m_cameraPosition;
+		LittleEngine::FQuaternion m_cameraRotation;
+		LittleEngine::UI::Widgets::Visual::Image* m_image;
 
-        OvMaths::FVector3 m_gridColor = OvMaths::FVector3 { 0.176f, 0.176f, 0.176f };
+        LittleEngine::FVector3 m_gridColor = LittleEngine::FVector3 { 0.176f, 0.176f, 0.176f };
 
-		OvRendering::Buffers::Framebuffer m_fbo;
+		LittleEngine::Rendering::Buffers::Framebuffer m_fbo;
 	};
 }

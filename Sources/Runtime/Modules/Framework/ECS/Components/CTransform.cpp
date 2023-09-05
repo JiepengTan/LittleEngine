@@ -6,189 +6,189 @@
 
 #include "Modules/Framework/ECS/Components/CTransform.h"
 
-OvCore::ECS::Components::CTransform::CTransform(ECS::Actor& p_owner, OvMaths::FVector3 p_localPosition, OvMaths::FQuaternion p_localRotation, OvMaths::FVector3 p_localScale) :
+LittleEngine::CTransform::CTransform(Actor& p_owner, LittleEngine::FVector3 p_localPosition, LittleEngine::FQuaternion p_localRotation, LittleEngine::FVector3 p_localScale) :
 AComponent(p_owner)
 {
 	m_transform.GenerateMatricesLocal(p_localPosition, p_localRotation, p_localScale);
 }
 
-std::string OvCore::ECS::Components::CTransform::GetName()
+std::string LittleEngine::CTransform::GetName()
 {
 	return "Transform";
 }
 
-void OvCore::ECS::Components::CTransform::SetParent(CTransform& p_parent)
+void LittleEngine::CTransform::SetParent(CTransform& p_parent)
 {
 	m_transform.SetParent(p_parent.GetFTransform());
 }
 
-bool OvCore::ECS::Components::CTransform::RemoveParent()
+bool LittleEngine::CTransform::RemoveParent()
 {
 	return m_transform.RemoveParent();
 }
 
-bool OvCore::ECS::Components::CTransform::HasParent() const
+bool LittleEngine::CTransform::HasParent() const
 {
 	return m_transform.HasParent();
 }
 
-void OvCore::ECS::Components::CTransform::SetWorldMatrix(OvMaths::FMatrix4 p_worldMatrix)
+void LittleEngine::CTransform::SetWorldMatrix(LittleEngine::FMatrix4 p_worldMatrix)
 {
 	m_transform.SetWorldMatrix(p_worldMatrix);
 }
-void OvCore::ECS::Components::CTransform::SetLocalMatrix(OvMaths::FMatrix4 p_localMatrix)
+void LittleEngine::CTransform::SetLocalMatrix(LittleEngine::FMatrix4 p_localMatrix)
 {
 	m_transform.SetLocalMatrix(p_localMatrix);
 }
-void OvCore::ECS::Components::CTransform::SetLocalPosition(OvMaths::FVector3 p_newPosition)
+void LittleEngine::CTransform::SetLocalPosition(LittleEngine::FVector3 p_newPosition)
 {
 	m_transform.SetLocalPosition(p_newPosition);
 }
 
-void OvCore::ECS::Components::CTransform::SetLocalRotation(OvMaths::FQuaternion p_newRotation)
+void LittleEngine::CTransform::SetLocalRotation(LittleEngine::FQuaternion p_newRotation)
 {
 	m_transform.SetLocalRotation(p_newRotation);
 }
 
-void OvCore::ECS::Components::CTransform::SetLocalScale(OvMaths::FVector3 p_newScale)
+void LittleEngine::CTransform::SetLocalScale(LittleEngine::FVector3 p_newScale)
 {
 	m_transform.SetLocalScale(p_newScale);
 }
-void OvCore::ECS::Components::CTransform::SetWorldPosition(OvMaths::FVector3 p_newPosition)
+void LittleEngine::CTransform::SetWorldPosition(LittleEngine::FVector3 p_newPosition)
 {
 	m_transform.SetWorldPosition(p_newPosition);
 }
 
-void OvCore::ECS::Components::CTransform::SetWorldRotation(OvMaths::FQuaternion p_newRotation)
+void LittleEngine::CTransform::SetWorldRotation(LittleEngine::FQuaternion p_newRotation)
 {
 	m_transform.SetWorldRotation(p_newRotation);
 }
 
-void OvCore::ECS::Components::CTransform::SetWorldScale(OvMaths::FVector3 p_newScale)
+void LittleEngine::CTransform::SetWorldScale(LittleEngine::FVector3 p_newScale)
 {
 	m_transform.SetWorldScale(p_newScale);
 }
 
-void OvCore::ECS::Components::CTransform::TranslateLocal(const OvMaths::FVector3 & p_translation)
+void LittleEngine::CTransform::TranslateLocal(const LittleEngine::FVector3 & p_translation)
 {
 	m_transform.TranslateLocal(p_translation);
 }
 
-void OvCore::ECS::Components::CTransform::RotateLocal(const OvMaths::FQuaternion & p_rotation)
+void LittleEngine::CTransform::RotateLocal(const LittleEngine::FQuaternion & p_rotation)
 {
 	m_transform.RotateLocal(p_rotation);
 }
 
-void OvCore::ECS::Components::CTransform::ScaleLocal(const OvMaths::FVector3 & p_scale)
+void LittleEngine::CTransform::ScaleLocal(const LittleEngine::FVector3 & p_scale)
 {
 	m_transform.ScaleLocal(p_scale);
 }
 
-const OvMaths::FVector3 & OvCore::ECS::Components::CTransform::GetLocalPosition() const
+const LittleEngine::FVector3 & LittleEngine::CTransform::GetLocalPosition() const
 {
 	return m_transform.GetLocalPosition();
 }
 
-const OvMaths::FQuaternion & OvCore::ECS::Components::CTransform::GetLocalRotation() const
+const LittleEngine::FQuaternion & LittleEngine::CTransform::GetLocalRotation() const
 {
 	return m_transform.GetLocalRotation();
 }
 
-const OvMaths::FVector3 & OvCore::ECS::Components::CTransform::GetLocalScale() const
+const LittleEngine::FVector3 & LittleEngine::CTransform::GetLocalScale() const
 {
 	return m_transform.GetLocalScale();
 }
 
-const OvMaths::FVector3 & OvCore::ECS::Components::CTransform::GetWorldPosition() const
+const LittleEngine::FVector3 & LittleEngine::CTransform::GetWorldPosition() const
 {
 	return m_transform.GetWorldPosition();
 }
 
-const OvMaths::FQuaternion & OvCore::ECS::Components::CTransform::GetWorldRotation() const
+const LittleEngine::FQuaternion & LittleEngine::CTransform::GetWorldRotation() const
 {
 	return m_transform.GetWorldRotation();
 }
 
-const OvMaths::FVector3 & OvCore::ECS::Components::CTransform::GetWorldScale() const
+const LittleEngine::FVector3 & LittleEngine::CTransform::GetWorldScale() const
 {
 	return m_transform.GetWorldScale();
 }
 
-const OvMaths::FMatrix4 & OvCore::ECS::Components::CTransform::GetLocalMatrix() const
+const LittleEngine::FMatrix4 & LittleEngine::CTransform::GetLocalMatrix() const
 {
 	return m_transform.GetLocalMatrix();
 }
 
-const OvMaths::FMatrix4 & OvCore::ECS::Components::CTransform::GetWorldMatrix() const
+const LittleEngine::FMatrix4 & LittleEngine::CTransform::GetWorldMatrix() const
 {
 	return m_transform.GetWorldMatrix();
 }
 
-OvMaths::FTransform & OvCore::ECS::Components::CTransform::GetFTransform()
+LittleEngine::FTransform & LittleEngine::CTransform::GetFTransform()
 {
 	return m_transform;
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetWorldForward() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetWorldForward() const
 {
 	return m_transform.GetWorldForward();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetWorldUp() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetWorldUp() const
 {
 	return m_transform.GetWorldUp();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetWorldRight() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetWorldRight() const
 {
 	return m_transform.GetWorldRight();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetLocalForward() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetLocalForward() const
 {
 	return m_transform.GetLocalForward();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetLocalUp() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetLocalUp() const
 {
 	return m_transform.GetLocalUp();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CTransform::GetLocalRight() const
+LittleEngine::FVector3 LittleEngine::CTransform::GetLocalRight() const
 {
 	return m_transform.GetLocalRight();
 }
 
-void OvCore::ECS::Components::CTransform::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CTransform::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
 {
-	OvCore::Serializer::SerializeVec3(p_doc, p_node, "position", GetLocalPosition());
-	OvCore::Serializer::SerializeQuat(p_doc, p_node, "rotation", GetLocalRotation());
-	OvCore::Serializer::SerializeVec3(p_doc, p_node, "scale", GetLocalScale());
+	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "position", GetLocalPosition());
+	LittleEngine::Serializer::SerializeQuat(p_doc, p_node, "rotation", GetLocalRotation());
+	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "scale", GetLocalScale());
 }
 
-void OvCore::ECS::Components::CTransform::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CTransform::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	m_transform.GenerateMatricesLocal
 	(
-		OvCore::Serializer::DeserializeVec3(p_doc, p_node, "position"),
-		OvCore::Serializer::DeserializeQuat(p_doc, p_node, "rotation"),
-		OvCore::Serializer::DeserializeVec3(p_doc, p_node, "scale")
+		LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "position"),
+		LittleEngine::Serializer::DeserializeQuat(p_doc, p_node, "rotation"),
+		LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "scale")
 	);
 }
 
-void OvCore::ECS::Components::CTransform::OnInspector(OvUI::Internal::WidgetContainer& p_root)
+void LittleEngine::CTransform::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
 {
 	auto getRotation = [this]
 	{ 
-		return OvMaths::FQuaternion::EulerAngles(GetLocalRotation());
+		return LittleEngine::FQuaternion::EulerAngles(GetLocalRotation());
 	};
 
-	auto setRotation = [this](OvMaths::FVector3 result)
+	auto setRotation = [this](LittleEngine::FVector3 result)
 	{
-		SetLocalRotation(OvMaths::FQuaternion(result));
+		SetLocalRotation(LittleEngine::FQuaternion(result));
 	};
 
-	OvCore::Helpers::GUIDrawer::DrawVec3(p_root, "Position", std::bind(&CTransform::GetLocalPosition, this), std::bind(&CTransform::SetLocalPosition, this, std::placeholders::_1), 0.05f);
-	OvCore::Helpers::GUIDrawer::DrawVec3(p_root, "Rotation", getRotation, setRotation, 0.05f);
-	OvCore::Helpers::GUIDrawer::DrawVec3(p_root, "Scale", std::bind(&CTransform::GetLocalScale, this), std::bind(&CTransform::SetLocalScale, this, std::placeholders::_1), 0.05f, 0.0001f);
+	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Position", std::bind(&CTransform::GetLocalPosition, this), std::bind(&CTransform::SetLocalPosition, this, std::placeholders::_1), 0.05f);
+	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Rotation", getRotation, setRotation, 0.05f);
+	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Scale", std::bind(&CTransform::GetLocalScale, this), std::bind(&CTransform::SetLocalScale, this, std::placeholders::_1), 0.05f, 0.0001f);
 }

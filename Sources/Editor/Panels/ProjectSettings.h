@@ -9,9 +9,9 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class ProjectSettings : public OvUI::Panels::PanelWindow
+	class ProjectSettings : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -24,7 +24,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -34,7 +34,7 @@ namespace OvEditor::Panels
 		template <typename T>
 		std::function<T()> GenerateGatherer(const std::string& p_keyName)
 		{
-			return std::bind(&OvTools::Filesystem::IniFile::Get<T>, &m_projectFile, p_keyName);
+			return std::bind(&LittleEngine::Filesystem::IniFile::Get<T>, &m_projectFile, p_keyName);
 		}
 
 		/**
@@ -44,10 +44,10 @@ namespace OvEditor::Panels
 		template <typename T>
 		std::function<void(T)> GenerateProvider(const std::string& p_keyName)
 		{
-			return std::bind(&OvTools::Filesystem::IniFile::Set<T>, &m_projectFile, p_keyName, std::placeholders::_1);
+			return std::bind(&LittleEngine::Filesystem::IniFile::Set<T>, &m_projectFile, p_keyName, std::placeholders::_1);
 		}
 
 	private:
-		OvTools::Filesystem::IniFile& m_projectFile;
+		LittleEngine::Filesystem::IniFile& m_projectFile;
 	};
 }

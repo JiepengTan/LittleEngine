@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Plugins/ContextualMenu.h"
 
-void OvUI::Plugins::ContextualMenu::Execute()
+void LittleEngine::UI::Plugins::ContextualMenu::Execute()
 {
 	if (ImGui::BeginPopupContextItem())
 	{
@@ -15,7 +15,7 @@ void OvUI::Plugins::ContextualMenu::Execute()
 	}
 }
 
-void OvUI::Plugins::ContextualMenu::Close()
+void LittleEngine::UI::Plugins::ContextualMenu::Close()
 {
 	ImGui::CloseCurrentPopup();
 }

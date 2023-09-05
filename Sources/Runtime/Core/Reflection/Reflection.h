@@ -8,7 +8,7 @@
 #include <unordered_Set>
 #include <vector>
 
-namespace OvCore
+namespace LittleEngine
 {
 
 #if defined(__REFLECTION_PARSER__)
@@ -37,13 +37,13 @@ namespace OvCore
         } \
     };
 
-#define REGISTER_FIELD_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
-#define REGISTER_Method_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
-#define REGISTER_BASE_CLASS_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value);
-#define REGISTER_ARRAY_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToArrayMap(name, value);
-#define UNREGISTER_ALL OvCore::Reflection::TypeMetaRegisterInterface::UnRegisterAll();
+#define REGISTER_FIELD_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
+#define REGISTER_Method_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
+#define REGISTER_BASE_CLASS_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value);
+#define REGISTER_ARRAY_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToArrayMap(name, value);
+#define UNREGISTER_ALL LittleEngine::Reflection::TypeMetaRegisterInterface::UnRegisterAll();
 
-#define PICCOLO_REFLECTION_NEW(name, ...) OvCore::Reflection::ReflectionPtr(#name, new name(__VA_ARGS__));
+#define PICCOLO_REFLECTION_NEW(name, ...) LittleEngine::Reflection::ReflectionPtr(#name, new name(__VA_ARGS__));
 #define PICCOLO_REFLECTION_DELETE(value) \
     if (value) \
     { \
@@ -54,11 +54,11 @@ namespace OvCore
     *static_cast<type*>(dst_ptr) = *static_cast<type*>(src_ptr.GetPtr());
 
 #define TypeMetaDef(class_name, ptr) \
-    OvCore::Reflection::ReflectionInstance(OvCore::Reflection::TypeMeta::NewMetaFromName(#class_name), \
+    LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
                                             (class_name*)ptr)
 
 #define TypeMetaDefPtr(class_name, ptr) \
-    new OvCore::Reflection::ReflectionInstance(OvCore::Reflection::TypeMeta::NewMetaFromName(#class_name), \
+    new LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
                                                 (class_name*)ptr)
 
     template<typename T, typename U, typename = void>

@@ -13,7 +13,7 @@
 #endif
 
 #define GUID_LEN 64
-std::string OvCore::Guid::ToString()
+std::string LittleEngine::Guid::ToString()
 {
     char buf[GUID_LEN] = {0};
     sprintf(buf,
@@ -25,7 +25,7 @@ std::string OvCore::Guid::ToString()
         Data4[6], Data4[7]);
     return std::move(std::string(buf));
 }
-OvCore::Guid OvCore::Guid::CreateGuid()
+LittleEngine::Guid LittleEngine::Guid::CreateGuid()
 {
     Guid guid;
 #ifdef _WIN32
@@ -38,7 +38,7 @@ OvCore::Guid OvCore::Guid::CreateGuid()
 #endif // WIN32
     return guid;
 }
-OvCore::Guid OvCore::Guid::CreateGuid(const std::string& str)
+LittleEngine::Guid LittleEngine::Guid::CreateGuid(const std::string& str)
 {
     Guid stGuid;
     const char* cstr = str.c_str();

@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Drags/DragSingleScalar.h"
 
-namespace OvUI::Widgets::Drags
+namespace LittleEngine::UI::Widgets::Drags
 {
 	/**
 	* Drag widget of type float

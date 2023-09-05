@@ -11,19 +11,19 @@ uint32_t Pack(uint8_t c0, uint8_t c1, uint8_t c2, uint8_t c3)
 	return (c0 << 24) | (c1 << 16) | (c2 << 8) | c3;
 }
 
-uint32_t Pack(const OvMaths::FVector3& p_toPack)
+uint32_t Pack(const LittleEngine::FVector3& p_toPack)
 {
 	return Pack(static_cast<uint8_t>(p_toPack.x * 255.f), static_cast<uint8_t>(p_toPack.y * 255.f), static_cast<uint8_t>(p_toPack.z * 255.f), 0);
 }
 
-OvRendering::Entities::Light::Light(OvMaths::FTransform & p_tranform, Type p_type) : m_transform(p_tranform), type(static_cast<float>(p_type))
+LittleEngine::Rendering::Entities::Light::Light(LittleEngine::FTransform & p_tranform, Type p_type) : m_transform(p_tranform), type(static_cast<float>(p_type))
 {
 	
 }
 
-OvMaths::FMatrix4 OvRendering::Entities::Light::GenerateMatrix() const
+LittleEngine::FMatrix4 LittleEngine::Rendering::Entities::Light::GenerateMatrix() const
 {
-	OvMaths::FMatrix4 result;
+	LittleEngine::FMatrix4 result;
 
 	auto position = m_transform.GetWorldPosition();
 	result.data[0] = position.x;
@@ -99,14 +99,14 @@ float CalculatePointLightRadius(float p_constant, float p_linear, float p_quadra
 	}
 }
 
-float CalculateAmbientBoxLightRadius(const OvMaths::FVector3& p_position, const OvMaths::FVector3& p_size)
+float CalculateAmbientBoxLightRadius(const LittleEngine::FVector3& p_position, const LittleEngine::FVector3& p_size)
 {
-	return OvMaths::FVector3::Distance(p_position, p_position + p_size);
+	return LittleEngine::FVector3::Distance(p_position, p_position + p_size);
 }
 
-float OvRendering::Entities::Light::GetEffectRange() const
+float LittleEngine::Rendering::Entities::Light::GetEffectRange() const
 {
-	switch (static_cast<OvRendering::Entities::Light::Type>(static_cast<int>(type)))
+	switch (static_cast<LittleEngine::Rendering::Entities::Light::Type>(static_cast<int>(type)))
 	{
 	case Type::POINT:
 	case Type::SPOT:			return CalculatePointLightRadius(constant, linear, quadratic, intensity);
@@ -117,7 +117,7 @@ float OvRendering::Entities::Light::GetEffectRange() const
 	return std::numeric_limits<float>::infinity();
 }
 
-const OvMaths::FTransform& OvRendering::Entities::Light::GetTransform() const
+const LittleEngine::FTransform& LittleEngine::Rendering::Entities::Light::GetTransform() const
 {
 	return m_transform;
 }

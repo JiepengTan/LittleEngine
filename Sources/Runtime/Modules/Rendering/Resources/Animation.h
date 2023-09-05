@@ -5,13 +5,13 @@
 #include "Modules/Rendering/Resources/AnimationData.h"
 #include "Modules/Rendering/Resources/Loaders/ModelLoader.h"
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
     class AnimationLoader;
 }
 
 
-namespace OvRendering::Resources
+namespace LittleEngine::Rendering::Resources
 {
 
     class Animation

@@ -15,7 +15,7 @@
 #include "Platform/Windowing/Cursor/ECursorShape.h"
 #include "Platform/Windowing/Cursor/ECursorMode.h"
 
-namespace OvWindowing
+namespace LittleEngine::Windowing
 {
 	/**
 	* A simple OS-based window.
@@ -25,21 +25,21 @@ namespace OvWindowing
 	{
 	public:
 		/* Inputs relatives */
-		OvTools::Eventing::Event<int> KeyPressedEvent;
-		OvTools::Eventing::Event<int> KeyReleasedEvent;
-		OvTools::Eventing::Event<int> MouseButtonPressedEvent;
-		OvTools::Eventing::Event<int> MouseButtonReleasedEvent;
+		LittleEngine::Eventing::Event<int> KeyPressedEvent;
+		LittleEngine::Eventing::Event<int> KeyReleasedEvent;
+		LittleEngine::Eventing::Event<int> MouseButtonPressedEvent;
+		LittleEngine::Eventing::Event<int> MouseButtonReleasedEvent;
 
 		/* Window events */
-		OvTools::Eventing::Event<uint16_t, uint16_t> ResizeEvent;
-		OvTools::Eventing::Event<uint16_t, uint16_t> FramebufferResizeEvent;
-		OvTools::Eventing::Event<int16_t, int16_t> MoveEvent;
-		OvTools::Eventing::Event<int16_t, int16_t> CursorMoveEvent;
-		OvTools::Eventing::Event<> MinimizeEvent;
-		OvTools::Eventing::Event<> MaximizeEvent;
-		OvTools::Eventing::Event<> GainFocusEvent;
-		OvTools::Eventing::Event<> LostFocusEvent;
-		OvTools::Eventing::Event<> CloseEvent;
+		LittleEngine::Eventing::Event<uint16_t, uint16_t> ResizeEvent;
+		LittleEngine::Eventing::Event<uint16_t, uint16_t> FramebufferResizeEvent;
+		LittleEngine::Eventing::Event<int16_t, int16_t> MoveEvent;
+		LittleEngine::Eventing::Event<int16_t, int16_t> CursorMoveEvent;
+		LittleEngine::Eventing::Event<> MinimizeEvent;
+		LittleEngine::Eventing::Event<> MaximizeEvent;
+		LittleEngine::Eventing::Event<> GainFocusEvent;
+		LittleEngine::Eventing::Event<> LostFocusEvent;
+		LittleEngine::Eventing::Event<> CloseEvent;
 
 		/**
 		* Create the window

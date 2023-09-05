@@ -12,7 +12,7 @@
 
 #include "Modules/Framework/ECS/Components/Behaviour.h"
 
-namespace OvCore::Scripting
+namespace LittleEngine::Scripting
 {
 	/**
 	* Handles script interpretation
@@ -45,13 +45,13 @@ namespace OvCore::Scripting
 		* Consider a behaviour
 		* @param p_toConsider
 		*/
-		void Consider(OvCore::ECS::Components::Behaviour* p_toConsider);
+		void Consider(LittleEngine::Behaviour* p_toConsider);
 
 		/**
 		* Unconsider a behaviour
 		* @param p_toUnconsider
 		*/
-		void Unconsider(OvCore::ECS::Components::Behaviour* p_toUnconsider);
+		void Unconsider(LittleEngine::Behaviour* p_toUnconsider);
 
 		/**
 		* Refresh every scripts
@@ -66,7 +66,7 @@ namespace OvCore::Scripting
 	private:
 		std::unique_ptr<sol::state> m_luaState;
 		std::string m_scriptRootFolder;
-		std::vector<OvCore::ECS::Components::Behaviour*> m_behaviours;
+		std::vector<LittleEngine::Behaviour*> m_behaviours;
 		bool m_isOk;
 	};
 }

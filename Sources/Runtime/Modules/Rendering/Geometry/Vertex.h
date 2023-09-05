@@ -11,8 +11,8 @@
 #include "Core/Debug/Assertion.h"
 #include "Modules/Rendering/Buffers/VertexArray.h"
 
-#define VERTEX_DATA_FLAGS_INDEX_COUNT ((int)(OvRendering::Geometry::EVertexDataFlagsIndex::count))
-namespace OvRendering::Geometry
+#define VERTEX_DATA_FLAGS_INDEX_COUNT ((int)(LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::count))
+namespace LittleEngine::Rendering::Geometry
 {
 	enum EVertexDataFlags
 	{

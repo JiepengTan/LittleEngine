@@ -13,12 +13,12 @@
 #include "Modules/UI/Plugins/DataDispatcher.h"
 #include "Modules/UI/ImGui/imgui.h"
 
-namespace  OvUI::Internal { class WidgetContainer; }
+namespace  LittleEngine::UI::Internal { class WidgetContainer; }
 
-namespace OvUI::Widgets
+namespace LittleEngine::UI::Widgets
 {
 	/**
-	* A AWidget is the base class for any widget of OvUI.
+	* A AWidget is the base class for any widget of LittleEngine::UI.
 	* It is basically a visual element that can be placed into a panel.
 	* It is drawable and can receive plugins
 	*/

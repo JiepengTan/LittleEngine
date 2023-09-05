@@ -20,7 +20,7 @@
 #include "../Game/Debug/FrameInfo.h"
 #endif
 
-namespace OvGame::Core
+namespace LittleGame::Core
 {
 	/**
 	* Handle the game logic
@@ -58,18 +58,18 @@ namespace OvGame::Core
 	private:
 		float m_elapsed = 0.0f;
 
-		OvGame::Core::Context& m_context;
-		OvUI::Modules::Canvas m_canvas;
+		LittleGame::Core::Context& m_context;
+		LittleEngine::UI::Modules::Canvas m_canvas;
 
-		OvGame::Core::GameRenderer m_gameRenderer;
+		LittleGame::Core::GameRenderer m_gameRenderer;
 
 		/* Debug elements */
-		OvGame::Utils::FPSCounter	m_fpsCounter;
+		LittleGame::Utils::FPSCounter	m_fpsCounter;
 
 		#ifdef _DEBUG
-		OvGame::Debug::DriverInfo	m_driverInfo;
-		OvGame::Debug::GameProfiler m_gameProfiler;
-		OvGame::Debug::FrameInfo	m_frameInfo;
+		LittleGame::Debug::DriverInfo	m_driverInfo;
+		LittleGame::Debug::GameProfiler m_gameProfiler;
+		LittleGame::Debug::FrameInfo	m_frameInfo;
 		#endif
 
 		#ifdef _DEBUG

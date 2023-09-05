@@ -8,7 +8,7 @@
 
 #include "Core/CoreInclude.h"
 
-OvUI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_style, const std::string& p_glslVersion)
+LittleEngine::UI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_style, const std::string& p_glslVersion)
 {
 	ImGui::CreateContext();
 
@@ -21,25 +21,25 @@ OvUI::Core::UIManager::UIManager(GLFWwindow* p_glfwWindow, Styling::EStyle p_sty
 	ImGui_ImplOpenGL3_Init(p_glslVersion.c_str());
 }
 
-OvUI::Core::UIManager::~UIManager()
+LittleEngine::UI::Core::UIManager::~UIManager()
 {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 }
 
-void OvUI::Core::UIManager::ApplyStyle(Styling::EStyle p_style)
+void LittleEngine::UI::Core::UIManager::ApplyStyle(Styling::EStyle p_style)
 {
 	ImGuiStyle* style = &ImGui::GetStyle();
 
 	switch (p_style)
 	{
-	case OvUI::Styling::EStyle::IM_CLASSIC_STYLE:	ImGui::StyleColorsClassic();	break;
-	case OvUI::Styling::EStyle::IM_DARK_STYLE:		ImGui::StyleColorsDark();		break;
-	case OvUI::Styling::EStyle::IM_LIGHT_STYLE:		ImGui::StyleColorsLight();		break;
+	case LittleEngine::UI::Styling::EStyle::IM_CLASSIC_STYLE:	ImGui::StyleColorsClassic();	break;
+	case LittleEngine::UI::Styling::EStyle::IM_DARK_STYLE:		ImGui::StyleColorsDark();		break;
+	case LittleEngine::UI::Styling::EStyle::IM_LIGHT_STYLE:		ImGui::StyleColorsLight();		break;
 	}
 
-	if (p_style == OvUI::Styling::EStyle::DUNE_DARK)
+	if (p_style == LittleEngine::UI::Styling::EStyle::DUNE_DARK)
 	{
 		style->WindowPadding = ImVec2(15, 15);
 		style->WindowRounding = 5.0f;
@@ -95,7 +95,7 @@ void OvUI::Core::UIManager::ApplyStyle(Styling::EStyle p_style)
 
 		style->Colors[ImGuiCol_Tab] = style->Colors[ImGuiCol_TabUnfocused];
 	}
-    else if (p_style == OvUI::Styling::EStyle::ALTERNATIVE_DARK)
+    else if (p_style == LittleEngine::UI::Styling::EStyle::ALTERNATIVE_DARK)
     {
         style->WindowPadding = ImVec2(15, 15);
         style->WindowRounding = 0.0f;
@@ -170,7 +170,7 @@ void OvUI::Core::UIManager::ApplyStyle(Styling::EStyle p_style)
     }
 }
 
-bool OvUI::Core::UIManager::LoadFont(const std::string& p_id, const std::string & p_path, float p_fontSize)
+bool LittleEngine::UI::Core::UIManager::LoadFont(const std::string& p_id, const std::string & p_path, float p_fontSize)
 {
 	if (m_fonts.find(p_id) == m_fonts.end())
 	{
@@ -191,7 +191,7 @@ bool OvUI::Core::UIManager::LoadFont(const std::string& p_id, const std::string 
 	return false;
 }
 
-bool OvUI::Core::UIManager::UnloadFont(const std::string & p_id)
+bool LittleEngine::UI::Core::UIManager::UnloadFont(const std::string & p_id)
 {
 	if (m_fonts.find(p_id) != m_fonts.end())
 	{
@@ -202,7 +202,7 @@ bool OvUI::Core::UIManager::UnloadFont(const std::string & p_id)
 	return false;
 }
 
-bool OvUI::Core::UIManager::UseFont(const std::string & p_id)
+bool LittleEngine::UI::Core::UIManager::UseFont(const std::string & p_id)
 {
 	auto foundFont = m_fonts.find(p_id);
 
@@ -215,12 +215,12 @@ bool OvUI::Core::UIManager::UseFont(const std::string & p_id)
 	return false;
 }
 
-void OvUI::Core::UIManager::UseDefaultFont()
+void LittleEngine::UI::Core::UIManager::UseDefaultFont()
 {
 	ImGui::GetIO().FontDefault = nullptr;
 }
 
-void OvUI::Core::UIManager::EnableEditorLayoutSave(bool p_value)
+void LittleEngine::UI::Core::UIManager::EnableEditorLayoutSave(bool p_value)
 {
 	if (p_value)
 		ImGui::GetIO().IniFilename = m_layoutSaveFilename.c_str();
@@ -228,29 +228,29 @@ void OvUI::Core::UIManager::EnableEditorLayoutSave(bool p_value)
 		ImGui::GetIO().IniFilename = nullptr;
 }
 
-bool OvUI::Core::UIManager::IsEditorLayoutSaveEnabled() const
+bool LittleEngine::UI::Core::UIManager::IsEditorLayoutSaveEnabled() const
 {
 	return ImGui::GetIO().IniFilename != nullptr;
 }
 
-void OvUI::Core::UIManager::SetEditorLayoutSaveFilename(const std::string & p_filename)
+void LittleEngine::UI::Core::UIManager::SetEditorLayoutSaveFilename(const std::string & p_filename)
 {
 	m_layoutSaveFilename = p_filename;
 	if (IsEditorLayoutSaveEnabled())
 		ImGui::GetIO().IniFilename = m_layoutSaveFilename.c_str();
 }
 
-void OvUI::Core::UIManager::SetEditorLayoutAutosaveFrequency(float p_frequency)
+void LittleEngine::UI::Core::UIManager::SetEditorLayoutAutosaveFrequency(float p_frequency)
 {
 	ImGui::GetIO().IniSavingRate = p_frequency;
 }
 
-float OvUI::Core::UIManager::GetEditorLayoutAutosaveFrequency(float p_frequeny)
+float LittleEngine::UI::Core::UIManager::GetEditorLayoutAutosaveFrequency(float p_frequeny)
 {
 	return ImGui::GetIO().IniSavingRate;
 }
 
-void OvUI::Core::UIManager::EnableDocking(bool p_value)
+void LittleEngine::UI::Core::UIManager::EnableDocking(bool p_value)
 {
 	m_dockingState = p_value;
 
@@ -260,29 +260,29 @@ void OvUI::Core::UIManager::EnableDocking(bool p_value)
 		ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_DockingEnable;
 }
 
-void OvUI::Core::UIManager::ResetLayout(const std::string& p_config) const
+void LittleEngine::UI::Core::UIManager::ResetLayout(const std::string& p_config) const
 {
     ImGui::LoadIniSettingsFromDisk(p_config.c_str());
 }
 
-bool OvUI::Core::UIManager::IsDockingEnabled() const
+bool LittleEngine::UI::Core::UIManager::IsDockingEnabled() const
 {
 	return m_dockingState;
 }
 
-void OvUI::Core::UIManager::SetCanvas(Modules::Canvas& p_canvas)
+void LittleEngine::UI::Core::UIManager::SetCanvas(Modules::Canvas& p_canvas)
 {
 	RemoveCanvas();
 
 	m_currentCanvas = &p_canvas;
 }
 
-void OvUI::Core::UIManager::RemoveCanvas()
+void LittleEngine::UI::Core::UIManager::RemoveCanvas()
 {
 	m_currentCanvas = nullptr;
 }
 
-void OvUI::Core::UIManager::Render()
+void LittleEngine::UI::Core::UIManager::Render()
 {
 	if (m_currentCanvas)
 	{
@@ -291,12 +291,12 @@ void OvUI::Core::UIManager::Render()
 	}
 }
 
-void OvUI::Core::UIManager::PushCurrentFont()
+void LittleEngine::UI::Core::UIManager::PushCurrentFont()
 {
 
 }
 
-void OvUI::Core::UIManager::PopCurrentFont()
+void LittleEngine::UI::Core::UIManager::PopCurrentFont()
 {
 
 }

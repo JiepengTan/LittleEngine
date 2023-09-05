@@ -11,12 +11,12 @@
 #include "Modules/Rendering/Buffers/UniformBuffer.h"
 #include "Modules/Rendering/Resources/Texture.h"
 
-void OvCore::Resources::Material::SetShader(OvRendering::Resources::Shader* p_shader)
+void LittleEngine::Resources::Material::SetShader(LittleEngine::Rendering::Resources::Shader* p_shader)
 {
 	m_shader = p_shader;
 	if (m_shader)
 	{
-		OvRendering::Buffers::UniformBuffer::BindBlockToShader(*m_shader, "EngineUBO");
+		LittleEngine::Rendering::Buffers::UniformBuffer::BindBlockToShader(*m_shader, "EngineUBO");
 		FillUniform();
 	}
 	else
@@ -25,19 +25,19 @@ void OvCore::Resources::Material::SetShader(OvRendering::Resources::Shader* p_sh
 	}
 }
 
-void OvCore::Resources::Material::FillUniform()
+void LittleEngine::Resources::Material::FillUniform()
 {
 	m_uniformsData.clear();
-	for (const OvRendering::Resources::UniformInfo& element : m_shader->uniforms)
+	for (const LittleEngine::Rendering::Resources::UniformInfo& element : m_shader->uniforms)
 		m_uniformsData.emplace(element.name, element.defaultValue);
 }
 
-void OvCore::Resources::Material::Bind(OvRendering::Resources::Texture* p_emptyTexture)
+void LittleEngine::Resources::Material::Bind(LittleEngine::Rendering::Resources::Texture* p_emptyTexture)
 {
 	if (HasShader())
 	{
-		using namespace OvMaths;
-		using namespace OvRendering::Resources;
+		using namespace LittleEngine;
+		using namespace LittleEngine::Rendering::Resources;
 
 		m_shader->Bind();
 
@@ -51,13 +51,13 @@ void OvCore::Resources::Material::Bind(OvRendering::Resources::Texture* p_emptyT
 			{
 				switch (uniformData->type)
 				{
-				case OvRendering::Resources::UniformType::UNIFORM_BOOL:			if (value.type() == typeid(bool))		m_shader->SetUniformInt(name, std::any_cast<bool>(value));			break;
-				case OvRendering::Resources::UniformType::UNIFORM_INT:			if (value.type() == typeid(int))		m_shader->SetUniformInt(name, std::any_cast<int>(value));			break;
-				case OvRendering::Resources::UniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		m_shader->SetUniformFloat(name, std::any_cast<float>(value));		break;
-				case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(FVector2))	m_shader->SetUniformVec2(name, std::any_cast<FVector2>(value));		break;
-				case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(FVector3))	m_shader->SetUniformVec3(name, std::any_cast<FVector3>(value));		break;
-				case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(FVector4))	m_shader->SetUniformVec4(name, std::any_cast<FVector4>(value));		break;
-				case OvRendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_BOOL:			if (value.type() == typeid(bool))		m_shader->SetUniformInt(name, std::any_cast<bool>(value));			break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_INT:			if (value.type() == typeid(int))		m_shader->SetUniformInt(name, std::any_cast<int>(value));			break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		m_shader->SetUniformFloat(name, std::any_cast<float>(value));		break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(FVector2))	m_shader->SetUniformVec2(name, std::any_cast<FVector2>(value));		break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(FVector3))	m_shader->SetUniformVec3(name, std::any_cast<FVector3>(value));		break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(FVector4))	m_shader->SetUniformVec4(name, std::any_cast<FVector4>(value));		break;
+				case LittleEngine::Rendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
 					{
 						if (value.type() == typeid(Texture*))
 						{
@@ -79,93 +79,93 @@ void OvCore::Resources::Material::Bind(OvRendering::Resources::Texture* p_emptyT
 	}
 }
 
-void OvCore::Resources::Material::UnBind()
+void LittleEngine::Resources::Material::UnBind()
 {
 	if (HasShader())
 		m_shader->Unbind();
 }
 
-OvRendering::Resources::Shader*& OvCore::Resources::Material::GetShader()
+LittleEngine::Rendering::Resources::Shader*& LittleEngine::Resources::Material::GetShader()
 {
 	return m_shader;
 }
 
-bool OvCore::Resources::Material::HasShader() const
+bool LittleEngine::Resources::Material::HasShader() const
 {
 	return m_shader;
 }
 
-void OvCore::Resources::Material::SetBlendable(bool p_transparent)
+void LittleEngine::Resources::Material::SetBlendable(bool p_transparent)
 {
 	m_blendable = p_transparent;
 }
 
-void OvCore::Resources::Material::SetBackfaceCulling(bool p_backfaceCulling)
+void LittleEngine::Resources::Material::SetBackfaceCulling(bool p_backfaceCulling)
 {
 	m_backfaceCulling = p_backfaceCulling;
 }
 
-void OvCore::Resources::Material::SetFrontfaceCulling(bool p_frontfaceCulling)
+void LittleEngine::Resources::Material::SetFrontfaceCulling(bool p_frontfaceCulling)
 {
 	m_frontfaceCulling = p_frontfaceCulling;
 }
 
-void OvCore::Resources::Material::SetDepthTest(bool p_depthTest)
+void LittleEngine::Resources::Material::SetDepthTest(bool p_depthTest)
 {
 	m_depthTest = p_depthTest;
 }
 
-void OvCore::Resources::Material::SetDepthWriting(bool p_depthWriting)
+void LittleEngine::Resources::Material::SetDepthWriting(bool p_depthWriting)
 {
 	m_depthWriting = p_depthWriting;
 }
 
-void OvCore::Resources::Material::SetColorWriting(bool p_colorWriting)
+void LittleEngine::Resources::Material::SetColorWriting(bool p_colorWriting)
 {
 	m_colorWriting = p_colorWriting;
 }
 
-void OvCore::Resources::Material::SetGPUInstances(int p_instances)
+void LittleEngine::Resources::Material::SetGPUInstances(int p_instances)
 {
 	m_gpuInstances = p_instances;
 }
 
-bool OvCore::Resources::Material::IsBlendable() const
+bool LittleEngine::Resources::Material::IsBlendable() const
 {
 	return m_blendable;
 }
 
-bool OvCore::Resources::Material::HasBackfaceCulling() const
+bool LittleEngine::Resources::Material::HasBackfaceCulling() const
 {
 	return m_backfaceCulling;
 }
 
-bool OvCore::Resources::Material::HasFrontfaceCulling() const
+bool LittleEngine::Resources::Material::HasFrontfaceCulling() const
 {
 	return m_frontfaceCulling;
 }
 
-bool OvCore::Resources::Material::HasDepthTest() const
+bool LittleEngine::Resources::Material::HasDepthTest() const
 {
 	return m_depthTest;
 }
 
-bool OvCore::Resources::Material::HasDepthWriting() const
+bool LittleEngine::Resources::Material::HasDepthWriting() const
 {
 	return m_depthWriting;
 }
 
-bool OvCore::Resources::Material::HasColorWriting() const
+bool LittleEngine::Resources::Material::HasColorWriting() const
 {
 	return m_colorWriting;
 }
 
-int OvCore::Resources::Material::GetGPUInstances() const
+int LittleEngine::Resources::Material::GetGPUInstances() const
 {
 	return m_gpuInstances;
 }
 
-uint8_t OvCore::Resources::Material::GenerateStateMask() const
+uint8_t LittleEngine::Resources::Material::GenerateStateMask() const
 {
 	uint8_t result = 0;
 
@@ -180,15 +180,15 @@ uint8_t OvCore::Resources::Material::GenerateStateMask() const
 	return result;
 }
 
-std::map<std::string, std::any>& OvCore::Resources::Material::GetUniformsData()
+std::map<std::string, std::any>& LittleEngine::Resources::Material::GetUniformsData()
 {
 	return m_uniformsData;
 }
 
-void OvCore::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
-	using namespace OvRendering::Resources;
-	using namespace OvMaths;
+	using namespace LittleEngine::Rendering::Resources;
+	using namespace LittleEngine;
 
 	Serializer::SerializeShader(p_doc, p_node, "shader", m_shader);
 
@@ -212,7 +212,7 @@ void OvCore::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tin
 		tinyxml2::XMLNode* uniform = p_doc.NewElement("uniform");
 		uniformsNode->InsertEndChild(uniform); // Instead of p_node, use uniformNode (To create)
 
-		const OvRendering::Resources::UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
+		const LittleEngine::Rendering::Resources::UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
 
 		Serializer::SerializeString(p_doc, uniform, "name", uniformName);
 
@@ -252,7 +252,7 @@ void OvCore::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tin
 	}
 }
 
-void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 { 
 
 	tinyxml2::XMLNode* settingsNode = p_node->FirstChildElement("settings");
@@ -269,7 +269,7 @@ void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, t
 	}
 
 	/* We get the shader with Deserialize method */
-	OvRendering::Resources::Shader* deserializedShader = OvCore::Serializer::DeserializeShader(p_doc, p_node, "shader");
+	LittleEngine::Rendering::Resources::Shader* deserializedShader = LittleEngine::Serializer::DeserializeShader(p_doc, p_node, "shader");
 
 	/* We verify that the shader is valid (Not null) */
 	if (deserializedShader)
@@ -290,7 +290,7 @@ void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, t
 					const std::string uniformName = uniformNameElement->GetText();
 
 					/* We collect information about the uniform (The uniform is identified in the shader by its name) */
-					const OvRendering::Resources::UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
+					const LittleEngine::Rendering::Resources::UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
 
 					/* We verify that the uniform is existant is the current shader */
 					if (uniformInfo)
@@ -298,32 +298,32 @@ void OvCore::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, t
 						/* Deserialization of the uniform value depending on the uniform type (Deserialization result to std::any) */
 						switch (uniformInfo->type)
 						{
-						case OvRendering::Resources::UniformType::UNIFORM_BOOL:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeBoolean(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_BOOL:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeBoolean(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_INT:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeInt(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_INT:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeInt(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_FLOAT:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeFloat(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeFloat(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec2(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec2(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec3(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec3(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeVec4(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec4(p_doc, uniform, "value");
 							break;
 
-						case OvRendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
-							m_uniformsData[uniformInfo->name] = OvCore::Serializer::DeserializeTexture(p_doc, uniform, "value");
+						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
+							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeTexture(p_doc, uniform, "value");
 							break;
 						}
 					}

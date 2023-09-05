@@ -6,7 +6,7 @@
 
 #include "Core/Analytics/Hardware/GPUInfo.h"
 
-OvAnalytics::Hardware::GPUInfo::GPUInfo()
+LittleEngine::Analytics::Hardware::GPUInfo::GPUInfo()
 {
 	#if _WIN32 || _WIN64
 		#if _WIN64
@@ -45,7 +45,7 @@ OvAnalytics::Hardware::GPUInfo::GPUInfo()
 	}
 }
 
-float OvAnalytics::Hardware::GPUInfo::CalculateGPULoad()
+float LittleEngine::Analytics::Hardware::GPUInfo::CalculateGPULoad()
 {
 	if (!m_NvAPIReady)
 		return -100.0f;

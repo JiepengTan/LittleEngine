@@ -8,13 +8,13 @@
 
 #include "Core/Maths/FVector3.h"
 
-namespace OvPhysics::Settings
+namespace LittleEngine::Physics::Settings
 {
 	/**
 	* Data structure to give to the PhysicsEngine constructor to setup its settings
 	*/
 	struct PhysicsSettings
 	{
-		OvMaths::FVector3 gravity = { 0.0f, -9.81f, 0.f };
+		LittleEngine::FVector3 gravity = { 0.0f, -9.81f, 0.f };
 	};
 }

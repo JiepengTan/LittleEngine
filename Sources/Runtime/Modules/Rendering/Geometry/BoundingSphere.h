@@ -8,14 +8,14 @@
 
 #include "Core/Maths/FVector3.h"
 
-namespace OvRendering::Geometry
+namespace LittleEngine::Rendering::Geometry
 {
 	/**
 	* Data structure that defines a bounding sphere (Position + radius)
 	*/
 	struct BoundingSphere
 	{
-		OvMaths::FVector3 position;
+		LittleEngine::FVector3 position;
 		float radius;
 	};
 }

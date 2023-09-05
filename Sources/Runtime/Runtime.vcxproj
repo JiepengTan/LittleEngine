@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="Core\Base\GlobalState.cpp"/>
     <ClCompile Include="Core\Base\Macro.cpp"/>
+    <ClCompile Include="Core\Maths\FFloat.cpp" />
     <ClCompile Include="Core\Serialization\json11\json11.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Core\Debug\ILogHandler.h" />
     <ClInclude Include="Core\Debug\Logger.h" />
     <ClInclude Include="Core\Maths\DebugUtil.h" />
+    <ClInclude Include="Core\Maths\FFloat.h" />
     <ClInclude Include="Core\Maths\FMatrix3.h" />
     <ClInclude Include="Core\Maths\FMatrix4.h" />
     <ClInclude Include="Core\Maths\FQuaternion.h" />

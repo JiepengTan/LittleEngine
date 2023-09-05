@@ -8,21 +8,21 @@
 
 #include "Modules/Rendering/Resources/Model.h"
 
-const OvRendering::Geometry::BoundingSphere& OvRendering::Resources::Model::GetBoundingSphere() const
+const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Rendering::Resources::Model::GetBoundingSphere() const
 {
 	return m_boundingSphere;
 }
 
-OvRendering::Resources::Model::Model(const std::string & p_path) : path(p_path)
+LittleEngine::Rendering::Resources::Model::Model(const std::string & p_path) : path(p_path)
 {
 }
-OvRendering::Resources::Model::~Model()
+LittleEngine::Rendering::Resources::Model::~Model()
 {
 	for (auto mesh : m_meshes)
 		delete mesh;
 }
 
-void OvRendering::Resources::Model::ComputeBoundingSphere()
+void LittleEngine::Rendering::Resources::Model::ComputeBoundingSphere()
 {
 	if (m_meshes.size() == 1)
 	{
@@ -30,7 +30,7 @@ void OvRendering::Resources::Model::ComputeBoundingSphere()
 	}
 	else
 	{
-		m_boundingSphere.position = OvMaths::FVector3::Zero;
+		m_boundingSphere.position = LittleEngine::FVector3::Zero;
 		m_boundingSphere.radius = 0.0f;
 
 		if (!m_meshes.empty())
@@ -55,18 +55,18 @@ void OvRendering::Resources::Model::ComputeBoundingSphere()
 				maxZ = std::max(maxZ, boundingSphere.position.z + boundingSphere.radius);
 			}
 
-			m_boundingSphere.position = OvMaths::FVector3{ minX + maxX, minY + maxY, minZ + maxZ } / 2.0f;
-			m_boundingSphere.radius = OvMaths::FVector3::Distance(m_boundingSphere.position, { minX, minY, minZ });
+			m_boundingSphere.position = LittleEngine::FVector3{ minX + maxX, minY + maxY, minZ + maxZ } / 2.0f;
+			m_boundingSphere.radius = LittleEngine::FVector3::Distance(m_boundingSphere.position, { minX, minY, minZ });
 		}
 	}
 }
 
-const std::vector<OvRendering::Resources::Mesh*>& OvRendering::Resources::Model::GetMeshes() const
+const std::vector<LittleEngine::Rendering::Resources::Mesh*>& LittleEngine::Rendering::Resources::Model::GetMeshes() const
 {
 	return m_meshes;
 }
 
-const std::vector<std::string>& OvRendering::Resources::Model::GetMaterialNames() const
+const std::vector<std::string>& LittleEngine::Rendering::Resources::Model::GetMaterialNames() const
 {
 	return m_materialNames;
 }

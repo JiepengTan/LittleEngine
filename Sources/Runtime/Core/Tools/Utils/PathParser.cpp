@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Utils/PathParser.h"
 
-std::string OvTools::Utils::PathParser::MakeWindowsStyle(const std::string & p_path)
+std::string LittleEngine::Utils::PathParser::MakeWindowsStyle(const std::string & p_path)
 {
 	std::string result;
 	result.resize(p_path.size());
@@ -19,7 +19,7 @@ std::string OvTools::Utils::PathParser::MakeWindowsStyle(const std::string & p_p
 	return result;
 }
 
-std::string OvTools::Utils::PathParser::MakeNonWindowsStyle(const std::string & p_path)
+std::string LittleEngine::Utils::PathParser::MakeNonWindowsStyle(const std::string & p_path)
 {
 	std::string result;
 	result.resize(p_path.size());
@@ -30,7 +30,7 @@ std::string OvTools::Utils::PathParser::MakeNonWindowsStyle(const std::string & 
 	return result;
 }
 
-std::string OvTools::Utils::PathParser::GetContainingFolder(const std::string & p_path)
+std::string LittleEngine::Utils::PathParser::GetContainingFolder(const std::string & p_path)
 {
 	std::string result;
 
@@ -53,7 +53,7 @@ std::string OvTools::Utils::PathParser::GetContainingFolder(const std::string & 
 	return result;
 }
 
-std::string OvTools::Utils::PathParser::GetElementName(const std::string & p_path)
+std::string LittleEngine::Utils::PathParser::GetElementName(const std::string & p_path)
 {
 	std::string result;
 
@@ -69,7 +69,7 @@ std::string OvTools::Utils::PathParser::GetElementName(const std::string & p_pat
 	return result;
 }
 
-std::string OvTools::Utils::PathParser::GetExtension(const std::string & p_path)
+std::string LittleEngine::Utils::PathParser::GetExtension(const std::string & p_path)
 {
 	std::string result;
 
@@ -81,24 +81,24 @@ std::string OvTools::Utils::PathParser::GetExtension(const std::string & p_path)
 	return result;
 }
 
-std::string OvTools::Utils::PathParser::FileTypeToString(EFileType p_fileType)
+std::string LittleEngine::Utils::PathParser::FileTypeToString(EFileType p_fileType)
 {
 	switch (p_fileType)
 	{
-	case OvTools::Utils::PathParser::EFileType::MODEL:		return "Model";
-	case OvTools::Utils::PathParser::EFileType::TEXTURE:	return "Texture";
-	case OvTools::Utils::PathParser::EFileType::SHADER:		return "Shader";
-	case OvTools::Utils::PathParser::EFileType::MATERIAL:	return "Material";
-	case OvTools::Utils::PathParser::EFileType::SOUND:		return "Sound";
-	case OvTools::Utils::PathParser::EFileType::SCENE:		return "Scene";
-	case OvTools::Utils::PathParser::EFileType::SCRIPT:		return "Script";
-	case OvTools::Utils::PathParser::EFileType::FONT:		return "Font";
+	case LittleEngine::Utils::PathParser::EFileType::MODEL:		return "Model";
+	case LittleEngine::Utils::PathParser::EFileType::TEXTURE:	return "Texture";
+	case LittleEngine::Utils::PathParser::EFileType::SHADER:		return "Shader";
+	case LittleEngine::Utils::PathParser::EFileType::MATERIAL:	return "Material";
+	case LittleEngine::Utils::PathParser::EFileType::SOUND:		return "Sound";
+	case LittleEngine::Utils::PathParser::EFileType::SCENE:		return "Scene";
+	case LittleEngine::Utils::PathParser::EFileType::SCRIPT:		return "Script";
+	case LittleEngine::Utils::PathParser::EFileType::FONT:		return "Font";
 	}
 
 	return "Unknown";
 }
 
-OvTools::Utils::PathParser::EFileType OvTools::Utils::PathParser::GetFileType(const std::string & p_path)
+LittleEngine::Utils::PathParser::EFileType LittleEngine::Utils::PathParser::GetFileType(const std::string & p_path)
 {
 	std::string ext = GetExtension(p_path);
 	std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);

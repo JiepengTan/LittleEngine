@@ -9,9 +9,9 @@
 #include "../Editor/Panels/AViewControllable.h"
 #include "../Editor/Core/GizmoBehaviour.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class SceneView : public OvEditor::Panels::AViewControllable
+	class SceneView : public LittleEditor::Panels::AViewControllable
 	{
 	public:
 		/**
@@ -24,7 +24,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -54,12 +54,12 @@ namespace OvEditor::Panels
 		void HandleActorPicking();
 
 	private:
-		OvCore::SceneSystem::SceneManager& m_sceneManager;
-		OvRendering::Buffers::Framebuffer m_actorPickingFramebuffer;
-		OvEditor::Core::GizmoBehaviour m_gizmoOperations;
-		OvEditor::Core::EGizmoOperation m_currentOperation = OvEditor::Core::EGizmoOperation::TRANSLATE;
+		LittleEngine::SceneSystem::SceneManager& m_sceneManager;
+		LittleEngine::Rendering::Buffers::Framebuffer m_actorPickingFramebuffer;
+		LittleEditor::Core::GizmoBehaviour m_gizmoOperations;
+		LittleEditor::Core::EGizmoOperation m_currentOperation = LittleEditor::Core::EGizmoOperation::TRANSLATE;
 
-		std::optional<std::reference_wrapper<OvCore::ECS::Actor>> m_highlightedActor;
-		std::optional<OvEditor::Core::GizmoBehaviour::EDirection> m_highlightedGizmoDirection;
+		std::optional<std::reference_wrapper<LittleEngine::Actor>> m_highlightedActor;
+		std::optional<LittleEditor::Core::GizmoBehaviour::EDirection> m_highlightedGizmoDirection;
 	};
 }

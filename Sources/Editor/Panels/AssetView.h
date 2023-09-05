@@ -12,15 +12,15 @@
 
 #include "../Editor/Panels/AViewControllable.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
 	/**
 	* Provide a view for assets
 	*/
-	class AssetView : public OvEditor::Panels::AViewControllable
+	class AssetView : public LittleEditor::Panels::AViewControllable
 	{
 	public:
-		using ViewableResource = std::variant<OvRendering::Resources::Model*, OvRendering::Resources::Texture*, OvCore::Resources::Material*>;
+		using ViewableResource = std::variant<LittleEngine::Rendering::Resources::Model*, LittleEngine::Rendering::Resources::Texture*, LittleEngine::Resources::Material*>;
 
 		/**
 		* Constructor
@@ -32,7 +32,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**

@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Sliders/SliderMultipleScalars.h"
 
-namespace OvUI::Widgets::Sliders
+namespace LittleEngine::UI::Widgets::Sliders
 {
 	/**
 	* Slider widget of multiple type int

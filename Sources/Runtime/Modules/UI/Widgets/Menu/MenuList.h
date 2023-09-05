@@ -12,7 +12,7 @@
 
 #include "Modules/UI/Widgets/Layout/Group.h"
 
-namespace OvUI::Widgets::Menu
+namespace LittleEngine::UI::Widgets::Menu
 {
 	/**
 	* Widget that behave like a group with a menu display
@@ -33,7 +33,7 @@ namespace OvUI::Widgets::Menu
 	public:
 		std::string name;
 		bool locked;
-		OvTools::Eventing::Event<> ClickedEvent;
+		LittleEngine::Eventing::Event<> ClickedEvent;
 
 	private:
 		bool m_opened;

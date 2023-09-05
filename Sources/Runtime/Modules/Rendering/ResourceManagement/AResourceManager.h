@@ -12,7 +12,7 @@
 
 
 
-namespace OvCore::ResourceManagement
+namespace LittleEngine::ResourceManagement
 {
 	/**
 	* Handle the management of various resources of variable type

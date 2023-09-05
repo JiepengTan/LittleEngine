@@ -8,17 +8,17 @@
 
 #include "../Game/Debug/DriverInfo.h"
 
-OvGame::Debug::DriverInfo::DriverInfo(OvRendering::Core::Renderer& p_renderer, OvWindowing::Window& p_window)
+LittleGame::Debug::DriverInfo::DriverInfo(LittleEngine::Rendering::Core::Renderer& p_renderer, LittleEngine::Windowing::Window& p_window)
 {
-	m_defaultHorizontalAlignment = OvUI::Settings::EHorizontalAlignment::RIGHT;
-	m_defaultVerticalAlignment = OvUI::Settings::EVerticalAlignment::BOTTOM;
+	m_defaultHorizontalAlignment = LittleEngine::UI::Settings::EHorizontalAlignment::RIGHT;
+	m_defaultVerticalAlignment = LittleEngine::UI::Settings::EVerticalAlignment::BOTTOM;
 	m_defaultPosition.x = static_cast<float>(p_window.GetSize().first) - 10.f;
 	m_defaultPosition.y = static_cast<float>(p_window.GetSize().second) - 10.f;
 
-	CreateWidget<OvUI::Widgets::Texts::TextColored>("Vendor: "	+ p_renderer.GetString(GL_VENDOR), OvUI::Types::Color::Yellow);
-	CreateWidget<OvUI::Widgets::Texts::TextColored>("Hardware: " + p_renderer.GetString(GL_RENDERER), OvUI::Types::Color::Yellow);
-	CreateWidget<OvUI::Widgets::Texts::TextColored>("OpenGL Version: " + p_renderer.GetString(GL_VERSION), OvUI::Types::Color::Yellow);
-	CreateWidget<OvUI::Widgets::Texts::TextColored>("GLSL Version: " + p_renderer.GetString(GL_SHADING_LANGUAGE_VERSION), OvUI::Types::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Vendor: "	+ p_renderer.GetString(GL_VENDOR), LittleEngine::UI::Types::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Hardware: " + p_renderer.GetString(GL_RENDERER), LittleEngine::UI::Types::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("OpenGL Version: " + p_renderer.GetString(GL_VERSION), LittleEngine::UI::Types::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("GLSL Version: " + p_renderer.GetString(GL_SHADING_LANGUAGE_VERSION), LittleEngine::UI::Types::Color::Yellow);
 }
 
 #endif

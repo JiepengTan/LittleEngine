@@ -10,7 +10,7 @@
 #include <chrono>
 
 
-namespace OvTools::Time
+namespace LittleEngine::Time
 {
 	/*
 	* Handle time calculations

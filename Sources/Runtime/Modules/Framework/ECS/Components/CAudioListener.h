@@ -12,9 +12,9 @@
 
 #include "Modules/Audio/Entities/AudioListener.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represents an audio listener. The distance between audio sources and audio listener will affect the sound
@@ -27,7 +27,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CAudioListener(ECS::Actor& p_owner);
+		CAudioListener(Actor& p_owner);
 		CAudioListener() = default;
 		/**
 		* Returns the name of the component
@@ -52,13 +52,13 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	private:
 		virtual void OnEnable() override;
 		virtual void OnDisable() override;
 
 	private:
-		OvAudio::Entities::AudioListener m_audioListener;
+		LittleEngine::Audio::Entities::AudioListener m_audioListener;
 	};
 }

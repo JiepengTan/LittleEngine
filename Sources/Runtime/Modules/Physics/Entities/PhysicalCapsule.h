@@ -8,7 +8,7 @@
 
 #include "Modules/Physics/Entities/PhysicalObject.h"
 
-namespace OvPhysics::Entities
+namespace LittleEngine::Physics::Entities
 {
 	/**
 	* PhysicalObject with a capsule shape
@@ -29,7 +29,7 @@ namespace OvPhysics::Entities
 		* @param p_radius
 		* @param p_height
 		*/
-		PhysicalCapsule(OvMaths::FTransform& p_transform, float p_radius = 1.f, float p_height = 1.f);
+		PhysicalCapsule(LittleEngine::FTransform& p_transform, float p_radius = 1.f, float p_height = 1.f);
 
 		/**
 		* Defines a new radius for the capsule
@@ -56,7 +56,7 @@ namespace OvPhysics::Entities
 	private:
 		void CreateCollisionShape(float p_radius, float p_height);
 		void RecreateCollisionShape(float p_radius, float p_height);
-		virtual void SetLocalScaling(const OvMaths::FVector3& p_scaling) override;
+		virtual void SetLocalScaling(const LittleEngine::FVector3& p_scaling) override;
 
 	private:
 		float m_radius;

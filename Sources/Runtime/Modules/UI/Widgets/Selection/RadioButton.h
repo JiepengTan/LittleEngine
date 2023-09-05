@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::Selection
+namespace LittleEngine::UI::Widgets::Selection
 {
 	class RadioButtonLinker;
 
@@ -50,7 +50,7 @@ namespace OvUI::Widgets::Selection
 
 	public:
 		std::string label;
-		OvTools::Eventing::Event<int> ClickedEvent;
+		LittleEngine::Eventing::Event<int> ClickedEvent;
 
 	private:
 		bool m_selected = false;

@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Sliders/SliderSingleScalar.h"
 
-namespace OvUI::Widgets::Sliders
+namespace LittleEngine::UI::Widgets::Sliders
 {
 	/**
 	* Slider widget of type float

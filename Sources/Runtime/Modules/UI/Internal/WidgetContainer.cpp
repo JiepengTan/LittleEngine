@@ -8,9 +8,9 @@
 
 #include "Modules/UI/Internal/WidgetContainer.h"
 
-void OvUI::Internal::WidgetContainer::RemoveWidget(Widgets::AWidget& p_widget)
+void LittleEngine::UI::Internal::WidgetContainer::RemoveWidget(Widgets::AWidget& p_widget)
 {
-	auto found = std::find_if(m_widgets.begin(), m_widgets.end(), [&p_widget](std::pair<OvUI::Widgets::AWidget*, Internal::EMemoryMode>& p_pair)
+	auto found = std::find_if(m_widgets.begin(), m_widgets.end(), [&p_widget](std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>& p_pair)
 	{ 
 		return p_pair.first == &p_widget;
 	});
@@ -24,7 +24,7 @@ void OvUI::Internal::WidgetContainer::RemoveWidget(Widgets::AWidget& p_widget)
 	}
 }
 
-void OvUI::Internal::WidgetContainer::RemoveAllWidgets()
+void LittleEngine::UI::Internal::WidgetContainer::RemoveAllWidgets()
 {
 	std::for_each(m_widgets.begin(), m_widgets.end(), [](auto& pair)
 	{
@@ -35,15 +35,15 @@ void OvUI::Internal::WidgetContainer::RemoveAllWidgets()
 	m_widgets.clear();
 }
 
-void OvUI::Internal::WidgetContainer::ConsiderWidget(Widgets::AWidget & p_widget, bool p_manageMemory)
+void LittleEngine::UI::Internal::WidgetContainer::ConsiderWidget(Widgets::AWidget & p_widget, bool p_manageMemory)
 {
 	m_widgets.emplace_back(std::make_pair(&p_widget, p_manageMemory ? EMemoryMode::INTERNAL_MANAGMENT : EMemoryMode::EXTERNAL_MANAGMENT));
 	p_widget.SetParent(this);
 }
 
-void OvUI::Internal::WidgetContainer::UnconsiderWidget(Widgets::AWidget & p_widget)
+void LittleEngine::UI::Internal::WidgetContainer::UnconsiderWidget(Widgets::AWidget & p_widget)
 {
-	auto found = std::find_if(m_widgets.begin(), m_widgets.end(), [&p_widget](std::pair<OvUI::Widgets::AWidget*, Internal::EMemoryMode>& p_pair)
+	auto found = std::find_if(m_widgets.begin(), m_widgets.end(), [&p_widget](std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>& p_pair)
 	{
 		return p_pair.first == &p_widget;
 	});
@@ -55,9 +55,9 @@ void OvUI::Internal::WidgetContainer::UnconsiderWidget(Widgets::AWidget & p_widg
 	}
 }
 
-void OvUI::Internal::WidgetContainer::CollectGarbages()
+void LittleEngine::UI::Internal::WidgetContainer::CollectGarbages()
 {
-	m_widgets.erase(std::remove_if(m_widgets.begin(), m_widgets.end(), [](std::pair<OvUI::Widgets::AWidget*, Internal::EMemoryMode>& p_item)
+	m_widgets.erase(std::remove_if(m_widgets.begin(), m_widgets.end(), [](std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>& p_item)
 	{
 		bool toDestroy = p_item.first && p_item.first->IsDestroyed();
 
@@ -68,7 +68,7 @@ void OvUI::Internal::WidgetContainer::CollectGarbages()
 	}), m_widgets.end());
 }
 
-void OvUI::Internal::WidgetContainer::DrawWidgets()
+void LittleEngine::UI::Internal::WidgetContainer::DrawWidgets()
 {
 	CollectGarbages();
 
@@ -84,12 +84,12 @@ void OvUI::Internal::WidgetContainer::DrawWidgets()
     }
 }
 
-void OvUI::Internal::WidgetContainer::ReverseDrawOrder(const bool reversed)
+void LittleEngine::UI::Internal::WidgetContainer::ReverseDrawOrder(const bool reversed)
 {
     m_reversedDrawOrder = reversed;
 }
 
-std::vector<std::pair<OvUI::Widgets::AWidget*, OvUI::Internal::EMemoryMode>>& OvUI::Internal::WidgetContainer::GetWidgets()
+std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, LittleEngine::UI::Internal::EMemoryMode>>& LittleEngine::UI::Internal::WidgetContainer::GetWidgets()
 {
 	return m_widgets;
 }

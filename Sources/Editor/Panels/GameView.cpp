@@ -11,16 +11,16 @@
 #include "../Editor/Core/EditorActions.h"
 #include "../Editor/Settings/EditorSettings.h"
 
-OvEditor::Panels::GameView::GameView
+LittleEditor::Panels::GameView::GameView
 (
 	const std::string & p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings & p_windowSettings
+	const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings
 ) : AView(p_title, p_opened, p_windowSettings), m_sceneManager(EDITOR_CONTEXT(sceneManager))
 {
 }
 
-void OvEditor::Panels::GameView::Update(float p_deltaTime)
+void LittleEditor::Panels::GameView::Update(float p_deltaTime)
 {
 	AView::Update(p_deltaTime);
 
@@ -45,7 +45,7 @@ void OvEditor::Panels::GameView::Update(float p_deltaTime)
 	}
 }
 
-void OvEditor::Panels::GameView::_Render_Impl()
+void LittleEditor::Panels::GameView::_Render_Impl()
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 	auto& currentScene = *m_sceneManager.GetCurrentScene();
@@ -76,12 +76,12 @@ void OvEditor::Panels::GameView::_Render_Impl()
 	m_fbo.Unbind();
 }
 
-bool OvEditor::Panels::GameView::HasCamera() const
+bool LittleEditor::Panels::GameView::HasCamera() const
 {
 	return m_hasCamera;
 }
 
-std::optional<OvRendering::Data::Frustum> OvEditor::Panels::GameView::GetActiveFrustum() const
+std::optional<LittleEngine::Rendering::Data::Frustum> LittleEditor::Panels::GameView::GetActiveFrustum() const
 {
-	return m_hasCamera ? m_camera.GetFrustum() : std::optional<OvRendering::Data::Frustum>{};
+	return m_hasCamera ? m_camera.GetFrustum() : std::optional<LittleEngine::Rendering::Data::Frustum>{};
 }

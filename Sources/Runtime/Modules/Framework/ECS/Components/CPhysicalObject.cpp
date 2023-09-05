@@ -14,137 +14,137 @@
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-OvCore::ECS::Components::CPhysicalObject::CPhysicalObject(ECS::Actor & p_owner) : 
+LittleEngine::CPhysicalObject::CPhysicalObject(Actor & p_owner) : 
 	AComponent(p_owner)
 {
 }
 
-void OvCore::ECS::Components::CPhysicalObject::AddForce(const OvMaths::FVector3 & p_force)
+void LittleEngine::CPhysicalObject::AddForce(const LittleEngine::FVector3 & p_force)
 {
 	m_physicalObject->AddForce(p_force);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::AddImpulse(const OvMaths::FVector3 & p_impulse)
+void LittleEngine::CPhysicalObject::AddImpulse(const LittleEngine::FVector3 & p_impulse)
 {
 	m_physicalObject->AddImpulse(p_impulse);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::ClearForces()
+void LittleEngine::CPhysicalObject::ClearForces()
 {
 	m_physicalObject->ClearForces();
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetCollisionDetectionMode(OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode p_mode)
+void LittleEngine::CPhysicalObject::SetCollisionDetectionMode(LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode p_mode)
 {
 	m_physicalObject->SetCollisionDetectionMode(p_mode);
 }
 
-OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode OvCore::ECS::Components::CPhysicalObject::GetCollisionDetectionMode() const
+LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode LittleEngine::CPhysicalObject::GetCollisionDetectionMode() const
 {
 	return m_physicalObject->GetCollisionDetectionMode();
 }
 
-float OvCore::ECS::Components::CPhysicalObject::GetMass() const
+float LittleEngine::CPhysicalObject::GetMass() const
 {
 	return m_physicalObject->GetMass();
 }
 
-float OvCore::ECS::Components::CPhysicalObject::GetBounciness() const
+float LittleEngine::CPhysicalObject::GetBounciness() const
 {
 	return m_physicalObject->GetBounciness();
 }
 
-float OvCore::ECS::Components::CPhysicalObject::GetFriction() const
+float LittleEngine::CPhysicalObject::GetFriction() const
 {
 	return m_physicalObject->GetFriction();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CPhysicalObject::GetLinearVelocity() const
+LittleEngine::FVector3 LittleEngine::CPhysicalObject::GetLinearVelocity() const
 {
 	return m_physicalObject->GetLinearVelocity();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CPhysicalObject::GetAngularVelocity() const
+LittleEngine::FVector3 LittleEngine::CPhysicalObject::GetAngularVelocity() const
 {
 	return m_physicalObject->GetAngularVelocity();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CPhysicalObject::GetLinearFactor() const
+LittleEngine::FVector3 LittleEngine::CPhysicalObject::GetLinearFactor() const
 {
 	return m_physicalObject->GetLinearFactor();
 }
 
-OvMaths::FVector3 OvCore::ECS::Components::CPhysicalObject::GetAngularFactor() const
+LittleEngine::FVector3 LittleEngine::CPhysicalObject::GetAngularFactor() const
 {
 	return m_physicalObject->GetAngularFactor();
 }
 
-bool OvCore::ECS::Components::CPhysicalObject::IsTrigger() const
+bool LittleEngine::CPhysicalObject::IsTrigger() const
 {
 	return m_physicalObject->IsTrigger();
 }
 
-bool OvCore::ECS::Components::CPhysicalObject::IsKinematic() const
+bool LittleEngine::CPhysicalObject::IsKinematic() const
 {
 	return m_physicalObject->IsKinematic();
 }
 
-OvPhysics::Entities::PhysicalObject::EActivationState OvCore::ECS::Components::CPhysicalObject::GetActivationState() const
+LittleEngine::Physics::Entities::PhysicalObject::EActivationState LittleEngine::CPhysicalObject::GetActivationState() const
 {
 	return m_physicalObject->GetActivationState();
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetMass(float p_mass)
+void LittleEngine::CPhysicalObject::SetMass(float p_mass)
 {
 	m_physicalObject->SetMass(p_mass);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetBounciness(float p_bounciness)
+void LittleEngine::CPhysicalObject::SetBounciness(float p_bounciness)
 {
 	m_physicalObject->SetBounciness(p_bounciness);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetFriction(float p_friction)
+void LittleEngine::CPhysicalObject::SetFriction(float p_friction)
 {
 	m_physicalObject->SetFriction(p_friction);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetLinearVelocity(const OvMaths::FVector3 & p_linearVelocity)
+void LittleEngine::CPhysicalObject::SetLinearVelocity(const LittleEngine::FVector3 & p_linearVelocity)
 {
 	m_physicalObject->SetLinearVelocity(p_linearVelocity);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetAngularVelocity(const OvMaths::FVector3 & p_angularVelocity)
+void LittleEngine::CPhysicalObject::SetAngularVelocity(const LittleEngine::FVector3 & p_angularVelocity)
 {
 	m_physicalObject->SetAngularVelocity(p_angularVelocity);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetLinearFactor(const OvMaths::FVector3 & p_linearFactor)
+void LittleEngine::CPhysicalObject::SetLinearFactor(const LittleEngine::FVector3 & p_linearFactor)
 {
 	m_physicalObject->SetLinearFactor(p_linearFactor);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetAngularFactor(const OvMaths::FVector3 & p_angularFactor)
+void LittleEngine::CPhysicalObject::SetAngularFactor(const LittleEngine::FVector3 & p_angularFactor)
 {
 	m_physicalObject->SetAngularFactor(p_angularFactor);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetTrigger(bool p_trigger)
+void LittleEngine::CPhysicalObject::SetTrigger(bool p_trigger)
 {
 	m_physicalObject->SetTrigger(p_trigger);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetKinematic(bool p_kinematic)
+void LittleEngine::CPhysicalObject::SetKinematic(bool p_kinematic)
 {
 	m_physicalObject->SetKinematic(p_kinematic);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::SetActivationState(OvPhysics::Entities::PhysicalObject::EActivationState p_state)
+void LittleEngine::CPhysicalObject::SetActivationState(LittleEngine::Physics::Entities::PhysicalObject::EActivationState p_state)
 {
 	m_physicalObject->SetActivationState(p_state);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalObject::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	Serializer::SerializeBoolean(p_doc, p_node, "is_trigger", IsTrigger());
 	Serializer::SerializeBoolean(p_doc, p_node, "is_kinematic", IsKinematic());
@@ -156,7 +156,7 @@ void OvCore::ECS::Components::CPhysicalObject::OnSerialize(tinyxml2::XMLDocument
 	Serializer::SerializeInt(p_doc, p_node, "collision_mode", static_cast<int>(GetCollisionDetectionMode()));
 }
 
-void OvCore::ECS::Components::CPhysicalObject::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalObject::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
 {
 	SetTrigger(Serializer::DeserializeBoolean(p_doc, p_node, "is_trigger"));
 	SetKinematic(Serializer::DeserializeBoolean(p_doc, p_node, "is_kinematic"));
@@ -165,10 +165,10 @@ void OvCore::ECS::Components::CPhysicalObject::OnDeserialize(tinyxml2::XMLDocume
 	SetFriction(Serializer::DeserializeFloat(p_doc, p_node, "friction"));
 	SetLinearFactor(Serializer::DeserializeVec3(p_doc, p_node, "linear_factor"));
 	SetAngularFactor(Serializer::DeserializeVec3(p_doc, p_node, "angular_factor"));
-	SetCollisionDetectionMode(static_cast<OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode>(Serializer::DeserializeInt(p_doc, p_node, "collision_mode")));
+	SetCollisionDetectionMode(static_cast<LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode>(Serializer::DeserializeInt(p_doc, p_node, "collision_mode")));
 }
 
-void OvCore::ECS::Components::CPhysicalObject::OnInspector(OvUI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalObject::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
 {
 	Helpers::GUIDrawer::DrawBoolean(p_root, "Trigger", std::bind(&CPhysicalObject::IsTrigger, this), std::bind(&CPhysicalObject::SetTrigger, this, std::placeholders::_1));
 	Helpers::GUIDrawer::DrawBoolean(p_root, "Kinematic", std::bind(&CPhysicalObject::IsKinematic, this), std::bind(&CPhysicalObject::SetKinematic, this, std::placeholders::_1));
@@ -179,38 +179,38 @@ void OvCore::ECS::Components::CPhysicalObject::OnInspector(OvUI::Internal::Widge
 	Helpers::GUIDrawer::DrawVec3(p_root, "Angular Factor", std::bind(&CPhysicalObject::GetAngularFactor, this), std::bind(&CPhysicalObject::SetAngularFactor, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
 	
 	Helpers::GUIDrawer::CreateTitle(p_root, "Collision Mode");
-	auto& collisionMode = p_root.CreateWidget<OvUI::Widgets::Selection::ComboBox>(static_cast<int>(GetCollisionDetectionMode()));
+	auto& collisionMode = p_root.CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(static_cast<int>(GetCollisionDetectionMode()));
 	collisionMode.choices.emplace(0, "Discrete");
 	collisionMode.choices.emplace(1, "Continuous");
 	collisionMode.ValueChangedEvent += [this](int p_choice)
 	{
-		SetCollisionDetectionMode(static_cast<OvPhysics::Entities::PhysicalObject::ECollisionDetectionMode>(p_choice));
+		SetCollisionDetectionMode(static_cast<LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode>(p_choice));
 	};
 }
 
-void OvCore::ECS::Components::CPhysicalObject::Init()
+void LittleEngine::CPhysicalObject::Init()
 {
 	m_physicalObject->SetEnabled(false);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::BindListener()
+void LittleEngine::CPhysicalObject::BindListener()
 {
 	/* Collision Events */
-	m_physicalObject->CollisionStartEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->CollisionStartEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionEnterEvent.Invoke(otherObject);
 		owner->OnCollisionEnter(otherObject);
 	};
-	m_physicalObject->CollisionStayEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->CollisionStayEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionStayEvent.Invoke(otherObject);
 		owner->OnCollisionStay(otherObject);
 	};
-	m_physicalObject->CollisionStopEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->CollisionStopEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
@@ -219,21 +219,21 @@ void OvCore::ECS::Components::CPhysicalObject::BindListener()
 	};
 
 	/* Trigger Events */
-	m_physicalObject->TriggerStartEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->TriggerStartEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerEnterEvent.Invoke(otherObject);
 		owner->OnTriggerEnter(otherObject);
 	};
-	m_physicalObject->TriggerStayEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->TriggerStayEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerStayEvent.Invoke(otherObject);
 		owner->OnTriggerStay(otherObject);
 	};
-	m_physicalObject->TriggerStopEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
+	m_physicalObject->TriggerStopEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
@@ -242,12 +242,12 @@ void OvCore::ECS::Components::CPhysicalObject::BindListener()
 	};
 }
 
-void OvCore::ECS::Components::CPhysicalObject::OnEnable()
+void LittleEngine::CPhysicalObject::OnEnable()
 {
 	m_physicalObject->SetEnabled(true);
 }
 
-void OvCore::ECS::Components::CPhysicalObject::OnDisable()
+void LittleEngine::CPhysicalObject::OnDisable()
 {
 	m_physicalObject->SetEnabled(false);
 }

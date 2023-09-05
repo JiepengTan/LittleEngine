@@ -10,7 +10,7 @@
 
 #include "Modules/UI/Widgets/DataWidget.h"
 
-namespace OvUI::Widgets::InputFields
+namespace LittleEngine::UI::Widgets::InputFields
 {
 	/**
 	* Input widget of type string
@@ -32,7 +32,7 @@ namespace OvUI::Widgets::InputFields
 		std::string content;
 		std::string label;
 		bool selectAllOnClick = false;
-		OvTools::Eventing::Event<std::string> ContentChangedEvent;
-		OvTools::Eventing::Event<std::string> EnterPressedEvent;
+		LittleEngine::Eventing::Event<std::string> ContentChangedEvent;
+		LittleEngine::Eventing::Event<std::string> EnterPressedEvent;
 	};
 }

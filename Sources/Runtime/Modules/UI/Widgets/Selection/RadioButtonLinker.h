@@ -8,7 +8,7 @@
 
 #include "Modules/UI/Widgets/Selection/RadioButton.h"
 
-namespace OvUI::Widgets::Selection
+namespace LittleEngine::UI::Widgets::Selection
 {
 	/**
 	* Handle the link of radio buttons. Necessary to enable the correct behaviour
@@ -44,11 +44,11 @@ namespace OvUI::Widgets::Selection
 		void OnRadioButtonClicked(int p_radioID);
 
 	public:
-		OvTools::Eventing::Event<int> ValueChangedEvent;
+		LittleEngine::Eventing::Event<int> ValueChangedEvent;
 
 	private:
 		int m_availableRadioID = 0;
 		int m_selected = -1;
-		std::vector<std::pair<OvTools::Eventing::ListenerID, std::reference_wrapper<RadioButton>>> m_radioButtons;
+		std::vector<std::pair<LittleEngine::Eventing::ListenerID, std::reference_wrapper<RadioButton>>> m_radioButtons;
 	};
 }

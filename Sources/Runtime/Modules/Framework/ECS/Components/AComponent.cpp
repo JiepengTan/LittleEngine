@@ -6,11 +6,11 @@
 
 #include "Modules/Framework/ECS/Components/AComponent.h"
 #include "Modules/Framework/ECS/Actor.h"
-OvCore::ECS::Components::AComponent::AComponent(ECS::Actor& p_owner) : owner(&p_owner)
+LittleEngine::AComponent::AComponent(Actor& p_owner) : owner(&p_owner)
 {
 }
 
-OvCore::ECS::Components::AComponent::~AComponent()
+LittleEngine::AComponent::~AComponent()
 {
 
 }

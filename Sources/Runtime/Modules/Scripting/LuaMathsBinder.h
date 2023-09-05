@@ -8,7 +8,7 @@
 
 #include <sol.hpp>
 
-namespace OvCore::Scripting
+namespace LittleEngine::Scripting
 {
 	/**
 	* Handle lua maths binding

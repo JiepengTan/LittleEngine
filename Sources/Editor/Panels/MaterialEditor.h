@@ -12,11 +12,11 @@
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/Rendering/Resources/Shader.h"
 
-namespace OvCore::Resources { class Material; }
+namespace LittleEngine::Resources { class Material; }
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
-	class MaterialEditor : public OvUI::Panels::PanelWindow
+	class MaterialEditor : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -29,7 +29,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 		);
 
 		/**
@@ -41,12 +41,12 @@ namespace OvEditor::Panels
 		* Defines the target material of the material editor
 		* @param p_newTarget
 		*/
-		void SetTarget(OvCore::Resources::Material& p_newTarget);
+		void SetTarget(LittleEngine::Resources::Material& p_newTarget);
 
 		/**
 		* Returns the target of the material editor
 		*/
-		OvCore::Resources::Material* GetTarget() const;
+		LittleEngine::Resources::Material* GetTarget() const;
 
 		/**
 		* Remove the target of the material editor (Clear the material editor)
@@ -77,20 +77,20 @@ namespace OvEditor::Panels
 		void GenerateMaterialSettingsContent();
 
 	private:
-		OvCore::Resources::Material* m_target		= nullptr;
-		OvRendering::Resources::Shader* m_shader	= nullptr;
+		LittleEngine::Resources::Material* m_target		= nullptr;
+		LittleEngine::Rendering::Resources::Shader* m_shader	= nullptr;
 
-		OvUI::Widgets::Texts::Text* m_targetMaterialText	= nullptr;
-		OvUI::Widgets::Texts::Text* m_shaderText			= nullptr;
+		LittleEngine::UI::Widgets::Texts::Text* m_targetMaterialText	= nullptr;
+		LittleEngine::UI::Widgets::Texts::Text* m_shaderText			= nullptr;
 
-		OvTools::Eventing::Event<> m_materialDroppedEvent;
-		OvTools::Eventing::Event<> m_shaderDroppedEvent;
+		LittleEngine::Eventing::Event<> m_materialDroppedEvent;
+		LittleEngine::Eventing::Event<> m_shaderDroppedEvent;
 
-		OvUI::Widgets::Layout::Group* m_settings			= nullptr;
-		OvUI::Widgets::Layout::Group* m_materialSettings	= nullptr;
-		OvUI::Widgets::Layout::Group* m_shaderSettings		= nullptr;
+		LittleEngine::UI::Widgets::Layout::Group* m_settings			= nullptr;
+		LittleEngine::UI::Widgets::Layout::Group* m_materialSettings	= nullptr;
+		LittleEngine::UI::Widgets::Layout::Group* m_shaderSettings		= nullptr;
 
-		OvUI::Widgets::Layout::Columns<2>* m_shaderSettingsColumns = nullptr;
-		OvUI::Widgets::Layout::Columns<2>* m_materialSettingsColumns = nullptr;
+		LittleEngine::UI::Widgets::Layout::Columns<2>* m_shaderSettingsColumns = nullptr;
+		LittleEngine::UI::Widgets::Layout::Columns<2>* m_materialSettingsColumns = nullptr;
 	};
 }

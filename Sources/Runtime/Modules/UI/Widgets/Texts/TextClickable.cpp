@@ -6,12 +6,12 @@
 
 #include "Modules/UI/Widgets/Texts/TextClickable.h"
 
-OvUI::Widgets::Texts::TextClickable::TextClickable(const std::string & p_content) :
+LittleEngine::UI::Widgets::Texts::TextClickable::TextClickable(const std::string & p_content) :
 	Text(p_content)
 {
 }
 
-void OvUI::Widgets::Texts::TextClickable::_Draw_Impl()
+void LittleEngine::UI::Widgets::Texts::TextClickable::_Draw_Impl()
 {
 	bool useless = false;
 

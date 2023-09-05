@@ -9,7 +9,7 @@
 #include <string>
 
 
-namespace OvTools::Utils
+namespace LittleEngine::Utils
 {
 	/**
 	* Provide some tools to get information about a given path

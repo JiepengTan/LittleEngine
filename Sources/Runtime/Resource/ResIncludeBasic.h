@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 #include "Core/CoreInclude.h"
 #include "Core/Reflection/Reflection.h"
 #ifdef false
-namespace OvCore
+namespace LittleEngine
 {
     // 资源的内部数据，没有文件映射关系
     REFLECTION_TYPE(ResData)
@@ -20,7 +20,7 @@ namespace OvCore
     {
         REFLECTION_BODY(ResObject)
     public:
-        OvCore::Guid guid;
+        LittleEngine::Guid guid;
         StringName name;
     };
 

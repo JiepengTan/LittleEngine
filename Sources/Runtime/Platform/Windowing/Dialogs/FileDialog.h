@@ -12,7 +12,7 @@
 
 struct tagOFNA;
 
-namespace OvWindowing::Dialogs
+namespace LittleEngine::Windowing::Dialogs
 {
 	/**
 	* Some flags that can be passed to FileDialog instances

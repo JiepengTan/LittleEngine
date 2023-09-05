@@ -8,6 +8,6 @@
 
 #include "Modules/Scripting/LuaMathsBinder.h"
 
-void OvCore::Scripting::LuaBinder::CallBinders(sol::state& p_luaState)
+void LittleEngine::Scripting::LuaBinder::CallBinders(sol::state& p_luaState)
 {
 }

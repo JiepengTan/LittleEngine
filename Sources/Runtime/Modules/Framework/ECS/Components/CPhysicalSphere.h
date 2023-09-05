@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* Represent a physical object with a sphere shape
@@ -24,7 +24,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalSphere(ECS::Actor& p_owner);
+		CPhysicalSphere(Actor& p_owner);
 		CPhysicalSphere() = default;
 		/**
 		* Returns the name of the component
@@ -60,6 +60,6 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 	};
 }

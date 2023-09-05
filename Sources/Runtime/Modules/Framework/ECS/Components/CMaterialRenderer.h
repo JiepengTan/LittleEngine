@@ -17,9 +17,9 @@
 
 #define MAX_MATERIAL_COUNT 255
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* A component that handle a material list, necessary for model rendering
@@ -27,14 +27,14 @@ namespace OvCore::ECS::Components
 	class CMaterialRenderer : public AComponent
 	{
 	public:
-		using MaterialList = std::array<OvCore::Resources::Material*, MAX_MATERIAL_COUNT>;
-		using MaterialField = std::array<std::array<OvUI::Widgets::AWidget*, 3>, MAX_MATERIAL_COUNT>;
+		using MaterialList = std::array<LittleEngine::Resources::Material*, MAX_MATERIAL_COUNT>;
+		using MaterialField = std::array<std::array<LittleEngine::UI::Widgets::AWidget*, 3>, MAX_MATERIAL_COUNT>;
 
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CMaterialRenderer(ECS::Actor& p_owner);
+		CMaterialRenderer(Actor& p_owner);
 		CMaterialRenderer() = default;
 		/**
 		* Returns the name of the component
@@ -45,20 +45,20 @@ namespace OvCore::ECS::Components
 		* Fill the material renderer with the given material
 		* @param p_material
 		*/
-		void FillWithMaterial(OvCore::Resources::Material& p_material);
+		void FillWithMaterial(LittleEngine::Resources::Material& p_material);
 
 		/**
 		* Defines the material to use for the given index
 		* @param p_index
 		* @param p_material
 		*/
-		void SetMaterialAtIndex(uint8_t p_index, OvCore::Resources::Material& p_material);
+		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material& p_material);
 
 		/**
 		* Returns the material to use at index
 		* @param p_index
 		*/
-		OvCore::Resources::Material* GetMaterialAtIndex(uint8_t p_index);
+		LittleEngine::Resources::Material* GetMaterialAtIndex(uint8_t p_index);
 
 		/**
 		* Remove the material at index
@@ -70,7 +70,7 @@ namespace OvCore::ECS::Components
 		* Remove the material by instance
 		* @param p_instance
 		*/
-		void RemoveMaterialByInstance(OvCore::Resources::Material& p_instance);
+		void RemoveMaterialByInstance(LittleEngine::Resources::Material& p_instance);
 
 		/**
 		* Remove every materials
@@ -100,7 +100,7 @@ namespace OvCore::ECS::Components
 		/**
 		* Returns the user matrix
 		*/
-		const OvMaths::FMatrix4& GetUserMatrix() const;
+		const LittleEngine::FMatrix4& GetUserMatrix() const;
 
 		/**
 		* Returns the materials
@@ -125,12 +125,12 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
 	private:
 		MaterialList m_materials;
 		MaterialField m_materialFields;
 		std::array<std::string, MAX_MATERIAL_COUNT> m_materialNames;
-		OvMaths::FMatrix4 m_userMatrix;
+		LittleEngine::FMatrix4 m_userMatrix;
 	};
 }

@@ -10,9 +10,9 @@
 
 #include "Modules/Framework/ECS/Components/CLight.h"
 
-namespace OvCore::ECS { class Actor; }
+namespace LittleEngine { class Actor; }
 
-namespace OvCore::ECS::Components
+namespace LittleEngine
 {
 	/**
 	* A light that is localized and has attenuation
@@ -24,7 +24,7 @@ namespace OvCore::ECS::Components
 		* Constructor
 		* @param p_owner
 		*/
-		CPointLight(ECS::Actor& p_owner);
+		CPointLight(Actor& p_owner);
 		CPointLight() = default;
 		/**
 		* Returns the name of the component
@@ -82,6 +82,6 @@ namespace OvCore::ECS::Components
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 	};
 }

@@ -8,8 +8,8 @@
 
 #include "Modules/Rendering/Buffers/Framebuffer.h"
 
-uint32_t OvRendering::Buffers::Framebuffer::m_curFrameBufferId = 0;
-OvRendering::Buffers::Framebuffer::Framebuffer(uint16_t p_width, uint16_t p_height)
+uint32_t LittleEngine::Rendering::Buffers::Framebuffer::m_curFrameBufferId = 0;
+LittleEngine::Rendering::Buffers::Framebuffer::Framebuffer(uint16_t p_width, uint16_t p_height)
 {
 	/* Generate OpenGL objects */
 	glGenFramebuffers(1, &m_bufferID);
@@ -30,7 +30,7 @@ OvRendering::Buffers::Framebuffer::Framebuffer(uint16_t p_width, uint16_t p_heig
 	Resize(p_width, p_height);
 }
 
-OvRendering::Buffers::Framebuffer::~Framebuffer()
+LittleEngine::Rendering::Buffers::Framebuffer::~Framebuffer()
 {
 	/* Destroy OpenGL objects */
 	glDeleteBuffers(1, &m_bufferID);
@@ -38,18 +38,18 @@ OvRendering::Buffers::Framebuffer::~Framebuffer()
 	glDeleteRenderbuffers(1, &m_depthStencilBuffer);
 }
 
-void OvRendering::Buffers::Framebuffer::Bind()
+void LittleEngine::Rendering::Buffers::Framebuffer::Bind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_bufferID);
 	m_curFrameBufferId = m_bufferID;
 }
 
-void OvRendering::Buffers::Framebuffer::Unbind()
+void LittleEngine::Rendering::Buffers::Framebuffer::Unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void OvRendering::Buffers::Framebuffer::Resize(uint16_t p_width, uint16_t p_height)
+void LittleEngine::Rendering::Buffers::Framebuffer::Resize(uint16_t p_width, uint16_t p_height)
 {
 	/* Resize texture */
 	glBindTexture(GL_TEXTURE_2D, m_renderTexture);
@@ -68,17 +68,17 @@ void OvRendering::Buffers::Framebuffer::Resize(uint16_t p_width, uint16_t p_heig
 	Unbind();
 }
 
-uint32_t OvRendering::Buffers::Framebuffer::GetID()
+uint32_t LittleEngine::Rendering::Buffers::Framebuffer::GetID()
 {
 	return m_bufferID;
 }
 
-uint32_t OvRendering::Buffers::Framebuffer::GetTextureID()
+uint32_t LittleEngine::Rendering::Buffers::Framebuffer::GetTextureID()
 {
 	return m_renderTexture;
 }
 
-uint32_t OvRendering::Buffers::Framebuffer::GetRenderBufferID()
+uint32_t LittleEngine::Rendering::Buffers::Framebuffer::GetRenderBufferID()
 {
 	return m_depthStencilBuffer;
 }

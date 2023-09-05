@@ -14,12 +14,12 @@
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Modules/UI/Widgets/Layout/Spacing.h"
 
-using namespace OvUI::Panels;
-using namespace OvUI::Widgets;
+using namespace LittleEngine::UI::Panels;
+using namespace LittleEngine::UI::Widgets;
 
-std::pair<OvUI::Types::Color, std::string> GetWidgetSettingsFromLogData(const OvDebug::LogData& p_logData)
+std::pair<LittleEngine::UI::Types::Color, std::string> GetWidgetSettingsFromLogData(const OvDebug::LogData& p_logData)
 {
-	OvUI::Types::Color logColor;
+	LittleEngine::UI::Types::Color logColor;
 	std::string logHeader;
 	std::string logDateFormated = "[";
 	bool isSecondPart = false;
@@ -44,11 +44,11 @@ std::pair<OvUI::Types::Color, std::string> GetWidgetSettingsFromLogData(const Ov
 	}
 }
 
-OvEditor::Panels::Console::Console
+LittleEditor::Panels::Console::Console
 (
 	const std::string& p_title,
 	bool p_opened,
-	const OvUI::Settings::PanelWindowSettings& p_windowSettings
+	const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings
 ) :
 	PanelWindow(p_title, p_opened, p_windowSettings)
 {
@@ -91,7 +91,7 @@ OvEditor::Panels::Console::Console
 	OvDebug::Logger::LogEvent += std::bind(&Console::OnLogIntercepted, this, std::placeholders::_1);
 }
 
-void OvEditor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_logData)
+void LittleEditor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_logData)
 {
 	auto[logColor, logDate] = GetWidgetSettingsFromLogData(p_logData);
 
@@ -102,25 +102,25 @@ void OvEditor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_logD
 	m_logTextWidgets[&consoleItem1] = p_logData.logLevel;
 }
 
-void OvEditor::Panels::Console::ClearOnPlay()
+void LittleEditor::Panels::Console::ClearOnPlay()
 {
 	if (m_clearOnPlay)
 		Clear();
 }
 
-void OvEditor::Panels::Console::Clear()
+void LittleEditor::Panels::Console::Clear()
 {
 	m_logTextWidgets.clear();
 	m_logGroup->RemoveAllWidgets();
 }
 
-void OvEditor::Panels::Console::FilterLogs()
+void LittleEditor::Panels::Console::FilterLogs()
 {
 	for (const auto&[widget, logLevel] : m_logTextWidgets)
 		widget->enabled = IsAllowedByFilter(logLevel);
 }
 
-bool OvEditor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLevel)
+bool LittleEditor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLevel)
 {
 	switch (p_logLevel)
 	{
@@ -133,25 +133,25 @@ bool OvEditor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLevel)
 	return false;
 }
 
-void OvEditor::Panels::Console::SetShowDefaultLogs(bool p_value)
+void LittleEditor::Panels::Console::SetShowDefaultLogs(bool p_value)
 {
 	m_showDefaultLog = p_value;
 	FilterLogs();
 }
 
-void OvEditor::Panels::Console::SetShowInfoLogs(bool p_value)
+void LittleEditor::Panels::Console::SetShowInfoLogs(bool p_value)
 {
 	m_showInfoLog = p_value;
 	FilterLogs();
 }
 
-void OvEditor::Panels::Console::SetShowWarningLogs(bool p_value)
+void LittleEditor::Panels::Console::SetShowWarningLogs(bool p_value)
 {
 	m_showWarningLog = p_value;
 	FilterLogs();
 }
 
-void OvEditor::Panels::Console::SetShowErrorLogs(bool p_value)
+void LittleEditor::Panels::Console::SetShowErrorLogs(bool p_value)
 {
 	m_showErrorLog = p_value;
 	FilterLogs();

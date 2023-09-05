@@ -22,10 +22,10 @@
 #include "Modules/Rendering/Settings/EPixelDataFormat.h"
 #include "Modules/Rendering/Settings/EPixelDataType.h"
 
-namespace OvRendering::Core
+namespace LittleEngine::Rendering::Core
 {
 	/**
-	* The renderer is one of the main classes of OvRendering. It is necessary to have one to
+	* The renderer is one of the main classes of LittleEngine::Rendering. It is necessary to have one to
 	* send batches to the GPU
 	*/
 	class Renderer
@@ -77,7 +77,7 @@ namespace OvRendering::Core
 		* @param p_depthBuffer
 		* @param p_stencilBuffer
 		*/
-		void Clear(OvRendering::LowRenderer::Camera& p_camera, bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
+		void Clear(LittleEngine::Rendering::LowRenderer::Camera& p_camera, bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
 
 		/**
 		* Defines the rasterization lines width
@@ -288,13 +288,13 @@ namespace OvRendering::Core
 		* @param p_frustum
 		* @param p_cullingOptions
 		*/
-		std::vector<std::reference_wrapper<OvRendering::Resources::Mesh>> GetMeshesInFrustum
+		std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> GetMeshesInFrustum
 		(
-			const OvRendering::Resources::Model& p_model,
-			const OvRendering::Geometry::BoundingSphere& p_modelBoundingSphere,
-			const OvMaths::FTransform& p_modelTransform,
-			const OvRendering::Data::Frustum& p_frustum,
-			OvRendering::Settings::ECullingOptions p_cullingOptions
+			const LittleEngine::Rendering::Resources::Model& p_model,
+			const LittleEngine::Rendering::Geometry::BoundingSphere& p_modelBoundingSphere,
+			const LittleEngine::FTransform& p_modelTransform,
+			const LittleEngine::Rendering::Data::Frustum& p_frustum,
+			LittleEngine::Rendering::Settings::ECullingOptions p_cullingOptions
 		);
 
 		/**

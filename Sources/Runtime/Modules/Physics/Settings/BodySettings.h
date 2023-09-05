@@ -8,7 +8,7 @@
 
 #include <bullet/btBulletCollisionCommon.h>
 
-namespace OvPhysics::Settings
+namespace LittleEngine::Physics::Settings
 {
 	/**
 	* Usefull to re-create a body using its previous settings

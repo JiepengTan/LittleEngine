@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-namespace OvTools::Eventing
+namespace LittleEngine::Eventing
 {
 	template<class... ArgTypes>
 	ListenerID Event<ArgTypes...>::AddListener(Callback p_callback)

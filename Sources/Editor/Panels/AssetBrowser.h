@@ -14,12 +14,12 @@
 #include "Modules/UI/Widgets/Layout/TreeNode.h"
 #include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
 
-namespace OvEditor::Panels
+namespace LittleEditor::Panels
 {
 	/**
 	* A panel that handle asset management
 	*/
-	class AssetBrowser : public OvUI::Panels::PanelWindow
+	class AssetBrowser : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
 		/**
@@ -35,7 +35,7 @@ namespace OvEditor::Panels
 		(
 			const std::string& p_title,
 			bool p_opened,
-			const OvUI::Settings::PanelWindowSettings& p_windowSettings,
+			const LittleEngine::UI::Settings::PanelWindowSettings& p_windowSettings,
 			const std::string& p_engineAssetFolder = "",
 			const std::string& p_projectAssetFolder = "",
 			const std::string& p_projectScriptFolder = ""
@@ -57,8 +57,8 @@ namespace OvEditor::Panels
 		void Refresh();
 
 	private:
-		void ParseFolder(OvUI::Widgets::Layout::TreeNode& p_root, const std::filesystem::directory_entry& p_directory, bool p_isEngineItem, bool p_scriptFolder = false);
-		void ConsiderItem(OvUI::Widgets::Layout::TreeNode* p_root, const std::filesystem::directory_entry& p_entry, bool p_isEngineItem, bool p_autoOpen = false, bool p_scriptFolder = false);
+		void ParseFolder(LittleEngine::UI::Widgets::Layout::TreeNode& p_root, const std::filesystem::directory_entry& p_directory, bool p_isEngineItem, bool p_scriptFolder = false);
+		void ConsiderItem(LittleEngine::UI::Widgets::Layout::TreeNode* p_root, const std::filesystem::directory_entry& p_entry, bool p_isEngineItem, bool p_autoOpen = false, bool p_scriptFolder = false);
 
 	public:
 		static const std::string __FILENAMES_CHARS;
@@ -67,7 +67,7 @@ namespace OvEditor::Panels
 		std::string m_engineAssetFolder;
 		std::string m_projectAssetFolder;
 		std::string m_projectScriptFolder;
-		OvUI::Widgets::Layout::Group* m_assetList;
-		std::unordered_map<OvUI::Widgets::Layout::TreeNode*, std::string> m_pathUpdate;
+		LittleEngine::UI::Widgets::Layout::Group* m_assetList;
+		std::unordered_map<LittleEngine::UI::Widgets::Layout::TreeNode*, std::string> m_pathUpdate;
 	};
 }
