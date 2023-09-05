@@ -23,7 +23,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CAmbientSphereLight(ECS::Actor& p_owner);
-
+		CAmbientSphereLight() = default;
 		/**
 		* Returns the name of the component
 		*/

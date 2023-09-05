@@ -28,7 +28,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CAudioListener(ECS::Actor& p_owner);
-
+		CAudioListener() = default;
 		/**
 		* Returns the name of the component
 		*/

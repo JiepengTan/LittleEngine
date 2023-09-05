@@ -25,7 +25,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CPhysicalObject(ECS::Actor& p_owner);
-
+		CPhysicalObject() = default;
 		/**
 		* Add a force to the rigidbody
 		* @param p_force

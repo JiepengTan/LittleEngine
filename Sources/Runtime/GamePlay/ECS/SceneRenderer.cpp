@@ -43,7 +43,7 @@ OvCore::ECS::SceneRenderer::~SceneRenderer()
 OvCore::ECS::Components::CCamera* OvCore::ECS::SceneRenderer::FindMainCamera(const OvCore::SceneSystem::Scene& p_scene)
 {
 	for (OvCore::ECS::Components::CCamera* camera : p_scene.GetFastAccessComponents().cameras)
-		if (camera->owner.IsActive())
+		if (camera->owner->IsActive())
 			return camera;
 
 	return nullptr;
@@ -57,7 +57,7 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::SceneRenderer::FindLightMatrices(con
 
 	for (auto light : facs.lights)
 	{
-		if (light->owner.IsActive())
+		if (light->owner->IsActive())
 		{
 			result.push_back(light->GetData().GenerateMatrix());
 		}
@@ -75,7 +75,7 @@ OvCore::ECS::Components::CLight* OvCore::ECS::SceneRenderer::FindMainLight(const
 	ECS::Components::CLight* mainLight = nullptr;
 	for (auto light : facs.lights)
 	{
-		if (light->owner.IsActive() && light->IsDirectional())
+		if (light->owner->IsActive() && light->IsDirectional())
 		{
 			if(maxIntersity < light->GetIntensity())
 			{
@@ -94,7 +94,7 @@ std::vector<OvMaths::FMatrix4> OvCore::ECS::SceneRenderer::FindLightMatricesInFr
 
 	for (auto light : facs.lights)
 	{
-		if (light->owner.IsActive())
+		if (light->owner->IsActive())
 		{
 			const auto& lightData = light->GetData();
 			const auto& position = lightData.GetTransform().GetWorldPosition();
@@ -130,7 +130,7 @@ void OvCore::ECS::SceneRenderer::DrawShadowmap
 		//auto cameraMatrix = p_camera.GetProjectionMatrix();
 		//auto cameraView = p_camera.GetViewMatrix();
 		auto lightProject =  OvMaths::FMatrix4::CreateOrthographic(10, 1, 0.1f, 100);
-		auto lightTran = mainLight->owner.transform;
+		auto lightTran = mainLight->owner->transform;
 		auto pos = lightTran.GetWorldPosition();
 		auto forward = lightTran.GetWorldForward();
 		auto up = lightTran.GetWorldUp();
@@ -202,7 +202,7 @@ std::vector<OvMaths::FMatrix4>* GetBoneMatrix(OvCore::ECS::Components::CModelRen
 	auto model = modelRenderer->GetModel();
 	if(model && model->isSkinMesh)
 	{
-		auto anim = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CAnimator>();
+		auto anim = modelRenderer->owner->GetComponent<OvCore::ECS::Components::CAnimator>();
 		if(anim != nullptr)
 		{
 			return anim->GetFinalBoneMatrices();
@@ -222,14 +222,14 @@ void FindAndSortDrawables
 {
 	for (OvCore::ECS::Components::CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
 	{
-		if (modelRenderer->owner.IsActive())
+		if (modelRenderer->owner->IsActive())
 		{
 			if (auto model = modelRenderer->GetModel())
 			{
-				float distanceToActor = OvMaths::FVector3::Distance(modelRenderer->owner.transform.GetWorldPosition(), p_cameraPosition);
-				if (auto materialRenderer = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
+				float distanceToActor = OvMaths::FVector3::Distance(modelRenderer->owner->transform.GetWorldPosition(), p_cameraPosition);
+				if (auto materialRenderer = modelRenderer->owner->GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
 				{
-					const auto& transform = modelRenderer->owner.transform.GetFTransform();
+					const auto& transform = modelRenderer->owner->transform.GetFTransform();
 
 					const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 
@@ -276,15 +276,15 @@ std::pair<OvCore::ECS::SceneRenderer::OpaqueDrawables, OvCore::ECS::SceneRendere
 
 	for (CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
 	{
-		auto& owner = modelRenderer->owner;
+		auto actor = modelRenderer->owner;
 
-		if (owner.IsActive())
+		if (actor->IsActive())
 		{
 			if (auto model = modelRenderer->GetModel())
 			{
-				if (auto materialRenderer = modelRenderer->owner.GetComponent<CMaterialRenderer>())
+				if (auto materialRenderer = modelRenderer->owner->GetComponent<CMaterialRenderer>())
 				{
-					auto& transform = owner.transform.GetFTransform();
+					auto& transform = actor->transform.GetFTransform();
 
 					OvRendering::Settings::ECullingOptions cullingOptions = OvRendering::Settings::ECullingOptions::NONE;
 
@@ -355,15 +355,15 @@ std::pair<OvCore::ECS::SceneRenderer::OpaqueDrawables, OvCore::ECS::SceneRendere
 
 	for (OvCore::ECS::Components::CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
 	{
-		if (modelRenderer->owner.IsActive())
+		if (modelRenderer->owner->IsActive())
 		{
 			if (auto model = modelRenderer->GetModel())
 			{
-				float distanceToActor = OvMaths::FVector3::Distance(modelRenderer->owner.transform.GetWorldPosition(), p_cameraPosition);
+				float distanceToActor = OvMaths::FVector3::Distance(modelRenderer->owner->transform.GetWorldPosition(), p_cameraPosition);
 
-				if (auto materialRenderer = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
+				if (auto materialRenderer = modelRenderer->owner->GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
 				{
-					const auto& transform = modelRenderer->owner.transform.GetFTransform();
+					const auto& transform = modelRenderer->owner->transform.GetFTransform();
 
 					const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 

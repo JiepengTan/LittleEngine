@@ -24,7 +24,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CCamera(ECS::Actor& p_owner);
-
+		CCamera() = default;
 		/**
 		* Destructor
 		*/

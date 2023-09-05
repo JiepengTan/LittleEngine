@@ -15,7 +15,7 @@
 
 OvCore::ECS::Components::CAudioSource::CAudioSource(ECS::Actor& p_owner) :
 	AComponent(p_owner),
-	m_audioSource(OvCore::Global::ServiceLocator::Get<OvAudio::Core::AudioPlayer>(), owner.transform.GetFTransform())
+	m_audioSource(OvCore::Global::ServiceLocator::Get<OvAudio::Core::AudioPlayer>(), owner->transform.GetFTransform())
 {
 }
 
@@ -111,25 +111,25 @@ float OvCore::ECS::Components::CAudioSource::GetAttenuationThreshold() const
 
 void OvCore::ECS::Components::CAudioSource::Play()
 {
-	if (owner.IsActive() && m_sound)
+	if (owner->IsActive() && m_sound)
 		m_audioSource.Play(*m_sound);
 }
 
 void OvCore::ECS::Components::CAudioSource::Pause()
 {
-	if (owner.IsActive())
+	if (owner->IsActive())
 		m_audioSource.Pause();
 }
 
 void OvCore::ECS::Components::CAudioSource::Resume()
 {
-	if (owner.IsActive())
+	if (owner->IsActive())
 		m_audioSource.Resume();
 }
 
 void OvCore::ECS::Components::CAudioSource::Stop()
 {
-	if (owner.IsActive())
+	if (owner->IsActive())
 		m_audioSource.Stop();
 }
 
@@ -193,7 +193,7 @@ void OvCore::ECS::Components::CAudioSource::OnInspector(OvUI::Internal::WidgetCo
 		if (listenerInfo.has_value())
 			listenerPosition = listenerInfo.value().first;
 
-		float distanceToListener = OvMaths::FVector3::Distance(listenerPosition, owner.transform.GetWorldPosition());
+		float distanceToListener = OvMaths::FVector3::Distance(listenerPosition, owner->transform.GetWorldPosition());
 
 		for (float graphX = 0.0f; graphX < 50.0f; graphX += 0.25f)
 		{

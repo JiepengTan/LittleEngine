@@ -25,7 +25,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CLight(ECS::Actor& p_owner);
-
+		CLight() = default;
 		/**
 		* Returns light data
 		*/

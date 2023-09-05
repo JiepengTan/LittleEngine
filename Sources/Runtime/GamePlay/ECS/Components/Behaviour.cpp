@@ -47,7 +47,7 @@ bool OvCore::ECS::Components::Behaviour::RegisterToLuaContext(sol::state& p_luaS
 		if (result.return_count() == 1 && result[0].is<sol::table>())
 		{
 			m_object = result[0];
-			m_object["owner"] = &owner;
+			m_object["owner"] = owner;
 			return true;
 		}
 		else

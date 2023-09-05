@@ -201,21 +201,21 @@ void OvCore::ECS::Components::CPhysicalObject::BindListener()
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionEnterEvent.Invoke(otherObject);
-		owner.OnCollisionEnter(otherObject);
+		owner->OnCollisionEnter(otherObject);
 	};
 	m_physicalObject->CollisionStayEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionStayEvent.Invoke(otherObject);
-		owner.OnCollisionStay(otherObject);
+		owner->OnCollisionStay(otherObject);
 	};
 	m_physicalObject->CollisionStopEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionExitEvent.Invoke(otherObject);
-		owner.OnCollisionExit(otherObject);
+		owner->OnCollisionExit(otherObject);
 	};
 
 	/* Trigger Events */
@@ -224,21 +224,21 @@ void OvCore::ECS::Components::CPhysicalObject::BindListener()
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerEnterEvent.Invoke(otherObject);
-		owner.OnTriggerEnter(otherObject);
+		owner->OnTriggerEnter(otherObject);
 	};
 	m_physicalObject->TriggerStayEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerStayEvent.Invoke(otherObject);
-		owner.OnTriggerStay(otherObject);
+		owner->OnTriggerStay(otherObject);
 	};
 	m_physicalObject->TriggerStopEvent += [this](OvPhysics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerExitEvent.Invoke(otherObject);
-		owner.OnTriggerExit(otherObject);
+		owner->OnTriggerExit(otherObject);
 	};
 }
 

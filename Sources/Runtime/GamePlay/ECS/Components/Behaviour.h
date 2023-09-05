@@ -21,6 +21,8 @@ namespace OvCore::ECS::Components
 	class Behaviour : public AComponent
 	{
 	public:
+		
+		Behaviour() = default;
 		/**
 		* Constructor of a ABehaviour (Must be called by derived classes)
 		* @param p_owner

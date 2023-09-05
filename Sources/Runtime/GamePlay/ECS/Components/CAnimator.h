@@ -20,6 +20,7 @@ namespace OvCore::ECS::Components
 	{
 		REFLECTION_BODY(CAnimator)
 	public:
+		CAnimator() = default;
 		CAnimator(ECS::Actor& p_owner);
 		~CAnimator() =default;
 		std::string GetName() override;
@@ -70,7 +71,7 @@ namespace OvCore::ECS::Components
 		// debug infos
 	private:
 		std::vector<Actor*> m_debugBones;
-		Actor* m_debugBoneRoot;
+		Actor* m_debugBoneRoot; 
 		std::vector<int> m_boneId;
 		float boneDrawSize = 0.05f;
 		

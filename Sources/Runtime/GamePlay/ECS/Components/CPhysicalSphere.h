@@ -25,7 +25,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CPhysicalSphere(ECS::Actor& p_owner);
-
+		CPhysicalSphere() = default;
 		/**
 		* Returns the name of the component
 		*/

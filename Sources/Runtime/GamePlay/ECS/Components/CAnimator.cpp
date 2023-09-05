@@ -50,8 +50,8 @@ void OvCore::ECS::Components::CAnimator::UnloadAnimations()
 void OvCore::ECS::Components::CAnimator::LoadAnimations()
 {
     if (m_curAnim != nullptr) return;
-    //owner.transform.SetLocalScale(OvMaths::FVector3::One*0.01f);
-    auto mesh = owner.GetComponent<CModelRenderer>();
+    //owner->transform.SetLocalScale(OvMaths::FVector3::One*0.01f);
+    auto mesh = owner->GetComponent<CModelRenderer>();
     if (mesh == nullptr) return;
     auto model = mesh->GetModel();
     if (model == nullptr) return;
@@ -64,7 +64,7 @@ void OvCore::ECS::Components::CAnimator::LoadAnimations()
         m_finalBoneMatrices.push_back(OvMaths::FMatrix4::Identity);
     if (anim && m_showDebugBones)
     {
-        m_debugBoneRoot  = ActorUtils::CreateEmptyActor(&owner, "BoneRoot");
+        m_debugBoneRoot  = ActorUtils::CreateEmptyActor(owner, "BoneRoot");
         CreateBoneActors(m_curAnim->GetSkeletonRoot(), OvMaths::FMatrix4::Identity);
         OVLOG("Creaet Actor Done ");
     }
@@ -105,7 +105,7 @@ void OvCore::ECS::Components::CAnimator::OnDestroy()
 void OvCore::ECS::Components::CAnimator::UpVertexBufferCPU()
 {
     PROFILER_SPY("Animator::UpVertexBufferCPU");
-    auto model = owner.GetComponent<CModelRenderer>()->GetModel();
+    auto model = owner->GetComponent<CModelRenderer>()->GetModel();
     auto& boneMatrixs = m_finalBoneMatrices;
     auto& structInfos = OvRendering::Geometry::VertexStructInfos;
     auto& positionStructInfo = structInfos[(int)OvRendering::Geometry::EVertexDataFlagsIndex::position];

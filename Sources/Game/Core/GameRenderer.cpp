@@ -65,8 +65,8 @@ void OvGame::Core::GameRenderer::RenderScene()
 			}
 
 			auto [winWidth, winHeight] = m_context.window->GetSize();
-			const auto& cameraPosition = mainCameraComponent->owner.transform.GetWorldPosition();
-			const auto& cameraRotation = mainCameraComponent->owner.transform.GetWorldRotation();
+			const auto& cameraPosition = mainCameraComponent->owner->transform.GetWorldPosition();
+			const auto& cameraRotation = mainCameraComponent->owner->transform.GetWorldRotation();
 			auto& camera = mainCameraComponent->GetCamera();
 
 			camera.CacheMatrices(winWidth, winHeight, cameraPosition, cameraRotation);
@@ -96,7 +96,7 @@ void OvGame::Core::GameRenderer::UpdateEngineUBO(OvCore::ECS::Components::CCamer
 
 	m_context.engineUBO->SetSubData(OvMaths::FMatrix4::Transpose(camera.GetViewMatrix()), std::ref(offset));
 	m_context.engineUBO->SetSubData(OvMaths::FMatrix4::Transpose(camera.GetProjectionMatrix()), std::ref(offset));
-	m_context.engineUBO->SetSubData(p_mainCamera.owner.transform.GetWorldPosition(), std::ref(offset));
+	m_context.engineUBO->SetSubData(p_mainCamera.owner->transform.GetWorldPosition(), std::ref(offset));
 }
 
 void OvGame::Core::GameRenderer::UpdateLights(OvCore::SceneSystem::Scene& p_scene)

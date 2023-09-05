@@ -181,7 +181,6 @@
     <ClInclude Include="GamePlay\ECS\Components\CPhysicalSphere.h" />
     <ClInclude Include="GamePlay\ECS\Components\CPointLight.h" />
     <ClInclude Include="GamePlay\ECS\Components\CSpotLight.h" />
-    <ClInclude Include="GamePlay\ECS\Components\CTestComp1.h" />
     <ClInclude Include="GamePlay\ECS\Components\CTransform.h" />
     <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h" />
     <ClInclude Include="GamePlay\ECS\SceneRenderer.h" />

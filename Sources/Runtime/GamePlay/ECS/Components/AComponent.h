@@ -21,10 +21,11 @@ namespace OvCore::ECS::Components
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
 	REFLECTION_TYPE(AComponent)
-	CLASS (AComponent : public API::IInspectorItem, WhiteListFields)
+	CLASS (AComponent , WhiteListFields)
 	{
 		REFLECTION_BODY(AComponent)
 	public:
+		AComponent() = default;
 		/**
 		* Constructor of a AComponent (Must be called by derived classes)
 		* @param p_owner
@@ -116,14 +117,17 @@ namespace OvCore::ECS::Components
 		* @param p_otherObject
 		*/
 		virtual void OnTriggerExit(Components::CPhysicalObject& p_otherObject) {}
-
+		
 		/**
 		* Returns the name of the component
 		*/
-		virtual std::string GetName() = 0;
-
+		virtual std::string GetName() {return "Error Component!";}
+		
+		virtual void OnInspector(OvUI::Internal::WidgetContainer& p_root){}
+		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node){}
+		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node){}
 	public:
-		ECS::Actor& owner;
+		ECS::Actor* owner;
         META(Enable)
 		bool IsUpdateInEdit;
 	};

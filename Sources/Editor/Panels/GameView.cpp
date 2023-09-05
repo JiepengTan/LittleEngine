@@ -32,8 +32,8 @@ void OvEditor::Panels::GameView::Update(float p_deltaTime)
 		if (cameraComponent)
 		{
 			m_camera = cameraComponent->GetCamera();
-			m_cameraPosition = cameraComponent->owner.transform.GetWorldPosition();
-			m_cameraRotation = cameraComponent->owner.transform.GetWorldRotation();
+			m_cameraPosition = cameraComponent->owner->transform.GetWorldPosition();
+			m_cameraRotation = cameraComponent->owner->transform.GetWorldRotation();
 			m_hasCamera = true;
 			PrepareCamera();
 		}

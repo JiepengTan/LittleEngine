@@ -26,7 +26,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CAudioSource(ECS::Actor& p_owner);
-
+		CAudioSource() = default;
 		/**
 		* Returns the name of the component
 		*/

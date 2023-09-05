@@ -23,7 +23,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CAmbientBoxLight(ECS::Actor& p_owner);
-
+		CAmbientBoxLight() = default;
 		/**
 		* Returns the name of the component
 		*/

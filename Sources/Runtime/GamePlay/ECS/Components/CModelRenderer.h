@@ -37,7 +37,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CModelRenderer(ECS::Actor& p_owner);
-
+		CModelRenderer() = default;
 		/**
 		* Returns the name of the component
 		*/

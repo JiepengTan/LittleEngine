@@ -24,7 +24,7 @@ OvCore::ECS::Components::CModelRenderer::CModelRenderer(ECS::Actor& p_owner) : A
 {
 	m_modelChangedEvent += [this]
 	{
-		if (auto materialRenderer = owner.GetComponent<CMaterialRenderer>())
+		if (auto materialRenderer = owner->GetComponent<CMaterialRenderer>())
 			materialRenderer->UpdateMaterialList();
 	};
 }

@@ -37,13 +37,13 @@ namespace OvCore
         } \
     };
 
-#define REGISTER_FIELD_TO_MAP(name, value) TypeMetaRegisterinterface::RegisterToFieldMap(name, value);
-#define REGISTER_Method_TO_MAP(name, value) TypeMetaRegisterinterface::RegisterToMethodMap(name, value);
-#define REGISTER_BASE_CLASS_TO_MAP(name, value) TypeMetaRegisterinterface::RegisterToClassMap(name, value);
-#define REGISTER_ARRAY_TO_MAP(name, value) TypeMetaRegisterinterface::RegisterToArrayMap(name, value);
-#define UNREGISTER_ALL TypeMetaRegisterinterface::unRegisterAll();
+#define REGISTER_FIELD_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
+#define REGISTER_Method_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
+#define REGISTER_BASE_CLASS_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value);
+#define REGISTER_ARRAY_TO_MAP(name, value) OvCore::Reflection::TypeMetaRegisterInterface::RegisterToArrayMap(name, value);
+#define UNREGISTER_ALL OvCore::Reflection::TypeMetaRegisterInterface::UnRegisterAll();
 
-#define PICCOLO_REFLECTION_NEW(name, ...) Reflection::ReflectionPtr(#name, new name(__VA_ARGS__));
+#define PICCOLO_REFLECTION_NEW(name, ...) OvCore::Reflection::ReflectionPtr(#name, new name(__VA_ARGS__));
 #define PICCOLO_REFLECTION_DELETE(value) \
     if (value) \
     { \

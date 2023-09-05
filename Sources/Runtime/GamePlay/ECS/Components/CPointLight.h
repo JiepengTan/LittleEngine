@@ -25,7 +25,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CPointLight(ECS::Actor& p_owner);
-
+		CPointLight() = default;
 		/**
 		* Returns the name of the component
 		*/

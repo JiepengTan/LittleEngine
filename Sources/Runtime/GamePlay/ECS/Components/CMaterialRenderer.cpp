@@ -86,7 +86,7 @@ void OvCore::ECS::Components::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocume
 	tinyxml2::XMLNode* materialsNode = p_doc.NewElement("materials");
 	p_node->InsertEndChild(materialsNode);
 
-	auto modelRenderer = owner.GetComponent<CModelRenderer>();
+	auto modelRenderer = owner->GetComponent<CModelRenderer>();
 	uint8_t elementsToSerialize = modelRenderer->GetModel() ? (uint8_t)std::min(modelRenderer->GetModel()->GetMaterialNames().size(), (size_t)MAX_MATERIAL_COUNT) : 0;
 
 	for (uint8_t i = 0; i < elementsToSerialize; ++i)
@@ -171,7 +171,7 @@ void OvCore::ECS::Components::CMaterialRenderer::OnInspector(OvUI::Internal::Wid
 
 void OvCore::ECS::Components::CMaterialRenderer::UpdateMaterialList()
 {
-	if (auto modelRenderer = owner.GetComponent<CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
+	if (auto modelRenderer = owner->GetComponent<CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
 	{
 		uint8_t materialIndex = 0;
 

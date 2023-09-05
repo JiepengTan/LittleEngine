@@ -5,11 +5,8 @@
 #include "{{headfile_name}}"
 {{/include_headfiles}}
 
-namespace OvCore::ECS::Components{
-namespace Reflection{
-    void TypeMetaRegister::MetaRegister(){
-        {{#sourefile_names}}TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
-        {{/sourefile_names}}
-    }
-}
+
+void OvCore::Reflection::TypeMetaRegister::MetaRegister(){
+    {{#sourefile_names}}OvCore::ECS::Components::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
+    {{/sourefile_names}}
 }

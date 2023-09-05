@@ -10,7 +10,7 @@
 
 namespace OvCore::ECS::Components
 {
-    void MetaExample()
+    void ShowMetaExample()
     {
         Test1 test1_in;
         test1_in.m_int  = 12;

@@ -233,18 +233,18 @@ void OvEditor::Panels::Inspector::CreateActorInspector(OvCore::ECS::Actor& p_tar
 
 void OvEditor::Panels::Inspector::DrawComponent(OvCore::ECS::Components::AComponent& p_component)
 {
-	if (auto inspectorItem = dynamic_cast<OvCore::API::IInspectorItem*>(&p_component); inspectorItem)
+	//if (auto inspectorItem = dynamic_cast<OvCore::API::IInspectorItem*>(&p_component); inspectorItem)
 	{
 		auto& header = m_actorInfo->CreateWidget<OvUI::Widgets::Layout::GroupCollapsable>(p_component.GetName());
 		header.closable = !dynamic_cast<OvCore::ECS::Components::CTransform*>(&p_component);
 		header.CloseEvent += [this, &header, &p_component]
 		{ 
-			if (p_component.owner.RemoveComponent(p_component))
+			if (p_component.owner->RemoveComponent(p_component))
 				m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
 		};
 		auto& columns = header.CreateWidget<OvUI::Widgets::Layout::Columns<2>>();
 		columns.widths[0] = 200;
-		inspectorItem->OnInspector(columns);
+		p_component.OnInspector(columns);
 	}
 }
 

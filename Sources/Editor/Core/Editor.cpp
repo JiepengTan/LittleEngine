@@ -120,7 +120,7 @@ void OvEditor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTime)
 				auto comps = actor->GetComponents();
 				for (auto comp :comps)
 				{
-					if(comp->owner.IsAlive() && comp->IsUpdateInEdit)
+					if(comp->owner->IsAlive() && comp->IsUpdateInEdit)
 					{
 						comp->OnUpdate(p_deltaTime);
 					}

@@ -23,7 +23,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CDirectionalLight(ECS::Actor& p_owner);
-
+		CDirectionalLight() = default;
 		/**
 		* Returns the name of the component
 		*/

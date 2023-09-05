@@ -172,13 +172,13 @@ void OvEditor::Core::EditorRenderer::RenderSceneForActorPicking()
 	/* Render models */
 	for (auto modelRenderer : scene.GetFastAccessComponents().modelRenderers)
 	{
-		auto& actor = modelRenderer->owner;
+		auto& actor = *modelRenderer->owner;
 
 		if (actor.IsActive())
 		{
 			if (auto model = modelRenderer->GetModel())
 			{
-				if (auto materialRenderer = modelRenderer->owner.GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
+				if (auto materialRenderer = modelRenderer->owner->GetComponent<OvCore::ECS::Components::CMaterialRenderer>())
 				{
 					const OvCore::ECS::Components::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 					const auto& modelMatrix = actor.transform.GetWorldMatrix();
@@ -215,7 +215,7 @@ void OvEditor::Core::EditorRenderer::RenderSceneForActorPicking()
 	/* Render cameras */
 	for (auto camera : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().cameras)
 	{
-		auto& actor = camera->owner;
+		auto& actor = *camera->owner;
 
 		if (actor.IsActive())
 		{
@@ -238,7 +238,7 @@ void OvEditor::Core::EditorRenderer::RenderSceneForActorPicking()
 
 		for (auto light : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
 		{
-			auto& actor = light->owner;
+			auto& actor = *light->owner;
 
 			if (actor.IsActive())
 			{
@@ -262,7 +262,7 @@ void OvEditor::Core::EditorRenderer::RenderCameras()
 
 	for (auto camera : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().cameras)
 	{
-		auto& actor = camera->owner;
+		auto& actor = *camera->owner;
 
 		if (actor.IsActive())
 		{
@@ -283,7 +283,7 @@ void OvEditor::Core::EditorRenderer::RenderLights()
 
 	for (auto light : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
 	{
-		auto& actor = light->owner;
+		auto& actor = *light->owner;
 
 		if (actor.IsActive())
 		{
@@ -482,12 +482,12 @@ void DrawFrustumLines(OvRendering::Core::ShapeDrawer& p_drawer,
 
 void OvEditor::Core::EditorRenderer::RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& p_size, OvCore::ECS::Components::CCamera& p_camera)
 {
-    const auto& owner = p_camera.owner;
+    const auto actor = p_camera.owner;
     auto& camera = p_camera.GetCamera();
 
-    const auto& cameraPos = owner.transform.GetWorldPosition();
-    const auto& cameraRotation = owner.transform.GetWorldRotation();
-    const auto& cameraForward = owner.transform.GetWorldForward();
+    const auto& cameraPos = actor->transform.GetWorldPosition();
+    const auto& cameraRotation = actor->transform.GetWorldRotation();
+    const auto& cameraForward = actor->transform.GetWorldForward();
 
     camera.CacheMatrices(p_size.first, p_size.second, cameraPos, cameraRotation);
     const auto proj = FMatrix4::Transpose(camera.GetProjectionMatrix());
@@ -522,9 +522,9 @@ void OvEditor::Core::EditorRenderer::RenderCameraOrthographicFrustum(std::pair<u
     auto& camera = p_camera.GetCamera();
     const auto ratio = p_size.first / static_cast<float>(p_size.second);
 
-    const auto& cameraPos = owner.transform.GetWorldPosition();
-    const auto& cameraRotation = owner.transform.GetWorldRotation();
-    const auto& cameraForward = owner.transform.GetWorldForward();
+    const auto& cameraPos = owner->transform.GetWorldPosition();
+    const auto& cameraRotation = owner->transform.GetWorldRotation();
+    const auto& cameraForward = owner->transform.GetWorldForward();
 
     const auto near = camera.GetNear();
     const auto far = camera.GetFar();
@@ -684,12 +684,12 @@ void OvEditor::Core::EditorRenderer::RenderAmbientBoxVolume(OvCore::ECS::Compone
 	auto& data = p_ambientBoxLight.GetData();
 
 	FMatrix4 model =
-		FMatrix4::Translation(p_ambientBoxLight.owner.transform.GetWorldPosition()) *
+		FMatrix4::Translation(p_ambientBoxLight.owner->transform.GetWorldPosition()) *
 		FMatrix4::Scaling({ data.constant * 2.f, data.linear * 2.f, data.quadratic * 2.f });
 
-	OvMaths::FVector3 center = p_ambientBoxLight.owner.transform.GetWorldPosition();
+	OvMaths::FVector3 center = p_ambientBoxLight.owner->transform.GetWorldPosition();
 	OvMaths::FVector3 size = { data.constant * 2.f, data.linear * 2.f, data.quadratic * 2.f };
-	OvMaths::FVector3 actorScale = p_ambientBoxLight.owner.transform.GetWorldScale();
+	OvMaths::FVector3 actorScale = p_ambientBoxLight.owner->transform.GetWorldScale();
 	OvMaths::FVector3 halfSize = size / 2.f;
 
 	m_context.shapeDrawer->DrawLine(center + OvMaths::FVector3{ -halfSize.x, -halfSize.y, -halfSize.z }, center + OvMaths::FVector3{ -halfSize.x, -halfSize.y, +halfSize.z }, LIGHT_VOLUME_COLOR, 1.f);
@@ -715,8 +715,8 @@ void OvEditor::Core::EditorRenderer::RenderAmbientSphereVolume(OvCore::ECS::Comp
 
 	auto& data = p_ambientSphereLight.GetData();
 
-	OvMaths::FQuaternion rotation = p_ambientSphereLight.owner.transform.GetWorldRotation();
-	OvMaths::FVector3 center = p_ambientSphereLight.owner.transform.GetWorldPosition();
+	OvMaths::FQuaternion rotation = p_ambientSphereLight.owner->transform.GetWorldRotation();
+	OvMaths::FVector3 center = p_ambientSphereLight.owner->transform.GetWorldPosition();
 	float radius = data.constant;
 
 	for (float i = 0; i <= 360.0f; i += 10.0f)
@@ -740,11 +740,11 @@ void OvEditor::Core::EditorRenderer::RenderBoundingSpheres(OvCore::ECS::Componen
 	/* Draw the sphere collider if any */
 	if (auto model = p_modelRenderer.GetModel())
 	{
-		auto& actor = p_modelRenderer.owner;
+		auto actor = p_modelRenderer.owner;
 
-		OvMaths::FVector3 actorScale = actor.transform.GetWorldScale();
-		OvMaths::FQuaternion actorRotation = actor.transform.GetWorldRotation();
-		OvMaths::FVector3 actorPosition = actor.transform.GetWorldPosition();
+		OvMaths::FVector3 actorScale = actor->transform.GetWorldScale();
+		OvMaths::FQuaternion actorRotation = actor->transform.GetWorldRotation();
+		OvMaths::FVector3 actorPosition = actor->transform.GetWorldPosition();
 
 		const auto& modelBoundingsphere = 
 			p_modelRenderer.GetFrustumBehaviour() == OvCore::ECS::Components::CModelRenderer::EFrustumBehaviour::CULL_CUSTOM ?

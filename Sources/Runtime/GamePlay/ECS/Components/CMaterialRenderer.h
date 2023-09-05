@@ -35,7 +35,7 @@ namespace OvCore::ECS::Components
 		* @param p_owner
 		*/
 		CMaterialRenderer(ECS::Actor& p_owner);
-
+		CMaterialRenderer() = default;
 		/**
 		* Returns the name of the component
 		*/

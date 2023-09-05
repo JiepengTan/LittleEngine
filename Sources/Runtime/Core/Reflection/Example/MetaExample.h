@@ -24,7 +24,7 @@ namespace OvCore::ECS::Components
     };
 
     REFLECTION_TYPE(Test2)
-    CLASS(Test2 : public BaseTest, , Fields)
+    CLASS(Test2 : public BaseTest,  Fields)
     {
         REFLECTION_BODY(Test2);
 
