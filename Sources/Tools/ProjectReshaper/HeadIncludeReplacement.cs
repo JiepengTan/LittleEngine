@@ -1,34 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using GamesTan;
 
-namespace ReshapeProject
+namespace GamesTan.ProjectReshaper
 {
-    internal class Program
+    public class HeadIncludeReplacement
     {
-        public static void Main(string[] args)
-        {
-            var paths = new string[]
-            {
-                @"../../Sources/Game",
-                @"../../Sources/Runtime",
-                @"../../Sources/Editor",
-            };
-            var namespaceMap = new Dictionary<string, string>()
-            {
-                { "Resource/ResourceManagement/", "Modules/Rendering/ResourceManagement/" },
-                { "Resource/Resources/", "Modules/Rendering/Resources/" },
-                { "Resource/Rendering/", "Modules/Rendering/" },
-            };
-
-
-            var oldIncludeTag = "Resource/";
-            ReplaceCodeIncludes(oldIncludeTag, paths, namespaceMap);
-        }
-
-        
-        private static void ReplaceCodeIncludes(string oldIncludeTag, string[] paths, Dictionary<string, string> namespaceMap)
+        public static void ReplaceFiles(string oldIncludeTag, string[] paths, Dictionary<string, string> namespaceMap)
         {
             List<string> allCppFiles = new List<string>();
             foreach (var dir in paths)
@@ -42,10 +20,6 @@ namespace ReshapeProject
                 Console.WriteLine(file);
                 var lines = File.ReadAllLines(file);
                 var resultLines = new List<string>(lines.Length);
-                if (file.Contains("CSpotLight.h"))
-                {
-                    int ss = 0;
-                }
 
                 foreach (var line in lines)
                 {
@@ -81,5 +55,6 @@ namespace ReshapeProject
                 File.WriteAllLines(file, resultLines);
             }
         }
+
     }
 }

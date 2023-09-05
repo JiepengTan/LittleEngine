@@ -8,8 +8,8 @@
         <ProjectGuid>{B616187D-C05E-4C69-A45B-DB2D4B64DD35}</ProjectGuid>
         <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ReshapeProject</RootNamespace>
-        <AssemblyName>ReshapeProject</AssemblyName>
+        <RootNamespace>ProjectReshaper</RootNamespace>
+        <AssemblyName>ProjectReshaper</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -40,6 +40,8 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="ContentReplacement.cs" />
+        <Compile Include="HeadIncludeReplacement.cs" />
         <Compile Include="PathUtil.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
