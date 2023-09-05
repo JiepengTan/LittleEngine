@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 #include "Core/Tools/Eventing/Event.h"
 
@@ -20,7 +20,7 @@ namespace LittleEngine
 	* Represents an audio listener. The distance between audio sources and audio listener will affect the sound
 	* attenuation of spatialized sounds
 	*/
-	class CAudioListener : public AComponent
+	class CAudioListener : public Component
 	{
 	public:
 		/**

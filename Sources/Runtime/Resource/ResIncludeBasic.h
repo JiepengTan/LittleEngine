@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/CoreInclude.h"
 #include "Core/Reflection/Reflection.h"
-#ifdef false
+
 namespace LittleEngine
 {
     // 资源的内部数据，没有文件映射关系
@@ -10,7 +10,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResData)
     public:
-        int64_t objectId;
+        int objectId;
         StringName name;
     };
 
@@ -20,10 +20,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResObject)
     public:
-        LittleEngine::Guid guid;
+        StringName guid;
         StringName name;
     };
-
-
 }
-#endif

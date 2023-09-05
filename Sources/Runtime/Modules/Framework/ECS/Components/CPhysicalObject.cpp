@@ -15,7 +15,7 @@
 #include "Modules/Framework/ECS/Actor.h"
 
 LittleEngine::CPhysicalObject::CPhysicalObject(Actor & p_owner) : 
-	AComponent(p_owner)
+	Component(p_owner)
 {
 }
 

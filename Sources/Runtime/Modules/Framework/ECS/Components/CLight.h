@@ -8,7 +8,7 @@
 
 #include "Modules/Rendering/Entities/Light.h"
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -17,7 +17,7 @@ namespace LittleEngine
 	/**
 	* Base class for any light
 	*/
-	class CLight : public AComponent
+	class CLight : public Component
 	{
 	public:
 		/**

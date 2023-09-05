@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 

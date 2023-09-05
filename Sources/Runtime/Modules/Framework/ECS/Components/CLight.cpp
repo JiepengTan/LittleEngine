@@ -15,7 +15,7 @@
 #include "Modules/Framework/ECS/Components/CLight.h"
 
 LittleEngine::CLight::CLight(Actor & p_owner) :
-	AComponent(p_owner),
+	Component(p_owner),
 	m_data(p_owner.transform.GetFTransform(), {})
 {
 }

@@ -13,7 +13,7 @@
 #include "Modules/Rendering/Resources/Mesh.h"
 
 #include "Modules/Rendering/Resources/Material.h"
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 #define MAX_MATERIAL_COUNT 255
 
@@ -24,7 +24,7 @@ namespace LittleEngine
 	/**
 	* A component that handle a material list, necessary for model rendering
 	*/
-	class CMaterialRenderer : public AComponent
+	class CMaterialRenderer : public Component
 	{
 	public:
 		using MaterialList = std::array<LittleEngine::Resources::Material*, MAX_MATERIAL_COUNT>;

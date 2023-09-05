@@ -217,7 +217,7 @@ LittleEngine::Actor * LittleEditor::Panels::Inspector::GetTargetActor() const
 
 void LittleEditor::Panels::Inspector::CreateActorInspector(LittleEngine::Actor& p_target)
 {
-	std::map<std::string, LittleEngine::AComponent*> components;
+	std::map<std::string, LittleEngine::Component*> components;
 
 	for (auto component : p_target.GetComponents())
 		if (component->GetName() != "Transform")
@@ -231,7 +231,7 @@ void LittleEditor::Panels::Inspector::CreateActorInspector(LittleEngine::Actor& 
 		DrawComponent(*instance);
 }
 
-void LittleEditor::Panels::Inspector::DrawComponent(LittleEngine::AComponent& p_component)
+void LittleEditor::Panels::Inspector::DrawComponent(LittleEngine::Component& p_component)
 {
 	//if (auto inspectorItem = dynamic_cast<LittleEngine::API::IInspectorItem*>(&p_component); inspectorItem)
 	{

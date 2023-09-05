@@ -12,9 +12,9 @@
 #include "Core/Tools/Eventing/Event.h"
 
 #include "Core/Base/Application.h"
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Components/CTransform.h"
-#include "Modules/Framework/ECS/Components/Behaviour.h"
+#include "Modules/Framework/ECS/Behaviour.h"
 #include "Modules/Framework/API/ISerializable.h"
 
 namespace LittleEngine::SceneSystem
@@ -201,7 +201,7 @@ namespace LittleEngine
 		* Remove the component by refering to the given instance
 		* @param p_component
 		*/
-		bool RemoveComponent(LittleEngine::AComponent& p_component);
+		bool RemoveComponent(LittleEngine::Component& p_component);
 
 		/**
 		* Try to get the given component (Returns nullptr on failure)
@@ -212,7 +212,7 @@ namespace LittleEngine
 		/**
 		* Returns a reference to the vector of components
 		*/
-		std::vector<std::shared_ptr<AComponent>>& GetComponents();
+		std::vector<std::shared_ptr<Component>>& GetComponents();
 
 
 		/**
@@ -311,8 +311,8 @@ namespace LittleEngine
 		
 	public:
 		/* Some events that are triggered when an action occur on the actor instance */
-		LittleEngine::Eventing::Event<AComponent&>	ComponentAddedEvent;
-		LittleEngine::Eventing::Event<AComponent&>	ComponentRemovedEvent;
+		LittleEngine::Eventing::Event<Component&>	ComponentAddedEvent;
+		LittleEngine::Eventing::Event<Component&>	ComponentRemovedEvent;
 
 		/* Some events that are triggered when an action occur on any actor */
 		static LittleEngine::Eventing::Event<Actor&>				DestroyedEvent;
@@ -339,10 +339,10 @@ namespace LittleEngine
 		std::vector<Actor*>		m_children;
 
 		/* Actors components */
-		std::vector<std::shared_ptr<AComponent>> m_components;
-		std::vector<std::shared_ptr<AComponent>> m_tempComponents;
+		std::vector<std::shared_ptr<Component>> m_components;
+		std::vector<std::shared_ptr<Component>> m_tempComponents;
 	private:
-		std::vector<std::shared_ptr<AComponent>>& GetComponentsCopy(std::vector<std::shared_ptr<AComponent>>& comps);
+		std::vector<std::shared_ptr<Component>>& GetComponentsCopy(std::vector<std::shared_ptr<Component>>& comps);
 	public:
 		CTransform& transform;
 	};

@@ -188,7 +188,7 @@ std::vector<std::reference_wrapper<LittleEngine::Actor>> LittleEngine::SceneSyst
 	return actors;
 }
 
-void LittleEngine::SceneSystem::Scene::OnComponentAdded(AComponent& p_compononent)
+void LittleEngine::SceneSystem::Scene::OnComponentAdded(Component& p_compononent)
 {
 	if (auto result = dynamic_cast<CModelRenderer*>(&p_compononent))
 		m_fastAccessComponents.modelRenderers.push_back(result);
@@ -200,7 +200,7 @@ void LittleEngine::SceneSystem::Scene::OnComponentAdded(AComponent& p_compononen
 		m_fastAccessComponents.lights.push_back(result);
 }
 
-void LittleEngine::SceneSystem::Scene::OnComponentRemoved(AComponent& p_compononent)
+void LittleEngine::SceneSystem::Scene::OnComponentRemoved(Component& p_compononent)
 {
 	if (auto result = dynamic_cast<CModelRenderer*>(&p_compononent))
 		m_fastAccessComponents.modelRenderers.erase(std::remove(m_fastAccessComponents.modelRenderers.begin(), m_fastAccessComponents.modelRenderers.end(), result), m_fastAccessComponents.modelRenderers.end());

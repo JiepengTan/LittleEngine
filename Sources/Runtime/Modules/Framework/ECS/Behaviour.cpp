@@ -8,14 +8,14 @@
 #include "Core/CoreInclude.h"
 
 #include "Modules/Framework/ECS/Actor.h"
-#include "Modules/Framework/ECS/Components/Behaviour.h"
+#include "Modules/Framework/ECS/Behaviour.h"
 #include "Modules/Scripting/LuaBinder.h"
 
 LittleEngine::Eventing::Event<LittleEngine::Behaviour*> LittleEngine::Behaviour::CreatedEvent;
 LittleEngine::Eventing::Event<LittleEngine::Behaviour*> LittleEngine::Behaviour::DestroyedEvent;
 
 LittleEngine::Behaviour::Behaviour(Actor& p_owner, const std::string& p_name) :
-	name(p_name), AComponent(p_owner)
+	name(p_name), Component(p_owner)
 {
 	CreatedEvent.Invoke(this);
 }

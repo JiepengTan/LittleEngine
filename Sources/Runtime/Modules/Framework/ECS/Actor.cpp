@@ -184,8 +184,8 @@ void LittleEngine::Actor::SetSleeping(bool p_sleeping)
 	m_sleeping = p_sleeping;
 }
 
-std::vector<std::shared_ptr<LittleEngine::AComponent>>& LittleEngine::Actor::GetComponentsCopy(
-	std::vector<std::shared_ptr<LittleEngine::AComponent>>& comps)
+std::vector<std::shared_ptr<LittleEngine::Component>>& LittleEngine::Actor::GetComponentsCopy(
+	std::vector<std::shared_ptr<LittleEngine::Component>>& comps)
 {
 	m_tempComponents.clear();
 	for (auto ident : comps){
@@ -233,7 +233,7 @@ void LittleEngine::Actor::OnDestroy()
 	
 	auto comps = GetComponentsCopy(m_components);
 	std::for_each(comps.begin(), comps.end(), [](auto element) { element->OnDestroy(); });
-	std::for_each(comps.begin(), comps.end(), [&](std::shared_ptr<AComponent> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
+	std::for_each(comps.begin(), comps.end(), [&](std::shared_ptr<Component> p_component) { ComponentRemovedEvent.Invoke(*p_component); });
 
 	DetachFromParent();
 	
@@ -306,7 +306,7 @@ void LittleEngine::Actor::OnTriggerExit(CPhysicalObject& p_otherObject)
 	std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerExit(p_otherObject); });
 }
 
-bool LittleEngine::Actor::RemoveComponent(LittleEngine::AComponent& p_component)
+bool LittleEngine::Actor::RemoveComponent(LittleEngine::Component& p_component)
 {
 	for (auto it = m_components.begin(); it != m_components.end(); ++it)
 	{
@@ -320,7 +320,7 @@ bool LittleEngine::Actor::RemoveComponent(LittleEngine::AComponent& p_component)
 	return false;
 }
 
-std::vector<std::shared_ptr<LittleEngine::AComponent>>& LittleEngine::Actor::GetComponents()
+std::vector<std::shared_ptr<LittleEngine::Component>>& LittleEngine::Actor::GetComponents()
 {
 	return m_components;
 }
@@ -377,7 +377,7 @@ void LittleEngine::Actor::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2:
 			while (currentComponent)
 			{
 				std::string componentType = currentComponent->FirstChildElement("type")->GetText();
-				LittleEngine::AComponent* component = nullptr;
+				LittleEngine::Component* component = nullptr;
 
 				// TODO: Use component name instead of typeid (unsafe)
 				if (componentType == typeid(CTransform).name())			component = &transform;

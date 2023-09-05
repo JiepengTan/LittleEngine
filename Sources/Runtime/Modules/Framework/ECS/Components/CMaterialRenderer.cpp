@@ -19,7 +19,7 @@
 #include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 
-LittleEngine::CMaterialRenderer::CMaterialRenderer(Actor & p_owner) : AComponent(p_owner)
+LittleEngine::CMaterialRenderer::CMaterialRenderer(Actor & p_owner) : Component(p_owner)
 {
 	m_materials.fill(nullptr);
 

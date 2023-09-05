@@ -20,7 +20,7 @@
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-LittleEngine::CModelRenderer::CModelRenderer(Actor& p_owner) : AComponent(p_owner)
+LittleEngine::CModelRenderer::CModelRenderer(Actor& p_owner) : Component(p_owner)
 {
 	m_modelChangedEvent += [this]
 	{

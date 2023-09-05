@@ -7,7 +7,7 @@
 #include "Modules/Framework/ECS/Components/CTransform.h"
 
 LittleEngine::CTransform::CTransform(Actor& p_owner, LittleEngine::FVector3 p_localPosition, LittleEngine::FQuaternion p_localRotation, LittleEngine::FVector3 p_localScale) :
-AComponent(p_owner)
+Component(p_owner)
 {
 	m_transform.GenerateMatricesLocal(p_localPosition, p_localRotation, p_localScale);
 }

@@ -71,7 +71,7 @@ namespace LittleEditor::Panels
 		/**
 		* Draw the given component in inspector
 		*/
-		void DrawComponent(LittleEngine::AComponent& p_component);
+		void DrawComponent(LittleEngine::Component& p_component);
 
 		/**
 		* Refresh the inspector

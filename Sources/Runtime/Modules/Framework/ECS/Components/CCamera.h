@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Modules/Rendering/LowRenderer/Camera.h"
-#include "AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -16,7 +16,7 @@ namespace LittleEngine
 	/**
 	* Represents a camera entity. Its position will determine its view matrix
 	*/
-	class CCamera : public AComponent
+	class CCamera : public Component
 	{
 	public:
 		/**

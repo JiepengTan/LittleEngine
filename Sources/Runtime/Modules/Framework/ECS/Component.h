@@ -21,21 +21,21 @@ namespace LittleEngine
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
 	REFLECTION_TYPE(AComponent)
-	CLASS (AComponent , WhiteListFields)
+	CLASS (Component , WhiteListFields)
 	{
 		REFLECTION_BODY(AComponent)
 	public:
-		AComponent() = default;
+		Component() = default;
 		/**
 		* Constructor of a AComponent (Must be called by derived classes)
 		* @param p_owner
 		*/
-		AComponent(Actor& p_owner);
+		Component(Actor& p_owner);
 
 		/**
 		* Destroying a AComponent will call dervied classes destructors
 		*/
-		virtual ~AComponent();
+		virtual ~Component();
 
 		/**
 		* Called when the scene start right before OnStart

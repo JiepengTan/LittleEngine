@@ -6,7 +6,7 @@
 #include "CModelRenderer.h"
 #include "Modules/Framework/ECS/Actor.h"
 #include "Core/Maths/FMatrix4.h"
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine::Rendering::Resources
 {
@@ -16,7 +16,7 @@ namespace LittleEngine::Rendering::Resources
 namespace LittleEngine
 {
 	REFLECTION_TYPE(CAnimator)
-	CLASS (CAnimator : public AComponent, WhiteListFields)
+	CLASS (CAnimator : public Component, WhiteListFields)
 	{
 		REFLECTION_BODY(CAnimator)
 	public:

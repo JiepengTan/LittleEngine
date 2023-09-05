@@ -14,7 +14,7 @@
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
 LittleEngine::CAudioSource::CAudioSource(Actor& p_owner) :
-	AComponent(p_owner),
+	Component(p_owner),
 	m_audioSource(LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioPlayer>(), owner->transform.GetFTransform())
 {
 }

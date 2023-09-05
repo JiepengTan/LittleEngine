@@ -18,7 +18,7 @@ namespace LittleEngine
 	* ABehaviour is the base class for any behaviour.
 	* A Behaviour is a script that is used to manipulate an actor over time
 	*/
-	class Behaviour : public AComponent
+	class Behaviour : public Component
 	{
 	public:
 		
@@ -178,4 +178,4 @@ namespace LittleEngine
 	};
 }
 
-#include "Modules/Framework/ECS/Components/Behaviour.inl"
+#include "Modules/Framework/ECS/Behaviour.inl"

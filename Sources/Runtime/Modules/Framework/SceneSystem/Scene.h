@@ -128,13 +128,13 @@ namespace LittleEngine::SceneSystem
 		* Callback method called everytime a component is added on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentAdded(AComponent& p_compononent);
+		void OnComponentAdded(Component& p_compononent);
 
 		/**
 		* Callback method called everytime a component is removed on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentRemoved(AComponent& p_compononent);
+		void OnComponentRemoved(Component& p_compononent);
 
 		/**
 		* Return a reference on the actor map

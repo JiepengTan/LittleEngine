@@ -8,7 +8,7 @@
 
 #include "Modules/Physics/Entities/PhysicalObject.h"
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -17,7 +17,7 @@ namespace LittleEngine
 	/**
 	* Base class for any physical object
 	*/
-	class CPhysicalObject : public AComponent
+	class CPhysicalObject : public Component
 	{
 	public:
 		/**

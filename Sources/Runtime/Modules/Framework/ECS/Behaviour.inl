@@ -8,7 +8,7 @@
 
 
 #include "Core/CoreInclude.h"
-#include "Modules/Framework/ECS/Components/Behaviour.h"
+#include "Modules/Framework/ECS/Behaviour.h"
 
 namespace LittleEngine
 {

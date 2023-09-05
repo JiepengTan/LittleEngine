@@ -9,7 +9,7 @@
 #include "Modules/Audio/Entities/AudioSource.h"
 #include "Core/Tools/Eventing/Event.h"
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -18,7 +18,7 @@ namespace LittleEngine
 	/**
 	* Represents an audio source. Its position in the world is important if the spatial sound settings is on
 	*/
-	class CAudioSource : public AComponent
+	class CAudioSource : public Component
 	{
 	public:
 		/**

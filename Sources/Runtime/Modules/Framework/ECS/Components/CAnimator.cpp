@@ -18,7 +18,7 @@
 const int INIT_BONE_COUNT = 100;
 
 LittleEngine::CAnimator::CAnimator(Actor& p_owner) :
-    AComponent(p_owner), m_currentTime(0), m_showDebugBones(false)
+    Component(p_owner), m_currentTime(0), m_showDebugBones(false)
 {
     m_curAnim = nullptr;
     m_finalBoneMatrices.reserve(INIT_BONE_COUNT);

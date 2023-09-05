@@ -9,7 +9,7 @@
 #include "Modules/Rendering/Geometry/Vertex.h"
 #include "Modules/Rendering/Resources/Model.h"
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -18,7 +18,7 @@ namespace LittleEngine
 	/**
 	* A ModelRenderer is necessary in combination with a MaterialRenderer to render a model in the world
 	*/
-	class CModelRenderer : public AComponent
+	class CModelRenderer : public Component
 	{
 	public:
 		/**

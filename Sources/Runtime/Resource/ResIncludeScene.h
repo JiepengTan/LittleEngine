@@ -1,6 +1,6 @@
 #pragma once
 #include "Resource/ResIncludeBasic.h"
-#ifdef false
+
 namespace LittleEngine
 {
     REFLECTION_TYPE(ResComponent)
@@ -15,7 +15,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResActor)
     public:
-        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
+        std::vector<Reflection::ReflectionPtr<Component>> components;
     };
     
     REFLECTION_TYPE(ResActor)
@@ -23,15 +23,13 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResActor)
         public:
-        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
+        std::vector<Reflection::ReflectionPtr<Component>> components;
     };
     REFLECTION_TYPE(ResActor)
     CLASS(ResScene: public ResObject, Fields)
     {
         REFLECTION_BODY(ResActor)
         public:
-        std::vector<LittleEngine::Reflection::ReflectionPtr<LittleEngine::AComponent>> components;
+        std::vector<Reflection::ReflectionPtr<Component>> components;
     };
 }
-
-#endif

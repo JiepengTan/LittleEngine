@@ -8,7 +8,7 @@
 #include "Modules/Framework/ECS/Actor.h"
 
 LittleEngine::CAudioListener::CAudioListener(Actor& p_owner) :
-	AComponent(p_owner),
+	Component(p_owner),
 	m_audioListener(owner->transform.GetFTransform())
 {
 	m_audioListener.SetEnabled(false);

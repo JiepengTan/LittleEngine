@@ -6,13 +6,13 @@
 
 #pragma once
 
-#include "Modules/Framework/ECS/Components/AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 #include "Core/Maths/FTransform.h"
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FQuaternion.h"
 
-#include "AComponent.h"
+#include "Modules/Framework/ECS/Component.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -21,7 +21,7 @@ namespace LittleEngine
 	/**
 	* Represents the 3D transformations applied to an actor
 	*/
-	class CTransform : public AComponent
+	class CTransform : public Component
 	{
 	public:
 		/**
