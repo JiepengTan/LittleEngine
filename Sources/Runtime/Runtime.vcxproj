@@ -47,12 +47,6 @@
     <TargetName>LittleEngine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\Bin\</OutDir>
-    <IntDir>..\..\Bin-Int\Release\$(ProjectName)\</IntDir>
-    <TargetName>LittleEngine</TargetName>
-    <TargetExt>.lib</TargetExt>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PreBuildEvent>
       <Command>
@@ -68,7 +62,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level2</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\3rdParty\misc;..\3rdParty\imgui;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -91,31 +85,11 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Base\Application.cpp" />
-    <ClCompile Include="Core\Base\Macro.cpp"/>
+    <ClCompile Include="Core\Base\Macro.cpp" />
+    <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
-    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
@@ -127,6 +101,7 @@
     <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h" />
     <ClInclude Include="Core\Base\Application.h" />
     <ClInclude Include="Core\Base\Macro.h" />
+    <ClInclude Include="Core\Base\Object.h" />
     <ClInclude Include="Core\CoreInclude.h" />
     <ClInclude Include="Core\Debug\Assertion.h" />
     <ClInclude Include="Core\Debug\ConsoleColor.h" />
@@ -149,7 +124,6 @@
     <ClInclude Include="Core\Reflection\Reflection.h" />
     <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
     <ClInclude Include="Core\Serialization\Json.h" />
-    <ClInclude Include="Core\Serialization\json11\json11.hpp" />
     <ClInclude Include="Core\Serialization\JsonSerializer.h" />
     <ClInclude Include="Core\String\StringName.h" />
     <ClInclude Include="Core\String\StringText.h" />
@@ -280,14 +254,6 @@
     <ClInclude Include="Modules\Scripting\ScriptInterpreter.h" />
     <ClInclude Include="Modules\UI\API\IDrawable.h" />
     <ClInclude Include="Modules\UI\Core\UIManager.h" />
-    <ClInclude Include="Modules\UI\ImGui\imconfig.h" />
-    <ClInclude Include="Modules\UI\ImGui\imgui.h" />
-    <ClInclude Include="Modules\UI\ImGui\imgui_impl_glfw.h" />
-    <ClInclude Include="Modules\UI\ImGui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Modules\UI\ImGui\imgui_internal.h" />
-    <ClInclude Include="Modules\UI\ImGui\imstb_rectpack.h" />
-    <ClInclude Include="Modules\UI\ImGui\imstb_textedit.h" />
-    <ClInclude Include="Modules\UI\ImGui\imstb_truetype.h" />
     <ClInclude Include="Modules\UI\Internal\Converter.h" />
     <ClInclude Include="Modules\UI\Internal\EMemoryMode.h" />
     <ClInclude Include="Modules\UI\Internal\TextureID.h" />
@@ -731,12 +697,6 @@
     <ClCompile Include="Modules\Scripting\LuaMathsBinder.cpp" />
     <ClCompile Include="Modules\Scripting\ScriptInterpreter.cpp" />
     <ClCompile Include="Modules\UI\Core\UIManager.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui_demo.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui_draw.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Modules\UI\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Modules\UI\Internal\Converter.cpp" />
     <ClCompile Include="Modules\UI\Internal\WidgetContainer.cpp" />
     <ClCompile Include="Modules\UI\Modules\Canvas.cpp" />

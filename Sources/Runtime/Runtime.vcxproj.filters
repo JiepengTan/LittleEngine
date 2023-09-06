@@ -34,9 +34,6 @@
     <ClCompile Include="Core\Debug\Logger.cpp">
       <Filter>Core\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Application.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Maths\DebugUtil.cpp">
       <Filter>Core\Maths</Filter>
     </ClCompile>
@@ -90,108 +87,6 @@
     </ClCompile>
     <ClCompile Include="Core\Tools\Utils\SystemCalls.cpp">
       <Filter>Core\Tools\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Actor.cpp">
-      <Filter>GamePlay\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\AComponent.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\Behaviour.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CAmbientBoxLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CAmbientSphereLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CAnimator.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CAudioListener.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CAudioSource.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CCamera.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CDirectionalLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CMaterialRenderer.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CModelRenderer.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CPhysicalBox.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CPhysicalCapsule.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CPhysicalObject.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CPhysicalSphere.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CPointLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CSpotLight.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\Components\CTransform.cpp">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\PhysicsWrapper.cpp">
-      <Filter>GamePlay\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Global\ServiceLocator.cpp">
-      <Filter>GamePlay\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Helpers\ActorUtils.cpp">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Helpers\GUIDrawer.cpp">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Helpers\RenderUtils.cpp">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Helpers\Serializer.cpp">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\SceneSystem\Scene.cpp">
-      <Filter>GamePlay\SceneSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\SceneSystem\SceneManager.cpp">
-      <Filter>GamePlay\SceneSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\LuaActorBinder.cpp">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\LuaBinder.cpp">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\LuaComponentBinder.cpp">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\LuaGlobalsBinder.cpp">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\LuaMathsBinder.cpp">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\Scripting\ScriptInterpreter.cpp">
-      <Filter>GamePlay\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="Modules\Audio\Core\AudioEngine.cpp">
       <Filter>Modules\Audio\Core</Filter>
@@ -439,105 +334,83 @@
     <ClCompile Include="Platform\Windowing\Window.cpp">
       <Filter>Platform\Windowing</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\Framebuffer.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\IndexBuffer.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\ShaderStorageBuffer.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\ShadowmapBuffer.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\UniformBuffer.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Buffers\VertexArray.cpp">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Context\Driver.cpp">
-      <Filter>Resource\Rendering\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Core\Renderer.cpp">
-      <Filter>Resource\Rendering\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Core\ShapeDrawer.cpp">
-      <Filter>Resource\Rendering\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Data\Frustum.cpp">
-      <Filter>Resource\Rendering\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Entities\Light.cpp">
-      <Filter>Resource\Rendering\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Geometry\Vertex.cpp">
-      <Filter>Resource\Rendering\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\LowRenderer\Camera.cpp">
-      <Filter>Resource\Rendering\LowRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Animation.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Loaders\AnimationLoader.cpp">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Loaders\ModelLoader.cpp">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Loaders\ShaderLoader.cpp">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Loaders\TextureLoader.cpp">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Mesh.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Model.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Parsers\AssimpParser.cpp">
-      <Filter>Resource\Rendering\Resources\Parsers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Shader.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Skeleton.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Rendering\Resources\Texture.cpp">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\AnimationManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\MaterialManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\ModelManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\ShaderManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\SoundManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\ResourceManagement\TextureManager.cpp">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Resources\Loaders\MaterialLoader.cpp">
-      <Filter>Resource\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\Resources\Material.cpp">
-      <Filter>Resource\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay\ECS\SceneRenderer.cpp">
-      <Filter>GamePlay\ECS</Filter>
-    </ClCompile>
+    <ClCompile Include="Core\Base\Application.cpp" />
+    <ClCompile Include="Core\Base\Macro.cpp" />
+    <ClCompile Include="Core\Base\Object.cpp" />
+    <ClCompile Include="Core\Maths\FFloat.cpp" />
+    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
+    <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
+    <ClCompile Include="Core\Reflection\Example\MetaExample.cpp" />
+    <ClCompile Include="Core\Reflection\Reflection.cpp" />
+    <ClCompile Include="Core\Reflection\ReflectionRegister.cpp" />
+    <ClCompile Include="Core\Tools\Guid.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Actor.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Behaviour.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Component.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientBoxLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientSphereLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CAnimator.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CAudioListener.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CAudioSource.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CCamera.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CDirectionalLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CMaterialRenderer.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CModelRenderer.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalBox.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalCapsule.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalObject.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalSphere.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CPointLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CSpotLight.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\Components\CTransform.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\PhysicsWrapper.cpp" />
+    <ClCompile Include="Modules\Framework\ECS\SceneRenderer.cpp" />
+    <ClCompile Include="Modules\Framework\Global\ServiceLocator.cpp" />
+    <ClCompile Include="Modules\Framework\SceneSystem\Scene.cpp" />
+    <ClCompile Include="Modules\Framework\SceneSystem\SceneManager.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\Framebuffer.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\ShaderStorageBuffer.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\ShadowmapBuffer.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\UniformBuffer.cpp" />
+    <ClCompile Include="Modules\Rendering\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Modules\Rendering\Context\Driver.cpp" />
+    <ClCompile Include="Modules\Rendering\Core\Renderer.cpp" />
+    <ClCompile Include="Modules\Rendering\Core\ShapeDrawer.cpp" />
+    <ClCompile Include="Modules\Rendering\Data\Frustum.cpp" />
+    <ClCompile Include="Modules\Rendering\Entities\Light.cpp" />
+    <ClCompile Include="Modules\Rendering\Geometry\Vertex.cpp" />
+    <ClCompile Include="Modules\Rendering\LowRenderer\Camera.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\AnimationManager.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\MaterialManager.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\ModelManager.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\ShaderManager.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\SoundManager.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\TextureManager.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Animation.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Loaders\AnimationLoader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Loaders\MaterialLoader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Loaders\ModelLoader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Loaders\ShaderLoader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Loaders\TextureLoader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Material.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Mesh.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Model.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Parsers\AssimpParser.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Shader.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Skeleton.cpp" />
+    <ClCompile Include="Modules\Rendering\Resources\Texture.cpp" />
+    <ClCompile Include="Modules\Scripting\LuaActorBinder.cpp" />
+    <ClCompile Include="Modules\Scripting\LuaBinder.cpp" />
+    <ClCompile Include="Modules\Scripting\LuaComponentBinder.cpp" />
+    <ClCompile Include="Modules\Scripting\LuaGlobalsBinder.cpp" />
+    <ClCompile Include="Modules\Scripting\LuaMathsBinder.cpp" />
+    <ClCompile Include="Modules\Scripting\ScriptInterpreter.cpp" />
+    <ClCompile Include="Modules\Utils\ActorUtils.cpp" />
+    <ClCompile Include="Modules\Utils\GUIDrawer.cpp" />
+    <ClCompile Include="Modules\Utils\RenderUtils.cpp" />
+    <ClCompile Include="Modules\Utils\Serializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h">
@@ -584,9 +457,6 @@
     </ClInclude>
     <ClInclude Include="Core\Debug\Logger.h">
       <Filter>Core\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Application.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\DebugUtil.h">
       <Filter>Core\Maths</Filter>
@@ -647,114 +517,6 @@
     </ClInclude>
     <ClInclude Include="Core\Tools\Utils\SystemCalls.h">
       <Filter>Core\Tools\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\API\IInspectorItem.h">
-      <Filter>GamePlay\API</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\API\ISerializable.h">
-      <Filter>GamePlay\API</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Actor.h">
-      <Filter>GamePlay\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\AComponent.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\Behaviour.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CAmbientBoxLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CAmbientSphereLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CAnimator.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CAudioListener.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CAudioSource.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CCamera.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CDirectionalLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CMaterialRenderer.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CModelRenderer.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CPhysicalBox.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CPhysicalCapsule.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CPhysicalObject.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CPhysicalSphere.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CPointLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CSpotLight.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\Components\CTransform.h">
-      <Filter>GamePlay\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\PhysicsWrapper.h">
-      <Filter>GamePlay\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Global\ServiceLocator.h">
-      <Filter>GamePlay\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Helpers\ActorUtils.h">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Helpers\GUIDrawer.h">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Helpers\RenderUtils.h">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Helpers\Serializer.h">
-      <Filter>GamePlay\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\SceneSystem\Scene.h">
-      <Filter>GamePlay\SceneSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\SceneSystem\SceneManager.h">
-      <Filter>GamePlay\SceneSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\LuaActorBinder.h">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\LuaBinder.h">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\LuaComponentBinder.h">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\LuaGlobalsBinder.h">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\LuaMathsBinder.h">
-      <Filter>GamePlay\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\Scripting\ScriptInterpreter.h">
-      <Filter>GamePlay\Scripting</Filter>
     </ClInclude>
     <ClInclude Include="Modules\Audio\Core\AudioEngine.h">
       <Filter>Modules\Audio\Core</Filter>
@@ -1134,174 +896,142 @@
     <ClInclude Include="Platform\Windowing\Window.h">
       <Filter>Platform\Windowing</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\EAccessSpecifier.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\Framebuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\IndexBuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\ShaderStorageBuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\ShadowmapBuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\UniformBuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\VertexArray.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Buffers\VertexBuffer.h">
-      <Filter>Resource\Rendering\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Context\Driver.h">
-      <Filter>Resource\Rendering\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Core\ShapeDrawer.h">
-      <Filter>Resource\Rendering\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Data\Frustum.h">
-      <Filter>Resource\Rendering\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Entities\Light.h">
-      <Filter>Resource\Rendering\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Geometry\BoundingSphere.h">
-      <Filter>Resource\Rendering\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Geometry\Vertex.h">
-      <Filter>Resource\Rendering\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\LowRenderer\Camera.h">
-      <Filter>Resource\Rendering\LowRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Animation.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\AnimationData.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\IMesh.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Loaders\AnimationLoader.h">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Loaders\ModelLoader.h">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Loaders\ShaderLoader.h">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Loaders\TextureLoader.h">
-      <Filter>Resource\Rendering\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Mesh.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Model.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Parsers\AssimpParser.h">
-      <Filter>Resource\Rendering\Resources\Parsers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Parsers\EModelParserFlags.h">
-      <Filter>Resource\Rendering\Resources\Parsers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Parsers\IModelParser.h">
-      <Filter>Resource\Rendering\Resources\Parsers</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Shader.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Skeleton.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\Texture.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\UniformInfo.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Resources\UniformType.h">
-      <Filter>Resource\Rendering\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\DriverSettings.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EComparaisonAlgorithm.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\ECullFace.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\ECullingOptions.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EOperation.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EPixelDataFormat.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EPixelDataType.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EPrimitiveMode.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\EProjectionMode.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\ERasterizationMode.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\ERenderingCapability.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Settings\ETextureFilteringMode.h">
-      <Filter>Resource\Rendering\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Utils\Defines.h">
-      <Filter>Resource\Rendering\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\AResourceManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\AnimationManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\MaterialManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\ModelManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\ShaderManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\SoundManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManagement\TextureManager.h">
-      <Filter>Resource\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Resources\Loaders\MaterialLoader.h">
-      <Filter>Resource\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Resources\Material.h">
-      <Filter>Resource\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\Rendering\Core\Renderer.h">
-      <Filter>Resource\Rendering\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay\ECS\SceneRenderer.h">
-      <Filter>GamePlay\ECS</Filter>
-    </ClInclude>
+    <ClInclude Include="Core\Base\Application.h" />
+    <ClInclude Include="Core\Base\Macro.h" />
+    <ClInclude Include="Core\Base\Object.h" />
+    <ClInclude Include="Core\CoreInclude.h" />
+    <ClInclude Include="Core\Maths\FFloat.h" />
+    <ClInclude Include="Core\Reflection\Example\MetaExample.h" />
+    <ClInclude Include="Core\Reflection\Reflection.h" />
+    <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
+    <ClInclude Include="Core\Serialization\Json.h" />
+    <ClInclude Include="Core\Serialization\json11\json11.hpp" />
+    <ClInclude Include="Core\Serialization\JsonSerializer.h" />
+    <ClInclude Include="Core\String\StringName.h" />
+    <ClInclude Include="Core\String\StringText.h" />
+    <ClInclude Include="Core\Tools\Guid.h" />
+    <ClInclude Include="Modules\Framework\API\IInspectorItem.h" />
+    <ClInclude Include="Modules\Framework\API\ISerializable.h" />
+    <ClInclude Include="Modules\Framework\ECS\Actor.h" />
+    <ClInclude Include="Modules\Framework\ECS\Actor.inl" />
+    <ClInclude Include="Modules\Framework\ECS\Behaviour.h" />
+    <ClInclude Include="Modules\Framework\ECS\Behaviour.inl" />
+    <ClInclude Include="Modules\Framework\ECS\Component.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientBoxLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientSphereLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CAnimator.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CAudioListener.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CAudioSource.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CCamera.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CDirectionalLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CMaterialRenderer.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CModelRenderer.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalBox.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalCapsule.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalObject.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalSphere.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CPointLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CSpotLight.h" />
+    <ClInclude Include="Modules\Framework\ECS\Components\CTransform.h" />
+    <ClInclude Include="Modules\Framework\ECS\PhysicsWrapper.h" />
+    <ClInclude Include="Modules\Framework\ECS\SceneRenderer.h" />
+    <ClInclude Include="Modules\Framework\Global\ServiceLocator.h" />
+    <ClInclude Include="Modules\Framework\SceneSystem\Scene.h" />
+    <ClInclude Include="Modules\Framework\SceneSystem\SceneManager.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\EAccessSpecifier.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\Framebuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.inl" />
+    <ClInclude Include="Modules\Rendering\Buffers\ShadowmapBuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.inl" />
+    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.inl" />
+    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.inl" />
+    <ClInclude Include="Modules\Rendering\Context\Driver.h" />
+    <ClInclude Include="Modules\Rendering\Core\Renderer.h" />
+    <ClInclude Include="Modules\Rendering\Core\ShapeDrawer.h" />
+    <ClInclude Include="Modules\Rendering\Data\Frustum.h" />
+    <ClInclude Include="Modules\Rendering\Entities\Light.h" />
+    <ClInclude Include="Modules\Rendering\Geometry\BoundingSphere.h" />
+    <ClInclude Include="Modules\Rendering\Geometry\Vertex.h" />
+    <ClInclude Include="Modules\Rendering\LowRenderer\Camera.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\AnimationManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.inl" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\MaterialManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\ModelManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\ShaderManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\SoundManager.h" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\TextureManager.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Animation.h" />
+    <ClInclude Include="Modules\Rendering\Resources\AnimationData.h" />
+    <ClInclude Include="Modules\Rendering\Resources\IMesh.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Loaders\AnimationLoader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Loaders\MaterialLoader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Loaders\ModelLoader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Loaders\ShaderLoader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Loaders\TextureLoader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Material.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Material.inl" />
+    <ClInclude Include="Modules\Rendering\Resources\Mesh.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Model.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Parsers\AssimpParser.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Parsers\EModelParserFlags.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Parsers\IModelParser.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Shader.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Skeleton.h" />
+    <ClInclude Include="Modules\Rendering\Resources\Texture.h" />
+    <ClInclude Include="Modules\Rendering\Resources\UniformInfo.h" />
+    <ClInclude Include="Modules\Rendering\Resources\UniformType.h" />
+    <ClInclude Include="Modules\Rendering\Settings\DriverSettings.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EComparaisonAlgorithm.h" />
+    <ClInclude Include="Modules\Rendering\Settings\ECullFace.h" />
+    <ClInclude Include="Modules\Rendering\Settings\ECullingOptions.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EOperation.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EPixelDataFormat.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EPixelDataType.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EPrimitiveMode.h" />
+    <ClInclude Include="Modules\Rendering\Settings\EProjectionMode.h" />
+    <ClInclude Include="Modules\Rendering\Settings\ERasterizationMode.h" />
+    <ClInclude Include="Modules\Rendering\Settings\ERenderingCapability.h" />
+    <ClInclude Include="Modules\Rendering\Settings\ETextureFilteringMode.h" />
+    <ClInclude Include="Modules\Rendering\Utils\Defines.h" />
+    <ClInclude Include="Modules\Scripting\LuaActorBinder.h" />
+    <ClInclude Include="Modules\Scripting\LuaBinder.h" />
+    <ClInclude Include="Modules\Scripting\LuaComponentBinder.h" />
+    <ClInclude Include="Modules\Scripting\LuaGlobalsBinder.h" />
+    <ClInclude Include="Modules\Scripting\LuaMathsBinder.h" />
+    <ClInclude Include="Modules\Scripting\ScriptInterpreter.h" />
+    <ClInclude Include="Modules\Utils\ActorUtils.h" />
+    <ClInclude Include="Modules\Utils\GUIDrawer.h" />
+    <ClInclude Include="Modules\Utils\GUIDrawer.inl" />
+    <ClInclude Include="Modules\Utils\RenderUtils.h" />
+    <ClInclude Include="Modules\Utils\Serializer.h" />
+    <ClInclude Include="Resource\ResIncludeBasic.h" />
+    <ClInclude Include="Resource\ResInclude.h" />
+    <ClInclude Include="Resource\ResIncludeAnimation.h" />
+    <ClInclude Include="Resource\ResIncludeAudio.h" />
+    <ClInclude Include="Resource\ResIncludeRendering.h" />
+    <ClInclude Include="Resource\ResIncludeScene.h" />
+    <ClInclude Include="_Generated\Reflection\AComponent.reflection.gen.h" />
+    <ClInclude Include="_Generated\Reflection\AllReflection.h" />
+    <ClInclude Include="_Generated\Reflection\CAnimator.reflection.gen.h" />
+    <ClInclude Include="_Generated\Reflection\CTestComp1.reflection.gen.h" />
+    <ClInclude Include="_Generated\Reflection\MetaExample.reflection.gen.h" />
+    <ClInclude Include="_Generated\Reflection\ResIncludeBasic.reflection.gen.h" />
+    <ClInclude Include="_Generated\Reflection\ResIncludeScene.reflection.gen.h" />
+    <ClInclude Include="_Generated\Serializer\AComponent.serializer.gen.h" />
+    <ClInclude Include="_Generated\Serializer\AllSerializer.h" />
+    <ClInclude Include="_Generated\Serializer\AllSerializer.ipp" />
+    <ClInclude Include="_Generated\Serializer\CAnimator.serializer.gen.h" />
+    <ClInclude Include="_Generated\Serializer\CTestComp1.serializer.gen.h" />
+    <ClInclude Include="_Generated\Serializer\MetaExample.serializer.gen.h" />
+    <ClInclude Include="_Generated\Serializer\ResIncludeBasic.serializer.gen.h" />
+    <ClInclude Include="_Generated\Serializer\ResIncludeScene.serializer.gen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

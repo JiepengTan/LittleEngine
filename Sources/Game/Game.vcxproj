@@ -42,7 +42,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level1</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\3rdParty\misc;..\3rdParty\imgui;..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -58,12 +58,12 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\3rdParty\misc;..\3rdParty\imgui;..\Runtime;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>LittleEngine.lib;assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>misc.lib;imgui.lib;LittleEngine.lib;assimp-vc143-mt.lib;zlibstatic.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;glew32.lib;glfw3dll.lib;irrKlang.lib;liblua53.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\Bin;..\3rdParty\glfw\lib;..\3rdParty\bullet3\lib\Debug;..\3rdParty\lua\lib;..\3rdParty\glew\lib;..\3rdParty\irrklang\lib;..\3rdParty\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Link>
