@@ -3,7 +3,7 @@
 #include "class.h"
 
 BaseClass::BaseClass(const Cursor& cursor) : name(Utils::getTypeNameWithoutNamespace(cursor.getType())) {}
-
+int Class::s_type_id = 1;
 Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     TypeInfo(cursor, current_namespace), m_name(cursor.getDisplayName()),
     m_qualified_name(Utils::getTypeNameWithoutNamespace(cursor.getType())),
@@ -11,7 +11,6 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
 {
     Utils::replaceAll(m_name, " ", "");
     Utils::replaceAll(m_name, "LittleEngine::", "");
-
     for (auto& child : cursor.getChildren())
     {
         switch (child.getKind())
@@ -32,6 +31,9 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
             default:
                 break;
         }
+    }
+    if(shouldCompile()){
+        type_id = s_type_id++;
     }
 }
 

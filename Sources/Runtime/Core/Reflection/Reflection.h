@@ -25,7 +25,11 @@ namespace LittleEngine
 
 #define REFLECTION_BODY(class_name) \
     friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
-    friend class JsonSerializer;
+    friend class JsonSerializer;\
+    public :\
+    static TypeID MetaTypeId;\
+    static TypeID GetTypeID(){ return LittleEngine::##class_name##::MetaTypeId;}
+    
     // public: virtual std::string GetTypeName() override {return #class_name;}
 
 #define REFLECTION_TYPE(class_name) \
@@ -35,7 +39,7 @@ namespace LittleEngine
         { \
             class Type##class_name##Operator; \
         } \
-    };
+    };\
 
 #define REGISTER_FIELD_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
 #define REGISTER_Method_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);

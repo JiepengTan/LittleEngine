@@ -43,6 +43,8 @@ public:
     SharedPtrVector<Method> m_methods;
 
     std::string m_display_name;
-
+    int type_id;
     bool isAccessible(void) const;
+public:
+    static int s_type_id;
 };

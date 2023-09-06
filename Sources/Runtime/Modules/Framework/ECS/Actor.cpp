@@ -318,10 +318,10 @@ namespace LittleEngine
     bool Actor::RemoveComponent(SharedPtr<Component> p_component)
     {
         if(p_component == nullptr) return false;
-        if (m_components.count(p_component->GetInstanceTypeID()) != 0)
+        if (m_components.count(p_component->GetTypeID()) != 0)
         {
             m_scene->OnComponentRemoved(p_component);
-            m_components.erase(p_component->GetInstanceTypeID());
+            m_components.erase(p_component->GetTypeID());
             return true;
         }
         return false;

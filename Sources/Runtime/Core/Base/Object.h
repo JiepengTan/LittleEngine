@@ -26,7 +26,13 @@ namespace LittleEngine
     private:
         static std::atomic<ActorID> m_next_id;
     };
-
+    namespace Reflection 
+    { 
+        namespace TypeFieldReflectionOparator 
+        { 
+            class TypeObjectOperator; 
+        } 
+    };
     
     REFLECTION_TYPE(Object)
     CLASS(Object, WhiteListFields)

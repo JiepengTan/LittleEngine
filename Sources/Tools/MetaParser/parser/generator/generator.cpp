@@ -14,10 +14,12 @@ namespace Generator
     }
     void GeneratorInterface::genClassRenderData(std::shared_ptr<Class> class_temp, Mustache::data& class_def)
     {
+        Class classInfo = *class_temp;
         class_def.set("class_name", class_temp->getClassName());
+        class_def.set("class_type_id", std::to_string(classInfo.type_id));
         class_def.set("class_base_class_size", std::to_string(class_temp->m_base_classes.size()));
         class_def.set("class_need_register", true);
-
+        //std::cout<<classInfo.type_id<<std::endl;
         if (class_temp->m_base_classes.size() > 0)
         {
             Mustache::data class_base_class_defines(Mustache::data::type::list);

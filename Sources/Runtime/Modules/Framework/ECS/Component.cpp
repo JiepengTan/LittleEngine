@@ -11,15 +11,7 @@
 LittleEngine::Component::~Component()
 {
 }
-// TODO tanjp gen code to auto create unique id
-LittleEngine::TypeID  LittleEngine::Component::GetTypeID()
-{
-    return 1;
-}
-LittleEngine::TypeID  LittleEngine::Component::GetInstanceTypeID()
-{
-    return 1;
-}
+
 void LittleEngine::Component::SetActor(ActorPtr actor)
 {
     LE_ASSERT(actor!= nullptr,"Actor should not be null!");

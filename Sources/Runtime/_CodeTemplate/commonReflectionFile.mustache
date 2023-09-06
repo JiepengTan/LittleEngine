@@ -5,6 +5,7 @@
 
 namespace LittleEngine{
     {{#class_defines}}class {{class_name}};
+    TypeID LittleEngine::{{class_name}}::MetaTypeId = 0;
     {{/class_defines}}
 namespace Reflection{
 {{#class_defines}}namespace TypeFieldReflectionOparator{
@@ -70,6 +71,7 @@ namespace Reflection{
 }//namespace ArrayReflectionOperator{{/vector_exist}}
 
     void TypeWrapperRegister_{{class_name}}(){
+        LittleEngine::{{class_name}}::MetaTypeId ={{class_type_id}};
         {{#class_field_defines}}FieldFunctionTuple* field_function_tuple_{{class_field_name}}=new FieldFunctionTuple(
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::Set_{{class_field_name}},
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::Get_{{class_field_name}},

@@ -25,11 +25,7 @@ namespace LittleEngine
 		REFLECTION_BODY(Component)
 		friend class Actor;
 	public:
-		static TypeID GetTypeID();
-		virtual TypeID GetInstanceTypeID();
-	public:
 		Component() = default;
-
 		/**
 		* Destroying a AComponent will call dervied classes destructors
 		*/

@@ -31,6 +31,8 @@ void LittleEngine::ActorIDAllocator::Init(ActorID p_startId)
 {
     m_next_id = p_startId;
 }
+
+
 void LittleEngine::Object::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot)
 {}
 

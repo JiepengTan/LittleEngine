@@ -43,6 +43,7 @@ namespace Generator
         include_headfiles.push_back(
             Mustache::data("headfile_name", Utils::makeRelativePath(m_root_path, path).string()));
 
+        
         std::map<std::string, bool> class_names;
         // class defs
         for (auto class_temp : schema.classes)

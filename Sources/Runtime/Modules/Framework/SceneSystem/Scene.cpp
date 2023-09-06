@@ -207,21 +207,21 @@ namespace LittleEngine
     
     void Scene::OnComponentAdded(CompPtr p_compononent)
     {
-        if(p_compononent->GetInstanceTypeID() == CModelRenderer::GetTypeID())
+        if(p_compononent->GetTypeID() == CModelRenderer::GetTypeID())
             m_fastAccessComponents.modelRenderers.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetInstanceTypeID() == CCamera::GetTypeID())
+        if(p_compononent->GetTypeID() == CCamera::GetTypeID())
             m_fastAccessComponents.cameras.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetInstanceTypeID() == CLight::GetTypeID())
+        if(p_compononent->GetTypeID() == CLight::GetTypeID())
             m_fastAccessComponents.lights.insert(p_compononent->GetActor()->GetID());
     }
 
     void Scene::OnComponentRemoved(CompPtr p_compononent)
     {
-        if(p_compononent->GetInstanceTypeID() == CModelRenderer::GetTypeID())
+        if(p_compononent->GetTypeID() == CModelRenderer::GetTypeID())
             m_fastAccessComponents.modelRenderers.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetInstanceTypeID() == CCamera::GetTypeID())
+        if(p_compononent->GetTypeID() == CCamera::GetTypeID())
             m_fastAccessComponents.cameras.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetInstanceTypeID() == CLight::GetTypeID())
+        if(p_compononent->GetTypeID() == CLight::GetTypeID())
             m_fastAccessComponents.lights.erase(p_compononent->GetActor()->GetID());
     }
 
