@@ -118,7 +118,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Bin\</OutDir>
     <IntDir>..\..\..\Bin-Int\Debug\3rdparty\$(ProjectName)\</IntDir>
-    <TargetName>imgui</TargetName>
+    <TargetName>misc</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
