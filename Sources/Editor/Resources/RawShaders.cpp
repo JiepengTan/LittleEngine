@@ -6,7 +6,7 @@
 
 #include "../Editor/Resources/RawShaders.h"
 
-std::pair<std::string, std::string> LittleEditor::Resources::RawShaders::GetGrid()
+std::pair<std::string, std::string> LittleEngine::Editor::Resources::RawShaders::GetGrid()
 {
 	std::pair<std::string, std::string> source;
 
@@ -114,7 +114,7 @@ void main()
 	return source;
 }
 
-std::pair<std::string, std::string> LittleEditor::Resources::RawShaders::GetGizmo()
+std::pair<std::string, std::string> LittleEngine::Editor::Resources::RawShaders::GetGizmo()
 {
 	std::pair<std::string, std::string> source;
 
@@ -236,7 +236,7 @@ void main()
 	return source;
 }
 
-std::pair<std::string, std::string> LittleEditor::Resources::RawShaders::GetBillboard()
+std::pair<std::string, std::string> LittleEngine::Editor::Resources::RawShaders::GetBillboard()
 {
 	std::pair<std::string, std::string> source;
 

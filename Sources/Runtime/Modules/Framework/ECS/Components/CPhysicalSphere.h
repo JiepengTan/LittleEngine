@@ -17,14 +17,16 @@ namespace LittleEngine
 	/**
 	* Represent a physical object with a sphere shape
 	*/
-	class CPhysicalSphere : public CPhysicalObject
+	REFLECTION_TYPE(CPhysicalSphere)
+	CLASS (CPhysicalSphere : public CPhysicalObject, WhiteListFields)
 	{
+		REFLECTION_BODY(CPhysicalSphere)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalSphere(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CPhysicalSphere() = default;
 		/**
 		* Returns the name of the component

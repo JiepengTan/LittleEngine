@@ -23,7 +23,7 @@ LittleEngine::Rendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_wi
 	glGenTextures(1, &m_renderTexture);
 	glGenRenderbuffers(1, &m_depthStencilBuffer);
 
-	OVLOG_INFO(
+	LOG_INFO(
 		"ShadowmapBuffer m_bufferID= " + std::to_string(m_bufferID)
 		+ " m_renderTexture= " + std::to_string(m_renderTexture)
 		+ " m_depthStencilBuffer= " + std::to_string(m_depthStencilBuffer) );

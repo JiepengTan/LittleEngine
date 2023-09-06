@@ -24,8 +24,10 @@ namespace LittleEngine
 	/**
 	* A component that handle a material list, necessary for model rendering
 	*/
-	class CMaterialRenderer : public Component
+	REFLECTION_TYPE(CMaterialRenderer)
+	CLASS (CMaterialRenderer : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CMaterialRenderer)
 	public:
 		using MaterialList = std::array<LittleEngine::Resources::Material*, MAX_MATERIAL_COUNT>;
 		using MaterialField = std::array<std::array<LittleEngine::UI::Widgets::AWidget*, 3>, MAX_MATERIAL_COUNT>;
@@ -34,7 +36,7 @@ namespace LittleEngine
 		* Constructor
 		* @param p_owner
 		*/
-		CMaterialRenderer(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CMaterialRenderer() = default;
 		/**
 		* Returns the name of the component

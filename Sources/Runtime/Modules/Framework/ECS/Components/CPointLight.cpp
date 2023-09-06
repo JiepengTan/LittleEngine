@@ -14,11 +14,17 @@
 
 #include "Modules/Framework/ECS/Components/CPointLight.h"
 
-LittleEngine::CPointLight::CPointLight(Actor& p_owner) :
-	CLight(p_owner)
+
+void LittleEngine::CPointLight::DoInit(ActorPtr p_owner)
 {
+	CLight::DoInit(p_owner);
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::POINT);
 }
+
+LittleEngine::CPointLight::CPointLight()
+{
+}
+
 
 std::string LittleEngine::CPointLight::GetName()
 {

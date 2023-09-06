@@ -18,7 +18,7 @@ namespace LittleEngine
     class Actor;
 }
 
-namespace LittleEditor::Utils
+namespace LittleEngine::Editor::Utils
 {
     /**
     * Class exposing tools to generate an actor creation menu
@@ -38,6 +38,6 @@ namespace LittleEditor::Utils
         * @param p_parent
         * @param p_onItemClicked
         */
-        static void GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, LittleEngine::Actor* p_parent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
+        static void GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, ActorPtr p_parent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
     };
 }

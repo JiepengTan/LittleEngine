@@ -20,11 +20,13 @@
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-LittleEngine::CModelRenderer::CModelRenderer(Actor& p_owner) : Component(p_owner)
+
+void LittleEngine::CModelRenderer::DoInit(ActorPtr p_owner)
 {
+	Component::DoInit(p_owner);
 	m_modelChangedEvent += [this]
 	{
-		if (auto materialRenderer = owner->GetComponent<CMaterialRenderer>())
+		if (auto materialRenderer = GetActor()->GetComponent<CMaterialRenderer>())
 			materialRenderer->UpdateMaterialList();
 	};
 }

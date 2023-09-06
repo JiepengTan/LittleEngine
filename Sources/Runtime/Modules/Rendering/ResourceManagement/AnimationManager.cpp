@@ -30,7 +30,7 @@ void LittleEngine::ResourceManagement::AnimationManager::DestroyResource(LittleE
 
 void LittleEngine::ResourceManagement::AnimationManager::ReloadResource(LittleEngine::Rendering::Resources::Animation* p_resource, const std::string& p_path)
 {
-	OVLOG_ERROR("Now do not support reload animation!");
+	LOG_ERROR("Now do not support reload animation!");
 	return;
 	std::string realPath = GetRealPath(p_path);
 	LittleEngine::Rendering::Resources::Loaders::AnimationLoader::Reload(*p_resource, realPath, currentModel);

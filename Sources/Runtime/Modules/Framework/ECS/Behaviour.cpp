@@ -14,11 +14,6 @@
 LittleEngine::Eventing::Event<LittleEngine::Behaviour*> LittleEngine::Behaviour::CreatedEvent;
 LittleEngine::Eventing::Event<LittleEngine::Behaviour*> LittleEngine::Behaviour::DestroyedEvent;
 
-LittleEngine::Behaviour::Behaviour(Actor& p_owner, const std::string& p_name) :
-	name(p_name), Component(p_owner)
-{
-	CreatedEvent.Invoke(this);
-}
 
 LittleEngine::Behaviour::~Behaviour()
 {
@@ -32,30 +27,7 @@ std::string LittleEngine::Behaviour::GetName()
 
 bool LittleEngine::Behaviour::RegisterToLuaContext(sol::state& p_luaState, const std::string& p_scriptFolder)
 {
-	using namespace LittleEngine::Scripting;
-
-	auto result = p_luaState.safe_script_file(p_scriptFolder + name + ".lua", &sol::script_pass_on_error);
-
-	if (!result.valid())
-	{
-		sol::error err = result;
-		OVLOG_ERROR(err.what());
-		return false;
-	}
-	else
-	{
-		if (result.return_count() == 1 && result[0].is<sol::table>())
-		{
-			m_object = result[0];
-			m_object["owner"] = owner;
-			return true;
-		}
-		else
-		{
-			OVLOG_ERROR("'" + name + ".lua' missing return expression");
-			return false;
-		}
-	}
+	return true;
 }
 
 void LittleEngine::Behaviour::UnregisterFromLuaContext()
@@ -109,35 +81,35 @@ void LittleEngine::Behaviour::OnLateUpdate(float p_deltaTime)
 	LuaCall("OnLateUpdate", p_deltaTime);
 }
 
-void LittleEngine::Behaviour::OnCollisionEnter(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnCollisionEnter(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnCollisionStart", p_otherObject); // Retro-compatibility
 	LuaCall("OnCollisionEnter", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnCollisionStay(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnCollisionStay(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnCollisionStay", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnCollisionExit(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnCollisionExit(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnCollisionStop", p_otherObject); // Retro-compatibility
 	LuaCall("OnCollisionExit", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnTriggerEnter(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnTriggerEnter(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnTriggerStart", p_otherObject); // Retro-compatibility
 	LuaCall("OnTriggerEnter", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnTriggerStay(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnTriggerStay(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnTriggerStay", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnTriggerExit(CPhysicalObject& p_otherObject)
+void LittleEngine::Behaviour::OnTriggerExit(SharedPtr<CPhysicalObject> p_otherObject)
 {
 	LuaCall("OnTriggerStop", p_otherObject); // Retro-compatibility
 	LuaCall("OnTriggerExit", p_otherObject);

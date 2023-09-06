@@ -81,7 +81,7 @@ LittleGame::Core::Context::Context() :
 	ServiceLocator::Provide<SoundManager>(soundManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Window>(*window);
-	ServiceLocator::Provide<LittleEngine::SceneSystem::SceneManager>(sceneManager);
+	ServiceLocator::Provide<LittleEngine::SceneManager>(sceneManager);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioEngine>(*audioEngine);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioPlayer>(*audioPlayer);
 

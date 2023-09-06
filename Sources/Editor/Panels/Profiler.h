@@ -15,7 +15,7 @@
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Buttons/Button.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class Profiler : public LittleEngine::UI::Panels::PanelWindow
 	{

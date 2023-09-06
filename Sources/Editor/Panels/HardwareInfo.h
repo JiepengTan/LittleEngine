@@ -12,7 +12,7 @@
 
 namespace LittleEngine::Analytics::Hardware { class HardwareInfo; }
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class HardwareInfo : public LittleEngine::UI::Panels::PanelWindow
 	{

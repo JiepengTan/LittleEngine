@@ -13,11 +13,10 @@
 
 #include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
 
-LittleEngine::CAmbientBoxLight::CAmbientBoxLight(Actor & p_owner) :
-	CLight(p_owner)
+void LittleEngine::CAmbientBoxLight::DoInit(ActorPtr p_owner)
 {
+	CLight::DoInit(p_owner);
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::AMBIENT_BOX);
-
 	m_data.intensity = 0.1f;
 	m_data.constant = 1.0f;
 	m_data.linear = 1.0f;

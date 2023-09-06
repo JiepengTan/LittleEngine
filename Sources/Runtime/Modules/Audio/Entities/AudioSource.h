@@ -28,6 +28,7 @@ namespace LittleEngine::Audio::Entities
 	class AudioSource
 	{
 	public:
+		AudioSource();
 		/**
 		* AudioSource constructor (Internal transform management)
 		* @param p_audioPlayer

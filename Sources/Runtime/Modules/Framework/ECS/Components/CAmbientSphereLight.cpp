@@ -13,9 +13,9 @@
 
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
-LittleEngine::CAmbientSphereLight::CAmbientSphereLight(Actor & p_owner) :
-	CLight(p_owner)
+void LittleEngine::CAmbientSphereLight::DoInit(ActorPtr p_owner)
 {
+	CLight::DoInit(p_owner);
     m_data.intensity = 0.1f;
 	m_data.constant = 1.0f;
 

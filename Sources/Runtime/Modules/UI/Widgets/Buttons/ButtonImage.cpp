@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 #include "Modules/UI/Internal/Converter.h"
-#include "Modules/UI/ImGui/imgui_internal.h"
+#include "ImGui/imgui_internal.h"
 
 LittleEngine::UI::Widgets::Buttons::ButtonImage::ButtonImage(uint32_t p_textureID, const LittleEngine::FVector2 & p_size) :
 	textureID{ p_textureID }, size(p_size)

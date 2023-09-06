@@ -40,7 +40,7 @@ void LittleEngine::Scripting::ScriptInterpreter::CreateLuaContextAndBindGlobals(
 		});
 
 		if (!m_isOk)
-			OVLOG_ERROR("Script interpreter failed to register scripts. Check your lua scripts");
+			LOG_ERROR("Script interpreter failed to register scripts. Check your lua scripts");
 	}
 }
 

@@ -13,7 +13,7 @@
 #include "Modules/UI/Core/UIManager.h"
 #include "Modules/UI/Panels/PanelWindow.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* A simple panel that allow the user to select the project to launch

@@ -12,10 +12,10 @@
 
 using namespace LittleEngine::Physics::Entities;
 
-LittleEngine::CPhysicalSphere::CPhysicalSphere(Actor & p_owner) :
-	CPhysicalObject(p_owner)
+void LittleEngine::CPhysicalSphere::DoInit(ActorPtr p_owner)
 {
-	m_physicalObject = std::make_unique<PhysicalSphere>(p_owner.transform.GetFTransform());
+	CPhysicalObject::DoInit(p_owner);
+	m_physicalObject = std::make_unique<PhysicalSphere>(p_owner->transform->GetFTransform());
 
 	m_physicalObject->SetUserData<std::reference_wrapper<CPhysicalObject>>(*this);
 

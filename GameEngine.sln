@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "Sources\3rdParty\i
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "misc", "Sources\3rdParty\misc\misc.vcxproj", "{60A8E6B5-F1A7-468C-9B4D-5DD889701002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectReshaper", "Sources\Tools\ProjectReshaper\ProjectReshaper.csproj", "{B616187D-C05E-4C69-A45B-DB2D4B64DD35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,10 @@ Global
 		{60A8E6B5-F1A7-468C-9B4D-5DD889701002}.Debug|x64.Build.0 = Debug|x64
 		{60A8E6B5-F1A7-468C-9B4D-5DD889701002}.Release|x64.ActiveCfg = Debug|x64
 		{60A8E6B5-F1A7-468C-9B4D-5DD889701002}.Release|x64.Build.0 = Debug|x64
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Debug|x64.Build.0 = Debug|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Release|x64.ActiveCfg = Release|Any CPU
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +77,6 @@ Global
 		{60A8E6B5-F1A7-468C-9B4D-5DD88970E5A6} = {C2115AE7-53B8-4380-80C0-65F7964F6310}
 		{60A8E6B5-F1A7-468C-9B4D-5DD889701001} = {C2115AE7-53B8-4380-80C0-65F7964F6310}
 		{60A8E6B5-F1A7-468C-9B4D-5DD889701002} = {C2115AE7-53B8-4380-80C0-65F7964F6310}
+		{B616187D-C05E-4C69-A45B-DB2D4B64DD35} = {1F5C3D08-E4CC-40AC-8BD3-8AA012D68BEF}
 	EndGlobalSection
 EndGlobal

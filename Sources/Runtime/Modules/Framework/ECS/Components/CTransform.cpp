@@ -6,20 +6,23 @@
 
 #include "Modules/Framework/ECS/Components/CTransform.h"
 
-LittleEngine::CTransform::CTransform(Actor& p_owner, LittleEngine::FVector3 p_localPosition, LittleEngine::FQuaternion p_localRotation, LittleEngine::FVector3 p_localScale) :
-Component(p_owner)
-{
-	m_transform.GenerateMatricesLocal(p_localPosition, p_localRotation, p_localScale);
-}
 
 std::string LittleEngine::CTransform::GetName()
 {
 	return "Transform";
 }
-
-void LittleEngine::CTransform::SetParent(CTransform& p_parent)
+void LittleEngine::CTransform::DoInit(ActorPtr p_owner)
 {
-	m_transform.SetParent(p_parent.GetFTransform());
+	Component::DoInit(p_owner);
+}
+void LittleEngine::CTransform::SetParent(SharedPtr<CTransform> p_parent)
+{
+	if(p_parent == nullptr)
+	{
+		RemoveParent();
+		return;
+	}
+	m_transform.SetParent(p_parent->GetFTransform());
 }
 
 bool LittleEngine::CTransform::RemoveParent()

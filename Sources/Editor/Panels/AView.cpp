@@ -9,7 +9,7 @@
 #include "../Editor/Panels/AView.h"
 #include "../Editor/Core/EditorActions.h"
 
-LittleEditor::Panels::AView::AView
+LittleEngine::Editor::Panels::AView::AView
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -24,7 +24,7 @@ LittleEditor::Panels::AView::AView
     scrollable = false;
 }
 
-void LittleEditor::Panels::AView::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::AView::Update(float p_deltaTime)
 {
 	auto[winWidth, winHeight] = GetSafeSize();
 
@@ -33,7 +33,7 @@ void LittleEditor::Panels::AView::Update(float p_deltaTime)
 	m_fbo.Resize(winWidth, winHeight);
 }
 
-void LittleEditor::Panels::AView::_Draw_Impl()
+void LittleEngine::Editor::Panels::AView::_Draw_Impl()
 {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
 
@@ -42,7 +42,7 @@ void LittleEditor::Panels::AView::_Draw_Impl()
 	ImGui::PopStyleVar();
 }
 
-void LittleEditor::Panels::AView::Render()
+void LittleEngine::Editor::Panels::AView::Render()
 {
 	m_camera.m_CameraType = LittleEngine::Rendering::Settings::ECameraType::Game;
 	FillEngineUBO();
@@ -56,48 +56,48 @@ void LittleEditor::Panels::AView::Render()
 	_Render_Impl();
 }
 
-void LittleEditor::Panels::AView::SetCameraPosition(const LittleEngine::FVector3 & p_position)
+void LittleEngine::Editor::Panels::AView::SetCameraPosition(const LittleEngine::FVector3 & p_position)
 {
 	m_cameraPosition = p_position;
 }
 
-void LittleEditor::Panels::AView::SetCameraRotation(const LittleEngine::FQuaternion& p_rotation)
+void LittleEngine::Editor::Panels::AView::SetCameraRotation(const LittleEngine::FQuaternion& p_rotation)
 {
 	m_cameraRotation = p_rotation;
 }
 
-const LittleEngine::FVector3 & LittleEditor::Panels::AView::GetCameraPosition() const
+const LittleEngine::FVector3 & LittleEngine::Editor::Panels::AView::GetCameraPosition() const
 {
 	return m_cameraPosition;
 }
 
-const LittleEngine::FQuaternion& LittleEditor::Panels::AView::GetCameraRotation() const
+const LittleEngine::FQuaternion& LittleEngine::Editor::Panels::AView::GetCameraRotation() const
 {
 	return m_cameraRotation;
 }
 
-LittleEngine::Rendering::LowRenderer::Camera & LittleEditor::Panels::AView::GetCamera()
+LittleEngine::Rendering::LowRenderer::Camera & LittleEngine::Editor::Panels::AView::GetCamera()
 {
 	return m_camera;
 }
 
-std::pair<uint16_t, uint16_t> LittleEditor::Panels::AView::GetSafeSize() const
+std::pair<uint16_t, uint16_t> LittleEngine::Editor::Panels::AView::GetSafeSize() const
 {
 	auto result = GetSize() - LittleEngine::FVector2{ 0.f, 25.f }; // 25 == title bar height
 	return { static_cast<uint16_t>(result.x), static_cast<uint16_t>(result.y) };
 }
 
-const LittleEngine::FVector3& LittleEditor::Panels::AView::GetGridColor() const
+const LittleEngine::FVector3& LittleEngine::Editor::Panels::AView::GetGridColor() const
 {
 	return m_gridColor;
 }
 
-void LittleEditor::Panels::AView::SetGridColor(const LittleEngine::FVector3& p_color)
+void LittleEngine::Editor::Panels::AView::SetGridColor(const LittleEngine::FVector3& p_color)
 {
 	m_gridColor = p_color;
 }
 
-void LittleEditor::Panels::AView::FillEngineUBO()
+void LittleEngine::Editor::Panels::AView::FillEngineUBO()
 {
 	auto& engineUBO = *EDITOR_CONTEXT(engineUBO);
 
@@ -109,7 +109,7 @@ void LittleEditor::Panels::AView::FillEngineUBO()
 	engineUBO.SetSubData(m_cameraPosition, std::ref(offset));
 }
 
-void LittleEditor::Panels::AView::PrepareCamera()
+void LittleEngine::Editor::Panels::AView::PrepareCamera()
 {
 	auto [winWidth, winHeight] = GetSafeSize();
 	m_camera.CacheMatrices(winWidth, winHeight, m_cameraPosition, m_cameraRotation);

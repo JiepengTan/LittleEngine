@@ -53,7 +53,7 @@ void LittleGame::Core::GameRenderer::RenderScene()
 {
 	if (auto currentScene = m_context.sceneManager.GetCurrentScene())
 	{
-		if (LittleEngine::CCamera* mainCameraComponent = m_context.renderer->FindMainCamera(*currentScene))
+		if (auto mainCameraComponent = m_context.renderer->FindMainCamera(currentScene))
 		{
 			if (mainCameraComponent->HasFrustumLightCulling())
 			{
@@ -65,8 +65,8 @@ void LittleGame::Core::GameRenderer::RenderScene()
 			}
 
 			auto [winWidth, winHeight] = m_context.window->GetSize();
-			const auto& cameraPosition = mainCameraComponent->owner->transform.GetWorldPosition();
-			const auto& cameraRotation = mainCameraComponent->owner->transform.GetWorldRotation();
+			const auto& cameraPosition = mainCameraComponent->GetActor()->transform->GetWorldPosition();
+			const auto& cameraRotation = mainCameraComponent->GetActor()->transform->GetWorldRotation();
 			auto& camera = mainCameraComponent->GetCamera();
 
 			camera.CacheMatrices(winWidth, winHeight, cameraPosition, cameraRotation);
@@ -96,17 +96,17 @@ void LittleGame::Core::GameRenderer::UpdateEngineUBO(LittleEngine::CCamera& p_ma
 
 	m_context.engineUBO->SetSubData(LittleEngine::FMatrix4::Transpose(camera.GetViewMatrix()), std::ref(offset));
 	m_context.engineUBO->SetSubData(LittleEngine::FMatrix4::Transpose(camera.GetProjectionMatrix()), std::ref(offset));
-	m_context.engineUBO->SetSubData(p_mainCamera.owner->transform.GetWorldPosition(), std::ref(offset));
+	m_context.engineUBO->SetSubData(p_mainCamera.GetActor()->transform->GetWorldPosition(), std::ref(offset));
 }
 
-void LittleGame::Core::GameRenderer::UpdateLights(LittleEngine::SceneSystem::Scene& p_scene)
+void LittleGame::Core::GameRenderer::UpdateLights(LittleEngine::Scene& p_scene)
 {
 	PROFILER_SPY("Light SSBO Update");
 	auto lightMatrices = m_context.renderer->FindLightMatrices(p_scene);
 	m_context.lightSSBO->SendBlocks<FMatrix4>(lightMatrices.data(), lightMatrices.size() * sizeof(FMatrix4));
 }
 
-void LittleGame::Core::GameRenderer::UpdateLightsInFrustum(LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum)
+void LittleGame::Core::GameRenderer::UpdateLightsInFrustum(LittleEngine::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum)
 {
 	PROFILER_SPY("Light SSBO Update (Frustum culled)");
 	auto lightMatrices = m_context.renderer->FindLightMatricesInFrustum(p_scene, p_frustum);

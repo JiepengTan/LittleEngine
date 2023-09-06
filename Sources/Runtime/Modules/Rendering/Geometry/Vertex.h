@@ -7,8 +7,7 @@
 #pragma once
 #include <array>
 #include <cstdint>
-
-#include "Core/Debug/Assertion.h"
+#include "Core/CoreInclude.h"
 #include "Modules/Rendering/Buffers/VertexArray.h"
 
 #define VERTEX_DATA_FLAGS_INDEX_COUNT ((int)(LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::count))
@@ -108,7 +107,7 @@ namespace LittleEngine::Rendering::Geometry
 			int offset  = idx *2;
 			ptr[offset+0] = _1;
 			ptr[offset+1] = _2;
-			OVASSERT(len > offset + 1,"SetData outOfRange ");
+			LE_ASSERT(len > offset + 1,"SetData outOfRange ");
 		}
 		template<typename T>
 		void SetData(EVertexDataFlagsIndex TFlag,int idx,  T _1,T _2,T _3)
@@ -119,7 +118,7 @@ namespace LittleEngine::Rendering::Geometry
 			ptr[offset+0] = _1;
 			ptr[offset+1] = _2;
 			ptr[offset+2] = _3;
-			OVASSERT(len > offset + 2,"SetData outOfRange ");
+			LE_ASSERT(len > offset + 2,"SetData outOfRange ");
 		}
 		template<typename T>
 		void SetData(EVertexDataFlagsIndex TFlag,int idx,  T _1,T _2,T _3,T _4)
@@ -131,7 +130,7 @@ namespace LittleEngine::Rendering::Geometry
 			ptr[offset+1] = _2;
 			ptr[offset+2] = _3;
 			ptr[offset+3] = _4;
-			OVASSERT(len > offset + 3,"SetData outOfRange ");
+			LE_ASSERT(len > offset + 3,"SetData outOfRange ");
 		}
 	};
 }

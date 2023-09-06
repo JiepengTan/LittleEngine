@@ -8,7 +8,7 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-namespace LittleEditor::Settings
+namespace LittleEngine::Editor::Settings
 {
 	/**
 	* Accessible from anywhere editor settings

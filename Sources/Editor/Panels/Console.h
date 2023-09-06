@@ -12,7 +12,7 @@
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Texts/TextColored.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class Console : public LittleEngine::UI::Panels::PanelWindow
 	{

@@ -21,7 +21,7 @@ namespace LittleEngine
 		REFLECTION_BODY(CAnimator)
 	public:
 		CAnimator() = default;
-		CAnimator(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		~CAnimator() =default;
 		std::string GetName() override;
 		void OnStart() override;
@@ -70,8 +70,8 @@ namespace LittleEngine
 		std::vector<LittleEngine::FMatrix4> m_finalBoneMatrices;
 		// debug infos
 	private:
-		std::vector<Actor*> m_debugBones;
-		Actor* m_debugBoneRoot; 
+		ActorVector m_debugBones;
+		ActorPtr m_debugBoneRoot; 
 		std::vector<int> m_boneId;
 		float boneDrawSize = 0.05f;
 		

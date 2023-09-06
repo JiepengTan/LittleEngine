@@ -8,6 +8,7 @@
 
 #include "Core/Base/Application.h"
 #include "../Game/Core/GameApp.h"
+#include "Resource/ResInclude.h"
 
 FORCE_DEDICATED_GPU
 

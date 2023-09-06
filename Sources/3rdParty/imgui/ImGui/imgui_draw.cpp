@@ -18,7 +18,7 @@ Index of this file:
 // [SECTION] ImFont
 // [SECTION] ImGui Internal Render Helpers
 // [SECTION] Decompression code
-// [SECTION] Default font data (ProggyClean.ttf)
+// [SECTION] Default font data (ProggyClean.ttf)  
 
 */
 

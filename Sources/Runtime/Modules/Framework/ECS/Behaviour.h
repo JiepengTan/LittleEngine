@@ -18,16 +18,13 @@ namespace LittleEngine
 	* ABehaviour is the base class for any behaviour.
 	* A Behaviour is a script that is used to manipulate an actor over time
 	*/
-	class Behaviour : public Component
+	REFLECTION_TYPE(Behaviour)
+	CLASS (Behaviour: public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(Behaviour)
 	public:
 		
 		Behaviour() = default;
-		/**
-		* Constructor of a ABehaviour (Must be called by derived classes)
-		* @param p_owner
-		*/
-		Behaviour(Actor& p_owner, const std::string& p_name);
 
 		/**
 		* Destructor
@@ -115,37 +112,37 @@ namespace LittleEngine
 		* Called when the owner of this component enter in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionEnter(CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionEnter(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Called when the owner of this component is in collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionStay(CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionStay(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Called when the owner of this component exit from collision with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnCollisionExit(CPhysicalObject& p_otherObject) override;
+		virtual void OnCollisionExit(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Called when the owner of this component enter in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerEnter(CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerEnter(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Called when the owner of this component is in trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerStay(CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerStay(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Called when the owner of this component exit from trigger with another physical object
 		* @param p_otherObject
 		*/
-		virtual void OnTriggerExit(CPhysicalObject& p_otherObject) override;
+		virtual void OnTriggerExit(SharedPtr<CPhysicalObject> p_otherObject) override;
 
 		/**
 		* Serialize the behaviour

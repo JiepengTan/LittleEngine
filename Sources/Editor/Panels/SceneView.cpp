@@ -12,7 +12,7 @@
 #include "../Editor/Panels/GameView.h"
 #include "../Editor/Settings/EditorSettings.h"
 
-LittleEditor::Panels::SceneView::SceneView
+LittleEngine::Editor::Panels::SceneView::SceneView
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -35,7 +35,7 @@ LittleEditor::Panels::SceneView::SceneView
 	};
 }
 
-void LittleEditor::Panels::SceneView::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::SceneView::Update(float p_deltaTime)
 {
 	AViewControllable::Update(p_deltaTime);
 
@@ -45,22 +45,22 @@ void LittleEditor::Panels::SceneView::Update(float p_deltaTime)
 	{
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_W))
 		{
-			m_currentOperation = LittleEditor::Core::EGizmoOperation::TRANSLATE;
+			m_currentOperation = LittleEngine::Editor::Core::EGizmoOperation::TRANSLATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_E))
 		{
-			m_currentOperation = LittleEditor::Core::EGizmoOperation::ROTATE;
+			m_currentOperation = LittleEngine::Editor::Core::EGizmoOperation::ROTATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(EKey::KEY_R))
 		{
-			m_currentOperation = LittleEditor::Core::EGizmoOperation::SCALE;
+			m_currentOperation = LittleEngine::Editor::Core::EGizmoOperation::SCALE;
 		}
 	}
 }
 
-void LittleEditor::Panels::SceneView::_Render_Impl()
+void LittleEngine::Editor::Panels::SceneView::_Render_Impl()
 {
 	PrepareCamera();
 
@@ -74,11 +74,11 @@ void LittleEditor::Panels::SceneView::_Render_Impl()
 	baseRenderer.ApplyStateMask(glState);
 }
 
-void LittleEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
+void LittleEngine::Editor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 	auto& currentScene = *m_sceneManager.GetCurrentScene();
-	auto& gameView = EDITOR_PANEL(LittleEditor::Panels::GameView, "Game View");
+	auto& gameView = EDITOR_PANEL(LittleEngine::Editor::Panels::GameView, "Game View");
 
 	// If the game is playing, and ShowLightFrustumCullingInSceneView is true, apply the game view frustum culling to the scene view (For debugging purposes)
 	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Settings::EditorSettings::ShowLightFrustumCullingInSceneView)
@@ -115,9 +115,9 @@ void LittleEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 
 	if (EDITOR_EXEC(IsAnyActorSelected()))
 	{
-		auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
+		auto selectedActor = EDITOR_EXEC(GetSelectedActor());
 
-		if (selectedActor.IsActive())
+		if (selectedActor->IsActive())
 		{
 			m_editorRenderer.RenderActorOutlinePass(selectedActor, true, true);
 			baseRenderer.ApplyStateMask(p_defaultRenderState);
@@ -134,20 +134,20 @@ void LittleEditor::Panels::SceneView::RenderScene(uint8_t p_defaultRenderState)
 			highlightedAxis = static_cast<int>(m_highlightedGizmoDirection.value());
 		}
 
-		m_editorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, false, highlightedAxis);
+		m_editorRenderer.RenderGizmo(selectedActor->transform->GetWorldPosition(), selectedActor->transform->GetWorldRotation(), m_currentOperation, false, highlightedAxis);
 	}
 
 	if (m_highlightedActor.has_value())
 	{
-		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), true, false);
+		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value(), true, false);
 		baseRenderer.ApplyStateMask(p_defaultRenderState);
-		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), false, false);
+		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value(), false, false);
 	}
 
 	m_fbo.Unbind();
 }
 
-void LittleEditor::Panels::SceneView::RenderSceneForActorPicking()
+void LittleEngine::Editor::Panels::SceneView::RenderSceneForActorPicking()
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 
@@ -161,9 +161,9 @@ void LittleEditor::Panels::SceneView::RenderSceneForActorPicking()
 
 	if (EDITOR_EXEC(IsAnyActorSelected()))
 	{
-		auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
+		auto selectedActor = EDITOR_EXEC(GetSelectedActor());
 		baseRenderer.Clear(false, true, false);
-		m_editorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, true);
+		m_editorRenderer.RenderGizmo(selectedActor->transform->GetWorldPosition(), selectedActor->transform->GetWorldRotation(), m_currentOperation, true);
 	}
 
 	m_actorPickingFramebuffer.Unbind();
@@ -181,7 +181,7 @@ bool IsResizing()
 		cursor == ImGuiMouseCursor_ResizeAll;;
 }
 
-void LittleEditor::Panels::SceneView::HandleActorPicking()
+void LittleEngine::Editor::Panels::SceneView::HandleActorPicking()
 {
 	using namespace LittleEngine::Windowing::Inputs;
 
@@ -209,7 +209,7 @@ void LittleEditor::Panels::SceneView::HandleActorPicking()
 
 		uint32_t actorID = (0 << 24) | (pixel[2] << 16) | (pixel[1] << 8) | (pixel[0] << 0);
 		auto actorUnderMouse = EDITOR_CONTEXT(sceneManager).GetCurrentScene()->FindActorByID(actorID);
-		auto direction = m_gizmoOperations.IsPicking() ? m_gizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<LittleEditor::Core::GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Core::GizmoBehaviour::EDirection>{};
+		auto direction = m_gizmoOperations.IsPicking() ? m_gizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<LittleEngine::Editor::Core::GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Core::GizmoBehaviour::EDirection>{};
 
 		m_highlightedActor = {};
 		m_highlightedGizmoDirection = {};
@@ -223,7 +223,7 @@ void LittleEditor::Panels::SceneView::HandleActorPicking()
 			}
 			else if (actorUnderMouse != nullptr)
 			{
-				m_highlightedActor = std::ref(*actorUnderMouse);
+				m_highlightedActor = actorUnderMouse;
 			}
 		}
 
@@ -241,7 +241,7 @@ void LittleEditor::Panels::SceneView::HandleActorPicking()
 
 				if (actorUnderMouse)
 				{
-					EDITOR_EXEC(SelectActor(*actorUnderMouse));
+					EDITOR_EXEC(SelectActor(actorUnderMouse));
 				}
 				else
 				{

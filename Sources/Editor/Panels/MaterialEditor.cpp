@@ -97,7 +97,7 @@ void DrawHybridVec4(LittleEngine::UI::Internal::WidgetContainer& p_root, const s
 	};
 }
 
-LittleEditor::Panels::MaterialEditor::MaterialEditor
+LittleEngine::Editor::Panels::MaterialEditor::MaterialEditor
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -120,32 +120,32 @@ LittleEditor::Panels::MaterialEditor::MaterialEditor
 	m_shaderDroppedEvent	+= std::bind(&MaterialEditor::OnShaderDropped, this);
 }
 
-void LittleEditor::Panels::MaterialEditor::Refresh()
+void LittleEngine::Editor::Panels::MaterialEditor::Refresh()
 {
 	if (m_target)
 		SetTarget(*m_target);
 }
 
-void LittleEditor::Panels::MaterialEditor::SetTarget(LittleEngine::Resources::Material & p_newTarget)
+void LittleEngine::Editor::Panels::MaterialEditor::SetTarget(LittleEngine::Resources::Material & p_newTarget)
 {
 	m_target = &p_newTarget;
 	m_targetMaterialText->content = m_target->path;
 	OnMaterialDropped();
 }
 
-LittleEngine::Resources::Material * LittleEditor::Panels::MaterialEditor::GetTarget() const
+LittleEngine::Resources::Material * LittleEngine::Editor::Panels::MaterialEditor::GetTarget() const
 {
 	return m_target;
 }
 
-void LittleEditor::Panels::MaterialEditor::RemoveTarget()
+void LittleEngine::Editor::Panels::MaterialEditor::RemoveTarget()
 {
 	m_target = nullptr;
 	m_targetMaterialText->content = "Empty";
 	OnMaterialDropped();
 }
 
-void LittleEditor::Panels::MaterialEditor::Preview()
+void LittleEngine::Editor::Panels::MaterialEditor::Preview()
 {
 	auto& assetView = EDITOR_PANEL(Panels::AssetView, "Asset View");
 
@@ -155,7 +155,7 @@ void LittleEditor::Panels::MaterialEditor::Preview()
 	assetView.Open();
 }
 
-void LittleEditor::Panels::MaterialEditor::Reset()
+void LittleEngine::Editor::Panels::MaterialEditor::Reset()
 {
 	if (m_target && m_shader)
 	{
@@ -164,7 +164,7 @@ void LittleEditor::Panels::MaterialEditor::Reset()
 	}
 }
 
-void LittleEditor::Panels::MaterialEditor::OnMaterialDropped()
+void LittleEngine::Editor::Panels::MaterialEditor::OnMaterialDropped()
 {
 	m_settings->enabled = m_target; // Enable m_settings group if the target material is non-null
 
@@ -186,7 +186,7 @@ void LittleEditor::Panels::MaterialEditor::OnMaterialDropped()
 		OnShaderDropped();
 }
 
-void LittleEditor::Panels::MaterialEditor::OnShaderDropped()
+void LittleEngine::Editor::Panels::MaterialEditor::OnShaderDropped()
 {
 	m_shaderSettings->enabled = m_shader; // Enable m_shaderSettings group if the shader of the target material is non-null
 
@@ -203,7 +203,7 @@ void LittleEditor::Panels::MaterialEditor::OnShaderDropped()
 	}
 }
 
-void LittleEditor::Panels::MaterialEditor::CreateHeaderButtons()
+void LittleEngine::Editor::Panels::MaterialEditor::CreateHeaderButtons()
 {
 	auto& saveButton = CreateWidget<Buttons::Button>("Save to file");
 	saveButton.idleBackgroundColor = { 0.0f, 0.5f, 0.0f };
@@ -237,28 +237,28 @@ void LittleEditor::Panels::MaterialEditor::CreateHeaderButtons()
 	resetButton.ClickedEvent += std::bind(&MaterialEditor::Reset, this);
 }
 
-void LittleEditor::Panels::MaterialEditor::CreateMaterialSelector()
+void LittleEngine::Editor::Panels::MaterialEditor::CreateMaterialSelector()
 {
 	auto& columns = CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 	columns.widths[0] = 150;
 	m_targetMaterialText = &GUIDrawer::DrawMaterial(columns, "Material", m_target, &m_materialDroppedEvent);
 }
 
-void LittleEditor::Panels::MaterialEditor::CreateShaderSelector()
+void LittleEngine::Editor::Panels::MaterialEditor::CreateShaderSelector()
 {
 	auto& columns = m_settings->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 	columns.widths[0] = 150;
 	m_shaderText = &GUIDrawer::DrawShader(columns, "Shader", m_shader, &m_shaderDroppedEvent);
 }
 
-void LittleEditor::Panels::MaterialEditor::CreateMaterialSettings()
+void LittleEngine::Editor::Panels::MaterialEditor::CreateMaterialSettings()
 {
 	m_materialSettings = &m_settings->CreateWidget<Layout::GroupCollapsable>("Material Settings");
 	m_materialSettingsColumns = &m_materialSettings->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 	m_materialSettingsColumns->widths[0] = 150;
 }
 
-void LittleEditor::Panels::MaterialEditor::CreateShaderSettings()
+void LittleEngine::Editor::Panels::MaterialEditor::CreateShaderSettings()
 {
 	m_shaderSettings = &m_settings->CreateWidget<Layout::GroupCollapsable>("Shader Settings");
 	m_shaderSettingsColumns = &m_shaderSettings->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
@@ -304,7 +304,7 @@ std::string UniformFormat(const std::string& p_string)
 	return result;
 }
 
-void LittleEditor::Panels::MaterialEditor::GenerateShaderSettingsContent()
+void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent()
 {
 	using namespace LittleEngine::Rendering::Resources;
 
@@ -355,7 +355,7 @@ void LittleEditor::Panels::MaterialEditor::GenerateShaderSettingsContent()
 	}
 }
 
-void LittleEditor::Panels::MaterialEditor::GenerateMaterialSettingsContent()
+void LittleEngine::Editor::Panels::MaterialEditor::GenerateMaterialSettingsContent()
 {
 	m_materialSettingsColumns->RemoveAllWidgets(); // Ensure that the m_shaderSettingsColumns is empty
 

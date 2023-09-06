@@ -11,6 +11,7 @@
 
 #include "Modules/Framework/ECS/SceneRenderer.h"
 
+#include "Components/CLight.h"
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
@@ -21,453 +22,497 @@
 #include "Modules/Rendering/Buffers/Framebuffer.h"
 #include "Modules/Rendering/Resources/Mesh.h"
 
-
-LittleEngine::SceneRenderer::SceneRenderer(LittleEngine::Rendering::Context::Driver& p_driver) :
-	LittleEngine::Rendering::Core::Renderer(p_driver),m_isGPUSkin(false),
-	m_emptyTexture(LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateColor
-	(
-		(255 << 24) | (255 << 16) | (255 << 8) | 255,
-		LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST,
-		LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST,
-		false
-	))
+namespace LittleEngine
 {
-	m_shadowmapBuffer = std::make_unique<LittleEngine::Rendering::Buffers::ShadowmapBuffer>(2048,2048);
-}
+    SceneRenderer::SceneRenderer(Rendering::Context::Driver& p_driver) :
+        Rendering::Core::Renderer(p_driver), m_isGPUSkin(false),
+        m_emptyTexture(Rendering::Resources::Loaders::TextureLoader::CreateColor
+            (
+                (255 << 24) | (255 << 16) | (255 << 8) | 255,
+                Rendering::Settings::ETextureFilteringMode::NEAREST,
+                Rendering::Settings::ETextureFilteringMode::NEAREST,
+                false
+            ))
+    {
+        m_shadowmapBuffer = std::make_unique<Rendering::Buffers::ShadowmapBuffer>(2048, 2048);
+    }
 
-LittleEngine::SceneRenderer::~SceneRenderer()
-{
-	LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(m_emptyTexture);
-}
+    SceneRenderer::~SceneRenderer()
+    {
+        Rendering::Resources::Loaders::TextureLoader::Destroy(m_emptyTexture);
+    }
 
-LittleEngine::CCamera* LittleEngine::SceneRenderer::FindMainCamera(const LittleEngine::SceneSystem::Scene& p_scene)
-{
-	for (LittleEngine::CCamera* camera : p_scene.GetFastAccessComponents().cameras)
-		if (camera->owner->IsActive())
-			return camera;
+    SharedPtr<CCamera> SceneRenderer::FindMainCamera(Scene* p_scene)
+    {
+        auto cameras = p_scene->GetFastAccessComponents().cameras;
+        for (auto cameraId : cameras)
+        {
+            auto camera = p_scene->GetActor(cameraId);
+            if (camera != nullptr && camera->IsActive())
+                return camera->GetComponent<CCamera>();
 
-	return nullptr;
-}
+            return nullptr;
+        }
+    }
 
-std::vector<LittleEngine::FMatrix4> LittleEngine::SceneRenderer::FindLightMatrices(const LittleEngine::SceneSystem::Scene& p_scene)
-{
-	std::vector<LittleEngine::FMatrix4> result;
+    std::vector<FMatrix4> SceneRenderer::FindLightMatrices(
+        const Scene& p_scene)
+    {
+        std::vector<FMatrix4> result;
 
-	const auto& facs = p_scene.GetFastAccessComponents();
+        for (auto light : p_scene.GetLights())
+        {
+            if (light->GetActor()->IsActive())
+            {
+                result.push_back(light->GetData().GenerateMatrix());
+            }
+        }
 
-	for (auto light : facs.lights)
-	{
-		if (light->owner->IsActive())
-		{
-			result.push_back(light->GetData().GenerateMatrix());
-		}
-	}
-
-	return result;
-}
-
-
-
-LittleEngine::CLight* LittleEngine::SceneRenderer::FindMainLight(const LittleEngine::SceneSystem::Scene& p_scene)
-{
-	const auto& facs = p_scene.GetFastAccessComponents();
-	float maxIntersity = -1;
-	CLight* mainLight = nullptr;
-	for (auto light : facs.lights)
-	{
-		if (light->owner->IsActive() && light->IsDirectional())
-		{
-			if(maxIntersity < light->GetIntensity())
-			{
-				maxIntersity = std::max(maxIntersity,light->GetIntensity());
-				mainLight = light;
-			}
-		}
-	}
-	return mainLight;
-}
-std::vector<LittleEngine::FMatrix4> LittleEngine::SceneRenderer::FindLightMatricesInFrustum(const LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum)
-{
-	std::vector<LittleEngine::FMatrix4> result;
-
-	const auto& facs = p_scene.GetFastAccessComponents();
-
-	for (auto light : facs.lights)
-	{
-		if (light->owner->IsActive())
-		{
-			const auto& lightData = light->GetData();
-			const auto& position = lightData.GetTransform().GetWorldPosition();
-			auto effectRange = lightData.GetEffectRange();
-
-			// We always consider lights that have an +inf range (Not necessary to test if they are in frustum)
-			if (std::isinf(effectRange) || p_frustum.SphereInFrustum(position.x, position.y, position.z, lightData.GetEffectRange()))
-			{
-				result.push_back(lightData.GenerateMatrix());
-			}
-		}
-	}
-
-	return result;
-}
-void LittleEngine::SceneRenderer::DrawShadowmap
-	(
-		LittleEngine::SceneSystem::Scene& p_scene,
-		const LittleEngine::FVector3& p_cameraPosition,
-		const LittleEngine::Rendering::LowRenderer::Camera& p_camera,
-		OpaqueDrawables&	opaqueMeshes
-	)
-{
-	PROFILER_SPY("DrawShadowmap");
-	int curFBO = LittleEngine::Rendering::Buffers::Framebuffer::m_curFrameBufferId;
-	m_shadowmapBuffer->Bind();
-	auto shadowMat = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::MaterialManager>()
-		.GetResource(":Materials/Shadowmap.ovmat");
-	auto mainLight = FindMainLight(p_scene);
-	if(mainLight != nullptr)
-	{
-		
-		//auto cameraMatrix = p_camera.GetProjectionMatrix();
-		//auto cameraView = p_camera.GetViewMatrix();
-		auto lightProject =  LittleEngine::FMatrix4::CreateOrthographic(10, 1, 0.1f, 100);
-		auto lightTran = mainLight->owner->transform;
-		auto pos = lightTran.GetWorldPosition();
-		auto forward = lightTran.GetWorldForward();
-		auto up = lightTran.GetWorldUp();
-		// TODO Use Correct light pos to cover the enough scene
-		auto lightRgihtPos =p_cameraPosition;
-		auto lightView =  LittleEngine::FMatrix4::CreateView(lightRgihtPos,	forward,up);
-		m_lightSpaceVPMatrix = lightProject*lightView;
-		m_lightInfo = LittleEngine::FVector4(pos.x,pos.y,pos.z,1);
-		uint8_t stateMask = shadowMat->GenerateStateMask();
-		ApplyStateMask(stateMask);
-		shadowMat->Bind(m_emptyTexture);
-		shadowMat->GetShader()->SetUniformMat4("u_LightSpaceMatrix", m_lightSpaceVPMatrix	);
-		for (const auto& [distance, drawable] : opaqueMeshes)
-		{
-			auto& modelMatrix = std::get<0>(drawable);
-			shadowMat->GetShader()->SetUniformMat4("u_Local2World",	modelMatrix);
-			auto mesh =std::get<1>(drawable);
-			Draw(*mesh, LittleEngine::Rendering::Settings::EPrimitiveMode::TRIANGLES, 1);
-		}
-		shadowMat->UnBind();
-	}
-	m_shadowmapBuffer->Unbind();
-	RecoverToLastViewPort();
-	glBindFramebuffer(GL_FRAMEBUFFER, curFBO);
-}
+        return result;
+    }
 
 
-void LittleEngine::SceneRenderer::RenderScene
-(
-	LittleEngine::SceneSystem::Scene& p_scene,
-	const LittleEngine::FVector3& p_cameraPosition,
-	const LittleEngine::Rendering::LowRenderer::Camera& p_camera,
-	const LittleEngine::Rendering::Data::Frustum* p_customFrustum,
-	LittleEngine::Resources::Material* p_defaultMaterial
-)
-{
-	OpaqueDrawables	opaqueMeshes;
-	TransparentDrawables transparentMeshes;
+    SharedPtr<CLight> SceneRenderer::FindMainLight(Scene& p_scene)
+    {
+        const auto& facs = p_scene.GetFastAccessComponents();
+        float maxIntersity = -1;
+        SharedPtr<CLight> mainLight = nullptr;
+        for (auto light : p_scene.GetLights())
+        {
+            if (light->GetActor()->IsActive() && light->IsDirectional())
+            {
+                if (maxIntersity < light->GetIntensity())
+                {
+                    maxIntersity = std::max(maxIntersity, light->GetIntensity());
+                    mainLight = light;
+                }
+            }
+        }
+        return mainLight;
+    }
 
-	if (p_camera.HasFrustumGeometryCulling())
-	{
-		const auto& frustum = p_customFrustum ? *p_customFrustum : p_camera.GetFrustum();
-		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortFrustumCulledDrawables(p_scene, p_cameraPosition, frustum, p_defaultMaterial);
-	}
-	else
-	{
-		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortDrawables(p_scene, p_cameraPosition, p_defaultMaterial);
-	}
+    std::vector<FMatrix4> SceneRenderer::FindLightMatricesInFrustum(
+        const Scene& p_scene, const Rendering::Data::Frustum& p_frustum)
+    {
+        std::vector<FMatrix4> result;
+        for (auto light : p_scene.GetLights())
+        {
+            if (light->GetActor()->IsActive())
+            {
+                const auto& lightData = light->GetData();
+                const auto& position = lightData.GetTransform()->GetWorldPosition();
+                auto effectRange = lightData.GetEffectRange();
 
-	// render shadow
-	
-	DrawShadowmap(p_scene,p_cameraPosition,p_camera,opaqueMeshes);
-	{
-		for (const auto& [distance, drawable] : opaqueMeshes)
-			DrawDrawable(drawable);
+                // We always consider lights that have an +inf range (Not necessary to test if they are in frustum)
+                if (std::isinf(effectRange) || p_frustum.SphereInFrustum(
+                    position.x, position.y, position.z, lightData.GetEffectRange()))
+                {
+                    result.push_back(lightData.GenerateMatrix());
+                }
+            }
+        }
 
-		for (const auto& [distance, drawable] : transparentMeshes)
-			DrawDrawable(drawable);
-	}
+        return result;
+    }
 
-	/*
-	if(p_camera.m_CameraType == LittleEngine::Rendering::Settings::ECameraType ::Game)
-		RenderUtils::DrawDebugQuad(m_shadowmapBuffer->GetTexture());
-	*/
-}
+    void SceneRenderer::DrawShadowmap
+    (
+        Scene& p_scene,
+        const FVector3& p_cameraPosition,
+        const Rendering::LowRenderer::Camera& p_camera,
+        OpaqueDrawables& opaqueMeshes
+    )
+    {
+        PROFILER_SPY("DrawShadowmap");
+        int curFBO = Rendering::Buffers::Framebuffer::m_curFrameBufferId;
+        m_shadowmapBuffer->Bind();
+        auto shadowMat = Global::ServiceLocator::Get<
+                ResourceManagement::MaterialManager>()
+            .GetResource(":Materials/Shadowmap.ovmat");
+        auto mainLight = FindMainLight(p_scene);
+        if (mainLight != nullptr)
+        {
+            //auto cameraMatrix = p_camera.GetProjectionMatrix();
+            //auto cameraView = p_camera.GetViewMatrix();
+            auto lightProject = FMatrix4::CreateOrthographic(10, 1, 0.1f, 100);
+            auto lightTran = mainLight->GetActor()->transform;
+            auto pos = lightTran->GetWorldPosition();
+            auto forward = lightTran->GetWorldForward();
+            auto up = lightTran->GetWorldUp();
+            // TODO Use Correct light pos to cover the enough scene
+            auto lightRgihtPos = p_cameraPosition;
+            auto lightView = FMatrix4::CreateView(lightRgihtPos, forward, up);
+            m_lightSpaceVPMatrix = lightProject * lightView;
+            m_lightInfo = FVector4(pos.x, pos.y, pos.z, 1);
+            uint8_t stateMask = shadowMat->GenerateStateMask();
+            ApplyStateMask(stateMask);
+            shadowMat->Bind(m_emptyTexture);
+            shadowMat->GetShader()->SetUniformMat4("u_LightSpaceMatrix", m_lightSpaceVPMatrix);
+            for (const auto& [distance, drawable] : opaqueMeshes)
+            {
+                auto& modelMatrix = std::get<0>(drawable);
+                shadowMat->GetShader()->SetUniformMat4("u_Local2World", modelMatrix);
+                auto mesh = std::get<1>(drawable);
+                Draw(*mesh, Rendering::Settings::EPrimitiveMode::TRIANGLES, 1);
+            }
+            shadowMat->UnBind();
+        }
+        m_shadowmapBuffer->Unbind();
+        RecoverToLastViewPort();
+        glBindFramebuffer(GL_FRAMEBUFFER, curFBO);
+    }
 
-std::vector<LittleEngine::FMatrix4>* GetBoneMatrix(LittleEngine::CModelRenderer* modelRenderer)
-{
-	auto model = modelRenderer->GetModel();
-	if(model && model->isSkinMesh)
-	{
-		auto anim = modelRenderer->owner->GetComponent<LittleEngine::CAnimator>();
-		if(anim != nullptr)
-		{
-			return anim->GetFinalBoneMatrices();
-		}
-	}
-	return nullptr;
-}
 
-void FindAndSortDrawables
-(
-	LittleEngine::SceneRenderer::OpaqueDrawables& p_opaques,
-	LittleEngine::SceneRenderer::TransparentDrawables& p_transparents,
-	const LittleEngine::SceneSystem::Scene& p_scene,
-	const LittleEngine::FVector3& p_cameraPosition,
-	LittleEngine::Resources::Material* p_defaultMaterial
-)
-{
-	for (LittleEngine::CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
-	{
-		if (modelRenderer->owner->IsActive())
-		{
-			if (auto model = modelRenderer->GetModel())
-			{
-				float distanceToActor = LittleEngine::FVector3::Distance(modelRenderer->owner->transform.GetWorldPosition(), p_cameraPosition);
-				if (auto materialRenderer = modelRenderer->owner->GetComponent<LittleEngine::CMaterialRenderer>())
-				{
-					const auto& transform = modelRenderer->owner->transform.GetFTransform();
+    void SceneRenderer::RenderScene
+    (
+        Scene& p_scene,
+        const FVector3& p_cameraPosition,
+        const Rendering::LowRenderer::Camera& p_camera,
+        const Rendering::Data::Frustum* p_customFrustum,
+        Resources::Material* p_defaultMaterial
+    )
+    {
+        OpaqueDrawables opaqueMeshes;
+        TransparentDrawables transparentMeshes;
 
-					const LittleEngine::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
+        if (p_camera.HasFrustumGeometryCulling())
+        {
+            const auto& frustum = p_customFrustum ? *p_customFrustum : p_camera.GetFrustum();
+            std::tie(opaqueMeshes, transparentMeshes) = FindAndSortFrustumCulledDrawables(
+                p_scene, p_cameraPosition, frustum, p_defaultMaterial);
+        }
+        else
+        {
+            std::tie(opaqueMeshes, transparentMeshes) = FindAndSortDrawables(
+                p_scene, p_cameraPosition, p_defaultMaterial);
+        }
 
-					std::vector<LittleEngine::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
-					for (auto mesh : model->GetMeshes())
-					{
-						LittleEngine::Resources::Material* material = nullptr;
+        // render shadow
 
-						if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
-						{
-							material = materials.at(mesh->GetMaterialIndex());
-							if (!material || !material->GetShader())
-								material = p_defaultMaterial;
-						}
+        DrawShadowmap(p_scene, p_cameraPosition, p_camera, opaqueMeshes);
+        {
+            for (const auto& [distance, drawable] : opaqueMeshes)
+                DrawDrawable(drawable);
 
-						if (material)
-						{
-							LittleEngine::SceneRenderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
+            for (const auto& [distance, drawable] : transparentMeshes)
+                DrawDrawable(drawable);
+        }
 
-							if (material->IsBlendable())
-								p_transparents.emplace(distanceToActor, element);
-							else
-								p_opaques.emplace(distanceToActor, element);
-						}
-					}
-				}
-			}
-		}
-	}
-}
+        /*
+        if(p_camera.m_CameraType == Rendering::Settings::ECameraType ::Game)
+            RenderUtils::DrawDebugQuad(m_shadowmapBuffer->GetTexture());
+        */
+    }
 
-std::pair<LittleEngine::SceneRenderer::OpaqueDrawables, LittleEngine::SceneRenderer::TransparentDrawables> LittleEngine::SceneRenderer::FindAndSortFrustumCulledDrawables
-(
-	const LittleEngine::SceneSystem::Scene& p_scene,
-	const LittleEngine::FVector3& p_cameraPosition,
-	const LittleEngine::Rendering::Data::Frustum& p_frustum,
-	LittleEngine::Resources::Material* p_defaultMaterial
-)
-{
-	using namespace LittleEngine;
+    std::vector<FMatrix4>* GetBoneMatrix(SharedPtr<CModelRenderer> modelRenderer)
+    {
+        auto model = modelRenderer->GetModel();
+        if (model && model->isSkinMesh)
+        {
+            auto anim = modelRenderer->GetActor()->GetComponent<CAnimator>();
+            if (anim != nullptr)
+            {
+                return anim->GetFinalBoneMatrices();
+            }
+        }
+        return nullptr;
+    }
 
-	LittleEngine::SceneRenderer::OpaqueDrawables opaqueDrawables;
-	LittleEngine::SceneRenderer::TransparentDrawables transparentDrawables;
+    void FindAndSortDrawables
+    (
+        SceneRenderer::OpaqueDrawables& p_opaques,
+        SceneRenderer::TransparentDrawables& p_transparents,
+        const Scene& p_scene,
+        const FVector3& p_cameraPosition,
+        Resources::Material* p_defaultMaterial
+    )
+    {
+        for (SharedPtr<CModelRenderer> modelRenderer : p_scene.GetRenderers())
+        {
+            if (modelRenderer->GetActor()->IsActive())
+            {
+                if (auto model = modelRenderer->GetModel())
+                {
+                    float distanceToActor = FVector3::Distance(
+                        modelRenderer->GetActor()->transform->GetWorldPosition(), p_cameraPosition);
+                    if (auto materialRenderer = modelRenderer->GetActor()->GetComponent<
+                        CMaterialRenderer>())
+                    {
+                        const auto transform = modelRenderer->GetActor()->transform->GetFTransform();
 
-	for (CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
-	{
-		auto actor = modelRenderer->owner;
+                        const CMaterialRenderer::MaterialList& materials = materialRenderer->
+                            GetMaterials();
 
-		if (actor->IsActive())
-		{
-			if (auto model = modelRenderer->GetModel())
-			{
-				if (auto materialRenderer = modelRenderer->owner->GetComponent<CMaterialRenderer>())
-				{
-					auto& transform = actor->transform.GetFTransform();
+                        std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
+                        for (auto mesh : model->GetMeshes())
+                        {
+                            Resources::Material* material = nullptr;
 
-					LittleEngine::Rendering::Settings::ECullingOptions cullingOptions = LittleEngine::Rendering::Settings::ECullingOptions::NONE;
+                            if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
+                            {
+                                material = materials.at(mesh->GetMaterialIndex());
+                                if (!material || !material->GetShader())
+                                    material = p_defaultMaterial;
+                            }
 
-					if (modelRenderer->GetFrustumBehaviour() != CModelRenderer::EFrustumBehaviour::DISABLED)
-					{
-						cullingOptions |= LittleEngine::Rendering::Settings::ECullingOptions::FRUSTUM_PER_MODEL;
-					}
+                            if (material)
+                            {
+                                SceneRenderer::Drawable element = {
+                                    transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),
+                                    boneAryPtr
+                                };
 
-					if (modelRenderer->GetFrustumBehaviour() == CModelRenderer::EFrustumBehaviour::CULL_MESHES)
-					{
-						cullingOptions |= LittleEngine::Rendering::Settings::ECullingOptions::FRUSTUM_PER_MESH;
-					}
+                                if (material->IsBlendable())
+                                    p_transparents.emplace(distanceToActor, element);
+                                else
+                                    p_opaques.emplace(distanceToActor, element);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-					const auto& modelBoundingSphere = modelRenderer->GetFrustumBehaviour() == CModelRenderer::EFrustumBehaviour::CULL_CUSTOM ? modelRenderer->GetCustomBoundingSphere() : model->GetBoundingSphere();
+    std::pair<SceneRenderer::OpaqueDrawables, SceneRenderer::TransparentDrawables>
+    SceneRenderer::FindAndSortFrustumCulledDrawables
+    (
+        const Scene& p_scene,
+        const FVector3& p_cameraPosition,
+        const Rendering::Data::Frustum& p_frustum,
+        Resources::Material* p_defaultMaterial
+    )
+    {
+        using namespace LittleEngine;
 
-					std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> meshes;
+        SceneRenderer::OpaqueDrawables opaqueDrawables;
+        SceneRenderer::TransparentDrawables transparentDrawables;
 
-					{
-						PROFILER_SPY("Frustum Culling");
-						meshes = GetMeshesInFrustum(*model, modelBoundingSphere, transform, p_frustum, cullingOptions);
-					}
+        for (SharedPtr<CModelRenderer> modelRenderer : p_scene.GetRenderers())
+        {
+            auto actor = modelRenderer->GetActor();
 
-					if (!meshes.empty())
-					{
-						float distanceToActor = LittleEngine::FVector3::Distance(transform.GetWorldPosition(), p_cameraPosition);
-						const LittleEngine::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
+            if (actor->IsActive())
+            {
+                if (auto model = modelRenderer->GetModel())
+                {
+                    if (auto materialRenderer = modelRenderer->GetActor()->GetComponent<CMaterialRenderer>())
+                    {
+                        auto& transform = actor->transform->GetFTransform();
 
-						std::vector<LittleEngine::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
-						for (const auto& mesh : meshes)
-						{
-							LittleEngine::Resources::Material* material = nullptr;
+                        Rendering::Settings::ECullingOptions cullingOptions =
+                            Rendering::Settings::ECullingOptions::NONE;
 
-							if (mesh.get().GetMaterialIndex() < MAX_MATERIAL_COUNT)
-							{
-								material = materials.at(mesh.get().GetMaterialIndex());
-								if (!material || !material->GetShader())
-									material = p_defaultMaterial;
-							}
+                        if (modelRenderer->GetFrustumBehaviour() != CModelRenderer::EFrustumBehaviour::DISABLED)
+                        {
+                            cullingOptions |= Rendering::Settings::ECullingOptions::FRUSTUM_PER_MODEL;
+                        }
 
-							if (material)
-							{
-								LittleEngine::SceneRenderer::Drawable element = { transform.GetWorldMatrix(), &mesh.get(), material, materialRenderer->GetUserMatrix() ,boneAryPtr};
+                        if (modelRenderer->GetFrustumBehaviour() == CModelRenderer::EFrustumBehaviour::CULL_MESHES)
+                        {
+                            cullingOptions |= Rendering::Settings::ECullingOptions::FRUSTUM_PER_MESH;
+                        }
 
-								if (material->IsBlendable())
-									transparentDrawables.emplace(distanceToActor, element);
-								else
-									opaqueDrawables.emplace(distanceToActor, element);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                        const auto& modelBoundingSphere =
+                            modelRenderer->GetFrustumBehaviour() == CModelRenderer::EFrustumBehaviour::CULL_CUSTOM
+                                ? modelRenderer->GetCustomBoundingSphere()
+                                : model->GetBoundingSphere();
 
-	return { opaqueDrawables, transparentDrawables };
-}
+                        std::vector<std::reference_wrapper<Rendering::Resources::Mesh>> meshes;
 
-std::pair<LittleEngine::SceneRenderer::OpaqueDrawables, LittleEngine::SceneRenderer::TransparentDrawables> LittleEngine::SceneRenderer::FindAndSortDrawables
-(
-	const LittleEngine::SceneSystem::Scene& p_scene,
-	const LittleEngine::FVector3& p_cameraPosition,
-	LittleEngine::Resources::Material* p_defaultMaterial
-)
-{
-	LittleEngine::SceneRenderer::OpaqueDrawables opaqueDrawables;
-	LittleEngine::SceneRenderer::TransparentDrawables transparentDrawables;
+                        {
+                            PROFILER_SPY("Frustum Culling");
+                            meshes = GetMeshesInFrustum(*model, modelBoundingSphere, transform, p_frustum,
+                                                        cullingOptions);
+                        }
 
-	for (LittleEngine::CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
-	{
-		if (modelRenderer->owner->IsActive())
-		{
-			if (auto model = modelRenderer->GetModel())
-			{
-				float distanceToActor = LittleEngine::FVector3::Distance(modelRenderer->owner->transform.GetWorldPosition(), p_cameraPosition);
+                        if (!meshes.empty())
+                        {
+                            float distanceToActor = FVector3::Distance(
+                                transform.GetWorldPosition(), p_cameraPosition);
+                            const CMaterialRenderer::MaterialList& materials = materialRenderer->
+                                GetMaterials();
 
-				if (auto materialRenderer = modelRenderer->owner->GetComponent<LittleEngine::CMaterialRenderer>())
-				{
-					const auto& transform = modelRenderer->owner->transform.GetFTransform();
+                            std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
+                            for (const auto& mesh : meshes)
+                            {
+                                Resources::Material* material = nullptr;
 
-					const LittleEngine::CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
+                                if (mesh.get().GetMaterialIndex() < MAX_MATERIAL_COUNT)
+                                {
+                                    material = materials.at(mesh.get().GetMaterialIndex());
+                                    if (!material || !material->GetShader())
+                                        material = p_defaultMaterial;
+                                }
 
-					std::vector<LittleEngine::FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
-					for (auto mesh : model->GetMeshes())
-					{
-						LittleEngine::Resources::Material* material = nullptr;
+                                if (material)
+                                {
+                                    SceneRenderer::Drawable element = {
+                                        transform.GetWorldMatrix(), &mesh.get(), material,
+                                        materialRenderer->GetUserMatrix(), boneAryPtr
+                                    };
 
-						if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
-						{
-							material = materials.at(mesh->GetMaterialIndex());
-							if (!material || !material->GetShader())
-								material = p_defaultMaterial;
-						}
+                                    if (material->IsBlendable())
+                                        transparentDrawables.emplace(distanceToActor, element);
+                                    else
+                                        opaqueDrawables.emplace(distanceToActor, element);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-						if (material)
-						{
-							LittleEngine::SceneRenderer::Drawable element = { transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),boneAryPtr };
+        return {opaqueDrawables, transparentDrawables};
+    }
 
-							if (material->IsBlendable())
-								transparentDrawables.emplace(distanceToActor, element);
-							else
-								opaqueDrawables.emplace(distanceToActor, element);
-						}
-					}
-				}
-			}
-		}
-	}
+    std::pair<SceneRenderer::OpaqueDrawables, SceneRenderer::TransparentDrawables>
+    SceneRenderer::FindAndSortDrawables
+    (
+        const Scene& p_scene,
+        const FVector3& p_cameraPosition,
+        Resources::Material* p_defaultMaterial
+    )
+    {
+        SceneRenderer::OpaqueDrawables opaqueDrawables;
+        SceneRenderer::TransparentDrawables transparentDrawables;
 
-	return { opaqueDrawables, transparentDrawables };
-}
+        for (SharedPtr<CModelRenderer> modelRenderer : p_scene.GetRenderers())
+        {
+            if (modelRenderer->GetActor()->IsActive())
+            {
+                if (auto model = modelRenderer->GetModel())
+                {
+                    float distanceToActor = FVector3::Distance(
+                        modelRenderer->GetActor()->transform->GetWorldPosition(), p_cameraPosition);
 
-void LittleEngine::SceneRenderer::DrawDrawable(const Drawable& p_toDraw)
-{
-	m_userMatrixSender(std::get<3>(p_toDraw));
-	DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw),std::get<4>(p_toDraw));
-}
+                    if (auto materialRenderer = modelRenderer->GetActor()->GetComponent<
+                        CMaterialRenderer>())
+                    {
+                        const auto& transform = modelRenderer->GetActor()->transform->GetFTransform();
 
-void LittleEngine::SceneRenderer::DrawModelWithSingleMaterial(LittleEngine::Rendering::Resources::Model& p_model, LittleEngine::Resources::Material& p_material, LittleEngine::FMatrix4 const* p_modelMatrix, LittleEngine::Resources::Material* p_defaultMaterial)
-{
-	if (p_modelMatrix)
-		m_modelMatrixSender(*p_modelMatrix);
+                        const CMaterialRenderer::MaterialList& materials = materialRenderer->
+                            GetMaterials();
 
-	for (auto mesh : p_model.GetMeshes())
-	{
-		LittleEngine::Resources::Material* material = p_material.GetShader() ? &p_material : p_defaultMaterial;
+                        std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
+                        for (auto mesh : model->GetMeshes())
+                        {
+                            Resources::Material* material = nullptr;
 
-		if (material)
-			DrawMesh(*mesh, *material, nullptr,nullptr);
-	}
-}
+                            if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
+                            {
+                                material = materials.at(mesh->GetMaterialIndex());
+                                if (!material || !material->GetShader())
+                                    material = p_defaultMaterial;
+                            }
 
-void LittleEngine::SceneRenderer::DrawModelWithMaterials(LittleEngine::Rendering::Resources::Model& p_model, std::vector<LittleEngine::Resources::Material*> p_materials, LittleEngine::FMatrix4 const* p_modelMatrix, LittleEngine::Resources::Material* p_defaultMaterial)
-{
-	if (p_modelMatrix)
-		m_modelMatrixSender(*p_modelMatrix);
+                            if (material)
+                            {
+                                SceneRenderer::Drawable element = {
+                                    transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),
+                                    boneAryPtr
+                                };
 
-	for (auto mesh : p_model.GetMeshes())
-	{
-		LittleEngine::Resources::Material* material = p_materials.size() > mesh->GetMaterialIndex() ? p_materials[mesh->GetMaterialIndex()] : p_defaultMaterial;
-		if (material)
-			DrawMesh(*mesh, *material, nullptr,nullptr);
-	}
-}
+                                if (material->IsBlendable())
+                                    transparentDrawables.emplace(distanceToActor, element);
+                                else
+                                    opaqueDrawables.emplace(distanceToActor, element);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-void LittleEngine::SceneRenderer::DrawMesh(LittleEngine::Rendering::Resources::Mesh& p_mesh, LittleEngine::Resources::Material& p_material, LittleEngine::FMatrix4 const* p_modelMatrix,
-std::vector<LittleEngine::FMatrix4>* p_boneMatrixAry
-)
-{
-	using namespace LittleEngine::Rendering::Settings;
-	p_material.Set("u_Shadowmap",m_shadowmapBuffer->GetTexture(),true);
-	if (p_material.HasShader() && p_material.GetGPUInstances() > 0)
-	{
-		if (p_modelMatrix)
-			m_modelMatrixSender(*p_modelMatrix);
+        return {opaqueDrawables, transparentDrawables};
+    }
 
-		uint8_t stateMask = p_material.GenerateStateMask();
-		ApplyStateMask(stateMask);
-		
-		/* Draw the mesh */
-		p_material.Bind(m_emptyTexture);
-		auto shader = p_material.GetShader();
-		shader->SetUniformMat4("u_LightSpaceMatrix",m_lightSpaceVPMatrix );
-		shader->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
-		if(m_isGPUSkin)
-		{
-			shader->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh?1:0));
-			if(p_mesh.isSkinMesh && p_boneMatrixAry != nullptr )
-			{
-				shader->SetUniformMat4Array("u_BonesMatrices",*p_boneMatrixAry);
-			}
-		}
-		Draw(p_mesh, LittleEngine::Rendering::Settings::EPrimitiveMode::TRIANGLES, p_material.GetGPUInstances());
-		p_material.UnBind();
-	}
-}
+    void SceneRenderer::DrawDrawable(const Drawable& p_toDraw)
+    {
+        m_userMatrixSender(std::get<3>(p_toDraw));
+        DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw), std::get<4>(p_toDraw));
+    }
 
-void LittleEngine::SceneRenderer::RegisterModelMatrixSender(std::function<void(LittleEngine::FMatrix4)> p_modelMatrixSender)
-{
-	m_modelMatrixSender = p_modelMatrixSender;
-}
+    void SceneRenderer::DrawModelWithSingleMaterial(
+        Rendering::Resources::Model& p_model, Resources::Material& p_material,
+        FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial)
+    {
+        if (p_modelMatrix)
+            m_modelMatrixSender(*p_modelMatrix);
 
-void LittleEngine::SceneRenderer::RegisterUserMatrixSender(std::function<void(LittleEngine::FMatrix4)> p_userMatrixSender)
-{
-	m_userMatrixSender = p_userMatrixSender;
+        for (auto mesh : p_model.GetMeshes())
+        {
+            Resources::Material* material = p_material.GetShader() ? &p_material : p_defaultMaterial;
+
+            if (material)
+                DrawMesh(*mesh, *material, nullptr, nullptr);
+        }
+    }
+
+    void SceneRenderer::DrawModelWithMaterials(Rendering::Resources::Model& p_model,
+                                               std::vector<Resources::Material*>
+                                               p_materials,
+                                               FMatrix4 const* p_modelMatrix,
+                                               Resources::Material* p_defaultMaterial)
+    {
+        if (p_modelMatrix)
+            m_modelMatrixSender(*p_modelMatrix);
+
+        for (auto mesh : p_model.GetMeshes())
+        {
+            Resources::Material* material = p_materials.size() > mesh->GetMaterialIndex()
+                                                ? p_materials[mesh->GetMaterialIndex()]
+                                                : p_defaultMaterial;
+            if (material)
+                DrawMesh(*mesh, *material, nullptr, nullptr);
+        }
+    }
+
+    void SceneRenderer::DrawMesh(Rendering::Resources::Mesh& p_mesh,
+                                 Resources::Material& p_material,
+                                 FMatrix4 const* p_modelMatrix,
+                                 std::vector<FMatrix4>* p_boneMatrixAry
+    )
+    {
+        using namespace Rendering::Settings;
+        p_material.Set("u_Shadowmap", m_shadowmapBuffer->GetTexture(), true);
+        if (p_material.HasShader() && p_material.GetGPUInstances() > 0)
+        {
+            if (p_modelMatrix)
+                m_modelMatrixSender(*p_modelMatrix);
+
+            uint8_t stateMask = p_material.GenerateStateMask();
+            ApplyStateMask(stateMask);
+
+            /* Draw the mesh */
+            p_material.Bind(m_emptyTexture);
+            auto shader = p_material.GetShader();
+            shader->SetUniformMat4("u_LightSpaceMatrix", m_lightSpaceVPMatrix);
+            shader->SetUniformVec4("u_ShadowLightPosition", m_lightInfo);
+            if (m_isGPUSkin)
+            {
+                shader->SetUniformInt("u_IsSkinMesh", (p_mesh.isSkinMesh ? 1 : 0));
+                if (p_mesh.isSkinMesh && p_boneMatrixAry != nullptr)
+                {
+                    shader->SetUniformMat4Array("u_BonesMatrices", *p_boneMatrixAry);
+                }
+            }
+            Draw(p_mesh, Rendering::Settings::EPrimitiveMode::TRIANGLES,
+                 p_material.GetGPUInstances());
+            p_material.UnBind();
+        }
+    }
+
+    void SceneRenderer::RegisterModelMatrixSender(
+        std::function<void(FMatrix4)> p_modelMatrixSender)
+    {
+        m_modelMatrixSender = p_modelMatrixSender;
+    }
+
+    void SceneRenderer::RegisterUserMatrixSender(
+        std::function<void(FMatrix4)> p_userMatrixSender)
+    {
+        m_userMatrixSender = p_userMatrixSender;
+    }
 }

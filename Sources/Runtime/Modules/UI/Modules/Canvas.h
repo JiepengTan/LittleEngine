@@ -12,9 +12,9 @@
 
 #include "Modules/UI/API/IDrawable.h"
 #include "Modules/UI/Panels/APanel.h"
-#include "Modules/UI/ImGui/imgui.h"
-#include "Modules/UI/ImGui/imgui_impl_glfw.h"
-#include "Modules/UI/ImGui/imgui_impl_opengl3.h"
+#include <ImGui/imgui.h>
+#include "ImGui/imgui_impl_glfw.h"
+#include "ImGui/imgui_impl_opengl3.h"
 
 namespace LittleEngine::UI::Modules
 {

@@ -18,15 +18,17 @@ namespace LittleEngine
 	/**
 	* Represents an audio source. Its position in the world is important if the spatial sound settings is on
 	*/
-	class CAudioSource : public Component
+	REFLECTION_TYPE(CAudioSource)
+	CLASS (CAudioSource : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CAudioSource)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CAudioSource(Actor& p_owner);
-		CAudioSource() = default;
+		void DoInit(ActorPtr p_owner) override;
+		CAudioSource();
 		/**
 		* Returns the name of the component
 		*/
@@ -164,13 +166,13 @@ namespace LittleEngine
 		*/
 		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
-	private:
 		virtual void OnEnable() override;
 		virtual void OnDisable() override;
-
+	private:
+		LittleEngine::Audio::Entities::AudioSource* GetSource();
 	private:
 		LittleEngine::Audio::Resources::Sound* m_sound = nullptr;
-		LittleEngine::Audio::Entities::AudioSource m_audioSource;
+		std::unique_ptr<LittleEngine::Audio::Entities::AudioSource> m_audioSource;
 		bool m_autoPlay = false;
 	};
 }

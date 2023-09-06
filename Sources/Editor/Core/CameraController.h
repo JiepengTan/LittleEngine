@@ -15,7 +15,7 @@
 #include "../Editor/Panels/Hierarchy.h"
 #include "../Editor/Panels/AView.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* A simple camera controller used to navigate into views
@@ -33,7 +33,7 @@ namespace LittleEditor::Core
 		*/
 		CameraController
 		(
-			LittleEditor::Panels::AView& p_view,
+			LittleEngine::Editor::Panels::AView& p_view,
 			LittleEngine::Rendering::LowRenderer::Camera& p_camera,
 			LittleEngine::FVector3& p_position,
 			LittleEngine::FQuaternion& p_rotation,
@@ -50,7 +50,7 @@ namespace LittleEditor::Core
 		* Asks the camera to move to the target actor
 		* @param p_target
 		*/
-		void MoveToTarget(LittleEngine::Actor& p_target);
+		void MoveToTarget(ActorPtr p_target);
 
 		/**
 		* Defines the speed of the camera
@@ -102,7 +102,7 @@ namespace LittleEditor::Core
 	private:
 		LittleEngine::Windowing::Inputs::InputManager& m_inputManager;
 		LittleEngine::Windowing::Window& m_window;
-		LittleEditor::Panels::AView& m_view;
+		LittleEngine::Editor::Panels::AView& m_view;
 		LittleEngine::Rendering::LowRenderer::Camera& m_camera;
 		LittleEngine::FVector3& m_cameraPosition;
 		LittleEngine::FQuaternion& m_cameraRotation;

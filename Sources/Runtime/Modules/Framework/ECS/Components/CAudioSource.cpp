@@ -13,11 +13,17 @@
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
-LittleEngine::CAudioSource::CAudioSource(Actor& p_owner) :
-	Component(p_owner),
-	m_audioSource(LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioPlayer>(), owner->transform.GetFTransform())
+
+
+void LittleEngine::CAudioSource::DoInit(ActorPtr p_owner)
 {
+	Component::DoInit(p_owner);
+	m_audioSource = MakeUniquePtr<LittleEngine::Audio::Entities::AudioSource>
+	(LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioPlayer>(),
+		GetActor()->transform->GetFTransform());
 }
+
+LittleEngine::CAudioSource::CAudioSource()= default;
 
 std::string LittleEngine::CAudioSource::GetName()
 {
@@ -36,32 +42,32 @@ void LittleEngine::CAudioSource::SetAutoplay(bool p_autoplay)
 
 void LittleEngine::CAudioSource::SetVolume(float p_volume)
 {
-	m_audioSource.SetVolume(p_volume);
+	m_audioSource->SetVolume(p_volume);
 }
 
 void LittleEngine::CAudioSource::SetPan(float p_pan)
 {
-	m_audioSource.SetPan(p_pan);
+	m_audioSource->SetPan(p_pan);
 }
 
 void LittleEngine::CAudioSource::SetLooped(bool p_looped)
 {
-	m_audioSource.SetLooped(p_looped);
+	m_audioSource->SetLooped(p_looped);
 }
 
 void LittleEngine::CAudioSource::SetPitch(float p_pitch)
 {
-	m_audioSource.SetPitch(p_pitch);
+	m_audioSource->SetPitch(p_pitch);
 }
 
 void LittleEngine::CAudioSource::SetSpatial(bool p_value)
 {
-	m_audioSource.SetSpatial(p_value);
+	m_audioSource->SetSpatial(p_value);
 }
 
 void LittleEngine::CAudioSource::SetAttenuationThreshold(float p_distance)
 {
-	m_audioSource.SetAttenuationThreshold(p_distance);
+	m_audioSource->SetAttenuationThreshold(p_distance);
 }
 
 LittleEngine::Audio::Resources::Sound* LittleEngine::CAudioSource::GetSound() const
@@ -76,61 +82,61 @@ bool LittleEngine::CAudioSource::IsAutoplayed() const
 
 float LittleEngine::CAudioSource::GetVolume() const
 {
-	return m_audioSource.GetVolume();
+	return m_audioSource->GetVolume();
 }
 
 float LittleEngine::CAudioSource::GetPan() const
 {
-	return m_audioSource.GetPan();
+	return m_audioSource->GetPan();
 }
 
 bool LittleEngine::CAudioSource::IsLooped() const
 {
-	return m_audioSource.IsLooped();
+	return m_audioSource->IsLooped();
 }
 
 float LittleEngine::CAudioSource::GetPitch() const
 {
-	return m_audioSource.GetPitch();
+	return m_audioSource->GetPitch();
 }
 
 bool LittleEngine::CAudioSource::IsFinished() const
 {
-	return m_audioSource.IsFinished();
+	return m_audioSource->IsFinished();
 }
 
 bool LittleEngine::CAudioSource::IsSpatial() const
 {
-	return m_audioSource.IsSpatial();
+	return m_audioSource->IsSpatial();
 }
 
 float LittleEngine::CAudioSource::GetAttenuationThreshold() const
 {
-	return m_audioSource.GetAttenuationThreshold();
+	return m_audioSource->GetAttenuationThreshold();
 }
 
 void LittleEngine::CAudioSource::Play()
 {
-	if (owner->IsActive() && m_sound)
-		m_audioSource.Play(*m_sound);
+	if (GetActor()->IsActive() && m_sound)
+		m_audioSource->Play(*m_sound);
 }
 
 void LittleEngine::CAudioSource::Pause()
 {
-	if (owner->IsActive())
-		m_audioSource.Pause();
+	if (GetActor()->IsActive())
+		m_audioSource->Pause();
 }
 
 void LittleEngine::CAudioSource::Resume()
 {
-	if (owner->IsActive())
-		m_audioSource.Resume();
+	if (GetActor()->IsActive())
+		m_audioSource->Resume();
 }
 
 void LittleEngine::CAudioSource::Stop()
 {
-	if (owner->IsActive())
-		m_audioSource.Stop();
+	if (GetActor()->IsActive())
+		m_audioSource->Stop();
 }
 
 void LittleEngine::CAudioSource::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
@@ -188,16 +194,16 @@ void LittleEngine::CAudioSource::OnInspector(LittleEngine::UI::Internal::WidgetC
 		std::vector<float> result;
 
 		LittleEngine::FVector3 listenerPosition(0.0f, 0.0f, 0.0f);
-		bool playMode = LittleEngine::Global::ServiceLocator::Get<SceneSystem::SceneManager>().GetCurrentScene()->IsPlaying();
+		bool playMode = LittleEngine::Global::ServiceLocator::Get<SceneManager>().GetCurrentScene()->IsPlaying();
 		auto listenerInfo = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioEngine>().GetListenerInformation(!playMode);
 		if (listenerInfo.has_value())
 			listenerPosition = listenerInfo.value().first;
 
-		float distanceToListener = LittleEngine::FVector3::Distance(listenerPosition, owner->transform.GetWorldPosition());
+		float distanceToListener = LittleEngine::FVector3::Distance(listenerPosition, GetActor()->transform->GetWorldPosition());
 
 		for (float graphX = 0.0f; graphX < 50.0f; graphX += 0.25f)
 		{
-			float graphY = graphX < m_audioSource.GetAttenuationThreshold() ? 1.0f : 1.0f / (1.0f + 1.0f * (graphX - m_audioSource.GetAttenuationThreshold()));
+			float graphY = graphX < m_audioSource->GetAttenuationThreshold() ? 1.0f : 1.0f / (1.0f + 1.0f * (graphX - m_audioSource->GetAttenuationThreshold()));
 
 			if (abs(graphX - distanceToListener) <= 0.25f)
 			{
@@ -220,5 +226,5 @@ void LittleEngine::CAudioSource::OnEnable()
 
 void LittleEngine::CAudioSource::OnDisable()
 {
-	m_audioSource.Stop();
+	m_audioSource->Stop();
 }

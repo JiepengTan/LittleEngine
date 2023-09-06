@@ -15,12 +15,15 @@ LittleEngine::Audio::Entities::AudioListener::AudioListener() :
 {
 	Setup();
 }
-
-LittleEngine::Audio::Entities::AudioListener::AudioListener(LittleEngine::FTransform& p_transform) :
-	m_transform(&p_transform),
-	m_internalTransform(false)
+void LittleEngine::Audio::Entities::AudioListener::DoInit(LittleEngine::FTransform& p_transform) 
 {
+	m_transform = &p_transform;
+	m_internalTransform = false;
 	Setup();
+}
+LittleEngine::Audio::Entities::AudioListener::AudioListener(LittleEngine::FTransform& p_transform) 
+{
+	DoInit(p_transform);
 }
 
 LittleEngine::Audio::Entities::AudioListener::~AudioListener()

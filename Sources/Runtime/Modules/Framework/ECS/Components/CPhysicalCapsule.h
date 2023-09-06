@@ -24,7 +24,7 @@ namespace LittleEngine
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalCapsule(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CPhysicalCapsule() = default;
 		/**
 		* Returns the name of the component

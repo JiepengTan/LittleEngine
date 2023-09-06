@@ -11,10 +11,11 @@
 
 using namespace LittleEngine::Physics::Entities;
 
-LittleEngine::CPhysicalBox::CPhysicalBox(Actor & p_owner) :
-	CPhysicalObject(p_owner)
+
+void LittleEngine::CPhysicalBox::DoInit(ActorPtr p_owner)
 {
-	m_physicalObject = std::make_unique<LittleEngine::Physics::Entities::PhysicalBox>(p_owner.transform.GetFTransform());
+	CPhysicalObject::DoInit(p_owner);
+	m_physicalObject = std::make_unique<LittleEngine::Physics::Entities::PhysicalBox>(p_owner->transform->GetFTransform());
 
 	m_physicalObject->SetUserData<std::reference_wrapper<CPhysicalObject>>(*this);
 

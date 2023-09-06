@@ -13,9 +13,9 @@
 #include "Modules/Rendering/Buffers/Framebuffer.h"
 #include "Modules/Rendering/LowRenderer/Camera.h"
 
-namespace LittleEditor::Core { class EditorRenderer; }
+namespace LittleEngine::Editor::Core { class EditorRenderer; }
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	/**
 	* Base class for any view
@@ -112,7 +112,7 @@ namespace LittleEditor::Panels
 		void PrepareCamera();
 
 	protected:
-		LittleEditor::Core::EditorRenderer& m_editorRenderer;
+		LittleEngine::Editor::Core::EditorRenderer& m_editorRenderer;
 		LittleEngine::Rendering::LowRenderer::Camera m_camera;
 		LittleEngine::FVector3 m_cameraPosition;
 		LittleEngine::FQuaternion m_cameraRotation;

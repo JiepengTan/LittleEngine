@@ -24,7 +24,7 @@ namespace LittleEngine
 				if (!pfrResult.valid())
 				{
 					sol::error err = pfrResult;
-					OVLOG_ERROR(err.what());
+					LOG_ERROR(err.what());
 				}
 			}
 		}

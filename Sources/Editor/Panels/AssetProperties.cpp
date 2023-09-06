@@ -25,7 +25,7 @@
 #include "../Editor/Panels/AssetView.h"
 #include "../Editor/Core/EditorActions.h"
 
-LittleEditor::Panels::AssetProperties::AssetProperties
+LittleEngine::Editor::Panels::AssetProperties::AssetProperties
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -53,7 +53,7 @@ LittleEditor::Panels::AssetProperties::AssetProperties
     m_settings->enabled = m_info->enabled = false;
 }
 
-void LittleEditor::Panels::AssetProperties::SetTarget(const std::string& p_path)
+void LittleEngine::Editor::Panels::AssetProperties::SetTarget(const std::string& p_path)
 {
 	m_resource = p_path == "" ? p_path : EDITOR_EXEC(GetResourcePath(p_path));
 
@@ -65,7 +65,7 @@ void LittleEditor::Panels::AssetProperties::SetTarget(const std::string& p_path)
     Refresh();
 }
 
-void LittleEditor::Panels::AssetProperties::Refresh()
+void LittleEngine::Editor::Panels::AssetProperties::Refresh()
 {
     m_metadata.reset(new LittleEngine::Filesystem::IniFile(EDITOR_EXEC(GetRealPath(m_resource)) + ".meta"));
 
@@ -93,9 +93,9 @@ void LittleEditor::Panels::AssetProperties::Refresh()
     m_headerLineBreak->enabled = m_headerSeparator->enabled;
 }
 
-void LittleEditor::Panels::AssetProperties::Preview()
+void LittleEngine::Editor::Panels::AssetProperties::Preview()
 {
-	auto& assetView = EDITOR_PANEL(LittleEditor::Panels::AssetView, "Asset View");
+	auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 
 	const auto fileType = LittleEngine::Utils::PathParser::GetFileType(m_resource);
 
@@ -117,7 +117,7 @@ void LittleEditor::Panels::AssetProperties::Preview()
 	assetView.Open();
 }
 
-void LittleEditor::Panels::AssetProperties::CreateHeaderButtons()
+void LittleEngine::Editor::Panels::AssetProperties::CreateHeaderButtons()
 {
 	m_applyButton = &CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Apply");
     m_applyButton->idleBackgroundColor = { 0.0f, 0.5f, 0.0f };
@@ -151,14 +151,14 @@ void LittleEditor::Panels::AssetProperties::CreateHeaderButtons()
     m_headerLineBreak->enabled = false;
 }
 
-void LittleEditor::Panels::AssetProperties::CreateAssetSelector()
+void LittleEngine::Editor::Panels::AssetProperties::CreateAssetSelector()
 {
     auto& columns = CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
     columns.widths[0] = 150;
     m_assetSelector = &LittleEngine::Helpers::GUIDrawer::DrawAsset(columns, "Target", m_resource, &m_targetChanged);
 }
 
-void LittleEditor::Panels::AssetProperties::CreateSettings()
+void LittleEngine::Editor::Panels::AssetProperties::CreateSettings()
 {
 	m_settingsColumns->RemoveAllWidgets();
 
@@ -180,7 +180,7 @@ void LittleEditor::Panels::AssetProperties::CreateSettings()
     }
 }
 
-void LittleEditor::Panels::AssetProperties::CreateInfo()
+void LittleEngine::Editor::Panels::AssetProperties::CreateInfo()
 {
     const auto realPath = EDITOR_EXEC(GetRealPath(m_resource));
 
@@ -208,7 +208,7 @@ void LittleEditor::Panels::AssetProperties::CreateInfo()
 
 #define MODEL_FLAG_ENTRY(setting) LittleEngine::Helpers::GUIDrawer::DrawBoolean(*m_settingsColumns, setting, [&]() { return m_metadata->Get<bool>(setting); }, [&](bool value) { m_metadata->Set<bool>(setting, value); })
 
-void LittleEditor::Panels::AssetProperties::CreateModelSettings()
+void LittleEngine::Editor::Panels::AssetProperties::CreateModelSettings()
 {
 	m_metadata->Add("CALC_TANGENT_SPACE", true);
 	m_metadata->Add("JOIN_IDENTICAL_VERTICES", true);
@@ -275,7 +275,7 @@ void LittleEditor::Panels::AssetProperties::CreateModelSettings()
 	MODEL_FLAG_ENTRY("GEN_BOUNDING_BOXES");
 };
 
-void LittleEditor::Panels::AssetProperties::CreateTextureSettings()
+void LittleEngine::Editor::Panels::AssetProperties::CreateTextureSettings()
 {
 	m_metadata->Add("MIN_FILTER", static_cast<int>(LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
 	m_metadata->Add("MAG_FILTER", static_cast<int>(LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR));
@@ -310,7 +310,7 @@ void LittleEditor::Panels::AssetProperties::CreateTextureSettings()
 	LittleEngine::Helpers::GUIDrawer::DrawBoolean(*m_settingsColumns, "ENABLE_MIPMAPPING", [&]() { return m_metadata->Get<bool>("ENABLE_MIPMAPPING"); }, [&](bool value) { m_metadata->Set<bool>("ENABLE_MIPMAPPING", value); });
 }
 
-void LittleEditor::Panels::AssetProperties::Apply()
+void LittleEngine::Editor::Panels::AssetProperties::Apply()
 {
 	m_metadata->Rewrite();
 

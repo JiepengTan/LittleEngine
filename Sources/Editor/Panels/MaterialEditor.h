@@ -14,7 +14,7 @@
 
 namespace LittleEngine::Resources { class Material; }
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class MaterialEditor : public LittleEngine::UI::Panels::PanelWindow
 	{

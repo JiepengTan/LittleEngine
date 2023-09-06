@@ -23,7 +23,7 @@ std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio
 		if (sound)
 			result = std::make_unique<Tracking::SoundTracker>(sound);
 		else
-			OVLOG_ERROR("Unable to play \"" + p_sound.path + "\"");
+			LOG_ERROR("Unable to play \"" + p_sound.path + "\"");
 	}
 
 	return result;
@@ -40,7 +40,7 @@ std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio
 		if (sound)
 			result = std::make_unique<Tracking::SoundTracker>(sound);
 		else
-			OVLOG_ERROR("Unable to play \"" + p_sound.path + "\"");
+			LOG_ERROR("Unable to play \"" + p_sound.path + "\"");
 	}
 
 	return result;

@@ -15,14 +15,16 @@ namespace LittleEngine
 	/**
 	* Represents an ambient light with a sphere shape
 	*/
-	class CAmbientSphereLight : public CLight
+	REFLECTION_TYPE(CAmbientSphereLight)
+	CLASS (CAmbientSphereLight : public CLight, WhiteListFields)
 	{
+		REFLECTION_BODY(CAmbientSphereLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CAmbientSphereLight(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CAmbientSphereLight() = default;
 		/**
 		* Returns the name of the component

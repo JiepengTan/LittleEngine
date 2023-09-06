@@ -18,8 +18,10 @@ namespace LittleEngine
 	/**
 	* A ModelRenderer is necessary in combination with a MaterialRenderer to render a model in the world
 	*/
-	class CModelRenderer : public Component
+	REFLECTION_TYPE(CModelRenderer)
+	CLASS (CModelRenderer : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CModelRenderer)
 	public:
 		/**
 		* Defines how the model renderer bounding sphere should be interpreted
@@ -36,7 +38,7 @@ namespace LittleEngine
 		* Constructor
 		* @param p_owner
 		*/
-		CModelRenderer(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CModelRenderer() = default;
 		/**
 		* Returns the name of the component

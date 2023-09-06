@@ -7,7 +7,7 @@
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Internal/Converter.h"
 
-#include "Modules/UI/ImGui/imgui_internal.h"
+#include "ImGui/imgui_internal.h"
 
 LittleEngine::UI::Panels::PanelWindow::PanelWindow(const std::string& p_name, bool p_opened, const Settings::PanelWindowSettings& p_floatingPanelSettings) :
 	name(p_name),

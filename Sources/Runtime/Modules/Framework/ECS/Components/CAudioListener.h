@@ -20,14 +20,17 @@ namespace LittleEngine
 	* Represents an audio listener. The distance between audio sources and audio listener will affect the sound
 	* attenuation of spatialized sounds
 	*/
-	class CAudioListener : public Component
+	REFLECTION_TYPE(CAudioListener)
+	CLASS (CAudioListener : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CAudioListener)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CAudioListener(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
+
 		CAudioListener() = default;
 		/**
 		* Returns the name of the component
@@ -54,7 +57,7 @@ namespace LittleEngine
 		*/
 		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
 
-	private:
+	public:
 		virtual void OnEnable() override;
 		virtual void OnDisable() override;
 

@@ -8,20 +8,22 @@
 
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Core/Tools/Filesystem/IniFile.h"
+#include "Core/CoreInclude.h"
+#include "Modules/Framework/ECS/Actor.h"
 #include "Core/Tools/Utils/PathParser.h"
 
 #include "../Editor/Core/Context.h"
 #include "../Editor/Core/EditorRenderer.h"
 #include "../Editor/Core/PanelsManager.h"
 
-#define EDITOR_EXEC(action)					LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().action
-#define EDITOR_BIND(method, ...)			std::bind(&LittleEditor::Core::EditorActions::method, &LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>(), ##__VA_ARGS__)
-#define EDITOR_EVENT(target)				LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().target
-#define EDITOR_CONTEXT(instance)			LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetContext().instance
-#define EDITOR_RENDERER()					LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetRenderer()
-#define EDITOR_PANEL(type, id)				LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
+#define EDITOR_EXEC(action)					LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().action
+#define EDITOR_BIND(method, ...)			std::bind(&LittleEngine::Editor::Core::EditorActions::method, &LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>(), ##__VA_ARGS__)
+#define EDITOR_EVENT(target)				LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().target
+#define EDITOR_CONTEXT(instance)			LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetContext().instance
+#define EDITOR_RENDERER()					LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetRenderer()
+#define EDITOR_PANEL(type, id)				LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* A set of editor actions
@@ -158,7 +160,7 @@ namespace LittleEditor::Core
 		* @param p_focusOnCreation
 		* @param p_parent
 		*/
-		template<typename T> LittleEngine::Actor& CreateMonoComponentActor(bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr);
+		template<typename T> ActorPtr CreateMonoComponentActor(bool p_focusOnCreation = true, ActorPtr p_parent = nullptr);
 
 		/**
 		* Calculate the position where to spawn the actor using the current camera position and forward
@@ -172,7 +174,7 @@ namespace LittleEditor::Core
 		* @param p_parent
         * @param p_name
 		*/
-		LittleEngine::Actor&	CreateEmptyActor(bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr, const std::string& p_name = "");
+		ActorPtr	CreateEmptyActor(bool p_focusOnCreation = true, ActorPtr p_parent = nullptr, const std::string& p_name = "");
 
 		/**
 		* Create an actor with a model renderer and a material renderer. The model renderer with use the model identified
@@ -182,14 +184,14 @@ namespace LittleEditor::Core
 		* @param p_parent
         * @param p_name
 		*/
-		LittleEngine::Actor&	CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation = true, LittleEngine::Actor* p_parent = nullptr, const std::string& p_name = "");
+		ActorPtr	CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation = true, ActorPtr p_parent = nullptr, const std::string& p_name = "");
 
 		/**
 		* Destroy an actor from his scene
 		* @param p_focusOnCreation
 		* @param p_parent
 		*/
-		bool DestroyActor(LittleEngine::Actor& p_actor);
+		bool DestroyActor(ActorPtr p_actor);
 
 		/**
 		* Duplicate an actor
@@ -197,7 +199,7 @@ namespace LittleEditor::Core
 		* @param p_forcedParent
 		* @param bool
 		*/
-		void DuplicateActor(LittleEngine::Actor& p_toDuplicate, LittleEngine::Actor* p_forcedParent = nullptr, bool p_focus = true);
+		void DuplicateActor(ActorPtr p_toDuplicate, ActorPtr p_forcedParent = nullptr, bool p_focus = true);
 		#pragma endregion
 
 		#pragma region ACTOR_MANIPULATION
@@ -205,7 +207,7 @@ namespace LittleEditor::Core
 		* Select an actor and show him in inspector
 		* @param p_target
 		*/
-		void SelectActor(LittleEngine::Actor& p_target);
+		void SelectActor(ActorPtr p_target);
 
 		/**
 		* Unselect any selected actor and clearing the inspector
@@ -221,12 +223,12 @@ namespace LittleEditor::Core
 		* Returns the selected actor. Make sur you verified that an actor is selected
 		* with IsAnyActorSelected() before calling this method
 		*/
-		LittleEngine::Actor&		GetSelectedActor() const;
+		ActorPtr		GetSelectedActor() const;
 
 		/**
 		* Moves the camera to the target actor
 		*/
-		void					MoveToTarget(LittleEngine::Actor& p_target);
+		void					MoveToTarget(ActorPtr p_target);
 		/**
 		* Select Asset
 		*/
@@ -408,8 +410,8 @@ namespace LittleEditor::Core
 		#pragma endregion
 
 	public:
-		LittleEngine::Eventing::Event<LittleEngine::Actor&> ActorSelectedEvent;
-		LittleEngine::Eventing::Event<LittleEngine::Actor&> ActorUnselectedEvent;
+		LittleEngine::Eventing::Event<ActorPtr> ActorSelectedEvent;
+		LittleEngine::Eventing::Event<ActorPtr> ActorUnselectedEvent;
 		LittleEngine::Eventing::Event<EEditorMode> EditorModeChangedEvent;
 		LittleEngine::Eventing::Event<> PlayEvent;
 

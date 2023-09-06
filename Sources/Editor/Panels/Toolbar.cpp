@@ -12,7 +12,7 @@
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Rendering/ResourceManagement/TextureManager.h"
 
-LittleEditor::Panels::Toolbar::Toolbar
+LittleEngine::Editor::Panels::Toolbar::Toolbar
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -43,7 +43,7 @@ LittleEditor::Panels::Toolbar::Toolbar
 	m_nextButton->ClickedEvent	+= EDITOR_BIND(NextFrame);
 	refreshButton.ClickedEvent	+= EDITOR_BIND(RefreshScripts);
 
-	EDITOR_EVENT(EditorModeChangedEvent) += [this](LittleEditor::Core::EditorActions::EEditorMode p_newMode)
+	EDITOR_EVENT(EditorModeChangedEvent) += [this](LittleEngine::Editor::Core::EditorActions::EEditorMode p_newMode)
 	{
 		auto enable = [](LittleEngine::UI::Widgets::Buttons::ButtonImage* p_button, bool p_enable)
 		{
@@ -53,25 +53,25 @@ LittleEditor::Panels::Toolbar::Toolbar
 
 		switch (p_newMode)
 		{
-		case LittleEditor::Core::EditorActions::EEditorMode::EDIT:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
 			enable(m_stopButton, false);
 			enable(m_nextButton, false);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::PLAY:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::PLAY:
 			enable(m_playButton, false);
 			enable(m_pauseButton, true);
 			enable(m_stopButton, true);
 			enable(m_nextButton, true);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::PAUSE:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::PAUSE:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
 			enable(m_stopButton, true);
 			enable(m_nextButton, true);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
 			enable(m_stopButton, true);
@@ -80,10 +80,10 @@ LittleEditor::Panels::Toolbar::Toolbar
 		}
 	};
 
-	EDITOR_EXEC(SetEditorMode(LittleEditor::Core::EditorActions::EEditorMode::EDIT));
+	EDITOR_EXEC(SetEditorMode(LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT));
 }
 
-void LittleEditor::Panels::Toolbar::_Draw_Impl()
+void LittleEngine::Editor::Panels::Toolbar::_Draw_Impl()
 {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10, 10));
 

@@ -62,7 +62,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level2</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\3rdParty\misc;..\3rdParty\imgui;.;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rdParty\misc;..\3rdParty\imgui;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -773,6 +773,14 @@
     <Content Include="_CodeTemplate\allSerializer.ipp.mustache" />
     <Content Include="_CodeTemplate\commonReflectionFile.mustache" />
     <Content Include="_CodeTemplate\commonSerializerGenFile.mustache" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\3rdParty\imgui\imgui.vcxproj">
+      <Project>{60a8e6b5-f1a7-468c-9b4d-5dd889701001}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\3rdParty\misc\misc.vcxproj">
+      <Project>{60a8e6b5-f1a7-468c-9b4d-5dd889701002}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

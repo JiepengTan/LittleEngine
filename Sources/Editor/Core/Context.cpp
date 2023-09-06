@@ -16,7 +16,7 @@
 using namespace LittleEngine::Global;
 using namespace LittleEngine::ResourceManagement;
 
-LittleEditor::Core::Context::Context(const std::string& p_projectPath, const std::string& p_projectName) :
+LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, const std::string& p_projectName) :
 	projectPath(p_projectPath),
 	projectName(p_projectName),
 	projectFilePath(p_projectPath + p_projectName + ".ovproject"),
@@ -66,19 +66,19 @@ LittleEditor::Core::Context::Context(const std::string& p_projectPath, const std
 	renderer->SetCapability(LittleEngine::Rendering::Settings::ERenderingCapability::MULTISAMPLE, true);
 	shapeDrawer = std::make_unique<LittleEngine::Rendering::Core::ShapeDrawer>(*renderer);
 
-	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\");
+	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\");
 
 	uiManager = std::make_unique<LittleEngine::UI::Core::UIManager>(window->GetGlfwWindow(), LittleEngine::UI::Styling::EStyle::ALTERNATIVE_DARK);
 	uiManager->LoadFont("Ruda_Big", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
 	uiManager->LoadFont("Ruda_Small", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
 	uiManager->LoadFont("Ruda_Medium", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 14);
 	uiManager->UseFont("Ruda_Medium");
-	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini");
+	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\layout.ini");
 	uiManager->SetEditorLayoutAutosaveFrequency(60.0f);
 	uiManager->EnableEditorLayoutSave(true);
 	uiManager->EnableDocking(true);
 
-	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini"))
+	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\layout.ini"))
 		uiManager->ResetLayout("Config\\layout.ini");
 
 	/* Audio */
@@ -86,7 +86,7 @@ LittleEditor::Core::Context::Context(const std::string& p_projectPath, const std
 	audioPlayer = std::make_unique<LittleEngine::Audio::Core::AudioPlayer>(*audioEngine);
 
 	/* Editor resources */
-	editorResources = std::make_unique<LittleEditor::Core::EditorResources>(editorAssetsPath);
+	editorResources = std::make_unique<LittleEngine::Editor::Core::EditorResources>(editorAssetsPath);
 
 	/* Physics engine */
 	physicsEngine = std::make_unique<LittleEngine::Physics::Core::PhysicsEngine>(LittleEngine::Physics::Settings::PhysicsSettings{ {0.0f, -9.81f, 0.0f } });
@@ -101,7 +101,7 @@ LittleEditor::Core::Context::Context(const std::string& p_projectPath, const std
 	ServiceLocator::Provide<AnimationManager>(animationManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Window>(*window);
-	ServiceLocator::Provide<LittleEngine::SceneSystem::SceneManager>(sceneManager);
+	ServiceLocator::Provide<LittleEngine::SceneManager>(sceneManager);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioEngine>(*audioEngine);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioPlayer>(*audioPlayer);
 	
@@ -146,7 +146,7 @@ LittleEditor::Core::Context::Context(const std::string& p_projectPath, const std
 	ApplyProjectSettings();
 }
 
-LittleEditor::Core::Context::~Context()
+LittleEngine::Editor::Core::Context::~Context()
 {
 	modelManager.UnloadResources();
 	textureManager.UnloadResources();
@@ -155,7 +155,7 @@ LittleEditor::Core::Context::~Context()
 	soundManager.UnloadResources();
 }
 
-void LittleEditor::Core::Context::ResetProjectSettings()
+void LittleEngine::Editor::Core::Context::ResetProjectSettings()
 {
 	projectSettings.RemoveAll();
 	projectSettings.Add<float>("gravity", -9.81f);
@@ -172,7 +172,7 @@ void LittleEditor::Core::Context::ResetProjectSettings()
 	projectSettings.Add<bool>("dev_build", true);
 }
 
-bool LittleEditor::Core::Context::IsProjectSettingsIntegrityVerified()
+bool LittleEngine::Editor::Core::Context::IsProjectSettingsIntegrityVerified()
 {
 	return
 		projectSettings.IsKeyExisting("gravity") &&
@@ -189,7 +189,7 @@ bool LittleEditor::Core::Context::IsProjectSettingsIntegrityVerified()
 		projectSettings.IsKeyExisting("dev_build");
 }
 
-void LittleEditor::Core::Context::ApplyProjectSettings()
+void LittleEngine::Editor::Core::Context::ApplyProjectSettings()
 {
 	physicsEngine->SetGravity({ 0.0f, projectSettings.Get<float>("gravity"), 0.0f });
 }

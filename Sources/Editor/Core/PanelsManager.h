@@ -13,7 +13,7 @@
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Modules/Canvas.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* Handle the creation and storage of UI panels
@@ -39,7 +39,7 @@ namespace LittleEditor::Core
 			{
 				m_panels.emplace(p_id, std::make_unique<T>(p_id, std::forward<Args>(p_args)...));
 				T& instance = *static_cast<T*>(m_panels.at(p_id).get());
-				GetPanelAs<LittleEditor::Panels::MenuBar>("Menu Bar").RegisterPanel(instance.name, instance);
+				GetPanelAs<LittleEngine::Editor::Panels::MenuBar>("Menu Bar").RegisterPanel(instance.name, instance);
 			}
 			else
 			{

@@ -67,7 +67,7 @@ namespace LittleGame::Core
 		std::unique_ptr<LittleEngine::Rendering::Buffers::UniformBuffer>		engineUBO;
 		std::unique_ptr<LittleEngine::Rendering::Buffers::ShaderStorageBuffer>	lightSSBO;
 
-		LittleEngine::SceneSystem::SceneManager sceneManager;
+		LittleEngine::SceneManager sceneManager;
 
 		LittleEngine::ResourceManagement::ModelManager	modelManager;
 		LittleEngine::ResourceManagement::TextureManager	textureManager;

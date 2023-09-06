@@ -12,12 +12,13 @@
 #include "Core/Tools/Eventing/Event.h"
 
 #include "Core/Base/Application.h"
+#include "Core/CoreInclude.h"
 #include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Modules/Framework/ECS/Behaviour.h"
 #include "Modules/Framework/API/ISerializable.h"
 
-namespace LittleEngine::SceneSystem
+namespace LittleEngine
 {
 	class Scene;
 }
@@ -34,10 +35,15 @@ namespace LittleEngine
 	* The Actor is the main class of the ECS, it corresponds to the entity and is
 	* composed of componenents and behaviours (scripts)
 	*/
-	class Actor : public API::ISerializable
+	REFLECTION_TYPE(Actor)
+	CLASS (Actor :public Object , WhiteListFields)
 	{
-		friend class SceneSystem::Scene;
+		
+		REFLECTION_BODY(Actor)
+		friend class Scene;
 	public:
+
+		Actor();
 		/**
 		* Constructor of the actor. It will automatically add a transform component
 		* @param p_actorID
@@ -45,7 +51,7 @@ namespace LittleEngine
 		* @param p_tag
 		* @param p_playing
 		*/
-		Actor(SceneSystem::Scene* p_scene, int64_t p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
+		void DoInit(Scene* p_scene, ActorID p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
 
 		/**
 		* Destructor of the actor instance. Force invoke ComponentRemovedEvent and BehaviourRemovedEvent
@@ -95,18 +101,18 @@ namespace LittleEngine
 		* Defines a new ID for the actor
 		* @param p_id
 		*/
-		void SetID(int64_t p_id);
+		void SetID(ActorID p_id);
 
 		/**
 		* Returns the ID of the actor
 		*/
-		int64_t GetID() const;
+		ActorID GetID() const;
 
 		/**
 		* Set an actor as the parent of this actor
 		* @param p_parent
 		*/
-		void SetParent(Actor& p_parent);
+		void SetParent(ActorPtr p_parent);
 
 		/**
 		* Detach from the parent
@@ -121,17 +127,17 @@ namespace LittleEngine
 		/**
 		* Returns the parents of this actor (Or nullptr if no parent)
 		*/
-		Actor* GetParent() const;
+		ActorPtr GetParent() const;
 
 		/**
 		* Returns the ID of the parent of this actor
 		*/
-		int64_t GetParentID() const;
+		ActorID GetParentID() const;
 
 		/**
 		* Returns the children of this actor
 		*/
-		std::vector<Actor*>& GetChildren();
+		ActorVector GetChildren() const;
 
 		bool Destroy();
 
@@ -152,44 +158,44 @@ namespace LittleEngine
 		* Called when the actor enter in collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionEnter(CPhysicalObject& p_otherObject);
+		void OnCollisionEnter(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Called when the actor is in collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionStay(CPhysicalObject& p_otherObject);
+		void OnCollisionStay(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Called when the actor exit from collision with another physical object
 		* @param p_otherObject
 		*/
-		void OnCollisionExit(CPhysicalObject& p_otherObject);
+		void OnCollisionExit(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Called when the actor enter in trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerEnter(CPhysicalObject& p_otherObject);
+		void OnTriggerEnter(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Called when the actor is in trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerStay(CPhysicalObject& p_otherObject);
+		void OnTriggerStay(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Called when the actor exit from trigger with another physical object
 		* @param p_otherObject
 		*/
-		void OnTriggerExit(CPhysicalObject& p_otherObject);
+		void OnTriggerExit(SharedPtr<CPhysicalObject> p_otherObject);
 
 		/**
 		* Add a component to the actor (Or return the component if already existing)
 		* @param p_args (Parameter pack forwared to the component constructor)
 		*/
-		template<typename T, typename ... Args>
-		T& AddComponent(Args&&... p_args);
+		template<typename T>
+		SharedPtr<T> AddComponent();
 
 		/**
 		* Remove the given component
@@ -201,18 +207,18 @@ namespace LittleEngine
 		* Remove the component by refering to the given instance
 		* @param p_component
 		*/
-		bool RemoveComponent(LittleEngine::Component& p_component);
+		bool RemoveComponent(SharedPtr<Component> p_component);
 
 		/**
 		* Try to get the given component (Returns nullptr on failure)
 		*/
 		template<typename T>
-		T* GetComponent();
-
+		SharedPtr<T> GetComponent();
+		
 		/**
 		* Returns a reference to the vector of components
 		*/
-		std::vector<std::shared_ptr<Component>>& GetComponents();
+		CompVector& GetComponentsInternal();
 
 
 		/**
@@ -298,53 +304,45 @@ namespace LittleEngine
 		* @param p_deltaTime
 		*/
 		void OnLateUpdate(float p_deltaTime);
-		/**
-		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself
-		*/
-		EActorAliveState m_aliveState ;
 		void MarkAsDestroying() ;
 		void MarkAsDestroyed();
 		bool IsDestroyed() const;
 		bool IsDestroying() const;
-	public:
-		SceneSystem::Scene*		Owner = nullptr;
 		
+		CompVector& GetComponentsCopy(CompMap& comps);
 	public:
-		/* Some events that are triggered when an action occur on the actor instance */
-		LittleEngine::Eventing::Event<Component&>	ComponentAddedEvent;
-		LittleEngine::Eventing::Event<Component&>	ComponentRemovedEvent;
-
-		/* Some events that are triggered when an action occur on any actor */
-		static LittleEngine::Eventing::Event<Actor&>				DestroyedEvent;
-		static LittleEngine::Eventing::Event<Actor&>				CreatedEvent;
-		static LittleEngine::Eventing::Event<Actor&, Actor&>		AttachEvent;
-		static LittleEngine::Eventing::Event<Actor&>				DettachEvent;
+		SharedPtr<CTransform> transform;
 	private:
+		Scene* m_scene;
 		/* Settings */
-		std::string		m_name;
-		std::string		m_tag;
+		META(Enable)
+		std::string		m_name = "";
+		META(Enable)
+		std::string		m_tag = "";
+		META(Enable)
 		bool			m_active = true;
-		bool&			m_playing;
+		bool			m_playing = false;
 
 		/* Internal settings */
-		int64_t	m_actorID;
+		ActorID	m_actorID = 0;
 		bool	m_sleeping = true;
 		bool	m_awaked = false;
 		bool	m_started = false;
 		bool	m_wasActive = false;
 
 		/* Parenting system stuff */
-		int64_t					m_parentID = 0;
-		Actor*					m_parent = nullptr;
-		std::vector<Actor*>		m_children;
+		ActorID				m_parentID = 0;
+		TSet<ActorID>		m_childrenIds;
 
 		/* Actors components */
-		std::vector<std::shared_ptr<Component>> m_components;
-		std::vector<std::shared_ptr<Component>> m_tempComponents;
-	private:
-		std::vector<std::shared_ptr<Component>>& GetComponentsCopy(std::vector<std::shared_ptr<Component>>& comps);
-	public:
-		CTransform& transform;
+		
+		CompMap m_components;
+		CompVector m_tempComponents;
+		/**
+		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself
+		*/
+		EActorAliveState m_aliveState= EActorAliveState::Alive ;
+		
 	};
 }
 

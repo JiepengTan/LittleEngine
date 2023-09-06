@@ -14,7 +14,7 @@
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FVector4.h"
 #include "Core/Maths/FQuaternion.h"
-#include "Core/Tools/Filesystem/tinyxml2.h"
+#include "tinyxml2/tinyxml2.h"
 
 
 
@@ -69,6 +69,8 @@ namespace LittleEngine
 		static void DeserializeInt(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, int& p_out);
 		static void DeserializeUint(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, unsigned& p_out);
 		static void DeserializeInt64(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, int64_t& p_out);
+		static void DeserializeUInt64(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, uint64_t& p_out);
+		
 		static void DeserializeVec2(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, LittleEngine::FVector2& p_out);
 		static void DeserializeVec3(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, LittleEngine::FVector3& p_out);
 		static void DeserializeVec4(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node, const std::string& p_name, LittleEngine::FVector4& p_out);

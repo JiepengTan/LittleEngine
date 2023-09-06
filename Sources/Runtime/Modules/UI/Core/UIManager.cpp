@@ -174,7 +174,7 @@ bool LittleEngine::UI::Core::UIManager::LoadFont(const std::string& p_id, const 
 {
 	if (m_fonts.find(p_id) == m_fonts.end())
 	{
-		OVLOG("load font path =" + p_path);
+		LOG_INFO("load font path =" + p_path);
 		auto& io = ImGui::GetIO();
 		ImFont* fontInstance = io.Fonts->AddFontFromFileTTF(p_path.c_str(), p_fontSize);
 
@@ -184,7 +184,7 @@ bool LittleEngine::UI::Core::UIManager::LoadFont(const std::string& p_id, const 
 			return true;
 		}
 		else {
-			OVLOG_ERROR("Could not load font !" + p_path);
+			LOG_ERROR("Could not load font !" + p_path);
 		}
 	}
 	

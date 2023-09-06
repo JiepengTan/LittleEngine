@@ -17,9 +17,11 @@
 
 const int INIT_BONE_COUNT = 100;
 
-LittleEngine::CAnimator::CAnimator(Actor& p_owner) :
-    Component(p_owner), m_currentTime(0), m_showDebugBones(false)
+void LittleEngine::CAnimator::DoInit(ActorPtr p_owner)
 {
+    Component::DoInit(p_owner);
+    m_currentTime = 0;
+    m_showDebugBones = false;
     m_curAnim = nullptr;
     m_finalBoneMatrices.reserve(INIT_BONE_COUNT);
 }
@@ -35,13 +37,13 @@ void LittleEngine::CAnimator::UnloadAnimations()
     {
         bone->Destroy();
     }
+    m_debugBones.clear();
     
     if(m_debugBoneRoot != nullptr)
     {
         m_debugBoneRoot->Destroy();
         m_debugBoneRoot = nullptr;
     }
-    m_debugBones.clear();
     m_boneId.clear();
     m_finalBoneMatrices.clear();
     m_curAnim = nullptr;
@@ -50,8 +52,8 @@ void LittleEngine::CAnimator::UnloadAnimations()
 void LittleEngine::CAnimator::LoadAnimations()
 {
     if (m_curAnim != nullptr) return;
-    //owner->transform.SetLocalScale(LittleEngine::FVector3::One*0.01f);
-    auto mesh = owner->GetComponent<CModelRenderer>();
+    //owner->transform->SetLocalScale(LittleEngine::FVector3::One*0.01f);
+    auto mesh = GetActor()->GetComponent<CModelRenderer>();
     if (mesh == nullptr) return;
     auto model = mesh->GetModel();
     if (model == nullptr) return;
@@ -64,9 +66,9 @@ void LittleEngine::CAnimator::LoadAnimations()
         m_finalBoneMatrices.push_back(LittleEngine::FMatrix4::Identity);
     if (anim && m_showDebugBones)
     {
-        m_debugBoneRoot  = ActorUtils::CreateEmptyActor(owner, "BoneRoot");
+        m_debugBoneRoot  = ActorUtils::CreateEmptyActor(GetActor(), "BoneRoot");
         CreateBoneActors(m_curAnim->GetSkeletonRoot(), LittleEngine::FMatrix4::Identity);
-        OVLOG("Creaet Actor Done ");
+        LOG_INFO("Creaet Actor Done ");
     }
 }
 
@@ -89,9 +91,9 @@ void LittleEngine::CAnimator::CreateBoneActors(const LittleEngine::Rendering::Re
         id = boneInfoMap[nodeName].id;
         const LittleEngine::FMatrix4 offset = boneInfoMap[nodeName].offset;
         m_finalBoneMatrices[id] = globalTransformation * offset;
-        boneActor->transform.SetLocalMatrix(m_finalBoneMatrices[id]);
+        boneActor->transform->SetLocalMatrix(m_finalBoneMatrices[id]);
     }
-    boneActor->transform.SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
+    boneActor->transform->SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
     m_boneId.push_back(id);
     for (int i = 0; i < node.childrenCount; i++)
         CreateBoneActors(node.children[i], globalTransformation);
@@ -105,7 +107,7 @@ void LittleEngine::CAnimator::OnDestroy()
 void LittleEngine::CAnimator::UpVertexBufferCPU()
 {
     PROFILER_SPY("Animator::UpVertexBufferCPU");
-    auto model = owner->GetComponent<CModelRenderer>()->GetModel();
+    auto model = GetActor()->GetComponent<CModelRenderer>()->GetModel();
     auto& boneMatrixs = m_finalBoneMatrices;
     auto& structInfos = LittleEngine::Rendering::Geometry::VertexStructInfos;
     auto& positionStructInfo = structInfos[(int)LittleEngine::Rendering::Geometry::EVertexDataFlagsIndex::position];
@@ -179,8 +181,8 @@ void LittleEngine::CAnimator::UpdateBonesGameObjects()
                 auto local2Model = LittleEngine::FMatrix4::Inverse(item.second.offset);
                 auto modelPos = local2Model * LittleEngine::FVector4(0,0,0,1);
                 auto finalPos = m_finalBoneMatrices[m_boneId[i]] * modelPos;
-                m_debugBones[i]->transform.SetLocalPosition(LittleEngine::FVector3(finalPos.x,finalPos.y,finalPos.z));
-                m_debugBones[i]->transform.SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
+                m_debugBones[i]->transform->SetLocalPosition(LittleEngine::FVector3(finalPos.x,finalPos.y,finalPos.z));
+                m_debugBones[i]->transform->SetLocalScale(LittleEngine::FVector3::One * boneDrawSize);
             }
         }
     }
@@ -270,7 +272,7 @@ void LittleEngine::CAnimator::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxm
 
 void LittleEngine::CAnimator::ToggleBones()
 {
-    OVLOG("ToggleBones " + std::to_string(m_curAnim == nullptr));
+    LOG_INFO("ToggleBones " + std::to_string(m_curAnim == nullptr));
     if (!m_curAnim)
     {
         LoadAnimations();

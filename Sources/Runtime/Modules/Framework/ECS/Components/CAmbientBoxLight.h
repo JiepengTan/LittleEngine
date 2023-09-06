@@ -15,15 +15,17 @@ namespace LittleEngine
 	/**
 	* Represents an ambient light with a box shape
 	*/
-	class CAmbientBoxLight : public CLight
+	REFLECTION_TYPE(CAmbientBoxLight)
+	CLASS (CAmbientBoxLight : public CLight, WhiteListFields)
 	{
+		REFLECTION_BODY(CAmbientBoxLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CAmbientBoxLight(Actor& p_owner);
 		CAmbientBoxLight() = default;
+		void DoInit(ActorPtr p_owner) override;
 		/**
 		* Returns the name of the component
 		*/

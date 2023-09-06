@@ -228,7 +228,15 @@ void LittleEngine::Serializer::DeserializeInt64(tinyxml2::XMLDocument & p_doc, t
 	if (auto element = p_node->FirstChildElement(p_name.c_str()); element)
 		element->QueryInt64Text(&p_out);
 }
-
+void LittleEngine::Serializer::DeserializeUInt64(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node, const std::string & p_name, uint64_t & p_out)
+{
+	if (auto element = p_node->FirstChildElement(p_name.c_str()); element)
+	{
+		int64_t val;
+		element->QueryInt64Text(&val);
+		p_out = val;
+	}
+}
 void LittleEngine::Serializer::DeserializeVec2(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node, const std::string & p_name, LittleEngine::FVector2 & p_out)
 {
 	if (auto node = p_node->FirstChildElement(p_name.c_str()); node)

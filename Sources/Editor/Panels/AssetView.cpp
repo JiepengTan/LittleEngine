@@ -12,7 +12,7 @@
 #include "../Editor/Panels/AssetView.h"
 
 
-LittleEditor::Panels::AssetView::AssetView
+LittleEngine::Editor::Panels::AssetView::AssetView
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -46,7 +46,7 @@ LittleEditor::Panels::AssetView::AssetView
 	};
 }
 
-void LittleEditor::Panels::AssetView::_Render_Impl()
+void LittleEngine::Editor::Panels::AssetView::_Render_Impl()
 {
 	PrepareCamera();
 
@@ -77,12 +77,12 @@ void LittleEditor::Panels::AssetView::_Render_Impl()
 	m_fbo.Unbind();
 }
 
-void LittleEditor::Panels::AssetView::SetResource(ViewableResource p_resource)
+void LittleEngine::Editor::Panels::AssetView::SetResource(ViewableResource p_resource)
 {
 	m_resource = p_resource;
 }
 
-LittleEditor::Panels::AssetView::ViewableResource LittleEditor::Panels::AssetView::GetResource() const
+LittleEngine::Editor::Panels::AssetView::ViewableResource LittleEngine::Editor::Panels::AssetView::GetResource() const
 {
 	return m_resource;
 }

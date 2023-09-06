@@ -11,7 +11,7 @@
 
 #include "Modules/Framework/ECS/Actor.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	enum class EGizmoOperation
 	{
@@ -43,7 +43,7 @@ namespace LittleEditor::Core
 		* @param p_operation
 		* @param p_direction
 		*/
-		void StartPicking(LittleEngine::Actor& p_target, const LittleEngine::FVector3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction);
+		void StartPicking(ActorPtr p_target, const LittleEngine::FVector3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction);
 
 		/**
 		* Stops the gizmo picking behaviour
@@ -121,7 +121,7 @@ namespace LittleEditor::Core
 	private:
 		bool m_firstMouse = true;
 		float m_distanceToActor = 0.0f;
-		LittleEngine::Actor* m_target = nullptr;
+		ActorPtr m_target = nullptr;
 		EGizmoOperation m_currentOperation;
 		EDirection m_direction;
 		LittleEngine::FTransform m_originalTransform;

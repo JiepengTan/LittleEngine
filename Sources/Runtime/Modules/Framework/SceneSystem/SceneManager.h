@@ -10,7 +10,7 @@
 
 #include "Modules/Framework/SceneSystem/Scene.h"
 
-namespace LittleEngine::SceneSystem
+namespace LittleEngine
 {
 	/**
 	* The scene manager of the current scene

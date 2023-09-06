@@ -9,10 +9,10 @@
 #include "../Editor/Core/Context.h"
 #include "../Editor/Core/Editor.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
-	* Entry point of LittleEditor
+	* Entry point of LittleEngine::Editor
 	*/
 	class EditorApp
 	{

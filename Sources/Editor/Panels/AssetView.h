@@ -12,12 +12,12 @@
 
 #include "../Editor/Panels/AViewControllable.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	/**
 	* Provide a view for assets
 	*/
-	class AssetView : public LittleEditor::Panels::AViewControllable
+	class AssetView : public LittleEngine::Editor::Panels::AViewControllable
 	{
 	public:
 		using ViewableResource = std::variant<LittleEngine::Rendering::Resources::Model*, LittleEngine::Rendering::Resources::Texture*, LittleEngine::Resources::Material*>;

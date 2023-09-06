@@ -24,6 +24,7 @@
 #include "Modules/Rendering/ResourceManagement/TextureManager.h"
 #include "Modules/Rendering/ResourceManagement/ShaderManager.h"
 
+#include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
@@ -45,39 +46,42 @@
 #include "../Editor/Core/EditorActions.h"
 
 using namespace LittleEngine;
-using namespace LittleEngine::UI::Widgets;
+using namespace UI::Widgets;
 
-LittleEditor::Panels::Inspector::Inspector
+namespace LittleEngine::Editor
+{
+	
+Panels::Inspector::Inspector
 (
 	const std::string& p_title,
 	bool p_opened,
-	const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings
+	const UI::Settings::PanelWindowSettings & p_windowSettings
 ) : PanelWindow(p_title, p_opened, p_windowSettings)
 {
-	m_inspectorHeader = &CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	m_inspectorHeader = &CreateWidget<UI::Widgets::Layout::Group>();
 	m_inspectorHeader->enabled = false;
-	m_actorInfo = &CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	m_actorInfo = &CreateWidget<UI::Widgets::Layout::Group>();
 
-	auto& headerColumns = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
+	auto& headerColumns = m_inspectorHeader->CreateWidget<UI::Widgets::Layout::Columns<2>>();
 
 	/* Name field */
 	auto nameGatherer = [this] { return m_targetActor ? m_targetActor->GetName() : "%undef%"; };
 	auto nameProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetName(p_newName); };
-	LittleEngine::Helpers::GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
+	Helpers::GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
 
 	/* Tag field */
 	auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
 	auto tagProvider = [this](const std::string & p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
-	LittleEngine::Helpers::GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
+	Helpers::GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
 
 	/* Active field */
 	auto activeGatherer = [this] { return m_targetActor ? m_targetActor->IsSelfActive() : false; };
 	auto activeProvider = [this](bool p_active) { if (m_targetActor) m_targetActor->SetActive(p_active); };
-	LittleEngine::Helpers::GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
+	Helpers::GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
 
 	/* Component select + button */
 	{
-		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(0);
+		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<UI::Widgets::Selection::ComboBox>(0);
 		componentSelectorWidget.lineBreak = false;
 		componentSelectorWidget.choices.emplace(0, "Model Renderer");
 		componentSelectorWidget.choices.emplace(1, "Camera");
@@ -94,9 +98,9 @@ LittleEditor::Panels::Inspector::Inspector
 		componentSelectorWidget.choices.emplace(12, "Audio Listener");
 		componentSelectorWidget.choices.emplace(13, "CAnimator");
 
-		auto& addComponentButton = m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Add Component", LittleEngine::FVector2{ 100.f, 0 });
-		addComponentButton.idleBackgroundColor = LittleEngine::UI::Types::Color{ 0.7f, 0.5f, 0.f };
-		addComponentButton.textColor = LittleEngine::UI::Types::Color::White;
+		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
+		addComponentButton.idleBackgroundColor = UI::Types::Color{ 0.7f, 0.5f, 0.f };
+		addComponentButton.textColor = UI::Types::Color::White;
 		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
 		{
 			switch (componentSelectorWidget.currentChoice)
@@ -125,25 +129,25 @@ LittleEditor::Panels::Inspector::Inspector
 			auto defineButtonsStates = [&addComponentButton](bool p_componentExists)
 			{
 				addComponentButton.disabled = p_componentExists;
-				addComponentButton.idleBackgroundColor = !p_componentExists ? LittleEngine::UI::Types::Color{ 0.7f, 0.5f, 0.f } : LittleEngine::UI::Types::Color{ 0.1f, 0.1f, 0.1f };
+				addComponentButton.idleBackgroundColor = !p_componentExists ? UI::Types::Color{ 0.7f, 0.5f, 0.f } : UI::Types::Color{ 0.1f, 0.1f, 0.1f };
 			};
 
 			switch (p_value)
 			{
-			case 0: defineButtonsStates(GetTargetActor()->GetComponent<CModelRenderer>());		return;
-			case 1: defineButtonsStates(GetTargetActor()->GetComponent<CCamera>());				return;
-			case 2: defineButtonsStates(GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 3: defineButtonsStates(GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 4: defineButtonsStates(GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 5: defineButtonsStates(GetTargetActor()->GetComponent<CPointLight>());			return;
-			case 6: defineButtonsStates(GetTargetActor()->GetComponent<CDirectionalLight>());	return;
-			case 7: defineButtonsStates(GetTargetActor()->GetComponent<CSpotLight>());			return;
-			case 8: defineButtonsStates(GetTargetActor()->GetComponent<CAmbientBoxLight>());	return;
-			case 9: defineButtonsStates(GetTargetActor()->GetComponent<CAmbientSphereLight>());	return;
-			case 10: defineButtonsStates(GetTargetActor()->GetComponent<CMaterialRenderer>());	return;
-			case 11: defineButtonsStates(GetTargetActor()->GetComponent<CAudioSource>());		return;
-			case 12: defineButtonsStates(GetTargetActor()->GetComponent<CAudioListener>());		return;
-			case 13: defineButtonsStates(GetTargetActor()->GetComponent<CAnimator>());		return;
+			case 0: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CModelRenderer>());		return;
+			case 1: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CCamera>());				return;
+			case 2: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
+			case 3: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
+			case 4: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
+			case 5: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPointLight>());			return;
+			case 6: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CDirectionalLight>());	return;
+			case 7: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CSpotLight>());			return;
+			case 8: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAmbientBoxLight>());	return;
+			case 9: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAmbientSphereLight>());	return;
+			case 10: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CMaterialRenderer>());	return;
+			case 11: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAudioSource>());		return;
+			case 12: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAudioListener>());		return;
+			case 13: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAnimator>());		return;
 			}
 		};
 
@@ -151,32 +155,32 @@ LittleEditor::Panels::Inspector::Inspector
 	}
 
 	
-	m_inspectorHeader->CreateWidget<LittleEngine::UI::Widgets::Visual::Separator>();
-	m_destroyedListener = LittleEngine::Actor::DestroyedEvent += [this](LittleEngine::Actor& p_destroyed)
+	m_inspectorHeader->CreateWidget<UI::Widgets::Visual::Separator>();
+	m_destroyedListener = Scene::DestroyedEvent += [this](ActorPtr p_destroyed)
 	{ 
-		if (&p_destroyed == m_targetActor)
+		if (p_destroyed == m_targetActor)
 			UnFocus();
 	};
 }
 
-LittleEditor::Panels::Inspector::~Inspector()
+Panels::Inspector::~Inspector()
 {
-	LittleEngine::Actor::DestroyedEvent -= m_destroyedListener;
+	Scene::DestroyedEvent -= m_destroyedListener;
 
 	UnFocus();
 }
 
-void LittleEditor::Panels::Inspector::FocusActor(LittleEngine::Actor& p_target)
+void Panels::Inspector::FocusActor(ActorPtr p_target)
 {
 	if (m_targetActor)
 		UnFocus();
 
 	m_actorInfo->RemoveAllWidgets();
 
-	m_targetActor = &p_target;
-
-	m_componentAddedListener = m_targetActor->ComponentAddedEvent += [this] (auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_componentRemovedListener =	m_targetActor->ComponentRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	m_targetActor = p_target;
+	// TODO tanjp deal component's events
+	//m_componentAddedListener = m_targetActor->ComponentAddedEvent += [this] (auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	//m_componentRemovedListener = m_targetActor->ComponentRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
 
 	m_inspectorHeader->enabled = true;
 
@@ -185,75 +189,79 @@ void LittleEditor::Panels::Inspector::FocusActor(LittleEngine::Actor& p_target)
     // Force component and script selectors to trigger their ChangedEvent to update button states
 	m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
 
-	EDITOR_EVENT(ActorSelectedEvent).Invoke(*m_targetActor);
+	EDITOR_EVENT(ActorSelectedEvent).Invoke(m_targetActor);
 }
 
-void LittleEditor::Panels::Inspector::UnFocus()
+void Panels::Inspector::UnFocus()
 {
 	if (m_targetActor && m_targetActor->IsAlive())
 	{
-		m_targetActor->ComponentAddedEvent		-= m_componentAddedListener;
-		m_targetActor->ComponentRemovedEvent	-= m_componentRemovedListener;
+		// TODO tanjp deal component's events
+		//m_targetActor->ComponentAddedEvent		-= m_componentAddedListener;
+		//m_targetActor->ComponentRemovedEvent	-= m_componentRemovedListener;
 	}
 
 	SoftUnFocus();
 }
 
-void LittleEditor::Panels::Inspector::SoftUnFocus()
+void Panels::Inspector::SoftUnFocus()
 {
     if (m_targetActor)
     {
-        EDITOR_EVENT(ActorUnselectedEvent).Invoke(*m_targetActor);
+        EDITOR_EVENT(ActorUnselectedEvent).Invoke(m_targetActor);
         m_inspectorHeader->enabled = false;
         m_targetActor = nullptr;
         m_actorInfo->RemoveAllWidgets();
     }
 }
 
-LittleEngine::Actor * LittleEditor::Panels::Inspector::GetTargetActor() const
+ActorPtr Panels::Inspector::GetTargetActor() const
 {
 	return m_targetActor;
 }
 
-void LittleEditor::Panels::Inspector::CreateActorInspector(LittleEngine::Actor& p_target)
+void Panels::Inspector::CreateActorInspector(ActorPtr p_target)
 {
-	std::map<std::string, LittleEngine::Component*> components;
+	auto components = p_target->GetComponentsInternal();
 
-	for (auto component : p_target.GetComponents())
-		if (component->GetName() != "Transform")
-			components[component->GetName()] = component.get();
-
-	auto transform = p_target.GetComponent<LittleEngine::CTransform>();
-	if (transform)
-		DrawComponent(*transform);
-
-	for (auto& [name, instance] : components)
-		DrawComponent(*instance);
+	// Transform Draw first
+	for (auto comp : components){
+		if(comp->GetInstanceTypeID() == CTransform::GetTypeID()){
+			DrawComponent(comp);
+		}
+	}
+	for (auto comp : components){
+		if(comp->GetInstanceTypeID() != CTransform::GetTypeID()){
+			DrawComponent(comp);
+		}
+	}
 }
 
-void LittleEditor::Panels::Inspector::DrawComponent(LittleEngine::Component& p_component)
+void Panels::Inspector::DrawComponent(CompPtr p_component)
 {
-	//if (auto inspectorItem = dynamic_cast<LittleEngine::API::IInspectorItem*>(&p_component); inspectorItem)
+	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<LittleEngine::UI::Widgets::Layout::GroupCollapsable>(p_component.GetName());
-		header.closable = !dynamic_cast<LittleEngine::CTransform*>(&p_component);
+		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetName());
+		header.closable = p_component->GetInstanceTypeID() == LittleEngine:: CTransform::GetTypeID();
 		header.CloseEvent += [this, &header, &p_component]
 		{ 
-			if (p_component.owner->RemoveComponent(p_component))
+			if (p_component->GetActor()->RemoveComponent(p_component))
 				m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
 		};
-		auto& columns = header.CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
+		auto& columns = header.CreateWidget<UI::Widgets::Layout::Columns<2>>();
 		columns.widths[0] = 200;
-		p_component.OnInspector(columns);
+		p_component->OnInspector(columns);
 	}
 }
 
 
-void LittleEditor::Panels::Inspector::Refresh()
+void Panels::Inspector::Refresh()
 {
 	if (m_targetActor)
 	{
 		m_actorInfo->RemoveAllWidgets();
-		CreateActorInspector(*m_targetActor);
+		CreateActorInspector(m_targetActor);
 	}
+}
+
 }

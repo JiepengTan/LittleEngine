@@ -14,7 +14,7 @@
 #include "../Editor/Resources/RawTextures.h"
 #include "../Editor/Resources/RawShaders.h"
 
-LittleEditor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
+LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
 {
 	using namespace LittleEngine::Rendering::Resources::Loaders;
 
@@ -162,9 +162,9 @@ LittleEditor::Core::EditorResources::EditorResources(const std::string& p_editor
 	m_models["Camera"]			= ModelLoader::Create(modelsFolder + "Camera.fbx", modelParserFlags);
 
 	/* Shaders */
-	auto gridSource			= LittleEditor::Resources::RawShaders::GetGrid();
-	auto gizmoSource		= LittleEditor::Resources::RawShaders::GetGizmo();
-	auto billboardSource	= LittleEditor::Resources::RawShaders::GetBillboard();
+	auto gridSource			= LittleEngine::Editor::Resources::RawShaders::GetGrid();
+	auto gizmoSource		= LittleEngine::Editor::Resources::RawShaders::GetGizmo();
+	auto billboardSource	= LittleEngine::Editor::Resources::RawShaders::GetBillboard();
 	m_shaders["Grid"]		= ShaderLoader::CreateFromSource(gridSource.first, gridSource.second);
 	m_shaders["Gizmo"]		= ShaderLoader::CreateFromSource(gizmoSource.first, gizmoSource.second);
 	m_shaders["Billboard"]	= ShaderLoader::CreateFromSource(billboardSource.first, billboardSource.second);
@@ -177,7 +177,7 @@ LittleEditor::Core::EditorResources::EditorResources(const std::string& p_editor
 	}
 }
 
-LittleEditor::Core::EditorResources::~EditorResources()
+LittleEngine::Editor::Core::EditorResources::~EditorResources()
 {
 	for (auto[id, texture] : m_textures)
 		LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(texture);
@@ -189,13 +189,13 @@ LittleEditor::Core::EditorResources::~EditorResources()
 		LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(shader);
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEditor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Editor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
 {
 	using namespace LittleEngine::Utils;
 	return GetTexture("Icon_" + PathParser::FileTypeToString(PathParser::GetFileType(p_filename)));
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEditor::Core::EditorResources::GetTexture(const std::string& p_id)
+LittleEngine::Rendering::Resources::Texture* LittleEngine::Editor::Core::EditorResources::GetTexture(const std::string& p_id)
 {
 	if (m_textures.find(p_id) != m_textures.end())
 		return m_textures.at(p_id);
@@ -203,7 +203,7 @@ LittleEngine::Rendering::Resources::Texture* LittleEditor::Core::EditorResources
 	return nullptr;
 }
 
-LittleEngine::Rendering::Resources::Model* LittleEditor::Core::EditorResources::GetModel(const std::string& p_id)
+LittleEngine::Rendering::Resources::Model* LittleEngine::Editor::Core::EditorResources::GetModel(const std::string& p_id)
 {
 	if (m_models.find(p_id) != m_models.end())
 		return m_models.at(p_id);
@@ -211,7 +211,7 @@ LittleEngine::Rendering::Resources::Model* LittleEditor::Core::EditorResources::
 	return nullptr;
 }
 
-LittleEngine::Rendering::Resources::Shader* LittleEditor::Core::EditorResources::GetShader(const std::string& p_id)
+LittleEngine::Rendering::Resources::Shader* LittleEngine::Editor::Core::EditorResources::GetShader(const std::string& p_id)
 {
 	if (m_shaders.find(p_id) != m_shaders.end())
 		return m_shaders.at(p_id);

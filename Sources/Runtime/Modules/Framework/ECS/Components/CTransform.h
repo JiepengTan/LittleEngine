@@ -21,16 +21,13 @@ namespace LittleEngine
 	/**
 	* Represents the 3D transformations applied to an actor
 	*/
-	class CTransform : public Component
+	REFLECTION_TYPE(CTransform)
+	CLASS (CTransform : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CTransform)
 	public:
-		/**
-		* Create a transform without setting a parent
-		* @param p_localPosition
-		* @param p_localRotation
-		* @param p_localScale
-		*/
-		CTransform(Actor& p_owner, struct LittleEngine::FVector3 p_localPosition = LittleEngine::FVector3(0.0f, 0.0f, 0.0f), LittleEngine::FQuaternion p_localRotation = LittleEngine::FQuaternion::Identity, struct LittleEngine::FVector3 p_localScale = LittleEngine::FVector3(1.0f, 1.0f, 1.0f));
+		
+		void DoInit(ActorPtr p_owner) override;
 		CTransform() = default;
 		/**
 		* Returns the name of the component
@@ -41,7 +38,7 @@ namespace LittleEngine
 		* Defines a parent to the transform
 		* @param p_parent
 		*/
-		void SetParent(CTransform& p_parent);
+		void SetParent(SharedPtr<CTransform> p_parent);
 
 		/**
 		* Set the parent to nullptr and recalculate world matrix

@@ -13,7 +13,7 @@ using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
 using namespace LittleEngine::UI::Types;
 
-LittleEditor::Panels::Profiler::Profiler
+LittleEngine::Editor::Panels::Profiler::Profiler
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -45,7 +45,7 @@ LittleEditor::Panels::Profiler::Profiler
 	Enable(false, true);
 }
 
-void LittleEditor::Panels::Profiler::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::Profiler::Update(float p_deltaTime)
 {
 	m_timer += p_deltaTime;
 	m_fpsTimer += p_deltaTime;
@@ -93,18 +93,18 @@ void LittleEditor::Panels::Profiler::Update(float p_deltaTime)
 	}
 }
 
-void LittleEditor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
+void LittleEngine::Editor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
 {
 	if (p_value)
 	{
 		if (!p_disableLog)
-			OVLOG_INFO("Profiling started!");
+			LOG_INFO("Profiling started!");
 		m_profiler.Enable();
 	}
 	else
 	{
 		if (!p_disableLog)
-			OVLOG_INFO("Profiling stoped!");
+			LOG_INFO("Profiling stoped!");
 		m_profiler.Disable();
 		m_profiler.ClearHistory();
 		m_actionList->RemoveAllWidgets();
@@ -116,7 +116,7 @@ void LittleEditor::Panels::Profiler::Enable(bool p_value, bool p_disableLog)
 	m_separator->enabled = p_value;
 }
 
-LittleEngine::UI::Types::Color LittleEditor::Panels::Profiler::CalculateActionColor(double p_percentage) const
+LittleEngine::UI::Types::Color LittleEngine::Editor::Panels::Profiler::CalculateActionColor(double p_percentage) const
 {
 	if (p_percentage <= 25.0f)		return { 0.0f, 1.0f, 0.0f, 1.0f };
 	else if (p_percentage <= 50.0f) return { 1.0f, 1.0f, 0.0f, 1.0f };
@@ -124,7 +124,7 @@ LittleEngine::UI::Types::Color LittleEditor::Panels::Profiler::CalculateActionCo
 	else							return { 1.0f, 0.0f, 0.0f, 1.0f };
 }
 
-std::string LittleEditor::Panels::Profiler::GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action & p_action)
+std::string LittleEngine::Editor::Panels::Profiler::GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action & p_action)
 {
 	std::string result;
 

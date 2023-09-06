@@ -9,7 +9,7 @@
 #include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 #include "Modules/UI/Panels/PanelWindow.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class Toolbar : public LittleEngine::UI::Panels::PanelWindow
 	{

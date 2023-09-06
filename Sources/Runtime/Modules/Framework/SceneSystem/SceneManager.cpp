@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Core/Tools/Filesystem/tinyxml2.h"
+#include "tinyxml2/tinyxml2.h"
 #include "Platform/Windowing/Dialogs/MessageBox.h"
 
 #include "Modules/Framework/SceneSystem/SceneManager.h"
@@ -12,17 +12,17 @@
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 
-LittleEngine::SceneSystem::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
+LittleEngine::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
 {
 	LoadEmptyScene();
 }
 
-LittleEngine::SceneSystem::SceneManager::~SceneManager()
+LittleEngine::SceneManager::~SceneManager()
 {
 	UnloadCurrentScene();
 }
 
-void LittleEngine::SceneSystem::SceneManager::Update()
+void LittleEngine::SceneManager::Update()
 {
 	if (m_delayedLoadCall)
 	{
@@ -31,7 +31,7 @@ void LittleEngine::SceneSystem::SceneManager::Update()
 	}
 }
 
-void LittleEngine::SceneSystem::SceneManager::LoadAndPlayDelayed(const std::string& p_path, bool p_absolute)
+void LittleEngine::SceneManager::LoadAndPlayDelayed(const std::string& p_path, bool p_absolute)
 {
 	m_delayedLoadCall = [this, p_path, p_absolute]
 	{
@@ -42,7 +42,7 @@ void LittleEngine::SceneSystem::SceneManager::LoadAndPlayDelayed(const std::stri
 	};
 }
 
-void LittleEngine::SceneSystem::SceneManager::LoadEmptyScene()
+void LittleEngine::SceneManager::LoadEmptyScene()
 {
 	UnloadCurrentScene();
 
@@ -51,7 +51,7 @@ void LittleEngine::SceneSystem::SceneManager::LoadEmptyScene()
 	SceneLoadEvent.Invoke();
 }
 
-void LittleEngine::SceneSystem::SceneManager::LoadEmptyLightedScene()
+void LittleEngine::SceneManager::LoadEmptyLightedScene()
 {
 	UnloadCurrentScene();
 
@@ -59,21 +59,21 @@ void LittleEngine::SceneSystem::SceneManager::LoadEmptyLightedScene()
 
 	SceneLoadEvent.Invoke();
 
-	auto& directionalLight = m_currentScene->CreateActor("Directional Light");
-	directionalLight.AddComponent<CDirectionalLight>().SetIntensity(0.75f);
-	directionalLight.transform.SetLocalPosition({ 0.0f, 10.0f, 0.0f });
-	directionalLight.transform.SetLocalRotation(LittleEngine::FQuaternion({ 120.0f, -40.0f, 0.0f }));
+	auto directionalLight = m_currentScene->CreateActor("Directional Light");
+	directionalLight->AddComponent<CDirectionalLight>()->SetIntensity(0.75f);
+	directionalLight->transform->SetLocalPosition({ 0.0f, 10.0f, 0.0f });
+	directionalLight->transform->SetLocalRotation(LittleEngine::FQuaternion({ 120.0f, -40.0f, 0.0f }));
 
-	auto& ambientLight = m_currentScene->CreateActor("Ambient Light");
-	ambientLight.AddComponent<CAmbientSphereLight>().SetRadius(10000.0f);
+	auto ambientLight = m_currentScene->CreateActor("Ambient Light");
+	ambientLight->AddComponent<CAmbientSphereLight>()->SetRadius(10000.0f);
 
-	auto& camera = m_currentScene->CreateActor("Main Camera");
-	camera.AddComponent<CCamera>();
-	camera.transform.SetLocalPosition({ 0.0f, 3.0f, 8.0f });
-	camera.transform.SetLocalRotation(LittleEngine::FQuaternion({ 20.0f, 180.0f, 0.0f }));
+	auto camera = m_currentScene->CreateActor("Main Camera");
+	camera->AddComponent<CCamera>();
+	camera->transform->SetLocalPosition({ 0.0f, 3.0f, 8.0f });
+	camera->transform->SetLocalRotation(LittleEngine::FQuaternion({ 20.0f, 180.0f, 0.0f }));
 }
 
-bool LittleEngine::SceneSystem::SceneManager::LoadScene(const std::string& p_path, bool p_absolute)
+bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_absolute)
 {
 	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + p_path;
 
@@ -89,7 +89,7 @@ bool LittleEngine::SceneSystem::SceneManager::LoadScene(const std::string& p_pat
 	return false;
 }
 
-bool LittleEngine::SceneSystem::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
+bool LittleEngine::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
 {
 	if (!p_doc.Error())
 	{
@@ -110,7 +110,7 @@ bool LittleEngine::SceneSystem::SceneManager::LoadSceneFromMemory(tinyxml2::XMLD
 	return false;
 }
 
-void LittleEngine::SceneSystem::SceneManager::UnloadCurrentScene()
+void LittleEngine::SceneManager::UnloadCurrentScene()
 {
 	if (m_currentScene)
 	{
@@ -122,34 +122,34 @@ void LittleEngine::SceneSystem::SceneManager::UnloadCurrentScene()
 	ForgetCurrentSceneSourcePath();
 }
 
-bool LittleEngine::SceneSystem::SceneManager::HasCurrentScene() const
+bool LittleEngine::SceneManager::HasCurrentScene() const
 {
 	return m_currentScene;
 }
 
-LittleEngine::SceneSystem::Scene* LittleEngine::SceneSystem::SceneManager::GetCurrentScene()
+LittleEngine::Scene* LittleEngine::SceneManager::GetCurrentScene()
 {
 	return m_currentScene;
 }
 
-std::string LittleEngine::SceneSystem::SceneManager::GetCurrentSceneSourcePath() const
+std::string LittleEngine::SceneManager::GetCurrentSceneSourcePath() const
 {
 	return m_currentSceneSourcePath;
 }
 
-bool LittleEngine::SceneSystem::SceneManager::IsCurrentSceneLoadedFromDisk() const
+bool LittleEngine::SceneManager::IsCurrentSceneLoadedFromDisk() const
 {
 	return m_currentSceneLoadedFromPath;
 }
 
-void LittleEngine::SceneSystem::SceneManager::StoreCurrentSceneSourcePath(const std::string& p_path)
+void LittleEngine::SceneManager::StoreCurrentSceneSourcePath(const std::string& p_path)
 {
 	m_currentSceneSourcePath = p_path;
 	m_currentSceneLoadedFromPath = true;
 	CurrentSceneSourcePathChangedEvent.Invoke(m_currentSceneSourcePath);
 }
 
-void LittleEngine::SceneSystem::SceneManager::ForgetCurrentSceneSourcePath()
+void LittleEngine::SceneManager::ForgetCurrentSceneSourcePath()
 {
 	m_currentSceneSourcePath = "";
 	m_currentSceneLoadedFromPath = false;

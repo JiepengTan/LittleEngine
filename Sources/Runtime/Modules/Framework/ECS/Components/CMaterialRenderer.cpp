@@ -19,8 +19,10 @@
 #include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 
-LittleEngine::CMaterialRenderer::CMaterialRenderer(Actor & p_owner) : Component(p_owner)
+
+void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)
 {
+	Component::DoInit(p_owner);
 	m_materials.fill(nullptr);
 
 	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)

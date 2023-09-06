@@ -11,7 +11,7 @@
 #include "../Editor/Core/EditorActions.h"
 #include "../Editor/Settings/EditorSettings.h"
 
-LittleEditor::Panels::GameView::GameView
+LittleEngine::Editor::Panels::GameView::GameView
 (
 	const std::string & p_title,
 	bool p_opened,
@@ -20,7 +20,7 @@ LittleEditor::Panels::GameView::GameView
 {
 }
 
-void LittleEditor::Panels::GameView::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::GameView::Update(float p_deltaTime)
 {
 	AView::Update(p_deltaTime);
 
@@ -28,12 +28,12 @@ void LittleEditor::Panels::GameView::Update(float p_deltaTime)
 
 	if (currentScene)
 	{
-		auto cameraComponent = EDITOR_CONTEXT(renderer)->FindMainCamera(*currentScene);
+		auto cameraComponent = EDITOR_CONTEXT(renderer)->FindMainCamera(currentScene);
 		if (cameraComponent)
 		{
 			m_camera = cameraComponent->GetCamera();
-			m_cameraPosition = cameraComponent->owner->transform.GetWorldPosition();
-			m_cameraRotation = cameraComponent->owner->transform.GetWorldRotation();
+			m_cameraPosition = cameraComponent->GetActor()->transform->GetWorldPosition();
+			m_cameraRotation = cameraComponent->GetActor()->transform->GetWorldRotation();
 			m_hasCamera = true;
 			PrepareCamera();
 		}
@@ -45,7 +45,7 @@ void LittleEditor::Panels::GameView::Update(float p_deltaTime)
 	}
 }
 
-void LittleEditor::Panels::GameView::_Render_Impl()
+void LittleEngine::Editor::Panels::GameView::_Render_Impl()
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 	auto& currentScene = *m_sceneManager.GetCurrentScene();
@@ -76,12 +76,12 @@ void LittleEditor::Panels::GameView::_Render_Impl()
 	m_fbo.Unbind();
 }
 
-bool LittleEditor::Panels::GameView::HasCamera() const
+bool LittleEngine::Editor::Panels::GameView::HasCamera() const
 {
 	return m_hasCamera;
 }
 
-std::optional<LittleEngine::Rendering::Data::Frustum> LittleEditor::Panels::GameView::GetActiveFrustum() const
+std::optional<LittleEngine::Rendering::Data::Frustum> LittleEngine::Editor::Panels::GameView::GetActiveFrustum() const
 {
 	return m_hasCamera ? m_camera.GetFrustum() : std::optional<LittleEngine::Rendering::Data::Frustum>{};
 }

@@ -11,7 +11,7 @@
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
 
-LittleEditor::Panels::HardwareInfo::HardwareInfo
+LittleEngine::Editor::Panels::HardwareInfo::HardwareInfo
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -47,12 +47,12 @@ LittleEditor::Panels::HardwareInfo::HardwareInfo
 	m_ramUsage->overlay = "RAM Usage (%)";
 }
 
-LittleEditor::Panels::HardwareInfo::~HardwareInfo()
+LittleEngine::Editor::Panels::HardwareInfo::~HardwareInfo()
 {
 	delete m_hardwareInfo;
 }
 
-void LittleEditor::Panels::HardwareInfo::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::HardwareInfo::Update(float p_deltaTime)
 {
 	m_hardwareInfo->Tick();
 

@@ -14,11 +14,15 @@
 
 #include "Modules/Framework/ECS/Components/CLight.h"
 
-LittleEngine::CLight::CLight(Actor & p_owner) :
-	Component(p_owner),
-	m_data(p_owner.transform.GetFTransform(), {})
+
+
+void LittleEngine::CLight::DoInit(ActorPtr p_owner)
 {
+	Component::DoInit(p_owner);
+	m_data.DoInit (p_owner->transform->GetFTransform(), {});
 }
+
+LittleEngine::CLight::CLight() = default;
 
 const LittleEngine::Rendering::Entities::Light& LittleEngine::CLight::GetData() const
 {

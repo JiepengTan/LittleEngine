@@ -36,17 +36,17 @@ std::function<void()> Combine(std::function<void()> p_a, std::optional<std::func
 }
 
 template<class T>
-std::function<void()> ActorWithComponentCreationHandler(LittleEngine::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
+std::function<void()> ActorWithComponentCreationHandler(LittleEngine::ActorPtr p_parent, std::optional<std::function<void()>> p_onItemClicked)
 {
     return Combine(EDITOR_BIND(CreateMonoComponentActor<T>, true, p_parent), p_onItemClicked);
 }
 
-std::function<void()> ActorWithModelComponentCreationHandler(LittleEngine::Actor* p_parent, const std::string& p_modelName, std::optional<std::function<void()>> p_onItemClicked)
+std::function<void()> ActorWithModelComponentCreationHandler(LittleEngine::ActorPtr p_parent, const std::string& p_modelName, std::optional<std::function<void()>> p_onItemClicked)
 {
     return Combine(EDITOR_BIND(CreateActorWithModel, ":Models\\" + p_modelName + ".fbx", true, p_parent, p_modelName), p_onItemClicked);
 }
 
-void LittleEditor::Utils::ActorCreationMenu::GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, LittleEngine::Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
+void LittleEngine::Editor::Utils::ActorCreationMenu::GenerateActorCreationMenu(LittleEngine::UI::Widgets::Menu::MenuList& p_menuList, ActorPtr p_parent, std::optional<std::function<void()>> p_onItemClicked)
 {
     using namespace LittleEngine::UI::Widgets::Menu;
     using namespace LittleEngine;

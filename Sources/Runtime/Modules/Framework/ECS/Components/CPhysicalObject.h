@@ -17,14 +17,16 @@ namespace LittleEngine
 	/**
 	* Base class for any physical object
 	*/
-	class CPhysicalObject : public Component
+	REFLECTION_TYPE(CPhysicalObject)
+	CLASS (CPhysicalObject : public Component, WhiteListFields)
 	{
+		REFLECTION_BODY(CPhysicalObject)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CPhysicalObject(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CPhysicalObject() = default;
 		/**
 		* Add a force to the rigidbody
@@ -189,18 +191,18 @@ namespace LittleEngine
 		void Init();
 		void BindListener();
 
-	private:
+	public:
 		virtual void OnEnable() override;
 		virtual void OnDisable() override;
 
 	public:
-		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionEnterEvent;
-		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionStayEvent;
-		LittleEngine::Eventing::Event<CPhysicalObject&> CollisionExitEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> CollisionEnterEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> CollisionStayEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> CollisionExitEvent;
 
-		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerEnterEvent;
-		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerStayEvent;
-		LittleEngine::Eventing::Event<CPhysicalObject&> TriggerExitEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> TriggerEnterEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> TriggerStayEvent;
+		LittleEngine::Eventing::Event<SharedPtr<CPhysicalObject>> TriggerExitEvent;
 
 	protected:
 		std::unique_ptr<LittleEngine::Physics::Entities::PhysicalObject> m_physicalObject;

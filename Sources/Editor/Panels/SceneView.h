@@ -9,9 +9,9 @@
 #include "../Editor/Panels/AViewControllable.h"
 #include "../Editor/Core/GizmoBehaviour.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
-	class SceneView : public LittleEditor::Panels::AViewControllable
+	class SceneView : public LittleEngine::Editor::Panels::AViewControllable
 	{
 	public:
 		/**
@@ -54,12 +54,12 @@ namespace LittleEditor::Panels
 		void HandleActorPicking();
 
 	private:
-		LittleEngine::SceneSystem::SceneManager& m_sceneManager;
+		LittleEngine::SceneManager& m_sceneManager;
 		LittleEngine::Rendering::Buffers::Framebuffer m_actorPickingFramebuffer;
-		LittleEditor::Core::GizmoBehaviour m_gizmoOperations;
-		LittleEditor::Core::EGizmoOperation m_currentOperation = LittleEditor::Core::EGizmoOperation::TRANSLATE;
+		LittleEngine::Editor::Core::GizmoBehaviour m_gizmoOperations;
+		LittleEngine::Editor::Core::EGizmoOperation m_currentOperation = LittleEngine::Editor::Core::EGizmoOperation::TRANSLATE;
 
-		std::optional<std::reference_wrapper<LittleEngine::Actor>> m_highlightedActor;
-		std::optional<LittleEditor::Core::GizmoBehaviour::EDirection> m_highlightedGizmoDirection;
+		std::optional<ActorPtr> m_highlightedActor;
+		std::optional<LittleEngine::Editor::Core::GizmoBehaviour::EDirection> m_highlightedGizmoDirection;
 	};
 }

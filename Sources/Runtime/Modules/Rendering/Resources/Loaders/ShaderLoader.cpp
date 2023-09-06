@@ -63,11 +63,11 @@ void LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(Shader
 
 		p_shader.QueryUniforms();
 
-		OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
+		LOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
 	}
 	else
 	{
-		OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version keept");
+		LOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version keept");
 	}
 }
 
@@ -167,7 +167,7 @@ uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateProgra
 		std::string errorLog(maxLength, ' ');
 		glGetProgramInfoLog(program, maxLength, &maxLength, errorLog.data());
 
-		OVLOG_ERROR("[LINK] \"" + __FILE_TRACE + "\":\n" + errorLog);
+		LOG_ERROR("[LINK] \"" + __FILE_TRACE + "\":\n" + errorLog);
 
 		glDeleteProgram(program);
 
@@ -204,7 +204,7 @@ uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CompileShade
 
 		std::string shaderTypeString = p_type == GL_VERTEX_SHADER ? "VERTEX SHADER" : "FRAGMENT SHADER";
 		std::string errorHeader = "[" + shaderTypeString + "] \"";
-		OVLOG_ERROR(errorHeader + __FILE_TRACE + "\":\n" + errorLog);
+		LOG_ERROR(errorHeader + __FILE_TRACE + "\":\n" + errorLog);
 
 		glDeleteShader(id);
 

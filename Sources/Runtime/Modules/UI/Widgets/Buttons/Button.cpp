@@ -6,7 +6,7 @@
 
 #include "Modules/UI/Widgets/Buttons/Button.h"
 #include "Modules/UI/Internal/Converter.h"
-#include "Modules/UI/ImGui/imgui_internal.h"
+#include "ImGui/imgui_internal.h"
 
 LittleEngine::UI::Widgets::Buttons::Button::Button(const std::string& p_label, const LittleEngine::FVector2& p_size, bool p_disabled) :
 	label(p_label), size(p_size), disabled(p_disabled)

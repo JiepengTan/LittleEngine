@@ -6,7 +6,7 @@
 
 #include "../Editor/Panels/AViewControllable.h"
 
-LittleEditor::Panels::AViewControllable::AViewControllable
+LittleEngine::Editor::Panels::AViewControllable::AViewControllable
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -17,14 +17,14 @@ LittleEditor::Panels::AViewControllable::AViewControllable
 
 }
 
-void LittleEditor::Panels::AViewControllable::Update(float p_deltaTime)
+void LittleEngine::Editor::Panels::AViewControllable::Update(float p_deltaTime)
 {
 	m_cameraController.HandleInputs(p_deltaTime);
 
 	AView::Update(p_deltaTime);
 }
 
-LittleEditor::Core::CameraController& LittleEditor::Panels::AViewControllable::GetCameraController()
+LittleEngine::Editor::Core::CameraController& LittleEngine::Editor::Panels::AViewControllable::GetCameraController()
 {
 	return m_cameraController;
 }

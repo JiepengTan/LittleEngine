@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace LittleEditor::Resources
+namespace LittleEngine::Editor::Resources
 {
 	/**
 	* Defines some editor shaders

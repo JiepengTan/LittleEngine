@@ -11,7 +11,7 @@
 #include "Modules/UI/Widgets/Menu/MenuItem.h"
 #include "Modules/UI/Widgets/Buttons/ButtonImage.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class MenuBar : public LittleEngine::UI::Panels::PanelMenuBar
 	{

@@ -14,7 +14,7 @@
 #include "Modules/UI/Widgets/Layout/TreeNode.h"
 #include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	/**
 	* A panel that handle asset management

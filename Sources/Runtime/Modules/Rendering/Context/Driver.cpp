@@ -85,10 +85,10 @@ void LittleEngine::Rendering::Context::Driver::GLDebugMessageCallback(uint32_t s
 
 	switch (severity)
 	{
-	case GL_DEBUG_SEVERITY_HIGH:			OVLOG_ERROR(output);	break;
-	case GL_DEBUG_SEVERITY_MEDIUM:			OVLOG_WARNING(output);	break;
-	case GL_DEBUG_SEVERITY_LOW:				OVLOG_INFO(output);		break;
-	case GL_DEBUG_SEVERITY_NOTIFICATION:	OVLOG_INFO(output);			break;
+	case GL_DEBUG_SEVERITY_HIGH:			LOG_ERROR(output);	break;
+	case GL_DEBUG_SEVERITY_MEDIUM:			LOG_WARNING(output);	break;
+	case GL_DEBUG_SEVERITY_LOW:				LOG_INFO(output);		break;
+	case GL_DEBUG_SEVERITY_NOTIFICATION:	LOG_INFO(output);			break;
 	}
 }
 
@@ -99,6 +99,6 @@ void LittleEngine::Rendering::Context::Driver::InitGlew()
 	{
 		std::string message = "Error Init GLEW: ";
 		std::string glewError = reinterpret_cast<const char*>(glewGetErrorString(error));
-		OVLOG_INFO(message + glewError);
+		LOG_INFO(message + glewError);
 	}
 }

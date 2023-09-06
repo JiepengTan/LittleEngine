@@ -16,7 +16,16 @@ uint32_t Pack(const LittleEngine::FVector3& p_toPack)
 	return Pack(static_cast<uint8_t>(p_toPack.x * 255.f), static_cast<uint8_t>(p_toPack.y * 255.f), static_cast<uint8_t>(p_toPack.z * 255.f), 0);
 }
 
-LittleEngine::Rendering::Entities::Light::Light(LittleEngine::FTransform & p_tranform, Type p_type) : m_transform(p_tranform), type(static_cast<float>(p_type))
+LittleEngine::Rendering::Entities::Light::Light(): m_transform()
+{
+}
+void LittleEngine::Rendering::Entities::Light::DoInit(LittleEngine::FTransform& p_tranform, Type p_type) 
+{
+	type=(static_cast<float>(p_type));
+	m_transform=(&p_tranform);
+}
+LittleEngine::Rendering::Entities::Light::Light(LittleEngine::FTransform& p_tranform, Type p_type) :
+	type(static_cast<float>(p_type)), m_transform(&p_tranform)
 {
 	
 }
@@ -25,12 +34,12 @@ LittleEngine::FMatrix4 LittleEngine::Rendering::Entities::Light::GenerateMatrix(
 {
 	LittleEngine::FMatrix4 result;
 
-	auto position = m_transform.GetWorldPosition();
+	auto position = m_transform->GetWorldPosition();
 	result.data[0] = position.x;
 	result.data[1] = position.y;
 	result.data[2] = position.z;
 
-	auto forward = m_transform.GetWorldForward();
+	auto forward = m_transform->GetWorldForward();
 	result.data[4] = forward.x;
 	result.data[5] = forward.y;
 	result.data[6] = forward.z;
@@ -110,14 +119,14 @@ float LittleEngine::Rendering::Entities::Light::GetEffectRange() const
 	{
 	case Type::POINT:
 	case Type::SPOT:			return CalculatePointLightRadius(constant, linear, quadratic, intensity);
-	case Type::AMBIENT_BOX:		return CalculateAmbientBoxLightRadius(m_transform.GetWorldPosition(), { constant, linear, quadratic });
+	case Type::AMBIENT_BOX:		return CalculateAmbientBoxLightRadius(m_transform->GetWorldPosition(), { constant, linear, quadratic });
 	case Type::AMBIENT_SPHERE:	return constant;
 	}
 
 	return std::numeric_limits<float>::infinity();
 }
 
-const LittleEngine::FTransform& LittleEngine::Rendering::Entities::Light::GetTransform() const
+const LittleEngine::FTransform* LittleEngine::Rendering::Entities::Light::GetTransform() const
 {
 	return m_transform;
 }

@@ -9,7 +9,7 @@
 #include "Core/Maths/FVector2.h"
 #include "Core/Maths/FVector4.h"
 
-#include "Modules/UI/ImGui/imgui.h"
+#include <ImGui/imgui.h>
 #include "Modules/UI/Types/Color.h"
 
 namespace LittleEngine::UI::Internal

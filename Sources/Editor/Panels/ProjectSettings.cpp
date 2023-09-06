@@ -18,7 +18,7 @@ using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
 using namespace LittleEngine::Helpers;
 
-LittleEditor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, bool p_opened, const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings) :
+LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, bool p_opened, const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings) :
 	PanelWindow(p_title, p_opened, p_windowSettings),
 	m_projectFile(EDITOR_CONTEXT(projectSettings))
 {

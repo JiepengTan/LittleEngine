@@ -124,7 +124,7 @@ uint32_t LittleEngine::Rendering::Resources::Shader::GetUniformLocation(const st
 	const int location = glGetUniformLocation(id, name.c_str());
 
 	if (location == -1)
-		OVLOG_WARNING("Uniform: '" + name + "' doesn't exist");
+		LOG_WARNING("Uniform: '" + name + "' doesn't exist");
 
 	m_uniformLocationCache[name] = location;
 

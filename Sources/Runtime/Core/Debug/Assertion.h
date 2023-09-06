@@ -9,7 +9,6 @@
 #include <string>
 
 
-#define OVASSERT(condition, message) OvDebug::Assertion::Assert(condition, message)
 
 namespace OvDebug
 {

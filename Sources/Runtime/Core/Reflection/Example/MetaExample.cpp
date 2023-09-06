@@ -37,7 +37,7 @@ namespace LittleEngine
 
         auto&& Test1_json = Json::parse(test1_context, err);
         LittleEngine::JsonSerializer::Read(Test1_json, test1_out);
-        OVLOG_INFO(test1_context);
+        LOG_INFO(test1_context);
 
         auto        Test2_json_in = LittleEngine::JsonSerializer::Write(test2_in);
         std::string test2_context = Test2_json_in.dump();
@@ -50,7 +50,7 @@ namespace LittleEngine
         Test2  test2_out;
         auto&& test2_json = Json::parse(test2_context, err);
         LittleEngine::JsonSerializer::Read(test2_json, test2_out);
-        OVLOG_INFO(test2_context.c_str());
+        LOG_INFO(test2_context.c_str());
 
         // reflection
         auto                       Meta = TypeMetaDef(Test2, &test2_out);

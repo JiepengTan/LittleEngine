@@ -44,7 +44,7 @@ std::pair<LittleEngine::UI::Types::Color, std::string> GetWidgetSettingsFromLogD
 	}
 }
 
-LittleEditor::Panels::Console::Console
+LittleEngine::Editor::Panels::Console::Console
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -91,7 +91,7 @@ LittleEditor::Panels::Console::Console
 	OvDebug::Logger::LogEvent += std::bind(&Console::OnLogIntercepted, this, std::placeholders::_1);
 }
 
-void LittleEditor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_logData)
+void LittleEngine::Editor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_logData)
 {
 	auto[logColor, logDate] = GetWidgetSettingsFromLogData(p_logData);
 
@@ -102,25 +102,25 @@ void LittleEditor::Panels::Console::OnLogIntercepted(const OvDebug::LogData & p_
 	m_logTextWidgets[&consoleItem1] = p_logData.logLevel;
 }
 
-void LittleEditor::Panels::Console::ClearOnPlay()
+void LittleEngine::Editor::Panels::Console::ClearOnPlay()
 {
 	if (m_clearOnPlay)
 		Clear();
 }
 
-void LittleEditor::Panels::Console::Clear()
+void LittleEngine::Editor::Panels::Console::Clear()
 {
 	m_logTextWidgets.clear();
 	m_logGroup->RemoveAllWidgets();
 }
 
-void LittleEditor::Panels::Console::FilterLogs()
+void LittleEngine::Editor::Panels::Console::FilterLogs()
 {
 	for (const auto&[widget, logLevel] : m_logTextWidgets)
 		widget->enabled = IsAllowedByFilter(logLevel);
 }
 
-bool LittleEditor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLevel)
+bool LittleEngine::Editor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLevel)
 {
 	switch (p_logLevel)
 	{
@@ -133,25 +133,25 @@ bool LittleEditor::Panels::Console::IsAllowedByFilter(OvDebug::ELogLevel p_logLe
 	return false;
 }
 
-void LittleEditor::Panels::Console::SetShowDefaultLogs(bool p_value)
+void LittleEngine::Editor::Panels::Console::SetShowDefaultLogs(bool p_value)
 {
 	m_showDefaultLog = p_value;
 	FilterLogs();
 }
 
-void LittleEditor::Panels::Console::SetShowInfoLogs(bool p_value)
+void LittleEngine::Editor::Panels::Console::SetShowInfoLogs(bool p_value)
 {
 	m_showInfoLog = p_value;
 	FilterLogs();
 }
 
-void LittleEditor::Panels::Console::SetShowWarningLogs(bool p_value)
+void LittleEngine::Editor::Panels::Console::SetShowWarningLogs(bool p_value)
 {
 	m_showWarningLog = p_value;
 	FilterLogs();
 }
 
-void LittleEditor::Panels::Console::SetShowErrorLogs(bool p_value)
+void LittleEngine::Editor::Panels::Console::SetShowErrorLogs(bool p_value)
 {
 	m_showErrorLog = p_value;
 	FilterLogs();

@@ -36,7 +36,7 @@
 
 #include "../Editor/Core/EditorResources.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* The Context handle the engine features setup
@@ -91,7 +91,7 @@ namespace LittleEditor::Core
 		std::unique_ptr<LittleEngine::Physics::Core::PhysicsEngine>			physicsEngine;
 		std::unique_ptr<LittleEngine::Audio::Core::AudioEngine>				audioEngine;
 		std::unique_ptr<LittleEngine::Audio::Core::AudioPlayer>				audioPlayer;
-		std::unique_ptr<LittleEditor::Core::EditorResources>		editorResources;
+		std::unique_ptr<LittleEngine::Editor::Core::EditorResources>		editorResources;
 
 		std::unique_ptr<LittleEngine::Scripting::ScriptInterpreter>	scriptInterpreter;
 		std::unique_ptr<LittleEngine::Rendering::Buffers::UniformBuffer>	engineUBO;
@@ -99,7 +99,7 @@ namespace LittleEditor::Core
 		std::unique_ptr<LittleEngine::Rendering::Buffers::ShaderStorageBuffer>	lightSSBO;
 		std::unique_ptr<LittleEngine::Rendering::Buffers::ShaderStorageBuffer>	simulatedLightSSBO;
 		
-		LittleEngine::SceneSystem::SceneManager sceneManager;
+		LittleEngine::SceneManager sceneManager;
 
 		LittleEngine::ResourceManagement::ModelManager	modelManager;
 		LittleEngine::ResourceManagement::TextureManager	textureManager;

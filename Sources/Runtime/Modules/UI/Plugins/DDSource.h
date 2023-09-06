@@ -10,7 +10,7 @@
 
 #include "Core/Tools/Eventing/Event.h"
 
-#include "Modules/UI/ImGui/imgui.h"
+#include <ImGui/imgui.h>
 
 #include "Modules/UI/Plugins/IPlugin.h"
 

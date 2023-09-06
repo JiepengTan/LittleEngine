@@ -41,13 +41,13 @@ namespace LittleGame::Core
 		* Update the light SSBO with the current scene
 		* @param p_scene
 		*/
-		void UpdateLights(LittleEngine::SceneSystem::Scene& p_scene);
+		void UpdateLights(LittleEngine::Scene& p_scene);
 
 		/**
 		* Update the light SSBO with the current scene (Lights outside of the given frustum are culled)
 		* @param p_scene
 		*/
-		void UpdateLightsInFrustum(LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
+		void UpdateLightsInFrustum(LittleEngine::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
 
 	private:
 		Context& m_context;

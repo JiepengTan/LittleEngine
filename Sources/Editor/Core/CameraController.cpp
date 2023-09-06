@@ -6,7 +6,7 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-#include "Modules/UI/imgui/imgui.h"
+#include "imgui/imgui.h"
 
 #include "../Editor/Core/CameraController.h"
 
@@ -16,9 +16,9 @@
 #include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
-LittleEditor::Core::CameraController::CameraController
+LittleEngine::Editor::Core::CameraController::CameraController
 (
-	LittleEditor::Panels::AView& p_view,
+	LittleEngine::Editor::Panels::AView& p_view,
 	LittleEngine::Rendering::LowRenderer::Camera& p_camera,
 	LittleEngine::FVector3& p_position,
 	LittleEngine::FQuaternion& p_rotation,
@@ -35,71 +35,71 @@ LittleEditor::Core::CameraController::CameraController
 	m_camera.SetFov(60.0f);
 }
 
-float GetActorFocusDist(LittleEngine::Actor& p_actor)
+float GetActorFocusDist(LittleEngine::ActorPtr p_actor)
 {
 	float distance = 4.0f;
 
-	if (p_actor.IsActive())
+	if (p_actor->IsActive())
 	{
-		if (auto pb = p_actor.GetComponent<LittleEngine::CPhysicalBox>())
+		if (auto pb = p_actor->GetComponent<LittleEngine::CPhysicalBox>())
 		{
 			distance = std::max(distance, std::max
 			(
 				std::max
 				(
-					pb->GetSize().x * p_actor.transform.GetWorldScale().x,
-					pb->GetSize().y * p_actor.transform.GetWorldScale().y
+					pb->GetSize().x * p_actor->transform->GetWorldScale().x,
+					pb->GetSize().y * p_actor->transform->GetWorldScale().y
 				),
-				pb->GetSize().z * p_actor.transform.GetWorldScale().z
+				pb->GetSize().z * p_actor->transform->GetWorldScale().z
 			) * 1.5f);
 		}
 
-		if (auto ps = p_actor.GetComponent<LittleEngine::CPhysicalSphere>())
+		if (auto ps = p_actor->GetComponent<LittleEngine::CPhysicalSphere>())
 		{
 			distance = std::max(distance, std::max
 			(
 				std::max
 				(
-					ps->GetRadius() * p_actor.transform.GetWorldScale().x,
-					ps->GetRadius() * p_actor.transform.GetWorldScale().y
+					ps->GetRadius() * p_actor->transform->GetWorldScale().x,
+					ps->GetRadius() * p_actor->transform->GetWorldScale().y
 				),
-				ps->GetRadius() * p_actor.transform.GetWorldScale().z
+				ps->GetRadius() * p_actor->transform->GetWorldScale().z
 			) * 1.5f);
 		}
 
-		if (auto pc = p_actor.GetComponent<LittleEngine::CPhysicalCapsule>())
+		if (auto pc = p_actor->GetComponent<LittleEngine::CPhysicalCapsule>())
 		{
 			distance = std::max(distance, std::max
 			(
 				std::max
 				(
-					pc->GetRadius() * p_actor.transform.GetWorldScale().x,
-					pc->GetHeight() * p_actor.transform.GetWorldScale().y
+					pc->GetRadius() * p_actor->transform->GetWorldScale().x,
+					pc->GetHeight() * p_actor->transform->GetWorldScale().y
 				),
-				pc->GetRadius() * p_actor.transform.GetWorldScale().z
+				pc->GetRadius() * p_actor->transform->GetWorldScale().z
 			) * 1.5f);
 		}
 
-		if (auto modelRenderer = p_actor.GetComponent<LittleEngine::CModelRenderer>())
+		if (auto modelRenderer = p_actor->GetComponent<LittleEngine::CModelRenderer>())
 		{
 			const bool hasCustomBoundingSphere = modelRenderer->GetFrustumBehaviour() == LittleEngine::CModelRenderer::EFrustumBehaviour::CULL_CUSTOM;
 			const bool hasModel = modelRenderer->GetModel();
 			const auto boundingSphere = hasCustomBoundingSphere ? &modelRenderer->GetCustomBoundingSphere() : hasModel ? &modelRenderer->GetModel()->GetBoundingSphere() : nullptr;
-			const auto& actorPosition = p_actor.transform.GetWorldPosition();
-			const auto& actorScale = p_actor.transform.GetWorldScale();
+			const auto& actorPosition = p_actor->transform->GetWorldPosition();
+			const auto& actorScale = p_actor->transform->GetWorldScale();
 			const auto scaleFactor = std::max(std::max(actorScale.x, actorScale.y), actorScale.z);
 
 			distance = std::max(distance, boundingSphere ? (boundingSphere->radius + LittleEngine::FVector3::Length(boundingSphere->position)) * scaleFactor * 2.0f : 10.0f);
 		}
 
-		for (auto child : p_actor.GetChildren())
-			distance = std::max(distance, GetActorFocusDist(*child));
+		for (auto child : p_actor->GetChildren())
+			distance = std::max(distance, GetActorFocusDist(child));
 	}
 
 	return distance;
 }
 
-void LittleEditor::Core::CameraController::HandleInputs(float p_deltaTime)
+void LittleEngine::Editor::Core::CameraController::HandleInputs(float p_deltaTime)
 {
 	if (m_view.IsHovered())
 	{
@@ -111,7 +111,7 @@ void LittleEditor::Core::CameraController::HandleInputs(float p_deltaTime)
 		{
 			if (EDITOR_EXEC(IsAnyActorSelected()))
 			{
-				auto targetPos = EDITOR_EXEC(GetSelectedActor()).transform.GetWorldPosition();
+				auto targetPos = EDITOR_EXEC(GetSelectedActor())->transform->GetWorldPosition();
 
 				float dist = GetActorFocusDist(EDITOR_EXEC(GetSelectedActor()));
 
@@ -217,47 +217,47 @@ void LittleEditor::Core::CameraController::HandleInputs(float p_deltaTime)
 	}
 }
 
-void LittleEditor::Core::CameraController::MoveToTarget(LittleEngine::Actor& p_target)
+void LittleEngine::Editor::Core::CameraController::MoveToTarget(ActorPtr p_target)
 {
-	m_cameraDestinations.push({ p_target.transform.GetWorldPosition() - m_cameraRotation * LittleEngine::FVector3::Forward * GetActorFocusDist(p_target), m_cameraRotation });
+	m_cameraDestinations.push({ p_target->transform->GetWorldPosition() - m_cameraRotation * LittleEngine::FVector3::Forward * GetActorFocusDist(p_target), m_cameraRotation });
 }
 
-void LittleEditor::Core::CameraController::SetSpeed(float p_speed)
+void LittleEngine::Editor::Core::CameraController::SetSpeed(float p_speed)
 {
 	m_cameraMoveSpeed = p_speed;
 }
 
-float LittleEditor::Core::CameraController::GetSpeed() const
+float LittleEngine::Editor::Core::CameraController::GetSpeed() const
 {
 	return m_cameraMoveSpeed;
 }
 
-void LittleEditor::Core::CameraController::SetPosition(const LittleEngine::FVector3 & p_position)
+void LittleEngine::Editor::Core::CameraController::SetPosition(const LittleEngine::FVector3 & p_position)
 {
 	m_cameraPosition = p_position;
 }
 
-void LittleEditor::Core::CameraController::SetRotation(const LittleEngine::FQuaternion & p_rotation)
+void LittleEngine::Editor::Core::CameraController::SetRotation(const LittleEngine::FQuaternion & p_rotation)
 {
 	m_cameraRotation = p_rotation;
 }
 
-const LittleEngine::FVector3& LittleEditor::Core::CameraController::GetPosition() const
+const LittleEngine::FVector3& LittleEngine::Editor::Core::CameraController::GetPosition() const
 {
 	return m_cameraPosition;
 }
 
-const LittleEngine::FQuaternion& LittleEditor::Core::CameraController::GetRotation() const
+const LittleEngine::FQuaternion& LittleEngine::Editor::Core::CameraController::GetRotation() const
 {
 	return m_cameraRotation;
 }
 
-bool LittleEditor::Core::CameraController::IsRightMousePressed() const
+bool LittleEngine::Editor::Core::CameraController::IsRightMousePressed() const
 {
 	return m_rightMousePressed;
 }
 
-void LittleEditor::Core::CameraController::HandleCameraPanning(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouset)
+void LittleEngine::Editor::Core::CameraController::HandleCameraPanning(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouset)
 {
 	m_window.SetCursorShape(LittleEngine::Windowing::Cursor::ECursorShape::HAND);
 
@@ -284,7 +284,7 @@ LittleEngine::FVector3 RemoveRoll(const LittleEngine::FVector3& p_ypr)
 	return result;
 }
 
-void LittleEditor::Core::CameraController::HandleCameraOrbit(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse)
+void LittleEngine::Editor::Core::CameraController::HandleCameraOrbit(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse)
 {
 	auto mouseOffset = p_mouseOffset * m_cameraOrbitSpeed;
 
@@ -292,7 +292,7 @@ void LittleEditor::Core::CameraController::HandleCameraOrbit(const LittleEngine:
 	{
 		m_ypr = LittleEngine::FQuaternion::EulerAngles(m_cameraRotation);
 		m_ypr = RemoveRoll(m_ypr);
-		m_orbitTarget = &EDITOR_EXEC(GetSelectedActor()).transform.GetFTransform();
+		m_orbitTarget = &EDITOR_EXEC(GetSelectedActor())->transform->GetFTransform();
 		m_orbitStartOffset = -LittleEngine::FVector3::Forward * LittleEngine::FVector3::Distance(m_orbitTarget->GetWorldPosition(), m_cameraPosition);
 	}
 
@@ -300,7 +300,7 @@ void LittleEditor::Core::CameraController::HandleCameraOrbit(const LittleEngine:
 	m_ypr.x += -mouseOffset.y;
 	m_ypr.x = std::max(std::min(m_ypr.x, 90.0f), -90.0f);
 
-	auto& target = EDITOR_EXEC(GetSelectedActor()).transform.GetFTransform();
+	auto& target = EDITOR_EXEC(GetSelectedActor())->transform->GetFTransform();
 	LittleEngine::FTransform pivotTransform(target.GetWorldPosition());
 	LittleEngine::FTransform cameraTransform(m_orbitStartOffset);
 	cameraTransform.SetParent(pivotTransform);
@@ -309,12 +309,12 @@ void LittleEditor::Core::CameraController::HandleCameraOrbit(const LittleEngine:
 	m_cameraRotation = cameraTransform.GetWorldRotation();
 }
 
-void LittleEditor::Core::CameraController::HandleCameraZoom()
+void LittleEngine::Editor::Core::CameraController::HandleCameraZoom()
 {
 	m_cameraPosition += m_cameraRotation * LittleEngine::FVector3::Forward * ImGui::GetIO().MouseWheel;
 }
 
-void LittleEditor::Core::CameraController::HandleCameraFPSMouse(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse)
+void LittleEngine::Editor::Core::CameraController::HandleCameraFPSMouse(const LittleEngine::FVector2& p_mouseOffset, bool p_firstMouse)
 {
 	auto mouseOffset = p_mouseOffset * m_mouseSensitivity;
 
@@ -331,7 +331,7 @@ void LittleEditor::Core::CameraController::HandleCameraFPSMouse(const LittleEngi
 	m_cameraRotation = LittleEngine::FQuaternion(m_ypr);
 }
 
-void LittleEditor::Core::CameraController::HandleCameraFPSKeyboard(float p_deltaTime)
+void LittleEngine::Editor::Core::CameraController::HandleCameraFPSKeyboard(float p_deltaTime)
 {
 	m_targetSpeed = LittleEngine::FVector3(0.f, 0.f, 0.f);
 
@@ -358,7 +358,7 @@ void LittleEditor::Core::CameraController::HandleCameraFPSKeyboard(float p_delta
 	m_cameraPosition += m_currentMovementSpeed;
 }
 
-void LittleEditor::Core::CameraController::UpdateMouseState()
+void LittleEngine::Editor::Core::CameraController::UpdateMouseState()
 {
 	if (m_inputManager.IsMouseButtonPressed(LittleEngine::Windowing::Inputs::EMouseButton::MOUSE_BUTTON_LEFT))
 		m_leftMousePressed = true;

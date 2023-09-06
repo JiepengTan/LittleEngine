@@ -17,15 +17,17 @@ namespace LittleEngine
 	/**
 	* A light that is localized and has attenuation
 	*/
-	class CPointLight : public CLight
+	REFLECTION_TYPE(CPointLight)
+	CLASS (CPointLight : public CLight, WhiteListFields)
 	{
+		REFLECTION_BODY(CPointLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CPointLight(Actor& p_owner);
-		CPointLight() = default;
+		void DoInit(ActorPtr p_owner) override;
+		CPointLight();
 		/**
 		* Returns the name of the component
 		*/

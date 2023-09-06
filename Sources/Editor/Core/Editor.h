@@ -18,7 +18,7 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* Handle the editor logic
@@ -111,9 +111,9 @@ namespace LittleEditor::Core
 	private:
 		uint64_t m_elapsedFrames = 0;
 		LittleEngine::UI::Modules::Canvas			m_canvas;
-		LittleEditor::Core::Context&		m_context;
-		LittleEditor::Core::EditorRenderer	m_editorRenderer;
-		LittleEditor::Core::PanelsManager	m_panelsManager;
-		LittleEditor::Core::EditorActions	m_editorActions;
+		LittleEngine::Editor::Core::Context&		m_context;
+		LittleEngine::Editor::Core::EditorRenderer	m_editorRenderer;
+		LittleEngine::Editor::Core::PanelsManager	m_panelsManager;
+		LittleEngine::Editor::Core::EditorActions	m_editorActions;
 	};
 }

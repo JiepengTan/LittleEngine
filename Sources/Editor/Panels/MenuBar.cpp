@@ -37,7 +37,7 @@ using namespace LittleEngine::UI::Widgets;
 using namespace LittleEngine::UI::Widgets::Menu;
 using namespace LittleEngine;
 
-LittleEditor::Panels::MenuBar::MenuBar()
+LittleEngine::Editor::Panels::MenuBar::MenuBar()
 {
 	CreateFileMenu();
 	CreateEditMenu();
@@ -49,7 +49,7 @@ LittleEditor::Panels::MenuBar::MenuBar()
 	CreateHelpMenu();
 	CreateToolbar();
 }
-LittleEngine::UI::Widgets::Buttons::ButtonImage* LittleEditor::Panels::MenuBar::CreateToolbarItem(std::string p_name,float& p_offset)
+LittleEngine::UI::Widgets::Buttons::ButtonImage* LittleEngine::Editor::Panels::MenuBar::CreateToolbarItem(std::string p_name,float& p_offset)
 {
 	const int btnOffset = 20;
 	const int btnSize = 16;
@@ -60,7 +60,7 @@ LittleEngine::UI::Widgets::Buttons::ButtonImage* LittleEditor::Panels::MenuBar::
 	p_offset += btnSize + btnOffset;
 	return btn;
 }
-void LittleEditor::Panels::MenuBar::CreateToolbar()
+void LittleEngine::Editor::Panels::MenuBar::CreateToolbar()
 {
 	float startOffset = 700;
 	m_playButton	= CreateToolbarItem("Button_Play",startOffset); 
@@ -75,8 +75,8 @@ void LittleEditor::Panels::MenuBar::CreateToolbar()
 
 	m_playButton->ClickedEvent	+=  [this]()
 	{
-		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>();
-		if (editorActors.GetCurrentEditorMode() == LittleEditor::Core::EditorActions::EEditorMode::EDIT)
+		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>();
+		if (editorActors.GetCurrentEditorMode() == LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT)
 		{
 			editorActors.StartPlaying();
 			m_playButton->textureID.id =  (uint32_t)EDITOR_CONTEXT(editorResources)->GetTexture("Button_Stop")->id;
@@ -88,12 +88,12 @@ void LittleEditor::Panels::MenuBar::CreateToolbar()
 	};
 	m_pauseButton->ClickedEvent	+=  [this]()
 	{
-		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEditor::Core::EditorActions>();
-		if (editorActors.GetCurrentEditorMode() == LittleEditor::Core::EditorActions::EEditorMode::PLAY)
+		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>();
+		if (editorActors.GetCurrentEditorMode() == LittleEngine::Editor::Core::EditorActions::EEditorMode::PLAY)
 		{
 			editorActors.PauseGame();
 			m_pauseButton->tint = { 0.9, 0.5, 0.5, 1 };
-		}else if (editorActors.GetCurrentEditorMode() == LittleEditor::Core::EditorActions::EEditorMode::PAUSE)
+		}else if (editorActors.GetCurrentEditorMode() == LittleEngine::Editor::Core::EditorActions::EEditorMode::PAUSE)
 		{
 			editorActors.ResumeGame();
 			m_pauseButton->tint = { 1, 1, 1, 1 };
@@ -102,7 +102,7 @@ void LittleEditor::Panels::MenuBar::CreateToolbar()
 	m_nextButton->ClickedEvent	+= EDITOR_BIND(NextFrame);
 	refreshButton->ClickedEvent	+= EDITOR_BIND(RefreshScripts);
 
-	EDITOR_EVENT(EditorModeChangedEvent) += [this](LittleEditor::Core::EditorActions::EEditorMode p_newMode)
+	EDITOR_EVENT(EditorModeChangedEvent) += [this](LittleEngine::Editor::Core::EditorActions::EEditorMode p_newMode)
 	{
 		auto enable = [](LittleEngine::UI::Widgets::Buttons::ButtonImage* p_button, bool p_enable)
 		{
@@ -112,22 +112,22 @@ void LittleEditor::Panels::MenuBar::CreateToolbar()
 
 		switch (p_newMode)
 		{
-		case LittleEditor::Core::EditorActions::EEditorMode::EDIT:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
 			enable(m_nextButton, false);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::PLAY:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::PLAY:
 			enable(m_playButton, true);
 			enable(m_pauseButton, true);
 			enable(m_nextButton, true);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::PAUSE:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::PAUSE:
 			enable(m_playButton, true);
 			enable(m_pauseButton, true);
 			enable(m_nextButton, true);
 			break;
-		case LittleEditor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
+		case LittleEngine::Editor::Core::EditorActions::EEditorMode::FRAME_BY_FRAME:
 			enable(m_playButton, true);
 			enable(m_pauseButton, false);
 			enable(m_nextButton, true);
@@ -135,11 +135,11 @@ void LittleEditor::Panels::MenuBar::CreateToolbar()
 		}
 	};
 
-	EDITOR_EXEC(SetEditorMode(LittleEditor::Core::EditorActions::EEditorMode::EDIT));
+	EDITOR_EXEC(SetEditorMode(LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT));
 }
 
 
-void LittleEditor::Panels::MenuBar::HandleShortcuts(float p_deltaTime)
+void LittleEngine::Editor::Panels::MenuBar::HandleShortcuts(float p_deltaTime)
 {
 	auto& inputManager = *EDITOR_CONTEXT(inputManager);
 
@@ -164,7 +164,7 @@ void LittleEditor::Panels::MenuBar::HandleShortcuts(float p_deltaTime)
 	}
 }
 
-void LittleEditor::Panels::MenuBar::CreateFileMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateFileMenu()
 {
 	auto& fileMenu = CreateWidget<MenuList>("File");
 	fileMenu.CreateWidget<MenuItem>("New Scene", "CTRL + N").ClickedEvent					+= EDITOR_BIND(LoadEmptyScene);
@@ -181,7 +181,7 @@ void LittleEditor::Panels::MenuBar::CreateFileMenu()
 
 }
 
-void LittleEditor::Panels::MenuBar::CreateEditMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateEditMenu()
 {
 	m_editMenu = &CreateWidget<MenuList>("Edit");
 	m_editMenu->ClickedEvent += [this]()
@@ -194,7 +194,7 @@ void LittleEditor::Panels::MenuBar::CreateEditMenu()
 	};
 }
 
-void LittleEditor::Panels::MenuBar::CreateWindowMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateWindowMenu()
 {
 	m_windowMenu = &CreateWidget<MenuList>("Window");
 	m_windowMenu->CreateWidget<MenuItem>("Close all").ClickedEvent	+= std::bind(&MenuBar::OpenEveryWindows, this, false);
@@ -205,20 +205,20 @@ void LittleEditor::Panels::MenuBar::CreateWindowMenu()
 	m_windowMenu->ClickedEvent += std::bind(&MenuBar::UpdateToggleableItems, this);
 }
 
-void LittleEditor::Panels::MenuBar::CreateActorsMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateActorsMenu()
 {
 	auto& actorsMenu = CreateWidget<MenuList>("Actors");
     Utils::ActorCreationMenu::GenerateActorCreationMenu(actorsMenu);
 }
 
-void LittleEditor::Panels::MenuBar::CreateResourcesMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateResourcesMenu()
 {
 	auto& resourcesMenu = CreateWidget<MenuList>("Resources");
 	resourcesMenu.CreateWidget<MenuItem>("Compile shaders").ClickedEvent += EDITOR_BIND(CompileShaders);
 	resourcesMenu.CreateWidget<MenuItem>("Save materials").ClickedEvent += EDITOR_BIND(SaveMaterials);
 }
 
-void LittleEditor::Panels::MenuBar::CreateSettingsMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 {
 	auto& settingsMenu = CreateWidget<MenuList>("Settings");
 	settingsMenu.CreateWidget<MenuItem>("Spawn actors at origin", "", true, true).ValueChangedEvent		+= EDITOR_BIND(SetActorSpawnAtOrigin, std::placeholders::_1);
@@ -297,13 +297,13 @@ void LittleEditor::Panels::MenuBar::CreateSettingsMenu()
 	subMenu.CreateWidget<MenuItem>("For lights", "", true, Settings::EditorSettings::ShowLightFrustumCullingInSceneView).ValueChangedEvent += [this](bool p_value) { Settings::EditorSettings::ShowLightFrustumCullingInSceneView = p_value; };
 }
 
-void LittleEditor::Panels::MenuBar::CreateLayoutMenu() 
+void LittleEngine::Editor::Panels::MenuBar::CreateLayoutMenu() 
 {
 	auto& layoutMenu = CreateWidget<MenuList>("Layout");
 	layoutMenu.CreateWidget<MenuItem>("Reset").ClickedEvent += EDITOR_BIND(ResetLayout);
 }
 
-void LittleEditor::Panels::MenuBar::CreateHelpMenu()
+void LittleEngine::Editor::Panels::MenuBar::CreateHelpMenu()
 {
     auto& helpMenu = CreateWidget<MenuList>("Help");
     helpMenu.CreateWidget<MenuItem>("GitHub").ClickedEvent += [] {LittleEngine::Utils::SystemCalls::OpenURL("https://github.com/adriengivry/Overload"); };
@@ -316,7 +316,7 @@ void LittleEditor::Panels::MenuBar::CreateHelpMenu()
     helpMenu.CreateWidget<Texts::Text>("Version: 1.3.0");
 }
 
-void LittleEditor::Panels::MenuBar::RegisterPanel(const std::string& p_name, LittleEngine::UI::Panels::PanelWindow& p_panel)
+void LittleEngine::Editor::Panels::MenuBar::RegisterPanel(const std::string& p_name, LittleEngine::UI::Panels::PanelWindow& p_panel)
 {
 	auto menuList = PorjectSettingName == p_name? m_editMenu : m_windowMenu;
 	MenuItem& menuItem = menuList->CreateWidget<MenuItem>(p_name, "", true, true);
@@ -324,13 +324,13 @@ void LittleEditor::Panels::MenuBar::RegisterPanel(const std::string& p_name, Lit
 	m_panels.emplace(p_name, std::make_pair(std::ref(p_panel), std::ref(menuItem)));
 }
 
-void LittleEditor::Panels::MenuBar::UpdateToggleableItems()
+void LittleEngine::Editor::Panels::MenuBar::UpdateToggleableItems()
 {
 	for (auto&[name, panel] : m_panels)
 		panel.second.get().checked = panel.first.get().IsOpened();
 }
 
-void LittleEditor::Panels::MenuBar::OpenEveryWindows(bool p_state)
+void LittleEngine::Editor::Panels::MenuBar::OpenEveryWindows(bool p_state)
 {
 	for (auto&[name, panel] : m_panels)
 		panel.first.get().SetOpened(p_state);

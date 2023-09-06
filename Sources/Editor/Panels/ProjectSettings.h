@@ -9,7 +9,7 @@
 
 #include "Core/Tools/Filesystem/IniFile.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class ProjectSettings : public LittleEngine::UI::Panels::PanelWindow
 	{

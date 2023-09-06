@@ -5,7 +5,7 @@
 */
 
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
-#include "Modules/UI/ImGui/imgui_internal.h"
+#include "ImGui/imgui_internal.h"
 
 LittleEngine::UI::Widgets::Layout::GroupCollapsable::GroupCollapsable(const std::string & p_name) :
 	name(p_name)

@@ -47,9 +47,9 @@ void LittleEngine::Resources::Loaders::MaterialLoader::Save(Material& p_material
 	p_material.OnSerialize(doc, node);
 
 	if (doc.SaveFile(p_path.c_str()) == tinyxml2::XML_SUCCESS)
-		OVLOG_INFO("[MATERIAL] \"" + p_path + "\": Saved");
+		LOG_INFO("[MATERIAL] \"" + p_path + "\": Saved");
 	else
-		OVLOG_ERROR("[MATERIAL] \"" + p_path + "\": Failed to save");
+		LOG_ERROR("[MATERIAL] \"" + p_path + "\": Failed to save");
 }
 
 bool LittleEngine::Resources::Loaders::MaterialLoader::Destroy(Material *& p_material)

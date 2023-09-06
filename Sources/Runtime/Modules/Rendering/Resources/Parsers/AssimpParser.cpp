@@ -41,7 +41,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadMissingBones
             boneCount++;
             if (boneName != "root")
             {
-                OVLOG("Miss Animation Node " + boneName);
+                LOG_INFO("Miss Animation Node " + boneName);
             }
         }
         const BoneFrames& boneFrames = BoneFrames(channel->mNodeName.data, boneInfoMap[channel->mNodeName.data].id, channel);
@@ -56,7 +56,7 @@ bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadAnimation(An
     const aiScene* scene = importer.ReadFile(p_fileName, aiProcess_ValidateDataStructure | aiProcess_GlobalScale);
     if (scene == nullptr || scene->mAnimations == nullptr)
     {
-        OVLOG_ERROR("Can not load animtion file " + p_fileName);
+        LOG_ERROR("Can not load animtion file " + p_fileName);
         return false;
     }
     auto animation = scene->mAnimations[0];
@@ -195,14 +195,14 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessVertexBon
             //SetVertexBoneData(vertices[vertexId], boneID, weight);
             if (vertexId >= p_verticesBuffer.Size())
             {
-                OVLOG_ERROR("Model file animation invalid !" + p_model->path);
+                LOG_ERROR("Model file animation invalid !" + p_model->path);
                 return;
             }
             auto startOffset = vertexId * MAX_BONE_INFLUENCE;
             for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
             {
                 auto curOffset = startOffset + i;
-                OVASSERT(boneIdAryLen > curOffset, "ProcessVertexBoneInfo outOfRange ");
+                LE_ASSERT(boneIdAryLen > curOffset, "ProcessVertexBoneInfo outOfRange ");
                 if (boneIdPtr[curOffset] < 0)
                 {
                     boneIdPtr[curOffset] = boneID;

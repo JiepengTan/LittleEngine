@@ -8,16 +8,16 @@
 
 #include "../Editor/Core/EditorActions.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	template<typename T>
-	inline LittleEngine::Actor & EditorActions::CreateMonoComponentActor(bool p_focusOnCreation, LittleEngine::Actor* p_parent)
+	inline ActorPtr EditorActions::CreateMonoComponentActor(bool p_focusOnCreation, ActorPtr p_parent)
 	{
-		auto& instance = CreateEmptyActor(false, p_parent);
+		auto instance = CreateEmptyActor(false, p_parent);
 
-		T& component = instance.AddComponent<T>();
+		SharedPtr<T> component = instance->AddComponent<T>();
 
-        instance.SetName(component.GetName());
+        instance->SetName(component->GetName());
 
 		if (p_focusOnCreation)
 			SelectActor(instance);

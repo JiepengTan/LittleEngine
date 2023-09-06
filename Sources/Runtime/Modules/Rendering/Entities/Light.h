@@ -23,14 +23,14 @@ namespace LittleEngine::Rendering::Entities
 		* Light types
 		*/
 		enum class Type { POINT, DIRECTIONAL, SPOT, AMBIENT_BOX, AMBIENT_SPHERE };
-
+		Light();
 		/**
 		* Create the light with the given transform and type
 		* @param p_transform
 		* @param p_type
 		*/
 		Light(LittleEngine::FTransform& p_tranform, Type p_type);
-
+		void DoInit(LittleEngine::FTransform& p_tranform, Type p_type) ;
 		/**
 		* Generate the light matrix, ready to send to the GPU
 		*/
@@ -44,7 +44,7 @@ namespace LittleEngine::Rendering::Entities
 		/**
 		* Returns the light transform
 		*/
-		const LittleEngine::FTransform& GetTransform() const;
+		const LittleEngine::FTransform* GetTransform() const;
 
 		LittleEngine::FVector3	color		= { 1.f, 1.f, 1.f };
 		float				intensity	= 1.f;
@@ -56,6 +56,6 @@ namespace LittleEngine::Rendering::Entities
 		float				type		= 0.0f;
 
 	protected:
-		LittleEngine::FTransform& m_transform;
+		LittleEngine::FTransform* m_transform;
 	};
 }

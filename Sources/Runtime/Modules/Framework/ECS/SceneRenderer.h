@@ -22,13 +22,13 @@
 namespace LittleEngine
 {
 	/**
-	* A Renderer capable of rendering stuffs linked with the ECS. It is a convenient class that should be used instead of LittleEngine::Rendering::Core::Renderer
+	* A Renderer capable of rendering stuffs linked with the ECS. It is a convenient class that should be used instead of Rendering::Core::Renderer
 	* when you plan to use the LittleEngine ECS architecture.
 	*/
-	class SceneRenderer : public LittleEngine::Rendering::Core::Renderer
+	class SceneRenderer : public Rendering::Core::Renderer
 	{
 	public:
-		using Drawable				= std::tuple<LittleEngine::FMatrix4, LittleEngine::Rendering::Resources::Mesh*, LittleEngine::Resources::Material*, LittleEngine::FMatrix4, std::vector<LittleEngine::FMatrix4>*  >;
+		using Drawable				= std::tuple<FMatrix4, Rendering::Resources::Mesh*, Resources::Material*, FMatrix4, std::vector<FMatrix4>*  >;
 		using OpaqueDrawables		= std::multimap<float, Drawable, std::less<float>>;
 		using TransparentDrawables	= std::multimap<float, Drawable, std::greater<float>>;
 
@@ -36,7 +36,7 @@ namespace LittleEngine
 		* Constructor of the Renderer
 		* @param p_driver
 		*/
-		SceneRenderer(LittleEngine::Rendering::Context::Driver& p_driver);
+		SceneRenderer(Rendering::Context::Driver& p_driver);
 
 		/**
 		* Destructor of the Renderer
@@ -48,23 +48,23 @@ namespace LittleEngine
 		* Parse a scene to find the main camera
 		* @param p_scene
 		*/
-		LittleEngine::CCamera* FindMainCamera(const LittleEngine::SceneSystem::Scene& p_scene);
+		SharedPtr<CCamera> FindMainCamera(Scene* p_scene);
 
 		/**
 		* Fill the given FMatrix4 vector with lights information
 		* @param p_scene
 		*/
-		std::vector<LittleEngine::FMatrix4> FindLightMatrices(const LittleEngine::SceneSystem::Scene& p_scene);
+		std::vector<FMatrix4> FindLightMatrices(const Scene& p_scene);
 
 		/**
 		* Fill the given FMatrix4 vector with lights information that are inside the frustum
 		* @param p_scene
 		* @param p_frustum
 		*/
-		std::vector<LittleEngine::FMatrix4> FindLightMatricesInFrustum(const LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
+		std::vector<FMatrix4> FindLightMatricesInFrustum(const Scene& p_scene, const Rendering::Data::Frustum& p_frustum);
 
 
-		CLight* FindMainLight(const LittleEngine::SceneSystem::Scene& p_scene);
+		SharedPtr<CLight> FindMainLight(Scene& p_scene);
 		/**
 		* Draw the given scene using the given default material (optional) if no material found on an actor
 		* @param p_scene
@@ -75,11 +75,11 @@ namespace LittleEngine
 		*/
 		void RenderScene
 		(
-			LittleEngine::SceneSystem::Scene& p_scene,
-			const LittleEngine::FVector3& p_cameraPosition,
-			const LittleEngine::Rendering::LowRenderer::Camera& p_camera,
-			const LittleEngine::Rendering::Data::Frustum* p_customFrustum = nullptr,
-			LittleEngine::Resources::Material* p_defaultMaterial = nullptr
+			Scene& p_scene,
+			const FVector3& p_cameraPosition,
+			const Rendering::LowRenderer::Camera& p_camera,
+			const Rendering::Data::Frustum* p_customFrustum = nullptr,
+			Resources::Material* p_defaultMaterial = nullptr
 		);
 		/**
 			* Draw shadow map using the given scene 
@@ -89,9 +89,9 @@ namespace LittleEngine
 		*/
 		void DrawShadowmap
 		(
-			LittleEngine::SceneSystem::Scene& p_scene,
-			const LittleEngine::FVector3& p_cameraPosition,
-			const LittleEngine::Rendering::LowRenderer::Camera& p_camera,
+			Scene& p_scene,
+			const FVector3& p_cameraPosition,
+			const Rendering::LowRenderer::Camera& p_camera,
 			OpaqueDrawables&	opaqueMeshes
 		);
 		
@@ -104,10 +104,10 @@ namespace LittleEngine
 		*/
 		std::pair<OpaqueDrawables, TransparentDrawables> FindAndSortFrustumCulledDrawables
 		(
-			const LittleEngine::SceneSystem::Scene& p_scene,
-			const LittleEngine::FVector3& p_cameraPosition,
-			const LittleEngine::Rendering::Data::Frustum& p_frustum,
-			LittleEngine::Resources::Material* p_defaultMaterial
+			const Scene& p_scene,
+			const FVector3& p_cameraPosition,
+			const Rendering::Data::Frustum& p_frustum,
+			Resources::Material* p_defaultMaterial
 		);
 
 		/**
@@ -118,9 +118,9 @@ namespace LittleEngine
 		*/
 		std::pair<OpaqueDrawables, TransparentDrawables> FindAndSortDrawables
 		(
-			const LittleEngine::SceneSystem::Scene& p_scene,
-			const LittleEngine::FVector3& p_cameraPosition,
-			LittleEngine::Resources::Material* p_defaultMaterial
+			const Scene& p_scene,
+			const FVector3& p_cameraPosition,
+			Resources::Material* p_defaultMaterial
 		);
 
 		/**
@@ -136,7 +136,7 @@ namespace LittleEngine
 		* @param p_modelMatrix
 		* @param p_defaultMaterial (Used if the given material has no shader attached)
 		*/
-		void DrawModelWithSingleMaterial(LittleEngine::Rendering::Resources::Model& p_model, LittleEngine::Resources::Material& p_material, LittleEngine::FMatrix4 const* p_modelMatrix, LittleEngine::Resources::Material* p_defaultMaterial = nullptr);
+		void DrawModelWithSingleMaterial(Rendering::Resources::Model& p_model, Resources::Material& p_material, FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial = nullptr);
 
 		/**
 		* Draw the model using the given materials
@@ -144,7 +144,7 @@ namespace LittleEngine
 		* @param p_modelMatrix
 		* @param p_defaultMaterial (Used when a submesh material has no shader attached)
 		*/
-		void DrawModelWithMaterials(LittleEngine::Rendering::Resources::Model& p_model, std::vector<LittleEngine::Resources::Material*> p_materials, LittleEngine::FMatrix4 const* p_modelMatrix, LittleEngine::Resources::Material* p_defaultMaterial = nullptr);
+		void DrawModelWithMaterials(Rendering::Resources::Model& p_model, std::vector<Resources::Material*> p_materials, FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial = nullptr);
 
 		/**
 		* Try drawing a mesh using the given material (Fails if the material has no shader attached)
@@ -152,7 +152,7 @@ namespace LittleEngine
 		* @param p_material
 		* @param p_modelMatrix (If set to nullptr, no data will be sent to the GPU)
 		*/
-		void DrawMesh(LittleEngine::Rendering::Resources::Mesh& p_mesh, LittleEngine::Resources::Material& p_material, LittleEngine::FMatrix4 const* p_modelMatrix,std::vector<LittleEngine::FMatrix4>* p_boneMatrixAry = nullptr);
+		void DrawMesh(Rendering::Resources::Mesh& p_mesh, Resources::Material& p_material, FMatrix4 const* p_modelMatrix,std::vector<FMatrix4>* p_boneMatrixAry = nullptr);
 
 		/**
 		* Register the given function as the model matrix sender.
@@ -161,7 +161,7 @@ namespace LittleEngine
 		* to the GPU in the way you want
 		* @param p_modelMatrixSender
 		*/
-		void RegisterModelMatrixSender(std::function<void(LittleEngine::FMatrix4)> p_modelMatrixSender);
+		void RegisterModelMatrixSender(std::function<void(FMatrix4)> p_modelMatrixSender);
 
 		/**
 		* Register the given function as the user matrix sender.
@@ -170,15 +170,15 @@ namespace LittleEngine
 		* to the GPU in the way you want
 		* @param p_userMatrixSender
 		*/
-		void RegisterUserMatrixSender(std::function<void(LittleEngine::FMatrix4)> p_userMatrixSender);
+		void RegisterUserMatrixSender(std::function<void(FMatrix4)> p_userMatrixSender);
 		
 	private:
-		std::function<void(LittleEngine::FMatrix4)> m_modelMatrixSender;
-		std::function<void(LittleEngine::FMatrix4)> m_userMatrixSender;
-		std::unique_ptr<LittleEngine::Rendering::Buffers::ShadowmapBuffer> m_shadowmapBuffer = nullptr;
-		LittleEngine::Rendering::Resources::Texture* m_emptyTexture = nullptr;
-		LittleEngine::FMatrix4 m_lightSpaceVPMatrix;
-		LittleEngine::FVector4 m_lightInfo;
+		std::function<void(FMatrix4)> m_modelMatrixSender;
+		std::function<void(FMatrix4)> m_userMatrixSender;
+		std::unique_ptr<Rendering::Buffers::ShadowmapBuffer> m_shadowmapBuffer = nullptr;
+		Rendering::Resources::Texture* m_emptyTexture = nullptr;
+		FMatrix4 m_lightSpaceVPMatrix;
+		FVector4 m_lightInfo;
 		bool m_isGPUSkin;
 	};
 }

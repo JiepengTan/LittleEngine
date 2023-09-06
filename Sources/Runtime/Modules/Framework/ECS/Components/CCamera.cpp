@@ -11,12 +11,12 @@
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-LittleEngine::CCamera::CCamera(Actor& p_owner) : Component(p_owner)
+
+void LittleEngine::CCamera::DoInit(ActorPtr p_owner)
 {
-	/* Default clear color for the CCamera (Different from Camera default clear color) */
+	Component::DoInit(p_owner);
 	SetClearColor({ 0.1921569f, 0.3019608f, 0.4745098f });
 }
-
 std::string LittleEngine::CCamera::GetName()
 {
 	return "Camera";

@@ -8,19 +8,24 @@
 
 
 #include "Modules/Framework/ECS/Actor.h"
-#include "Modules/Framework/API/ISerializable.h"
 
-#include "Modules/Framework/ECS/Components/CModelRenderer.h"
-#include "Modules/Framework/ECS/Components/CCamera.h"
-#include "Modules/Framework/ECS/Components/CLight.h"
 
-namespace LittleEngine::SceneSystem
+namespace LittleEngine
 {
+	class CLight;
+	class CCamera;
+	class CModelRenderer;
 	/**
 	* The scene is a set of actors
 	*/
-	class Scene : public API::ISerializable
+	class Scene : Object
 	{
+	public:
+		// events
+		static Eventing::Event<ActorPtr>				 	DestroyedEvent;
+		static Eventing::Event<ActorPtr>				 	CreatedEvent;
+		static Eventing::Event<ActorPtr, ActorPtr>			AttachEvent;
+		static Eventing::Event<ActorPtr>				 	DettachEvent;
 	public:
 		/**
 		* Contains a set of vectors of components that are sorted. It allows fast
@@ -28,9 +33,17 @@ namespace LittleEngine::SceneSystem
 		*/
 		struct FastAccessComponents
 		{
-			std::vector<CModelRenderer*>	modelRenderers;
-			std::vector<CCamera*>			cameras;
-			std::vector<CLight*>			lights;
+			TUnorderedSet<ActorID>			modelRenderers;
+			TUnorderedSet<ActorID>			cameras;
+			TUnorderedSet<ActorID>			lights;
+
+		public:
+			void Clear()
+			{
+				modelRenderers.clear();
+				cameras.clear();
+				lights.clear();
+			}
 		};
 
 		/**
@@ -74,21 +87,21 @@ namespace LittleEngine::SceneSystem
 		/**
 		* Create an actor with a default name and return a reference to it.
 		*/
-		Actor& CreateActor();
+		ActorPtr CreateActor();
 
 		/**
 		* Create an actor with the given name and return a reference to it.
 		* @param p_name
 		* @param p_tag
 		*/
-		Actor& CreateActor(const std::string& p_name, const std::string& p_tag = "");
+		ActorPtr CreateActor(const std::string& p_name, const std::string& p_tag = "");
 
 		/**
 		* Destroy and actor and return true on success
 		* @param p_target (The actor to remove from the scene)
 		*/
-		bool DestroyActor(Actor& p_target);
-
+		bool DestroyActor(Actor* p_target);
+		bool DestroyActor(ActorID p_actorID);
 		/**
 		* Collect garbages by removing Destroyed-marked actors
 		*/
@@ -98,54 +111,72 @@ namespace LittleEngine::SceneSystem
 		* Return the first actor identified by the given name, or nullptr on fail
 		* @param p_name
 		*/
-		Actor* FindActorByName(const std::string& p_name);
+		ActorPtr FindActorByName(const std::string& p_name);
 
 		/**
 		* Return the first actor identified by the given tag, or nullptr on fail
 		* @param p_tag
 		*/
-		Actor* FindActorByTag(const std::string& p_tag);
+		ActorPtr FindActorByTag(const std::string& p_tag);
 
 		/**
 		* Return the actor identified by the given ID (Returns 0 on fail)
 		* @param p_id
 		*/
-		Actor* FindActorByID(int64_t p_id);
+		ActorPtr FindActorByID(ActorID p_id);
 
 		/**
 		* Return every actors identified by the given name
 		* @param p_name
 		*/
-		std::vector<std::reference_wrapper<Actor>> FindActorsByName(const std::string& p_name);
+		ActorVector FindActorsByName(const std::string& p_name);
 
 		/**
 		* Return every actors identified by the given tag
 		* @param p_tag
 		*/
-		std::vector<std::reference_wrapper<Actor>> FindActorsByTag(const std::string& p_tag);
+		ActorVector FindActorsByTag(const std::string& p_tag);
 
 		/**
 		* Callback method called everytime a component is added on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentAdded(Component& p_compononent);
+		void OnComponentAdded(CompPtr p_compononent);
 
 		/**
 		* Callback method called everytime a component is removed on an actor of the scene
 		* @param p_component
 		*/
-		void OnComponentRemoved(Component& p_compononent);
+		void OnComponentRemoved(CompPtr p_compononent);
 
+		void OnActorDetach(ActorID p_child,ActorID p_parent);
+		void OnActorAttach(ActorID p_child,ActorID p_parent);
 		/**
 		* Return a reference on the actor map
 		*/
-		std::vector<LittleEngine::Actor*>& GetActors();
+		ActorVector& GetActorsInternal();
 
 		/**
 		* Return the fast access components data structure
 		*/
 		const FastAccessComponents& GetFastAccessComponents() const;
-
+		TVector<SharedPtr<CLight>> GetLights() const;
+		TVector<SharedPtr<CCamera>> GetCameras() const;
+		TVector<SharedPtr<CModelRenderer>> GetRenderers() const;
+		template<typename T>
+		TVector<SharedPtr<T>> GetComponents(TUnorderedSet<ActorID> p_IDs) const 
+		{
+			TVector<SharedPtr<T>> vector;
+			for (auto ident : p_IDs){
+				auto actor = GetActor(ident);
+				if(actor != nullptr)
+				{
+					vector.push_back(actor->GetComponent<T>());
+				}
+			}
+			return vector;
+		}
+		
 		/**
 		* Serialize the scene
 		* @param p_doc
@@ -160,18 +191,20 @@ namespace LittleEngine::SceneSystem
 		*/
 		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
 
-		std::vector<Actor*>& GetActorsCopy(std::vector<Actor*>& p_vec);
-
-		int GetSceneId(){ return m_sceneId;}
+		ActorVector& GetActorsCopy(ActorMap& p_vec);
+		ActorVector& GetActorsCopy(ActorVector& p_vec);
+		bool HasActor(ActorID p_actorId)const{ return m_actors.count(p_actorId) != 0;}
+		ActorPtr GetActor(ActorID p_actorId)const { return m_actors.at(p_actorId);}
+		ObjectID GetSceneId()const{ return m_sceneId;}
 	private:
-		int64_t m_availableID = 1;
 		bool m_isPlaying = false;
-		std::vector<Actor*> m_actors;
-		std::vector<Actor*> m_tempActors;
-		std::vector<Actor*> m_tempDeleteActors;
+		
+		ActorMap m_actors;
+		ActorVector m_tempActors;
+		ActorVector m_tempDeleteActors;
 
 		FastAccessComponents m_fastAccessComponents;
-		int m_sceneId;
+		ObjectID m_sceneId;
 	private:
 		static int s_globalSceneId; 
 	};

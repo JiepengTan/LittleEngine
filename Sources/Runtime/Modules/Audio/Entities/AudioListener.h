@@ -31,6 +31,7 @@ namespace LittleEngine::Audio::Entities
 		* @param p_transform
 		*/
 		AudioListener(LittleEngine::FTransform& p_transform);
+		void DoInit(LittleEngine::FTransform& p_transform);
 
 		/**
 		* AudioListener destructor
@@ -58,8 +59,8 @@ namespace LittleEngine::Audio::Entities
 
 	private:
 		/* Transform stuff */
-		LittleEngine::FTransform* const		m_transform;
-		const bool						m_internalTransform;
+		LittleEngine::FTransform* 		m_transform;
+		bool							m_internalTransform;
 		bool							m_enabled = true;
 
 	public:

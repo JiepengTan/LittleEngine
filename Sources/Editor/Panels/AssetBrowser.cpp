@@ -40,7 +40,7 @@
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
 
-#define FILENAMES_CHARS LittleEditor::Panels::AssetBrowser::__FILENAMES_CHARS
+#define FILENAMES_CHARS LittleEngine::Editor::Panels::AssetBrowser::__FILENAMES_CHARS
 
 const std::string FILENAMES_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-_=+ 0123456789()[]";
 
@@ -61,7 +61,7 @@ void RenameAsset(const std::string& p_prev, const std::string& p_new)
 		}
 		else
 		{
-			OVLOG_ERROR(newMetaPath + " is already existing, .meta creation failed");
+			LOG_ERROR(newMetaPath + " is already existing, .meta creation failed");
 		}
 	}
 }
@@ -369,7 +369,7 @@ public:
 
 				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 				{
-					auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 					materialEditor.SetTarget(*instance);
 					materialEditor.Open();
 					materialEditor.Focus();
@@ -399,7 +399,7 @@ public:
 
 				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 				{
-					auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 					materialEditor.SetTarget(*instance);
 					materialEditor.Open();
 					materialEditor.Focus();
@@ -429,7 +429,7 @@ public:
 
 				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 				{
-					auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 					materialEditor.SetTarget(*instance);
 					materialEditor.Open();
 					materialEditor.Focus();
@@ -460,7 +460,7 @@ public:
 
 				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 				{
-					auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 					materialEditor.SetTarget(*instance);
 					materialEditor.Open();
 					materialEditor.Focus();
@@ -490,7 +490,7 @@ public:
 
 				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 				{
-					auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 					materialEditor.SetTarget(*instance);
 					materialEditor.Open();
 					materialEditor.Focus();
@@ -624,7 +624,7 @@ public:
 
         editMetadata.ClickedEvent += [this]
         {
-            auto& panel = EDITOR_PANEL(LittleEditor::Panels::AssetProperties, "Asset Properties");
+            auto& panel = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetProperties, "Asset Properties");
             std::string resourcePath = EDITOR_EXEC(GetResourcePath(filePath, m_protected));
             panel.SetTarget(resourcePath);
             panel.Open();
@@ -662,7 +662,7 @@ public:
 		previewAction.ClickedEvent += [this]
 		{
 			Resource* resource = LittleEngine::Global::ServiceLocator::Get<ResourceLoader>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
-			auto& assetView = EDITOR_PANEL(LittleEditor::Panels::AssetView, "Asset View");
+			auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 			assetView.SetResource(resource);
 			assetView.Open();
 			assetView.Focus();
@@ -697,7 +697,7 @@ public:
 				/* Trying to compile */
 				LittleEngine::Rendering::Resources::Shader* shader = OVSERVICE(LittleEngine::ResourceManagement::ShaderManager)[resourcePath];
 				if (shader)
-					OVLOG_INFO("[COMPILE] \"" + filePath + "\": Success!");
+					LOG_INFO("[COMPILE] \"" + filePath + "\": Success!");
 			}
 			
 		};
@@ -861,7 +861,7 @@ public:
 			{
 				/* Trying to recompile */
 				textureManager.AResourceManager::ReloadResource(resourcePath);
-				EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor").Refresh();
+				EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor").Refresh();
 			}
 		};
 
@@ -901,13 +901,13 @@ public:
 			LittleEngine::Resources::Material* material = OVSERVICE(LittleEngine::ResourceManagement::MaterialManager)[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
 			if (material)
 			{
-				auto& materialEditor = EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor");
+				auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
 				materialEditor.SetTarget(*material);
 				materialEditor.Open();
 				materialEditor.Focus();
 				
 				LittleEngine::Resources::Material* resource = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
-				auto& assetView = EDITOR_PANEL(LittleEditor::Panels::AssetView, "Asset View");
+				auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 				assetView.SetResource(resource);
 				assetView.Open();
 				assetView.Focus();
@@ -923,7 +923,7 @@ public:
 			if (material)
 			{
 				materialManager.AResourceManager::ReloadResource(resourcePath);
-				EDITOR_PANEL(LittleEditor::Panels::MaterialEditor, "Material Editor").Refresh();
+				EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor").Refresh();
 			}
 		};
 
@@ -931,7 +931,7 @@ public:
 	}
 };
 
-LittleEditor::Panels::AssetBrowser::AssetBrowser
+LittleEngine::Editor::Panels::AssetBrowser::AssetBrowser
 (
 	const std::string& p_title,
 	bool p_opened,
@@ -985,7 +985,7 @@ LittleEditor::Panels::AssetBrowser::AssetBrowser
 	Fill();
 }
 
-void LittleEditor::Panels::AssetBrowser::Fill()
+void LittleEngine::Editor::Panels::AssetBrowser::Fill()
 {
 	m_assetList->CreateWidget<LittleEngine::UI::Widgets::Visual::Separator>();
 	ConsiderItem(nullptr, std::filesystem::directory_entry(m_engineAssetFolder), true);
@@ -995,18 +995,18 @@ void LittleEditor::Panels::AssetBrowser::Fill()
 	ConsiderItem(nullptr, std::filesystem::directory_entry(m_projectScriptFolder), false, false, true);
 }
 
-void LittleEditor::Panels::AssetBrowser::Clear()
+void LittleEngine::Editor::Panels::AssetBrowser::Clear()
 {
 	m_assetList->RemoveAllWidgets();
 }
 
-void LittleEditor::Panels::AssetBrowser::Refresh()
+void LittleEngine::Editor::Panels::AssetBrowser::Refresh()
 {
 	Clear();
 	Fill();
 }
 
-void LittleEditor::Panels::AssetBrowser::ParseFolder(Layout::TreeNode& p_root, const std::filesystem::directory_entry& p_directory, bool p_isEngineItem, bool p_scriptFolder)
+void LittleEngine::Editor::Panels::AssetBrowser::ParseFolder(Layout::TreeNode& p_root, const std::filesystem::directory_entry& p_directory, bool p_isEngineItem, bool p_scriptFolder)
 {
 	/* Iterates another time to display list files */
 	for (auto& item : std::filesystem::directory_iterator(p_directory))
@@ -1019,7 +1019,7 @@ void LittleEditor::Panels::AssetBrowser::ParseFolder(Layout::TreeNode& p_root, c
 			ConsiderItem(&p_root, item, p_isEngineItem, false, p_scriptFolder);
 }
 
-void LittleEditor::Panels::AssetBrowser::ConsiderItem(LittleEngine::UI::Widgets::Layout::TreeNode* p_root, const std::filesystem::directory_entry& p_entry, bool p_isEngineItem, bool p_autoOpen, bool p_scriptFolder)
+void LittleEngine::Editor::Panels::AssetBrowser::ConsiderItem(LittleEngine::UI::Widgets::Layout::TreeNode* p_root, const std::filesystem::directory_entry& p_entry, bool p_isEngineItem, bool p_autoOpen, bool p_scriptFolder)
 {
 	bool isDirectory = p_entry.is_directory();
 	std::string itemname = LittleEngine::Utils::PathParser::GetElementName(p_entry.path().string());

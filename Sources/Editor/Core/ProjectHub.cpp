@@ -25,7 +25,7 @@
 #include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 #include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\projects.ini")
+#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\projects.ini")
 
 class ProjectHubPanel : public LittleEngine::UI::Panels::PanelWindow
 {
@@ -40,7 +40,7 @@ public:
 		movable = false;
 		titleBar = false;
 
-		std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\");
+		std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\");
 
 		SetSize({ 1000, 580 });
 		SetPosition({ 0.f, 0.f });
@@ -247,7 +247,7 @@ private:
 	LittleEngine::UI::Widgets::Buttons::Button* m_goButton = nullptr;
 };
 
-LittleEditor::Core::ProjectHub::ProjectHub()
+LittleEngine::Editor::Core::ProjectHub::ProjectHub()
 {
 	SetupContext();
 	m_mainPanel = std::make_unique<ProjectHubPanel>(m_readyToGo, m_projectPath, m_projectName);
@@ -256,7 +256,7 @@ LittleEditor::Core::ProjectHub::ProjectHub()
 	m_canvas.AddPanel(*m_mainPanel);
 }
 
-std::tuple<bool, std::string, std::string> LittleEditor::Core::ProjectHub::Run()
+std::tuple<bool, std::string, std::string> LittleEngine::Editor::Core::ProjectHub::Run()
 {
 	m_renderer->SetClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -274,7 +274,7 @@ std::tuple<bool, std::string, std::string> LittleEditor::Core::ProjectHub::Run()
 	return { m_readyToGo, m_projectPath, m_projectName };
 }
 
-void LittleEditor::Core::ProjectHub::SetupContext()
+void LittleEngine::Editor::Core::ProjectHub::SetupContext()
 {
 	/* Settings */
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
@@ -307,7 +307,7 @@ void LittleEditor::Core::ProjectHub::SetupContext()
 	m_uiManager->EnableDocking(false);
 }
 
-void LittleEditor::Core::ProjectHub::RegisterProject(const std::string& p_path)
+void LittleEngine::Editor::Core::ProjectHub::RegisterProject(const std::string& p_path)
 {
 	static_cast<ProjectHubPanel*>(m_mainPanel.get())->RegisterProject(p_path);
 }

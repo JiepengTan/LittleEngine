@@ -14,9 +14,9 @@
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-LittleEngine::CPhysicalObject::CPhysicalObject(Actor & p_owner) : 
-	Component(p_owner)
+void LittleEngine::CPhysicalObject::DoInit(ActorPtr p_owner) 
 {
+	Component::DoInit(p_owner);
 }
 
 void LittleEngine::CPhysicalObject::AddForce(const LittleEngine::FVector3 & p_force)
@@ -196,50 +196,53 @@ void LittleEngine::CPhysicalObject::Init()
 void LittleEngine::CPhysicalObject::BindListener()
 {
 	/* Collision Events */
+	// TODO tanjp recover the  m_physicalObject events
+	/*
 	m_physicalObject->CollisionStartEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionEnterEvent.Invoke(otherObject);
-		owner->OnCollisionEnter(otherObject);
+		GetActor()->OnCollisionEnter(otherObject);
 	};
 	m_physicalObject->CollisionStayEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionStayEvent.Invoke(otherObject);
-		owner->OnCollisionStay(otherObject);
+		GetActor()->OnCollisionStay(otherObject);
 	};
 	m_physicalObject->CollisionStopEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		CollisionExitEvent.Invoke(otherObject);
-		owner->OnCollisionExit(otherObject);
+		GetActor()->OnCollisionExit(otherObject);
 	};
 
-	/* Trigger Events */
+	// Trigger Events 
 	m_physicalObject->TriggerStartEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerEnterEvent.Invoke(otherObject);
-		owner->OnTriggerEnter(otherObject);
+		GetActor()->OnTriggerEnter(otherObject);
 	};
 	m_physicalObject->TriggerStayEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerStayEvent.Invoke(otherObject);
-		owner->OnTriggerStay(otherObject);
+		GetActor()->OnTriggerStay(otherObject);
 	};
 	m_physicalObject->TriggerStopEvent += [this](LittleEngine::Physics::Entities::PhysicalObject& otherPhysicalObject)
 	{
 		auto& otherObject = otherPhysicalObject.GetUserData<std::reference_wrapper<CPhysicalObject>>().get();
 
 		TriggerExitEvent.Invoke(otherObject);
-		owner->OnTriggerExit(otherObject);
+		GetActor()->OnTriggerExit(otherObject);
 	};
+	*/
 }
 
 void LittleEngine::CPhysicalObject::OnEnable()

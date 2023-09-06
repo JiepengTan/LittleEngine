@@ -10,11 +10,11 @@
 
 #include "../Editor/Panels/AView.h"
 
-namespace LittleEditor::Core { class EditorRenderer; }
+namespace LittleEngine::Editor::Core { class EditorRenderer; }
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
-	class GameView : public LittleEditor::Panels::AView
+	class GameView : public LittleEngine::Editor::Panels::AView
 	{
 	public:
 		/**
@@ -52,7 +52,7 @@ namespace LittleEditor::Panels
 		std::optional<LittleEngine::Rendering::Data::Frustum> GetActiveFrustum() const;
 
 	private:
-		LittleEngine::SceneSystem::SceneManager& m_sceneManager;
+		LittleEngine::SceneManager& m_sceneManager;
 		bool m_hasCamera = false;
 	};
 }

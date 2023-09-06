@@ -13,7 +13,7 @@ float SnapValue(float p_value, float p_step)
 	return p_value - std::fmod(p_value, p_step);
 }
 
-bool LittleEditor::Core::GizmoBehaviour::IsSnappedBehaviourEnabled() const
+bool LittleEngine::Editor::Core::GizmoBehaviour::IsSnappedBehaviourEnabled() const
 {
 	using namespace LittleEngine::Windowing::Inputs;
 
@@ -21,34 +21,34 @@ bool LittleEditor::Core::GizmoBehaviour::IsSnappedBehaviourEnabled() const
 	return inputManager->GetKeyState(EKey::KEY_LEFT_CONTROL) == EKeyState::KEY_DOWN || inputManager->GetKeyState(EKey::KEY_RIGHT_CONTROL) == EKeyState::KEY_DOWN;
 }
 
-void LittleEditor::Core::GizmoBehaviour::StartPicking(LittleEngine::Actor& p_target, const LittleEngine::FVector3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction)
+void LittleEngine::Editor::Core::GizmoBehaviour::StartPicking(ActorPtr p_target, const LittleEngine::FVector3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction)
 {
-	m_target = &p_target;
+	m_target = p_target;
 	m_firstMouse = true;
-	m_originalTransform = p_target.transform.GetFTransform();
-	m_distanceToActor = LittleEngine::FVector3::Distance(p_cameraPosition, m_target->transform.GetWorldPosition());
+	m_originalTransform = p_target->transform->GetFTransform();
+	m_distanceToActor = LittleEngine::FVector3::Distance(p_cameraPosition, m_target->transform->GetWorldPosition());
 	m_currentOperation = p_operation;
 	m_direction = p_direction;
 }
 
-void LittleEditor::Core::GizmoBehaviour::StopPicking()
+void LittleEngine::Editor::Core::GizmoBehaviour::StopPicking()
 {
 	m_target = nullptr;
 }
 
-LittleEngine::FVector3 LittleEditor::Core::GizmoBehaviour::GetFakeDirection() const
+LittleEngine::FVector3 LittleEngine::Editor::Core::GizmoBehaviour::GetFakeDirection() const
 {
 	auto result = LittleEngine::FVector3();
 
 	switch (m_direction)
 	{
-	case LittleEditor::Core::GizmoBehaviour::EDirection::X:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::X:
 		result = LittleEngine::FVector3::Right;
 		break;
-	case LittleEditor::Core::GizmoBehaviour::EDirection::Y:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::Y:
 		result = LittleEngine::FVector3::Up;
 		break;
-	case LittleEditor::Core::GizmoBehaviour::EDirection::Z:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::Z:
 		result = LittleEngine::FVector3::Forward;
 		break;
 	}
@@ -56,19 +56,19 @@ LittleEngine::FVector3 LittleEditor::Core::GizmoBehaviour::GetFakeDirection() co
 	return result;
 }
 
-LittleEngine::FVector3 LittleEditor::Core::GizmoBehaviour::GetRealDirection(bool p_relative) const
+LittleEngine::FVector3 LittleEngine::Editor::Core::GizmoBehaviour::GetRealDirection(bool p_relative) const
 {
 	auto result = LittleEngine::FVector3();
 
 	switch (m_direction)
 	{
-	case LittleEditor::Core::GizmoBehaviour::EDirection::X:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::X:
 		result = p_relative ? m_originalTransform.GetWorldRight() : m_originalTransform.GetLocalRight();
 		break;
-	case LittleEditor::Core::GizmoBehaviour::EDirection::Y:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::Y:
 		result = p_relative ? m_originalTransform.GetWorldUp() : m_originalTransform.GetLocalUp();
 		break;
-	case LittleEditor::Core::GizmoBehaviour::EDirection::Z:
+	case LittleEngine::Editor::Core::GizmoBehaviour::EDirection::Z:
 		result = p_relative ? m_originalTransform.GetWorldForward() : m_originalTransform.GetLocalForward();
 		break;
 	}
@@ -76,7 +76,7 @@ LittleEngine::FVector3 LittleEditor::Core::GizmoBehaviour::GetRealDirection(bool
 	return result;
 }
 
-LittleEngine::FVector2 LittleEditor::Core::GizmoBehaviour::GetScreenDirection(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
+LittleEngine::FVector2 LittleEngine::Editor::Core::GizmoBehaviour::GetScreenDirection(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
 {
 	auto start = m_originalTransform.GetWorldPosition();
 	auto end = m_originalTransform.GetWorldPosition() + GetRealDirection(true) * 0.01f;
@@ -108,7 +108,7 @@ LittleEngine::FVector2 LittleEditor::Core::GizmoBehaviour::GetScreenDirection(co
 	return LittleEngine::FVector2::Normalize(result);
 }
 
-void LittleEditor::Core::GizmoBehaviour::ApplyTranslation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
+void LittleEngine::Editor::Core::GizmoBehaviour::ApplyTranslation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
 {
 	auto unitsPerPixel = 0.001f * m_distanceToActor;
 	auto originPosition = m_originalTransform.GetWorldPosition();
@@ -120,13 +120,13 @@ void LittleEditor::Core::GizmoBehaviour::ApplyTranslation(const LittleEngine::FM
 
 	if (IsSnappedBehaviourEnabled())
 	{
-		translationCoefficient = SnapValue(translationCoefficient, LittleEditor::Settings::EditorSettings::TranslationSnapUnit);
+		translationCoefficient = SnapValue(translationCoefficient, LittleEngine::Editor::Settings::EditorSettings::TranslationSnapUnit);
 	}
 
-	m_target->transform.SetWorldPosition(originPosition + GetRealDirection(true) * translationCoefficient);
+	m_target->transform->SetWorldPosition(originPosition + GetRealDirection(true) * translationCoefficient);
 }
 
-void LittleEditor::Core::GizmoBehaviour::ApplyRotation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
+void LittleEngine::Editor::Core::GizmoBehaviour::ApplyRotation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
 {
 	auto unitsPerPixel = 0.2f;
 	auto originRotation = m_originalTransform.GetWorldRotation();
@@ -139,14 +139,14 @@ void LittleEditor::Core::GizmoBehaviour::ApplyRotation(const LittleEngine::FMatr
 
 	if (IsSnappedBehaviourEnabled())
 	{
-		rotationCoefficient = SnapValue(rotationCoefficient, LittleEditor::Settings::EditorSettings::RotationSnapUnit);
+		rotationCoefficient = SnapValue(rotationCoefficient, LittleEngine::Editor::Settings::EditorSettings::RotationSnapUnit);
 	}
 
 	auto rotationToApply = LittleEngine::FQuaternion(LittleEngine::FVector3(GetFakeDirection() * rotationCoefficient));
-	m_target->transform.SetWorldRotation(originRotation * rotationToApply);
+	m_target->transform->SetWorldRotation(originRotation * rotationToApply);
 }
 
-void LittleEditor::Core::GizmoBehaviour::ApplyScale(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
+void LittleEngine::Editor::Core::GizmoBehaviour::ApplyScale(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize) const
 {
 	auto unitsPerPixel = 0.01f;
 	auto originScale = m_originalTransform.GetWorldScale();
@@ -158,7 +158,7 @@ void LittleEditor::Core::GizmoBehaviour::ApplyScale(const LittleEngine::FMatrix4
 
 	if (IsSnappedBehaviourEnabled())
 	{
-		scaleCoefficient = SnapValue(scaleCoefficient, LittleEditor::Settings::EditorSettings::ScalingSnapUnit);
+		scaleCoefficient = SnapValue(scaleCoefficient, LittleEngine::Editor::Settings::EditorSettings::ScalingSnapUnit);
 	}
 
 	auto newScale = originScale + GetFakeDirection() * scaleCoefficient;
@@ -168,10 +168,10 @@ void LittleEditor::Core::GizmoBehaviour::ApplyScale(const LittleEngine::FMatrix4
 	newScale.y = std::max(newScale.y, 0.0001f);
 	newScale.z = std::max(newScale.z, 0.0001f);
 
-	m_target->transform.SetWorldScale(newScale);
+	m_target->transform->SetWorldScale(newScale);
 }
 
-void LittleEditor::Core::GizmoBehaviour::ApplyOperation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize)
+void LittleEngine::Editor::Core::GizmoBehaviour::ApplyOperation(const LittleEngine::FMatrix4& p_viewMatrix, const LittleEngine::FMatrix4& p_projectionMatrix, const LittleEngine::FVector2& p_viewSize)
 {
 	switch (m_currentOperation)
 	{
@@ -189,7 +189,7 @@ void LittleEditor::Core::GizmoBehaviour::ApplyOperation(const LittleEngine::FMat
 	}
 }
 
-void LittleEditor::Core::GizmoBehaviour::SetCurrentMouse(const LittleEngine::FVector2& p_mousePosition)
+void LittleEngine::Editor::Core::GizmoBehaviour::SetCurrentMouse(const LittleEngine::FVector2& p_mousePosition)
 {
 	if (m_firstMouse)
 	{
@@ -202,12 +202,12 @@ void LittleEditor::Core::GizmoBehaviour::SetCurrentMouse(const LittleEngine::FVe
 	}
 }
 
-bool LittleEditor::Core::GizmoBehaviour::IsPicking() const
+bool LittleEngine::Editor::Core::GizmoBehaviour::IsPicking() const
 {
-	return m_target;
+	return m_target != nullptr;
 }
 
-LittleEditor::Core::GizmoBehaviour::EDirection LittleEditor::Core::GizmoBehaviour::GetDirection() const
+LittleEngine::Editor::Core::GizmoBehaviour::EDirection LittleEngine::Editor::Core::GizmoBehaviour::GetDirection() const
 {
 	return m_direction;
 }

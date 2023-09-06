@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by LittleEditor.rc
+// Used by LittleEngine::Editor.rc
 //
 #define IDI_ICON1                       101
 

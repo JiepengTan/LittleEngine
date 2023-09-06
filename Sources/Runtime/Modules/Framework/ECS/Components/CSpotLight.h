@@ -15,14 +15,16 @@ namespace LittleEngine
 	/**
 	* A light that is localized, has attenuation and has a direction
 	*/
-	class CSpotLight : public CLight
+	REFLECTION_TYPE(CSpotLight)
+	CLASS (CSpotLight : public CLight, WhiteListFields)
 	{
+		REFLECTION_BODY(CSpotLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		CSpotLight(Actor& p_owner);
+		void DoInit(ActorPtr p_owner) override;
 		CSpotLight() = default;
 		/**
 		* Returns the name of the component

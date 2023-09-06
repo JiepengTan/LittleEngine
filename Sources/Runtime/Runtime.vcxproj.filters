@@ -64,9 +64,6 @@
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp">
       <Filter>Core\Tools\Filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Tools\Filesystem\tinyxml2.cpp">
-      <Filter>Core\Tools\Filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Tools\Time\Clock.cpp">
       <Filter>Core\Tools\Time</Filter>
     </ClCompile>
@@ -132,24 +129,6 @@
     </ClCompile>
     <ClCompile Include="Modules\UI\Core\UIManager.cpp">
       <Filter>Modules\UI\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui_demo.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui_draw.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui_impl_glfw.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui_impl_opengl3.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\ImGui\imgui_widgets.cpp">
-      <Filter>Modules\UI\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Modules\UI\Internal\Converter.cpp">
       <Filter>Modules\UI\Internal</Filter>
@@ -338,7 +317,6 @@
     <ClCompile Include="Core\Base\Macro.cpp" />
     <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
-    <ClCompile Include="Core\Serialization\json11\json11.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
     <ClCompile Include="Core\Reflection\Example\MetaExample.cpp" />
     <ClCompile Include="Core\Reflection\Reflection.cpp" />
@@ -491,9 +469,6 @@
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h">
       <Filter>Core\Tools\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Tools\Filesystem\tinyxml2.h">
-      <Filter>Core\Tools\Filesystem</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Tools\Time\Clock.h">
       <Filter>Core\Tools\Time</Filter>
     </ClInclude>
@@ -574,30 +549,6 @@
     </ClInclude>
     <ClInclude Include="Modules\UI\Core\UIManager.h">
       <Filter>Modules\UI\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imconfig.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imgui.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imgui_impl_glfw.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imgui_impl_opengl3.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imgui_internal.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imstb_rectpack.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imstb_textedit.h">
-      <Filter>Modules\UI\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\ImGui\imstb_truetype.h">
-      <Filter>Modules\UI\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Modules\UI\Internal\Converter.h">
       <Filter>Modules\UI\Internal</Filter>
@@ -905,7 +856,6 @@
     <ClInclude Include="Core\Reflection\Reflection.h" />
     <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
     <ClInclude Include="Core\Serialization\Json.h" />
-    <ClInclude Include="Core\Serialization\json11\json11.hpp" />
     <ClInclude Include="Core\Serialization\JsonSerializer.h" />
     <ClInclude Include="Core\String\StringName.h" />
     <ClInclude Include="Core\String\StringText.h" />
@@ -1017,21 +967,6 @@
     <ClInclude Include="Resource\ResIncludeAudio.h" />
     <ClInclude Include="Resource\ResIncludeRendering.h" />
     <ClInclude Include="Resource\ResIncludeScene.h" />
-    <ClInclude Include="_Generated\Reflection\AComponent.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\AllReflection.h" />
-    <ClInclude Include="_Generated\Reflection\CAnimator.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\CTestComp1.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\MetaExample.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\ResIncludeBasic.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\ResIncludeScene.reflection.gen.h" />
-    <ClInclude Include="_Generated\Serializer\AComponent.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\AllSerializer.h" />
-    <ClInclude Include="_Generated\Serializer\AllSerializer.ipp" />
-    <ClInclude Include="_Generated\Serializer\CAnimator.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\CTestComp1.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\MetaExample.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\ResIncludeBasic.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\ResIncludeScene.serializer.gen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

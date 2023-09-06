@@ -10,7 +10,7 @@
 #include "Modules/Rendering/ResourceManagement/ModelManager.h"
 #include "Modules/Rendering/ResourceManagement/ShaderManager.h"
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* Handle the creation and storage of editor specific resources

@@ -12,9 +12,10 @@
 
 #include "Modules/Framework/ECS/Components/CDirectionalLight.h"
 
-LittleEngine::CDirectionalLight::CDirectionalLight(Actor & p_owner) :
-	CLight(p_owner)
+
+void LittleEngine::CDirectionalLight::DoInit(ActorPtr p_owner)
 {
+	CLight::DoInit(p_owner);
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::DIRECTIONAL);
 }
 

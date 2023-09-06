@@ -16,30 +16,23 @@ namespace GamesTan.ProjectReshaper
         public static void Main(string[] args)
         {
             //ReplaceHeadInclude();
-            //ReplaceNameSpace();
+            ReplaceContext();
         }
 
-        private static void ReplaceNameSpace()
+        private static void ReplaceContext()
         {
             var namespaceMap = new Dictionary<string, string>()
             {
-                { "OvCore::ECS::Components", "LittleEngine"},
-                { "OvCore::ECS", "LittleEngine"},
-                { "OvCore", "LittleEngine" },
-                { "ECS::Components::", ""},
-                { "ECS::", ""},
-                { "Components::", ""},
-                { "OvMaths", "LittleEngine" },
-                { "OvTools", "LittleEngine" },
-                { "OvEditor", "LittleEditor" },
-                { "OvGame", "LittleGame" },
-                
-                { "OvAnalytics", "LittleEngine::Analytics" },
-                { "OvAudio", "LittleEngine::Audio" },
-                { "OvPhysics", "LittleEngine::Physics" },
-                { "OvRendering", "LittleEngine::Rendering" },
-                { "OvUI", "LittleEngine::UI" },
-                { "OvWindowing", "LittleEngine::Windowing" },
+                { "std::weak_ptr", "WeakPtr"},
+                { "std::shared_ptr", "SharedPtr"},
+                { "std::unique_ptr", "UniquePtr"},
+                { "std::vector", "TVector"},
+                { "std::array", "TArray"},
+                { "std::map", "TMap"},
+                { "std::list", "TList"},
+                { "std::set", "TSet"},
+                { "std::unordered_map", "TUnorderedMap"},
+                { "std::queue", "TQueue"},
             };
             ContentReplacement.ReplaceFiles(sourceDirs, namespaceMap);
         }

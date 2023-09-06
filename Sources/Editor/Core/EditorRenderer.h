@@ -17,10 +17,10 @@
 
 #include "../Editor/Core/Context.h"
 
-namespace LittleEditor::Core { enum class EGizmoOperation; }
-namespace LittleEditor::Panels { class AView; }
+namespace LittleEngine::Editor::Core { enum class EGizmoOperation; }
+namespace LittleEngine::Editor::Panels { class AView; }
 
-namespace LittleEditor::Core
+namespace LittleEngine::Editor::Core
 {
 	/**
 	* Handle the rendering of the editor
@@ -44,13 +44,13 @@ namespace LittleEditor::Core
 		* @param p_actor
 		* @param p_material
 		*/
-		void PreparePickingMaterial(LittleEngine::Actor& p_actor, LittleEngine::Resources::Material& p_material);
+		void PreparePickingMaterial(ActorPtr p_actor, LittleEngine::Resources::Material& p_material);
 
 		/**
 		* Calculate the model matrix for a camera attached to the given actor
 		* @param p_actor
 		*/
-		LittleEngine::FMatrix4 CalculateCameraModelMatrix(LittleEngine::Actor& p_actor);
+		LittleEngine::FMatrix4 CalculateCameraModelMatrix(ActorPtr p_actor);
 
 		/**
 		* Render the scene
@@ -87,7 +87,7 @@ namespace LittleEditor::Core
 		* @param p_pickable (Determine the shader to use to render the gizmo)
 		* @param p_highlightedAxis (-1 to highlight no axis, 0 for X, 1 for Y, 2 for Z)
 		*/
-		void RenderGizmo(const LittleEngine::FVector3& p_position, const LittleEngine::FQuaternion& p_rotation, LittleEditor::Core::EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
+		void RenderGizmo(const LittleEngine::FVector3& p_position, const LittleEngine::FQuaternion& p_rotation, LittleEngine::Editor::Core::EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
 
 		/**
 		* Render a model to the stencil buffer
@@ -108,7 +108,7 @@ namespace LittleEditor::Core
 		* @param p_toStencil
 		* @param p_isSelected
 		*/
-		void RenderActorOutlinePass(LittleEngine::Actor& p_actor, bool p_toStencil, bool p_isSelected = false);
+		void RenderActorOutlinePass(ActorPtr p_actor, bool p_toStencil, bool p_isSelected = false);
 
         /**
         * Render the camera perspective frustum
@@ -132,7 +132,7 @@ namespace LittleEditor::Core
 		/**
 		* Render an actor collider
 		*/
-		void RenderActorCollider(LittleEngine::Actor& p_actor);
+		void RenderActorCollider(ActorPtr p_actor);
 
 		/**
 		* Render light bounds
@@ -178,13 +178,13 @@ namespace LittleEditor::Core
 		* Update the light SSBO with the current scene
 		* @param p_scene
 		*/
-		void UpdateLights(LittleEngine::SceneSystem::Scene& p_scene);
+		void UpdateLights(LittleEngine::Scene& p_scene);
 
 		/**
 		* Update the light SSBO with the current scene (Lights outside of the given frustum are culled)
 		* @param p_scene
 		*/
-		void UpdateLightsInFrustum(LittleEngine::SceneSystem::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
+		void UpdateLightsInFrustum(LittleEngine::Scene& p_scene, const LittleEngine::Rendering::Data::Frustum& p_frustum);
 
 	private:
 		Context& m_context;

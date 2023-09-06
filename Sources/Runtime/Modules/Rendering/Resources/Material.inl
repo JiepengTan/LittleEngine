@@ -26,7 +26,7 @@ namespace LittleEngine::Resources
 		}
 		else
 		{
-			OVLOG_ERROR("Material Set failed: No attached shader");
+			LOG_ERROR("Material Set failed: No attached shader");
 		}
 	}
 

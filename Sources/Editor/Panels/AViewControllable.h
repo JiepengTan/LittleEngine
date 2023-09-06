@@ -9,9 +9,9 @@
 #include "../Editor/Panels/AView.h"
 #include "../Editor/Core/CameraController.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
-	class AViewControllable : public LittleEditor::Panels::AView
+	class AViewControllable : public LittleEngine::Editor::Panels::AView
 	{
 	public:
 		/**
@@ -38,9 +38,9 @@ namespace LittleEditor::Panels
 		/**
 		* Returns the camera controller of the controllable view
 		*/
-		LittleEditor::Core::CameraController& GetCameraController();
+		LittleEngine::Editor::Core::CameraController& GetCameraController();
 
 	protected:
-		LittleEditor::Core::CameraController m_cameraController;
+		LittleEngine::Editor::Core::CameraController m_cameraController;
 	};
 }

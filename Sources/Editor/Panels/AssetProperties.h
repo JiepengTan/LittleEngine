@@ -19,7 +19,7 @@
 #include "Modules/Rendering/Resources/Model.h"
 #include "Modules/Rendering/Resources/Texture.h"
 
-namespace LittleEditor::Panels
+namespace LittleEngine::Editor::Panels
 {
 	class AssetProperties : public LittleEngine::UI::Panels::PanelWindow
 	{
