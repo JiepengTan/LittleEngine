@@ -129,7 +129,6 @@
     <ClInclude Include="Core\String\StringText.h" />
     <ClInclude Include="Core\Tools\Eventing\Event.h" />
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h" />
-    <ClInclude Include="Core\Tools\Filesystem\tinyxml2.h" />
     <ClInclude Include="Core\Tools\Time\Clock.h" />
     <ClInclude Include="Core\Tools\Time\Date.h" />
     <ClInclude Include="Core\Tools\Utils\PathParser.h" />
@@ -382,7 +381,6 @@
     <ClCompile Include="Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Core\Reflection\ReflectionRegister.cpp" />
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp" />
-    <ClCompile Include="Core\Tools\Filesystem\tinyxml2.cpp" />
     <ClCompile Include="Core\Tools\Time\Clock.cpp" />
     <ClCompile Include="Core\Tools\Time\Date.cpp" />
     <ClCompile Include="Core\Tools\Utils\PathParser.cpp" />
@@ -768,21 +766,6 @@
     <ClInclude Include="Resource\ResIncludeAudio.h" />
     <ClInclude Include="Resource\ResIncludeRendering.h" />
     <ClInclude Include="Resource\ResIncludeScene.h" />
-    <ClInclude Include="_Generated\Reflection\AComponent.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\AllReflection.h" />
-    <ClInclude Include="_Generated\Reflection\CAnimator.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\CTestComp1.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\MetaExample.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\ResIncludeBasic.reflection.gen.h" />
-    <ClInclude Include="_Generated\Reflection\ResIncludeScene.reflection.gen.h" />
-    <ClInclude Include="_Generated\Serializer\AComponent.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\AllSerializer.h" />
-    <ClInclude Include="_Generated\Serializer\AllSerializer.ipp" />
-    <ClInclude Include="_Generated\Serializer\CAnimator.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\CTestComp1.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\MetaExample.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\ResIncludeBasic.serializer.gen.h" />
-    <ClInclude Include="_Generated\Serializer\ResIncludeScene.serializer.gen.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_CodeTemplate\allReflectionFile.mustache" />
@@ -790,7 +773,6 @@
     <Content Include="_CodeTemplate\allSerializer.ipp.mustache" />
     <Content Include="_CodeTemplate\commonReflectionFile.mustache" />
     <Content Include="_CodeTemplate\commonSerializerGenFile.mustache" />
-    <Content Include="_Generated\Padding.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
