@@ -47,6 +47,8 @@ namespace Utils
         Utils::replace(source_string, ':', 'S');
         Utils::replace(source_string, '>', 'R');
         Utils::replace(source_string, '*', 'P');
+        Utils::replace(source_string, '[', 'L');
+        Utils::replace(source_string, ']', 'T');
         return source_string;
     }
 
@@ -164,6 +166,11 @@ namespace Utils
         {
             return nullptr;
         }
+    }
+    std::string getNameForArray(std::string name)
+    {
+        size_t left  = name.find_first_of('[') + 1;
+        return name.substr(0, left);
     }
 
     std::string getStringWithoutQuot(std::string input)

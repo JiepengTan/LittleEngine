@@ -33,6 +33,7 @@ namespace Generator
     int ReflectionGenerator::generate(std::string path, SchemaMoudle schema)
     {
         static const std::string vector_prefix = "std::vector<";
+        static const std::string array_prefix = "[";
 
         std::string    file_path = processFileName(path);
 
@@ -56,31 +57,37 @@ namespace Generator
 
             std::vector<std::string>                                   field_names;
             std::map<std::string, std::pair<std::string, std::string>> vector_map;
+            std::map<std::string, std::pair<std::string, std::string>> array_map;
 
             Mustache::data class_def;
             Mustache::data vector_defines(Mustache::data::type::list);
-
+            Mustache::data array_defines(Mustache::data::type::list);
+            
             genClassRenderData(class_temp, class_def);
             for (auto field : class_temp->m_fields)
             {
                 if (!field->shouldCompile())
                     continue;
                 field_names.emplace_back(field->m_name);
-                bool is_array = field->m_type.find(vector_prefix) == 0;
-                if (is_array)
+                bool is_vector = field->m_type.find(vector_prefix) == 0;
+                if (is_vector)
                 {
                     std::string array_useful_name = field->m_type;
-
                     Utils::formatQualifiedName(array_useful_name);
-
-                    std::string item_type = field->m_type;
-
-                    item_type = Utils::getNameWithoutContainer(item_type);
+                    std::string item_type = Utils::getNameWithoutContainer( field->m_type);
 
                     vector_map[field->m_type] = std::make_pair(array_useful_name, item_type);
                 }
+                bool is_array = field->m_type.find(array_prefix) == 0;
+                if (is_array)
+                {
+                    std::string array_useful_name = field->m_type;
+                    Utils::formatQualifiedName(array_useful_name);
+                    std::string item_type = Utils::getNameForArray( field->m_type);
+                    array_map[field->m_type] = std::make_pair(array_useful_name, item_type);
+                }
             }
-
+            // array
             if (vector_map.size() > 0)
             {
                 if (nullptr == class_def.get("vector_exist"))
@@ -98,6 +105,25 @@ namespace Generator
                     vector_defines.push_back(vector_define);
                 }
             }
+            // vector
+            if (array_map.size() > 0)
+            {
+                if (nullptr == class_def.get("array_exist"))
+                {
+                    class_def.set("array_exist", true);
+                }
+                for (auto array_item : array_map)
+                {
+                    std::string    array_useful_name = array_item.second.first;
+                    std::string    item_type         = array_item.second.second;
+                    Mustache::data array_define;
+                    array_define.set("array_useful_name", array_useful_name);
+                    array_define.set("array_type_name", array_item.first);
+                    array_define.set("array_element_type_name", item_type);
+                    array_defines.push_back(array_define);
+                }
+            }
+            class_def.set("array_defines", array_defines);
             class_def.set("vector_defines", vector_defines);
             class_defines.push_back(class_def);
         }

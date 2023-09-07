@@ -35,11 +35,13 @@ namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator{
             return count;
         }
         // fields
-        {{#class_field_defines}}static const char* GetFieldName_{{class_field_name}}(){ return "{{class_field_name}}";}
-        static const char* GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
-        static void Set_{{class_field_name}}(void* instance, void* field_value){ static_cast<{{class_name}}*>(instance)->{{class_field_name}} = *static_cast<{{{class_field_type}}}*>(field_value);}
+        {{#class_field_defines}}
+        static void Set_{{class_field_name}}(void* instance, void* field_value){ {{#class_field_is_array}}memcpy(&static_cast<{{class_name}}*>(instance)->{{class_field_name}},field_value,sizeof({{class_name}}::{{class_field_name}}));{{/class_field_is_array}} {{^class_field_is_array}}static_cast<{{class_name}}*>(instance)->{{class_field_name}} = *static_cast<{{{class_field_type}}}*>(field_value);{{/class_field_is_array}} }
         static void* Get_{{class_field_name}}(void* instance){ return static_cast<void*>(&(static_cast<{{class_name}}*>(instance)->{{class_field_name}}));}
-        static bool IsArray_{{class_field_name}}(){ {{#class_field_is_vector}}return true;{{/class_field_is_vector}}{{^class_field_is_vector}}return false;{{/class_field_is_vector}} }
+        static const char* GetFieldName_{{class_field_name}}(){ return "{{class_field_name}}";}
+        static const char* GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
+        static bool IsVector_{{class_field_name}}(){ {{#class_field_is_vector}}return true;{{/class_field_is_vector}}{{^class_field_is_vector}}return false;{{/class_field_is_vector}} }
+        static bool IsArray_{{class_field_name}}(){ {{#class_field_is_array}}return true;{{/class_field_is_array}}{{^class_field_is_array}}return false;{{/class_field_is_array}} }
         {{/class_field_defines}}
 
         // methods

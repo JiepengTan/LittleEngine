@@ -1,6 +1,13 @@
 #include "common/precompiled.h"
 #include "parser/parser.h"
 
+struct FMatrix4
+{
+    
+public:
+    float data[16];
+};
+
 int parse(std::string project_input_file_name,
           std::string template_dir,
           std::string source_include_file_name,
@@ -9,7 +16,7 @@ int parse(std::string project_input_file_name,
           std::string module_name,
           std::string show_errors)
 {
-    std::cout << std::endl;
+    //std::cout << sizeof(FMatrix4::data) << std::endl;
     std::cout << "Parsing meta data for target \"" << module_name << "\"" << std::endl;
     std::fstream input_file;
 
