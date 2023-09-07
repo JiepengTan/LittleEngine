@@ -101,7 +101,18 @@ namespace LittleEngine
     Json JsonSerializer::Write(const unsigned int& instance);
     template<>
     unsigned int& JsonSerializer::Read(const Json& json_context, unsigned int& instance);
+    
+    template<>
+    Json JsonSerializer::Write(const int64_t& instance);
+    template<>
+    int64_t& JsonSerializer::Read(const Json& json_context, int64_t& instance);
+    
+    template<>
+    Json JsonSerializer::Write(const uint64_t& instance);
+    template<>
+    uint64_t& JsonSerializer::Read(const Json& json_context, uint64_t& instance);
 
+    
     template<>
     Json JsonSerializer::Write(const float& instance);
     template<>

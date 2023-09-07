@@ -49,6 +49,8 @@ namespace Generator
     {
         static const std::string vector_prefix = "std::vector<";
         static const std::string array_tga1 = "[";
+        static const std::string array_tga2 = "]";
+        static const std::string white_space_string = " \t\r\n";
 
         for (auto& field : class_temp->m_fields)
         {
@@ -62,8 +64,26 @@ namespace Generator
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);
             bool is_array= field->m_type.find(array_tga1) != field->m_type.npos;
+            int size = 0;
+            if(is_array)
+            {
+                
+                auto startIdx = field->m_type.find(array_tga1);
+                auto endIdx = field->m_type.find(array_tga2);
+                if(endIdx != field->m_type.npos && endIdx>startIdx)
+                {
+                    auto sizeStr = field->m_type.substr(startIdx+1,endIdx-startIdx-1);
+                    sizeStr = Utils::trim(sizeStr,white_space_string);
+                    std::cout << "arysize field->m_type "+ field->m_type +  " result= " + sizeStr <<std::endl;
+                    size = std::stoi(sizeStr);
+                }else
+                {
+                    std::cerr << "parse array size error "+class_temp->getFullName() +"::" + field->m_name + " "+ field->m_type <<std::endl;
+                }
+            }
             filed_define.set("class_field_is_array", is_array);
-            filed_define.set("class_field_is_not_array", !is_array);
+            filed_define.set("class_field_array_size", std::to_string(size));
+            filed_define.set("class_field_is_not_container", !is_array && !is_vector);
             feild_defs.push_back(filed_define);
         }
     }

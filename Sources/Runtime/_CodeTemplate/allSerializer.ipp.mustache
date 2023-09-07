@@ -13,12 +13,20 @@ namespace LittleEngine{
         assert(json_context_{{class_base_class_index}}.is_object());
         auto&& json_context_map_{{class_base_class_index}} = json_context_{{class_base_class_index}}.object_items();
         ret_context.insert(json_context_map_{{class_base_class_index}}.begin() , json_context_map_{{class_base_class_index}}.end());{{/class_base_class_defines}}
-        {{#class_field_defines}}{{#class_field_is_vector}}Json::array {{class_field_name}}_json;
-        for (auto& item : instance.{{class_field_name}}){
-            {{class_field_name}}_json.emplace_back(JsonSerializer::Write(item));
-        }
-        ret_context.insert_or_assign("{{class_field_display_name}}",{{class_field_name}}_json);{{/class_field_is_vector}}
-        {{^class_field_is_vector}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));{{/class_field_is_vector}}
+        {{#class_field_defines}}
+            {{#class_field_is_array}}
+            Json::array {{class_field_name}}_json;
+            for(int i =0; i< {{class_field_array_size}} ;i++){
+                {{class_field_name}}_json.emplace_back(JsonSerializer::Write(instance.{{class_field_name}}[i]));
+            }
+            ret_context.insert_or_assign("{{class_field_display_name}}",{{class_field_name}}_json);
+            {{/class_field_is_array}} {{#class_field_is_vector}}
+            Json::array {{class_field_name}}_json;
+            for (auto& item : instance.{{class_field_name}}){
+                {{class_field_name}}_json.emplace_back(JsonSerializer::Write(item));
+            }
+            ret_context.insert_or_assign("{{class_field_display_name}}",{{class_field_name}}_json);
+            {{/class_field_is_vector}} {{#class_field_is_not_container}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));        {{/class_field_is_not_container}}
         {{/class_field_defines}}
         return  Json(ret_context);
     }
@@ -27,13 +35,19 @@ namespace LittleEngine{
         assert(json_context.is_object());
         {{#class_base_class_defines}}JsonSerializer::Read(json_context,*({{class_base_class_name}}*)&instance);{{/class_base_class_defines}}
         {{#class_field_defines}}
-        if(!json_context["{{class_field_display_name}}"].is_null()){
-            {{#class_field_is_vector}}assert(json_context["{{class_field_display_name}}"].is_array());
+        if(!json_context["{{class_field_display_name}}"].is_null()){ {{#class_field_is_array}}
+            assert(json_context["{{class_field_display_name}}"].is_array());
+            Json::array array_{{class_field_name}} = json_context["{{class_field_display_name}}"].array_items();
+            for (size_t index=0; index < array_{{class_field_name}}.size();++index){
+                JsonSerializer::Read(array_{{class_field_name}}[index], instance.{{class_field_name}}[index]);
+            }{{/class_field_is_array}} {{#class_field_is_vector}}
+            assert(json_context["{{class_field_display_name}}"].is_array());
             Json::array array_{{class_field_name}} = json_context["{{class_field_display_name}}"].array_items();
             instance.{{class_field_name}}.resize(array_{{class_field_name}}.size());
             for (size_t index=0; index < array_{{class_field_name}}.size();++index){
                 JsonSerializer::Read(array_{{class_field_name}}[index], instance.{{class_field_name}}[index]);
-            }{{/class_field_is_vector}}{{^class_field_is_vector}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_vector}}
+            }{{/class_field_is_vector}} 
+            {{#class_field_is_not_container}} JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_not_container}}
         }{{/class_field_defines}}
         return instance;
     }{{/class_defines}}

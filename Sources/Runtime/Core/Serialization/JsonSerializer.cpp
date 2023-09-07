@@ -37,7 +37,30 @@ namespace LittleEngine
         assert(json_context.is_number());
         return instance = static_cast<unsigned int>(json_context.number_value());
     }
-
+    
+    template<>
+    Json JsonSerializer::Write(const int64_t& instance)
+    {
+        return Json(static_cast<double>(instance));
+    }
+    template<>
+    int64_t& JsonSerializer::Read(const Json& json_context, int64_t& instance)
+    {
+        assert(json_context.is_number());
+        return instance = static_cast<int64_t>(json_context.number_value());
+    }
+    template<>
+    Json JsonSerializer::Write(const uint64_t& instance)
+    {
+        return Json(static_cast<double>(instance));
+    }
+    template<>
+    uint64_t& JsonSerializer::Read(const Json& json_context, uint64_t& instance)
+    {
+        assert(json_context.is_number());
+        return instance = static_cast<uint64_t>(json_context.number_value());
+    }
+    
     template<>
     Json JsonSerializer::Write(const float& instance)
     {
