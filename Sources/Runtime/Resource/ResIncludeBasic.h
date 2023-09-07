@@ -9,9 +9,6 @@ namespace LittleEngine
     CLASS(ResData, Fields)
     {
         REFLECTION_BODY(ResData)
-    public:
-        int objectId;
-        StringName name;
     };
 
     // resource object, There are specific file types that correspond to it
@@ -20,7 +17,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResObject)
     public:
-        StringName guid;
-        StringName name;
+        StringName m_guid;
+        StringName m_name;
     };
 }

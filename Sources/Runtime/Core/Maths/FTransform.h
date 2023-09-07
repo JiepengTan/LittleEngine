@@ -16,8 +16,10 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a 3D transformation with float precision
 	*/
-	class FTransform
+	REFLECTION_TYPE(FTransform)
+	STRUCT(FTransform, WhiteListFields)
 	{
+		REFLECTION_BODY(FTransform)
 	public:
 		/**
 		* Create a transform without setting a parent
@@ -218,8 +220,11 @@ namespace LittleEngine
 		void PreDecomposeLocalMatrix();
 
 		/* Pre-decomposed data to prevent multiple decomposition */
+		META(Enable)
 		FVector3 m_localPosition;
+		META(Enable)
 		FQuaternion m_localRotation;
+		META(Enable)
 		FVector3 m_localScale;
 		FVector3 m_worldPosition;
 		FQuaternion m_worldRotation;

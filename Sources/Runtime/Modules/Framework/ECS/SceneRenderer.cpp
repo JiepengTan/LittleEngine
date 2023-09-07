@@ -51,8 +51,8 @@ namespace LittleEngine
             if (camera != nullptr && camera->IsActive())
                 return camera->GetComponent<CCamera>();
 
-            return nullptr;
         }
+        return nullptr;
     }
 
     std::vector<FMatrix4> SceneRenderer::FindLightMatrices(

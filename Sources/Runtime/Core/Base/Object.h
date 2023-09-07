@@ -53,6 +53,7 @@ namespace LittleEngine
 
         ObjectID GetObjectId(){  return m_instanceId;}
     private:
+        META(Enable)
         ObjectID m_instanceId;
     };
 }

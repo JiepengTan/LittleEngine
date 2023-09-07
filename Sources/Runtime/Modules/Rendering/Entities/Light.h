@@ -9,8 +9,7 @@
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FMatrix4.h"
 #include "Core/Maths/FTransform.h"
-
-
+#include "Resource/ResIncludeRendering.h"
 
 namespace LittleEngine::Rendering::Entities
 {
@@ -46,7 +45,7 @@ namespace LittleEngine::Rendering::Entities
 		*/
 		const LittleEngine::FTransform* GetTransform() const;
 
-		LittleEngine::FVector3	color		= { 1.f, 1.f, 1.f };
+		FVector3			color		= { 1.f, 1.f, 1.f };
 		float				intensity	= 1.f;
 		float				constant	= 0.0f;
 		float				linear		= 0.0f;

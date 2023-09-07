@@ -13,8 +13,11 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a 3D vector of floats
 	*/
-	struct FVector3
+	REFLECTION_TYPE(FVector3)
+	STRUCT(FVector3, Fields)
 	{
+		REFLECTION_BODY(FVector3)
+	public:
 		static const FVector3 One;
 		static const FVector3 Zero;
 		static const FVector3 Forward;

@@ -12,6 +12,16 @@ namespace LittleEngine { class Actor; }
 
 namespace LittleEngine
 {
+	namespace Test{
+		class Component;
+		REFLECTION_TYPE(ResTestInfo)
+		CLASS(ResTestInfo: public ResData, Fields)
+		{
+			REFLECTION_BODY(ResTestInfo)
+		public:
+			int info;
+		};
+	}
 	/**
 	* Represents an ambient light with a box shape
 	*/

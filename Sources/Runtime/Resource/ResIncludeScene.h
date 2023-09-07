@@ -9,6 +9,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResComponent)
     public:
+        ObjectID   m_objectId;
     };
     
     REFLECTION_TYPE(ResActor)
@@ -16,7 +17,14 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResActor)
     public:
-        StringName prefabGuid;
+        StringName      m_prefabGuid;
+        
+        ObjectID        m_objectId;
+        StringName		m_name = "";
+        StringName		m_tag = "";
+        bool			m_active = true;
+        ActorID	        m_actorID = 0;
+        ActorID			m_parentID = 0;
         std::vector<Reflection::ReflectionPtr<Component>> components;
     };
     
@@ -32,9 +40,7 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResScene)
     public:
-        
-        META(Enable)
-        int Levels;
-        std::vector<Reflection::ReflectionPtr<Component>> actors;
+        int m_sceneId;
+        std::vector<ResActor> actors;
     };
 }

@@ -28,7 +28,7 @@ namespace LittleEngine
     friend class JsonSerializer;\
     public :\
     static TypeID MetaTypeId;\
-    static TypeID GetTypeID(){ return LittleEngine::##class_name##::MetaTypeId;}
+    static TypeID GetTypeID(){ return class_name##::MetaTypeId;}
     
     // public: virtual std::string GetTypeName() override {return #class_name;}
 

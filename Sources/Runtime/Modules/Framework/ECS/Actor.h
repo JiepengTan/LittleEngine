@@ -327,6 +327,7 @@ namespace LittleEngine
 		bool			m_playing = false;
 
 		/* Internal settings */
+		META(Enable)
 		ActorID	m_actorID = 0;
 		bool	m_sleeping = true;
 		bool	m_awaked = false;
@@ -334,6 +335,7 @@ namespace LittleEngine
 		bool	m_wasActive = false;
 
 		/* Parenting system stuff */
+		META(Enable)
 		ActorID				m_parentID = 0;
 		TSet<ActorID>		m_childrenIds;
 

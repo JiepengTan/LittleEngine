@@ -5,15 +5,20 @@
 */
 
 #pragma once
-
+#include "Core/Reflection/Reflection.h"
+#include "Core/Base/Macro.h"
 
 namespace LittleEngine
 {
 	/**
 	* Data structur that contains color information in a 0.f to 1.f float format
 	*/
-	struct Color
+
+	REFLECTION_TYPE(Color)
+	STRUCT(Color, Fields)
 	{
+		REFLECTION_BODY(Color)
+	public:
 		Color(float p_r = 1.0f, float p_g = 1.0f, float p_b = 1.0f, float p_a = 1.0f);
 
 		float r;

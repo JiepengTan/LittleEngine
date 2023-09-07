@@ -16,8 +16,11 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a 3x3 Matrix of floats
 	*/
-	struct FMatrix3
+	REFLECTION_TYPE(FMatrix3)
+	STRUCT(FMatrix3, Fields)
 	{
+		REFLECTION_BODY(FMatrix3)
+	public:
 		FFloat data[9];
 		static const FMatrix3 Identity;
 
