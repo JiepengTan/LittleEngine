@@ -7,10 +7,7 @@
 #pragma once
 
 #include "Modules/Physics/Entities/PhysicalObject.h"
-
 #include "Modules/Framework/ECS/Component.h"
-
-namespace LittleEngine { class Actor; }
 
 namespace LittleEngine
 {

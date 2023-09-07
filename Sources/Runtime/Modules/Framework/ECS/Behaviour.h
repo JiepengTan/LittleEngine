@@ -8,9 +8,14 @@
 
 #include <sol.hpp>
 
+#include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
+#include "Modules/Framework/ECS/Components/CTransform.h"
 
-namespace LittleEngine { class Actor; }
+namespace LittleEngine
+{
+	class Actor;
+}
 
 namespace LittleEngine
 {
