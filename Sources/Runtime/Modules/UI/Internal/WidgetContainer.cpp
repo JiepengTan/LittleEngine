@@ -71,7 +71,6 @@ void LittleEngine::UI::Internal::WidgetContainer::CollectGarbages()
 void LittleEngine::UI::Internal::WidgetContainer::DrawWidgets()
 {
 	CollectGarbages();
-
     if (m_reversedDrawOrder)
     {
         for (auto it = m_widgets.crbegin(); it != m_widgets.crend(); ++it)

@@ -49,7 +49,7 @@ namespace LittleEngine::Editor::Panels
 		void Enable(bool p_value, bool p_disableLog = false);
 
 	private:
-		LittleEngine::UI::Types::Color CalculateActionColor(double p_percentage) const;
+		LittleEngine::Color CalculateActionColor(double p_percentage) const;
 		std::string GenerateActionString(LittleEngine::Analytics::Profiling::ProfilerReport::Action& p_action);
 
 	private:

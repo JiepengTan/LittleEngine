@@ -139,50 +139,50 @@ void LittleEngine::CAudioSource::Stop()
 		m_audioSource->Stop();
 }
 
-void LittleEngine::CAudioSource::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioSource::OnSerialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	Serializer::SerializeBoolean(p_doc, p_node, "autoplay", m_autoPlay);
-	Serializer::SerializeBoolean(p_doc, p_node, "spatial", IsSpatial());
-	Serializer::SerializeFloat(p_doc, p_node, "volume", GetVolume());
-	Serializer::SerializeFloat(p_doc, p_node, "pan", GetPan());
-	Serializer::SerializeBoolean(p_doc, p_node, "looped", IsLooped());
-	Serializer::SerializeFloat(p_doc, p_node, "pitch", GetPitch());
-	Serializer::SerializeFloat(p_doc, p_node, "attenuation_threshold", GetAttenuationThreshold());
-	Serializer::SerializeSound(p_doc, p_node, "audio_clip", m_sound);
+	SerializeUtil::SerializeBoolean("autoplay", m_autoPlay);
+	SerializeUtil::SerializeBoolean("spatial", IsSpatial());
+	SerializeUtil::SerializeFloat("volume", GetVolume());
+	SerializeUtil::SerializeFloat("pan", GetPan());
+	SerializeUtil::SerializeBoolean("looped", IsLooped());
+	SerializeUtil::SerializeFloat("pitch", GetPitch());
+	SerializeUtil::SerializeFloat("attenuation_threshold", GetAttenuationThreshold());
+	SerializeUtil::SerializeSound("audio_clip", m_sound);
 }
 
-void LittleEngine::CAudioSource::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioSource::OnDeserialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	Serializer::DeserializeBoolean(p_doc, p_node, "autoplay", m_autoPlay);
-	SetSpatial(Serializer::DeserializeBoolean(p_doc, p_node, "spatial"));
-	SetVolume(Serializer::DeserializeFloat(p_doc, p_node, "volume"));
-	SetPan(Serializer::DeserializeFloat(p_doc, p_node, "pan"));
-	SetLooped(Serializer::DeserializeBoolean(p_doc, p_node, "looped"));
-	SetPitch(Serializer::DeserializeFloat(p_doc, p_node, "pitch"));
-	SetAttenuationThreshold(Serializer::DeserializeFloat(p_doc, p_node, "attenuation_threshold"));
-	Serializer::DeserializeSound(p_doc, p_node, "audio_clip", m_sound);
+	SerializeUtil::DeserializeBoolean("autoplay", m_autoPlay);
+	SetSpatial(SerializeUtil::DeserializeBoolean("spatial"));
+	SetVolume(SerializeUtil::DeserializeFloat("volume"));
+	SetPan(SerializeUtil::DeserializeFloat("pan"));
+	SetLooped(SerializeUtil::DeserializeBoolean("looped"));
+	SetPitch(SerializeUtil::DeserializeFloat("pitch"));
+	SetAttenuationThreshold(SerializeUtil::DeserializeFloat("attenuation_threshold"));
+	SerializeUtil::DeserializeSound("audio_clip", m_sound);
 }
 
-void LittleEngine::CAudioSource::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAudioSource::OnInspector()
 {
 	using namespace LittleEngine::Audio::Entities;
-	using namespace LittleEngine::Helpers;
+	
 
-	GUIDrawer::DrawSound(p_root, "Sound", m_sound);
-	GUIDrawer::DrawBoolean(p_root, "Auto-play", m_autoPlay);
-	GUIDrawer::DrawScalar<float>(p_root, "Volume", std::bind(&CAudioSource::GetVolume, this), std::bind(&CAudioSource::SetVolume, this, std::placeholders::_1), 0.01f, 0.0f, 1.0f);
-	GUIDrawer::DrawScalar<float>(p_root, "Pan", std::bind(&CAudioSource::GetPan, this), std::bind(&CAudioSource::SetPan, this, std::placeholders::_1), 0.01f, -1.0f, 1.0f);
-	GUIDrawer::DrawBoolean(p_root, "Looped", std::bind(&CAudioSource::IsLooped, this), std::bind(&CAudioSource::SetLooped, this, std::placeholders::_1));
-	GUIDrawer::DrawScalar<float>(p_root, "Pitch", std::bind(&CAudioSource::GetPitch, this), std::bind(&CAudioSource::SetPitch, this, std::placeholders::_1), 0.01f, 0.01f, 10000.0f);
-	GUIDrawer::DrawBoolean(p_root, "Spatial", std::bind(&CAudioSource::IsSpatial, this), std::bind(&CAudioSource::SetSpatial, this, std::placeholders::_1));
-	GUIDrawer::DrawScalar<float>(p_root, "Attenuation threshold", std::bind(&CAudioSource::GetAttenuationThreshold, this), std::bind(&CAudioSource::SetAttenuationThreshold, this, std::placeholders::_1), 0.5f);
+	GUIUtil::DrawSound( "Sound", m_sound);
+	GUIUtil::DrawBoolean( "Auto-play", m_autoPlay);
+	GUIUtil::DrawScalar<float>( "Volume", std::bind(&CAudioSource::GetVolume, this), std::bind(&CAudioSource::SetVolume, this, std::placeholders::_1), 0.01f, 0.0f, 1.0f);
+	GUIUtil::DrawScalar<float>( "Pan", std::bind(&CAudioSource::GetPan, this), std::bind(&CAudioSource::SetPan, this, std::placeholders::_1), 0.01f, -1.0f, 1.0f);
+	GUIUtil::DrawBoolean( "Looped", std::bind(&CAudioSource::IsLooped, this), std::bind(&CAudioSource::SetLooped, this, std::placeholders::_1));
+	GUIUtil::DrawScalar<float>( "Pitch", std::bind(&CAudioSource::GetPitch, this), std::bind(&CAudioSource::SetPitch, this, std::placeholders::_1), 0.01f, 0.01f, 10000.0f);
+	GUIUtil::DrawBoolean( "Spatial", std::bind(&CAudioSource::IsSpatial, this), std::bind(&CAudioSource::SetSpatial, this, std::placeholders::_1));
+	GUIUtil::DrawScalar<float>( "Attenuation threshold", std::bind(&CAudioSource::GetAttenuationThreshold, this), std::bind(&CAudioSource::SetAttenuationThreshold, this, std::placeholders::_1), 0.5f);
 
-	GUIDrawer::CreateTitle(p_root, "Spatial graph");
-	auto& graph = p_root.CreateWidget<LittleEngine::UI::Widgets::Plots::PlotLines>(std::vector<float>(), -0.1f, 1.1f);
+	GUIUtil::CreateTitle( "Spatial graph");
+	auto& graph = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Plots::PlotLines>(std::vector<float>(), -0.1f, 1.1f);
 
 	graph.size.y = 75.0f;
 

@@ -9,7 +9,7 @@
 #include "Core/Tools/Utils/PathParser.h"
 #include "Core/Tools/Utils/SizeConverter.h"
 
-#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Utils/GUIUtil.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Rendering/ResourceManagement/ModelManager.h"
 #include "Modules/Rendering/ResourceManagement/TextureManager.h"
@@ -155,7 +155,8 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateAssetSelector()
 {
     auto& columns = CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
     columns.widths[0] = 150;
-    m_assetSelector = &LittleEngine::Helpers::GUIDrawer::DrawAsset(columns, "Target", m_resource, &m_targetChanged);
+	GUIUtil::m_root = &columns;
+    m_assetSelector = &GUIUtil::DrawAsset("Target", m_resource, &m_targetChanged);
 }
 
 void LittleEngine::Editor::Panels::AssetProperties::CreateSettings()
@@ -190,14 +191,15 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateInfo()
     {
         m_info->enabled = true;
 
-        LittleEngine::Helpers::GUIDrawer::CreateTitle(*m_infoColumns, "Path");
+    	GUIUtil::m_root = m_infoColumns;
+        GUIUtil::CreateTitle("Path");
         m_infoColumns->CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(realPath);
 
-        LittleEngine::Helpers::GUIDrawer::CreateTitle(*m_infoColumns, "Size");
+        GUIUtil::CreateTitle("Size");
         const auto [size, unit] = LittleEngine::Utils::SizeConverter::ConvertToOptimalUnit(static_cast<float>(std::filesystem::file_size(realPath)), LittleEngine::Utils::SizeConverter::ESizeUnit::BYTE);
         m_infoColumns->CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(std::to_string(size) + " " + LittleEngine::Utils::SizeConverter::UnitToString(unit));
 
-        LittleEngine::Helpers::GUIDrawer::CreateTitle(*m_infoColumns, "Metadata");
+        GUIUtil::CreateTitle("Metadata");
         m_infoColumns->CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(std::filesystem::exists(realPath + ".meta") ? "Yes" : "No");
     }
     else
@@ -206,7 +208,7 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateInfo()
     }
 }
 
-#define MODEL_FLAG_ENTRY(setting) LittleEngine::Helpers::GUIDrawer::DrawBoolean(*m_settingsColumns, setting, [&]() { return m_metadata->Get<bool>(setting); }, [&](bool value) { m_metadata->Set<bool>(setting, value); })
+#define MODEL_FLAG_ENTRY(setting) GUIUtil::DrawBoolean(setting, [&]() { return m_metadata->Get<bool>(setting); }, [&](bool value) { m_metadata->Set<bool>(setting, value); })
 
 void LittleEngine::Editor::Panels::AssetProperties::CreateModelSettings()
 {
@@ -241,7 +243,8 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateModelSettings()
 	m_metadata->Add("FORCE_GEN_NORMALS", false);
 	m_metadata->Add("DROP_NORMALS", false);
 	m_metadata->Add("GEN_BOUNDING_BOXES", false);
-
+	
+	GUIUtil::m_root = m_settingsColumns;
 	MODEL_FLAG_ENTRY("CALC_TANGENT_SPACE");
 	MODEL_FLAG_ENTRY("JOIN_IDENTICAL_VERTICES");
 	MODEL_FLAG_ENTRY("MAKE_LEFT_HANDED");
@@ -291,7 +294,8 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateTextureSettings()
         {0x2702, "NEAREST_MIPMAP_LINEAR"}
     };
 
-	LittleEngine::Helpers::GUIDrawer::CreateTitle(*m_settingsColumns, "MIN_FILTER");
+	GUIUtil::m_root = m_settingsColumns;
+	GUIUtil::CreateTitle( "MIN_FILTER");
 	auto& minFilter = m_settingsColumns->CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(m_metadata->Get<int>("MIN_FILTER"));
 	minFilter.choices = filteringModes;
 	minFilter.ValueChangedEvent += [this](int p_choice)
@@ -299,7 +303,7 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateTextureSettings()
 		m_metadata->Set("MIN_FILTER", p_choice);
 	};
 
-	LittleEngine::Helpers::GUIDrawer::CreateTitle(*m_settingsColumns, "MAG_FILTER");
+	GUIUtil::CreateTitle( "MAG_FILTER");
 	auto& magFilter = m_settingsColumns->CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(m_metadata->Get<int>("MAG_FILTER"));
 	magFilter.choices = filteringModes;
 	magFilter.ValueChangedEvent += [this](int p_choice)
@@ -307,7 +311,7 @@ void LittleEngine::Editor::Panels::AssetProperties::CreateTextureSettings()
 		m_metadata->Set("MAG_FILTER", p_choice);
 	};
 
-	LittleEngine::Helpers::GUIDrawer::DrawBoolean(*m_settingsColumns, "ENABLE_MIPMAPPING", [&]() { return m_metadata->Get<bool>("ENABLE_MIPMAPPING"); }, [&](bool value) { m_metadata->Set<bool>("ENABLE_MIPMAPPING", value); });
+	GUIUtil::DrawBoolean( "ENABLE_MIPMAPPING", [&]() { return m_metadata->Get<bool>("ENABLE_MIPMAPPING"); }, [&](bool value) { m_metadata->Set<bool>("ENABLE_MIPMAPPING", value); });
 }
 
 void LittleEngine::Editor::Panels::AssetProperties::Apply()

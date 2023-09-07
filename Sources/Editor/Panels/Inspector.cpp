@@ -63,21 +63,21 @@ Panels::Inspector::Inspector
 	m_actorInfo = &CreateWidget<UI::Widgets::Layout::Group>();
 
 	auto& headerColumns = m_inspectorHeader->CreateWidget<UI::Widgets::Layout::Columns<2>>();
-
+	GUIUtil::m_root =&headerColumns;
 	/* Name field */
 	auto nameGatherer = [this] { return m_targetActor ? m_targetActor->GetName() : "%undef%"; };
 	auto nameProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetName(p_newName); };
-	Helpers::GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
+	GUIUtil::DrawString( "Name", nameGatherer, nameProvider);
 
 	/* Tag field */
 	auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
 	auto tagProvider = [this](const std::string & p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
-	Helpers::GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
+	GUIUtil::DrawString( "Tag", tagGatherer, tagProvider);
 
 	/* Active field */
 	auto activeGatherer = [this] { return m_targetActor ? m_targetActor->IsSelfActive() : false; };
 	auto activeProvider = [this](bool p_active) { if (m_targetActor) m_targetActor->SetActive(p_active); };
-	Helpers::GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
+	GUIUtil::DrawBoolean( "Active", activeGatherer, activeProvider);
 
 	/* Component select + button */
 	{
@@ -99,8 +99,8 @@ Panels::Inspector::Inspector
 		componentSelectorWidget.choices.emplace(13, "CAnimator");
 
 		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
-		addComponentButton.idleBackgroundColor = UI::Types::Color{ 0.7f, 0.5f, 0.f };
-		addComponentButton.textColor = UI::Types::Color::White;
+		addComponentButton.idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
+		addComponentButton.textColor = Color::White;
 		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
 		{
 			switch (componentSelectorWidget.currentChoice)
@@ -129,7 +129,7 @@ Panels::Inspector::Inspector
 			auto defineButtonsStates = [&addComponentButton](bool p_componentExists)
 			{
 				addComponentButton.disabled = p_componentExists;
-				addComponentButton.idleBackgroundColor = !p_componentExists ? UI::Types::Color{ 0.7f, 0.5f, 0.f } : UI::Types::Color{ 0.1f, 0.1f, 0.1f };
+				addComponentButton.idleBackgroundColor = !p_componentExists ? Color{ 0.7f, 0.5f, 0.f } : Color{ 0.1f, 0.1f, 0.1f };
 			};
 
 			switch (p_value)
@@ -250,7 +250,8 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 		};
 		auto& columns = header.CreateWidget<UI::Widgets::Layout::Columns<2>>();
 		columns.widths[0] = 200;
-		p_component->OnInspector(columns);
+		GUIUtil::m_root = &columns;
+		p_component->OnInspector();
 	}
 }
 

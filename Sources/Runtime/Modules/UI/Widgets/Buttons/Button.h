@@ -11,7 +11,7 @@
 #include "Core/Maths/FVector2.h"
 
 #include "Modules/UI/Widgets/Buttons/AButton.h"
-#include "Modules/UI/Types/Color.h"
+#include "Core/Base/Color.h"
 
 namespace LittleEngine::UI::Widgets::Buttons
 {
@@ -37,10 +37,10 @@ namespace LittleEngine::UI::Widgets::Buttons
 		LittleEngine::FVector2 size;
 		bool disabled = false;
 
-		Types::Color idleBackgroundColor;
-		Types::Color hoveredBackgroundColor;
-		Types::Color clickedBackgroundColor;
+		Color idleBackgroundColor;
+		Color hoveredBackgroundColor;
+		Color clickedBackgroundColor;
 
-		Types::Color textColor;
+		Color textColor;
 	};
 }

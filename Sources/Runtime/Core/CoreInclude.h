@@ -4,6 +4,7 @@
 #include "Core/Tools/Guid.h"
 #include "Core/Reflection/Reflection.h"
 #include "Core/Serialization/JsonSerializer.h"
+#include "Core/Serialization/SerializeUtil.h"
 
 #include "Core/Base/Object.h"
 #include "Core/Base/Application.h"

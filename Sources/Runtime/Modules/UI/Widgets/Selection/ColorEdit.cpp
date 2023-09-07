@@ -6,8 +6,8 @@
 
 #include "Modules/UI/Widgets/Selection/ColorEdit.h"
 
-LittleEngine::UI::Widgets::Selection::ColorEdit::ColorEdit(bool p_enableAlpha, const Types::Color & p_defaultColor) :
-	DataWidget<Types::Color>(color), enableAlpha(p_enableAlpha), color(p_defaultColor)
+LittleEngine::UI::Widgets::Selection::ColorEdit::ColorEdit(bool p_enableAlpha, const Color & p_defaultColor) :
+	DataWidget<Color>(color), enableAlpha(p_enableAlpha), color(p_defaultColor)
 {
 }
 

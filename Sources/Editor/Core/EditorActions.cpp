@@ -64,12 +64,13 @@ namespace LittleEngine::Editor
 
     void Core::EditorActions::SaveCurrentSceneTo(const std::string& p_path)
     {
-        tinyxml2::XMLDocument doc;
-        tinyxml2::XMLNode* node = doc.NewElement("root");
-        doc.InsertFirstChild(node);
-        m_context.sceneManager.StoreCurrentSceneSourcePath(p_path);
-        m_context.sceneManager.GetCurrentScene()->OnSerialize(doc, node);
-        doc.SaveFile(p_path.c_str());
+        // TODO tanjp
+        //tinyxml2::XMLDocument doc;
+        //tinyxml2::XMLNode* node = doc.NewElement("root");
+        //doc.InsertFirstChild(node);
+        //m_context.sceneManager.StoreCurrentSceneSourcePath(p_path);
+        //m_context.sceneManager.GetCurrentScene()->OnSerialize(doc, node);
+        //doc.SaveFile(p_path.c_str());
     }
 
     void Core::EditorActions::LoadSceneFromDisk(const std::string& p_path, bool p_absolute)
@@ -510,9 +511,10 @@ namespace LittleEngine::Editor
             {
                 PlayEvent.Invoke();
                 m_sceneBackup.Clear();
-                tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
-                m_sceneBackup.InsertFirstChild(node);
-                m_context.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
+                // TODO tanjp save scene
+                //tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
+                //m_sceneBackup.InsertFirstChild(node);
+                //m_context.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
                 m_panelsManager.GetPanelAs<Panels::GameView>("Game View").Focus();
                 m_context.sceneManager.GetCurrentScene()->Play();
                 SetEditorMode(EEditorMode::PLAY);
@@ -646,13 +648,14 @@ namespace LittleEngine::Editor
     void Core::EditorActions::DuplicateActor(ActorPtr p_toDuplicate, ActorPtr p_forcedParent,
                                                                    bool p_focus)
     {
-        tinyxml2::XMLDocument doc;
-        tinyxml2::XMLNode* actorsRoot = doc.NewElement("actors");
-        p_toDuplicate->OnSerialize(doc, actorsRoot);
+        // TODO tanjp DuplicateActor
+        //tinyxml2::XMLDocument doc;
+        //tinyxml2::XMLNode* actorsRoot = doc.NewElement("actors");
+        //p_toDuplicate->OnSerialize(doc, actorsRoot);
         auto newActor = CreateEmptyActor(false);
         int64_t idToUse = newActor->GetID();
-        tinyxml2::XMLElement* currentActor = actorsRoot->FirstChildElement("actor");
-        newActor->OnDeserialize(doc, currentActor);
+        //tinyxml2::XMLElement* currentActor = actorsRoot->FirstChildElement("actor");
+        //newActor->OnDeserialize(doc, currentActor);
 
         newActor->SetID(idToUse);
 

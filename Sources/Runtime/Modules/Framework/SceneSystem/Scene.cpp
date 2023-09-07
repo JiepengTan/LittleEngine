@@ -263,47 +263,16 @@ namespace LittleEngine
             m_tempActors.push_back(item);
         return m_tempActors;
     }
-    void Scene::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root)
+    void Scene::OnSerialize(ISerializer p_serializer)
     {
-        tinyxml2::XMLNode* sceneNode = p_doc.NewElement("scene");
-        p_root->InsertEndChild(sceneNode);
-
-        tinyxml2::XMLNode* actorsNode = p_doc.NewElement("actors");
-        sceneNode->InsertEndChild(actorsNode);
-
-        for (auto& item : m_actors)
-        {
-            item.second->OnSerialize(p_doc, actorsNode);
-        }
+        // TODO tanjp OnSerialize Scene
     }
-    void Scene::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root)
+    void Scene::OnDeserialize(ISerializer p_serializer)
     {
-        tinyxml2::XMLNode* actorsRoot = p_root->FirstChildElement("actors");
-
-        if (actorsRoot)
-        {
-            tinyxml2::XMLElement* currentActor = actorsRoot->FirstChildElement("actor");
-
-            ActorID maxID = 1;
-
-            while (currentActor)
-            {
-                auto actor = CreateActor();
-                actor->OnDeserialize(p_doc, currentActor);
-                maxID = std::max(actor->GetID() + 1, maxID);
-                currentActor = currentActor->NextSiblingElement("actor");
-            }
-            LOG_INFO(" maxID " +  maxID);
-            /* We recreate the hierarchy of the scene by attaching children to their parents */
-            for (auto& item : m_actors)
-            {
-                auto& actor= item.second;
-                if (actor->GetParentID() > 0)
-                {
-                    if (auto found = FindActorByID(actor->GetParentID()); found)
-                        actor->SetParent(found);
-                }
-            }
-        }
+        //1. create Actors
+        //2. resolve actor's references
+        //update global states
+        //LOG_INFO(" maxID " +  maxID);
+        /* We recreate the hierarchy of the scene by attaching children to their parents */
     }
 }

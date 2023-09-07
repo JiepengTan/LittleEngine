@@ -49,19 +49,19 @@ namespace LittleEngine
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(ISerializer p_serializer) override;
 
 		/**
 		* Deserialize the component
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 		/**
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
-		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) override;
+		virtual void OnInspector() override;
 	};
 }

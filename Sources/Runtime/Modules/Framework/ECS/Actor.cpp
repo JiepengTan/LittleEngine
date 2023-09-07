@@ -7,21 +7,6 @@
 #include <algorithm>
 
 #include "Modules/Framework/ECS/Actor.h"
-
-#include "Modules/Framework/ECS/Components/CPhysicalBox.h"
-#include "Modules/Framework/ECS/Components/CPhysicalSphere.h"
-#include "Modules/Framework/ECS/Components/CPhysicalCapsule.h"
-#include "Modules/Framework/ECS/Components/CCamera.h"
-#include "Modules/Framework/ECS/Components/CModelRenderer.h"
-#include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
-#include "Modules/Framework/ECS/Components/CAudioSource.h"
-#include "Modules/Framework/ECS/Components/CAudioListener.h"
-#include "Modules/Framework/ECS/Components/CPointLight.h"
-#include "Modules/Framework/ECS/Components/CDirectionalLight.h"
-#include "Modules/Framework/ECS/Components/CSpotLight.h"
-#include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
-#include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
-#include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "Modules/Framework/SceneSystem/Scene.h"
 
 namespace LittleEngine
@@ -332,99 +317,36 @@ namespace LittleEngine
         return GetComponentsCopy(m_components);
     }
 
-    void Actor::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot)
+    void Actor::OnSerialize(ISerializer p_serializer)
     {
-        tinyxml2::XMLNode* actorNode = p_doc.NewElement("actor");
-        p_actorsRoot->InsertEndChild(actorNode);
+        SerializeUtil::SerializeString( "name", m_name);
+        SerializeUtil::SerializeString( "tag", m_tag);
+        SerializeUtil::SerializeBoolean( "active", m_active);
+        SerializeUtil::SerializeInt64( "id", m_actorID);
+        SerializeUtil::SerializeInt64( "parent", m_parentID);
 
-        Serializer::SerializeString(p_doc, actorNode, "name", m_name);
-        Serializer::SerializeString(p_doc, actorNode, "tag", m_tag);
-        Serializer::SerializeBoolean(p_doc, actorNode, "active", m_active);
-        Serializer::SerializeInt64(p_doc, actorNode, "id", m_actorID);
-        Serializer::SerializeInt64(p_doc, actorNode, "parent", m_parentID);
-
-        tinyxml2::XMLNode* componentsNode = p_doc.NewElement("components");
-        actorNode->InsertEndChild(componentsNode);
-
+        SerializeUtil::SerializeInt( "m_components", m_components.size());
         for (auto& item : m_components)
         {
+            auto comp = item.second;
+            SerializeUtil::SerializeString( "type", comp->GetName());
             auto component = item.second;
-            /* Current component root */
-            tinyxml2::XMLNode* componentNode = p_doc.NewElement("component");
-            componentsNode->InsertEndChild(componentNode);
-
-            /* Component type */
-            Serializer::SerializeString(p_doc, componentNode, "type", typeid(*component).name());
-
-            /* Data node (Will be passed to the component) */
-            tinyxml2::XMLElement* data = p_doc.NewElement("data");
-            componentNode->InsertEndChild(data);
-
             /* Data serialization of the component */
-            component->OnSerialize(p_doc, data);
+            component->OnSerialize(p_serializer);
         }
-
-        tinyxml2::XMLNode* behavioursNode = p_doc.NewElement("behaviours");
-        actorNode->InsertEndChild(behavioursNode);
     }
 
-    void Actor::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot)
+    void Actor::OnDeserialize(ISerializer p_serializer)
     {
-        Serializer::DeserializeString(p_doc, p_actorsRoot, "name", m_name);
-        Serializer::DeserializeString(p_doc, p_actorsRoot, "tag", m_tag);
-        Serializer::DeserializeBoolean(p_doc, p_actorsRoot, "active", m_active);
-        Serializer::DeserializeUInt64(p_doc, p_actorsRoot, "id", m_actorID);
-        Serializer::DeserializeUInt64(p_doc, p_actorsRoot, "parent", m_parentID);
+        SerializeUtil::DeserializeString("name", m_name);
+        SerializeUtil::DeserializeString("tag", m_tag);
+        SerializeUtil::DeserializeBoolean("active", m_active);
+        SerializeUtil::DeserializeUInt64("id", m_actorID);
+        SerializeUtil::DeserializeUInt64("parent", m_parentID);
 
-        {
-            tinyxml2::XMLNode* componentsRoot = p_actorsRoot->FirstChildElement("components");
-            if (componentsRoot)
-            {
-                tinyxml2::XMLElement* currentComponent = componentsRoot->FirstChildElement("component");
-
-                while (currentComponent)
-                {
-                    std::string componentType = currentComponent->FirstChildElement("type")->GetText();
-                    SharedPtr<Component> component = nullptr;
-
-                    // TODO: Use component name instead of typeid (unsafe)
-                    if (componentType == typeid(CTransform).name()) component = transform;
-                    else if (componentType == typeid(CPhysicalBox).name()) component = AddComponent<
-                        CPhysicalBox>();
-                    else if (componentType == typeid(CPhysicalSphere).name()) component = AddComponent<
-                        CPhysicalSphere>();
-                    else if (componentType == typeid(CPhysicalCapsule).name()) component = AddComponent<
-                        CPhysicalCapsule>();
-                    else if (componentType == typeid(CModelRenderer).name()) component = AddComponent<
-                        CModelRenderer>();
-                    else if (componentType == typeid(CCamera).name()) component = AddComponent<
-                        CCamera>();
-                    else if (componentType == typeid(CMaterialRenderer).name()) component = AddComponent<
-                        CMaterialRenderer>();
-                    else if (componentType == typeid(CAudioSource).name()) component = AddComponent<
-                        CAudioSource>();
-                    else if (componentType == typeid(CAudioListener).name()) component = AddComponent<
-                        CAudioListener>();
-                    else if (componentType == typeid(CPointLight).name()) component = AddComponent<
-                        CPointLight>();
-                    else if (componentType == typeid(CDirectionalLight).name()) component = AddComponent<
-                        CDirectionalLight>();
-                    else if (componentType == typeid(CSpotLight).name()) component = AddComponent<
-                        CSpotLight>();
-                    else if (componentType == typeid(CAmbientBoxLight).name()) component = AddComponent<
-                        CAmbientBoxLight>();
-                    else if (componentType == typeid(CAmbientSphereLight).name()) component = AddComponent<
-                        CAmbientSphereLight>();
-                    else if (componentType == typeid(CAnimator).name()) component = AddComponent<
-                        CAnimator>();
-
-                    if (component)
-                        component->OnDeserialize(p_doc, currentComponent->FirstChildElement("data"));
-
-                    currentComponent = currentComponent->NextSiblingElement("component");
-                }
-            }
-        }
+        // TODO
+        int count = 0;
+        SerializeUtil::DeserializeInt("parent", count);
     }
 
     void Actor::RecursiveActiveUpdate()

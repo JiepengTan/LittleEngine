@@ -182,14 +182,14 @@ namespace LittleEngine
 		* @param p_doc
 		* @param p_root
 		*/
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
+		virtual void OnSerialize(ISerializer p_serializer) override;
 
 		/**
 		* Deserialize the scene
 		* @param p_doc
 		* @param p_root
 		*/
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
+		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 		ActorVector& GetActorsCopy(ActorMap& p_vec);
 		ActorVector& GetActorsCopy(ActorVector& p_vec);

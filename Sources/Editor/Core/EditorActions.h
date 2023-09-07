@@ -425,7 +425,7 @@ namespace LittleEngine::Editor::Core
 
 		std::vector<std::pair<uint32_t, std::function<void()>>> m_delayedActions;
 		bool m_isLoadingScene = false;
-		tinyxml2::XMLDocument m_sceneBackup;
+		ISerializer m_sceneBackup;
 	};
 }
 

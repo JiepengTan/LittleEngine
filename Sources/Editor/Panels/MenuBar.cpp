@@ -107,7 +107,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateToolbar()
 		auto enable = [](LittleEngine::UI::Widgets::Buttons::ButtonImage* p_button, bool p_enable)
 		{
 			p_button->disabled = !p_enable;
-			p_button->tint = p_enable ? LittleEngine::UI::Types::Color{ 1.0f, 1.0f, 1.0f, 1.0f} : LittleEngine::UI::Types::Color{1.0f, 1.0f, 1.0f, 0.15f};
+			p_button->tint = p_enable ? LittleEngine::Color{ 1.0f, 1.0f, 1.0f, 1.0f} : LittleEngine::Color{1.0f, 1.0f, 1.0f, 0.15f};
 		};
 
 		switch (p_newMode)
@@ -232,7 +232,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 
 	auto& viewColors = settingsMenu.CreateWidget<MenuList>("View Colors");
 	auto& sceneViewBackground = viewColors.CreateWidget<MenuList>("Scene View Background");
-	auto& sceneViewBackgroundPicker = sceneViewBackground.CreateWidget<Selection::ColorEdit>(false, LittleEngine::UI::Types::Color{ 0.098f, 0.098f, 0.098f });
+	auto& sceneViewBackgroundPicker = sceneViewBackground.CreateWidget<Selection::ColorEdit>(false, LittleEngine::Color{ 0.098f, 0.098f, 0.098f });
 	sceneViewBackgroundPicker.ColorChangedEvent += [this](const auto & color)
 	{
 		EDITOR_PANEL(Panels::SceneView, "Scene View").GetCamera().SetClearColor({ color.r, color.g, color.b });
@@ -244,7 +244,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 	};
 
 	auto& sceneViewGrid = viewColors.CreateWidget<MenuList>("Scene View Grid");
-    auto& sceneViewGridPicker = sceneViewGrid.CreateWidget<Selection::ColorEdit>(false, LittleEngine::UI::Types::Color(0.176f, 0.176f, 0.176f));
+    auto& sceneViewGridPicker = sceneViewGrid.CreateWidget<Selection::ColorEdit>(false, LittleEngine::Color(0.176f, 0.176f, 0.176f));
 	sceneViewGridPicker.ColorChangedEvent += [this](const auto & color)
 	{
 		EDITOR_PANEL(Panels::SceneView, "Scene View").SetGridColor({ color.r, color.g, color.b });
@@ -252,11 +252,11 @@ void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 	sceneViewGrid.CreateWidget<MenuItem>("Reset").ClickedEvent += [this, &sceneViewGridPicker]
 	{
 		EDITOR_PANEL(Panels::SceneView, "Scene View").SetGridColor(LittleEngine::FVector3(0.176f, 0.176f, 0.176f));
-		sceneViewGridPicker.color = LittleEngine::UI::Types::Color(0.176f, 0.176f, 0.176f);
+		sceneViewGridPicker.color = LittleEngine::Color(0.176f, 0.176f, 0.176f);
 	};
 
 	auto& assetViewBackground = viewColors.CreateWidget<MenuList>("Asset View Background");
-	auto& assetViewBackgroundPicker = assetViewBackground.CreateWidget<Selection::ColorEdit>(false, LittleEngine::UI::Types::Color{ 0.098f, 0.098f, 0.098f });
+	auto& assetViewBackgroundPicker = assetViewBackground.CreateWidget<Selection::ColorEdit>(false, LittleEngine::Color{ 0.098f, 0.098f, 0.098f });
 	assetViewBackgroundPicker.ColorChangedEvent += [this](const auto & color)
 	{
 		EDITOR_PANEL(Panels::AssetView, "Asset View").GetCamera().SetClearColor({ color.r, color.g, color.b });
@@ -268,7 +268,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 	};
 
 	auto& assetViewGrid = viewColors.CreateWidget<MenuList>("Asset View Grid");
-	auto& assetViewGridPicker = assetViewGrid.CreateWidget<Selection::ColorEdit>(false, LittleEngine::UI::Types::Color(0.176f, 0.176f, 0.176f));
+	auto& assetViewGridPicker = assetViewGrid.CreateWidget<Selection::ColorEdit>(false, LittleEngine::Color(0.176f, 0.176f, 0.176f));
 	assetViewGridPicker.ColorChangedEvent += [this](const auto & color)
 	{
 		EDITOR_PANEL(Panels::AssetView, "Asset View").SetGridColor({ color.r, color.g, color.b });
@@ -276,7 +276,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateSettingsMenu()
 	assetViewGrid.CreateWidget<MenuItem>("Reset").ClickedEvent += [this, &assetViewGridPicker]
 	{
 		EDITOR_PANEL(Panels::AssetView, "Asset View").SetGridColor(LittleEngine::FVector3(0.176f, 0.176f, 0.176f));
-		assetViewGridPicker.color = LittleEngine::UI::Types::Color(0.176f, 0.176f, 0.176f);
+		assetViewGridPicker.color = LittleEngine::Color(0.176f, 0.176f, 0.176f);
 	};
 
 	auto& sceneViewBillboardScaleMenu = settingsMenu.CreateWidget<MenuList>("3D Icons Scales");

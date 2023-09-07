@@ -11,7 +11,6 @@
 
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
-using namespace LittleEngine::UI::Types;
 
 LittleEngine::Editor::Panels::Profiler::Profiler
 (
@@ -116,7 +115,7 @@ void LittleEngine::Editor::Panels::Profiler::Enable(bool p_value, bool p_disable
 	m_separator->enabled = p_value;
 }
 
-LittleEngine::UI::Types::Color LittleEngine::Editor::Panels::Profiler::CalculateActionColor(double p_percentage) const
+LittleEngine::Color LittleEngine::Editor::Panels::Profiler::CalculateActionColor(double p_percentage) const
 {
 	if (p_percentage <= 25.0f)		return { 0.0f, 1.0f, 0.0f, 1.0f };
 	else if (p_percentage <= 50.0f) return { 1.0f, 1.0f, 0.0f, 1.0f };

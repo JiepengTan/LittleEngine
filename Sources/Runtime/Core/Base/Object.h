@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Macro.h"
 #include "Core/Reflection/Reflection.h"
+#include "Core/Serialization/ISerializer.h"
 #include "tinyxml2/tinyxml2.h"
 
 
@@ -44,11 +45,11 @@ namespace LittleEngine
         /**
         * Serialize all the components
         */
-        virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot);
+        virtual void OnSerialize(ISerializer p_serializer);
         /**
         * Deserialize all the components
         */
-        virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot);
+        virtual void OnDeserialize(ISerializer p_serializer);
 
         ObjectID GetObjectId(){  return m_instanceId;}
     private:

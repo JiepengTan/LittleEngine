@@ -159,14 +159,14 @@ namespace LittleEngine::Resources
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(ISerializer p_serializer) override;
 
 		/**
 		* Deserialize the material
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 		const std::string path;
 

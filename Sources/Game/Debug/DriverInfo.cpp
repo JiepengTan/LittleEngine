@@ -15,10 +15,10 @@ LittleGame::Debug::DriverInfo::DriverInfo(LittleEngine::Rendering::Core::Rendere
 	m_defaultPosition.x = static_cast<float>(p_window.GetSize().first) - 10.f;
 	m_defaultPosition.y = static_cast<float>(p_window.GetSize().second) - 10.f;
 
-	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Vendor: "	+ p_renderer.GetString(GL_VENDOR), LittleEngine::UI::Types::Color::Yellow);
-	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Hardware: " + p_renderer.GetString(GL_RENDERER), LittleEngine::UI::Types::Color::Yellow);
-	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("OpenGL Version: " + p_renderer.GetString(GL_VERSION), LittleEngine::UI::Types::Color::Yellow);
-	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("GLSL Version: " + p_renderer.GetString(GL_SHADING_LANGUAGE_VERSION), LittleEngine::UI::Types::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Vendor: "	+ p_renderer.GetString(GL_VENDOR), LittleEngine::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Hardware: " + p_renderer.GetString(GL_RENDERER), LittleEngine::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("OpenGL Version: " + p_renderer.GetString(GL_VERSION), LittleEngine::Color::Yellow);
+	CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("GLSL Version: " + p_renderer.GetString(GL_SHADING_LANGUAGE_VERSION), LittleEngine::Color::Yellow);
 }
 
 #endif

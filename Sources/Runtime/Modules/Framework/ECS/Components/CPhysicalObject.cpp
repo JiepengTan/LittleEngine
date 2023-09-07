@@ -144,42 +144,42 @@ void LittleEngine::CPhysicalObject::SetActivationState(LittleEngine::Physics::En
 	m_physicalObject->SetActivationState(p_state);
 }
 
-void LittleEngine::CPhysicalObject::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalObject::OnSerialize(ISerializer p_serializer)
 {
-	Serializer::SerializeBoolean(p_doc, p_node, "is_trigger", IsTrigger());
-	Serializer::SerializeBoolean(p_doc, p_node, "is_kinematic", IsKinematic());
-	Serializer::SerializeFloat(p_doc, p_node, "bounciness", GetBounciness());
-	Serializer::SerializeFloat(p_doc, p_node, "mass", GetMass());
-	Serializer::SerializeFloat(p_doc, p_node, "friction", GetFriction());
-	Serializer::SerializeVec3(p_doc, p_node, "linear_factor", GetLinearFactor());
-	Serializer::SerializeVec3(p_doc, p_node, "angular_factor", GetAngularFactor());
-	Serializer::SerializeInt(p_doc, p_node, "collision_mode", static_cast<int>(GetCollisionDetectionMode()));
+	SerializeUtil::SerializeBoolean("is_trigger", IsTrigger());
+	SerializeUtil::SerializeBoolean("is_kinematic", IsKinematic());
+	SerializeUtil::SerializeFloat("bounciness", GetBounciness());
+	SerializeUtil::SerializeFloat("mass", GetMass());
+	SerializeUtil::SerializeFloat("friction", GetFriction());
+	SerializeUtil::SerializeVec3("linear_factor", GetLinearFactor());
+	SerializeUtil::SerializeVec3("angular_factor", GetAngularFactor());
+	SerializeUtil::SerializeInt("collision_mode", static_cast<int>(GetCollisionDetectionMode()));
 }
 
-void LittleEngine::CPhysicalObject::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalObject::OnDeserialize(ISerializer p_serializer)
 {
-	SetTrigger(Serializer::DeserializeBoolean(p_doc, p_node, "is_trigger"));
-	SetKinematic(Serializer::DeserializeBoolean(p_doc, p_node, "is_kinematic"));
-	SetBounciness(Serializer::DeserializeFloat(p_doc, p_node, "bounciness"));
-	SetMass(Serializer::DeserializeFloat(p_doc, p_node, "mass"));
-	SetFriction(Serializer::DeserializeFloat(p_doc, p_node, "friction"));
-	SetLinearFactor(Serializer::DeserializeVec3(p_doc, p_node, "linear_factor"));
-	SetAngularFactor(Serializer::DeserializeVec3(p_doc, p_node, "angular_factor"));
-	SetCollisionDetectionMode(static_cast<LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode>(Serializer::DeserializeInt(p_doc, p_node, "collision_mode")));
+	SetTrigger(SerializeUtil::DeserializeBoolean("is_trigger"));
+	SetKinematic(SerializeUtil::DeserializeBoolean("is_kinematic"));
+	SetBounciness(SerializeUtil::DeserializeFloat("bounciness"));
+	SetMass(SerializeUtil::DeserializeFloat("mass"));
+	SetFriction(SerializeUtil::DeserializeFloat("friction"));
+	SetLinearFactor(SerializeUtil::DeserializeVec3("linear_factor"));
+	SetAngularFactor(SerializeUtil::DeserializeVec3("angular_factor"));
+	SetCollisionDetectionMode(static_cast<LittleEngine::Physics::Entities::PhysicalObject::ECollisionDetectionMode>(SerializeUtil::DeserializeInt("collision_mode")));
 }
 
-void LittleEngine::CPhysicalObject::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalObject::OnInspector()
 {
-	Helpers::GUIDrawer::DrawBoolean(p_root, "Trigger", std::bind(&CPhysicalObject::IsTrigger, this), std::bind(&CPhysicalObject::SetTrigger, this, std::placeholders::_1));
-	Helpers::GUIDrawer::DrawBoolean(p_root, "Kinematic", std::bind(&CPhysicalObject::IsKinematic, this), std::bind(&CPhysicalObject::SetKinematic, this, std::placeholders::_1));
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Mass", std::bind(&CPhysicalObject::GetMass, this), std::bind(&CPhysicalObject::SetMass, this, std::placeholders::_1), 0.1f, 0.f, 10000.f);
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Bounciness", std::bind(&CPhysicalObject::GetBounciness, this), std::bind(&CPhysicalObject::SetBounciness, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Friction", std::bind(&CPhysicalObject::GetFriction, this), std::bind(&CPhysicalObject::SetFriction, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
-	Helpers::GUIDrawer::DrawVec3(p_root, "Linear Factor", std::bind(&CPhysicalObject::GetLinearFactor, this), std::bind(&CPhysicalObject::SetLinearFactor, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
-	Helpers::GUIDrawer::DrawVec3(p_root, "Angular Factor", std::bind(&CPhysicalObject::GetAngularFactor, this), std::bind(&CPhysicalObject::SetAngularFactor, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
+	GUIUtil::DrawBoolean( "Trigger", std::bind(&CPhysicalObject::IsTrigger, this), std::bind(&CPhysicalObject::SetTrigger, this, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Kinematic", std::bind(&CPhysicalObject::IsKinematic, this), std::bind(&CPhysicalObject::SetKinematic, this, std::placeholders::_1));
+	GUIUtil::DrawScalar<float>( "Mass", std::bind(&CPhysicalObject::GetMass, this), std::bind(&CPhysicalObject::SetMass, this, std::placeholders::_1), 0.1f, 0.f, 10000.f);
+	GUIUtil::DrawScalar<float>( "Bounciness", std::bind(&CPhysicalObject::GetBounciness, this), std::bind(&CPhysicalObject::SetBounciness, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
+	GUIUtil::DrawScalar<float>( "Friction", std::bind(&CPhysicalObject::GetFriction, this), std::bind(&CPhysicalObject::SetFriction, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
+	GUIUtil::DrawVec3( "Linear Factor", std::bind(&CPhysicalObject::GetLinearFactor, this), std::bind(&CPhysicalObject::SetLinearFactor, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
+	GUIUtil::DrawVec3( "Angular Factor", std::bind(&CPhysicalObject::GetAngularFactor, this), std::bind(&CPhysicalObject::SetAngularFactor, this, std::placeholders::_1), 0.1f, 0.f, 1.f);
 	
-	Helpers::GUIDrawer::CreateTitle(p_root, "Collision Mode");
-	auto& collisionMode = p_root.CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(static_cast<int>(GetCollisionDetectionMode()));
+	GUIUtil::CreateTitle( "Collision Mode");
+	auto& collisionMode = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(static_cast<int>(GetCollisionDetectionMode()));
 	collisionMode.choices.emplace(0, "Discrete");
 	collisionMode.choices.emplace(1, "Continuous");
 	collisionMode.ValueChangedEvent += [this](int p_choice)

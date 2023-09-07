@@ -8,7 +8,7 @@
 #include "../Editor/Core/EditorActions.h"
 
 #include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
-#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Utils/GUIUtil.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
@@ -16,7 +16,6 @@
 
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
-using namespace LittleEngine::Helpers;
 
 LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string & p_title, bool p_opened, const LittleEngine::UI::Settings::PanelWindowSettings & p_windowSettings) :
 	PanelWindow(p_title, p_opened, p_windowSettings),
@@ -46,8 +45,8 @@ LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string
 		auto& root = CreateWidget<Layout::GroupCollapsable>("Physics");
 		auto& columns = root.CreateWidget<Layout::Columns<2>>();
 		columns.widths[0] = 125;
-
-		GUIDrawer::DrawScalar<float>(columns, "Gravity", GenerateGatherer<float>("gravity"), GenerateProvider<float>("gravity"), 0.1f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);
+		GUIUtil::m_root = &columns;
+		GUIUtil::DrawScalar<float>( "Gravity", GenerateGatherer<float>("gravity"), GenerateProvider<float>("gravity"), 0.1f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);
 	}
 
 	{
@@ -56,7 +55,8 @@ LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string
 		auto& columns = generationRoot.CreateWidget<Layout::Columns<2>>();
 		columns.widths[0] = 125;
 
-		GUIDrawer::DrawBoolean(columns, "Development build", GenerateGatherer<bool>("dev_build"), GenerateProvider<bool>("dev_build"));
+		GUIUtil::m_root = &columns;
+		GUIUtil::DrawBoolean( "Development build", GenerateGatherer<bool>("dev_build"), GenerateProvider<bool>("dev_build"));
 	}
 
 	{
@@ -65,10 +65,11 @@ LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string
 		auto& columns = windowingRoot.CreateWidget<Layout::Columns<2>>();
 		columns.widths[0] = 125;
 
-		GUIDrawer::DrawScalar<int>(columns, "Resolution X", GenerateGatherer<int>("x_resolution"), GenerateProvider<int>("x_resolution"), 1, 0, 10000);
-		GUIDrawer::DrawScalar<int>(columns, "Resolution Y", GenerateGatherer<int>("y_resolution"), GenerateProvider<int>("y_resolution"), 1, 0, 10000);
-		GUIDrawer::DrawBoolean(columns, "Fullscreen", GenerateGatherer<bool>("fullscreen"), GenerateProvider<bool>("fullscreen"));
-		GUIDrawer::DrawString(columns, "Executable name", GenerateGatherer<std::string>("executable_name"), GenerateProvider<std::string>("executable_name"));
+		GUIUtil::m_root = &columns;
+		GUIUtil::DrawScalar<int>( "Resolution X", GenerateGatherer<int>("x_resolution"), GenerateProvider<int>("x_resolution"), 1, 0, 10000);
+		GUIUtil::DrawScalar<int>( "Resolution Y", GenerateGatherer<int>("y_resolution"), GenerateProvider<int>("y_resolution"), 1, 0, 10000);
+		GUIUtil::DrawBoolean( "Fullscreen", GenerateGatherer<bool>("fullscreen"), GenerateProvider<bool>("fullscreen"));
+		GUIUtil::DrawString( "Executable name", GenerateGatherer<std::string>("executable_name"), GenerateProvider<std::string>("executable_name"));
 	}
 
 	{
@@ -77,11 +78,12 @@ LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string
 		auto& columns = renderingRoot.CreateWidget<Layout::Columns<2>>();
 		columns.widths[0] = 125;
 
-		GUIDrawer::DrawBoolean(columns, "Vertical Sync.", GenerateGatherer<bool>("vsync"), GenerateProvider<bool>("vsync"));
-		GUIDrawer::DrawBoolean(columns, "Multi-sampling", GenerateGatherer<bool>("multisampling"), GenerateProvider<bool>("multisampling"));
-		GUIDrawer::DrawScalar<int>(columns, "Samples", GenerateGatherer<int>("samples"), GenerateProvider<int>("samples"), 1, 2, 16);
-		GUIDrawer::DrawScalar<int>(columns, "OpenGL Major", GenerateGatherer<int>("opengl_major"), GenerateProvider<int>("opengl_major"), 1, 3, 4);
-		GUIDrawer::DrawScalar<int>(columns, "OpenGL Minor", GenerateGatherer<int>("opengl_minor"), GenerateProvider<int>("opengl_minor"), 1, 0, 6);
+		GUIUtil::m_root = &columns;
+		GUIUtil::DrawBoolean( "Vertical Sync.", GenerateGatherer<bool>("vsync"), GenerateProvider<bool>("vsync"));
+		GUIUtil::DrawBoolean( "Multi-sampling", GenerateGatherer<bool>("multisampling"), GenerateProvider<bool>("multisampling"));
+		GUIUtil::DrawScalar<int>( "Samples", GenerateGatherer<int>("samples"), GenerateProvider<int>("samples"), 1, 2, 16);
+		GUIUtil::DrawScalar<int>( "OpenGL Major", GenerateGatherer<int>("opengl_major"), GenerateProvider<int>("opengl_major"), 1, 3, 4);
+		GUIUtil::DrawScalar<int>( "OpenGL Minor", GenerateGatherer<int>("opengl_minor"), GenerateProvider<int>("opengl_minor"), 1, 0, 6);
 	}
 
 	{
@@ -89,7 +91,7 @@ LittleEngine::Editor::Panels::ProjectSettings::ProjectSettings(const std::string
 		auto& gameRoot = CreateWidget<Layout::GroupCollapsable>("Scene Management");
 		auto& columns = gameRoot.CreateWidget<Layout::Columns<2>>();
 		columns.widths[0] = 125;
-
-		GUIDrawer::DrawDDString(columns, "Start scene", GenerateGatherer<std::string>("start_scene"), GenerateProvider<std::string>("start_scene"), "File");
+		GUIUtil::m_root = &columns;
+		GUIUtil::DrawDDString( "Start scene", GenerateGatherer<std::string>("start_scene"), GenerateProvider<std::string>("start_scene"), "File");
 	}
 }

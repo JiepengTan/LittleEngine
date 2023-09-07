@@ -14,8 +14,7 @@
 
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
-using namespace LittleEngine::UI::Types;
-
+using namespace LittleEngine;
 LittleGame::Debug::GameProfiler::GameProfiler(LittleEngine::Windowing::Window& p_window, float p_frequency) : m_frequency(p_frequency), m_window(p_window)
 {
 	m_defaultHorizontalAlignment = LittleEngine::UI::Settings::EHorizontalAlignment::LEFT;
@@ -72,7 +71,7 @@ void LittleGame::Debug::GameProfiler::Update(float p_deltaTime)
 	}
 }
 
-LittleEngine::UI::Types::Color LittleGame::Debug::GameProfiler::CalculateActionColor(double p_percentage) const
+LittleEngine::Color LittleGame::Debug::GameProfiler::CalculateActionColor(double p_percentage) const
 {
 	if (p_percentage <= 25.0f)		return { 0.0f, 1.0f, 0.0f, 1.0f };
 	else if (p_percentage <= 50.0f) return { 1.0f, 1.0f, 0.0f, 1.0f };

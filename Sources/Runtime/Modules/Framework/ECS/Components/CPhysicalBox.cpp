@@ -38,23 +38,23 @@ LittleEngine::FVector3 LittleEngine::CPhysicalBox::GetSize() const
 	return GetPhysicalObjectAs<PhysicalBox>().GetSize();
 }
 
-void LittleEngine::CPhysicalBox::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalBox::OnSerialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnSerialize(p_doc, p_node);
+	CPhysicalObject::OnSerialize(p_serializer);
 
-	Serializer::SerializeVec3(p_doc, p_node, "size", GetSize());
+	SerializeUtil::SerializeVec3("size", GetSize());
 }
 
-void LittleEngine::CPhysicalBox::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalBox::OnDeserialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnDeserialize(p_doc, p_node);
+	CPhysicalObject::OnDeserialize(p_serializer);
 
-	SetSize(Serializer::DeserializeVec3(p_doc, p_node, "size"));
+	SetSize(SerializeUtil::DeserializeVec3("size"));
 }
 
-void LittleEngine::CPhysicalBox::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalBox::OnInspector()
 {
-	CPhysicalObject::OnInspector(p_root);
+	CPhysicalObject::OnInspector();
 
-	Helpers::GUIDrawer::DrawVec3(p_root, "Size", std::bind(&CPhysicalBox::GetSize, this), std::bind(&CPhysicalBox::SetSize, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
+	GUIUtil::DrawVec3( "Size", std::bind(&CPhysicalBox::GetSize, this), std::bind(&CPhysicalBox::SetSize, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
 }

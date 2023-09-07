@@ -9,7 +9,7 @@
 #include "tinyxml2/tinyxml2.h"
 
 
-#include "Modules/Utils/Serializer.h"
+#include "Core/Serialization/ISerializer.h"
 
 namespace LittleEngine::API
 {
@@ -24,14 +24,14 @@ namespace LittleEngine::API
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) = 0;
+		virtual void OnSerialize(ISerializer p_serializer) = 0;
 
 		/**
 		* Called when the deserialization is asked
 		* @param p_doc
 		* @param p_node
 		*/
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) = 0;
+		virtual void OnDeserialize(ISerializer p_serializer) = 0;
 
 		/**
 		* Default polymorphic destructor

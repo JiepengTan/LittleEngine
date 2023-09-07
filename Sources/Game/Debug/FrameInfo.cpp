@@ -17,9 +17,9 @@ LittleGame::Debug::FrameInfo::FrameInfo(LittleEngine::Rendering::Core::Renderer&
 	m_defaultPosition.x = static_cast<float>(p_window.GetSize().first) - 10.f;
 	m_defaultPosition.y = static_cast<float>(p_window.GetSize().second) - 10.f;
 
-	m_frameInfo[0] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
-	m_frameInfo[1] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
-	m_frameInfo[2] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::UI::Types::Color::Yellow);
+	m_frameInfo[0] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::Color::Yellow);
+	m_frameInfo[1] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::Color::Yellow);
+	m_frameInfo[2] = &CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("", LittleEngine::Color::Yellow);
 }
 
 void LittleGame::Debug::FrameInfo::Update(float p_deltaTime)

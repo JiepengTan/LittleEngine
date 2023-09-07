@@ -38,23 +38,23 @@ float LittleEngine::CPhysicalSphere::GetRadius() const
 	return GetPhysicalObjectAs<PhysicalSphere>().GetRadius();
 }
 
-void LittleEngine::CPhysicalSphere::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalSphere::OnSerialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnSerialize(p_doc, p_node);
+	CPhysicalObject::OnSerialize(p_serializer);
 
-	Serializer::SerializeFloat(p_doc, p_node, "radius", GetRadius());
+	SerializeUtil::SerializeFloat("radius", GetRadius());
 }
 
-void LittleEngine::CPhysicalSphere::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalSphere::OnDeserialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnDeserialize(p_doc, p_node);
+	CPhysicalObject::OnDeserialize(p_serializer);
 
-	SetRadius(Serializer::DeserializeFloat(p_doc, p_node, "radius"));
+	SetRadius(SerializeUtil::DeserializeFloat("radius"));
 }
 
-void LittleEngine::CPhysicalSphere::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalSphere::OnInspector()
 {
-	CPhysicalObject::OnInspector(p_root);
+	CPhysicalObject::OnInspector();
 
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Radius", std::bind(&CPhysicalSphere::GetRadius, this), std::bind(&CPhysicalSphere::SetRadius, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
+	GUIUtil::DrawScalar<float>( "Radius", std::bind(&CPhysicalSphere::GetRadius, this), std::bind(&CPhysicalSphere::SetRadius, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
 }

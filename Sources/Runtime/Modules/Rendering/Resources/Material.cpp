@@ -185,23 +185,25 @@ std::map<std::string, std::any>& LittleEngine::Resources::Material::GetUniformsD
 	return m_uniformsData;
 }
 
-void LittleEngine::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Resources::Material::OnSerialize(ISerializer p_serializer)
 {
+	// TODO tanjp 
+#ifdef false
 	using namespace LittleEngine::Rendering::Resources;
 	using namespace LittleEngine;
 
-	Serializer::SerializeShader(p_doc, p_node, "shader", m_shader);
+	SerializeUtil::SerializeShader("shader", m_shader);
 
 	tinyxml2::XMLNode* settingsNode = p_doc.NewElement("settings");
 	p_node->InsertEndChild(settingsNode);
 
-	Serializer::SerializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
-	Serializer::SerializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
-	Serializer::SerializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
-	Serializer::SerializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
-	Serializer::SerializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
-	Serializer::SerializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
-	Serializer::SerializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
+	SerializeUtil::SerializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
+	SerializeUtil::SerializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
 
 	// Create "Uniforms" (Every uniform will be attached to "Uniforms")
 	tinyxml2::XMLNode* uniformsNode = p_doc.NewElement("uniforms");
@@ -214,64 +216,67 @@ void LittleEngine::Resources::Material::OnSerialize(tinyxml2::XMLDocument & p_do
 
 		const LittleEngine::Rendering::Resources::UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
 
-		Serializer::SerializeString(p_doc, uniform, "name", uniformName);
+		SerializeUtil::SerializeString(p_doc, uniform, "name", uniformName);
 
 		if (uniformInfo && uniformValue.has_value())
 		{
 			switch (uniformInfo->type)
 			{
 			case UniformType::UNIFORM_BOOL:
-				if (uniformValue.type() == typeid(bool)) Serializer::SerializeInt(p_doc, uniform, "value", std::any_cast<bool>(uniformValue));
+				if (uniformValue.type() == typeid(bool)) SerializeUtil::SerializeInt(p_doc, uniform, "value", std::any_cast<bool>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_INT:
-				if (uniformValue.type() == typeid(int)) Serializer::SerializeInt(p_doc, uniform, "value", std::any_cast<int>(uniformValue));
+				if (uniformValue.type() == typeid(int)) SerializeUtil::SerializeInt(p_doc, uniform, "value", std::any_cast<int>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_FLOAT:
-				if (uniformValue.type() == typeid(float)) Serializer::SerializeFloat(p_doc, uniform, "value", std::any_cast<float>(uniformValue));
+				if (uniformValue.type() == typeid(float)) SerializeUtil::SerializeFloat(p_doc, uniform, "value", std::any_cast<float>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_FLOAT_VEC2:
-				if (uniformValue.type() == typeid(FVector2)) Serializer::SerializeVec2(p_doc, uniform, "value", std::any_cast<FVector2>(uniformValue));
+				if (uniformValue.type() == typeid(FVector2)) SerializeUtil::SerializeVec2(p_doc, uniform, "value", std::any_cast<FVector2>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_FLOAT_VEC3:
-				if (uniformValue.type() == typeid(FVector3)) Serializer::SerializeVec3(p_doc, uniform, "value", std::any_cast<FVector3>(uniformValue));
+				if (uniformValue.type() == typeid(FVector3)) SerializeUtil::SerializeVec3(p_doc, uniform, "value", std::any_cast<FVector3>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_FLOAT_VEC4:
-				if (uniformValue.type() == typeid(FVector4)) Serializer::SerializeVec4(p_doc, uniform, "value", std::any_cast<FVector4>(uniformValue));
+				if (uniformValue.type() == typeid(FVector4)) SerializeUtil::SerializeVec4(p_doc, uniform, "value", std::any_cast<FVector4>(uniformValue));
 				break;
 
 			case UniformType::UNIFORM_SAMPLER_2D:
-				if (uniformValue.type() == typeid(Texture*)) Serializer::SerializeTexture(p_doc, uniform, "value", std::any_cast<Texture*>(uniformValue));
+				if (uniformValue.type() == typeid(Texture*)) SerializeUtil::SerializeTexture(p_doc, uniform, "value", std::any_cast<Texture*>(uniformValue));
 				break;
 			}
 		}
 	}
+		*/
+#endif
+			
 }
 
-void LittleEngine::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Resources::Material::OnDeserialize(ISerializer p_serializer)
 { 
-
+#ifdef false
 	tinyxml2::XMLNode* settingsNode = p_node->FirstChildElement("settings");
 	
 	if (settingsNode)
 	{
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
-		Serializer::DeserializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
-		Serializer::DeserializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
+		SerializeUtil::DeserializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
+		SerializeUtil::DeserializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
 	}
 
-	/* We get the shader with Deserialize method */
-	LittleEngine::Rendering::Resources::Shader* deserializedShader = LittleEngine::Serializer::DeserializeShader(p_doc, p_node, "shader");
+	//We get the shader with Deserialize method
+	LittleEngine::Rendering::Resources::Shader* deserializedShader = SerializeUtil::DeserializeShader("shader");
 
-	/* We verify that the shader is valid (Not null) */
+	//We verify that the shader is valid (Not null)
 	if (deserializedShader)
 	{
 		/* If the shader is valid, we set it to the material (Modify m_shader pointer + Query + FillUniforms) */
@@ -299,36 +304,39 @@ void LittleEngine::Resources::Material::OnDeserialize(tinyxml2::XMLDocument & p_
 						switch (uniformInfo->type)
 						{
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_BOOL:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeBoolean(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeBoolean(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_INT:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeInt(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeInt(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeFloat(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeFloat(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec2(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeVec2(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec3(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeVec3(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeVec4(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeVec4(p_doc, uniform, "value");
 							break;
 
 						case LittleEngine::Rendering::Resources::UniformType::UNIFORM_SAMPLER_2D:
-							m_uniformsData[uniformInfo->name] = LittleEngine::Serializer::DeserializeTexture(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = SerializeUtil::DeserializeTexture(p_doc, uniform, "value");
 							break;
 						}
 					}
 				}
 			}
 		}
+			
 	}
+		*/
+#endif
 }

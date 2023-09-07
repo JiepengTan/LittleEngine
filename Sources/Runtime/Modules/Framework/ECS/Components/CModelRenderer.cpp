@@ -67,30 +67,30 @@ void LittleEngine::CModelRenderer::SetCustomBoundingSphere(const LittleEngine::R
 	m_customBoundingSphere = p_boundingSphere;
 }
 
-void LittleEngine::CModelRenderer::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CModelRenderer::OnSerialize(ISerializer p_serializer)
 {
-	LittleEngine::Serializer::SerializeModel(p_doc, p_node, "model", m_model);
-	LittleEngine::Serializer::SerializeInt(p_doc, p_node, "frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
-	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "custom_bounding_sphere_position", m_customBoundingSphere.position);
-	LittleEngine::Serializer::SerializeFloat(p_doc, p_node, "custom_bounding_sphere_radius", m_customBoundingSphere.radius);
+	SerializeUtil::SerializeModel("model", m_model);
+	SerializeUtil::SerializeInt("frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
+	SerializeUtil::SerializeVec3("custom_bounding_sphere_position", m_customBoundingSphere.position);
+	SerializeUtil::SerializeFloat("custom_bounding_sphere_radius", m_customBoundingSphere.radius);
 }
 
-void LittleEngine::CModelRenderer::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CModelRenderer::OnDeserialize(ISerializer p_serializer)
 {
-	LittleEngine::Serializer::DeserializeModel(p_doc, p_node, "model", m_model);
-	LittleEngine::Serializer::DeserializeInt(p_doc, p_node, "frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
-	LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "custom_bounding_sphere_position", m_customBoundingSphere.position);
-	LittleEngine::Serializer::DeserializeFloat(p_doc, p_node, "custom_bounding_sphere_radius", m_customBoundingSphere.radius);
+	SerializeUtil::DeserializeModel("model", m_model);
+	SerializeUtil::DeserializeInt("frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
+	SerializeUtil::DeserializeVec3("custom_bounding_sphere_position", m_customBoundingSphere.position);
+	SerializeUtil::DeserializeFloat("custom_bounding_sphere_radius", m_customBoundingSphere.radius);
 }
 
-void LittleEngine::CModelRenderer::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CModelRenderer::OnInspector()
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	GUIDrawer::DrawMesh(p_root, "Model", m_model, &m_modelChangedEvent);
+	GUIUtil::DrawMesh( "Model", m_model, &m_modelChangedEvent);
 
-	GUIDrawer::CreateTitle(p_root, "Frustum Culling Behaviour");
-	auto& boundingMode = p_root.CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(0);
+	GUIUtil::CreateTitle( "Frustum Culling Behaviour");
+	auto& boundingMode = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(0);
 	boundingMode.choices.emplace(0, "Disabled");
 	boundingMode.choices.emplace(1, "Cull model");
 	boundingMode.choices.emplace(2, "Cull model & sub-meshes");
@@ -98,13 +98,13 @@ void LittleEngine::CModelRenderer::OnInspector(LittleEngine::UI::Internal::Widge
 	auto& boundingModeDispatcher = boundingMode.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<int>>();
 	boundingModeDispatcher.RegisterReference(reinterpret_cast<int&>(m_frustumBehaviour));
 
-	auto& centerLabel = p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Bounding Sphere Center", GUIDrawer::TitleColor);
-	auto& centerWidget = p_root.CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 3>>(GUIDrawer::GetDataType<float>(), GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT, 0.f, 0.05f, "", GUIDrawer::GetFormat<float>());
+	auto& centerLabel = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Bounding Sphere Center", GUIUtil::TitleColor);
+	auto& centerWidget = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 3>>(GUIUtil::GetDataType<float>(), GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT, 0.f, 0.05f, "", GUIUtil::GetFormat<float>());
 	auto& centerDispatcher = centerWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::array<float, 3>>>();
 	centerDispatcher.RegisterReference(reinterpret_cast<std::array<float, 3>&>(m_customBoundingSphere.position));
 
-	auto& radiusLabel = p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Bounding Sphere Radius", GUIDrawer::TitleColor);
-	auto& radiusWidget = p_root.CreateWidget<LittleEngine::UI::Widgets::Drags::DragFloat>(0.0f, GUIDrawer::_MAX_FLOAT, 0.f, 0.1f);
+	auto& radiusLabel = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Bounding Sphere Radius", GUIUtil::TitleColor);
+	auto& radiusWidget = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Drags::DragFloat>(0.0f, GUIUtil::_MAX_FLOAT, 0.f, 0.1f);
 	auto& radiusDispatcher = radiusWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<float>>();
 	radiusDispatcher.RegisterReference(m_customBoundingSphere.radius);
 

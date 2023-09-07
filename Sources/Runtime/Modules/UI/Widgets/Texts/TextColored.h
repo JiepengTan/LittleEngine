@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Modules/UI/Widgets/Texts/Text.h"
-#include "Modules/UI/Types/Color.h"
+#include "Core/Base/Color.h"
 
 namespace LittleEngine::UI::Widgets::Texts
 {
@@ -22,10 +22,10 @@ namespace LittleEngine::UI::Widgets::Texts
 		* @param p_content
 		* @param p_color
 		*/
-		TextColored(const std::string& p_content = "", const Types::Color& p_color = Types::Color(1.0f, 1.0f, 1.0f, 1.0f));
+		TextColored(const std::string& p_content = "", const Color& p_color = Color(1.0f, 1.0f, 1.0f, 1.0f));
 
 	public:
-		Types::Color color;
+		Color color;
 
 	protected:
 		virtual void _Draw_Impl() override;

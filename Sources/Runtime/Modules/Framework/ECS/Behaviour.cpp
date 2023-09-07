@@ -115,27 +115,27 @@ void LittleEngine::Behaviour::OnTriggerExit(SharedPtr<CPhysicalObject> p_otherOb
 	LuaCall("OnTriggerExit", p_otherObject);
 }
 
-void LittleEngine::Behaviour::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Behaviour::OnSerialize(ISerializer p_serializer)
 {
 }
 
-void LittleEngine::Behaviour::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::Behaviour::OnDeserialize(ISerializer p_serializer)
 {
 }
 
-void LittleEngine::Behaviour::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::Behaviour::OnInspector()
 {
 	using namespace LittleEngine;
-	using namespace LittleEngine::Helpers;
+	
 
 	if (m_object.valid())
 	{
-		p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Ready", LittleEngine::UI::Types::Color::Green);
-		p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Your script gets interpreted by the engine with success", LittleEngine::UI::Types::Color::White);
+		GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Ready", LittleEngine::Color::Green);
+		GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Your script gets interpreted by the engine with success", LittleEngine::Color::White);
 	}
 	else
 	{
-		p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Compilation failed!", LittleEngine::UI::Types::Color::Red);
-		p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Check the console for more information", LittleEngine::UI::Types::Color::White);
+		GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Compilation failed!", LittleEngine::Color::Red);
+		GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>("Check the console for more information", LittleEngine::Color::White);
 	}
 }

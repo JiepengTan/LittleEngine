@@ -33,8 +33,8 @@ void LittleEngine::ActorIDAllocator::Init(ActorID p_startId)
 }
 
 
-void LittleEngine::Object::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot)
+void LittleEngine::Object::OnSerialize(ISerializer p_serializer)
 {}
 
-void LittleEngine::Object::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot)
+void LittleEngine::Object::OnDeserialize(ISerializer p_serializer)
 {}

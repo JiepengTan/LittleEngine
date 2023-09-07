@@ -18,15 +18,15 @@ std::string LittleEngine::CAudioListener::GetName()
 	return "Audio Listener";
 }
 
-void LittleEngine::CAudioListener::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioListener::OnSerialize(ISerializer p_serializer)
 {
 }
 
-void LittleEngine::CAudioListener::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAudioListener::OnDeserialize(ISerializer p_serializer)
 {
 }
 
-void LittleEngine::CAudioListener::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAudioListener::OnInspector()
 {
 
 }

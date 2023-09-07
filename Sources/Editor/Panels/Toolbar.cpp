@@ -48,7 +48,7 @@ LittleEngine::Editor::Panels::Toolbar::Toolbar
 		auto enable = [](LittleEngine::UI::Widgets::Buttons::ButtonImage* p_button, bool p_enable)
 		{
 			p_button->disabled = !p_enable;
-			p_button->tint = p_enable ? LittleEngine::UI::Types::Color{ 1.0f, 1.0f, 1.0f, 1.0f} : LittleEngine::UI::Types::Color{1.0f, 1.0f, 1.0f, 0.15f};
+			p_button->tint = p_enable ? LittleEngine::Color{ 1.0f, 1.0f, 1.0f, 1.0f} : LittleEngine::Color{1.0f, 1.0f, 1.0f, 0.15f};
 		};
 
 		switch (p_newMode)

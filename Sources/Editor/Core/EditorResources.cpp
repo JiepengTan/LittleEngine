@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Utils/GUIUtil.h"
 
 #include "Modules/Rendering/Settings/ETextureFilteringMode.h"
 
@@ -173,7 +173,7 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	{
 		std::vector<uint64_t> raw = EMPTY_TEXTURE;
 		m_textures["Empty_Texture"] = LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-		LittleEngine::Helpers::GUIDrawer::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
+		GUIUtil::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
 	}
 }
 

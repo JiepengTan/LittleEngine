@@ -4,12 +4,14 @@
 
 #include <cassert>
 
+#include "ISerializer.h"
+
 namespace LittleEngine
 {
     template<typename...>
     inline constexpr bool always_false = false;
 
-    class JsonSerializer
+    class JsonSerializer:IBaseSerializer
     {
     public:
         template<typename T>

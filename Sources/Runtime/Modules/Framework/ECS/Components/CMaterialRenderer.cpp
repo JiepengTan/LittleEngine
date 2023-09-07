@@ -83,52 +83,36 @@ const LittleEngine::CMaterialRenderer::MaterialList& LittleEngine::CMaterialRend
 	return m_materials;
 }
 
-void LittleEngine::CMaterialRenderer::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CMaterialRenderer::OnSerialize(ISerializer p_serializer)
 {
-	tinyxml2::XMLNode* materialsNode = p_doc.NewElement("materials");
-	p_node->InsertEndChild(materialsNode);
-
+	
 	auto modelRenderer = owner->GetComponent<CModelRenderer>();
 	uint8_t elementsToSerialize = modelRenderer->GetModel() ? (uint8_t)std::min(modelRenderer->GetModel()->GetMaterialNames().size(), (size_t)MAX_MATERIAL_COUNT) : 0;
-
+	SerializeUtil::SerializeInt("material_count", elementsToSerialize);
 	for (uint8_t i = 0; i < elementsToSerialize; ++i)
 	{
-		LittleEngine::Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
+		SerializeUtil::SerializeMaterial("material" + i, m_materials[i]);
 	}
 }
 
-void LittleEngine::CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CMaterialRenderer::OnDeserialize(ISerializer p_serializer)
 {
-	tinyxml2::XMLNode* materialsRoot = p_node->FirstChildElement("materials");
-	if (materialsRoot)
+	int count = SerializeUtil::DeserializeInt("material_count");
+	for (int i =0;i< count;i++)
 	{
-		tinyxml2::XMLElement* currentMaterial = materialsRoot->FirstChildElement("material");
-
-		uint8_t materialIndex = 0;
-
-		while (currentMaterial)
-		{
-			if (auto material = Global::ServiceLocator::Get<ResourceManagement::MaterialManager>()[currentMaterial->GetText()])
-				m_materials[materialIndex] = material;
-
-			currentMaterial = currentMaterial->NextSiblingElement("material");
-			++materialIndex;
-		}
+		m_materials[i] =  SerializeUtil::DeserializeMaterial("material"+i);
 	}
-
 	UpdateMaterialList();
 }
 
-std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::Resources::Material*& p_data)
+std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer( const std::string& p_name, LittleEngine::Resources::Material*& p_data)
 {
-	using namespace LittleEngine::Helpers;
-
 	std::array<LittleEngine::UI::Widgets::AWidget*, 3> widgets;
 
-	widgets[0] = &p_root.CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>(p_name, GUIDrawer::TitleColor);
+	widgets[0] = & LittleEngine::GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Texts::TextColored>(p_name, LittleEngine::GUIUtil::TitleColor);
 
 	std::string displayedText = (p_data ? p_data->path : std::string("Empty"));
-	auto & rightSide = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	auto & rightSide = LittleEngine::GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
 	auto& widget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(displayedText);
 
@@ -149,7 +133,7 @@ std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer(LittleEn
 	widget.lineBreak = false;
 
 	auto & resetButton = rightSide.CreateWidget<LittleEngine::UI::Widgets::Buttons::ButtonSmall>("Clear");
-	resetButton.idleBackgroundColor = GUIDrawer::ClearButtonColor;
+	resetButton.idleBackgroundColor = LittleEngine::GUIUtil::ClearButtonColor;
 	resetButton.ClickedEvent += [&widget, &p_data]
 	{
 		p_data = nullptr;
@@ -161,12 +145,10 @@ std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer(LittleEn
 	return widgets;
 }
 
-void LittleEngine::CMaterialRenderer::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::CMaterialRenderer::OnInspector()
 {
-	using namespace LittleEngine::Helpers;
-
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materialFields[i] = CustomMaterialDrawer(p_root, "Material", m_materials[i]);
+		m_materialFields[i] = CustomMaterialDrawer( "Material", m_materials[i]);
 
 	UpdateMaterialList();
 }

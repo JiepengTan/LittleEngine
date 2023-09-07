@@ -224,12 +224,12 @@ namespace LittleEngine
 		/**
 		* Serialize all the components
 		*/
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot) override;
+		virtual void OnSerialize(ISerializer p_serializer) override;
 
 		/**
 		* Deserialize all the components
 		*/
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot) override;
+		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 	private:
 		/**

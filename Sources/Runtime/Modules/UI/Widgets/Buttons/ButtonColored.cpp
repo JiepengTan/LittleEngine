@@ -7,7 +7,7 @@
 #include "Modules/UI/Widgets/Buttons/ButtonColored.h"
 #include "Modules/UI/Internal/Converter.h"
 
-LittleEngine::UI::Widgets::Buttons::ButtonColored::ButtonColored(const std::string & p_label, const Types::Color& p_color, const LittleEngine::FVector2& p_size, bool p_enableAlpha) :
+LittleEngine::UI::Widgets::Buttons::ButtonColored::ButtonColored(const std::string & p_label, const Color& p_color, const LittleEngine::FVector2& p_size, bool p_enableAlpha) :
 	label(p_label), color(p_color), size(p_size), enableAlpha(p_enableAlpha)
 {
 }

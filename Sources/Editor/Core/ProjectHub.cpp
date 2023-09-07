@@ -171,7 +171,7 @@ public:
 	void UpdateGoButton(const std::string& p_path)
 	{
 		bool validPath = p_path != "";
-		m_goButton->idleBackgroundColor = validPath ? LittleEngine::UI::Types::Color{ 0.f, 0.5f, 0.0f } : LittleEngine::UI::Types::Color{ 0.1f, 0.1f, 0.1f };
+		m_goButton->idleBackgroundColor = validPath ? LittleEngine::Color{ 0.f, 0.5f, 0.0f } : LittleEngine::Color{ 0.1f, 0.1f, 0.1f };
 		m_goButton->disabled = !validPath;
 	}
 

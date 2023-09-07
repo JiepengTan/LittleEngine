@@ -24,17 +24,17 @@ std::string LittleEngine::CDirectionalLight::GetName()
 	return "Directional Light";
 }
 
-void LittleEngine::CDirectionalLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CDirectionalLight::OnSerialize(ISerializer p_serializer)
 {
-	CLight::OnSerialize(p_doc, p_node);
+	CLight::OnSerialize(p_serializer);
 }
 
-void LittleEngine::CDirectionalLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CDirectionalLight::OnDeserialize(ISerializer p_serializer)
 {
-	CLight::OnDeserialize(p_doc, p_node);
+	CLight::OnDeserialize(p_serializer);
 }
 
-void LittleEngine::CDirectionalLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CDirectionalLight::OnInspector()
 {
-	CLight::OnInspector(p_root);
+	CLight::OnInspector();
 }

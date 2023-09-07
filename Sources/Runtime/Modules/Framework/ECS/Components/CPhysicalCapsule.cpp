@@ -50,26 +50,26 @@ float LittleEngine::CPhysicalCapsule::GetHeight() const
 	return GetPhysicalObjectAs<PhysicalCapsule>().GetHeight();
 }
 
-void LittleEngine::CPhysicalCapsule::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalCapsule::OnSerialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnSerialize(p_doc, p_node);
+	CPhysicalObject::OnSerialize(p_serializer);
 
-	Serializer::SerializeFloat(p_doc, p_node, "radius", GetRadius());
-	Serializer::SerializeFloat(p_doc, p_node, "height", GetHeight());
+	SerializeUtil::SerializeFloat("radius", GetRadius());
+	SerializeUtil::SerializeFloat("height", GetHeight());
 }
 
-void LittleEngine::CPhysicalCapsule::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPhysicalCapsule::OnDeserialize(ISerializer p_serializer)
 {
-	CPhysicalObject::OnDeserialize(p_doc, p_node);
+	CPhysicalObject::OnDeserialize(p_serializer);
 
-	SetRadius(Serializer::DeserializeFloat(p_doc, p_node, "radius"));
-	SetHeight(Serializer::DeserializeFloat(p_doc, p_node, "height"));
+	SetRadius(SerializeUtil::DeserializeFloat("radius"));
+	SetHeight(SerializeUtil::DeserializeFloat("height"));
 }
 
-void LittleEngine::CPhysicalCapsule::OnInspector(LittleEngine::UI::Internal::WidgetContainer & p_root)
+void LittleEngine::CPhysicalCapsule::OnInspector()
 {
-	CPhysicalObject::OnInspector(p_root);
+	CPhysicalObject::OnInspector();
 
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Radius", std::bind(&CPhysicalCapsule::GetRadius, this), std::bind(&CPhysicalCapsule::SetRadius, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
-	Helpers::GUIDrawer::DrawScalar<float>(p_root, "Height", std::bind(&CPhysicalCapsule::GetHeight, this), std::bind(&CPhysicalCapsule::SetHeight, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
+	GUIUtil::DrawScalar<float>( "Radius", std::bind(&CPhysicalCapsule::GetRadius, this), std::bind(&CPhysicalCapsule::SetRadius, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
+	GUIUtil::DrawScalar<float>( "Height", std::bind(&CPhysicalCapsule::GetHeight, this), std::bind(&CPhysicalCapsule::SetHeight, this, std::placeholders::_1), 0.1f, 0.f, 100000.f);
 }

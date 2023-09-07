@@ -123,9 +123,9 @@ namespace LittleEngine
 		ActorPtr GetActor() {return owner;}
 		void SetActor(ActorPtr actor);
 		
-		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root){}
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnInspector(){}
+		virtual void OnSerialize(ISerializer p_serializer) override;
+		virtual void OnDeserialize(ISerializer p_serializer) override;
 	public:
         META(Enable)
 		bool IsUpdateInEdit;

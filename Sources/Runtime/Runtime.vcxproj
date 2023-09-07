@@ -87,6 +87,83 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Base\Application.cpp" />
+    <ClCompile Include="Core\Base\Color.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>..\..\Bin-Int\Debug\Runtime\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>..\..\Bin-Int\Debug\Runtime\</BrowseInformationFile>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>..\..\Bin-Int\Debug\Runtime\</ModuleDependenciesFile>
+      <ModuleOutputFile>..\..\Bin-Int\Debug\Runtime\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
+      <ObjectFileName>..\..\Bin-Int\Debug\Runtime\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>..\..\Bin\LittleEngine.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>..\..\Bin-Int\Debug\Runtime\LittleEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>..\..\Bin-Int\Debug\Runtime\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TrackerLogDirectory>..\..\Bin-Int\Debug\Runtime\Runtime.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level2</WarningLevel>
+      <XMLDocumentationFileName>..\..\Bin-Int\Debug\Runtime\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\3rdParty\misc\;..\3rdParty\imgui\;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;;I:\Projects\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
     <ClCompile Include="Core\Base\Macro.cpp" />
     <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
@@ -100,6 +177,7 @@
     <ClInclude Include="Core\Analytics\Profiling\ProfilerReport.h" />
     <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h" />
     <ClInclude Include="Core\Base\Application.h" />
+    <ClInclude Include="Core\Base\Color.h" />
     <ClInclude Include="Core\Base\Macro.h" />
     <ClInclude Include="Core\Base\Object.h" />
     <ClInclude Include="Core\CoreInclude.h" />
@@ -123,8 +201,11 @@
     <ClInclude Include="Core\Reflection\Example\MetaExample.h" />
     <ClInclude Include="Core\Reflection\Reflection.h" />
     <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
+    <ClInclude Include="Core\Serialization\ISerializer.h" />
     <ClInclude Include="Core\Serialization\Json.h" />
     <ClInclude Include="Core\Serialization\JsonSerializer.h" />
+    <ClInclude Include="Core\Serialization\SerializeUtil.h" />
+    <ClInclude Include="Core\Serialization\XmlSerializerXX.h" />
     <ClInclude Include="Core\String\StringName.h" />
     <ClInclude Include="Core\String\StringText.h" />
     <ClInclude Include="Core\Tools\Eventing\Event.h" />
@@ -272,7 +353,6 @@
     <ClInclude Include="Modules\UI\Settings\Alignment.h" />
     <ClInclude Include="Modules\UI\Settings\PanelWindowSettings.h" />
     <ClInclude Include="Modules\UI\Styling\EStyle.h" />
-    <ClInclude Include="Modules\UI\Types\Color.h" />
     <ClInclude Include="Modules\UI\Widgets\AWidget.h" />
     <ClInclude Include="Modules\UI\Widgets\Buttons\AButton.h" />
     <ClInclude Include="Modules\UI\Widgets\Buttons\Button.h" />
@@ -337,10 +417,9 @@
     <ClInclude Include="Modules\UI\Widgets\Visual\ProgressBar.h" />
     <ClInclude Include="Modules\UI\Widgets\Visual\Separator.h" />
     <ClInclude Include="Modules\Utils\ActorUtils.h" />
-    <ClInclude Include="Modules\Utils\GUIDrawer.h" />
-    <ClInclude Include="Modules\Utils\GUIDrawer.inl" />
+    <ClInclude Include="Modules\Utils\GUIUtil.h" />
+    <ClInclude Include="Modules\Utils\GUIUtil.inl" />
     <ClInclude Include="Modules\Utils\RenderUtils.h" />
-    <ClInclude Include="Modules\Utils\Serializer.h" />
     <ClInclude Include="Platform\Windowing\Context\Device.h" />
     <ClInclude Include="Platform\Windowing\Context\EDeviceError.h" />
     <ClInclude Include="Platform\Windowing\Cursor\ECursorMode.h" />
@@ -380,6 +459,160 @@
     <ClCompile Include="Core\Reflection\Example\MetaExample.cpp" />
     <ClCompile Include="Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Core\Reflection\ReflectionRegister.cpp" />
+    <ClCompile Include="Core\Serialization\SerializeUtil.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>..\..\Bin-Int\Debug\Runtime\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>..\..\Bin-Int\Debug\Runtime\</BrowseInformationFile>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>..\..\Bin-Int\Debug\Runtime\</ModuleDependenciesFile>
+      <ModuleOutputFile>..\..\Bin-Int\Debug\Runtime\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
+      <ObjectFileName>..\..\Bin-Int\Debug\Runtime\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>..\..\Bin\LittleEngine.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>..\..\Bin-Int\Debug\Runtime\LittleEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>..\..\Bin-Int\Debug\Runtime\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TrackerLogDirectory>..\..\Bin-Int\Debug\Runtime\Runtime.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level2</WarningLevel>
+      <XMLDocumentationFileName>..\..\Bin-Int\Debug\Runtime\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\3rdParty\misc\;..\3rdParty\imgui\;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;;I:\Projects\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
+    <ClCompile Include="Core\Serialization\XmlSerializerXX.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>..\..\Bin-Int\Debug\Runtime\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>..\..\Bin-Int\Debug\Runtime\</BrowseInformationFile>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>..\..\Bin-Int\Debug\Runtime\</ModuleDependenciesFile>
+      <ModuleOutputFile>..\..\Bin-Int\Debug\Runtime\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
+      <ObjectFileName>..\..\Bin-Int\Debug\Runtime\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>..\..\Bin\LittleEngine.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>..\..\Bin-Int\Debug\Runtime\LittleEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>..\..\Bin-Int\Debug\Runtime\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TrackerLogDirectory>..\..\Bin-Int\Debug\Runtime\Runtime.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level2</WarningLevel>
+      <XMLDocumentationFileName>..\..\Bin-Int\Debug\Runtime\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>DEBUG;_MBCS;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\3rdParty\misc\;..\3rdParty\imgui\;..\3rdParty\assimp\include\;..\3rdParty\glfw\include;..\3rdParty\stb_image\include;..\3rdParty\lua\include;..\3rdParty\bullet3\include;..\3rdParty\glew\include;..\3rdParty\irrklang\include;;I:\Projects\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningVersion>18</WarningVersion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LibCompiled>true</LibCompiled>
+    </ClCompile>
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp" />
     <ClCompile Include="Core\Tools\Time\Clock.cpp" />
     <ClCompile Include="Core\Tools\Time\Date.cpp" />
@@ -476,7 +709,6 @@
     <ClCompile Include="Modules\UI\Panels\PanelUndecorated.cpp" />
     <ClCompile Include="Modules\UI\Panels\PanelWindow.cpp" />
     <ClCompile Include="Modules\UI\Plugins\ContextualMenu.cpp" />
-    <ClCompile Include="Modules\UI\Types\Color.cpp" />
     <ClCompile Include="Modules\UI\Widgets\AWidget.cpp" />
     <ClCompile Include="Modules\UI\Widgets\Buttons\Button.cpp" />
     <ClCompile Include="Modules\UI\Widgets\Buttons\ButtonArrow.cpp" />
@@ -522,9 +754,8 @@
     <ClCompile Include="Modules\UI\Widgets\Visual\ProgressBar.cpp" />
     <ClCompile Include="Modules\UI\Widgets\Visual\Separator.cpp" />
     <ClCompile Include="Modules\Utils\ActorUtils.cpp" />
-    <ClCompile Include="Modules\Utils\GUIDrawer.cpp" />
+    <ClCompile Include="Modules\Utils\GUIUtil.cpp" />
     <ClCompile Include="Modules\Utils\RenderUtils.cpp" />
-    <ClCompile Include="Modules\Utils\Serializer.cpp" />
     <ClCompile Include="Platform\Windowing\Context\Device.cpp" />
     <ClCompile Include="Platform\Windowing\Dialogs\FileDialog.cpp" />
     <ClCompile Include="Platform\Windowing\Dialogs\MessageBox.cpp" />
@@ -553,6 +784,9 @@
     <ProjectReference Include="..\3rdParty\misc\misc.vcxproj">
       <Project>{60a8e6b5-f1a7-468c-9b4d-5dd889701002}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\UI\Types\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

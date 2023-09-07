@@ -63,7 +63,7 @@ namespace LittleEngine
 		* Load specific scene in memory
 		* @param p_scenePath
 		*/
-		bool LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc);
+		bool LoadSceneFromMemory(ISerializer& p_serializer);
 
 		/**
 		* Destroy current scene from memory

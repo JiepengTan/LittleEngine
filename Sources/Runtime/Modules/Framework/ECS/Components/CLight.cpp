@@ -56,26 +56,26 @@ bool LittleEngine::CLight::IsDirectional()
 {
 	return GetLightType() == LittleEngine::Rendering::Entities::Light::Type::DIRECTIONAL;
 }
-void LittleEngine::CLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CLight::OnSerialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	Serializer::SerializeVec3(p_doc, p_node, "color", m_data.color);
-	Serializer::SerializeFloat(p_doc, p_node, "intensity", m_data.intensity);
+	SerializeUtil::SerializeVec3("color", m_data.color);
+	SerializeUtil::SerializeFloat("intensity", m_data.intensity);
 }
 
-void LittleEngine::CLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CLight::OnDeserialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	Serializer::DeserializeVec3(p_doc, p_node, "color", m_data.color);
-	Serializer::DeserializeFloat(p_doc, p_node, "intensity", m_data.intensity);
+	SerializeUtil::DeserializeVec3("color", m_data.color);
+	SerializeUtil::DeserializeFloat("intensity", m_data.intensity);
 }
 
-void LittleEngine::CLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CLight::OnInspector()
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	GUIDrawer::DrawColor(p_root, "Color", reinterpret_cast<LittleEngine::UI::Types::Color&>(m_data.color));
-	GUIDrawer::DrawScalar<float>(p_root, "Intensity", m_data.intensity, 0.005f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);
+	GUIUtil::DrawColor( "Color", reinterpret_cast<LittleEngine::Color&>(m_data.color));
+	GUIUtil::DrawScalar<float>( "Intensity", m_data.intensity, 0.005f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);
 }

@@ -10,7 +10,7 @@
 #include "../Editor/Core/EditorActions.h"
 
 #include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
-#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Utils/GUIUtil.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
@@ -21,22 +21,22 @@
 
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
-using namespace LittleEngine::Helpers;
+using namespace LittleEngine;
 
-void DrawHybridVec3(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FVector3& p_data, float p_step, float p_min, float p_max)
+void DrawHybridVec3( const std::string& p_name, LittleEngine::FVector3& p_data, float p_step, float p_min, float p_max)
 {
-	LittleEngine::Helpers::GUIDrawer::CreateTitle(p_root, p_name);
+	GUIUtil::CreateTitle( p_name);
 
-	auto& rightSide = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	auto& rightSide = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
-	auto& xyzWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 3>>(LittleEngine::Helpers::GUIDrawer::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", LittleEngine::Helpers::GUIDrawer::GetFormat<float>());
+	auto& xyzWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 3>>(GUIUtil::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", GUIUtil::GetFormat<float>());
 	auto& xyzDispatcher = xyzWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::array<float, 3>>>();
 	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 3>&>(p_data));
 	xyzWidget.lineBreak = false;
 
-	auto& rgbWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Selection::ColorEdit>(false, LittleEngine::UI::Types::Color{ p_data.x, p_data.y, p_data.z });
-	auto& rgbDispatcher = rgbWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<LittleEngine::UI::Types::Color>>();
-	rgbDispatcher.RegisterReference(reinterpret_cast<LittleEngine::UI::Types::Color&>(p_data));
+	auto& rgbWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Selection::ColorEdit>(false, LittleEngine::Color{ p_data.x, p_data.y, p_data.z });
+	auto& rgbDispatcher = rgbWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<LittleEngine::Color>>();
+	rgbDispatcher.RegisterReference(reinterpret_cast<LittleEngine::Color&>(p_data));
 	rgbWidget.enabled = false;
 	rgbWidget.lineBreak = false;
 
@@ -60,20 +60,20 @@ void DrawHybridVec3(LittleEngine::UI::Internal::WidgetContainer& p_root, const s
 	};
 }
 
-void DrawHybridVec4(LittleEngine::UI::Internal::WidgetContainer& p_root, const std::string& p_name, LittleEngine::FVector4& p_data, float p_step, float p_min, float p_max)
+void DrawHybridVec4( const std::string& p_name, LittleEngine::FVector4& p_data, float p_step, float p_min, float p_max)
 {
-	LittleEngine::Helpers::GUIDrawer::CreateTitle(p_root, p_name);
+	GUIUtil::CreateTitle( p_name);
 
-	auto& rightSide = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	auto& rightSide = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
-	auto& xyzWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 4>>(LittleEngine::Helpers::GUIDrawer::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", LittleEngine::Helpers::GUIDrawer::GetFormat<float>());
+	auto& xyzWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Drags::DragMultipleScalars<float, 4>>(GUIUtil::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", GUIUtil::GetFormat<float>());
 	auto& xyzDispatcher = xyzWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::array<float, 4>>>();
 	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 4>&>(p_data));
 	xyzWidget.lineBreak = false;
 
-	auto& rgbaWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Selection::ColorEdit>(true, LittleEngine::UI::Types::Color{ p_data.x, p_data.y, p_data.z, p_data.w });
-	auto& rgbaDispatcher = rgbaWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<LittleEngine::UI::Types::Color>>();
-	rgbaDispatcher.RegisterReference(reinterpret_cast<LittleEngine::UI::Types::Color&>(p_data));
+	auto& rgbaWidget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Selection::ColorEdit>(true, LittleEngine::Color{ p_data.x, p_data.y, p_data.z, p_data.w });
+	auto& rgbaDispatcher = rgbaWidget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<LittleEngine::Color>>();
+	rgbaDispatcher.RegisterReference(reinterpret_cast<LittleEngine::Color&>(p_data));
 	rgbaWidget.enabled = false;
 	rgbaWidget.lineBreak = false;
 
@@ -241,14 +241,17 @@ void LittleEngine::Editor::Panels::MaterialEditor::CreateMaterialSelector()
 {
 	auto& columns = CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 	columns.widths[0] = 150;
-	m_targetMaterialText = &GUIDrawer::DrawMaterial(columns, "Material", m_target, &m_materialDroppedEvent);
+	GUIUtil::m_root = &columns;
+
+	m_targetMaterialText = &GUIUtil::DrawMaterial( "Material", m_target, &m_materialDroppedEvent);
 }
 
 void LittleEngine::Editor::Panels::MaterialEditor::CreateShaderSelector()
 {
 	auto& columns = m_settings->CreateWidget<LittleEngine::UI::Widgets::Layout::Columns<2>>();
 	columns.widths[0] = 150;
-	m_shaderText = &GUIDrawer::DrawShader(columns, "Shader", m_shader, &m_shaderDroppedEvent);
+	GUIUtil::m_root = &columns;
+	m_shaderText = &GUIUtil::DrawShader( "Shader", m_shader, &m_shaderDroppedEvent);
 }
 
 void LittleEngine::Editor::Panels::MaterialEditor::CreateMaterialSettings()
@@ -339,17 +342,18 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 	{
 		auto uniformData = m_target->GetShader()->GetUniformInfo(info.first);
 		
+		GUIUtil::m_root = m_shaderSettingsColumns;
 		if (uniformData)
 		{
 			switch (uniformData->type)
 			{
-			case UniformType::UNIFORM_BOOL:			GUIDrawer::DrawBoolean(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
-			case UniformType::UNIFORM_INT:			GUIDrawer::DrawScalar<int>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
-			case UniformType::UNIFORM_FLOAT:		GUIDrawer::DrawScalar<float>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);		break;
-			case UniformType::UNIFORM_FLOAT_VEC2:	GUIDrawer::DrawVec2(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector2&>(*info.second), 0.01f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);	break;
-			case UniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector3&>(*info.second), 0.01f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);			break;
-			case UniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector4&>(*info.second), 0.01f, GUIDrawer::_MIN_FLOAT, GUIDrawer::_MAX_FLOAT);			break;
-			case UniformType::UNIFORM_SAMPLER_2D:	GUIDrawer::DrawTexture(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<Texture * &>(*info.second));																break;
+			case UniformType::UNIFORM_BOOL:			GUIUtil::DrawBoolean( UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
+			case UniformType::UNIFORM_INT:			GUIUtil::DrawScalar<int>( UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
+			case UniformType::UNIFORM_FLOAT:		GUIUtil::DrawScalar<float>( UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);		break;
+			case UniformType::UNIFORM_FLOAT_VEC2:	GUIUtil::DrawVec2( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector2&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);	break;
+			case UniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector3&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
+			case UniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector4&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
+			case UniformType::UNIFORM_SAMPLER_2D:	GUIUtil::DrawTexture( UniformFormat(info.first), reinterpret_cast<Texture * &>(*info.second));																break;
 			}
 		}
 	}
@@ -358,12 +362,12 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 void LittleEngine::Editor::Panels::MaterialEditor::GenerateMaterialSettingsContent()
 {
 	m_materialSettingsColumns->RemoveAllWidgets(); // Ensure that the m_shaderSettingsColumns is empty
-
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Blendable", std::bind(&LittleEngine::Resources::Material::IsBlendable, m_target), std::bind(&LittleEngine::Resources::Material::SetBlendable, m_target, std::placeholders::_1));
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Back-face Culling", std::bind(&LittleEngine::Resources::Material::HasBackfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetBackfaceCulling, m_target, std::placeholders::_1));
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Front-face Culling", std::bind(&LittleEngine::Resources::Material::HasFrontfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetFrontfaceCulling, m_target, std::placeholders::_1));
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Depth Test", std::bind(&LittleEngine::Resources::Material::HasDepthTest, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthTest, m_target, std::placeholders::_1));
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Depth Writing", std::bind(&LittleEngine::Resources::Material::HasDepthWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthWriting, m_target, std::placeholders::_1));
-	GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Color Writing", std::bind(&LittleEngine::Resources::Material::HasColorWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetColorWriting, m_target, std::placeholders::_1));
-	GUIDrawer::DrawScalar<int>(*m_materialSettingsColumns, "GPU Instances", std::bind(&LittleEngine::Resources::Material::GetGPUInstances, m_target), std::bind(&LittleEngine::Resources::Material::SetGPUInstances, m_target, std::placeholders::_1), 1.0f, 0, 100000);
+	GUIUtil::m_root =m_materialSettingsColumns;
+	GUIUtil::DrawBoolean( "Blendable", std::bind(&LittleEngine::Resources::Material::IsBlendable, m_target), std::bind(&LittleEngine::Resources::Material::SetBlendable, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Back-face Culling", std::bind(&LittleEngine::Resources::Material::HasBackfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetBackfaceCulling, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Front-face Culling", std::bind(&LittleEngine::Resources::Material::HasFrontfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetFrontfaceCulling, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Depth Test", std::bind(&LittleEngine::Resources::Material::HasDepthTest, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthTest, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Depth Writing", std::bind(&LittleEngine::Resources::Material::HasDepthWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthWriting, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Color Writing", std::bind(&LittleEngine::Resources::Material::HasColorWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetColorWriting, m_target, std::placeholders::_1));
+	GUIUtil::DrawScalar<int>( "GPU Instances", std::bind(&LittleEngine::Resources::Material::GetGPUInstances, m_target), std::bind(&LittleEngine::Resources::Material::SetGPUInstances, m_target, std::placeholders::_1), 1.0f, 0, 100000);
 }

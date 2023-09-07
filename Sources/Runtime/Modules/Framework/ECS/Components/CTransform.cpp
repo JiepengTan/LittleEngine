@@ -162,24 +162,24 @@ LittleEngine::FVector3 LittleEngine::CTransform::GetLocalRight() const
 	return m_transform.GetLocalRight();
 }
 
-void LittleEngine::CTransform::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CTransform::OnSerialize(ISerializer p_serializer)
 {
-	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "position", GetLocalPosition());
-	LittleEngine::Serializer::SerializeQuat(p_doc, p_node, "rotation", GetLocalRotation());
-	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "scale", GetLocalScale());
+	SerializeUtil::SerializeVec3("position", GetLocalPosition());
+	SerializeUtil::SerializeQuat("rotation", GetLocalRotation());
+	SerializeUtil::SerializeVec3("scale", GetLocalScale());
 }
 
-void LittleEngine::CTransform::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CTransform::OnDeserialize(ISerializer p_serializer)
 {
 	m_transform.GenerateMatricesLocal
 	(
-		LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "position"),
-		LittleEngine::Serializer::DeserializeQuat(p_doc, p_node, "rotation"),
-		LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "scale")
+		SerializeUtil::DeserializeVec3("position"),
+		SerializeUtil::DeserializeQuat("rotation"),
+		SerializeUtil::DeserializeVec3("scale")
 	);
 }
 
-void LittleEngine::CTransform::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CTransform::OnInspector()
 {
 	auto getRotation = [this]
 	{ 
@@ -191,7 +191,7 @@ void LittleEngine::CTransform::OnInspector(LittleEngine::UI::Internal::WidgetCon
 		SetLocalRotation(LittleEngine::FQuaternion(result));
 	};
 
-	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Position", std::bind(&CTransform::GetLocalPosition, this), std::bind(&CTransform::SetLocalPosition, this, std::placeholders::_1), 0.05f);
-	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Rotation", getRotation, setRotation, 0.05f);
-	LittleEngine::Helpers::GUIDrawer::DrawVec3(p_root, "Scale", std::bind(&CTransform::GetLocalScale, this), std::bind(&CTransform::SetLocalScale, this, std::placeholders::_1), 0.05f, 0.0001f);
+	GUIUtil::DrawVec3( "Position", std::bind(&CTransform::GetLocalPosition, this), std::bind(&CTransform::SetLocalPosition, this, std::placeholders::_1), 0.05f);
+	GUIUtil::DrawVec3( "Rotation", getRotation, setRotation, 0.05f);
+	GUIUtil::DrawVec3( "Scale", std::bind(&CTransform::GetLocalScale, this), std::bind(&CTransform::SetLocalScale, this, std::placeholders::_1), 0.05f, 0.0001f);
 }

@@ -9,7 +9,7 @@
 #include "Core/Maths/FVector2.h"
 
 #include "Modules/UI/Internal/TextureID.h"
-#include "Modules/UI/Types/Color.h"
+#include "Core/Base/Color.h"
 #include "Modules/UI/Widgets/Buttons/AButton.h"
 
 namespace LittleEngine::UI::Widgets::Buttons
@@ -33,8 +33,8 @@ namespace LittleEngine::UI::Widgets::Buttons
 	public:
 		bool disabled = false;
 
-		LittleEngine::UI::Types::Color background = { 0, 0, 0, 0 };
-		LittleEngine::UI::Types::Color tint = { 1, 1, 1, 1 };
+		LittleEngine::Color background = { 0, 0, 0, 0 };
+		LittleEngine::Color tint = { 1, 1, 1, 1 };
 
 		Internal::TextureID textureID;
 		LittleEngine::FVector2 size;

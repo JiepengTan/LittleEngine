@@ -10,7 +10,7 @@
 #include "Core/Maths/FVector4.h"
 
 #include <ImGui/imgui.h>
-#include "Modules/UI/Types/Color.h"
+#include "Core/Base/Color.h"
 
 namespace LittleEngine::UI::Internal
 {
@@ -29,13 +29,13 @@ namespace LittleEngine::UI::Internal
 		* Convert the given Color to ImVec4
 		* @param p_value
 		*/
-		static ImVec4 ToImVec4(const Types::Color& p_value);
+		static ImVec4 ToImVec4(const Color& p_value);
 
 		/**
 		* Convert the given ImVec4 to Color
 		* @param p_value
 		*/
-		static Types::Color ToColor(const ImVec4& p_value);
+		static Color ToColor(const ImVec4& p_value);
 
 		/**
 		* Convert the given FVector2 to ImVec2

@@ -61,36 +61,36 @@ void LittleEngine::CPointLight::SetQuadratic(float p_quadratic)
 	m_data.quadratic = p_quadratic;
 }
 
-void LittleEngine::CPointLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPointLight::OnSerialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnSerialize(p_doc, p_node);
+	CLight::OnSerialize(p_serializer);
 
-	Serializer::SerializeFloat(p_doc, p_node, "constant", m_data.constant);
-	Serializer::SerializeFloat(p_doc, p_node, "linear", m_data.linear);
-	Serializer::SerializeFloat(p_doc, p_node, "quadratic", m_data.quadratic);
+	SerializeUtil::SerializeFloat("constant", m_data.constant);
+	SerializeUtil::SerializeFloat("linear", m_data.linear);
+	SerializeUtil::SerializeFloat("quadratic", m_data.quadratic);
 }
 
-void LittleEngine::CPointLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CPointLight::OnDeserialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnDeserialize(p_doc, p_node);
+	CLight::OnDeserialize(p_serializer);
 
-	Serializer::DeserializeFloat(p_doc, p_node, "constant", m_data.constant);
-	Serializer::DeserializeFloat(p_doc, p_node, "linear", m_data.linear);
-	Serializer::DeserializeFloat(p_doc, p_node, "quadratic", m_data.quadratic);
+	SerializeUtil::DeserializeFloat("constant", m_data.constant);
+	SerializeUtil::DeserializeFloat("linear", m_data.linear);
+	SerializeUtil::DeserializeFloat("quadratic", m_data.quadratic);
 }
 
-void LittleEngine::CPointLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CPointLight::OnInspector()
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnInspector(p_root);
+	CLight::OnInspector();
 
-	GUIDrawer::CreateTitle(p_root, "Fall-off presets");
-	auto& presetsRoot = p_root.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
+	GUIUtil::CreateTitle( "Fall-off presets");
+	auto& presetsRoot = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 
 	auto& constantPreset = presetsRoot.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Constant");
 	constantPreset.ClickedEvent += [this] { m_data.constant = 1.f, m_data.linear = m_data.quadratic = 0.f; };
@@ -106,7 +106,7 @@ void LittleEngine::CPointLight::OnInspector(LittleEngine::UI::Internal::WidgetCo
 	quadraticPreset.ClickedEvent += [this] { m_data.quadratic = 1.f, m_data.constant = m_data.linear = 0.f; };
 	quadraticPreset.idleBackgroundColor = { 0.7f, 0.5f, 0.f };
 
-	GUIDrawer::DrawScalar<float>(p_root, "Constant", m_data.constant, 0.005f, 0.f);
-	GUIDrawer::DrawScalar<float>(p_root, "Linear", m_data.linear, 0.005f, 0.f);
-	GUIDrawer::DrawScalar<float>(p_root, "Quadratic", m_data.quadratic, 0.005f, 0.f);
+	GUIUtil::DrawScalar<float>( "Constant", m_data.constant, 0.005f, 0.f);
+	GUIUtil::DrawScalar<float>( "Linear", m_data.linear, 0.005f, 0.f);
+	GUIUtil::DrawScalar<float>( "Quadratic", m_data.quadratic, 0.005f, 0.f);
 }

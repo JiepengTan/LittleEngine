@@ -107,59 +107,52 @@ LittleEngine::Rendering::LowRenderer::Camera & LittleEngine::CCamera::GetCamera(
 	return m_camera;
 }
 
-void LittleEngine::CCamera::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CCamera::OnSerialize(ISerializer p_serializer)
 {
-	LittleEngine::Serializer::SerializeFloat(p_doc, p_node, "fov", m_camera.GetFov());
-	LittleEngine::Serializer::SerializeFloat(p_doc, p_node, "size", m_camera.GetSize());
-	LittleEngine::Serializer::SerializeFloat(p_doc, p_node, "near", m_camera.GetNear());
-	LittleEngine::Serializer::SerializeFloat(p_doc, p_node, "far", m_camera.GetFar());
-	LittleEngine::Serializer::SerializeVec3(p_doc, p_node, "clear_color", m_camera.GetClearColor());
-	LittleEngine::Serializer::SerializeBoolean(p_doc, p_node, "frustum_geometry_culling", m_camera.HasFrustumGeometryCulling());
-	LittleEngine::Serializer::SerializeBoolean(p_doc, p_node, "frustum_light_culling", m_camera.HasFrustumLightCulling());
-	LittleEngine::Serializer::SerializeInt(p_doc, p_node, "projection_mode", static_cast<int>(m_camera.GetProjectionMode()));
+	SerializeUtil::SerializeFloat("fov", m_camera.GetFov());
+	SerializeUtil::SerializeFloat("size", m_camera.GetSize());
+	SerializeUtil::SerializeFloat("near", m_camera.GetNear());
+	SerializeUtil::SerializeFloat("far", m_camera.GetFar());
+	SerializeUtil::SerializeVec3("clear_color", m_camera.GetClearColor());
+	SerializeUtil::SerializeBoolean("frustum_geometry_culling", m_camera.HasFrustumGeometryCulling());
+	SerializeUtil::SerializeBoolean("frustum_light_culling", m_camera.HasFrustumLightCulling());
+	SerializeUtil::SerializeInt("projection_mode", static_cast<int>(m_camera.GetProjectionMode()));
 }
 
-void LittleEngine::CCamera::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CCamera::OnDeserialize(ISerializer p_serializer)
 {
-	m_camera.SetFov(LittleEngine::Serializer::DeserializeFloat(p_doc, p_node, "fov"));
-	m_camera.SetSize(LittleEngine::Serializer::DeserializeFloat(p_doc, p_node, "size"));
-	m_camera.SetNear(LittleEngine::Serializer::DeserializeFloat(p_doc, p_node, "near"));
-	m_camera.SetFar(LittleEngine::Serializer::DeserializeFloat(p_doc, p_node, "far"));
-	m_camera.SetClearColor(LittleEngine::Serializer::DeserializeVec3(p_doc, p_node, "clear_color"));
-	m_camera.SetFrustumGeometryCulling(LittleEngine::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_geometry_culling"));
-	m_camera.SetFrustumLightCulling(LittleEngine::Serializer::DeserializeBoolean(p_doc, p_node, "frustum_light_culling"));
-
-    // We have to make sure the "projection_mode" exists in the serialized component, otherwise we do not want to modify the default setting (Perspective).
-    // This is a bad practice to have each components calling setters in `OnDeserialize` even if no XML node hasn't been found for a given property.
-    // We should rework this system later. As it is out of the scope of the orthographic projection scope, this will be left as is for now.
-    if (p_node->FirstChildElement("projection_mode"))
-    {
-        m_camera.SetProjectionMode(static_cast<LittleEngine::Rendering::Settings::EProjectionMode>(LittleEngine::Serializer::DeserializeInt(p_doc, p_node, "projection_mode")));
-    }
+	m_camera.SetFov(SerializeUtil::DeserializeFloat("fov"));
+	m_camera.SetSize(SerializeUtil::DeserializeFloat("size"));
+	m_camera.SetNear(SerializeUtil::DeserializeFloat("near"));
+	m_camera.SetFar(SerializeUtil::DeserializeFloat("far"));
+	m_camera.SetClearColor(SerializeUtil::DeserializeVec3("clear_color"));
+	m_camera.SetFrustumGeometryCulling(SerializeUtil::DeserializeBoolean("frustum_geometry_culling"));
+	m_camera.SetFrustumLightCulling(SerializeUtil::DeserializeBoolean("frustum_light_culling"));
+    m_camera.SetProjectionMode(static_cast<LittleEngine::Rendering::Settings::EProjectionMode>(SerializeUtil::DeserializeInt("projection_mode")));
 }
 
-void LittleEngine::CCamera::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CCamera::OnInspector()
 {
     auto currentProjectionMode = GetProjectionMode();
 
-	LittleEngine::Helpers::GUIDrawer::DrawScalar<float>(p_root, "Field of view", std::bind(&CCamera::GetFov, this), std::bind(&CCamera::SetFov, this, std::placeholders::_1));
-    auto& fovWidget = *p_root.GetWidgets()[p_root.GetWidgets().size() - 1].first;
-    auto& fovWidgetLabel = *p_root.GetWidgets()[p_root.GetWidgets().size() - 2].first;
+	GUIUtil::DrawScalar<float>( "Field of view", std::bind(&CCamera::GetFov, this), std::bind(&CCamera::SetFov, this, std::placeholders::_1));
+    auto& fovWidget = *GUIUtil::GetWidgets()[GUIUtil::GetWidgets().size() - 1].first;
+    auto& fovWidgetLabel = *GUIUtil::GetWidgets()[GUIUtil::GetWidgets().size() - 2].first;
     fovWidget.enabled = fovWidgetLabel.enabled = currentProjectionMode == LittleEngine::Rendering::Settings::EProjectionMode::PERSPECTIVE;
 
-	LittleEngine::Helpers::GUIDrawer::DrawScalar<float>(p_root, "Size", std::bind(&CCamera::GetSize, this), std::bind(&CCamera::SetSize, this, std::placeholders::_1));
-    auto& sizeWidget = *p_root.GetWidgets()[p_root.GetWidgets().size() - 1].first;
-    auto& sizeWidgetLabel = *p_root.GetWidgets()[p_root.GetWidgets().size() - 2].first;
+	GUIUtil::DrawScalar<float>( "Size", std::bind(&CCamera::GetSize, this), std::bind(&CCamera::SetSize, this, std::placeholders::_1));
+    auto& sizeWidget = *GUIUtil::GetWidgets()[GUIUtil::GetWidgets().size() - 1].first;
+    auto& sizeWidgetLabel = *GUIUtil::GetWidgets()[GUIUtil::GetWidgets().size() - 2].first;
     sizeWidget.enabled = sizeWidgetLabel.enabled = currentProjectionMode == LittleEngine::Rendering::Settings::EProjectionMode::ORTHOGRAPHIC;
 
-	LittleEngine::Helpers::GUIDrawer::DrawScalar<float>(p_root, "Near", std::bind(&CCamera::GetNear, this), std::bind(&CCamera::SetNear, this, std::placeholders::_1));
-	LittleEngine::Helpers::GUIDrawer::DrawScalar<float>(p_root, "Far", std::bind(&CCamera::GetFar, this), std::bind(&CCamera::SetFar, this, std::placeholders::_1));
-	LittleEngine::Helpers::GUIDrawer::DrawColor(p_root, "Clear color", [this]() {return reinterpret_cast<const LittleEngine::UI::Types::Color&>(GetClearColor()); }, [this](LittleEngine::UI::Types::Color p_color) { SetClearColor({ p_color.r, p_color.g, p_color.b }); }, false);
-	LittleEngine::Helpers::GUIDrawer::DrawBoolean(p_root, "Frustum Geometry Culling", std::bind(&CCamera::HasFrustumGeometryCulling, this), std::bind(&CCamera::SetFrustumGeometryCulling, this, std::placeholders::_1));
-	LittleEngine::Helpers::GUIDrawer::DrawBoolean(p_root, "Frustum Light Culling", std::bind(&CCamera::HasFrustumLightCulling, this), std::bind(&CCamera::SetFrustumLightCulling, this, std::placeholders::_1));
+	GUIUtil::DrawScalar<float>( "Near", std::bind(&CCamera::GetNear, this), std::bind(&CCamera::SetNear, this, std::placeholders::_1));
+	GUIUtil::DrawScalar<float>( "Far", std::bind(&CCamera::GetFar, this), std::bind(&CCamera::SetFar, this, std::placeholders::_1));
+	GUIUtil::DrawColor( "Clear color", [this]() {return reinterpret_cast<const LittleEngine::Color&>(GetClearColor()); }, [this](LittleEngine::Color p_color) { SetClearColor({ p_color.r, p_color.g, p_color.b }); }, false);
+	GUIUtil::DrawBoolean( "Frustum Geometry Culling", std::bind(&CCamera::HasFrustumGeometryCulling, this), std::bind(&CCamera::SetFrustumGeometryCulling, this, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Frustum Light Culling", std::bind(&CCamera::HasFrustumLightCulling, this), std::bind(&CCamera::SetFrustumLightCulling, this, std::placeholders::_1));
 
-    Helpers::GUIDrawer::CreateTitle(p_root, "Projection Mode");
-    auto& projectionMode = p_root.CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(static_cast<int>(GetProjectionMode()));
+    GUIUtil::CreateTitle( "Projection Mode");
+    auto& projectionMode = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(static_cast<int>(GetProjectionMode()));
     projectionMode.choices.emplace(0, "Orthographic");
     projectionMode.choices.emplace(1, "Perspective");
     projectionMode.ValueChangedEvent += [this, &fovWidget, &fovWidgetLabel, &sizeWidget, &sizeWidgetLabel](int p_choice)

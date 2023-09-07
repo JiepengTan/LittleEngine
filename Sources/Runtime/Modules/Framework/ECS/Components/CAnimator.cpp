@@ -260,14 +260,14 @@ std::vector<LittleEngine::FMatrix4>* LittleEngine::CAnimator::GetFinalBoneMatric
 }
 
 
-void LittleEngine::CAnimator::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAnimator::OnSerialize(ISerializer p_serializer)
 {
-    LittleEngine::Serializer::SerializeString(p_doc, p_node, "animPath", m_animPath);
+    SerializeUtil::SerializeString("animPath", m_animPath);
 }
 
-void LittleEngine::CAnimator::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::CAnimator::OnDeserialize(ISerializer p_serializer)
 {
-    LittleEngine::Serializer::DeserializeString(p_doc, p_node, "animPath", m_animPath);
+    SerializeUtil::DeserializeString("animPath", m_animPath);
 }
 
 void LittleEngine::CAnimator::ToggleBones()
@@ -283,16 +283,16 @@ void LittleEngine::CAnimator::ToggleBones()
     }
 }
 
-void LittleEngine::CAnimator::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAnimator::OnInspector()
 {
-    using namespace LittleEngine::Helpers;
-    GUIDrawer::DrawBoolean(p_root, "IsUpdateInEdit", IsUpdateInEdit);
-    GUIDrawer::DrawAsset(p_root, "animPath", m_animPath);
-    GUIDrawer::DrawScalar<float>(p_root, "currentTime", m_currentTime, 0.005f, GUIDrawer::_MIN_FLOAT,
-                                 GUIDrawer::_MAX_FLOAT);
-    GUIDrawer::DrawBoolean(p_root, "showDebugBones", m_showDebugBones);
-    GUIDrawer::DrawScalar(p_root, "boneDrawSize", boneDrawSize);
+    
+    GUIUtil::DrawBoolean( "IsUpdateInEdit", IsUpdateInEdit);
+    GUIUtil::DrawAsset( "animPath", m_animPath);
+    GUIUtil::DrawScalar<float>( "currentTime", m_currentTime, 0.005f, GUIUtil::_MIN_FLOAT,
+                                 GUIUtil::_MAX_FLOAT);
+    GUIUtil::DrawBoolean( "showDebugBones", m_showDebugBones);
+    GUIUtil::DrawScalar( "boneDrawSize", boneDrawSize);
 
-    auto& btn = p_root.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("CreateBones");
+    auto& btn = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("CreateBones");
     btn.ClickedEvent += std::bind(&LittleEngine::CAnimator::ToggleBones, this);
 }

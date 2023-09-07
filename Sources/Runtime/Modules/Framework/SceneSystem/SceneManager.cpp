@@ -79,8 +79,9 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(completePath.c_str());
-
-	if (LoadSceneFromMemory(doc))
+	JsonSerializer p_serializer;
+	// TODO tanjp 处理好对应的序列化代码
+	if (LoadSceneFromMemory(*(ISerializer*)&p_serializer))
 	{
 		StoreCurrentSceneSourcePath(completePath);
 		return true;
@@ -89,23 +90,11 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 	return false;
 }
 
-bool LittleEngine::SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
+bool LittleEngine::SceneManager::LoadSceneFromMemory(ISerializer& p_serializer)
 {
-	if (!p_doc.Error())
-	{
-		tinyxml2::XMLNode* root = p_doc.FirstChild();
-		if (root)
-		{
-			tinyxml2::XMLNode* sceneNode = root->FirstChildElement("scene");
-			if (sceneNode)
-			{
-				LoadEmptyScene();
-				m_currentScene->OnDeserialize(p_doc, sceneNode);
-				return true;
-			}
-		}
-	}
-
+	
+	LoadEmptyScene();
+	m_currentScene->OnDeserialize(p_serializer);
 	LittleEngine::Windowing::Dialogs::MessageBox message("Scene loading failed", "The scene you are trying to load was not found or corrupted", LittleEngine::Windowing::Dialogs::MessageBox::EMessageType::ERROR, LittleEngine::Windowing::Dialogs::MessageBox::EButtonLayout::OK, true);
 	return false;
 }

@@ -37,29 +37,29 @@ void LittleEngine::CAmbientSphereLight::SetRadius(float p_radius)
 	m_data.constant = p_radius;
 }
 
-void LittleEngine::CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CAmbientSphereLight::OnSerialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnSerialize(p_doc, p_node);
+	CLight::OnSerialize(p_serializer);
 
-	Serializer::SerializeFloat(p_doc, p_node, "radius", m_data.constant);
+	SerializeUtil::SerializeFloat("radius", m_data.constant);
 }
 
-void LittleEngine::CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument & p_doc, tinyxml2::XMLNode * p_node)
+void LittleEngine::CAmbientSphereLight::OnDeserialize(ISerializer p_serializer)
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnDeserialize(p_doc, p_node);
+	CLight::OnDeserialize(p_serializer);
 
-	Serializer::DeserializeFloat(p_doc, p_node, "radius", m_data.constant);
+	SerializeUtil::DeserializeFloat("radius", m_data.constant);
 }
 
-void LittleEngine::CAmbientSphereLight::OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root)
+void LittleEngine::CAmbientSphereLight::OnInspector()
 {
-	using namespace LittleEngine::Helpers;
+	
 
-	CLight::OnInspector(p_root);
+	CLight::OnInspector();
 
-	GUIDrawer::DrawScalar<float>(p_root, "Radius", m_data.constant, 0.1f, 0.f);
+	GUIUtil::DrawScalar<float>( "Radius", m_data.constant, 0.1f, 0.f);
 }

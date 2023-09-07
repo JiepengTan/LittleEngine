@@ -7,7 +7,7 @@
 #pragma once
 
 
-namespace LittleEngine::UI::Types
+namespace LittleEngine
 {
 	/**
 	* Data structur that contains color information in a 0.f to 1.f float format

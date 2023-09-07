@@ -9,7 +9,7 @@
 #include "Modules/UI/Internal/WidgetContainer.h"
 
 #include "Modules/Framework/API/ISerializable.h"
-#include "Modules/Utils/GUIDrawer.h"
+#include "Modules/Utils/GUIUtil.h"
 
 namespace LittleEngine::API
 {
@@ -23,6 +23,6 @@ namespace LittleEngine::API
 		* Called when the inspector needs to create the UI elements for the given IInspectorItem
 		* @param p_root
 		*/
-		virtual void OnInspector(LittleEngine::UI::Internal::WidgetContainer& p_root) = 0;
+		virtual void OnInspector() = 0;
 	};
 }

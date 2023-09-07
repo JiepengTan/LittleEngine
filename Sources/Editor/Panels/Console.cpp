@@ -17,9 +17,9 @@
 using namespace LittleEngine::UI::Panels;
 using namespace LittleEngine::UI::Widgets;
 
-std::pair<LittleEngine::UI::Types::Color, std::string> GetWidgetSettingsFromLogData(const OvDebug::LogData& p_logData)
+std::pair<LittleEngine::Color, std::string> GetWidgetSettingsFromLogData(const OvDebug::LogData& p_logData)
 {
-	LittleEngine::UI::Types::Color logColor;
+	LittleEngine::Color logColor;
 	std::string logHeader;
 	std::string logDateFormated = "[";
 	bool isSecondPart = false;

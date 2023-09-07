@@ -22,12 +22,12 @@ void LittleEngine::Component::SetActor(ActorPtr actor)
     }
     owner = actor;
 }
-void LittleEngine::Component::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::Component::OnSerialize(ISerializer p_serializer)
 {
-    Object::OnSerialize(p_doc, p_node);
+    Object::OnSerialize(p_serializer);
 }
 
-void LittleEngine::Component::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void LittleEngine::Component::OnDeserialize(ISerializer p_serializer)
 {
-    Object::OnDeserialize(p_doc, p_node);
+    Object::OnDeserialize(p_serializer);
 }
