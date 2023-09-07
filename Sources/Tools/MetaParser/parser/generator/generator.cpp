@@ -16,6 +16,8 @@ namespace Generator
     {
         Class classInfo = *class_temp;
         class_def.set("class_name", class_temp->getClassName());
+        class_def.set("class_namespace", class_temp->getCurrentNamespaceStr());
+        class_def.set("class_full_name", class_temp->getFullName());
         class_def.set("class_type_id", std::to_string(classInfo.type_id));
         class_def.set("class_base_class_size", std::to_string(class_temp->m_base_classes.size()));
         class_def.set("class_need_register", true);

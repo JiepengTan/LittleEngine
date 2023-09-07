@@ -9,6 +9,10 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     m_qualified_name(Utils::getTypeNameWithoutNamespace(cursor.getType())),
     m_display_name(Utils::getNameWithoutFirstM(m_qualified_name))
 {
+    auto rawName = cursor.getDisplayName();
+    std::string curNamespace = "";
+    //for (auto nameItem : current_namespace)  curNamespace += nameItem + "::";
+    
     Utils::replaceAll(m_name, " ", "");
     Utils::replaceAll(m_name, "LittleEngine::", "");
     for (auto& child : cursor.getChildren())
@@ -52,5 +56,10 @@ bool Class::shouldCompileMethods(void) const{
 }
 
 std::string Class::getClassName(void) { return m_name; }
+
+std::string Class::getFullName()
+{
+    return getCurrentNamespaceStr() + "::" + getClassName();
+}
 
 bool Class::isAccessible(void) const { return m_enabled; }

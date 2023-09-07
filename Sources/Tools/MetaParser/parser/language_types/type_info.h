@@ -17,7 +17,8 @@ public:
     std::string getSourceFile(void) const;
 
     Namespace getCurrentNamespace() const;
-
+    std::string getCurrentNamespaceStr() const;
+    
     Cursor& getCurosr();
 
 protected:

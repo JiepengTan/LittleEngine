@@ -31,7 +31,7 @@ public:
     using SharedPtrVector = std::vector<std::shared_ptr<T>>;
 
     std::string getClassName(void);
-
+    std::string getFullName();
     SharedPtrVector<BaseClass> m_base_classes;
 
 public:

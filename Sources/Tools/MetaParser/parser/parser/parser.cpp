@@ -217,11 +217,27 @@ void MetaParser::buildClassAST(const Cursor& cursor, Namespace& current_namespac
         {
             auto class_ptr = std::make_shared<Class>(child, current_namespace);
 
-            TRY_ADD_LANGUAGE_TYPE(class_ptr, classes);
+            //TRY_ADD_LANGUAGE_TYPE(class_ptr, classes);
+            if (class_ptr->shouldCompile()) 
+            { 
+                auto file = class_ptr->getSourceFile(); 
+                m_schema_modules[file].classes.emplace_back(class_ptr); 
+                m_type_table[class_ptr->m_display_name] = file;
+            } 
         }
         else
         {
-            RECURSE_NAMESPACES(kind, child, buildClassAST, current_namespace);
+            //RECURSE_NAMESPACES(kind, child, buildClassAST, current_namespace);
+            if (kind == CXCursor_Namespace) 
+            { 
+                auto display_name = child.getDisplayName(); 
+                if (!display_name.empty()) 
+                { 
+                    current_namespace.emplace_back(display_name);
+                    buildClassAST(child, current_namespace); 
+                    current_namespace.pop_back(); 
+                } 
+            } 
         }
     }
 }
