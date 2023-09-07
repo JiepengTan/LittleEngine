@@ -19,19 +19,18 @@ namespace LittleEngine
 		if (auto found = GetComponent<T>(); !found)
 		{
 			auto comp = std::make_shared<T>();
-			/* // TODO tanjp recover the codes // TODO fixed scene Actor loop reference
-			SharedPtr<Actor> ptr = m_scene->GetActor(m_actorID);
+			ActorPtr ptr = GetSceneActor(m_actorID);
 			LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
 			comp->SetActor(ptr);
 			comp->DoInit(ptr);
 			m_components[comp->GetTypeID()] = comp;
-			m_scene->OnComponentAdded(comp);
+			NotifyComponentAdd(comp);
 			if (m_playing && IsActive())
 			{
 				comp->OnAwake();
 				comp->OnEnable();
 				comp->OnStart();
-			}*/
+			}		
 			return comp;
 		}
 		else
@@ -45,17 +44,14 @@ namespace LittleEngine
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
 		static_assert(!std::is_same<CTransform, T>::value, "You can't remove a CTransform from an actor");
-		 /* //TODO tanjp recover the codes
 		auto key = T::GetTypeID();
 		if(m_components.count(key) != 0)
 		{
 			auto comp = m_components.at(key);
-			m_scene->OnComponentRemoved(comp);
+			NotifyComponentRemoved(comp);
 			m_components.erase(key);
 			return true;
 		}
-		*/
-
 		return false;
 	}
 

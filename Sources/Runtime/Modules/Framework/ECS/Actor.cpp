@@ -466,4 +466,16 @@ namespace LittleEngine
                 actor->RecursiveWasActiveUpdate();
         }
     }
+    void Actor::NotifyComponentAdd(CompPtr p_comp)
+    {
+        m_scene->OnComponentAdded(p_comp);
+    }
+    void Actor::NotifyComponentRemoved(CompPtr p_comp)
+    {
+        m_scene->OnComponentRemoved(p_comp);
+    }
+    ActorPtr Actor::GetSceneActor(ActorID p_actorID)
+    {
+        return m_scene->GetActor(p_actorID);
+    }
 }

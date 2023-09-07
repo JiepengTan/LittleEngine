@@ -241,6 +241,9 @@ namespace LittleEngine
 		void RecursiveActiveUpdate();
 		void RecursiveWasActiveUpdate();
 
+		ActorPtr GetSceneActor(ActorID p_actorID);
+		void NotifyComponentAdd(CompPtr p_comp);
+		void NotifyComponentRemoved(CompPtr p_comp);
 	private:
 		
 		/**
