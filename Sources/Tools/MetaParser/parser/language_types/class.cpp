@@ -9,6 +9,8 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     m_qualified_name(Utils::getTypeNameWithoutNamespace(cursor.getType())),
     m_display_name(Utils::getNameWithoutFirstM(m_qualified_name))
 {
+    is_struct = cursor.getKind() == CXCursor_StructDecl;
+
     auto rawName = cursor.getDisplayName();
     std::string curNamespace = "";
     //for (auto nameItem : current_namespace)  curNamespace += nameItem + "::";

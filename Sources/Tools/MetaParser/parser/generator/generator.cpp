@@ -21,6 +21,8 @@ namespace Generator
         class_def.set("class_type_id", std::to_string(classInfo.type_id));
         class_def.set("class_base_class_size", std::to_string(class_temp->m_base_classes.size()));
         class_def.set("class_need_register", true);
+        class_def.set("class_is_struct", class_temp->is_struct);
+        
         //std::cout<<classInfo.type_id<<std::endl;
         if (class_temp->m_base_classes.size() > 0)
         {

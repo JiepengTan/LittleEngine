@@ -6,7 +6,7 @@
 {{#class_defines}}
 namespace {{class_namespace}}{
     TypeID {{class_name}}::MetaTypeId = 0;
-    class {{class_name}};
+    {{#class_is_struct}}struct {{class_name}}; {{/class_is_struct}}{{^class_is_struct}}class {{class_name}}; {{/class_is_struct}}
 }
 {{/class_defines}}
 
@@ -123,7 +123,7 @@ namespace {{class_namespace}}::Reflection::ArrayReflectionOperator{
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::Get{{class_name}}BaseClassReflectionInstanceList,
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::ConstructorWithJson,
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::WriteByName);
-        REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}});
+        REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
     }
 }//namespace {{class_namespace}}::Reflection

@@ -45,6 +45,7 @@ public:
     std::string m_display_name;
     int type_id;
     bool isAccessible(void) const;
+    bool is_struct;
 public:
     static int s_type_id;
 };
