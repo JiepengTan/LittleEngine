@@ -14,7 +14,7 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     //for (auto nameItem : current_namespace)  curNamespace += nameItem + "::";
     
     Utils::replaceAll(m_name, " ", "");
-    Utils::replaceAll(m_name, "LittleEngine::", "");
+    //Utils::replaceAll(m_name, "LittleEngine::", "");
     for (auto& child : cursor.getChildren())
     {
         switch (child.getKind())

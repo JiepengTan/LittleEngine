@@ -1,9 +1,9 @@
 #pragma once
 #include "Core/CoreInclude.h"
 
-namespace LittleEngine::Test::_Reflection
+namespace LittleEngine::Test
 {
-    void DoTest();
+    void DoReflectionTest();
     REFLECTION_TYPE(BaseTest)
     CLASS(BaseTest, Fields)
     {
