@@ -3,6 +3,9 @@
 #include <fstream>
 #include <stdexcept>
 
+#include "PathUtil.h"
+#include "Core/Tools/Utils/StringUtil.h"
+
 namespace LittleEngine
 {
     std::string FileUtil::GetRealPath(const std::string& p_path)
@@ -13,9 +16,13 @@ namespace LittleEngine
         {
             result = __ENGINE_ASSETS_PATH + std::string(p_path.data() + 1, p_path.data() + p_path.size());
         }
-        else // The path is a project path
+        else if(!StringUtil::StartWith(p_path,__PROJECT_ASSETS_PATH))// The path is a project path
         {
             result = __PROJECT_ASSETS_PATH + p_path;
+        }
+        else // The path is a project path
+        {
+            result = p_path;
         }
 
         return result;
@@ -25,6 +32,7 @@ namespace LittleEngine
     {
         __PROJECT_ASSETS_PATH	= p_projectAssetsPath;
         __ENGINE_ASSETS_PATH	= p_engineAssetsPath;
+        PathUtil::ProvideAssetPaths(p_projectAssetsPath,p_engineAssetsPath);
     }
 
     std::string FileUtil::ReadAllText(const std::string& filePath)
