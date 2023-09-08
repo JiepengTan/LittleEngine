@@ -52,7 +52,7 @@ LittleEngine::Rendering::Resources::Parsers::EModelParserFlags GetAssetMetadata(
 
 LittleEngine::Rendering::Resources::Model* LittleEngine::ResourceManagement::ModelManager::CreateResource(const std::string& p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	auto model = LittleEngine::Rendering::Resources::Loaders::ModelLoader::Create(realPath, GetAssetMetadata(realPath));
 	if (model)
 		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(LittleEngine::Rendering::Resources::Model, path)) = p_path; // Force the resource path to fit the given path
@@ -67,6 +67,6 @@ void LittleEngine::ResourceManagement::ModelManager::DestroyResource(LittleEngin
 
 void LittleEngine::ResourceManagement::ModelManager::ReloadResource(LittleEngine::Rendering::Resources::Model* p_resource, const std::string& p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	LittleEngine::Rendering::Resources::Loaders::ModelLoader::Reload(*p_resource, realPath, GetAssetMetadata(realPath));
 }

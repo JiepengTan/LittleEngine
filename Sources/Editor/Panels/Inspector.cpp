@@ -226,12 +226,12 @@ void Panels::Inspector::CreateActorInspector(ActorPtr p_target)
 
 	// Transform Draw first
 	for (auto comp : components){
-		if(comp->GetTypeID() == CTransform::GetTypeID()){
+		if(comp->GetTypeID() == CTransform::GetStaticTypeID()){
 			DrawComponent(comp);
 		}
 	}
 	for (auto comp : components){
-		if(comp->GetTypeID() != CTransform::GetTypeID()){
+		if(comp->GetTypeID() != CTransform::GetStaticTypeID()){
 			DrawComponent(comp);
 		}
 	}
@@ -242,7 +242,7 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
 	{
 		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetName());
-		header.closable = p_component->GetTypeID() == LittleEngine:: CTransform::GetTypeID();
+		header.closable = p_component->GetTypeID() == LittleEngine:: CTransform::GetStaticTypeID();
 		header.CloseEvent += [this, &header, &p_component]
 		{ 
 			if (p_component->GetActor()->RemoveComponent(p_component))

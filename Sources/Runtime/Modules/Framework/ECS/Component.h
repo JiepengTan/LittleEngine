@@ -17,13 +17,14 @@ namespace LittleEngine
 	* AComponent is the base class for any component.
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
-	REFLECTION_TYPE(Component)
+	REFLECTION_COMPONENT_TYPE(Component)
 	CLASS (Component: public Object, WhiteListFields)
 	{
-		REFLECTION_BODY(Component)
+		REFLECTION_COMPONENT_BODY(Component)
 		friend class Actor;
+	protected:
+		TypeID _LE_InternalMetaTypeID;// internal type id for reflection
 	public:
-		Component() = default;
 		/**
 		* Destroying a AComponent will call dervied classes destructors
 		*/
@@ -128,7 +129,7 @@ namespace LittleEngine
 		virtual void OnDeserialize(ISerializer p_serializer) override;
 	public:
         META(Enable)
-		bool IsUpdateInEdit;
+		bool isUpdateInEdit = false;
 	protected:
 		ActorPtr owner;
 	};

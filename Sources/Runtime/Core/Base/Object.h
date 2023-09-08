@@ -55,5 +55,6 @@ namespace LittleEngine
     protected:
         META(Enable)
         ObjectID m_instanceId;
+        TypeID m_typeId;
     };
 }

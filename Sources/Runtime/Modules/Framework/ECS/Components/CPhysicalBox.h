@@ -17,17 +17,16 @@ namespace LittleEngine
 	/**
 	* Represent a physical object with a box shape
 	*/
-	REFLECTION_TYPE(CPhysicalBox)
+	REFLECTION_COMPONENT_TYPE(CPhysicalBox)
 	CLASS (CPhysicalBox : public CPhysicalObject, WhiteListFields)
 	{
-		REFLECTION_BODY(CPhysicalBox)
+		REFLECTION_COMPONENT_BODY(CPhysicalBox)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CPhysicalBox() = default;
 		/**
 		* Returns the name of the component
 		*/

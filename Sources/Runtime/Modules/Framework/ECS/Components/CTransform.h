@@ -21,14 +21,13 @@ namespace LittleEngine
 	/**
 	* Represents the 3D transformations applied to an actor
 	*/
-	REFLECTION_TYPE(CTransform)
+	REFLECTION_COMPONENT_TYPE(CTransform)
 	CLASS (CTransform : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CTransform)
+		REFLECTION_COMPONENT_BODY(CTransform)
 	public:
 		
 		void DoInit(ActorPtr p_owner) override;
-		CTransform() = default;
 		/**
 		* Returns the name of the component
 		*/
@@ -204,6 +203,7 @@ namespace LittleEngine
 		virtual void OnInspector() override;
 
 	private:
+		META(Enable)
 		LittleEngine::FTransform m_transform;
 	};
 }

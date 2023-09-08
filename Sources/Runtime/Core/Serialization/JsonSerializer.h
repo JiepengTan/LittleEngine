@@ -10,10 +10,29 @@ namespace LittleEngine
 {
     template<typename...>
     inline constexpr bool always_false = false;
-
-    class JsonSerializer:IBaseSerializer
+    class Component;
+    class JsonSerializer 
     {
     public:
+        typedef Json (* __FunPtrWriteComponent)(void* data);
+        typedef void (* __FunPtrReadComponent)(const Json& json_context,void* data);
+        static std::map<TypeID,__FunPtrReadComponent> Id2ReadFunctionMap;
+        static std::map<TypeID,__FunPtrWriteComponent> Id2WriteFunctionMap;
+        
+    public:
+        
+        template<typename T>
+        static void ReadEnum(const Json& json_context, T& instance)
+        {
+            assert(json_context.is_number());
+            instance = (T)(int)(json_context.number_value());
+        }
+        template<typename T>
+        static Json WriteEnum(T& instance)
+        {
+            return Json((int)instance);
+        }
+        
         template<typename T>
         static Json WritePointer(T* instance)
         {
@@ -33,8 +52,8 @@ namespace LittleEngine
             }
             else
             {
-                instance = static_cast<T*>(
-                    Reflection::TypeMeta::NewFromNameAndJson(type_name, json_context["$context"]).m_instance);
+                auto inst = Reflection::TypeMeta::CreateFromNameAndJson(type_name, json_context["$context"]);
+                instance = static_cast<T*>(inst);
             }
             return instance;
         }
@@ -55,11 +74,16 @@ namespace LittleEngine
             instance.SetTypeName(type_name);
             return ReadPointer(json_context, instance.GetPtrReference());
         }
-
+        
+        template<typename T>
+        static Json WriteComponent(const T& instance)
+        {
+            return Json::object {{"$typeName", Json {instance.GetTypeName()}}, {"$context", JsonSerializer::Write(*instance)}};
+        }
+        
         template<typename T>
         static Json Write(const T& instance)
         {
-
             if constexpr (std::is_pointer<T>::value)
             {
                 return WritePointer((T)instance);
@@ -71,6 +95,7 @@ namespace LittleEngine
             }
         }
 
+        
         template<typename T>
         static T& Read(const Json& json_context, T& instance)
         {
@@ -86,17 +111,20 @@ namespace LittleEngine
         }
     };
 
+    
+    
     // implementation of base types
     template<>
     Json JsonSerializer::Write(const char& instance);
     template<>
     char& JsonSerializer::Read(const Json& json_context, char& instance);
 
+    
     template<>
     Json JsonSerializer::Write(const int& instance);
     template<>
     int& JsonSerializer::Read(const Json& json_context, int& instance);
-
+    
     template<>
     Json JsonSerializer::Write(const unsigned int& instance);
     template<>

@@ -15,7 +15,7 @@
 #include "Modules/Rendering/Resources/Material.h"
 #include "Modules/Framework/ECS/Component.h"
 
-#define MAX_MATERIAL_COUNT 255
+#define MAX_MATERIAL_COUNT 8
 
 namespace LittleEngine { class Actor; }
 
@@ -24,10 +24,10 @@ namespace LittleEngine
 	/**
 	* A component that handle a material list, necessary for model rendering
 	*/
-	REFLECTION_TYPE(CMaterialRenderer)
+	REFLECTION_COMPONENT_TYPE(CMaterialRenderer)
 	CLASS (CMaterialRenderer : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CMaterialRenderer)
+		REFLECTION_COMPONENT_BODY(CMaterialRenderer)
 	public:
 		using MaterialList = std::array<LittleEngine::Resources::Material*, MAX_MATERIAL_COUNT>;
 		using MaterialField = std::array<std::array<LittleEngine::UI::Widgets::AWidget*, 3>, MAX_MATERIAL_COUNT>;
@@ -37,7 +37,6 @@ namespace LittleEngine
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CMaterialRenderer() = default;
 		/**
 		* Returns the name of the component
 		*/
@@ -132,7 +131,8 @@ namespace LittleEngine
 	private:
 		MaterialList m_materials;
 		MaterialField m_materialFields;
-		std::array<std::string, MAX_MATERIAL_COUNT> m_materialNames;
 		LittleEngine::FMatrix4 m_userMatrix;
+		META(Enable)
+		std::string m_materialNames[MAX_MATERIAL_COUNT];
 	};
 }

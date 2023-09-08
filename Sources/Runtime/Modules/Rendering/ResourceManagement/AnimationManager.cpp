@@ -14,7 +14,7 @@
 
 LittleEngine::Rendering::Resources::Animation* LittleEngine::ResourceManagement::AnimationManager::CreateResource(const std::string& p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	auto anim = LittleEngine::Rendering::Resources::Loaders::AnimationLoader::Create( realPath,currentModel);
 	if(anim != nullptr)
 	{
@@ -32,6 +32,6 @@ void LittleEngine::ResourceManagement::AnimationManager::ReloadResource(LittleEn
 {
 	LOG_ERROR("Now do not support reload animation!");
 	return;
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	LittleEngine::Rendering::Resources::Loaders::AnimationLoader::Reload(*p_resource, realPath, currentModel);
 }

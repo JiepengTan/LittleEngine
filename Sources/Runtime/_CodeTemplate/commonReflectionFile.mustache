@@ -36,6 +36,7 @@ namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator{
         }
         // fields
         {{#class_field_defines}}
+        
         static void Set_{{class_field_name}}(void* instance, void* field_value){ 
             {{#class_field_is_array}}memcpy(&static_cast<{{class_name}}*>(instance)->{{class_field_name}},field_value,sizeof({{class_name}}::{{class_field_name}}));{{/class_field_is_array}}
             {{#class_field_is_vector}}memcpy(&static_cast<{{class_name}}*>(instance)->{{class_field_name}},field_value,sizeof({{class_name}}::{{class_field_name}}));{{/class_field_is_vector}}

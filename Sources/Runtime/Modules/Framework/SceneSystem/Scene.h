@@ -183,7 +183,7 @@ namespace LittleEngine
 		* @param p_root
 		*/
 		virtual void OnSerialize(ISerializer p_serializer) override;
-
+		virtual void SaveTo(ResScene& resScene);
 		/**
 		* Deserialize the scene
 		* @param p_doc

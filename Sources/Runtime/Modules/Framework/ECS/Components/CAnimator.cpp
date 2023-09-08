@@ -286,7 +286,7 @@ void LittleEngine::CAnimator::ToggleBones()
 void LittleEngine::CAnimator::OnInspector()
 {
     
-    GUIUtil::DrawBoolean( "IsUpdateInEdit", IsUpdateInEdit);
+    GUIUtil::DrawBoolean( "IsUpdateInEdit", isUpdateInEdit);
     GUIUtil::DrawAsset( "animPath", m_animPath);
     GUIUtil::DrawScalar<float>( "currentTime", m_currentTime, 0.005f, GUIUtil::_MIN_FLOAT,
                                  GUIUtil::_MAX_FLOAT);

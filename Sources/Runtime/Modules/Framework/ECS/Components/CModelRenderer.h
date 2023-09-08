@@ -18,10 +18,10 @@ namespace LittleEngine
 	/**
 	* A ModelRenderer is necessary in combination with a MaterialRenderer to render a model in the world
 	*/
-	REFLECTION_TYPE(CModelRenderer)
+	REFLECTION_COMPONENT_TYPE(CModelRenderer)
 	CLASS (CModelRenderer : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CModelRenderer)
+		REFLECTION_COMPONENT_BODY(CModelRenderer)
 	public:
 		/**
 		* Defines how the model renderer bounding sphere should be interpreted
@@ -39,7 +39,6 @@ namespace LittleEngine
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CModelRenderer() = default;
 		/**
 		* Returns the name of the component
 		*/
@@ -102,6 +101,7 @@ namespace LittleEngine
 		LittleEngine::Rendering::Resources::Model* m_model = nullptr;
 		LittleEngine::Eventing::Event<> m_modelChangedEvent;
 		LittleEngine::Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
+		META(Enable)
 		EFrustumBehaviour m_frustumBehaviour = EFrustumBehaviour::CULL_MODEL;
 	};
 }

@@ -8,9 +8,13 @@
 #include <string>
 
 #include "Modules/Framework/SceneSystem/Scene.h"
+
+#include "Core/Tools/Filesystem/FileUtil.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/ECS/Components/CLight.h"
+#include "Resource/ResIncludeScene.h"
+#include "_Generated/Serializer/AllSerializer.h"
 
 namespace LittleEngine
 {
@@ -208,21 +212,21 @@ namespace LittleEngine
     
     void Scene::OnComponentAdded(CompPtr p_compononent)
     {
-        if(p_compononent->GetTypeID() == CModelRenderer::GetTypeID())
+        if(p_compononent->GetTypeID() == CModelRenderer::GetStaticTypeID())
             m_fastAccessComponents.modelRenderers.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CCamera::GetTypeID())
+        if(p_compononent->GetTypeID() == CCamera::GetStaticTypeID())
             m_fastAccessComponents.cameras.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CLight::GetTypeID())
+        if(p_compononent->GetTypeID() == CLight::GetStaticTypeID())
             m_fastAccessComponents.lights.insert(p_compononent->GetActor()->GetID());
     }
 
     void Scene::OnComponentRemoved(CompPtr p_compononent)
     {
-        if(p_compononent->GetTypeID() == CModelRenderer::GetTypeID())
+        if(p_compononent->GetTypeID() == CModelRenderer::GetStaticTypeID())
             m_fastAccessComponents.modelRenderers.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CCamera::GetTypeID())
+        if(p_compononent->GetTypeID() == CCamera::GetStaticTypeID())
             m_fastAccessComponents.cameras.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CLight::GetTypeID())
+        if(p_compononent->GetTypeID() == CLight::GetStaticTypeID())
             m_fastAccessComponents.lights.erase(p_compononent->GetActor()->GetID());
     }
 
@@ -275,7 +279,19 @@ namespace LittleEngine
     }
 
     ObjectID Scene::GetSceneId() const    { return m_sceneId;}
-
+    
+    void Scene::SaveTo(ResScene& resScene)
+    {
+        auto& actors = GetActorsCopy(m_actors);
+        auto count = actors.size();
+        resScene.actors.reserve(count);
+        for (auto item : actors)
+        {
+            ResActor actor;
+            item->SaveTo(actor);
+            resScene.actors.push_back(actor);
+        }
+    }
     void Scene::OnSerialize(ISerializer p_serializer)
     {
         // TODO tanjp OnSerialize Scene

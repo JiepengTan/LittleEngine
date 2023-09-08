@@ -8,7 +8,7 @@
 
 LittleEngine::Audio::Resources::Sound* LittleEngine::ResourceManagement::SoundManager::CreateResource(const std::string& p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	LittleEngine::Audio::Resources::Sound* sound = LittleEngine::Audio::Resources::Loaders::SoundLoader::Create(realPath);
 	if (sound)
 		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(sound) + offsetof(LittleEngine::Audio::Resources::Sound, path)) = p_path; // Force the resource path to fit the given path

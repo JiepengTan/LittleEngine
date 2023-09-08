@@ -22,7 +22,7 @@ std::tuple<LittleEngine::Rendering::Settings::ETextureFilteringMode, LittleEngin
 
 LittleEngine::Rendering::Resources::Texture* LittleEngine::ResourceManagement::TextureManager::CreateResource(const std::string & p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
@@ -40,7 +40,7 @@ void LittleEngine::ResourceManagement::TextureManager::DestroyResource(LittleEng
 
 void LittleEngine::ResourceManagement::TextureManager::ReloadResource(LittleEngine::Rendering::Resources::Texture* p_resource, const std::string& p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 

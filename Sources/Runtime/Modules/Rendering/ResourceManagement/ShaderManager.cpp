@@ -8,7 +8,7 @@
 
 LittleEngine::Rendering::Resources::Shader* LittleEngine::ResourceManagement::ShaderManager::CreateResource(const std::string & p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 	LittleEngine::Rendering::Resources::Shader* shader = LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Create(realPath);
 	if (shader)
 		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(shader) + offsetof(LittleEngine::Rendering::Resources::Shader, path)) = p_path; // Force the resource path to fit the given path

@@ -18,17 +18,16 @@ namespace LittleEngine
 	/**
 	* Represents an audio source. Its position in the world is important if the spatial sound settings is on
 	*/
-	REFLECTION_TYPE(CAudioSource)
+	REFLECTION_COMPONENT_TYPE(CAudioSource)
 	CLASS (CAudioSource : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CAudioSource)
+		REFLECTION_COMPONENT_BODY(CAudioSource)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CAudioSource();
 		/**
 		* Returns the name of the component
 		*/

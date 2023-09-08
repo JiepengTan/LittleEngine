@@ -21,9 +21,6 @@ void LittleEngine::CPointLight::DoInit(ActorPtr p_owner)
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::POINT);
 }
 
-LittleEngine::CPointLight::CPointLight()
-{
-}
 
 
 std::string LittleEngine::CPointLight::GetName()

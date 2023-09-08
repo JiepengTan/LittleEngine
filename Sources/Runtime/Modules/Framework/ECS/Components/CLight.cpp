@@ -22,7 +22,6 @@ void LittleEngine::CLight::DoInit(ActorPtr p_owner)
 	m_data.DoInit (p_owner->transform->GetFTransform(), {});
 }
 
-LittleEngine::CLight::CLight() = default;
 
 const LittleEngine::Rendering::Entities::Light& LittleEngine::CLight::GetData() const
 {

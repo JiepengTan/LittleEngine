@@ -27,7 +27,7 @@ namespace LittleEngine{
                 {{class_field_name}}_json.emplace_back(JsonSerializer::Write(item));
             }
             ret_context.insert_or_assign("{{class_field_display_name}}",{{class_field_name}}_json);
-            {{/class_field_is_vector}} {{#class_field_is_not_container}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));        {{/class_field_is_not_container}}
+            {{/class_field_is_vector}}{{#class_field_is_not_container}} {{#class_field_is_enum}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::WriteEnum(instance.{{class_field_name}}));{{/class_field_is_enum}} {{^class_field_is_enum}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));{{/class_field_is_enum}}  {{/class_field_is_not_container}}
         {{/class_field_defines}}
         return  Json(ret_context);
     }
@@ -47,8 +47,8 @@ namespace LittleEngine{
             instance.{{class_field_name}}.resize(array_{{class_field_name}}.size());
             for (size_t index=0; index < array_{{class_field_name}}.size();++index){
                 JsonSerializer::Read(array_{{class_field_name}}[index], instance.{{class_field_name}}[index]);
-            }{{/class_field_is_vector}} 
-            {{#class_field_is_not_container}} JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_not_container}}
+            }{{/class_field_is_vector}}
+            {{#class_field_is_not_container}} {{#class_field_is_enum}}JsonSerializer::ReadEnum(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_enum}} {{^class_field_is_enum}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_enum}} {{/class_field_is_not_container}}
         }{{/class_field_defines}}
         return instance;
     }

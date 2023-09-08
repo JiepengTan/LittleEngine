@@ -17,15 +17,16 @@ namespace LittleEngine
 	/**
 	* Represent a physical object with a capsule hape
 	*/
-	class CPhysicalCapsule : public CPhysicalObject
+	REFLECTION_COMPONENT_TYPE(CPhysicalCapsule)
+	CLASS (CPhysicalCapsule : public CPhysicalObject, WhiteListFields)
 	{
+		REFLECTION_COMPONENT_BODY(CPhysicalCapsule)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CPhysicalCapsule() = default;
 		/**
 		* Returns the name of the component
 		*/

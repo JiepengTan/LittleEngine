@@ -122,7 +122,7 @@ void LittleEngine::Editor::Core::Editor::UpdateCurrentEditorMode(float p_deltaTi
 				auto comps = actor->GetComponentsInternal();
 				for (auto comp :comps)
 				{
-					if(comp->GetActor()->IsAlive() && comp->IsUpdateInEdit)
+					if(comp->GetActor()->IsAlive() && comp->isUpdateInEdit)
 					{
 						comp->OnUpdate(p_deltaTime);
 					}

@@ -16,10 +16,10 @@ namespace LittleEngine
 	/**
 	* Represents a camera entity. Its position will determine its view matrix
 	*/
-	REFLECTION_TYPE(CCamera)
+	REFLECTION_COMPONENT_TYPE(CCamera)
 	CLASS (CCamera : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CCamera)
+		REFLECTION_COMPONENT_BODY(CCamera)
 	public:
 		/**
 		* Constructor
@@ -27,7 +27,6 @@ namespace LittleEngine
 		*/
 		void DoInit(ActorPtr p_owner) override;
 
-		CCamera() = default;
 		/**
 		* Destructor
 		*/

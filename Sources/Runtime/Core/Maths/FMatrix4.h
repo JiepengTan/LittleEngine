@@ -23,7 +23,7 @@ namespace LittleEngine
 	* Forward declaration due to circular reference
 	*/
 	struct FQuaternion;
-	class FTransform;
+	struct FTransform;
 	/**
 	* Mathematic representation of a 4x4 Matrix of floats
 	*/

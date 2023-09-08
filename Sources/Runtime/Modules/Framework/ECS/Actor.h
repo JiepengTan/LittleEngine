@@ -17,6 +17,7 @@
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Modules/Framework/ECS/Behaviour.h"
 #include "Modules/Framework/API/ISerializable.h"
+#include "Resource/ResIncludeScene.h"
 
 namespace LittleEngine
 {
@@ -59,6 +60,7 @@ namespace LittleEngine
 		*/
 		virtual ~Actor() override;
 
+		void SaveTo(ResActor& p_resActor); 
 		/**
 		* Return the current name of the actor
 		*/
@@ -317,6 +319,8 @@ namespace LittleEngine
 		SharedPtr<CTransform> transform;
 	private:
 		Scene* m_scene;
+		META(Enable)
+		std::string		m_prefabGuid = "";
 		/* Settings */
 		META(Enable)
 		std::string		m_name = "";

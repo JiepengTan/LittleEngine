@@ -8,7 +8,7 @@
 
 LittleEngine::Resources::Material * LittleEngine::ResourceManagement::MaterialManager::CreateResource(const std::string & p_path)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = PathUtil::GetRealPath(p_path);
 
 	Resources::Material* material = LittleEngine::Resources::Loaders::MaterialLoader::Create(realPath);
 	if (material)

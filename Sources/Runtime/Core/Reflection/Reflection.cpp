@@ -40,11 +40,11 @@ namespace LittleEngine
 
         std::string TypeMetaRegisterInterface::GetTypeName(TypeID typeId)
         {
-            if (m_id2ClassNameMap.find(typeId) == m_id2ClassNameMap.end())
+            if (m_id2ClassNameMap.find(typeId) != m_id2ClassNameMap.end())
             {
                 return m_id2ClassNameMap.at(typeId);
             }
-            return "Unknown_Type";
+            return k_unknown_type;
         }
 
         void TypeMetaRegisterInterface::RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId)
@@ -133,7 +133,16 @@ namespace LittleEngine
 
             return false;
         }
-
+        void* TypeMeta::CreateFromNameAndJson(std::string type_name, const Json& json_context)
+        {
+            auto iter = m_classMap.find(type_name);
+            if (iter != m_classMap.end())
+            {
+                return (std::get<1>(*iter->second)(json_context));
+            }
+            return nullptr;
+        }
+        
         ReflectionInstance TypeMeta::NewFromNameAndJson(std::string type_name, const Json& json_context)
         {
             auto iter = m_classMap.find(type_name);

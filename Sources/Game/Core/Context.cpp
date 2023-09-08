@@ -9,6 +9,7 @@
 #include "../Game/Core/Context.h"
 
 #include "Core/Tools/Filesystem/FileUtil.h"
+#include "Core/Tools/Filesystem/PathUtil.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
 
@@ -22,7 +23,7 @@ LittleGame::Core::Context::Context() :
 	projectSettings("Data\\User\\Game.ini"),
 	sceneManager(projectAssetsPath)
 {
-	LittleEngine::FileUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	LittleEngine::PathUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ModelManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	TextureManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);

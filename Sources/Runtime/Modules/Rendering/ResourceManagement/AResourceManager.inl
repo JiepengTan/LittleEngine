@@ -8,6 +8,7 @@
 
 #include <algorithm>
 
+#include "Core/Tools/Filesystem/PathUtil.h"
 #include "Modules/Rendering/ResourceManagement/AResourceManager.h"
 
 namespace LittleEngine::ResourceManagement
@@ -126,20 +127,4 @@ namespace LittleEngine::ResourceManagement
 		return m_resources;
 	}
 
-	template<typename T>
-	inline std::string AResourceManager<T>::GetRealPath(const std::string& p_path) const
-	{
-		std::string result;
-
-		if (p_path[0] == ':') // The path is an engine path
-		{
-			result = __ENGINE_ASSETS_PATH + std::string(p_path.data() + 1, p_path.data() + p_path.size());
-		}
-		else // The path is a project path
-		{
-			result = __PROJECT_ASSETS_PATH + p_path;
-		}
-
-		return result;
-	}
 }

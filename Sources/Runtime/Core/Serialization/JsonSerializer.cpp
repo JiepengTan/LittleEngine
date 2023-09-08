@@ -2,6 +2,10 @@
 #include <assert.h>
 namespace LittleEngine
 {
+    
+    std::map<TypeID,JsonSerializer::__FunPtrReadComponent> JsonSerializer::Id2ReadFunctionMap;
+    std::map<TypeID,JsonSerializer::__FunPtrWriteComponent> JsonSerializer::Id2WriteFunctionMap;
+    
     template<>
     Json JsonSerializer::Write(const char& instance)
     {
@@ -14,6 +18,7 @@ namespace LittleEngine
         return instance = json_context.number_value();
     }
 
+    
     template<>
     Json JsonSerializer::Write(const int& instance)
     {
@@ -25,7 +30,7 @@ namespace LittleEngine
         assert(json_context.is_number());
         return instance = static_cast<int>(json_context.number_value());
     }
-
+    
     template<>
     Json JsonSerializer::Write(const unsigned int& instance)
     {

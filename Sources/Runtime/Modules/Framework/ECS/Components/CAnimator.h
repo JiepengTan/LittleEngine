@@ -15,12 +15,11 @@ namespace LittleEngine::Rendering::Resources
 }
 namespace LittleEngine
 {
-	REFLECTION_TYPE(CAnimator)
+	REFLECTION_COMPONENT_TYPE(CAnimator)
 	CLASS (CAnimator : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CAnimator)
+		REFLECTION_COMPONENT_BODY(CAnimator)
 	public:
-		CAnimator() = default;
 		void DoInit(ActorPtr p_owner) override;
 		~CAnimator() =default;
 		std::string GetName() override;

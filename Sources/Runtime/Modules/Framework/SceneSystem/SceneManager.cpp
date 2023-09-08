@@ -10,12 +10,14 @@
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 
 #include "Core/Tools/Filesystem/FileUtil.h"
+#include "Core/Tools/Filesystem/PathUtil.h"
 #include "Modules/Framework/ECS/Components/CDirectionalLight.h"
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
 #include "Resource/ResIncludeScene.h"
+#include "_Generated/Serializer/AllSerializer.h"
 
 LittleEngine::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)
 {
@@ -80,10 +82,10 @@ void LittleEngine::SceneManager::LoadEmptyLightedScene()
 
 bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_absolute)
 {
-	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + p_path;
-	auto textAsset = GetGlobalService<LittleEngine::ResourceManagement::TextAssetManager>().LoadResource(completePath);
+	auto textAsset = GetGlobalService<LittleEngine::ResourceManagement::TextAssetManager>().LoadResource(p_path);
 	if (LoadSceneFromMemory(textAsset->text))
 	{
+		std::string completePath = PathUtil::GetRealPath(p_path);
 		StoreCurrentSceneSourcePath(completePath);
 		return true;
 	}
@@ -93,25 +95,23 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 
 bool LittleEngine::SceneManager::SaveScene(const std::string& p_path)
 {
-	StoreCurrentSceneSourcePath(p_path);
-	auto fullPath = FileUtil::GetRealPath(p_path);
-	std::string context;
-	// TODO tanjp
-	//tinyxml2::XMLDocument doc;
-	//tinyxml2::XMLNode* node = doc.NewElement("root");
-	//doc.InsertFirstChild(node);
-	//m_context.sceneManager.GetCurrentScene()->OnSerialize(doc, node);
-	//doc.SaveFile(p_path.c_str());
+	auto fullPath = PathUtil::GetRealPath(p_path);
+	ResScene resScene;
+	m_currentScene->SaveTo(resScene);
+	auto&& json = JsonSerializer::Write(resScene);
+	std::string&& context = json.dump(); 
 	FileUtil::WriteAllText(fullPath,context);
+	StoreCurrentSceneSourcePath(p_path);
+	return true;
 }
 
 bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneStr)
 {
 	LoadEmptyScene();
-	std::string error;
-	auto&& json = Json::parse(p_sceneStr, error);
-	ResScene resScene;
-	JsonSerializer::Read(json, resScene);
+	//std::string error;
+	//auto&& json = Json::parse(p_sceneStr, error);
+	//ResScene resScene;
+	//JsonSerializer::Read(json, resScene);
 	// TODO recover scene
 	//m_currentScene->OnDeserialize(p_serializer);
 	LittleEngine::Windowing::Dialogs::MessageBox message("Scene loading failed", "The scene you are trying to load was not found or corrupted", LittleEngine::Windowing::Dialogs::MessageBox::EMessageType::ERROR, LittleEngine::Windowing::Dialogs::MessageBox::EButtonLayout::OK, true);

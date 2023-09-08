@@ -12,6 +12,7 @@
 #include "../Editor/Core/Context.h"
 
 #include "Core/Tools/Filesystem/FileUtil.h"
+#include "Core/Tools/Filesystem/PathUtil.h"
 #include "Modules/Rendering/ResourceManagement/AnimationManager.h"
 
 using namespace LittleEngine::Global;
@@ -34,7 +35,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 		ResetProjectSettings();
 		projectSettings.Rewrite();
 	}
-	FileUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	PathUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ModelManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	TextureManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);

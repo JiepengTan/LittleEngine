@@ -17,7 +17,7 @@ namespace LittleEngine::ResourceManagement
     TextAsset* LittleEngine::ResourceManagement::TextAssetManager::CreateResource(
         const std::string& p_path)
     {
-        std::string realPath = GetRealPath(p_path);
+        std::string realPath = PathUtil::GetRealPath(p_path);
         auto* asset = new TextAsset();
         asset->path = p_path;
         asset->text = FileUtil::ReadAllText(realPath);
@@ -33,7 +33,7 @@ namespace LittleEngine::ResourceManagement
     void LittleEngine::ResourceManagement::TextAssetManager::ReloadResource(
         TextAsset* p_resource, const std::string& p_path)
     {
-        std::string realPath = GetRealPath(p_path);
+        std::string realPath = PathUtil::GetRealPath(p_path);
         p_resource->path = p_path;
         p_resource->text = FileUtil::ReadAllText(realPath);
     }

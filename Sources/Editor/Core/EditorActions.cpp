@@ -505,7 +505,7 @@ namespace LittleEngine::Editor
             if (m_context.scriptInterpreter->IsOk())
             {
                 PlayEvent.Invoke();
-                m_sceneBackup.Clear();
+                m_sceneBackup.clear();
                 // TODO tanjp save scene
                 //tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
                 //m_sceneBackup.InsertFirstChild(node);

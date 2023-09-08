@@ -44,7 +44,7 @@ namespace LittleEngine
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
 		static_assert(!std::is_same<CTransform, T>::value, "You can't remove a CTransform from an actor");
-		auto key = T::GetTypeID();
+		auto key = T::GetStaticTypeID();
 		if(m_components.count(key) != 0)
 		{
 			auto comp = m_components.at(key);
@@ -59,7 +59,7 @@ namespace LittleEngine
 	SharedPtr<T> Actor::GetComponent()
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
-		auto key = T::GetTypeID();
+		auto key = T::GetStaticTypeID();
 		if(m_components.count(key) != 0)
 		{
 			return std::dynamic_pointer_cast<T>(m_components.at(key));

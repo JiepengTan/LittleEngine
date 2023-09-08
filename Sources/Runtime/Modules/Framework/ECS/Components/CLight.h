@@ -17,17 +17,16 @@ namespace LittleEngine
 	/**
 	* Base class for any light
 	*/
-	REFLECTION_TYPE(CLight)
+	REFLECTION_COMPONENT_TYPE(CLight)
 	CLASS (CLight : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CLight)
+		REFLECTION_COMPONENT_BODY(CLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CLight();
 		/**
 		* Returns light data
 		*/

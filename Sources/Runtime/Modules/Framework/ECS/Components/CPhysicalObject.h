@@ -14,17 +14,16 @@ namespace LittleEngine
 	/**
 	* Base class for any physical object
 	*/
-	REFLECTION_TYPE(CPhysicalObject)
+	REFLECTION_COMPONENT_TYPE(CPhysicalObject)
 	CLASS (CPhysicalObject : public Component, WhiteListFields)
 	{
-		REFLECTION_BODY(CPhysicalObject)
+		REFLECTION_COMPONENT_BODY(CPhysicalObject)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CPhysicalObject() = default;
 		/**
 		* Add a force to the rigidbody
 		* @param p_force

@@ -15,17 +15,16 @@ namespace LittleEngine
 	/**
 	* A simple light that has no attenuation and that has a direction
 	*/
-	REFLECTION_TYPE(CDirectionalLight)
+	REFLECTION_COMPONENT_TYPE(CDirectionalLight)
 	CLASS (CDirectionalLight : public CLight, WhiteListFields)
 	{
-		REFLECTION_BODY(CDirectionalLight)
+		REFLECTION_COMPONENT_BODY(CDirectionalLight)
 	public:
 		/**
 		* Constructor
 		* @param p_owner
 		*/
 		void DoInit(ActorPtr p_owner) override;
-		CDirectionalLight() = default;
 		/**
 		* Returns the name of the component
 		*/

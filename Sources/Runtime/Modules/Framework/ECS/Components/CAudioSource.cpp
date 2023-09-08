@@ -23,7 +23,6 @@ void LittleEngine::CAudioSource::DoInit(ActorPtr p_owner)
 		GetActor()->transform->GetFTransform());
 }
 
-LittleEngine::CAudioSource::CAudioSource()= default;
 
 std::string LittleEngine::CAudioSource::GetName()
 {

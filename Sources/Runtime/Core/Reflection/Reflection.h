@@ -25,16 +25,9 @@ namespace LittleEngine
 //#define CLASS(class_name,...) class class_name:public Reflection::object
 #endif // __REFLECTION_PARSER__
 
-#define REFLECTION_BODY(class_name) \
-    friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
-    friend class JsonSerializer;\
-    public :\
-    static TypeID MetaTypeId;\
-    static TypeID GetTypeID(){ return class_name##::MetaTypeId;}\
-    static std::string GetTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
     
-    // public: virtual std::string GetTypeName() override {return #class_name;}
 
+        
 #define REFLECTION_TYPE(class_name) \
     namespace Reflection \
     { \
@@ -44,6 +37,40 @@ namespace LittleEngine
         } \
     };\
 
+    
+#define REFLECTION_BODY(class_name) \
+    friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
+    friend class JsonSerializer;\
+    public :\
+    static ::LittleEngine::TypeID MetaTypeId;\
+    static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
+    static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
+    
+
+    
+#define REFLECTION_COMPONENT_TYPE(class_name) \
+    namespace Reflection \
+    { \
+        namespace TypeFieldReflectionOparator \
+        { \
+            class Type##class_name##Operator; \
+        } \
+    };\
+
+#define REFLECTION_COMPONENT_BODY(class_name) \
+    friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
+    friend class JsonSerializer;\
+    public :\
+    static ::LittleEngine::TypeID MetaTypeId;\
+    static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
+    static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}\
+    \
+    ##class_name(){ _LE_InternalMetaTypeID = class_name##::MetaTypeId;}\
+    virtual ::LittleEngine::TypeID GetTypeID(){ return _LE_InternalMetaTypeID;}\
+    virtual std::string GetTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(_LE_InternalMetaTypeID);}
+
+
+    
 #define REGISTER_FIELD_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
 #define REGISTER_Method_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
 #define REGISTER_BASE_CLASS_TO_MAP(name, value, typeId) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value, typeId);
@@ -105,8 +132,10 @@ namespace LittleEngine
 
     namespace Reflection
     {
+        class TypeMeta;
         class TypeMetaRegisterInterface
         {
+            friend class TypeMeta;
         public:
             static void RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId);
             static void RegisterToFieldMap(const char* name, FieldFunctionTuple* value);
@@ -117,6 +146,7 @@ namespace LittleEngine
             static std::string GetTypeName(TypeID typeId);
             
             static void UnRegisterAll();
+            
         };
         class TypeMeta
         {
@@ -133,6 +163,8 @@ namespace LittleEngine
 
             static bool               NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor);
             static ReflectionInstance NewFromNameAndJson(std::string type_name, const Json& json_context);
+            static void*              CreateFromNameAndJson(std::string type_name, const Json& json_context);
+            
             static Json               WriteByName(std::string type_name, void* instance);
 
             std::string GetTypeName();

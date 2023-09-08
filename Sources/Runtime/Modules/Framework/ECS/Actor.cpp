@@ -29,6 +29,22 @@ namespace LittleEngine
     {
     }
 
+    void Actor::SaveTo(ResActor& p_resActor)
+    {
+        p_resActor.m_prefabGuid = m_prefabGuid;
+        p_resActor.m_instanceId = m_instanceId;
+        p_resActor.m_name = m_name;
+        p_resActor.m_tag = m_tag;
+        p_resActor.m_active = m_active;
+        p_resActor.m_actorID = m_actorID;
+        p_resActor.m_parentID = m_parentID;
+        auto& comps = GetComponentsCopy(m_components);
+        for (auto comp : comps)
+        {
+            p_resActor.m_components.push_back( Reflection::ReflectionPtr<Component>(comp->GetTypeName(),comp.get()));
+        }
+    }
+
     const std::string& Actor::GetName() const
     {
         return m_name;
