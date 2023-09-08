@@ -5,6 +5,7 @@
 #include "{{headfile_name}}"
 {{/include_headfiles}}
 namespace LittleEngine{
+
     {{#class_defines}}
     template<>
     Json JsonSerializer::Write(const {{class_full_name}}& instance){
@@ -50,6 +51,28 @@ namespace LittleEngine{
             {{#class_field_is_not_container}} JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_not_container}}
         }{{/class_field_defines}}
         return instance;
-    }{{/class_defines}}
+    }
+    {{/class_defines}}
 
+    {{#class_defines}}
+    namespace SerializerInternal{
+        Json JsonSerializer_Write_{{class_full_code_name}}(void* instance){
+            const {{class_full_name}}& item = *({{class_full_name}}*) instance;
+            return LittleEngine::JsonSerializer::Write(item);
+        }
+        void JsonSerializer_Read_{{class_full_code_name}}(const Json& json_context, void* instance){
+            {{class_full_name}}& item = *({{class_full_name}}*) instance;
+            LittleEngine::JsonSerializer::Read(json_context, item);
+        }
+    }
+    {{/class_defines}}
+
+    namespace SerializerInternal{
+        void RegisterJsonSerializerFunctionPointer(){
+        {{#class_defines}}
+            ::LittleEngine::JsonSerializer::Id2WriteFunctionMap[{{class_type_id}}]=JsonSerializer_Write_{{class_full_code_name}};
+            ::LittleEngine::JsonSerializer::Id2ReadFunctionMap[{{class_type_id}}]=JsonSerializer_Read_{{class_full_code_name}};
+        {{/class_defines}}
+        }
+    }
 }

@@ -5,7 +5,7 @@
 
 {{#class_defines}}
 namespace {{class_namespace}}{
-    TypeID {{class_name}}::MetaTypeId = 0;
+    TypeID {{class_name}}::MetaTypeId = {{class_type_id}};
     {{#class_is_struct}}struct {{class_name}}; {{/class_is_struct}}{{^class_is_struct}}class {{class_name}}; {{/class_is_struct}}
 }
 {{/class_defines}}
@@ -88,7 +88,6 @@ namespace {{class_namespace}}::Reflection::ArrayReflectionOperator{
  {{#class_defines}}
  namespace {{class_namespace}}::Reflection{
     void TypeWrapperRegister_{{class_name}}(){
-        ::{{class_namespace}}::{{class_name}}::MetaTypeId ={{class_type_id}};
         // register field info
         {{#class_field_defines}}FieldFunctionTuple* field_function_tuple_{{class_field_name}}=new FieldFunctionTuple(
             &TypeFieldReflectionOparator::Type{{class_name}}Operator::Set_{{class_field_name}},
