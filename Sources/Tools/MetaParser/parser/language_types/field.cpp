@@ -10,7 +10,8 @@ Field::Field(const Cursor& cursor, const Namespace& current_namespace, Class* pa
 {
     Utils::replaceAll(m_type, " ", "");
     //Utils::replaceAll(m_type, "LittleEngine::", "");
-
+    //std::cout<<m_name << " cursor.getType().GetKind() " << cursor.getType().GetKind() <<std::endl;
+    m_is_enum = cursor.getType().GetKind() == CXType_Enum;
     auto ret_string = Utils::getStringWithoutQuot(m_meta_data.getProperty("default"));
     m_default       = ret_string;
 }

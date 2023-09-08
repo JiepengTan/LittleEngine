@@ -18,6 +18,7 @@ namespace Generator
         class_def.set("class_name", class_temp->getClassName());
         class_def.set("class_namespace", class_temp->getCurrentNamespaceStr());
         class_def.set("class_full_name", class_temp->getFullName());
+        class_def.set("class_full_code_name", class_temp->getFullCodeName());
         class_def.set("class_type_id", std::to_string(classInfo.type_id));
         class_def.set("class_base_class_size", std::to_string(class_temp->m_base_classes.size()));
         class_def.set("class_need_register", true);
@@ -63,6 +64,8 @@ namespace Generator
             filed_define.set("class_field_name", field->m_name);
             filed_define.set("class_field_type", field->m_type);
             filed_define.set("class_field_display_name", field->m_display_name);
+            filed_define.set("class_field_is_enum", field->m_is_enum);
+            
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);
             bool is_array= field->m_type.find(array_tga1) != field->m_type.npos;

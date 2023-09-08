@@ -10,7 +10,7 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     m_display_name(Utils::getNameWithoutFirstM(m_qualified_name))
 {
     is_struct = cursor.getKind() == CXCursor_StructDecl;
-
+   
     auto rawName = cursor.getDisplayName();
     std::string curNamespace = "";
     //for (auto nameItem : current_namespace)  curNamespace += nameItem + "::";
@@ -58,10 +58,14 @@ bool Class::shouldCompileMethods(void) const{
 }
 
 std::string Class::getClassName(void) { return m_name; }
-
 std::string Class::getFullName()
 {
     return getCurrentNamespaceStr() + "::" + getClassName();
 }
 
+std::string Class::getFullCodeName()
+{
+    auto fullname = getFullName();
+    return Utils::replace(fullname,"::","_");
+}
 bool Class::isAccessible(void) const { return m_enabled; }

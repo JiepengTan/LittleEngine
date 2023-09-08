@@ -25,5 +25,6 @@ public:
 
     std::string m_default;
 
+    bool m_is_enum;
     bool isAccessible(void) const;
 };
