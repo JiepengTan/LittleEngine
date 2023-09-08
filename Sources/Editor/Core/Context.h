@@ -35,6 +35,7 @@
 #include "Modules/Audio/Core/AudioPlayer.h"
 
 #include "../Editor/Core/EditorResources.h"
+#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
 
 namespace LittleEngine::Editor::Core
 {
@@ -107,7 +108,8 @@ namespace LittleEngine::Editor::Core
 		LittleEngine::ResourceManagement::MaterialManager	materialManager;
 		LittleEngine::ResourceManagement::SoundManager	soundManager;
 		LittleEngine::ResourceManagement::AnimationManager animationManager;
-
+		LittleEngine::ResourceManagement::TextAssetManager textAssetManager;
+		
 		LittleEngine::Windowing::Settings::WindowSettings windowSettings;
 
 		LittleEngine::Filesystem::IniFile projectSettings;

@@ -86,7 +86,7 @@ public:
 
 	void SetPath(const std::string& p_path)
 	{
-		texture = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::TextureManager>()[p_path];
+		texture = GetGlobalService<LittleEngine::ResourceManagement::TextureManager>()[p_path];
 	}
 
 	virtual void Execute() override
@@ -661,7 +661,7 @@ public:
 
 		previewAction.ClickedEvent += [this]
 		{
-			Resource* resource = LittleEngine::Global::ServiceLocator::Get<ResourceLoader>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
+			Resource* resource = GetGlobalService<ResourceLoader>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
 			auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 			assetView.SetResource(resource);
 			assetView.Open();
@@ -906,7 +906,7 @@ public:
 				materialEditor.Open();
 				materialEditor.Focus();
 				
-				LittleEngine::Resources::Material* resource = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
+				LittleEngine::Resources::Material* resource = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
 				auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 				assetView.SetResource(resource);
 				assetView.Open();

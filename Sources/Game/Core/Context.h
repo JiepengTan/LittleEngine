@@ -30,6 +30,12 @@
 #include "Modules/Audio/Core/AudioPlayer.h"
 
 #include "Core/Tools/Filesystem/IniFile.h"
+#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
+
+namespace LittleEngine::ResourceManagement
+{
+	class TextAssetManager;
+}
 
 namespace LittleGame::Core
 {
@@ -74,6 +80,7 @@ namespace LittleGame::Core
 		LittleEngine::ResourceManagement::ShaderManager	shaderManager;
 		LittleEngine::ResourceManagement::MaterialManager	materialManager;
 		LittleEngine::ResourceManagement::SoundManager	soundManager;
+		LittleEngine::ResourceManagement::TextAssetManager	textAssetManager;
 		
 		LittleEngine::Filesystem::IniFile projectSettings;
 	};

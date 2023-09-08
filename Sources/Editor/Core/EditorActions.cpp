@@ -35,6 +35,7 @@
 #include "../Editor/Panels/Inspector.h"
 #include "../Editor/Panels/ProjectSettings.h"
 #include "../Editor/Panels/MaterialEditor.h"
+#include "Resource/ResIncludeScene.h"
 
 namespace LittleEngine::Editor
 {
@@ -64,13 +65,7 @@ namespace LittleEngine::Editor
 
     void Core::EditorActions::SaveCurrentSceneTo(const std::string& p_path)
     {
-        // TODO tanjp
-        //tinyxml2::XMLDocument doc;
-        //tinyxml2::XMLNode* node = doc.NewElement("root");
-        //doc.InsertFirstChild(node);
-        //m_context.sceneManager.StoreCurrentSceneSourcePath(p_path);
-        //m_context.sceneManager.GetCurrentScene()->OnSerialize(doc, node);
-        //doc.SaveFile(p_path.c_str());
+        m_context.sceneManager.SaveScene(p_path);
     }
 
     void Core::EditorActions::LoadSceneFromDisk(const std::string& p_path, bool p_absolute)
@@ -515,6 +510,8 @@ namespace LittleEngine::Editor
                 //tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
                 //m_sceneBackup.InsertFirstChild(node);
                 //m_context.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
+                ResScene resScene;
+                
                 m_panelsManager.GetPanelAs<Panels::GameView>("Game View").Focus();
                 m_context.sceneManager.GetCurrentScene()->Play();
                 SetEditorMode(EEditorMode::PLAY);
@@ -559,7 +556,7 @@ namespace LittleEngine::Editor
             if (loadedFromDisk)
                 m_context.sceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
             // To bo able to save or reload the scene whereas the scene is loaded from memory (Supposed to have no path)
-            m_sceneBackup.Clear();
+            m_sceneBackup.clear();
             EDITOR_PANEL(Panels::SceneView, "Scene View").Focus();
             if (auto actorInstance = m_context.sceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
                 EDITOR_PANEL(Panels::Inspector, "Inspector").FocusActor(actorInstance);

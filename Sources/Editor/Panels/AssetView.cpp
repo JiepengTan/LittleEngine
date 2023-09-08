@@ -30,16 +30,16 @@ LittleEngine::Editor::Panels::AssetView::AssetView
 		switch (LittleEngine::Utils::PathParser::GetFileType(path))
 		{
 		case LittleEngine::Utils::PathParser::EFileType::MODEL:
-			if (auto resource = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::ModelManager>().GetResource(path); resource)
+			if (auto resource = GetGlobalService<LittleEngine::ResourceManagement::ModelManager>().GetResource(path); resource)
 				m_resource = resource;
 			break;
 		case LittleEngine::Utils::PathParser::EFileType::TEXTURE:
-			if (auto resource = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::TextureManager>().GetResource(path); resource)
+			if (auto resource = GetGlobalService<LittleEngine::ResourceManagement::TextureManager>().GetResource(path); resource)
 				m_resource = resource;
 			break;
 
 		case LittleEngine::Utils::PathParser::EFileType::MATERIAL:
-			if (auto resource = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::MaterialManager>().GetResource(path); resource)
+			if (auto resource = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>().GetResource(path); resource)
 				m_resource = resource;
 			break;
 		}

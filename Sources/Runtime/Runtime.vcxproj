@@ -168,6 +168,9 @@
     <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
+    <ClCompile Include="Core\Tools\Filesystem\FileUtil.cpp" />
+    <ClCompile Include="Modules\Rendering\ResourceManagement\TextAssetManager.cpp" />
+    <ClCompile Include="Resource\TextAsset.cpp" />
     <ClCompile Include="_Test\Reflection\TestReflection.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
       <AssemblerListingLocation>..\..\Bin-Int\Debug\Runtime\</AssemblerListingLocation>
@@ -286,6 +289,7 @@
     <ClInclude Include="Core\String\StringName.h" />
     <ClInclude Include="Core\String\StringText.h" />
     <ClInclude Include="Core\Tools\Eventing\Event.h" />
+    <ClInclude Include="Core\Tools\Filesystem\FileUtil.h" />
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h" />
     <ClInclude Include="Core\Tools\Time\Clock.h" />
     <ClInclude Include="Core\Tools\Time\Date.h" />
@@ -365,6 +369,7 @@
     <ClInclude Include="Modules\Rendering\ResourceManagement\AnimationManager.h" />
     <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.h" />
     <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.inl" />
+    <ClInclude Include="Modules\Rendering\ResourceManagement\TextAssetManager.h" />
     <ClInclude Include="Modules\Rendering\ResourceManagement\MaterialManager.h" />
     <ClInclude Include="Modules\Rendering\ResourceManagement\ModelManager.h" />
     <ClInclude Include="Modules\Rendering\ResourceManagement\ShaderManager.h" />
@@ -845,6 +850,7 @@
     <ClInclude Include="Resource\ResIncludeAudio.h" />
     <ClInclude Include="Resource\ResIncludeRendering.h" />
     <ClInclude Include="Resource\ResIncludeScene.h" />
+    <ClInclude Include="Resource\TextAsset.h" />
     <ClInclude Include="_Generated\Reflection\AComponent.reflection.gen.h" />
     <ClInclude Include="_Generated\Reflection\Actor.reflection.gen.h" />
     <ClInclude Include="_Generated\Reflection\AllReflection.h" />
@@ -940,6 +946,7 @@
   <ItemGroup>
     <Folder Include="Core\Reflection\Example\" />
     <Folder Include="Modules\UI\Types\" />
+    <Folder Include="Platform\Files\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

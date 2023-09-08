@@ -11,6 +11,7 @@
 
 #include "../Editor/Core/Context.h"
 
+#include "Core/Tools/Filesystem/FileUtil.h"
 #include "Modules/Rendering/ResourceManagement/AnimationManager.h"
 
 using namespace LittleEngine::Global;
@@ -33,14 +34,15 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 		ResetProjectSettings();
 		projectSettings.Rewrite();
 	}
-
+	FileUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ModelManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	TextureManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	MaterialManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	SoundManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	AnimationManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
-
+	TextAssetManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	
 	/* Settings */
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
 	deviceSettings.contextMajorVersion = 4;
@@ -99,6 +101,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	ServiceLocator::Provide<MaterialManager>(materialManager);
 	ServiceLocator::Provide<SoundManager>(soundManager);
 	ServiceLocator::Provide<AnimationManager>(animationManager);
+	ServiceLocator::Provide<TextAssetManager>(textAssetManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Window>(*window);
 	ServiceLocator::Provide<LittleEngine::SceneManager>(sceneManager);

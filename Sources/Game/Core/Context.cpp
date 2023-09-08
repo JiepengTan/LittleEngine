@@ -8,7 +8,9 @@
 
 #include "../Game/Core/Context.h"
 
+#include "Core/Tools/Filesystem/FileUtil.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
+#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
 
 using namespace LittleEngine::Global;
 using namespace LittleEngine::ResourceManagement;
@@ -20,11 +22,13 @@ LittleGame::Core::Context::Context() :
 	projectSettings("Data\\User\\Game.ini"),
 	sceneManager(projectAssetsPath)
 {
+	LittleEngine::FileUtil::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ModelManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	TextureManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	MaterialManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	SoundManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	TextAssetManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 
 	/* Settings */
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
@@ -79,6 +83,8 @@ LittleGame::Core::Context::Context() :
 	ServiceLocator::Provide<ShaderManager>(shaderManager);
 	ServiceLocator::Provide<MaterialManager>(materialManager);
 	ServiceLocator::Provide<SoundManager>(soundManager);
+	ServiceLocator::Provide<SoundManager>(soundManager);
+	ServiceLocator::Provide<TextAssetManager>(textAssetManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Window>(*window);
 	ServiceLocator::Provide<LittleEngine::SceneManager>(sceneManager);

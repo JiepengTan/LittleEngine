@@ -75,7 +75,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateToolbar()
 
 	m_playButton->ClickedEvent	+=  [this]()
 	{
-		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>();
+		auto& editorActors = GetGlobalService<LittleEngine::Editor::Core::EditorActions>();
 		if (editorActors.GetCurrentEditorMode() == LittleEngine::Editor::Core::EditorActions::EEditorMode::EDIT)
 		{
 			editorActors.StartPlaying();
@@ -88,7 +88,7 @@ void LittleEngine::Editor::Panels::MenuBar::CreateToolbar()
 	};
 	m_pauseButton->ClickedEvent	+=  [this]()
 	{
-		auto& editorActors = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>();
+		auto& editorActors = GetGlobalService<LittleEngine::Editor::Core::EditorActions>();
 		if (editorActors.GetCurrentEditorMode() == LittleEngine::Editor::Core::EditorActions::EEditorMode::PLAY)
 		{
 			editorActors.PauseGame();

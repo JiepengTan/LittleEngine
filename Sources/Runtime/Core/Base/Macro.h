@@ -33,6 +33,7 @@
 #define MakeSharedPtr     std::make_shared
 #define MakeUniquePtr     std::make_unique
 
+#define GetGlobalService  LittleEngine::Global::ServiceLocator::Get
 
 
 // string

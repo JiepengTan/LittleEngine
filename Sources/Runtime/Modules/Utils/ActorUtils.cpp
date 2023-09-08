@@ -23,7 +23,7 @@ LittleEngine::ActorPtr LittleEngine::ActorUtils::CreateSphere(LittleEngine::Acto
 
 LittleEngine::ActorPtr LittleEngine::ActorUtils::CreateEmptyActor( LittleEngine::ActorPtr p_parent, const std::string& p_name)
 {
-    auto& sceneManager = LittleEngine::Global::ServiceLocator::Get<SceneManager>();
+    auto& sceneManager = GetGlobalService<SceneManager>();
     const auto currentScene = sceneManager.GetCurrentScene();
     auto instance = p_name.empty() ? currentScene->CreateActor() : currentScene->CreateActor(p_name);
 
@@ -37,14 +37,14 @@ LittleEngine::ActorPtr LittleEngine::ActorUtils::CreateActorWithModel(const std:
     auto path= ":Models\\" + p_modelName + ".fbx";
     auto instance = CreateEmptyActor( p_parent, p_name);
 
-    auto& modelManager = LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ModelManager>();
+    auto& modelManager = GetGlobalService<ResourceManagement::ModelManager>();
     auto modelRenderer = instance->AddComponent<LittleEngine::CModelRenderer>();
 
     const auto model = modelManager[path];
     if (model)
         modelRenderer->SetModel(model);
 
-    auto& materialManager = LittleEngine::Global::ServiceLocator::Get<ResourceManagement::MaterialManager>();
+    auto& materialManager = GetGlobalService<ResourceManagement::MaterialManager>();
     auto materialRenderer = instance->AddComponent<LittleEngine::CMaterialRenderer>();
     const auto material = materialManager[":Materials\\Default.ovmat"];
     if (material)

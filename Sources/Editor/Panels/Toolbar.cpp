@@ -21,7 +21,7 @@ LittleEngine::Editor::Panels::Toolbar::Toolbar
 {
 	std::string iconFolder = ":Textures/Icons/";
 
-	auto& textureManager = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::TextureManager>();
+	auto& textureManager = GetGlobalService<LittleEngine::ResourceManagement::TextureManager>();
 
 	m_playButton	= &CreateWidget<LittleEngine::UI::Widgets::Buttons::ButtonImage>(EDITOR_CONTEXT(editorResources)->GetTexture("Button_Play")->id, LittleEngine::FVector2{ 20, 20 });
 	m_pauseButton	= &CreateWidget<LittleEngine::UI::Widgets::Buttons::ButtonImage>(EDITOR_CONTEXT(editorResources)->GetTexture("Button_Pause")->id, LittleEngine::FVector2{ 20, 20 });

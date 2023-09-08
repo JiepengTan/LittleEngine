@@ -16,12 +16,12 @@
 #include "../Editor/Core/EditorRenderer.h"
 #include "../Editor/Core/PanelsManager.h"
 
-#define EDITOR_EXEC(action)					LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().action
-#define EDITOR_BIND(method, ...)			std::bind(&LittleEngine::Editor::Core::EditorActions::method, &LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>(), ##__VA_ARGS__)
-#define EDITOR_EVENT(target)				LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().target
-#define EDITOR_CONTEXT(instance)			LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetContext().instance
-#define EDITOR_RENDERER()					LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetRenderer()
-#define EDITOR_PANEL(type, id)				LittleEngine::Global::ServiceLocator::Get<LittleEngine::Editor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
+#define EDITOR_EXEC(action)					GetGlobalService<LittleEngine::Editor::Core::EditorActions>().action
+#define EDITOR_BIND(method, ...)			std::bind(&LittleEngine::Editor::Core::EditorActions::method, &GetGlobalService<LittleEngine::Editor::Core::EditorActions>(), ##__VA_ARGS__)
+#define EDITOR_EVENT(target)				GetGlobalService<LittleEngine::Editor::Core::EditorActions>().target
+#define EDITOR_CONTEXT(instance)			GetGlobalService<LittleEngine::Editor::Core::EditorActions>().GetContext().instance
+#define EDITOR_RENDERER()					GetGlobalService<LittleEngine::Editor::Core::EditorActions>().GetRenderer()
+#define EDITOR_PANEL(type, id)				GetGlobalService<LittleEngine::Editor::Core::EditorActions>().GetPanelsManager().GetPanelAs<type>(id)
 
 namespace LittleEngine::Editor::Core
 {
@@ -425,7 +425,7 @@ namespace LittleEngine::Editor::Core
 
 		std::vector<std::pair<uint32_t, std::function<void()>>> m_delayedActions;
 		bool m_isLoadingScene = false;
-		ISerializer m_sceneBackup;
+		std::string m_sceneBackup;
 	};
 }
 

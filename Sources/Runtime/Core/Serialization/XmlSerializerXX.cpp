@@ -323,7 +323,7 @@ void LittleEngine::XmlSerializerXX::DeserializeColor( const std::string & p_name
 void LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name, LittleEngine::Rendering::Resources::Model *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
-		p_out = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::ModelManager>().GetResource(path);
+		p_out = GetGlobalService<LittleEngine::ResourceManagement::ModelManager>().GetResource(path);
 	else
 		p_out = nullptr;
 }
@@ -331,7 +331,7 @@ void LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name
 void LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_name, LittleEngine::Rendering::Resources::Texture *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
-		p_out = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::TextureManager>().GetResource(path);
+		p_out = GetGlobalService<LittleEngine::ResourceManagement::TextureManager>().GetResource(path);
 	else
 		p_out = nullptr;
 }
@@ -339,7 +339,7 @@ void LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_na
 void LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_name, LittleEngine::Rendering::Resources::Shader *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
-		p_out = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::ShaderManager>().GetResource(path);
+		p_out = GetGlobalService<LittleEngine::ResourceManagement::ShaderManager>().GetResource(path);
 	else
 		p_out = nullptr;
 }
@@ -347,7 +347,7 @@ void LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_nam
 void LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_name, LittleEngine::Resources::Material *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
-		p_out = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::MaterialManager>().GetResource(path);
+		p_out = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>().GetResource(path);
 	else
 		p_out = nullptr;
 }
@@ -355,7 +355,7 @@ void LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_n
 void LittleEngine::XmlSerializerXX::DeserializeSound(const std::string& p_name, LittleEngine::Audio::Resources::Sound*& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
-		p_out = LittleEngine::Global::ServiceLocator::Get<LittleEngine::ResourceManagement::SoundManager>().GetResource(path);
+		p_out = GetGlobalService<LittleEngine::ResourceManagement::SoundManager>().GetResource(path);
 	else
 		p_out = nullptr;
 }

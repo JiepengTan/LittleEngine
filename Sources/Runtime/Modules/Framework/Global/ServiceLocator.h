@@ -11,7 +11,7 @@
 
 
 
-#define OVSERVICE(Type) LittleEngine::Global::ServiceLocator::Get<Type>()
+#define OVSERVICE(Type) GetGlobalService<Type>()
 
 namespace LittleEngine::Global
 {

@@ -12,6 +12,8 @@
 
 namespace LittleEngine
 {
+
+	
 	/**
 	* The scene manager of the current scene
 	*/
@@ -59,11 +61,12 @@ namespace LittleEngine
 		*/
 		bool LoadScene(const std::string& p_path, bool p_absolute = false);
 
+		bool SaveScene(const std::string& p_path);
 		/**
 		* Load specific scene in memory
 		* @param p_scenePath
 		*/
-		bool LoadSceneFromMemory(ISerializer& p_serializer);
+		bool LoadSceneFromMemory(const std::string& p_sceneStr);
 
 		/**
 		* Destroy current scene from memory

@@ -19,7 +19,7 @@ void LittleEngine::CAudioSource::DoInit(ActorPtr p_owner)
 {
 	Component::DoInit(p_owner);
 	m_audioSource = MakeUniquePtr<LittleEngine::Audio::Entities::AudioSource>
-	(LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioPlayer>(),
+	(GetGlobalService<LittleEngine::Audio::Core::AudioPlayer>(),
 		GetActor()->transform->GetFTransform());
 }
 
@@ -194,8 +194,8 @@ void LittleEngine::CAudioSource::OnInspector()
 		std::vector<float> result;
 
 		LittleEngine::FVector3 listenerPosition(0.0f, 0.0f, 0.0f);
-		bool playMode = LittleEngine::Global::ServiceLocator::Get<SceneManager>().GetCurrentScene()->IsPlaying();
-		auto listenerInfo = LittleEngine::Global::ServiceLocator::Get<LittleEngine::Audio::Core::AudioEngine>().GetListenerInformation(!playMode);
+		bool playMode = GetGlobalService<SceneManager>().GetCurrentScene()->IsPlaying();
+		auto listenerInfo = GetGlobalService<LittleEngine::Audio::Core::AudioEngine>().GetListenerInformation(!playMode);
 		if (listenerInfo.has_value())
 			listenerPosition = listenerInfo.value().first;
 

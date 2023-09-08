@@ -57,7 +57,7 @@ void LittleEngine::CAnimator::LoadAnimations()
     if (mesh == nullptr) return;
     auto model = mesh->GetModel();
     if (model == nullptr) return;
-    auto& mgr = LittleEngine::Global::ServiceLocator::Get
+    auto& mgr = GetGlobalService
         <LittleEngine::ResourceManagement::AnimationManager>();
     mgr.currentModel = model;
     auto anim = mgr.GetResource(m_animPath);
