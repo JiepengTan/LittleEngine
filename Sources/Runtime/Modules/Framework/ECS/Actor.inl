@@ -62,8 +62,7 @@ namespace LittleEngine
 		auto key = T::GetTypeID();
 		if(m_components.count(key) != 0)
 		{
-			Component* ptr = m_components.at(key).get();
-			return SharedPtr<T>(reinterpret_cast<T*>(ptr));// TODO can cast shared_ptr??
+			return std::dynamic_pointer_cast<T>(m_components.at(key));
 		}
 		return nullptr;
 	}

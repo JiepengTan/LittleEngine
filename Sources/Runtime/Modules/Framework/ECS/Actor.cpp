@@ -121,6 +121,7 @@ namespace LittleEngine
 
     ActorPtr Actor::GetParent() const
     {
+        if(!m_scene->HasActor(m_parentID)) return nullptr;
         return m_scene->GetActor(m_parentID);
     }
 
