@@ -60,7 +60,7 @@ namespace LittleEngine::Editor
                 auto& duplicateButton = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuItem>("Duplicate");
                 duplicateButton.ClickedEvent += [this]
                 {
-                    EDITOR_EXEC(DelayAction(EDITOR_BIND(DuplicateActor, std::ref(m_target), nullptr, true), 0));
+                    EDITOR_EXEC(DelayAction(EDITOR_BIND(DuplicateActor, m_target, nullptr, true), 0));
                 };
 
                 auto& deleteButton = CreateWidget<LittleEngine::UI::Widgets::Menu::MenuItem>("Delete");
@@ -311,7 +311,7 @@ namespace LittleEngine::Editor
 
         m_widgetActorLink[targetPtr->GetID()] = &textSelectable;
 
-        textSelectable.ClickedEvent += EDITOR_BIND(SelectActor, std::ref(p_actor));
-        textSelectable.DoubleClickedEvent += EDITOR_BIND(MoveToTarget, std::ref(p_actor));
+        textSelectable.ClickedEvent += EDITOR_BIND(SelectActor, p_actor);
+        textSelectable.DoubleClickedEvent += EDITOR_BIND(MoveToTarget, p_actor);
     }
 }

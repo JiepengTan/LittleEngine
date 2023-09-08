@@ -269,7 +269,8 @@ namespace LittleEngine
 
     ActorPtr Scene::GetActor(ActorID p_actorId) const
     {
-        LE_ASSERT(m_actors.count(p_actorId) != 0,"Can not find a actor in scene, should call HasActor first??" + std::to_string(p_actorId));
+        if( m_actors.count(p_actorId) == 0) return nullptr;
+        //LE_ASSERT(m_actors.count(p_actorId) != 0,"Can not find a actor in scene, should call HasActor first??" + std::to_string(p_actorId));
         return m_actors.at(p_actorId);
     }
 
