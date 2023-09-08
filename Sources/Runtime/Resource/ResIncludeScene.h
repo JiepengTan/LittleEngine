@@ -25,8 +25,10 @@ namespace LittleEngine
         bool			m_active = true;
         ActorID	        m_actorID = 0;
         ActorID			m_parentID = 0;
+        std::vector<ActorID> m_childrenIds;
         std::vector<Reflection::ReflectionPtr<Component>> m_components;
     };
+    
     
     REFLECTION_TYPE(ResPrefab)
     CLASS(ResPrefab: public ResObject, Fields)

@@ -168,7 +168,8 @@ namespace LittleEngine::Resources
 		*/
 		virtual void OnDeserialize(ISerializer p_serializer) override;
 
-		const std::string path;
+	public:
+		std::string path;
 
 	private:
 		LittleEngine::Rendering::Resources::Shader* m_shader = nullptr;

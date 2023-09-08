@@ -107,6 +107,7 @@ namespace LittleEngine
 		*/
 		void ScaleLocal(const struct LittleEngine::FVector3& p_scale);
 
+		void UpdateWorldMatrix(){m_transform.UpdateWorldMatrix();}
 		/**
 		* Return the position in local space
 		*/

@@ -8,12 +8,12 @@
 
 #include <stdint.h>
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 	/**
 	* Defines the types that a uniform can take
 	*/
-	enum class UniformType : uint32_t
+	enum class UniformType 
 	{
 		UNIFORM_BOOL			= 0x8B56,
 		UNIFORM_INT				= 0x1404,

@@ -15,19 +15,23 @@
 
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
+
+#include <complex.h>
+
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Rendering/ResourceManagement/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
+#include "Modules/Rendering/ResourceManagement/ModelManager.h"
 
 
 void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)
 {
 	Component::DoInit(p_owner);
-	m_materials.fill(nullptr);
-
-	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)
-		m_materialFields[i].fill(nullptr);
-
+	m_materials.clear();
+	for (auto item : m_materialFields)
+	{
+		item.fill(nullptr);
+	}
 	UpdateMaterialList();
 }
 
@@ -38,17 +42,29 @@ std::string LittleEngine::CMaterialRenderer::GetName()
 
 void LittleEngine::CMaterialRenderer::FillWithMaterial(LittleEngine::Resources::Material & p_material)
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materials[i] = &p_material;
+	SetMaterialAtIndex(0,&p_material);
 }
-
-void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material& p_material)
+void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index,const std::string& p_matPath)
 {
-	m_materials[p_index] = &p_material;
+	auto mat = GetGlobalService<ResourceManagement::MaterialManager>().GetResource(p_matPath);
+	SetMaterialAtIndex(p_index,mat);
+}
+void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material* p_material)
+{
+	auto count = m_materials.size();
+	for (int i =count ;i<=p_index;i++)
+	{
+		m_materials.push_back(nullptr);
+		m_materialNames.push_back("");
+	}
+	m_materials[p_index] = p_material;
+	m_materialNames[p_index] = p_material == nullptr?p_material->path:"";
+	
 }
 
 LittleEngine::Resources::Material* LittleEngine::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
 {
+	if(p_index> m_materials.size()	) return nullptr;
 	return m_materials.at(p_index);
 }
 
@@ -56,21 +72,27 @@ void LittleEngine::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
 {
 	if (p_index < m_materials.size())
 	{
-		m_materials[p_index] = nullptr;;
+		m_materials[p_index] = nullptr;
+		m_materialNames[p_index] = "";
 	}
 }
 
 void LittleEngine::CMaterialRenderer::RemoveMaterialByInstance(LittleEngine::Resources::Material& p_instance)
 {
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
+	{
 		if (m_materials[i] == &p_instance)
+		{
 			m_materials[i] = nullptr;
+			m_materialNames[i] = "";
+		}
+	}
 }
 
 void LittleEngine::CMaterialRenderer::RemoveAllMaterials()
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materials[i] = nullptr;
+	m_materials.clear();
+	m_materialNames.clear();
 }
 
 const LittleEngine::FMatrix4 & LittleEngine::CMaterialRenderer::GetUserMatrix() const
@@ -83,9 +105,24 @@ const LittleEngine::CMaterialRenderer::MaterialList& LittleEngine::CMaterialRend
 	return m_materials;
 }
 
+void LittleEngine::CMaterialRenderer::OnBeforeSceneSave(ActorPtr p_actor)
+{
+
+}
+
+void LittleEngine::CMaterialRenderer::OnAfterSceneLoaded(ActorPtr p_actor)
+{
+	m_materials.clear();
+	for (auto matName : m_materialNames)
+	{
+		auto mat = GetGlobalService<ResourceManagement::MaterialManager>().GetResource(matName);
+		m_materials.push_back(mat);
+	}
+	UpdateMaterialList();
+}
+
 void LittleEngine::CMaterialRenderer::OnSerialize(ISerializer p_serializer)
 {
-	
 	auto modelRenderer = owner->GetComponent<CModelRenderer>();
 	uint8_t elementsToSerialize = modelRenderer->GetModel() ? (uint8_t)std::min(modelRenderer->GetModel()->GetMaterialNames().size(), (size_t)MAX_MATERIAL_COUNT) : 0;
 	SerializeUtil::SerializeInt("material_count", elementsToSerialize);
@@ -155,18 +192,6 @@ void LittleEngine::CMaterialRenderer::OnInspector()
 
 void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 {
-	if (auto modelRenderer = owner->GetComponent<CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
-	{
-		uint8_t materialIndex = 0;
-
-		for (const std::string& materialName : modelRenderer->GetModel()->GetMaterialNames())
-		{
-			m_materialNames[materialIndex++] = materialName;
-		}
-
-		for (uint8_t i = materialIndex; i < MAX_MATERIAL_COUNT; ++i)
-			m_materialNames[i] = "";
-	}
 
 	for (uint8_t i = 0; i < m_materialFields.size(); ++i)
 	{

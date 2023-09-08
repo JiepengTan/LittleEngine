@@ -151,13 +151,13 @@ void LittleEngine::Rendering::Resources::Shader::QueryUniforms()
 
 			switch (static_cast<UniformType>(type))
 			{
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_BOOL:			defaultValue = std::make_any<bool>(GetUniformInt(name));					break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_INT:			defaultValue = std::make_any<int>(GetUniformInt(name));						break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT:		defaultValue = std::make_any<float>(GetUniformFloat(name));					break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC2:	defaultValue = std::make_any<LittleEngine::FVector2>(GetUniformVec2(name));		break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC3:	defaultValue = std::make_any<LittleEngine::FVector3>(GetUniformVec3(name));		break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_FLOAT_VEC4:	defaultValue = std::make_any<LittleEngine::FVector4>(GetUniformVec4(name));		break;
-			case LittleEngine::Rendering::Resources::UniformType::UNIFORM_SAMPLER_2D:	defaultValue = std::make_any<LittleEngine::Rendering::Resources::Texture*>(nullptr);	break;
+			case UniformType::UNIFORM_BOOL:			defaultValue = std::make_any<bool>(GetUniformInt(name));					break;
+			case UniformType::UNIFORM_INT:			defaultValue = std::make_any<int>(GetUniformInt(name));						break;
+			case UniformType::UNIFORM_FLOAT:		defaultValue = std::make_any<float>(GetUniformFloat(name));					break;
+			case UniformType::UNIFORM_FLOAT_VEC2:	defaultValue = std::make_any<LittleEngine::FVector2>(GetUniformVec2(name));		break;
+			case UniformType::UNIFORM_FLOAT_VEC3:	defaultValue = std::make_any<LittleEngine::FVector3>(GetUniformVec3(name));		break;
+			case UniformType::UNIFORM_FLOAT_VEC4:	defaultValue = std::make_any<LittleEngine::FVector4>(GetUniformVec4(name));		break;
+			case UniformType::UNIFORM_SAMPLER_2D:	defaultValue = std::make_any<LittleEngine::Rendering::Resources::Texture*>(nullptr);	break;
 			}
 
 			if (defaultValue.has_value())

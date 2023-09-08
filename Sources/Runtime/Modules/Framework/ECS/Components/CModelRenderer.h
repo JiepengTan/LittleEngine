@@ -22,6 +22,7 @@ namespace LittleEngine
 	CLASS (CModelRenderer : public Component, WhiteListFields)
 	{
 		REFLECTION_COMPONENT_BODY(CModelRenderer)
+		friend class CMaterialRenderer;
 	public:
 		/**
 		* Defines how the model renderer bounding sphere should be interpreted
@@ -53,7 +54,7 @@ namespace LittleEngine
 		/**
 		* Returns the current model
 		*/
-		LittleEngine::Rendering::Resources::Model* GetModel() const;
+		LittleEngine::Rendering::Resources::Model* GetModel();
 
 		/**
 		* Sets a bounding mode
@@ -96,11 +97,16 @@ namespace LittleEngine
 		* @param p_root
 		*/
 		virtual void OnInspector() override;
+		
+		virtual void OnBeforeSceneSave(ActorPtr p_actor) override;
+		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
 
 	private:
-		LittleEngine::Rendering::Resources::Model* m_model = nullptr;
 		LittleEngine::Eventing::Event<> m_modelChangedEvent;
-		LittleEngine::Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
+		META(Enable)
+		LittleEngine::Rendering::Resources::Model* m_model = nullptr;
+		META(Enable)
+		Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
 		META(Enable)
 		EFrustumBehaviour m_frustumBehaviour = EFrustumBehaviour::CULL_MODEL;
 	};

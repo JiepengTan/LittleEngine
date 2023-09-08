@@ -34,6 +34,18 @@ namespace LittleEngine
         }
         
         template<typename T>
+        static Json WriteRes(T* instance)
+        {
+            static_assert(always_false<T>, "Serializer::Write<T> has not been implemented yet!"); 
+            return Json();
+        }
+        template<typename T>
+        static void ReadRes(const Json& json_context, T*& instance)
+        {
+            static_assert(always_false<T>, "Serializer::Read<T> has not been implemented yet!");  
+        }
+        
+        template<typename T>
         static Json WritePointer(T* instance)
         {
             return Json::object {{"$typeName", Json {"*"}}, {"$context", JsonSerializer::Write(*instance)}};
@@ -74,12 +86,7 @@ namespace LittleEngine
             instance.SetTypeName(type_name);
             return ReadPointer(json_context, instance.GetPtrReference());
         }
-        
-        template<typename T>
-        static Json WriteComponent(const T& instance)
-        {
-            return Json::object {{"$typeName", Json {instance.GetTypeName()}}, {"$context", JsonSerializer::Write(*instance)}};
-        }
+    
         
         template<typename T>
         static Json Write(const T& instance)
@@ -94,7 +101,6 @@ namespace LittleEngine
                 return Json();
             }
         }
-
         
         template<typename T>
         static T& Read(const Json& json_context, T& instance)
@@ -109,6 +115,7 @@ namespace LittleEngine
                 return instance;
             }
         }
+
     };
 
     
@@ -161,50 +168,4 @@ namespace LittleEngine
     template<>
     std::string& JsonSerializer::Read(const Json& json_context, std::string& instance);
 
-    // template<>
-    // Json Serializer::Write(const Reflection::object& instance);
-    // template<>
-    // Reflection::object& Serializer::Read(const Json& json_context, Reflection::object& instance);
-
-    ////////////////////////////////////
-    ////sample of generation coder
-    ////////////////////////////////////
-    // class test_class
-    //{
-    // public:
-    //     int a;
-    //     unsigned int b;
-    //     std::vector<int> c;
-    // };
-    // class ss;
-    // class jkj;
-    // template<>
-    // Json Serializer::Write(const ss& instance);
-    // template<>
-    // Json Serializer::Write(const jkj& instance);
-
-    /*REFLECTION_TYPE(jkj)
-    CLASS(jkj,Fields)
-    {
-        REFLECTION_BODY(jkj);
-        int jl;
-    };
-
-    REFLECTION_TYPE(ss)
-    CLASS(ss:public jkj,WhiteListFields)
-    {
-        REFLECTION_BODY(ss);
-        int jl;
-    };*/
-
-    ////////////////////////////////////
-    ////template of generation coder
-    ////////////////////////////////////
-    // template<>
-    // Json Serializer::Write(const test_class& instance);
-    // template<>
-    // test_class& Serializer::Read(const Json& json_context, test_class& instance);
-
-    //
-    ////////////////////////////////////
 } // namespace LittleEngine

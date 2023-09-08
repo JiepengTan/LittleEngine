@@ -42,7 +42,7 @@ void LittleEngine::CModelRenderer::SetModel(LittleEngine::Rendering::Resources::
 	m_modelChangedEvent.Invoke();
 }
 
-LittleEngine::Rendering::Resources::Model * LittleEngine::CModelRenderer::GetModel() const
+LittleEngine::Rendering::Resources::Model * LittleEngine::CModelRenderer::GetModel()
 {
 	return m_model;
 }
@@ -114,4 +114,11 @@ void LittleEngine::CModelRenderer::OnInspector()
 	};
 
 	centerLabel.enabled = centerWidget.enabled = radiusLabel.enabled = radiusWidget.enabled = m_frustumBehaviour == EFrustumBehaviour::CULL_CUSTOM;
+}
+
+void LittleEngine::CModelRenderer::OnBeforeSceneSave(ActorPtr p_actor)
+{}
+
+void LittleEngine::CModelRenderer::OnAfterSceneLoaded(ActorPtr p_actor)
+{
 }

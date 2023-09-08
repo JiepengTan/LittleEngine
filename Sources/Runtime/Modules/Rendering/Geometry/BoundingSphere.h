@@ -13,8 +13,11 @@ namespace LittleEngine::Rendering::Geometry
 	/**
 	* Data structure that defines a bounding sphere (Position + radius)
 	*/
-	struct BoundingSphere
+	REFLECTION_TYPE(BoundingSphere)
+	STRUCT (BoundingSphere , Fields)
 	{
+		REFLECTION_BODY(BoundingSphere)
+	public:
 		LittleEngine::FVector3 position;
 		float radius;
 	};

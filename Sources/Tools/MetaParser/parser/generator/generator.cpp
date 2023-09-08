@@ -65,6 +65,8 @@ namespace Generator
             filed_define.set("class_field_type", field->m_type);
             filed_define.set("class_field_display_name", field->m_display_name);
             filed_define.set("class_field_is_enum", field->m_is_enum);
+            filed_define.set("class_field_is_pointer", field->m_is_pointer);
+            filed_define.set("class_field_is_normal", !field->m_is_pointer&&!field->m_is_enum);
             
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);

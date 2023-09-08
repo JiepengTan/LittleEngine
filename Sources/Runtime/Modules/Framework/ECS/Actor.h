@@ -26,7 +26,7 @@ namespace LittleEngine
 
 namespace LittleEngine
 {
-	enum EActorAliveState
+	enum class EActorAliveState
 	{
 		Alive,
 		Destroying,
@@ -53,14 +53,18 @@ namespace LittleEngine
 		* @param p_playing
 		*/
 		void DoInit(Scene* p_scene, ActorID p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
-
+		
+		void SaveTo(ResActor& p_resActor);
+		void LoadFrom(ResActor& p_resActor);
+		void OnBeforeSceneSave(Scene* p_scene);
+		void OnAfterSceneLoaded(Scene* p_scene);
+		
 		/**
 		* Destructor of the actor instance. Force invoke ComponentRemovedEvent and BehaviourRemovedEvent
 		* for every components and behaviours
 		*/
 		virtual ~Actor() override;
 
-		void SaveTo(ResActor& p_resActor); 
 		/**
 		* Return the current name of the actor
 		*/
@@ -350,6 +354,7 @@ namespace LittleEngine
 		/**
 		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself
 		*/
+		META(Enable)
 		EActorAliveState m_aliveState= EActorAliveState::Alive ;
 		
 	};

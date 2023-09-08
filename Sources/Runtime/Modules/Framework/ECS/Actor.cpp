@@ -24,11 +24,46 @@ namespace LittleEngine
         m_playing = p_playing;
         transform = AddComponent<CTransform>();
     }
-
     Actor::~Actor()
     {
     }
-
+    
+    void Actor::OnBeforeSceneSave(Scene* p_scene)
+    {
+        
+    }
+    void Actor::OnAfterSceneLoaded(Scene* p_scene)
+    {
+        auto comps = GetComponentsCopy(m_components);
+        auto self = m_scene->GetActor(m_actorID);
+        for (auto comp : comps)
+        {
+            comp->owner = self;
+            comp->OnAfterSceneLoaded(comp->owner);
+        }
+        
+    }
+    void Actor::LoadFrom(ResActor& p_resActor)
+    {
+        m_prefabGuid = p_resActor.m_prefabGuid;
+        m_instanceId = p_resActor.m_instanceId;
+        m_name = p_resActor.m_name;
+        m_tag = p_resActor.m_tag;
+        m_active = p_resActor.m_active;
+        m_actorID = p_resActor.m_actorID;
+        m_parentID = p_resActor.m_parentID;
+        for (auto comp : p_resActor.m_components)
+        {
+            SharedPtr<Component> sptr;
+            sptr.reset(comp.GetPtr());
+            m_components[comp->GetTypeID()] = sptr;
+        }
+        for (auto child : p_resActor.m_childrenIds)
+        {
+            m_childrenIds.emplace(child);
+        }
+        transform = GetComponent<CTransform>();
+    }
     void Actor::SaveTo(ResActor& p_resActor)
     {
         p_resActor.m_prefabGuid = m_prefabGuid;

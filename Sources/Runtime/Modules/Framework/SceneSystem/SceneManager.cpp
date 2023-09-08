@@ -108,14 +108,12 @@ bool LittleEngine::SceneManager::SaveScene(const std::string& p_path)
 bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneStr)
 {
 	LoadEmptyScene();
-	//std::string error;
-	//auto&& json = Json::parse(p_sceneStr, error);
-	//ResScene resScene;
-	//JsonSerializer::Read(json, resScene);
-	// TODO recover scene
-	//m_currentScene->OnDeserialize(p_serializer);
-	LittleEngine::Windowing::Dialogs::MessageBox message("Scene loading failed", "The scene you are trying to load was not found or corrupted", LittleEngine::Windowing::Dialogs::MessageBox::EMessageType::ERROR, LittleEngine::Windowing::Dialogs::MessageBox::EButtonLayout::OK, true);
-	return false;
+	std::string error;
+	auto&& asset_json = Json::parse(p_sceneStr, error);
+	ResScene resScene;
+	JsonSerializer::Read(asset_json,resScene);
+	m_currentScene->LoadFrom(resScene);
+	return true;
 }
 
 void LittleEngine::SceneManager::UnloadCurrentScene()

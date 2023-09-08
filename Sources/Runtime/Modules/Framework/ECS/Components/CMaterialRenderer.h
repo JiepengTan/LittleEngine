@@ -29,8 +29,8 @@ namespace LittleEngine
 	{
 		REFLECTION_COMPONENT_BODY(CMaterialRenderer)
 	public:
-		using MaterialList = std::array<LittleEngine::Resources::Material*, MAX_MATERIAL_COUNT>;
-		using MaterialField = std::array<std::array<LittleEngine::UI::Widgets::AWidget*, 3>, MAX_MATERIAL_COUNT>;
+		using MaterialList = std::vector<LittleEngine::Resources::Material*>;
+		using MaterialField = std::vector<std::array<LittleEngine::UI::Widgets::AWidget*, 3>>;
 
 		/**
 		* Constructor
@@ -53,8 +53,8 @@ namespace LittleEngine
 		* @param p_index
 		* @param p_material
 		*/
-		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material& p_material);
-
+		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material* p_material);
+		void SetMaterialAtIndex(uint8_t p_index,const std::string& p_matPath);
 		/**
 		* Returns the material to use at index
 		* @param p_index
@@ -127,12 +127,16 @@ namespace LittleEngine
 		* @param p_root
 		*/
 		virtual void OnInspector() override;
+		virtual void OnBeforeSceneSave(ActorPtr p_actor) override;
+		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
 
 	private:
-		MaterialList m_materials;
-		MaterialField m_materialFields;
-		LittleEngine::FMatrix4 m_userMatrix;
+		std::vector<LittleEngine::Resources::Material*> m_materials;
+		MaterialField  m_materialFields;
 		META(Enable)
-		std::string m_materialNames[MAX_MATERIAL_COUNT];
+		std::vector<std::string> m_materialNames;
+		META(Enable)
+		FMatrix4 m_userMatrix;
+		
 	};
 }

@@ -279,7 +279,49 @@ namespace LittleEngine
     }
 
     ObjectID Scene::GetSceneId() const    { return m_sceneId;}
-    
+    void Scene::LoadFrom(ResScene& resScene)
+    {
+        for (auto& resActor : resScene.actors)
+        {
+            auto actor= MakeSharedPtr<Actor>();
+            actor->m_scene = this; 
+            actor->LoadFrom(resActor);
+            m_actors.emplace(actor->GetID(), actor);
+        }
+        auto actors = GetActorsCopy(m_actors);
+        // update transform
+        std::queue<ActorPtr> rootActors;
+        for (auto actor : actors)
+        {
+            if(!HasActor(actor->m_parentID))
+            {
+                actor->m_parentID = k_invalidID;
+                rootActors.emplace(actor);
+            }
+        }
+        while (rootActors.size()>0)
+        {
+            auto& actor = rootActors.front();
+            rootActors.pop();
+            if(actor->m_parentID == k_invalidID)
+            {
+                actor->transform->SetParent(nullptr);
+                actor->transform->UpdateWorldMatrix();
+            }else
+            {
+                actor->transform->SetParent(GetActor(actor->m_parentID)->transform);
+            }
+            for (auto child : actor->m_childrenIds)
+            {
+                rootActors.push(GetActor(child));
+            }
+        }
+        // call child to resolve references
+        for (auto actor : actors)
+        {
+            actor->OnAfterSceneLoaded(this);
+        }
+    }
     void Scene::SaveTo(ResScene& resScene)
     {
         auto& actors = GetActorsCopy(m_actors);

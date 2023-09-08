@@ -29,7 +29,8 @@ namespace LittleEngine
 		* Destroying a AComponent will call dervied classes destructors
 		*/
 		virtual ~Component();
-
+		virtual void OnBeforeSceneSave(ActorPtr p_actor){}
+		virtual void OnAfterSceneLoaded(ActorPtr p_actor){}
 		/**
 		* Constructor of a AComponent (Must be called by derived classes)
 		* @param p_owner
