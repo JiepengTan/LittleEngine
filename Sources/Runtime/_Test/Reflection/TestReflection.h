@@ -6,7 +6,7 @@ namespace LittleEngine::Test
     void DoReflectionTest();
     REFLECTION_TYPE(BaseTest)
     CLASS(BaseTest, Fields)
-    {
+    { 
         REFLECTION_BODY(BaseTest)
 
         public:

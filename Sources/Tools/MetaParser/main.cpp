@@ -32,7 +32,7 @@ int parse(std::string project_input_file_name,
         return result;
     }
 
-    parser.generateFiles();
+    parser.generateFiles(); 
 
     return 0;
 }

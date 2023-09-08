@@ -88,9 +88,10 @@ namespace LittleEngine
         auto actorId = ActorIDAllocator::Alloc();
         LOG_INFO("scene " + std::to_string(GetSceneId()) + " Create Actor " + std::to_string(actorId) + "  name ="            + p_name);
         auto instance= MakeSharedPtr<Actor>();
+        instance->SetID(actorId);
+        m_actors.emplace(instance->GetID(), instance);
         instance->DoInit(this, actorId, p_name, p_tag, m_isPlaying);
         CreatedEvent.Invoke(instance);
-        m_actors.emplace(instance->GetID(), instance);
         
         if (m_isPlaying)
         {
@@ -263,6 +264,17 @@ namespace LittleEngine
             m_tempActors.push_back(item);
         return m_tempActors;
     }
+
+    bool Scene::HasActor(ActorID p_actorId) const    { return m_actors.count(p_actorId) != 0;}
+
+    ActorPtr Scene::GetActor(ActorID p_actorId) const
+    {
+        LE_ASSERT(m_actors.count(p_actorId) != 0,"Can not find a actor in scene, should call HasActor first??" + std::to_string(p_actorId));
+        return m_actors.at(p_actorId);
+    }
+
+    ObjectID Scene::GetSceneId() const    { return m_sceneId;}
+
     void Scene::OnSerialize(ISerializer p_serializer)
     {
         // TODO tanjp OnSerialize Scene

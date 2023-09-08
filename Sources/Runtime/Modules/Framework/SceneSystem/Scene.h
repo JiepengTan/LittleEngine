@@ -193,9 +193,10 @@ namespace LittleEngine
 
 		ActorVector& GetActorsCopy(ActorMap& p_vec);
 		ActorVector& GetActorsCopy(ActorVector& p_vec);
-		bool HasActor(ActorID p_actorId)const{ return m_actors.count(p_actorId) != 0;}
-		ActorPtr GetActor(ActorID p_actorId)const { return m_actors.at(p_actorId);}
-		ObjectID GetSceneId()const{ return m_sceneId;}
+		bool HasActor(ActorID p_actorId)const;
+		ActorPtr GetActor(ActorID p_actorId)const;
+		ObjectID GetSceneId()const;
+
 	private:
 		bool m_isPlaying = false;
 		

@@ -66,19 +66,19 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	renderer->SetCapability(LittleEngine::Rendering::Settings::ERenderingCapability::MULTISAMPLE, true);
 	shapeDrawer = std::make_unique<LittleEngine::Rendering::Core::ShapeDrawer>(*renderer);
 
-	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\");
-
+	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\");
+	
 	uiManager = std::make_unique<LittleEngine::UI::Core::UIManager>(window->GetGlfwWindow(), LittleEngine::UI::Styling::EStyle::ALTERNATIVE_DARK);
 	uiManager->LoadFont("Ruda_Big", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
 	uiManager->LoadFont("Ruda_Small", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
 	uiManager->LoadFont("Ruda_Medium", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 14);
 	uiManager->UseFont("Ruda_Medium");
-	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\layout.ini");
+	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini");
 	uiManager->SetEditorLayoutAutosaveFrequency(60.0f);
 	uiManager->EnableEditorLayoutSave(true);
 	uiManager->EnableDocking(true);
 
-	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\layout.ini"))
+	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini"))
 		uiManager->ResetLayout("Config\\layout.ini");
 
 	/* Audio */

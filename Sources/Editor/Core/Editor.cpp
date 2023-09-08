@@ -35,9 +35,11 @@ LittleEngine::Editor::Core::Editor::Editor(Context& p_context) :
 	m_panelsManager(m_canvas),
 	m_editorActions(m_context, m_editorRenderer, m_panelsManager)
 {
+	LOG_INFO( "DebugProgress Editor " );
 	SetupUI();
-
+	LOG_INFO( "DebugProgress SetupUI " );
 	m_context.sceneManager.LoadEmptyLightedScene();
+	LOG_INFO( "DebugProgress LoadEmptyLightedScene " );
 }
 
 LittleEngine::Editor::Core::Editor::~Editor()

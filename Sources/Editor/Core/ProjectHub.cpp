@@ -11,6 +11,7 @@
 
 #include "../Editor/Core/ProjectHub.h"
 
+#include "Core/Analytics/Hardware/CPUInfo.h"
 #include "Modules/UI/Widgets/Texts/Text.h"
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
@@ -25,7 +26,7 @@
 #include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 #include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\projects.ini")
+#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\projects.ini")
 
 class ProjectHubPanel : public LittleEngine::UI::Panels::PanelWindow
 {
@@ -39,8 +40,8 @@ public:
 		resizable = false;
 		movable = false;
 		titleBar = false;
-
-		std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEngine::Editor\\");
+		auto appPath = std::string(getenv("APPDATA"))+"\\OverloadTech\\LittleEditor\\";
+		std::filesystem::create_directories(appPath );
 
 		SetSize({ 1000, 580 });
 		SetPosition({ 0.f, 0.f });
@@ -118,6 +119,7 @@ public:
 
 		columns.widths = { 750, 500 };
 
+		std::string firstProject = "";
 		std::string line;
 		std::ifstream myfile(PROJECTS_FILE);
 		if (myfile.is_open())
@@ -126,6 +128,7 @@ public:
 			{
 				if (std::filesystem::exists(line)) // TODO: Delete line from the file
 				{
+					if(firstProject.empty()) firstProject = line;
 					auto& text = columns.CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(line);
 					auto& actions = columns.CreateWidget<LittleEngine::UI::Widgets::Layout::Group>();
 					auto& openButton = actions.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Open");
@@ -165,6 +168,10 @@ public:
 				}
 			}
 			myfile.close();
+		}
+		if(!firstProject.empty())
+		{
+			OpenProject(firstProject); // fast open first project
 		}
 	}
 
