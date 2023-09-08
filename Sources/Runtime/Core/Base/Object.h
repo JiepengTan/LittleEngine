@@ -52,7 +52,7 @@ namespace LittleEngine
         virtual void OnDeserialize(ISerializer p_serializer);
 
         ObjectID GetObjectId(){  return m_instanceId;}
-    private:
+    protected:
         META(Enable)
         ObjectID m_instanceId;
     };

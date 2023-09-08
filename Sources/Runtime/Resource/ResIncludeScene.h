@@ -19,7 +19,7 @@ namespace LittleEngine
     public:
         StringName      m_prefabGuid;
         
-        ObjectID        m_objectId;
+        ObjectID        m_instanceId;
         StringName		m_name = "";
         StringName		m_tag = "";
         bool			m_active = true;
@@ -41,6 +41,6 @@ namespace LittleEngine
         REFLECTION_BODY(ResScene)
     public:
         int m_sceneId;
-        std::vector<ResActor> actors;
+        std::vector<LittleEngine::ResActor> actors;
     };
 }

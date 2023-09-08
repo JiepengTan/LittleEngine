@@ -8,6 +8,8 @@
 #include <unordered_Set>
 #include <vector>
 
+#include "Core/Base/Macro.h"
+
 namespace LittleEngine
 {
 
@@ -28,7 +30,8 @@ namespace LittleEngine
     friend class JsonSerializer;\
     public :\
     static TypeID MetaTypeId;\
-    static TypeID GetTypeID(){ return class_name##::MetaTypeId;}
+    static TypeID GetTypeID(){ return class_name##::MetaTypeId;}\
+    static std::string GetTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
     
     // public: virtual std::string GetTypeName() override {return #class_name;}
 
@@ -43,7 +46,7 @@ namespace LittleEngine
 
 #define REGISTER_FIELD_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToFieldMap(name, value);
 #define REGISTER_Method_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
-#define REGISTER_BASE_CLASS_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value);
+#define REGISTER_BASE_CLASS_TO_MAP(name, value, typeId) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value, typeId);
 #define REGISTER_ARRAY_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToArrayMap(name, value);
 #define UNREGISTER_ALL LittleEngine::Reflection::TypeMetaRegisterInterface::UnRegisterAll();
 
@@ -105,12 +108,14 @@ namespace LittleEngine
         class TypeMetaRegisterInterface
         {
         public:
-            static void RegisterToClassMap(const char* name, ClassFunctionTuple* value);
+            static void RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId);
             static void RegisterToFieldMap(const char* name, FieldFunctionTuple* value);
 
             static void RegisterToMethodMap(const char* name, MethodFunctionTuple* value);
             static void RegisterToArrayMap(const char* name, ArrayFunctionTuple* value);
-
+            
+            static std::string GetTypeName(TypeID typeId);
+            
             static void UnRegisterAll();
         };
         class TypeMeta

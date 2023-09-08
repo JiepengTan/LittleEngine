@@ -3,6 +3,8 @@
 #include <cstring>
 #include <map>
 
+#include "Core/Base/Macro.h"
+
 namespace LittleEngine
 {
     namespace Reflection
@@ -10,6 +12,7 @@ namespace LittleEngine
         const char* k_unknown_type = "UnknownType";
         const char* k_unknown      = "Unknown";
 
+        static std::map<TypeID, std::string>                    m_id2ClassNameMap;
         static std::map<std::string, ClassFunctionTuple*>       m_classMap;
         static std::multimap<std::string, FieldFunctionTuple*>  m_fieldMap;
         static std::multimap<std::string, MethodFunctionTuple*> m_methodMap;
@@ -35,10 +38,25 @@ namespace LittleEngine
             }
         }
 
-        void TypeMetaRegisterInterface::RegisterToClassMap(const char* name, ClassFunctionTuple* value)
+        std::string TypeMetaRegisterInterface::GetTypeName(TypeID typeId)
         {
+            if (m_id2ClassNameMap.find(typeId) == m_id2ClassNameMap.end())
+            {
+                return m_id2ClassNameMap.at(typeId);
+            }
+            return "Unknown_Type";
+        }
+
+        void TypeMetaRegisterInterface::RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId)
+        {
+            if (m_id2ClassNameMap.find(typeId) == m_id2ClassNameMap.end())
+            {
+                m_id2ClassNameMap.insert(std::make_pair(typeId, std::string(name)));
+            }
+            
             if (m_classMap.find(name) == m_classMap.end())
             {
+                m_id2ClassNameMap.insert(std::make_pair(typeId, std::string(name)));
                 m_classMap.insert(std::make_pair(name, value));
             }
             else
@@ -46,6 +64,7 @@ namespace LittleEngine
                 delete value;
             }
         }
+        
 
         void TypeMetaRegisterInterface::UnRegisterAll()
         {
