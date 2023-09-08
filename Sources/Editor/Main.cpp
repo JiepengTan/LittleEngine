@@ -22,6 +22,7 @@
 #include "Core/Reflection/ReflectionRegister.h"
 #include "_Generated/Serializer/AllSerializer.ipp"
 #include "_Generated/Reflection/AllReflection.h"
+#include "_Test/TestManager.h"
 
 FORCE_DEDICATED_GPU
 
@@ -37,7 +38,6 @@ void UpdateWorkingDirectory(const std::string& p_executablePath)
 		std::filesystem::current_path(LittleEngine::Utils::PathParser::GetContainingFolder(p_executablePath));
 	}
 }
-using namespace LittleEngine;
 
 
 int main(int argc, char** argv);
@@ -53,11 +53,10 @@ INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nC
 int main(int argc, char** argv)
 {
 	UpdateWorkingDirectory(argv[0]);
-	Reflection::TypeMetaRegister::MetaRegister();
-	std::cout<<Object::GetTypeID()<<std::endl;
-	std::cout<<Component::GetTypeID()<<std::endl;
-	return 0;
-	//ShowMetaExample();
+	LittleEngine::Reflection::TypeMetaRegister::MetaRegister();
+	
+	LittleEngine::Test::RunTests();
+	
 	bool ready = false;
 	std::string projectPath;
 	std::string projectName;
