@@ -11,6 +11,7 @@
 #include "Resource/Asset/Texture.h"
 #include "Resource/Asset/Shader.h"
 #include "Modules/Framework/API/ISerializable.h"
+#include "Resource/Data/ResIncludeRendering.h"
 
 
 namespace LittleEngine
@@ -18,13 +19,14 @@ namespace LittleEngine
 	/**
 	* A material is a combination of a shader and some settings (Material settings and shader settings)
 	*/
-	class Material : public API::ISerializable
+	class Material 
 	{
 	public:
 		/**
 		* Defines the shader to attach to this material instance
 		* @param p_shader
 		*/
+		void SetShader(StringText p_path);
 		void SetShader(Shader* p_shader);
 
 		/**
@@ -151,21 +153,8 @@ namespace LittleEngine
 		/**
 		* Returns the uniforms data of the material
 		*/
-		std::map<std::string, std::any>& GetUniformsData();
+		std::vector<ResUniformInfo>& GetUniformsData();
 
-		/**
-		* Serialize the material
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnSerialize(ISerializer p_serializer) override;
-
-		/**
-		* Deserialize the material
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 	public:
 		std::string path;
@@ -173,14 +162,9 @@ namespace LittleEngine
 	private:
 		Shader* m_shader = nullptr;
 		std::map<std::string, std::any> m_uniformsData;
-
-		bool m_blendable		= false;
-		bool m_backfaceCulling	= true;
-		bool m_frontfaceCulling = false;
-		bool m_depthTest		= true;
-		bool m_depthWriting		= true;
-		bool m_colorWriting		= true;
-		int m_gpuInstances		= 1;
+		bool m_isDirty = false;
+		META(Enable)
+		ResMaterial m_res;
 	};
 }
 

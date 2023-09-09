@@ -1,6 +1,7 @@
 #pragma once
 #include "ResIncludeBasic.h"
 #include "Resource/Asset/UniformType.h"
+#include "Resource/Core/ResPtr.h"
 
 namespace LittleEngine
 {
@@ -25,14 +26,27 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResUniformInfo)
     public:
-        std::string    key;
+        FVector4    m_data;
+        
         UniformType     m_uniformType;
-        bool m_bool		    ;
-        int  m_int	        ;
-        float m_float	    ;
-        FVector4 m_vec4	    ;
-        FMatrix4 m_matrix4	;
-        std::string    texturePath;
+        std::string    m_key;
+        TextureResPtr   m_texture;
+
+        bool GetBool() const { return m_data.x>0.5f;}
+        int GetInt() const{ return (int)(m_data.x+0.5f);}
+        float GetFloat() const{ return m_data.x;}
+        FVector2 GetVector2()const { return FVector2(m_data.x,m_data.y);}
+        FVector3 GetVector3()const { return FVector3(m_data.x,m_data.y,m_data.z);}
+        FVector4 GetVector4()const { return m_data;}
+
+
+        void SetBool(bool val){ m_data.x = val?1.0f:0.0f; }
+        void SetInt(int val){ m_data.x = (float)val;}
+        void SetFloat(float val){ m_data.x = val;}
+        void SetVector2(FVector2 val){ m_data.x = val.x;m_data.y = val.y;}
+        void SetVector3(FVector3 val){ m_data.x = val.x;m_data.y = val.y;m_data.z = val.z;}
+        void SetVector4(FVector4 val){ m_data = val;}
+        void SetTexture(Texture* texture){m_texture = TextureResPtr::NullPtr;}
     };
     
     REFLECTION_TYPE(ResMaterial)
@@ -47,7 +61,7 @@ namespace LittleEngine
         bool m_depthWriting		= true;
         bool m_colorWriting		= true;
         int  m_gpuInstances		= 1;
-		std::string m_shader ;
+		ShaderResPtr        m_shader ;
         std::vector<ResUniformInfo> m_uniformsData;
     };
     

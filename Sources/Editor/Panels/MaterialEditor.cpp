@@ -313,10 +313,11 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 
 	m_shaderSettingsColumns->RemoveAllWidgets(); // Ensure that the m_shaderSettingsColumns is empty
 
-	std::multimap<int, std::pair<std::string, std::any*>> sortedUniformsData;
+	std::multimap<int, std::pair<std::string, ResUniformInfo*>> sortedUniformsData;
 
-	for (auto&[name, value] : m_target->GetUniformsData())
+	for (auto item : m_target->GetUniformsData())
 	{
+		auto name = item.m_key;
 		int orderID = 0;
 
 		auto uniformData = m_target->GetShader()->GetUniformInfo(name);
@@ -334,7 +335,7 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 			case UniformType::UNIFORM_BOOL:			orderID = 6; break;
 			}
 
-			sortedUniformsData.emplace(orderID, std::pair<std::string, std::any*>{ name, & value });
+			sortedUniformsData.emplace(orderID, std::pair{ name, &item });
 		}
 	}
 
@@ -343,17 +344,18 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 		auto uniformData = m_target->GetShader()->GetUniformInfo(info.first);
 		
 		GUIUtil::m_root = m_shaderSettingsColumns;
+		auto& data = info.second->m_data;
 		if (uniformData)
 		{
 			switch (uniformData->type)
 			{
-			case UniformType::UNIFORM_BOOL:			GUIUtil::DrawBoolean( UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
-			case UniformType::UNIFORM_INT:			GUIUtil::DrawScalar<int>( UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
-			case UniformType::UNIFORM_FLOAT:		GUIUtil::DrawScalar<float>( UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);		break;
-			case UniformType::UNIFORM_FLOAT_VEC2:	GUIUtil::DrawVec2( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector2&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);	break;
-			case UniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector3&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
-			case UniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector4&>(*info.second), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
-			case UniformType::UNIFORM_SAMPLER_2D:	GUIUtil::DrawTexture( UniformFormat(info.first), reinterpret_cast<Texture * &>(*info.second));																break;
+				case UniformType::UNIFORM_BOOL:			GUIUtil::DrawBoolean( UniformFormat(info.first), reinterpret_cast<bool&>(data));																	break;
+				case UniformType::UNIFORM_INT:			GUIUtil::DrawScalar<int>( UniformFormat(info.first), reinterpret_cast<int&>(data));																break;
+				case UniformType::UNIFORM_FLOAT:		GUIUtil::DrawScalar<float>( UniformFormat(info.first), reinterpret_cast<float&>(data), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);		break;
+				case UniformType::UNIFORM_FLOAT_VEC2:	GUIUtil::DrawVec2( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector2&>(data), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);	break;
+				case UniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector3&>(data), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
+				case UniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4( UniformFormat(info.first), reinterpret_cast<LittleEngine::FVector4&>(data), 0.01f, GUIUtil::_MIN_FLOAT, GUIUtil::_MAX_FLOAT);			break;
+				case UniformType::UNIFORM_SAMPLER_2D:	GUIUtil::DrawTexture( UniformFormat(info.first), info.second->m_texture);																break;
 			}
 		}
 	}

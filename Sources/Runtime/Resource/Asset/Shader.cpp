@@ -144,31 +144,31 @@ void LittleEngine::Shader::QueryUniforms()
 		GLsizei actualLength = 0;
 		glGetActiveUniform(id, unif, static_cast<GLsizei>(nameData.size()), &actualLength, &arraySize, &type, &nameData[0]);
 		std::string name(static_cast<char*>(nameData.data()), actualLength);
-
+		Resources::UniformInfo info;
 		if (!IsEngineUBOMember(name))
 		{
 			std::any defaultValue;
-
-			switch (static_cast<UniformType>(type))
+			bool hasValue = false;
+			UniformType utype = static_cast<UniformType>(type);
+			switch (utype)
 			{
-			case UniformType::UNIFORM_BOOL:			defaultValue = std::make_any<bool>(GetUniformInt(name));					break;
-			case UniformType::UNIFORM_INT:			defaultValue = std::make_any<int>(GetUniformInt(name));						break;
-			case UniformType::UNIFORM_FLOAT:		defaultValue = std::make_any<float>(GetUniformFloat(name));					break;
-			case UniformType::UNIFORM_FLOAT_VEC2:	defaultValue = std::make_any<LittleEngine::FVector2>(GetUniformVec2(name));		break;
-			case UniformType::UNIFORM_FLOAT_VEC3:	defaultValue = std::make_any<LittleEngine::FVector3>(GetUniformVec3(name));		break;
-			case UniformType::UNIFORM_FLOAT_VEC4:	defaultValue = std::make_any<LittleEngine::FVector4>(GetUniformVec4(name));		break;
-			case UniformType::UNIFORM_SAMPLER_2D:	defaultValue = std::make_any<LittleEngine::Texture*>(nullptr);	break;
+				case UniformType::UNIFORM_BOOL:			hasValue = true;info.defaultValue.SetBool(GetUniformInt(name))  ;	break;
+				case UniformType::UNIFORM_INT:			hasValue = true;info.defaultValue.SetInt(GetUniformInt(name))  ;	break;
+				case UniformType::UNIFORM_FLOAT:		hasValue = true;info.defaultValue.SetFloat(GetUniformFloat(name));	break;
+				case UniformType::UNIFORM_FLOAT_VEC2:	hasValue = true;info.defaultValue.SetVector2(GetUniformVec2(name)) ;		break;
+				case UniformType::UNIFORM_FLOAT_VEC3:	hasValue = true;info.defaultValue.SetVector3(GetUniformVec3(name)) ;		break;
+				case UniformType::UNIFORM_FLOAT_VEC4:	hasValue = true;info.defaultValue.SetVector4(GetUniformVec4(name)) ;		break;
+				case UniformType::UNIFORM_SAMPLER_2D:	hasValue = true;info.defaultValue.SetTexture(nullptr); 	break;
 			}
 
-			if (defaultValue.has_value())
+			if (hasValue)
 			{
-				uniforms.push_back
-				({
-					static_cast<UniformType>(type),
-					name,
-					GetUniformLocation(nameData.data()),
-					defaultValue
-				});
+				info.name = name;
+				info.type = utype;
+				info.location = GetUniformLocation(nameData.data());
+				info.defaultValue.m_key = name;
+				info.defaultValue.m_uniformType = utype;
+				uniforms.push_back(info);
 			}
 		}
 	}

@@ -51,7 +51,7 @@ void main()
     //FragColor = vec4(1,0,0,1);
 })";
 
-    auto shader	= LittleEngine::Resources::ShaderLoader::CreateFromSource(vertstr, fragStr);
+    auto shader	= LittleEngine::Resources::ShaderLoader::CreateFromSource(vertstr, fragStr,"DebugQuad");
     auto mat = new LittleEngine::Material();
     mat->SetDepthTest(false);
     mat->SetBlendable(false);

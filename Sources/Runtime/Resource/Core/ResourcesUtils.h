@@ -22,12 +22,11 @@ namespace LittleEngine
         
     #define DELCARE_RES_LOAD_FUNCTION(restypename)\
         static restypename* Load##restypename(StringText guid);\
-        static restypename##ResPtr Load##restypename##ResPtr(StringText guid);
+        static restypename##ResPtr Load##restypename##ResPtr(StringText guid);\
+        static void Register##restypename(const StringText& guid, ##restypename* p_resPtr);
+
         
-        static Shader* LoadShader(std::string guid);
-        static ShaderResPtr LoadShaderResPtr(std::string guid);
-        
-        //DELCARE_RES_LOAD_FUNCTION(Shader)
+        DELCARE_RES_LOAD_FUNCTION(Shader)
         DELCARE_RES_LOAD_FUNCTION(Texture)
         DELCARE_RES_LOAD_FUNCTION(Model)
         DELCARE_RES_LOAD_FUNCTION(Animation)

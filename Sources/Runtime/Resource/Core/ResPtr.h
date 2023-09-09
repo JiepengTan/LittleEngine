@@ -85,6 +85,7 @@ namespace LittleEngine
 
         StringText GetPath() const { return m_guid; }
         StringText GetGUID() const { return m_guid; }
+        StringText& GetGuidReference() { return m_guid; }
         
         EResType GetResType() const { return m_resType; }
         void SetResType(EResType name) { m_resType = name; }

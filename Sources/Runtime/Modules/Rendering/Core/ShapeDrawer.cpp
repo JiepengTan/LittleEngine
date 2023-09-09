@@ -41,7 +41,7 @@ void main()
 }
 )";
 
-	m_lineShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
+	m_lineShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader,"line");
 
 	vertexShader = R"(
 #version 430 core
@@ -90,7 +90,7 @@ void main()
 }
 )";
 
-	m_gridShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
+	m_gridShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader,"grid");
 }
 
 LittleEngine::Rendering::Core::ShapeDrawer::~ShapeDrawer()

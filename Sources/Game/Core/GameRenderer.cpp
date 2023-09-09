@@ -24,7 +24,7 @@ LittleGame::Core::GameRenderer::GameRenderer(Context & p_context) :
 	m_context(p_context)
 {
 	/* Empty Material */
-	m_emptyMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+	m_emptyMaterial.SetShader(":Shaders\\Unlit.glsl");
 	m_emptyMaterial.Set("u_Diffuse", FVector3(1.f, 0.f, 1.f));
 	m_emptyMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 

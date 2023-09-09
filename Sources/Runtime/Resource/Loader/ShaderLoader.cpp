@@ -14,6 +14,7 @@
 #include "Resource/Loader/ShaderLoader.h"
 
 #include "Core/Tools/Utils/PathParser.h"
+#include "Resource/Core/ResPtr.h"
 
 std::string LittleEngine::Resources::ShaderLoader::__FILE_TRACE;
 
@@ -31,13 +32,14 @@ LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::Create(const std::s
 	return nullptr;
 }
 
-LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader,std::string name)
 {
 	uint32_t programID = CreateProgram(p_vertexShader, p_fragmentShader);
 
-	if (programID)
-		return new Shader("", programID);
-
+	if (programID){
+		Shader* shader = new Shader(name, programID);
+		ResourcesUtils::RegisterShader(name,shader);
+	}
 	return nullptr;
 }
 

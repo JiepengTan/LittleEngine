@@ -10,6 +10,7 @@
 #include "any"
 
 #include "Resource/Asset/UniformType.h"
+#include "Resource/Data/ResIncludeRendering.h"
 
 namespace LittleEngine::Resources
 {
@@ -21,6 +22,6 @@ namespace LittleEngine::Resources
 		UniformType		type;
 		std::string		name;
 		uint32_t		location;
-		std::any		defaultValue;
+		ResUniformInfo	defaultValue;
 	};
 }

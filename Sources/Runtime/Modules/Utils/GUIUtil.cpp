@@ -150,8 +150,16 @@ LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMesh(const std::string & p_
 
 	return widget;
 }
-
-LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, LittleEngine::Texture *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, TextureResPtr& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+{
+	return DrawTexture(p_name,p_data.GetPtrReference(),p_data.GetGuidReference(),p_updateNotifier);
+}
+LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, LittleEngine::Texture *& p_data,  LittleEngine::Eventing::Event<>* p_updateNotifier)
+{
+	std::string guid;
+	return DrawTexture(p_name,p_data,guid,p_updateNotifier);
+}
+LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, LittleEngine::Texture *& p_data, std::string& guid, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 
@@ -160,13 +168,14 @@ LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string
 
 	auto& widget = rightSide.CreateWidget<LittleEngine::UI::Widgets::Visual::Image>(p_data ? p_data->id : (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->id : 0), LittleEngine::FVector2{ 75, 75 });
 
-	widget.AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<std::string, LittleEngine::UI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [&widget, &p_data, p_updateNotifier](auto p_receivedData)
+	widget.AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<std::string, LittleEngine::UI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [&widget, &p_data,&guid, p_updateNotifier](auto p_receivedData)
 	{
 		if (LittleEngine::Utils::PathParser::GetFileType(p_receivedData.first) == LittleEngine::Utils::PathParser::EFileType::TEXTURE)
 		{
 			if (auto resource = OVSERVICE(LittleEngine::ResourceManagement::TextureManager).GetResource(p_receivedData.first); resource)
 			{
 				p_data = resource;
+				guid = p_receivedData.first;
 				widget.textureID.id = resource->id;
 				if (p_updateNotifier)
 					p_updateNotifier->Invoke();
@@ -178,9 +187,10 @@ LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string
 
 	auto& resetButton = rightSide.CreateWidget<LittleEngine::UI::Widgets::Buttons::Button>("Clear");
 	resetButton.idleBackgroundColor = ClearButtonColor;
-	resetButton.ClickedEvent += [&widget, &p_data, p_updateNotifier]
+	resetButton.ClickedEvent += [&widget, &p_data,&guid, p_updateNotifier]
 	{
 		p_data = nullptr;
+		guid = "";
 		widget.textureID.id = (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->id : 0);
 		if (p_updateNotifier)
 			p_updateNotifier->Invoke();

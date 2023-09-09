@@ -20,7 +20,12 @@ namespace LittleEngine
     restypename##ResPtr ResourcesUtils::Load##restypename##ResPtr(StringText guid){\
         auto ptr = Load##restypename(guid);\
         return restypename##ResPtr(guid,ptr);\
+    }\
+    void ResourcesUtils::Register##restypename(const StringText& guid, ##restypename* p_resPtr){\
+        GetGlobalService<ResourceManagement::##restypename##Manager>().RegisterResource(guid,p_resPtr);\
     }
+
+
     
     DEFINE_RES_LOAD_FUNCTION(Shader);
     DEFINE_RES_LOAD_FUNCTION(Texture);

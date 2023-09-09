@@ -161,7 +161,7 @@ void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 	{
 		if (m_materialFields[i][0])
 		{
-			bool enabled = !m_materials[i].IsNull();
+			bool enabled = !m_materials[i].GetPath().empty();
 			m_materialFields[i][0]->enabled = enabled;
 			m_materialFields[i][1]->enabled = enabled;
 			m_materialFields[i][2]->enabled = enabled;

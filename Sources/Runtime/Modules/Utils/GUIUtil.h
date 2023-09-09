@@ -18,7 +18,7 @@
 #include "Modules/UI/Widgets/InputFields/InputText.h"
 #include "Modules/UI/Widgets/Visual/Image.h"
 #include "Core/Base/Color.h"
-
+#include "Resource/Core/ResPtr.h"
 namespace LittleEngine
 {
 	class Model;
@@ -66,6 +66,9 @@ namespace LittleEngine
 		static void DrawColor(const std::string& p_name, LittleEngine::Color& p_color, bool p_hasAlpha = false);
 		static LittleEngine::UI::Widgets::Texts::Text& DrawMesh(const std::string& p_name, LittleEngine::Model*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string& p_name, LittleEngine::Texture*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string & p_name, LittleEngine::Texture *& p_data, std::string& guid,  LittleEngine::Eventing::Event<>* p_updateNotifier= nullptr);
+		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string & p_name, TextureResPtr& p_data,  LittleEngine::Eventing::Event<>* p_updateNotifier= nullptr);
+		
 		static LittleEngine::UI::Widgets::Texts::Text& DrawShader(const std::string& p_name, LittleEngine::Shader*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 		static LittleEngine::UI::Widgets::Texts::Text& DrawMaterial(const std::string& p_name, LittleEngine::Material*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 		static LittleEngine::UI::Widgets::Texts::Text& DrawSound(const std::string& p_name, LittleEngine::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);

@@ -165,9 +165,9 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	auto gridSource			= LittleEngine::Editor::Resources::RawShaders::GetGrid();
 	auto gizmoSource		= LittleEngine::Editor::Resources::RawShaders::GetGizmo();
 	auto billboardSource	= LittleEngine::Editor::Resources::RawShaders::GetBillboard();
-	m_shaders["Grid"]		= ShaderLoader::CreateFromSource(gridSource.first, gridSource.second);
-	m_shaders["Gizmo"]		= ShaderLoader::CreateFromSource(gizmoSource.first, gizmoSource.second);
-	m_shaders["Billboard"]	= ShaderLoader::CreateFromSource(billboardSource.first, billboardSource.second);
+	m_shaders["Grid"]		= ShaderLoader::CreateFromSource(gridSource.first, gridSource.second,"Grid");
+	m_shaders["Gizmo"]		= ShaderLoader::CreateFromSource(gizmoSource.first, gizmoSource.second,"Gizmo");
+	m_shaders["Billboard"]	= ShaderLoader::CreateFromSource(billboardSource.first, billboardSource.second,"Billboard");
 
 	/* From memory */
 	{

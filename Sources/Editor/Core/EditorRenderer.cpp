@@ -72,13 +72,13 @@ namespace LittleEngine::Editor
     void Editor::Core::EditorRenderer::InitMaterials()
     {
         /* Default Material */
-        m_defaultMaterial.SetShader(m_context.shaderManager[":Shaders\\Standard.glsl"]);
+        m_defaultMaterial.SetShader(":Shaders\\Standard.glsl");
         m_defaultMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
         m_defaultMaterial.Set("u_Shininess", 100.0f);
         m_defaultMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Empty Material */
-        m_emptyMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+        m_emptyMaterial.SetShader(":Shaders\\Unlit.glsl");
         m_emptyMaterial.Set("u_Diffuse", FVector4(1.f, 0.f, 1.f, 1.0f));
         m_emptyMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
@@ -89,7 +89,7 @@ namespace LittleEngine::Editor
         m_gridMaterial.SetDepthTest(false);
 
         /* Camera Material */
-        m_cameraMaterial.SetShader(m_context.shaderManager[":Shaders\\Lambert.glsl"]);
+        m_cameraMaterial.SetShader(":Shaders\\Lambert.glsl");
         m_cameraMaterial.Set("u_Diffuse", FVector4(0.0f, 0.3f, 0.7f, 1.0f));
         m_cameraMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
@@ -101,21 +101,21 @@ namespace LittleEngine::Editor
         m_lightMaterial.SetDepthTest(false);
 
         /* Stencil Fill Material */
-        m_stencilFillMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+        m_stencilFillMaterial.SetShader(":Shaders\\Unlit.glsl");
         m_stencilFillMaterial.SetBackfaceCulling(true);
         m_stencilFillMaterial.SetDepthTest(false);
         m_stencilFillMaterial.SetColorWriting(false);
         m_stencilFillMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Texture Material */
-        m_textureMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+        m_textureMaterial.SetShader(":Shaders\\Unlit.glsl");
         m_textureMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
         m_textureMaterial.SetBackfaceCulling(false);
         m_textureMaterial.SetBlendable(true);
         m_textureMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Outline Material */
-        m_outlineMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+        m_outlineMaterial.SetShader(":Shaders\\Unlit.glsl");
         m_outlineMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
         m_outlineMaterial.SetDepthTest(false);
 
@@ -137,7 +137,7 @@ namespace LittleEngine::Editor
         m_gizmoPickingMaterial.Set("u_IsPickable", true);
 
         /* Picking Material */
-        m_actorPickingMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
+        m_actorPickingMaterial.SetShader(":Shaders\\Unlit.glsl");
         m_actorPickingMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.0f));
         m_actorPickingMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
         m_actorPickingMaterial.SetFrontfaceCulling(false);

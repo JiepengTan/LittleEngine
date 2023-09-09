@@ -32,7 +32,7 @@ namespace LittleEngine::Resources
 		* @param p_vertexShader
 		* @param p_fragmentShader
 		*/
-		static Shader* CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader);
+		static Shader* CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader,std::string name = "");
 
 		/**
 		* Recompile a shader
