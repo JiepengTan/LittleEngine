@@ -14,6 +14,7 @@
 
 #include "Resource/Asset/Material.h"
 #include "Modules/Framework/ECS/Component.h"
+#include "Resource/Core/ResPtr.h"
 
 #define MAX_MATERIAL_COUNT 8
 
@@ -46,14 +47,15 @@ namespace LittleEngine
 		* Fill the material renderer with the given material
 		* @param p_material
 		*/
-		void FillWithMaterial(LittleEngine::Material& p_material);
+		void FillWithMaterial(MaterialResPtr& p_material);
+		void FillWithMaterial(const std::string& p_matPath);
 
 		/**
 		* Defines the material to use for the given index
 		* @param p_index
 		* @param p_material
 		*/
-		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Material* p_material);
+		void SetMaterialAtIndex(uint8_t p_index,MaterialResPtr& p_material);
 		void SetMaterialAtIndex(uint8_t p_index,const std::string& p_matPath);
 		/**
 		* Returns the material to use at index
@@ -66,13 +68,7 @@ namespace LittleEngine
 		* @param p_index
 		*/
 		void RemoveMaterialAtIndex(uint8_t p_index);
-
-		/**
-		* Remove the material by instance
-		* @param p_instance
-		*/
-		void RemoveMaterialByInstance(LittleEngine::Material& p_instance);
-
+		
 		/**
 		* Remove every materials
 		*/
@@ -104,23 +100,11 @@ namespace LittleEngine
 		const LittleEngine::FMatrix4& GetUserMatrix() const;
 
 		/**
-		* Returns the materials
+		* Returns the material
 		*/
-		const MaterialList& GetMaterials() const;
+		LittleEngine::Material* GetMaterial(int idx) const;
 
-		/**
-		* Serialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnSerialize(ISerializer p_serializer) override;
 
-		/**
-		* Deserialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 		/**
 		* Defines how the component should be drawn in the inspector
@@ -131,10 +115,9 @@ namespace LittleEngine
 		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
 
 	private:
-		std::vector<LittleEngine::Material*> m_materials;
 		MaterialField  m_materialFields;
 		META(Enable)
-		std::vector<std::string> m_materialNames;
+		MaterialResPtr m_materials[MAX_MATERIAL_COUNT];
 		META(Enable)
 		FMatrix4 m_userMatrix;
 		

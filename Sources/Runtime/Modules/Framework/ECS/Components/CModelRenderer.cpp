@@ -36,15 +36,15 @@ std::string LittleEngine::CModelRenderer::GetName()
 	return "Model Renderer";
 }
 
-void LittleEngine::CModelRenderer::SetModel(LittleEngine::Model* p_model)
+void LittleEngine::CModelRenderer::SetModel(const StringText& p_model)
 {
-	m_model = p_model;
+	m_model = ResourcesUtils::LoadModelResPtr(p_model);
 	m_modelChangedEvent.Invoke();
 }
 
 LittleEngine::Model * LittleEngine::CModelRenderer::GetModel()
 {
-	return m_model;
+	return m_model.GetPtr();
 }
 
 void LittleEngine::CModelRenderer::SetFrustumBehaviour(EFrustumBehaviour p_boundingMode)
@@ -67,27 +67,12 @@ void LittleEngine::CModelRenderer::SetCustomBoundingSphere(const LittleEngine::R
 	m_customBoundingSphere = p_boundingSphere;
 }
 
-void LittleEngine::CModelRenderer::OnSerialize(ISerializer p_serializer)
-{
-	SerializeUtil::SerializeModel("model", m_model);
-	SerializeUtil::SerializeInt("frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
-	SerializeUtil::SerializeVec3("custom_bounding_sphere_position", m_customBoundingSphere.position);
-	SerializeUtil::SerializeFloat("custom_bounding_sphere_radius", m_customBoundingSphere.radius);
-}
 
-void LittleEngine::CModelRenderer::OnDeserialize(ISerializer p_serializer)
-{
-	SerializeUtil::DeserializeModel("model", m_model);
-	SerializeUtil::DeserializeInt("frustum_behaviour", reinterpret_cast<int&>(m_frustumBehaviour));
-	SerializeUtil::DeserializeVec3("custom_bounding_sphere_position", m_customBoundingSphere.position);
-	SerializeUtil::DeserializeFloat("custom_bounding_sphere_radius", m_customBoundingSphere.radius);
-}
 
 void LittleEngine::CModelRenderer::OnInspector()
 {
 	
-
-	GUIUtil::DrawMesh( "Model", m_model, &m_modelChangedEvent);
+	GUIUtil::DrawMesh( "Model", m_model.GetPtrReference(), &m_modelChangedEvent);
 
 	GUIUtil::CreateTitle( "Frustum Culling Behaviour");
 	auto& boundingMode = GUIUtil::CreateWidget<LittleEngine::UI::Widgets::Selection::ComboBox>(0);

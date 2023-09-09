@@ -240,8 +240,6 @@ namespace LittleEngine
                     {
                         const auto transform = modelRenderer->GetActor()->transform->GetFTransform();
 
-                        const CMaterialRenderer::MaterialList& materials = materialRenderer->
-                            GetMaterials();
 
                         std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                         for (auto mesh : model->GetMeshes())
@@ -250,7 +248,7 @@ namespace LittleEngine
 
                             if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
                             {
-                                material = materials.at(mesh->GetMaterialIndex());
+                                material = materialRenderer->GetMaterial(mesh->GetMaterialIndex());
                                 if (!material || !material->GetShader())
                                     material = p_defaultMaterial;
                             }
@@ -330,9 +328,7 @@ namespace LittleEngine
                         {
                             float distanceToActor = FVector3::Distance(
                                 transform.GetWorldPosition(), p_cameraPosition);
-                            const CMaterialRenderer::MaterialList& materials = materialRenderer->
-                                GetMaterials();
-
+                          
                             std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                             for (const auto& mesh : meshes)
                             {
@@ -340,7 +336,7 @@ namespace LittleEngine
 
                                 if (mesh.get().GetMaterialIndex() < MAX_MATERIAL_COUNT)
                                 {
-                                    material = materials.at(mesh.get().GetMaterialIndex());
+                                    material = materialRenderer->GetMaterial(mesh.get().GetMaterialIndex());
                                     if (!material || !material->GetShader())
                                         material = p_defaultMaterial;
                                 }
@@ -392,8 +388,6 @@ namespace LittleEngine
                     {
                         const auto& transform = modelRenderer->GetActor()->transform->GetFTransform();
 
-                        const CMaterialRenderer::MaterialList& materials = materialRenderer->
-                            GetMaterials();
 
                         std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                         for (auto mesh : model->GetMeshes())
@@ -402,7 +396,7 @@ namespace LittleEngine
 
                             if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
                             {
-                                material = materials.at(mesh->GetMaterialIndex());
+                                material = materialRenderer->GetMaterial(mesh->GetMaterialIndex());
                                 if (!material || !material->GetShader())
                                     material = p_defaultMaterial;
                             }

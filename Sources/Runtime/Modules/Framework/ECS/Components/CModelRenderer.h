@@ -10,6 +10,7 @@
 #include "Resource/Asset/Model.h"
 
 #include "Modules/Framework/ECS/Component.h"
+#include "Resource/Core/ResPtr.h"
 
 namespace LittleEngine { class Actor; }
 
@@ -49,7 +50,7 @@ namespace LittleEngine
 		* Defines the model to use
 		* @param p_model
 		*/
-		void SetModel(LittleEngine::Model* p_model);
+		void SetModel(const StringText& p_model);
 
 		/**
 		* Returns the current model
@@ -79,20 +80,6 @@ namespace LittleEngine
 		void SetCustomBoundingSphere(const LittleEngine::Rendering::Geometry::BoundingSphere& p_boundingSphere);
 
 		/**
-		* Serialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnSerialize(ISerializer p_serializer) override;
-
-		/**
-		* Deserialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnDeserialize(ISerializer p_serializer) override;
-
-		/**
 		* Defines how the component should be drawn in the inspector
 		* @param p_root
 		*/
@@ -103,8 +90,8 @@ namespace LittleEngine
 
 	private:
 		LittleEngine::Eventing::Event<> m_modelChangedEvent;
-		//META(Enable)
-		LittleEngine::Model* m_model = nullptr;
+		META(Enable)
+		ModelResPtr m_model ;
 		META(Enable)
 		Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
 		META(Enable)

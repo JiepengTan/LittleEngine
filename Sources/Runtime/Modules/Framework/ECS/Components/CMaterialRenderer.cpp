@@ -27,7 +27,10 @@
 void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)
 {
 	Component::DoInit(p_owner);
-	m_materials.clear();
+	for (int i =0;i< MAX_MATERIAL_COUNT;i++)
+	{
+		m_materials[i] = MaterialResPtr::NullPtr;
+	}
 	for (auto item : m_materialFields)
 	{
 		item.fill(nullptr);
@@ -40,59 +43,45 @@ std::string LittleEngine::CMaterialRenderer::GetName()
 	return "Material Renderer";
 }
 
-void LittleEngine::CMaterialRenderer::FillWithMaterial(LittleEngine::Material & p_material)
+void LittleEngine::CMaterialRenderer::FillWithMaterial(const std::string& p_matPath)
 {
-	SetMaterialAtIndex(0,&p_material);
+	SetMaterialAtIndex(0,p_matPath);
+}
+void LittleEngine::CMaterialRenderer::FillWithMaterial(MaterialResPtr& p_material)
+{
+	SetMaterialAtIndex(0,p_material);
 }
 void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index,const std::string& p_matPath)
 {
-	auto mat = GetGlobalService<ResourceManagement::MaterialManager>().GetResource(p_matPath);
+	auto mat = ResourcesUtils::LoadMaterialResPtr(p_matPath);
 	SetMaterialAtIndex(p_index,mat);
 }
-void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Material* p_material)
+void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, MaterialResPtr& p_material)
 {
-	auto count = m_materials.size();
-	for (int i =count ;i<=p_index;i++)
-	{
-		m_materials.push_back(nullptr);
-		m_materialNames.push_back("");
-	}
+	if(p_index<0|| p_index> MAX_MATERIAL_COUNT) return;
 	m_materials[p_index] = p_material;
-	m_materialNames[p_index] = p_material == nullptr?p_material->path:"";
-	
 }
 
 LittleEngine::Material* LittleEngine::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
 {
-	if(p_index> m_materials.size()	) return nullptr;
-	return m_materials.at(p_index);
+	if(p_index> MAX_MATERIAL_COUNT	) return nullptr;
+	return m_materials[p_index].GetPtr();
 }
 
 void LittleEngine::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
 {
-	if (p_index < m_materials.size())
+	if (p_index < MAX_MATERIAL_COUNT)
 	{
-		m_materials[p_index] = nullptr;
-		m_materialNames[p_index] = "";
-	}
-}
-
-void LittleEngine::CMaterialRenderer::RemoveMaterialByInstance(LittleEngine::Material& p_instance)
-{
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-	{
-		if (m_materials[i] == &p_instance)
-		{
-			m_materials[i] = nullptr;
-			m_materialNames[i] = "";
-		}
+		m_materials[p_index] = MaterialResPtr::NullPtr;
 	}
 }
 
 void LittleEngine::CMaterialRenderer::RemoveAllMaterials()
 {
-	m_materials.clear();
-	m_materialNames.clear();
+	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)
+	{
+		m_materials[i] = MaterialResPtr::NullPtr;
+	}
 }
 
 const LittleEngine::FMatrix4 & LittleEngine::CMaterialRenderer::GetUserMatrix() const
@@ -100,11 +89,12 @@ const LittleEngine::FMatrix4 & LittleEngine::CMaterialRenderer::GetUserMatrix() 
 	return m_userMatrix;
 }
 
-const LittleEngine::CMaterialRenderer::MaterialList& LittleEngine::CMaterialRenderer::GetMaterials() const
+LittleEngine::Material* LittleEngine::CMaterialRenderer::GetMaterial(int idx) const
 {
-	return m_materials;
+	if(idx >=0 && idx < MAX_MATERIAL_COUNT)
+		return m_materials[idx].GetPtr();
+	return nullptr;
 }
-
 void LittleEngine::CMaterialRenderer::OnBeforeSceneSave(ActorPtr p_actor)
 {
 
@@ -112,35 +102,9 @@ void LittleEngine::CMaterialRenderer::OnBeforeSceneSave(ActorPtr p_actor)
 
 void LittleEngine::CMaterialRenderer::OnAfterSceneLoaded(ActorPtr p_actor)
 {
-	m_materials.clear();
-	for (auto matName : m_materialNames)
-	{
-		auto mat = GetGlobalService<ResourceManagement::MaterialManager>().GetResource(matName);
-		m_materials.push_back(mat);
-	}
 	UpdateMaterialList();
 }
 
-void LittleEngine::CMaterialRenderer::OnSerialize(ISerializer p_serializer)
-{
-	auto modelRenderer = owner->GetComponent<CModelRenderer>();
-	uint8_t elementsToSerialize = modelRenderer->GetModel() ? (uint8_t)std::min(modelRenderer->GetModel()->GetMaterialNames().size(), (size_t)MAX_MATERIAL_COUNT) : 0;
-	SerializeUtil::SerializeInt("material_count", elementsToSerialize);
-	for (uint8_t i = 0; i < elementsToSerialize; ++i)
-	{
-		SerializeUtil::SerializeMaterial("material" + i, m_materials[i]);
-	}
-}
-
-void LittleEngine::CMaterialRenderer::OnDeserialize(ISerializer p_serializer)
-{
-	int count = SerializeUtil::DeserializeInt("material_count");
-	for (int i =0;i< count;i++)
-	{
-		m_materials[i] =  SerializeUtil::DeserializeMaterial("material"+i);
-	}
-	UpdateMaterialList();
-}
 
 std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer( const std::string& p_name, LittleEngine::Material*& p_data)
 {
@@ -184,8 +148,8 @@ std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer( const s
 
 void LittleEngine::CMaterialRenderer::OnInspector()
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materialFields[i] = CustomMaterialDrawer( "Material", m_materials[i]);
+	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)
+		m_materialFields[i] = CustomMaterialDrawer( "Material", m_materials[i].GetPtrReference());
 
 	UpdateMaterialList();
 }
@@ -197,11 +161,11 @@ void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 	{
 		if (m_materialFields[i][0])
 		{
-			bool enabled = !m_materialNames[i].empty();
+			bool enabled = !m_materials[i].IsNull();
 			m_materialFields[i][0]->enabled = enabled;
 			m_materialFields[i][1]->enabled = enabled;
 			m_materialFields[i][2]->enabled = enabled;
-			reinterpret_cast<LittleEngine::UI::Widgets::Texts::Text*>(m_materialFields[i][0])->content = m_materialNames[i];
+			reinterpret_cast<LittleEngine::UI::Widgets::Texts::Text*>(m_materialFields[i][0])->content = m_materials[i].GetPath();
 		}
 	}
 }

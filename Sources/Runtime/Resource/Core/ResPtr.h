@@ -83,6 +83,7 @@ namespace LittleEngine
             return *this;
         }
 
+        StringText GetPath() const { return m_guid; }
         StringText GetGUID() const { return m_guid; }
         
         EResType GetResType() const { return m_resType; }
@@ -135,41 +136,38 @@ namespace LittleEngine
         T*& GetPtrReference() { return m_instance; }
 
         operator bool() const { return (m_instance != nullptr); }
+
+        bool IsNull (){ return m_instance == nullptr;}
     
-    private:
-        EResType    m_resType = EResType::EResInvalid;
+    protected:
+        EResType    m_resType;
         StringText  m_guid = {""};
         T*          m_instance {nullptr};
+    public:
         typedef T   m_type;
     };
     
-#define DECLARE_RES_TYPE(restypename) \
-    class ResPtr##restypename :public ResPtr<##restypename##>\
+#define DECLARE_RES_PTR_TYPE(restypename) \
+    class restypename##ResPtr :public ResPtr<##restypename##>\
     {\
+    public:\
+        static restypename##ResPtr NullPtr;\
+    public:\
+        restypename##ResPtr(StringText guid, ##restypename##* instance) :ResPtr(EResType::ERes##restypename,guid,nullptr)  {}\
+        restypename##ResPtr() :ResPtr(EResType::ERes##restypename,"",nullptr)  {}\
     };\
     template<>\
-    Json JsonSerializer::Write(const ResPtr##restypename##& instance)\
-    {\
-        auto resType    = instance.GetResType();\
-        return Json::object {\
-            {"resType", Json((int)resType)},\
-            {"guid", Json( instance.GetGUID())}\
-        };\
-    }\
+    Json JsonSerializer::Write(const restypename##ResPtr& instance);\
     template<>\
-    ResPtr##restypename##& JsonSerializer::Read(const Json& json_context, ResPtr##restypename##& instance)\
-    {\
-        auto resType = (EResType)json_context["resType"].int_value();\
-        auto guid = json_context["guid"].string_value();\
-        auto ptr = ResourcesUtils::Load##restypename##(guid);\
-        instance.Reset(resType,guid,ptr);\
-        return instance;\
-    }
+    restypename##ResPtr& JsonSerializer::Read(const Json& json_context, restypename##ResPtr& instance);\
 
-    DECLARE_RES_TYPE(Shader) 
-    DECLARE_RES_TYPE(Texture)
-    DECLARE_RES_TYPE(Model) 
-    DECLARE_RES_TYPE(Animation) 
-    DECLARE_RES_TYPE(Sound) 
-    DECLARE_RES_TYPE(Material)
+    
+    
+    DECLARE_RES_PTR_TYPE(Shader) 
+    DECLARE_RES_PTR_TYPE(Texture)
+    DECLARE_RES_PTR_TYPE(Model) 
+    DECLARE_RES_PTR_TYPE(Animation) 
+    DECLARE_RES_PTR_TYPE(Sound) 
+    DECLARE_RES_PTR_TYPE(Material)
+
 }

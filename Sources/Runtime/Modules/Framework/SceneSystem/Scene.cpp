@@ -281,7 +281,7 @@ namespace LittleEngine
     ObjectID Scene::GetSceneId() const    { return m_sceneId;}
     void Scene::LoadFrom(ResScene& resScene)
     {
-        for (auto& resActor : resScene.actors)
+        for (auto& resActor : resScene.m_actors)
         {
             auto actor= MakeSharedPtr<Actor>();
             actor->m_scene = this; 
@@ -326,12 +326,12 @@ namespace LittleEngine
     {
         auto& actors = GetActorsCopy(m_actors);
         auto count = actors.size();
-        resScene.actors.reserve(count);
+        resScene.m_actors.reserve(count);
         for (auto item : actors)
         {
             ResActor actor;
             item->SaveTo(actor);
-            resScene.actors.push_back(actor);
+            resScene.m_actors.push_back(actor);
         }
     }
     void Scene::OnSerialize(ISerializer p_serializer)

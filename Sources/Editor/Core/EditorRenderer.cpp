@@ -193,8 +193,6 @@ namespace LittleEngine::Editor
                     if (auto materialRenderer = modelRenderer->GetActor()->GetComponent<
                         LittleEngine::CMaterialRenderer>())
                     {
-                        const LittleEngine::CMaterialRenderer::MaterialList& materials = materialRenderer->
-                            GetMaterials();
                         const auto& modelMatrix = actor->transform->GetWorldMatrix();
 
                         PreparePickingMaterial(actor, m_actorPickingMaterial);
@@ -205,7 +203,7 @@ namespace LittleEngine::Editor
 
                             if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
                             {
-                                material = materials.at(mesh->GetMaterialIndex());
+                                material = materialRenderer->GetMaterial(mesh->GetMaterialIndex());
                                 if (!material || !material->GetShader())
                                     material = &m_emptyMaterial;
                             }

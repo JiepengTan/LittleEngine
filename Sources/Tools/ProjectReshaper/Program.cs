@@ -16,7 +16,7 @@ namespace GamesTan.ProjectReshaper
         public static void Main(string[] args)
         {
             //ReplaceHeadInclude();
-            ReplaceContext();
+            //ReplaceContext();
         }
 
         private static void ReplaceContext()

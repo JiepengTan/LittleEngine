@@ -35,14 +35,15 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResPrefab)
     public:
-        std::vector<Component*> components;
+        std::vector<LittleEngine::ResActor> m_actors;
     };
+    
     REFLECTION_TYPE(ResScene)
     CLASS(ResScene: public ResObject, Fields)
     {
         REFLECTION_BODY(ResScene)
     public:
         int m_sceneId;
-        std::vector<LittleEngine::ResActor> actors;
+        std::vector<LittleEngine::ResActor> m_actors;
     };
 }
