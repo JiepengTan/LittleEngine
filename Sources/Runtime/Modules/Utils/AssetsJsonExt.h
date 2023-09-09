@@ -4,7 +4,7 @@
 #include "Resource/Asset/Texture.h"
 #include "Resource/Asset/Shader.h"
 #include "Resource/Asset/Material.h"
-#include "Modules/Audio/Resources/Sound.h"
+#include "Resource/Asset/Sound.h"
 #include "Resource/Asset/TextAsset.h"
 
 namespace LittleEngine

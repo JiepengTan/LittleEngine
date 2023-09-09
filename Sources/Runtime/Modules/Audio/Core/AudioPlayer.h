@@ -8,7 +8,7 @@
 
 
 #include "Modules/Audio/Core/AudioEngine.h"
-#include "Modules/Audio/Resources/Sound.h"
+#include "Resource/Asset/Sound.h"
 
 namespace LittleEngine::Audio::Core
 {

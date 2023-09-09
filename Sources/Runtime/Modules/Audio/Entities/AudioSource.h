@@ -16,7 +16,7 @@
 #include "Core/Maths/FTransform.h"
 
 #include "Modules/Audio/Tracking/SoundTracker.h"
-#include "Modules/Audio/Resources/Sound.h"
+#include "Resource/Asset/Sound.h"
 
 namespace LittleEngine::Audio::Core { class AudioPlayer; }
 

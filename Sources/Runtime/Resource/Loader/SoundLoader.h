@@ -8,7 +8,7 @@
 
 #include "string"
 
-#include "Modules/Audio/Resources/Sound.h"
+#include "Resource/Asset/Sound.h"
 
 namespace LittleEngine::Audio::Resources::Loaders
 {

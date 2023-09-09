@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Audio/Resources/Loaders/SoundLoader.h"
+#include "Resource/Loader//SoundLoader.h"
 
 LittleEngine::Audio::Resources::Sound* LittleEngine::Audio::Resources::Loaders::SoundLoader::Create(const std::string& p_filepath)
 {

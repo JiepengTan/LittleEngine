@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Modules/Audio/Resources/Loaders/SoundLoader.h"
+#include "Resource/Loader//SoundLoader.h"
 
 #include "Resource/Manager/AResourceManager.h"
 

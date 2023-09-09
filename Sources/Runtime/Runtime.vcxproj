@@ -101,12 +101,14 @@
     <ClCompile Include="Resource\Asset\Model.cpp" />
     <ClCompile Include="Resource\Asset\Shader.cpp" />
     <ClCompile Include="Resource\Asset\Skeleton.cpp" />
+    <ClCompile Include="Resource\Asset\Sound.cpp" />
     <ClCompile Include="Resource\Asset\TextAsset.cpp" />
     <ClCompile Include="Resource\Asset\Texture.cpp" />
     <ClCompile Include="Resource\Loader\AnimationLoader.cpp" />
     <ClCompile Include="Resource\Loader\MaterialLoader.cpp" />
     <ClCompile Include="Resource\Loader\ModelLoader.cpp" />
     <ClCompile Include="Resource\Loader\ShaderLoader.cpp" />
+    <ClCompile Include="Resource\Loader\SoundLoader.cpp" />
     <ClCompile Include="Resource\Loader\TextureLoader.cpp" />
     <ClCompile Include="Resource\Manager\AnimationManager.cpp" />
     <ClCompile Include="Resource\Manager\MaterialManager.cpp" />
@@ -175,8 +177,6 @@
     <ClInclude Include="Modules\Audio\Core\AudioPlayer.h" />
     <ClInclude Include="Modules\Audio\Entities\AudioListener.h" />
     <ClInclude Include="Modules\Audio\Entities\AudioSource.h" />
-    <ClInclude Include="Modules\Audio\Resources\Loaders\SoundLoader.h" />
-    <ClInclude Include="Modules\Audio\Resources\Sound.h" />
     <ClInclude Include="Modules\Audio\Tracking\SoundStopEventBinder.h" />
     <ClInclude Include="Modules\Audio\Tracking\SoundTracker.h" />
     <ClInclude Include="Modules\Framework\API\IInspectorItem.h" />
@@ -397,8 +397,6 @@
     <ClCompile Include="Modules\Audio\Core\AudioPlayer.cpp" />
     <ClCompile Include="Modules\Audio\Entities\AudioListener.cpp" />
     <ClCompile Include="Modules\Audio\Entities\AudioSource.cpp" />
-    <ClCompile Include="Modules\Audio\Resources\Loaders\SoundLoader.cpp" />
-    <ClCompile Include="Modules\Audio\Resources\Sound.cpp" />
     <ClCompile Include="Modules\Audio\Tracking\SoundStopEventBinder.cpp" />
     <ClCompile Include="Modules\Audio\Tracking\SoundTracker.cpp" />
     <ClCompile Include="Modules\Framework\ECS\Actor.cpp" />
@@ -524,6 +522,7 @@
     <ClInclude Include="Resource\Asset\Model.h" />
     <ClInclude Include="Resource\Asset\Shader.h" />
     <ClInclude Include="Resource\Asset\Skeleton.h" />
+    <ClInclude Include="Resource\Asset\Sound.h" />
     <ClInclude Include="Resource\Asset\TextAsset.h" />
     <ClInclude Include="Resource\Asset\Texture.h" />
     <ClInclude Include="Resource\Asset\UniformInfo.h" />
@@ -537,6 +536,7 @@
     <ClInclude Include="Resource\Loader\MaterialLoader.h" />
     <ClInclude Include="Resource\Loader\ModelLoader.h" />
     <ClInclude Include="Resource\Loader\ShaderLoader.h" />
+    <ClInclude Include="Resource\Loader\SoundLoader.h" />
     <ClInclude Include="Resource\Loader\TextureLoader.h" />
     <ClInclude Include="Resource\Parser\AssimpParser.h" />
     <ClInclude Include="Resource\Parser\EModelParserFlags.h" />
