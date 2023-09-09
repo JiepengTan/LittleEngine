@@ -55,7 +55,7 @@ void LittleEngine::SceneManager::LoadEmptyScene()
 
 	m_currentScene = new Scene();
 
-	SceneLoadEvent.Invoke();
+	SceneLoadEvent.Invoke(m_currentScene);
 }
 
 void LittleEngine::SceneManager::LoadEmptyLightedScene()
@@ -64,7 +64,7 @@ void LittleEngine::SceneManager::LoadEmptyLightedScene()
 
 	m_currentScene = new Scene();
 
-	SceneLoadEvent.Invoke();
+	SceneLoadEvent.Invoke(m_currentScene);
 
 	auto directionalLight = m_currentScene->CreateActor("Directional Light");
 	directionalLight->AddComponent<CDirectionalLight>()->SetIntensity(0.75f);
@@ -89,7 +89,6 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 		StoreCurrentSceneSourcePath(completePath);
 		return true;
 	}
-
 	return false;
 }
 
@@ -100,6 +99,7 @@ bool LittleEngine::SceneManager::SaveScene(const std::string& p_path)
 	m_currentScene->SaveTo(resScene);
 	auto&& json = JsonSerializer::Write(resScene);
 	std::string&& context = json.dump(); 
+	LOG_INFO(""+context);
 	FileUtil::WriteAllText(fullPath,context);
 	StoreCurrentSceneSourcePath(p_path);
 	return true;
@@ -113,6 +113,7 @@ bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneS
 	ResScene resScene;
 	JsonSerializer::Read(asset_json,resScene);
 	m_currentScene->LoadFrom(resScene);
+	SceneLoadEvent.Invoke(m_currentScene);
 	return true;
 }
 

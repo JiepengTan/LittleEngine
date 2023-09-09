@@ -105,7 +105,7 @@ namespace LittleEngine
 		void ForgetCurrentSceneSourcePath();
 
 	public:
-		LittleEngine::Eventing::Event<> SceneLoadEvent;
+		LittleEngine::Eventing::Event<Scene*> SceneLoadEvent;
 		LittleEngine::Eventing::Event<> SceneUnloadEvent;
 		LittleEngine::Eventing::Event<const std::string&> CurrentSceneSourcePathChangedEvent;
 

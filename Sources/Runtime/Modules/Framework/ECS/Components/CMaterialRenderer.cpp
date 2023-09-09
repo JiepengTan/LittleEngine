@@ -157,7 +157,6 @@ void LittleEngine::CMaterialRenderer::OnInspector()
 
 void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 {
-
 	for (uint8_t i = 0; i <MAX_MATERIAL_COUNT; ++i)
 	{
 		if (m_materialFields[i][0])

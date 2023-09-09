@@ -288,6 +288,13 @@ namespace LittleEngine
             actor->LoadFrom(resActor);
             m_actors.emplace(actor->GetID(), actor);
         }
+        ActorID maxActorId = 0;
+        for (auto& resActor : resScene.m_actors)
+        {
+            maxActorId = std::max(maxActorId,resActor.m_actorID);
+        }
+        ActorIDAllocator::Init(maxActorId);
+        
         auto actors = GetActorsCopy(m_actors);
         // update transform
         std::queue<ActorPtr> rootActors;

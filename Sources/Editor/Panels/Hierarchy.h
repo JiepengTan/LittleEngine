@@ -38,7 +38,11 @@ namespace LittleEngine::Editor::Panels
 		* Clear hierarchy nodes
 		*/
 		void Clear();
-
+		
+		/**
+		* Rebuild layout from scene hierarchy nodes
+		*/
+		void RebuildFromScene(Scene* p_curScene);
 		/**
 		* Unselect every widgets
 		*/

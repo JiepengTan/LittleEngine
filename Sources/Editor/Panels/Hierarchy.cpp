@@ -191,6 +191,7 @@ namespace LittleEngine::Editor
 
         EDITOR_EVENT(ActorUnselectedEvent) += std::bind(&Hierarchy::UnselectActorsWidgets, this);
         EDITOR_CONTEXT(sceneManager).SceneUnloadEvent += std::bind(&Hierarchy::Clear, this);
+        EDITOR_CONTEXT(sceneManager).SceneLoadEvent += std::bind(&Hierarchy::RebuildFromScene, this, std::placeholders::_1);
         LittleEngine::Scene::CreatedEvent += std::bind(&Hierarchy::AddActorByInstance, this, std::placeholders::_1);
         LittleEngine::Scene::DestroyedEvent +=
             std::bind(&Hierarchy::DeleteActorByInstance, this, std::placeholders::_1);
@@ -198,7 +199,15 @@ namespace LittleEngine::Editor
         LittleEngine::Scene::AttachEvent += std::bind(&Hierarchy::AttachActorToParent, this, std::placeholders::_1);
         LittleEngine::Scene::DettachEvent += std::bind(&Hierarchy::DetachFromParent, this, std::placeholders::_1);
     }
-
+    void Panels::Hierarchy::RebuildFromScene(Scene* p_curScene)
+    {
+        Clear();
+        auto actors = p_curScene->GetActorsInternal();
+        for (auto actor : actors)
+        {
+            AddActorByInstance(actor);
+        }
+    }
     void Panels::Hierarchy::Clear()
     {
         EDITOR_EXEC(UnselectActor());
