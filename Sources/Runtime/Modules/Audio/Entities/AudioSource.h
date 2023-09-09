@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <memory>
+#include "memory"
 
-#include <irrklang/ik_ISoundEngine.h>
-#include <irrklang/ik_ISoundStopEventReceiver.h>
+#include "irrklang/ik_ISoundEngine.h"
+#include "irrklang/ik_ISoundStopEventReceiver.h"
 
 #include "Core/Tools/Eventing/Event.h"
 #include "Core/Maths/FVector3.h"

@@ -1,5 +1,5 @@
-#include <map>
-#include <vector>
+#include "map"
+#include "vector"
 #include "Core/Maths/FMatrix4.h"
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 
@@ -7,10 +7,10 @@
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Modules/Utils/ActorUtils.h"
-#include "Modules/Rendering/ResourceManagement/AnimationManager.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/Resources/Animation.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Manager/AnimationManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Asset/Animation.h"
+#include "Resource/Asset/Model.h"
 #include "Modules/Utils/ActorUtils.h"
 #include "Core/Maths/DebugUtil.h"
 #include "Modules/UI/Widgets/Buttons/Button.h"

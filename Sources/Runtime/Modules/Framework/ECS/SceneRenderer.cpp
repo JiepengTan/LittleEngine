@@ -6,7 +6,7 @@
 
 #include "Core/Analytics/Profiling/ProfilerSpy.h"
 
-#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Loader/TextureLoader.h"
 #include "Modules/Rendering/Data/Frustum.h"
 
 #include "Modules/Framework/ECS/SceneRenderer.h"
@@ -15,12 +15,12 @@
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
+#include "Resource/Manager/ShaderManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Resource/Manager/MaterialManager.h"
 #include "Modules/Utils/RenderUtils.h"
 #include "Modules/Rendering/Buffers/Framebuffer.h"
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "Resource/Asset/Mesh.h"
 
 namespace LittleEngine
 {

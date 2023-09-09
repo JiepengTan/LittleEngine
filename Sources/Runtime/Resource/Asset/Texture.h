@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <stdint.h>
-#include <string>
+#include "stdint.h"
+#include "string"
 
 #include "Modules/Rendering/Settings/ETextureFilteringMode.h"
 

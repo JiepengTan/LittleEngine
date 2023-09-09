@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
-#include "Modules/Rendering/Resources/Texture.h"
+#include "Resource/Asset/Texture.h"
 
 void LittleEngine::Rendering::Resources::Texture::Bind(uint32_t p_slot) const
 {

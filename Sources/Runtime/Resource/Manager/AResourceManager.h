@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <unordered_map>
-#include <any>
-#include <string>
+#include "unordered_map"
+#include "any"
+#include "string"
 
 
 
@@ -114,4 +114,4 @@ namespace LittleEngine::ResourceManagement
 	};
 }
 
-#include "Modules/Rendering/ResourceManagement/AResourceManager.inl"
+#include "Resource/Manager/AResourceManager.inl"

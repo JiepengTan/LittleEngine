@@ -4,15 +4,15 @@
 * @licence: MIT
 */
 
-#include <filesystem>
+#include "filesystem"
 
 #include "Core/Tools/Utils/PathParser.h"
 #include "Core/Tools/Utils/SizeConverter.h"
 
 #include "Modules/Utils/GUIUtil.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Manager/TextureManager.h"
 
 #include "Modules/UI/Widgets/Visual/Separator.h"
 #include "Modules/UI/Widgets/Layout/Group.h"

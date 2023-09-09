@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/Resources/Loaders/ModelLoader.h"
+#include "Resource/Loader/ModelLoader.h"
 
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Model.h"
 
 LittleEngine::Rendering::Resources::Parsers::AssimpParser LittleEngine::Rendering::Resources::Loaders::ModelLoader::__ASSIMP;
 

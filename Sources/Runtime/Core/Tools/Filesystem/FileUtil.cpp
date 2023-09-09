@@ -1,7 +1,7 @@
-﻿#include "FileUtil.h"
+#include "FileUtil.h"
 #include "PathUtil.h"
-#include <fstream>
-#include <stdexcept>
+#include "fstream"
+#include "stdexcept"
 namespace LittleEngine
 {
     std::string FileUtil::ReadAllText(const std::string& filePath)

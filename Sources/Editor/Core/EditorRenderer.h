@@ -11,7 +11,7 @@
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 #include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 

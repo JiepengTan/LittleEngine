@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <any>
-#include <map>
+#include "any"
+#include "map"
 
-#include "Modules/Rendering/Resources/Shader.h"
+#include "Resource/Asset/Shader.h"
 
 #include "Modules/Framework/API/ISerializable.h"
 
@@ -185,4 +185,4 @@ namespace LittleEngine::Resources
 	};
 }
 
-#include "Modules/Rendering/Resources/Material.inl"
+#include "Resource/Asset/Material.inl"

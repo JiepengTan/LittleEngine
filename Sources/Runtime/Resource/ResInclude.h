@@ -1,6 +1,6 @@
 #pragma once
-#include "Resource/ResIncludeBasic.h"
-#include "Resource/ResIncludeAnimation.h"
-#include "Resource/ResIncludeAudio.h"
-#include "Resource/ResIncludeRendering.h"
-#include "Resource/ResIncludeScene.h"
+#include "Resource/Data/ResIncludeBasic.h"
+#include "Resource/Data/ResIncludeAnimation.h"
+#include "Resource/Data/ResIncludeAudio.h"
+#include "Resource/Data/ResIncludeRendering.h"
+#include "Resource/Data/ResIncludeScene.h"

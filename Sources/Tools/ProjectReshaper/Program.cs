@@ -15,7 +15,7 @@ namespace GamesTan.ProjectReshaper
         };
         public static void Main(string[] args)
         {
-            //ReplaceHeadInclude();
+            ReplaceHeadInclude();
             //ReplaceContext();
         }
 
@@ -42,13 +42,13 @@ namespace GamesTan.ProjectReshaper
             var namespaceMap = new Dictionary<string, string>()
             {
                 { "Modules/Rendering/ResourceManagement/", "Resource/Manager/" },
-                { "Modules/Resources/Loaders/", "Resource/Loader/" },
-                { "Modules/Resources/Parsers/", "Resource/Parser/" },
-                { "Modules/Resources/", "Resource/Asset/" },
+                { "Modules/Rendering/Resources/Loaders/", "Resource/Loader/" },
+                { "Modules/Rendering/Resources/Parsers/", "Resource/Parser/" },
+                { "Modules/Rendering/Resources/", "Resource/Asset/" },
                 { "Resource/ResInclude", "Resource/Data/ResInclude" },
                 { "Resource/TextAsset", "Resource/Asset/TextAsset" },
             };
-            var oldIncludeTag = "Resource/";
+            var oldIncludeTag = "";
             HeadIncludeReplacement.ReplaceFiles(oldIncludeTag, sourceDirs, namespaceMap);
         }
     }

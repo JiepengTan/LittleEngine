@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "Modules/Rendering/ResourceManagement/AResourceManager.h"
-#include "Modules/Rendering/Resources/Animation.h"
+#include "Resource/Manager/AResourceManager.h"
+#include "Resource/Asset/Animation.h"
 
 namespace LittleEngine::ResourceManagement
 {

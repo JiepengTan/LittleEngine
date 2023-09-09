@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <sol.hpp>
+#include "sol.hpp"
 
 namespace LittleEngine::Scripting
 {

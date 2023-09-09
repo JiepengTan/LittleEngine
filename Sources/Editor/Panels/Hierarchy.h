@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Loader/TextureLoader.h"
 #include "Modules/Rendering/LowRenderer/Camera.h"
 
 #include "Modules/Framework/SceneSystem/SceneManager.h"

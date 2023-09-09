@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
+#include "Resource/Manager/ShaderManager.h"
 
 LittleEngine::Rendering::Resources::Shader* LittleEngine::ResourceManagement::ShaderManager::CreateResource(const std::string & p_path)
 {

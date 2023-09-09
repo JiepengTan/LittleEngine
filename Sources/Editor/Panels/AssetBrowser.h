@@ -6,13 +6,13 @@
 
 #pragma once
 
-#include <filesystem>
-#include <unordered_map>
-#include <queue>
+#include "filesystem"
+#include "unordered_map"
+#include "queue"
 
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/TreeNode.h"
-#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Loader/TextureLoader.h"
 
 namespace LittleEngine::Editor::Panels
 {

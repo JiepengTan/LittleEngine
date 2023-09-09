@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <string>
-#include <queue>
+#include "string"
+#include "queue"
 
 #include "Core/Debug/ILogHandler.h"
 

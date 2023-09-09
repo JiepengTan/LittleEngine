@@ -33,7 +33,7 @@ namespace LittleEngine{
             {{#class_field_is_not_container}}
              {{#class_field_is_enum}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::WriteEnum(instance.{{class_field_name}}));{{/class_field_is_enum}} 
              {{#class_field_is_normal}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));{{/class_field_is_normal}}  
-             {{#class_field_is_pointer}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::WriteRes(instance.{{class_field_name}}));{{/class_field_is_pointer}}  
+             {{#class_field_is_pointer}}ret_context.insert_or_assign("{{class_field_display_name}}", JsonSerializer::Write(instance.{{class_field_name}}));{{/class_field_is_pointer}}  
              {{/class_field_is_not_container}}
         {{/class_field_defines}}
         return  Json(ret_context);
@@ -58,7 +58,7 @@ namespace LittleEngine{
             {{#class_field_is_not_container}} 
             {{#class_field_is_enum}}JsonSerializer::ReadEnum(json_context["{{class_field_display_name}}"], instance.{{class_field_name}}); {{/class_field_is_enum}} 
             {{#class_field_is_normal}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_normal}} 
-            {{#class_field_is_pointer}}JsonSerializer::ReadRes(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_pointer}} 
+            {{#class_field_is_pointer}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_pointer}} 
             {{/class_field_is_not_container}}
         }{{/class_field_defines}}
         return instance;

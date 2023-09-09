@@ -10,7 +10,7 @@
 #include "Modules/UI/Panels/PanelWindow.h"
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
-#include "Modules/Rendering/Resources/Shader.h"
+#include "Resource/Asset/Shader.h"
 
 namespace LittleEngine::Resources { class Material; }
 

@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Core/CoreInclude.h"
 
-#include "Modules/Rendering/Resources/Texture.h"
-#include "Modules/Rendering/Resources/Shader.h"
+#include "Resource/Asset/Texture.h"
+#include "Resource/Asset/Shader.h"
 
 LittleEngine::Rendering::Resources::Shader::Shader(const std::string p_path, uint32_t p_id) : path(p_path), id(p_id)
 {

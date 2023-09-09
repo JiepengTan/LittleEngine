@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <unordered_map>
-#include <memory>
+#include "unordered_map"
+#include "memory"
 
 #include "Core/Tools/Eventing/Event.h"
 
@@ -17,7 +17,7 @@
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Modules/Framework/ECS/Behaviour.h"
 #include "Modules/Framework/API/ISerializable.h"
-#include "Resource/ResIncludeScene.h"
+#include "Resource/Data/ResIncludeScene.h"
 
 namespace LittleEngine
 {

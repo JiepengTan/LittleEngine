@@ -8,7 +8,7 @@
 
 #include "Modules/Audio/Resources/Loaders/SoundLoader.h"
 
-#include "Modules/Rendering/ResourceManagement/AResourceManager.h"
+#include "Resource/Manager/AResourceManager.h"
 
 namespace LittleEngine::ResourceManagement
 {

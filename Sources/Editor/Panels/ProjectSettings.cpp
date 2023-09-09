@@ -7,7 +7,7 @@
 #include "../Editor/Panels/ProjectSettings.h"
 #include "../Editor/Core/EditorActions.h"
 
-#include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
+#include "Resource/Loader/MaterialLoader.h"
 #include "Modules/Utils/GUIUtil.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Modules/UI/Widgets/Layout/GroupCollapsable.h"

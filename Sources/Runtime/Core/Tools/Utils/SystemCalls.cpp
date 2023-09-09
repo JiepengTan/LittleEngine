@@ -7,7 +7,7 @@
 #include "Core/Tools/Utils/PathParser.h"
 #include "Core/Tools/Utils/SystemCalls.h"
 
-#include <Windows.h>
+#include "Windows.h"
 
 void LittleEngine::Utils::SystemCalls::ShowInExplorer(const std::string & p_path)
 {

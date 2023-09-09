@@ -1,5 +1,5 @@
-﻿#include "Object.h"
-#include <atomic>
+#include "Object.h"
+#include "atomic"
 
 
 std::atomic<LittleEngine::ObjectID> LittleEngine::ObjectIDAllocator::m_next_id = 0;

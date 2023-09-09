@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Modules/Rendering/Core/Renderer.h"
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "Resource/Asset/Mesh.h"
 
 namespace LittleEngine::Rendering::Core
 {

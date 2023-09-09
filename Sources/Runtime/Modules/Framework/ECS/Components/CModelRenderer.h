@@ -7,7 +7,7 @@
 #pragma once
 
 #include "Modules/Rendering/Geometry/Vertex.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Model.h"
 
 #include "Modules/Framework/ECS/Component.h"
 
@@ -103,7 +103,7 @@ namespace LittleEngine
 
 	private:
 		LittleEngine::Eventing::Event<> m_modelChangedEvent;
-		META(Enable)
+		//META(Enable)
 		LittleEngine::Rendering::Resources::Model* m_model = nullptr;
 		META(Enable)
 		Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };

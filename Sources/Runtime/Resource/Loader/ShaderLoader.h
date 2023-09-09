@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Modules/Rendering/Resources/Shader.h"
+#include "Resource/Asset/Shader.h"
 
 namespace LittleEngine::Rendering::Resources::Loaders
 {

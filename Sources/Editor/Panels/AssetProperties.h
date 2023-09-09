@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <variant>
+#include "variant"
 
 #include "Core/Tools/Filesystem/IniFile.h"
 #include "Core/Tools/Eventing/Event.h"
@@ -16,8 +16,8 @@
 #include "Modules/UI/Widgets/Layout/Group.h"
 #include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include "Modules/Rendering/Resources/Model.h"
-#include "Modules/Rendering/Resources/Texture.h"
+#include "Resource/Asset/Model.h"
+#include "Resource/Asset/Texture.h"
 
 namespace LittleEngine::Editor::Panels
 {

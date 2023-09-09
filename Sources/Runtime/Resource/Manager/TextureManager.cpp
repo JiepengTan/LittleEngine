@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Resource/Manager/TextureManager.h"
 #include "Modules/Rendering/Settings/DriverSettings.h"
 
 #include "Core/Tools/Filesystem/IniFile.h"

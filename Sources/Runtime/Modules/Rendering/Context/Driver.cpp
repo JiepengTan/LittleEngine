@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Core/CoreInclude.h"
 

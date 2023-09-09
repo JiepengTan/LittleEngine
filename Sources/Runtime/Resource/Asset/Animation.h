@@ -1,9 +1,9 @@
 #pragma once
 
-#include <vector>
-#include <map>
-#include "Modules/Rendering/Resources/AnimationData.h"
-#include "Modules/Rendering/Resources/Loaders/ModelLoader.h"
+#include "vector"
+#include "map"
+#include "Resource/Asset/AnimationData.h"
+#include "Resource/Loader/ModelLoader.h"
 
 namespace LittleEngine::Rendering::Resources
 {

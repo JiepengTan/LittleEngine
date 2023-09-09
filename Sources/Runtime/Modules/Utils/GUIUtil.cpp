@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <array>
+#include "array"
 
 #include "Core/Tools/Utils/PathParser.h"
 
@@ -21,14 +21,14 @@
 #include "Modules/UI/Plugins/DDTarget.h"
 
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
-#include "Modules/Rendering/ResourceManagement/SoundManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Manager/TextureManager.h"
+#include "Resource/Manager/ShaderManager.h"
+#include "Resource/Manager/MaterialManager.h"
+#include "Resource/Manager/SoundManager.h"
 
 #include "Modules/Utils/GUIUtil.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Model.h"
 
 namespace LittleEngine
 {

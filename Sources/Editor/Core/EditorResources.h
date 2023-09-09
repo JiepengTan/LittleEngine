@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
+#include "Resource/Manager/TextureManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Manager/ShaderManager.h"
 
 namespace LittleEngine::Editor::Core
 {

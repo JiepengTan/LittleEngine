@@ -8,7 +8,7 @@
 
 #include "Core/CoreInclude.h"
 
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 
 namespace LittleEngine::Resources
 {

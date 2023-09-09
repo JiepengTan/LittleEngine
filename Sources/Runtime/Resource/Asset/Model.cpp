@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <algorithm>
+#include "algorithm"
 
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Model.h"
 
 const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Rendering::Resources::Model::GetBoundingSphere() const
 {

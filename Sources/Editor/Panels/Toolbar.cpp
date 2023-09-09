@@ -10,7 +10,7 @@
 #include "../Editor/Core/EditorActions.h"
 
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Resource/Manager/TextureManager.h"
 
 LittleEngine::Editor::Panels::Toolbar::Toolbar
 (

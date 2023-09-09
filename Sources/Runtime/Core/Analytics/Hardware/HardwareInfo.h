@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <chrono>
+#include "chrono"
 
 
 #include "Core/Analytics/Hardware/HardwareReport.h"

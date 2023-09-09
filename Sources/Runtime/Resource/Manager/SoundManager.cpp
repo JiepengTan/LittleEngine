@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/SoundManager.h"
+#include "Resource/Manager/SoundManager.h"
 
 LittleEngine::Audio::Resources::Sound* LittleEngine::ResourceManagement::SoundManager::CreateResource(const std::string& p_path)
 {

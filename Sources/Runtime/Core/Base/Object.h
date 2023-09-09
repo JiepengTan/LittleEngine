@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Macro.h"
 #include "Core/Reflection/Reflection.h"
 #include "Core/Serialization/ISerializer.h"

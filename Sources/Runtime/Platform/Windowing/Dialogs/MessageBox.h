@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <string>
+#include "string"
 
 
 /* Prevent enum and class name to be replaced by standard macros */

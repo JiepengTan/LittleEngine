@@ -6,10 +6,10 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 
-#include <GL/glew.h>
-#include <stb_image/stb_image.h>
+#include "GL/glew.h"
+#include "stb_image/stb_image.h"
 
-#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Loader/TextureLoader.h"
 
 LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {

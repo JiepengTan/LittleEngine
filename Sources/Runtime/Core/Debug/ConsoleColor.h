@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <iostream>
-#include <windows.h>
+#include "iostream"
+#include "windows.h"
 
 #define COLOR_BLUE OvDebug::blue
 #define COLOR_RED OvDebug::red

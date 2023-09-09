@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Modules/Rendering/Resources/Animation.h"
-#include "Modules/Rendering/Resources/Model.h"
-#include <vector>
-#include <map>
-#include <functional>
-#include <assimp/Importer.hpp>
-#include <assimp/postprocess.h>
+#include "Resource/Asset/Animation.h"
+#include "Resource/Asset/Model.h"
+#include "vector"
+#include "map"
+#include "functional"
+#include "assimp/Importer.hpp"
+#include "assimp/postprocess.h"
 #include "Core/Debug/Assertion.h"
 #include "Core/Maths/FMatrix4.h"
 
-#include <assimp/anim.h>
+#include "assimp/anim.h"
 #include "Core/Maths/FQuaternion.h"
 
 using namespace std;

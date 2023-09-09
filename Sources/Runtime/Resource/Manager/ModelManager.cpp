@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Resource/Manager/ModelManager.h"
 
 #include "Core/Tools/Filesystem/IniFile.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Model.h"
 
 LittleEngine::Rendering::Resources::Parsers::EModelParserFlags GetAssetMetadata(const std::string& p_path)
 {

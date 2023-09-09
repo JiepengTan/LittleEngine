@@ -1,4 +1,4 @@
-﻿#include "PathUtil.h"
+#include "PathUtil.h"
 
 #include "Core/Tools/Utils/StringUtil.h"
 

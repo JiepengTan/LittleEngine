@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Modules/Rendering/Buffers/ShadowmapBuffer.h"
 
-#include <memory>
+#include "memory"
 
 #include "Core/CoreInclude.h"
 

@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <map>
-#include <vector>
-#include <string>
-#include "Modules/Rendering/Resources/AnimationData.h"
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "map"
+#include "vector"
+#include "string"
+#include "Resource/Asset/AnimationData.h"
+#include "Resource/Asset/Mesh.h"
 namespace LittleEngine::Rendering::Resources::Loaders
 {
 	class ModelLoader;

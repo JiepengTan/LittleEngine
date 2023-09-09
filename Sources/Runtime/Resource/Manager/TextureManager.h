@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include "Modules/Rendering/Resources/Loaders/TextureLoader.h"
+#include "Resource/Loader/TextureLoader.h"
 
-#include "Modules/Rendering/ResourceManagement/AResourceManager.h"
+#include "Resource/Manager/AResourceManager.h"
 
 namespace LittleEngine::ResourceManagement
 {

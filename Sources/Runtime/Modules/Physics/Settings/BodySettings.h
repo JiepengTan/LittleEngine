@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <bullet/btBulletCollisionCommon.h>
+#include "bullet/btBulletCollisionCommon.h"
 
 namespace LittleEngine::Physics::Settings
 {

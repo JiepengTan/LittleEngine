@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <string>
+#include "string"
 
-#include "Modules/Rendering/Resources/Parsers/AssimpParser.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Parser/AssimpParser.h"
+#include "Resource/Asset/Model.h"
 namespace LittleEngine::Rendering::Resources
 {
 	class Model;

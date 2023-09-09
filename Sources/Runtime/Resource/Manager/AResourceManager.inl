@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <algorithm>
+#include "algorithm"
 
 #include "Core/Tools/Filesystem/PathUtil.h"
-#include "Modules/Rendering/ResourceManagement/AResourceManager.h"
+#include "Resource/Manager/AResourceManager.h"
 
 namespace LittleEngine::ResourceManagement
 {

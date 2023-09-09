@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Modules/Rendering/Buffers/VertexArray.h"
 

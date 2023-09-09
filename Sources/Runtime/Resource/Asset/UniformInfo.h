@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <string>
-#include <any>
+#include "string"
+#include "any"
 
-#include "Modules/Rendering/Resources/UniformType.h"
+#include "Resource/Asset/UniformType.h"
 
 namespace LittleEngine::Rendering::Resources
 {

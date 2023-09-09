@@ -4,12 +4,12 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Resource/Manager/TextureManager.h"
 
 #include "Modules/Rendering/Buffers/UniformBuffer.h"
-#include "Modules/Rendering/Resources/Texture.h"
+#include "Resource/Asset/Texture.h"
 
 void LittleEngine::Resources::Material::SetShader(LittleEngine::Rendering::Resources::Shader* p_shader)
 {

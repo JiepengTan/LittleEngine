@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <Windows.h>
+#include "Windows.h"
 
 #include "Core/Analytics/Hardware/HardwareInfo.h"
 

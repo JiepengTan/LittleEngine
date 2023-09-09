@@ -6,7 +6,7 @@
 
 #include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 
-#include <Windows.h>
+#include "Windows.h"
 
 LittleEngine::Windowing::Dialogs::OpenFileDialog::OpenFileDialog(const std::string & p_dialogTitle) : FileDialog(GetOpenFileNameA, p_dialogTitle)
 {

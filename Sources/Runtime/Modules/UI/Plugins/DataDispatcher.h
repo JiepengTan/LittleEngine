@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <functional>
+#include "functional"
 
 #include "Modules/UI/Plugins/IPlugin.h"
 

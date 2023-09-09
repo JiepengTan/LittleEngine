@@ -1,12 +1,12 @@
-﻿#include "AssetsJsonExt.h"
+#include "AssetsJsonExt.h"
 #include "Core/Serialization/JsonSerializer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
-#include "Modules/Rendering/ResourceManagement/SoundManager.h"
-#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
+#include "Resource/Manager/MaterialManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Manager/ShaderManager.h"
+#include "Resource/Manager/SoundManager.h"
+#include "Resource/Manager/TextAssetManager.h"
+#include "Resource/Manager/TextureManager.h"
 
 namespace LittleEngine
 {

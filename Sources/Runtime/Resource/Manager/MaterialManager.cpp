@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Resource/Manager/MaterialManager.h"
 
 LittleEngine::Resources::Material * LittleEngine::ResourceManagement::MaterialManager::CreateResource(const std::string & p_path)
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <algorithm>
+#include "algorithm"
 
 #include "../Editor/Panels/Console.h"
 #include "../Editor/Core/EditorActions.h"

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <Windows.h>
-#include <psapi.h>
+#include "Windows.h"
+#include "psapi.h"
 
 namespace LittleEngine::Analytics::Hardware
 {

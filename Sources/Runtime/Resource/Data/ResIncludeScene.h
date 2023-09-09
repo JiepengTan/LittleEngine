@@ -1,5 +1,5 @@
 #pragma once
-#include "Resource/ResIncludeBasic.h"
+#include "Resource/Data/ResIncludeBasic.h"
 
 namespace LittleEngine
 {

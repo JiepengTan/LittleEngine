@@ -18,11 +18,11 @@
 #include "Modules/UI/Core/UIManager.h"
 
 #include "Modules/Framework/ECS/SceneRenderer.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
-#include "Modules/Rendering/ResourceManagement/TextureManager.h"
-#include "Modules/Rendering/ResourceManagement/ShaderManager.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
-#include "Modules/Rendering/ResourceManagement/SoundManager.h"
+#include "Resource/Manager/ModelManager.h"
+#include "Resource/Manager/TextureManager.h"
+#include "Resource/Manager/ShaderManager.h"
+#include "Resource/Manager/MaterialManager.h"
+#include "Resource/Manager/SoundManager.h"
 #include "Modules/Framework/SceneSystem/SceneManager.h"
 #include "Modules/Scripting/ScriptInterpreter.h"
 
@@ -30,7 +30,7 @@
 #include "Modules/Audio/Core/AudioPlayer.h"
 
 #include "Core/Tools/Filesystem/IniFile.h"
-#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
+#include "Resource/Manager/TextAssetManager.h"
 
 namespace LittleEngine::ResourceManagement
 {

@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <optional>
+#include "optional"
 
 #include "Modules/Rendering/Context/Driver.h"
 #include "Modules/Rendering/LowRenderer/Camera.h"
-#include "Modules/Rendering/Resources/Shader.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/Shader.h"
+#include "Resource/Asset/Model.h"
 #include "Modules/Rendering/Settings/ERenderingCapability.h"
 #include "Modules/Rendering/Settings/EPrimitiveMode.h"
 #include "Modules/Rendering/Settings/ERasterizationMode.h"

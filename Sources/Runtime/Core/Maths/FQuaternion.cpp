@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <algorithm>
-#include <cmath>
-#include <stdexcept>
+#include "algorithm"
+#include "cmath"
+#include "stdexcept"
 
 #include "Core/Maths/FQuaternion.h"
 

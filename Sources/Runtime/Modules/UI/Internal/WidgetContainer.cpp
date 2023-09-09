@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <algorithm>
+#include "algorithm"
 
 #include "Modules/UI/Internal/WidgetContainer.h"
 

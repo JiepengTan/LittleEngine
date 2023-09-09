@@ -1,13 +1,13 @@
 #include "Guid.h"
 
-#include <stdio.h>
-#include <stdint.h>
-#include <string>
+#include "stdio.h"
+#include "stdint.h"
+#include "string"
 
 #if defined(_WIN32)
-#include <objbase.h>
+#include "objbase.h"
 #elif defined(__linux__)
-#include <Guid/Guid.h>
+#include "Guid/Guid.h"
 #else
 #error "Guid unsupport platform"
 #endif

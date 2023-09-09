@@ -4,16 +4,16 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/Resources/Loaders/AnimationLoader.h"
+#include "Resource/Loader/AnimationLoader.h"
 
-#include <assimp/postprocess.h>
+#include "assimp/postprocess.h"
 
-#include "Modules/Rendering/Resources/Animation.h"
-#include "Modules/Rendering/Resources/Loaders/ModelLoader.h"
+#include "Resource/Asset/Animation.h"
+#include "Resource/Loader/ModelLoader.h"
 #include "Core/Tools/Filesystem/IniFile.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
+#include "fstream"
+#include "iostream"
+#include "sstream"
 
 #include "Core/Maths/DebugUtil.h"
 

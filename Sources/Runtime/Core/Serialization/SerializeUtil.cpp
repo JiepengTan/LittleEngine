@@ -1,4 +1,4 @@
-﻿#include "SerializeUtil.h"
+#include "SerializeUtil.h"
 
 #include "XmlSerializerXX.h"
 

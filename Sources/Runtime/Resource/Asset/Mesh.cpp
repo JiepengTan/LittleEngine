@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <algorithm>
+#include "algorithm"
 
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "Resource/Asset/Mesh.h"
 
 LittleEngine::Rendering::Resources::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
 			uint32_t p_materialIndex,

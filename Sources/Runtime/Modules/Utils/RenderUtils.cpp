@@ -2,9 +2,9 @@
 #include "Modules/Framework/ECS/SceneRenderer.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Resource/Manager/MaterialManager.h"
 #include "Modules/Utils/RenderUtils.h"
-#include "Modules/Rendering/Resources/Loaders/ShaderLoader.h"
+#include "Resource/Loader/ShaderLoader.h"
 
 unsigned int LittleEngine::RenderUtils::_QuadVAO = 0;
 unsigned int LittleEngine::RenderUtils::_QuadVBO = 0;

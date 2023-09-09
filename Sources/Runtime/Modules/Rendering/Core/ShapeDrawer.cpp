@@ -5,7 +5,7 @@
 */
 
 #include "Modules/Rendering/Core/ShapeDrawer.h"
-#include "Modules/Rendering/Resources/Loaders/ShaderLoader.h"
+#include "Resource/Loader/ShaderLoader.h"
 
 LittleEngine::Rendering::Core::ShapeDrawer::ShapeDrawer(LittleEngine::Rendering::Core::Renderer& p_renderer) : m_renderer(p_renderer)
 {

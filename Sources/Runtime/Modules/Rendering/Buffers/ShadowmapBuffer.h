@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <memory>
+#include "memory"
 
 #include "Modules/Rendering/Context/Driver.h"
-#include "Modules/Rendering/Resources/Texture.h"
+#include "Resource/Asset/Texture.h"
 
 namespace LittleEngine::Rendering::Buffers
 {

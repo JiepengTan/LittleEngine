@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <functional>
+#include "functional"
 
 #include "Modules/Rendering/Core/Renderer.h"
 

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <irrklang/irrKlang.h>
-#include <irrklang/ik_ISoundStopEventReceiver.h>
+#include "irrklang/irrKlang.h"
+#include "irrklang/ik_ISoundStopEventReceiver.h"
 
 #include "Core/Tools/Eventing/Event.h"
 

@@ -1,7 +1,7 @@
-﻿#include "StringUtil.h"
+#include "StringUtil.h"
 
-#include <algorithm>
-#include <iostream>
+#include "algorithm"
+#include "iostream"
 
 static int parse_flag = 0;
 

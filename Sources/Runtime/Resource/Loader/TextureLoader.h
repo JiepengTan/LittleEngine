@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <string>
-#include <vector>
+#include "string"
+#include "vector"
 
-#include "Modules/Rendering/Resources/Texture.h"
+#include "Resource/Asset/Texture.h"
 
 
 namespace LittleEngine::Rendering::Resources::Loaders

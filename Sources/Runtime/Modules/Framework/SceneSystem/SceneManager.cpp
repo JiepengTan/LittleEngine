@@ -15,8 +15,8 @@
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
-#include "Resource/ResIncludeScene.h"
+#include "Resource/Manager/TextAssetManager.h"
+#include "Resource/Data/ResIncludeScene.h"
 #include "_Generated/Serializer/AllSerializer.h"
 
 LittleEngine::SceneManager::SceneManager(const std::string& p_sceneRootFolder) : m_sceneRootFolder(p_sceneRootFolder)

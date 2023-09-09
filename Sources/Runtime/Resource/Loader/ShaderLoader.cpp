@@ -4,14 +4,14 @@
 * @licence: MIT
 */
 
-#include <sstream>
-#include <fstream>
+#include "sstream"
+#include "fstream"
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Core/CoreInclude.h"
 
-#include "Modules/Rendering/Resources/Loaders/ShaderLoader.h"
+#include "Resource/Loader/ShaderLoader.h"
 
 #include "Core/Tools/Utils/PathParser.h"
 

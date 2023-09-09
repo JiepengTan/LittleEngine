@@ -1,4 +1,4 @@
-﻿#include "TestManager.h"
+#include "TestManager.h"
 void LittleEngine::Test::RunTests()
 {
     RunRuntimeTests();

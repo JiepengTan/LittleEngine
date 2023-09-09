@@ -1,9 +1,9 @@
-﻿#pragma once
+#pragma once
 
 
 #include "Core/Serialization/Json.h"
-#include "Modules/Rendering/ResourceManagement/AResourceManager.h"
-#include "Resource/TextAsset.h"
+#include "Resource/Manager/AResourceManager.h"
+#include "Resource/Asset/TextAsset.h"
 
 namespace LittleEngine::ResourceManagement
 {

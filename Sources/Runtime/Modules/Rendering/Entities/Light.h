@@ -9,7 +9,7 @@
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FMatrix4.h"
 #include "Core/Maths/FTransform.h"
-#include "Resource/ResIncludeRendering.h"
+#include "Resource/Data/ResIncludeRendering.h"
 
 namespace LittleEngine::Rendering::Entities
 {

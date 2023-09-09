@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @project: Overload
 * @author: Overload Tech.
 * @licence: MIT
@@ -8,7 +8,7 @@
 #include "Core/CoreInclude.h"
 #include "TextAssetManager.h"
 
-#include <fstream>
+#include "fstream"
 
 #include "Core/Tools/Filesystem/FileUtil.h"
 

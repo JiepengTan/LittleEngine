@@ -6,7 +6,7 @@
 
 #include "Platform/Windowing/Context/Device.h"
 
-#include <stdexcept>
+#include "stdexcept"
 
 LittleEngine::Eventing::Event<LittleEngine::Windowing::Context::EDeviceError, std::string> LittleEngine::Windowing::Context::Device::ErrorEvent;
 

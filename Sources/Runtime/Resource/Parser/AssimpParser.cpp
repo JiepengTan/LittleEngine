@@ -4,19 +4,19 @@
 * @licence: MIT
 */
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/matrix4x4.h>
-#include "Modules/Rendering/Resources/Parsers/AssimpParser.h"
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/matrix4x4.h"
+#include "Resource/Parser/AssimpParser.h"
 
-#include <array>
-#include <cassert>
-#include <assimp/postprocess.h>
+#include "array"
+#include "cassert"
+#include "assimp/postprocess.h"
 #include "Core/Debug/Assertion.h"
 #include "Core/CoreInclude.h"
-#include "Modules/Rendering/Resources/AnimationData.h"
-#include "Modules/Rendering/Resources/Animation.h"
-#include "Modules/Rendering/Resources/Model.h"
+#include "Resource/Asset/AnimationData.h"
+#include "Resource/Asset/Animation.h"
+#include "Resource/Asset/Model.h"
 
 static LittleEngine::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 {

@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <Windows.h>
-#include <stdint.h>
+#include "Windows.h"
+#include "stdint.h"
 
 namespace LittleEngine::Analytics::Hardware
 {

@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/Resources/Loaders/MaterialLoader.h"
+#include "Resource/Loader/MaterialLoader.h"
 
 LittleEngine::Resources::Material * LittleEngine::Resources::Loaders::MaterialLoader::Create(const std::string & p_path)
 {

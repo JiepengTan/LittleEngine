@@ -10,7 +10,7 @@
 #define PI 3.14159265359f
 #define EPSILON 0.00001f
 
-#include <stdint.h>
+#include "stdint.h"
 
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FVector4.h"

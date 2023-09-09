@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <string>
-#include "Modules/Rendering/Resources/Parsers/EModelParserFlags.h"
+#include "string"
+#include "Resource/Parser/EModelParserFlags.h"
 namespace LittleEngine::Rendering::Resources
 {
 	class Model;

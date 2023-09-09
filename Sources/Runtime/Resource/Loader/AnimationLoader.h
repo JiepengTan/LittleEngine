@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
+#include "string"
 
-#include "Modules/Rendering/Resources/Model.h"
-#include "Modules/Rendering/Resources/Parsers/AssimpParser.h"
+#include "Resource/Asset/Model.h"
+#include "Resource/Parser/AssimpParser.h"
 
 namespace LittleEngine::Rendering::Resources::Loaders
 {

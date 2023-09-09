@@ -4,14 +4,14 @@
 * @licence: MIT
 */
 
-#include <filesystem>
+#include "filesystem"
 
 #include "../Game/Core/Context.h"
 
 #include "Core/Tools/Filesystem/FileUtil.h"
 #include "Core/Tools/Filesystem/PathUtil.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/TextAssetManager.h"
+#include "Resource/Manager/TextAssetManager.h"
 
 using namespace LittleEngine::Global;
 using namespace LittleEngine::ResourceManagement;

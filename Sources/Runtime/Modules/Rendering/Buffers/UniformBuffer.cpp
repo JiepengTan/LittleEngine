@@ -4,10 +4,10 @@
 * @licence: MIT
 */
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 #include "Modules/Rendering/Buffers/UniformBuffer.h"
-#include "Modules/Rendering/Resources/Shader.h"
+#include "Resource/Asset/Shader.h"
 
 LittleEngine::Rendering::Buffers::UniformBuffer::UniformBuffer(size_t p_size, uint32_t p_bindingPoint, uint32_t p_offset, EAccessSpecifier p_accessSpecifier)
 {

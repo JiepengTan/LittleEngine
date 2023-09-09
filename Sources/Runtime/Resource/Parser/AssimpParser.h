@@ -5,12 +5,12 @@
 */
 #pragma once
 
-#include <map>
-#include <vector>
+#include "map"
+#include "vector"
 
 #include "Core/Maths/FMatrix4.h"
 #include "Modules/Rendering/Geometry/Vertex.h"
-#include "Modules/Rendering/Resources/Parsers/IModelParser.h"
+#include "Resource/Parser/IModelParser.h"
 
 namespace LittleEngine::Rendering::Resources
 {

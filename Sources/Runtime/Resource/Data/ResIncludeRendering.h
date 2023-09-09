@@ -1,6 +1,6 @@
 #pragma once
 #include "ResIncludeBasic.h"
-#include "Modules/Rendering/Resources/UniformType.h"
+#include "Resource/Asset/UniformType.h"
 
 namespace LittleEngine
 {
@@ -47,7 +47,7 @@ namespace LittleEngine
         bool m_depthWriting		= true;
         bool m_colorWriting		= true;
         int  m_gpuInstances		= 1;
-		LittleEngine::Rendering::Resources::Shader* m_shader = nullptr;
+		std::string m_shader ;
         std::vector<ResUniformInfo> m_uniformsData;
     };
     

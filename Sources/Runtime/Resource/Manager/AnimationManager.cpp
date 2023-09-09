@@ -4,11 +4,11 @@
 * @licence: MIT
 */
 
-#include "Modules/Rendering/ResourceManagement/AnimationManager.h"
+#include "Resource/Manager/AnimationManager.h"
 #include "Core/Tools/Filesystem/IniFile.h"
 
 #include "Core/CoreInclude.h"
-#include "Modules/Rendering/Resources/Loaders/AnimationLoader.h"
+#include "Resource/Loader/AnimationLoader.h"
 
 
 

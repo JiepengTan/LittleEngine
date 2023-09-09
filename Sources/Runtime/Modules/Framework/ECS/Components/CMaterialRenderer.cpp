@@ -16,12 +16,12 @@
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/ECS/Components/CMaterialRenderer.h"
 
-#include <complex.h>
+#include "complex.h"
 
 #include "Modules/Framework/ECS/Components/CModelRenderer.h"
-#include "Modules/Rendering/ResourceManagement/MaterialManager.h"
+#include "Resource/Manager/MaterialManager.h"
 #include "Modules/Framework/Global/ServiceLocator.h"
-#include "Modules/Rendering/ResourceManagement/ModelManager.h"
+#include "Resource/Manager/ModelManager.h"
 
 
 void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)

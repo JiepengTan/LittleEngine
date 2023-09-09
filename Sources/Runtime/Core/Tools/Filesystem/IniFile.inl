@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <assert.h>
+#include "assert.h"
 
 #include "Core/Tools/Filesystem/IniFile.h"
 

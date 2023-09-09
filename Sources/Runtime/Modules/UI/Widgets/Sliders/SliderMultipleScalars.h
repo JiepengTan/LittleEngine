@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <array>
+#include "array"
 
 #include "Core/Tools/Eventing/Event.h"
 

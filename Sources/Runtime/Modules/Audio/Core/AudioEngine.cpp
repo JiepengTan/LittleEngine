@@ -6,9 +6,9 @@
 
 #include "Modules/Audio/Core/AudioEngine.h"
 
-#include <algorithm>
+#include "algorithm"
 
-#include <irrklang/irrKlang.h>
+#include "irrklang/irrKlang.h"
 
 LittleEngine::Audio::Core::AudioEngine::AudioEngine(const std::string & p_workingDirectory) : m_workingDirectory(p_workingDirectory)
 {

@@ -6,13 +6,13 @@
 
 #pragma once
 
-#include <array>
-#include <vector>
-#include <memory>
+#include "array"
+#include "vector"
+#include "memory"
 
 #include "Modules/Rendering/Buffers/VertexArray.h"
 #include "Modules/Rendering/Buffers/IndexBuffer.h"
-#include "Modules/Rendering/Resources/IMesh.h"
+#include "Resource/Asset/IMesh.h"
 #include "Modules/Rendering/Geometry/Vertex.h"
 #include "Modules/Rendering/Geometry/BoundingSphere.h"
 

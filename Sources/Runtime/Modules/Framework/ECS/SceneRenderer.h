@@ -6,15 +6,15 @@
 
 #pragma once
 
-#include <map>
+#include "map"
 
 #include "Modules/Rendering/Core/Renderer.h"
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "Resource/Asset/Mesh.h"
 #include "Modules/Rendering/Data/Frustum.h"
 #include "Modules/Rendering/Buffers/ShadowmapBuffer.h"
 
 
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/ECS/Components/CCamera.h"
 #include "Modules/Framework/SceneSystem/Scene.h"

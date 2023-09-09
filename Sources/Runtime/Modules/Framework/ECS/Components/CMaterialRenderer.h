@@ -6,13 +6,13 @@
 
 #pragma once
 
-#include <array>
+#include "array"
 
 #include "Modules/UI/Widgets/Layout/Columns.h"
 
-#include "Modules/Rendering/Resources/Mesh.h"
+#include "Resource/Asset/Mesh.h"
 
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 #include "Modules/Framework/ECS/Component.h"
 
 #define MAX_MATERIAL_COUNT 8

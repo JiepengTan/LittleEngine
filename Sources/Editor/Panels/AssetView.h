@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <variant>
+#include "variant"
 
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Material.h"
 
 #include "../Editor/Panels/AViewControllable.h"
 

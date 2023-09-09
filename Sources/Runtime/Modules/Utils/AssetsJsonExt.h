@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 #include "Core/Serialization/JsonSerializer.h"
-#include "Modules/Rendering/Resources/Model.h"
-#include "Modules/Rendering/Resources/Texture.h"
-#include "Modules/Rendering/Resources/Shader.h"
-#include "Modules/Rendering/Resources/Material.h"
+#include "Resource/Asset/Model.h"
+#include "Resource/Asset/Texture.h"
+#include "Resource/Asset/Shader.h"
+#include "Resource/Asset/Material.h"
 #include "Modules/Audio/Resources/Sound.h"
-#include "Resource/TextAsset.h"
+#include "Resource/Asset/TextAsset.h"
 
 namespace LittleEngine
 {
