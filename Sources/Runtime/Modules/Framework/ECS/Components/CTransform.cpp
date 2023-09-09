@@ -11,10 +11,7 @@ std::string LittleEngine::CTransform::GetName()
 {
 	return "Transform";
 }
-void LittleEngine::CTransform::DoInit(ActorPtr p_owner)
-{
-	Component::DoInit(p_owner);
-}
+
 void LittleEngine::CTransform::SetParent(SharedPtr<CTransform> p_parent)
 {
 	if(p_parent == nullptr)

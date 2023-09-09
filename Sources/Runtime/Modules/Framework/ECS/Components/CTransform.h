@@ -27,7 +27,6 @@ namespace LittleEngine
 		REFLECTION_COMPONENT_BODY(CTransform)
 	public:
 		
-		void DoInit(ActorPtr p_owner) override;
 		/**
 		* Returns the name of the component
 		*/

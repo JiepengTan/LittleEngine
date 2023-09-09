@@ -65,7 +65,10 @@ namespace LittleEngine
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
     static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}\
     \
-    ##class_name(){ _LE_InternalMetaTypeID = class_name##::MetaTypeId;}\
+    ##class_name(){\
+        _LE_InternalMetaTypeID = class_name##::MetaTypeId;\
+        OnConstruction();\
+    }\
     virtual ::LittleEngine::TypeID GetTypeID(){ return _LE_InternalMetaTypeID;}\
     virtual std::string GetTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(_LE_InternalMetaTypeID);}
 

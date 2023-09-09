@@ -13,9 +13,9 @@
 
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
-void LittleEngine::CAmbientSphereLight::DoInit(ActorPtr p_owner)
+void LittleEngine::CAmbientSphereLight::OnAwake()
 {
-	CLight::DoInit(p_owner);
+	CLight::OnAwake();
     m_data.intensity = 0.1f;
 	m_data.constant = 1.0f;
 

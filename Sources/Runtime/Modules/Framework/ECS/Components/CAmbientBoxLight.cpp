@@ -13,9 +13,9 @@
 
 #include "Modules/Framework/ECS/Components/CAmbientBoxLight.h"
 
-void LittleEngine::CAmbientBoxLight::DoInit(ActorPtr p_owner)
+void LittleEngine::CAmbientBoxLight::OnAwake()
 {
-	CLight::DoInit(p_owner);
+	CLight::OnAwake();
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::AMBIENT_BOX);
 	m_data.intensity = 0.1f;
 	m_data.constant = 1.0f;

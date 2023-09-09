@@ -30,14 +30,13 @@ namespace LittleEngine
 	{
 		REFLECTION_COMPONENT_BODY(CMaterialRenderer)
 	public:
-		using MaterialList = std::vector<LittleEngine::Material*>;
-		using MaterialField = std::vector<std::array<LittleEngine::UI::Widgets::AWidget*, 3>>;
 
+		void OnConstruction() override;
 		/**
 		* Constructor
 		* @param p_owner
 		*/
-		void DoInit(ActorPtr p_owner) override;
+		void OnAwake() override;
 		/**
 		* Returns the name of the component
 		*/
@@ -115,7 +114,7 @@ namespace LittleEngine
 		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
 
 	private:
-		MaterialField  m_materialFields;
+		std::array<LittleEngine::UI::Widgets::AWidget*, 3>  m_materialFields[MAX_MATERIAL_COUNT];
 		META(Enable)
 		MaterialResPtr m_materials[MAX_MATERIAL_COUNT];
 		META(Enable)

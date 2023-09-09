@@ -31,11 +31,12 @@ namespace LittleEngine
 		virtual ~Component();
 		virtual void OnBeforeSceneSave(ActorPtr p_actor){}
 		virtual void OnAfterSceneLoaded(ActorPtr p_actor){}
+		
 		/**
 		* Constructor of a AComponent (Must be called by derived classes)
 		* @param p_owner
 		*/
-		virtual void DoInit(ActorPtr p_owner){}
+		virtual void OnConstruction(){}
 		
 		/**
 		* Called when the scene start right before OnStart

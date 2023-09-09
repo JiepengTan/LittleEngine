@@ -15,9 +15,9 @@
 #include "Modules/Framework/ECS/Components/CSpotLight.h"
 
 
-void LittleEngine::CSpotLight::DoInit(ActorPtr p_owner)
+void LittleEngine::CSpotLight::OnAwake()
 {
-	CLight::DoInit(p_owner);
+	CLight::OnAwake();
 	m_data.type = static_cast<float>(LittleEngine::Rendering::Entities::Light::Type::SPOT);
 }
 

@@ -20,7 +20,7 @@ namespace LittleEngine
 	{
 		REFLECTION_COMPONENT_BODY(CAnimator)
 	public:
-		void DoInit(ActorPtr p_owner) override;
+		void OnAwake() override;
 		~CAnimator() =default;
 		std::string GetName() override;
 		void OnStart() override;

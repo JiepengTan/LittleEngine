@@ -16,10 +16,9 @@
 
 
 
-void LittleEngine::CLight::DoInit(ActorPtr p_owner)
+void LittleEngine::CLight::OnAwake()
 {
-	Component::DoInit(p_owner);
-	m_data.DoInit (p_owner->transform->GetFTransform(), {});
+	m_data.DoInit (owner->transform->GetFTransform(), {});
 }
 
 

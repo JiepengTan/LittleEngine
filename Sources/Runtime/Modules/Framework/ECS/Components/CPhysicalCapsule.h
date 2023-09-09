@@ -26,7 +26,7 @@ namespace LittleEngine
 		* Constructor
 		* @param p_owner
 		*/
-		void DoInit(ActorPtr p_owner) override;
+		void OnAwake() override;
 		/**
 		* Returns the name of the component
 		*/

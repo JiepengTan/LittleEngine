@@ -12,9 +12,9 @@
 #include "Modules/Framework/ECS/Actor.h"
 
 
-void LittleEngine::CCamera::DoInit(ActorPtr p_owner)
+void LittleEngine::CCamera::OnAwake()
 {
-	Component::DoInit(p_owner);
+	Component::OnAwake();
 	SetClearColor({ 0.1921569f, 0.3019608f, 0.4745098f });
 }
 std::string LittleEngine::CCamera::GetName()

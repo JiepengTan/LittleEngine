@@ -14,9 +14,9 @@
 #include "Modules/Framework/ECS/Components/CPhysicalObject.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-void LittleEngine::CPhysicalObject::DoInit(ActorPtr p_owner) 
+void LittleEngine::CPhysicalObject::OnAwake() 
 {
-	Component::DoInit(p_owner);
+	Component::OnAwake();
 }
 
 void LittleEngine::CPhysicalObject::AddForce(const LittleEngine::FVector3 & p_force)

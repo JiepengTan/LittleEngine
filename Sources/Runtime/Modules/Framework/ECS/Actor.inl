@@ -22,7 +22,6 @@ namespace LittleEngine
 			ActorPtr ptr = GetSceneActor(m_actorID);
 			LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
 			comp->SetActor(ptr);
-			comp->DoInit(ptr);
 			m_components[comp->GetTypeID()] = comp;
 			NotifyComponentAdd(comp);
 			if (m_playing && IsActive())

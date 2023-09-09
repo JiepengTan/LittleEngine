@@ -7,9 +7,9 @@
 #include "Modules/Framework/ECS/Components/CAudioListener.h"
 #include "Modules/Framework/ECS/Actor.h"
 
-void LittleEngine::CAudioListener::DoInit(ActorPtr p_owner)
+void LittleEngine::CAudioListener::OnAwake()
 {
-	Component::DoInit(p_owner);
+	Component::OnAwake();
 	m_audioListener.DoInit(GetActor()->transform->GetFTransform());
 	m_audioListener.SetEnabled(false);
 }

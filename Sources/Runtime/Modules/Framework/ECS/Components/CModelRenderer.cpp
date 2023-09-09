@@ -21,9 +21,9 @@
 #include "Modules/Framework/ECS/Actor.h"
 
 
-void LittleEngine::CModelRenderer::DoInit(ActorPtr p_owner)
+void LittleEngine::CModelRenderer::OnAwake()
 {
-	Component::DoInit(p_owner);
+	Component::OnAwake();
 	m_modelChangedEvent += [this]
 	{
 		if (auto materialRenderer = GetActor()->GetComponent<CMaterialRenderer>())

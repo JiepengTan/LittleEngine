@@ -17,9 +17,9 @@
 
 const int INIT_BONE_COUNT = 100;
 
-void LittleEngine::CAnimator::DoInit(ActorPtr p_owner)
+void LittleEngine::CAnimator::OnAwake()
 {
-    Component::DoInit(p_owner);
+    Component::OnAwake();
     m_currentTime = 0;
     m_showDebugBones = false;
     m_curAnim = nullptr;

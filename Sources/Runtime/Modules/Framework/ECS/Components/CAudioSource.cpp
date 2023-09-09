@@ -15,9 +15,9 @@
 
 
 
-void LittleEngine::CAudioSource::DoInit(ActorPtr p_owner)
+void LittleEngine::CAudioSource::OnAwake()
 {
-	Component::DoInit(p_owner);
+	Component::OnAwake();
 	m_audioSource = MakeUniquePtr<LittleEngine::Audio::Entities::AudioSource>
 	(GetGlobalService<LittleEngine::Audio::Core::AudioPlayer>(),
 		GetActor()->transform->GetFTransform());

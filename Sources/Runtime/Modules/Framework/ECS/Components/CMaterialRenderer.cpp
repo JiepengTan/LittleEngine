@@ -23,10 +23,8 @@
 #include "Modules/Framework/Global/ServiceLocator.h"
 #include "Resource/Manager/ModelManager.h"
 
-
-void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)
+void LittleEngine::CMaterialRenderer::OnConstruction()
 {
-	Component::DoInit(p_owner);
 	for (int i =0;i< MAX_MATERIAL_COUNT;i++)
 	{
 		m_materials[i] = MaterialResPtr::NullPtr;
@@ -35,6 +33,10 @@ void LittleEngine::CMaterialRenderer::DoInit(ActorPtr p_owner)
 	{
 		item.fill(nullptr);
 	}
+}
+void LittleEngine::CMaterialRenderer::OnAwake()
+{
+	Component::OnAwake();
 	UpdateMaterialList();
 }
 
@@ -102,7 +104,6 @@ void LittleEngine::CMaterialRenderer::OnBeforeSceneSave(ActorPtr p_actor)
 
 void LittleEngine::CMaterialRenderer::OnAfterSceneLoaded(ActorPtr p_actor)
 {
-	UpdateMaterialList();
 }
 
 
@@ -157,7 +158,7 @@ void LittleEngine::CMaterialRenderer::OnInspector()
 void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 {
 
-	for (uint8_t i = 0; i < m_materialFields.size(); ++i)
+	for (uint8_t i = 0; i <MAX_MATERIAL_COUNT; ++i)
 	{
 		if (m_materialFields[i][0])
 		{

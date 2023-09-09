@@ -23,7 +23,7 @@ namespace LittleEngine
 		* Constructor
 		* @param p_owner
 		*/
-		void DoInit(ActorPtr p_owner) override;
+		void OnAwake() override;
 		/**
 		* Add a force to the rigidbody
 		* @param p_force

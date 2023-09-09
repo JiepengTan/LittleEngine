@@ -41,7 +41,6 @@ namespace LittleEngine
             comp->owner = self;
             comp->OnAfterSceneLoaded(comp->owner);
         }
-        
     }
     void Actor::LoadFrom(ResActor& p_resActor)
     {
