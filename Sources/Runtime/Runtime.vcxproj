@@ -104,6 +104,9 @@
     <ClCompile Include="Resource\Asset\Sound.cpp" />
     <ClCompile Include="Resource\Asset\TextAsset.cpp" />
     <ClCompile Include="Resource\Asset\Texture.cpp" />
+    <ClCompile Include="Resource\Core\ResMeta.cpp" />
+    <ClCompile Include="Resource\Core\ResourcesUtils.cpp" />
+    <ClCompile Include="Resource\Core\ResPtr.cpp" />
     <ClCompile Include="Resource\Loader\AnimationLoader.cpp" />
     <ClCompile Include="Resource\Loader\MaterialLoader.cpp" />
     <ClCompile Include="Resource\Loader\ModelLoader.cpp" />
@@ -527,6 +530,9 @@
     <ClInclude Include="Resource\Asset\Texture.h" />
     <ClInclude Include="Resource\Asset\UniformInfo.h" />
     <ClInclude Include="Resource\Asset\UniformType.h" />
+    <ClInclude Include="Resource\Core\ResMeta.h" />
+    <ClInclude Include="Resource\Core\ResourcesUtils.h" />
+    <ClInclude Include="Resource\Core\ResPtr.h" />
     <ClInclude Include="Resource\Data\ResIncludeAnimation.h" />
     <ClInclude Include="Resource\Data\ResIncludeAudio.h" />
     <ClInclude Include="Resource\Data\ResIncludeBasic.h" />

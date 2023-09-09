@@ -1,0 +1,175 @@
+﻿#pragma once
+#include "Core/Reflection/Reflection.h"
+#include "Resource/Data/ResIncludeBasic.h"
+#include "Resource/Core/ResourcesUtils.h"
+
+namespace LittleEngine
+{
+    enum class EResType
+    {
+        EResInvalid=0,
+        EResMesh = 1,
+        EResShader = 2,
+        EResTexture= 3,
+        EResModel = 4,
+        EResAnimation = 5,
+        EResSound = 6,
+        EResMaterial = 7,
+    };
+
+    template<typename T>
+    class ResPtr
+    {
+        template<typename U>
+        friend class ResPtr;
+    public:
+        ResPtr(EResType type,StringText guid, T* instance) :m_guid(guid), m_resType(type), m_instance(instance) {}
+        ResPtr() : m_resType(), m_instance(nullptr) {}
+
+        ResPtr(const ResPtr& dest) : m_resType(dest.m_resType), m_instance(dest.m_instance) {}
+        void Reset(EResType type,StringText guid, T* instance)
+        {
+            m_guid = guid;
+            m_resType = type;
+            m_instance = instance;
+        }
+        template<typename U /*, typename = typename std::enable_if<std::is_safely_castable<T*, U*>::value>::type */>
+        ResPtr<T>& operator=(const ResPtr<U>& dest)
+        {
+            if (this == static_cast<void*>(&dest))
+            {
+                return *this;
+            }
+            m_resType = dest.m_resType;
+            m_guid = dest.m_guid;
+            m_instance  = static_cast<T*>(dest.m_instance);
+            return *this;
+        }
+
+        template<typename U /*, typename = typename std::enable_if<std::is_safely_castable<T*, U*>::value>::type*/>
+        ResPtr<T>& operator=(ResPtr<U>&& dest)
+        {
+            if (this == static_cast<void*>(&dest))
+            {
+                return *this;
+            }
+            m_resType = dest.m_resType;
+            m_guid = dest.m_guid;
+            m_instance  = static_cast<T*>(dest.m_instance);
+            return *this;
+        }
+
+        ResPtr<T>& operator=(const ResPtr<T>& dest)
+        {
+            if (this == &dest)
+            {
+                return *this;
+            }
+            m_resType = dest.m_resType;
+            m_guid = dest.m_guid;
+            m_instance  = dest.m_instance;
+            return *this;
+        }
+
+        ResPtr<T>& operator=(ResPtr<T>&& dest)
+        {
+            if (this == &dest)
+            {
+                return *this;
+            }
+            m_resType = dest.m_resType;
+            m_guid = dest.m_guid;
+            m_instance  = dest.m_instance;
+            return *this;
+        }
+
+        StringText GetGUID() const { return m_guid; }
+        
+        EResType GetResType() const { return m_resType; }
+        void SetResType(EResType name) { m_resType = name; }
+
+        bool operator==(const T* ptr) const { return (m_instance == ptr); }
+
+        bool operator!=(const T* ptr) const { return (m_instance != ptr); }
+
+        bool operator==(const ResPtr<T>& rhs_ptr) const { return (m_instance == rhs_ptr.m_instance); }
+
+        bool operator!=(const ResPtr<T>& rhs_ptr) const { return (m_instance != rhs_ptr.m_instance); }
+
+        template<typename T1>
+        explicit operator T1*()
+        {
+            return static_cast<T1*>(m_instance);
+        }
+
+        template<typename T1>
+        operator ResPtr<T1>()
+        {
+            return ResPtr<T1>(m_resType, (T1*)(m_instance));
+        }
+
+        template<typename T1>
+        explicit operator const T1*() const
+        {
+            return static_cast<T1*>(m_instance);
+        }
+
+        template<typename T1>
+        operator const ResPtr<T1>() const
+        {
+            return ResPtr<T1>(m_resType, (T1*)(m_instance));
+        }
+
+        T* operator->() { return m_instance; }
+
+        T* operator->() const { return m_instance; }
+
+        T& operator*() { return *(m_instance); }
+
+        T* GetPtr() { return m_instance; }
+
+        T* GetPtr() const { return m_instance; }
+
+        const T& operator*() const { return *(static_cast<const T*>(m_instance)); }
+
+        T*& GetPtrReference() { return m_instance; }
+
+        operator bool() const { return (m_instance != nullptr); }
+    
+    private:
+        EResType    m_resType = EResType::EResInvalid;
+        StringText  m_guid = {""};
+        T*          m_instance {nullptr};
+        typedef T   m_type;
+    };
+    
+#define DECLARE_RES_TYPE(restypename) \
+    class ResPtr##restypename :public ResPtr<##restypename##>\
+    {\
+    };\
+    template<>\
+    Json JsonSerializer::Write(const ResPtr##restypename##& instance)\
+    {\
+        auto resType    = instance.GetResType();\
+        return Json::object {\
+            {"resType", Json((int)resType)},\
+            {"guid", Json( instance.GetGUID())}\
+        };\
+    }\
+    template<>\
+    ResPtr##restypename##& JsonSerializer::Read(const Json& json_context, ResPtr##restypename##& instance)\
+    {\
+        auto resType = (EResType)json_context["resType"].int_value();\
+        auto guid = json_context["guid"].string_value();\
+        auto ptr = ResourcesUtils::Load##restypename##(guid);\
+        instance.Reset(resType,guid,ptr);\
+        return instance;\
+    }
+
+    DECLARE_RES_TYPE(Shader) 
+    DECLARE_RES_TYPE(Texture)
+    DECLARE_RES_TYPE(Model) 
+    DECLARE_RES_TYPE(Animation) 
+    DECLARE_RES_TYPE(Sound) 
+    DECLARE_RES_TYPE(Material)
+}
