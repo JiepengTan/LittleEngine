@@ -11,7 +11,7 @@ LittleEngine::Rendering::Core::ShapeDrawer::ShapeDrawer(LittleEngine::Rendering:
 {
 
 	Geometry::VertexDataBuffer vertices(2,Geometry::EVertexDataFlags::vdf_allNoBone);
-	m_lineMesh = new Resources::Mesh(vertices, { 0, 1 }, 0,Geometry::EVertexDataFlags::vdf_allNoBone,false);
+	m_lineMesh = new Mesh(vertices, { 0, 1 }, 0,Geometry::EVertexDataFlags::vdf_allNoBone,false);
 
 	std::string vertexShader = R"(
 #version 430 core
@@ -41,7 +41,7 @@ void main()
 }
 )";
 
-	m_lineShader = LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
+	m_lineShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
 
 	vertexShader = R"(
 #version 430 core
@@ -90,13 +90,13 @@ void main()
 }
 )";
 
-	m_gridShader = LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
+	m_gridShader = LittleEngine::Resources::ShaderLoader::CreateFromSource(vertexShader, fragmentShader);
 }
 
 LittleEngine::Rendering::Core::ShapeDrawer::~ShapeDrawer()
 {
 	delete m_lineMesh;
-	LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(m_lineShader);
+	LittleEngine::Resources::ShaderLoader::Destroy(m_lineShader);
 }
 
 void LittleEngine::Rendering::Core::ShapeDrawer::SetViewProjection(const LittleEngine::FMatrix4& p_viewProjection)

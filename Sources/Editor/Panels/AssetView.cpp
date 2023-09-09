@@ -22,7 +22,7 @@ LittleEngine::Editor::Panels::AssetView::AssetView
 	m_camera.SetClearColor({ 0.098f, 0.098f, 0.098f });
 	m_camera.SetFar(5000.0f);
 
-	m_resource = static_cast<LittleEngine::Rendering::Resources::Model*>(nullptr);
+	m_resource = static_cast<LittleEngine::Model*>(nullptr);
 	m_image->AddPlugin<LittleEngine::UI::Plugins::DDTarget<std::pair<std::string, LittleEngine::UI::Widgets::Layout::Group*>>>("File").DataReceivedEvent += [this](auto p_data)
 	{
 		std::string path = p_data.first;
@@ -63,13 +63,13 @@ void LittleEngine::Editor::Panels::AssetView::_Render_Impl()
 
 	m_editorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
 
-	if (auto pval = std::get_if<LittleEngine::Rendering::Resources::Model*>(&m_resource); pval && *pval)
+	if (auto pval = std::get_if<LittleEngine::Model*>(&m_resource); pval && *pval)
 		m_editorRenderer.RenderModelAsset(**pval);
 	
-	if (auto pval = std::get_if<LittleEngine::Rendering::Resources::Texture*>(&m_resource); pval && *pval)
+	if (auto pval = std::get_if<LittleEngine::Texture*>(&m_resource); pval && *pval)
 		m_editorRenderer.RenderTextureAsset(**pval);
 	
-	if (auto pval = std::get_if<LittleEngine::Resources::Material*>(&m_resource); pval && *pval)
+	if (auto pval = std::get_if<LittleEngine::Material*>(&m_resource); pval && *pval)
 		m_editorRenderer.RenderMaterialAsset(**pval);
 
 	baseRenderer.ApplyStateMask(glState);

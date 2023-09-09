@@ -161,17 +161,17 @@ void LittleEngine::XmlSerializerXX::SerializeColor( const std::string & p_name, 
 	element->InsertEndChild(a);
 }
 
-void LittleEngine::XmlSerializerXX::SerializeModel( const std::string & p_name, LittleEngine::Rendering::Resources::Model * p_value)
+void LittleEngine::XmlSerializerXX::SerializeModel( const std::string & p_name, LittleEngine::Model * p_value)
 {
 	SerializeString(p_name.c_str(), p_value ? p_value->path : "?");
 }
 
-void LittleEngine::XmlSerializerXX::SerializeTexture( const std::string & p_name, LittleEngine::Rendering::Resources::Texture * p_value)
+void LittleEngine::XmlSerializerXX::SerializeTexture( const std::string & p_name, LittleEngine::Texture * p_value)
 {
 	SerializeString(p_name.c_str(), p_value ? p_value->path : "?");
 }
 
-void LittleEngine::XmlSerializerXX::SerializeShader( const std::string & p_name, LittleEngine::Rendering::Resources::Shader * p_value)
+void LittleEngine::XmlSerializerXX::SerializeShader( const std::string & p_name, LittleEngine::Shader * p_value)
 {
 	SerializeString(p_name.c_str(), p_value ? p_value->path : "?");
 }
@@ -182,12 +182,12 @@ void LittleEngine::XmlSerializerXX::DeserializeBoolean( const std::string & p_na
 		element->QueryBoolText(&p_out);
 }
 
-void LittleEngine::XmlSerializerXX::SerializeMaterial( const std::string & p_name, LittleEngine::Resources::Material * p_value)
+void LittleEngine::XmlSerializerXX::SerializeMaterial( const std::string & p_name, LittleEngine::Material * p_value)
 {
 	SerializeString(p_name.c_str(), p_value ? p_value->path : "?");
 }
 
-void LittleEngine::XmlSerializerXX::SerializeSound(const std::string& p_name, LittleEngine::Audio::Resources::Sound* p_value)
+void LittleEngine::XmlSerializerXX::SerializeSound(const std::string& p_name, LittleEngine::Sound* p_value)
 {
 	SerializeString(p_name.c_str(), p_value ? p_value->path : "?");
 }
@@ -320,7 +320,7 @@ void LittleEngine::XmlSerializerXX::DeserializeColor( const std::string & p_name
 	}
 }
 
-void LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name, LittleEngine::Rendering::Resources::Model *& p_out)
+void LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name, LittleEngine::Model *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
 		p_out = GetGlobalService<LittleEngine::ResourceManagement::ModelManager>().GetResource(path);
@@ -328,7 +328,7 @@ void LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name
 		p_out = nullptr;
 }
 
-void LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_name, LittleEngine::Rendering::Resources::Texture *& p_out)
+void LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_name, LittleEngine::Texture *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
 		p_out = GetGlobalService<LittleEngine::ResourceManagement::TextureManager>().GetResource(path);
@@ -336,7 +336,7 @@ void LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_na
 		p_out = nullptr;
 }
 
-void LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_name, LittleEngine::Rendering::Resources::Shader *& p_out)
+void LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_name, LittleEngine::Shader *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
 		p_out = GetGlobalService<LittleEngine::ResourceManagement::ShaderManager>().GetResource(path);
@@ -344,7 +344,7 @@ void LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_nam
 		p_out = nullptr;
 }
 
-void LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_name, LittleEngine::Resources::Material *& p_out)
+void LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_name, LittleEngine::Material *& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
 		p_out = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>().GetResource(path);
@@ -352,7 +352,7 @@ void LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_n
 		p_out = nullptr;
 }
 
-void LittleEngine::XmlSerializerXX::DeserializeSound(const std::string& p_name, LittleEngine::Audio::Resources::Sound*& p_out)
+void LittleEngine::XmlSerializerXX::DeserializeSound(const std::string& p_name, LittleEngine::Sound*& p_out)
 {
 	if (std::string path = DeserializeString(p_name.c_str()); path != "?" && path != "")
 		p_out = GetGlobalService<LittleEngine::ResourceManagement::SoundManager>().GetResource(path);
@@ -444,37 +444,37 @@ LittleEngine::Color LittleEngine::XmlSerializerXX::DeserializeColor( const std::
 	return result;
 }
 
-LittleEngine::Rendering::Resources::Model* LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name)
+LittleEngine::Model* LittleEngine::XmlSerializerXX::DeserializeModel( const std::string & p_name)
 {
-	LittleEngine::Rendering::Resources::Model* result;
+	LittleEngine::Model* result;
 	DeserializeModel(p_name, result);
 	return result;
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_name)
+LittleEngine::Texture* LittleEngine::XmlSerializerXX::DeserializeTexture( const std::string & p_name)
 {
-	LittleEngine::Rendering::Resources::Texture* result;
+	LittleEngine::Texture* result;
 	DeserializeTexture(p_name, result);
 	return result;
 }
 
-LittleEngine::Rendering::Resources::Shader* LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_name)
+LittleEngine::Shader* LittleEngine::XmlSerializerXX::DeserializeShader( const std::string & p_name)
 {
-	LittleEngine::Rendering::Resources::Shader* result;
+	LittleEngine::Shader* result;
 	DeserializeShader(p_name, result);
 	return result;
 }
 
-LittleEngine::Resources::Material * LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_name)
+LittleEngine::Material * LittleEngine::XmlSerializerXX::DeserializeMaterial( const std::string & p_name)
 {
-	LittleEngine::Resources::Material* result;
+	LittleEngine::Material* result;
 	DeserializeMaterial(p_name, result);
 	return result;
 }
 
-LittleEngine::Audio::Resources::Sound* LittleEngine::XmlSerializerXX::DeserializeSound(const std::string& p_name)
+LittleEngine::Sound* LittleEngine::XmlSerializerXX::DeserializeSound(const std::string& p_name)
 {
-	LittleEngine::Audio::Resources::Sound* result;
+	LittleEngine::Sound* result;
 	DeserializeSound(p_name, result);
 	return result;
 }

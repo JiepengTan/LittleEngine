@@ -16,9 +16,8 @@
 #include "Modules/Rendering/Geometry/Vertex.h"
 #include "Modules/Rendering/Geometry/BoundingSphere.h"
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
-
 
 	
 	/**
@@ -33,9 +32,9 @@ namespace LittleEngine::Rendering::Resources
 		* @param p_indices
 		* @param p_materialIndex
 		*/
-		Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
+		Mesh(Rendering::Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
 			uint32_t p_materialIndex,
-			Geometry::EVertexDataFlags p_dataFlag ,
+			Rendering::Geometry::EVertexDataFlags p_dataFlag ,
 			bool p_isReadWrite);
 		~Mesh();
 /*
@@ -79,7 +78,7 @@ namespace LittleEngine::Rendering::Resources
 		float* GetBoneWeights() const;
 		int* GetBoneIds() const;
 		int GetPositionBufferSize();
-		Geometry::EVertexDataFlags GetDataFlags(){ return m_dataFlags;} 
+		Rendering::Geometry::EVertexDataFlags GetDataFlags(){ return m_dataFlags;} 
 	private:
 		void ComputeBoundingSphere();
 
@@ -88,22 +87,22 @@ namespace LittleEngine::Rendering::Resources
 		const uint32_t m_indicesCount;
 		const uint32_t m_materialIndex;
 
-		Buffers::VertexArray							m_vertexArray;
-		std::unique_ptr<Buffers::IndexBuffer>			m_indexBuffer;
+		Rendering::Buffers::VertexArray							m_vertexArray;
+		std::unique_ptr<Rendering::Buffers::IndexBuffer>			m_indexBuffer;
 		
-		std::unique_ptr<Buffers::VertexBuffer<float>>	m_vertexBuffer[VERTEX_DATA_FLAGS_INDEX_COUNT];
+		std::unique_ptr<Rendering::Buffers::VertexBuffer<float>>	m_vertexBuffer[VERTEX_DATA_FLAGS_INDEX_COUNT];
 		// malloc datas ,should be released correct
 		void*  m_dataPtrs[VERTEX_DATA_FLAGS_INDEX_COUNT];
 		float* m_animatedPositions;
-		Geometry::EVertexDataFlags m_dataFlags;
+		Rendering::Geometry::EVertexDataFlags m_dataFlags;
 		
-		Geometry::BoundingSphere m_boundingSphere;
+		Rendering::Geometry::BoundingSphere m_boundingSphere;
 
 	public:
 
 		bool isSkinMesh;
 		bool isReadWriteable;
 		
-		void* GetDataPtrs(Geometry::EVertexDataFlagsIndex typeIdx);
+		void* GetDataPtrs(Rendering::Geometry::EVertexDataFlagsIndex typeIdx);
 	};
 }

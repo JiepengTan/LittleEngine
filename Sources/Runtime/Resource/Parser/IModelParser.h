@@ -8,12 +8,12 @@
 
 #include "string"
 #include "Resource/Parser/EModelParserFlags.h"
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 	class Model;
 	class Mesh;
 }
-namespace LittleEngine::Rendering::Resources::Parsers
+namespace LittleEngine::Resources
 {
 	/**
 	* Interface for any model parser

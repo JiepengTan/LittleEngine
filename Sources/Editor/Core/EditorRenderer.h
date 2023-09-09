@@ -44,7 +44,7 @@ namespace LittleEngine::Editor::Core
 		* @param p_actor
 		* @param p_material
 		*/
-		void PreparePickingMaterial(ActorPtr p_actor, LittleEngine::Resources::Material& p_material);
+		void PreparePickingMaterial(ActorPtr p_actor, LittleEngine::Material& p_material);
 
 		/**
 		* Calculate the model matrix for a camera attached to the given actor
@@ -92,7 +92,7 @@ namespace LittleEngine::Editor::Core
 		/**
 		* Render a model to the stencil buffer
 		*/
-		void RenderModelToStencil(const LittleEngine::FMatrix4& p_worldMatrix, LittleEngine::Rendering::Resources::Model& p_model);
+		void RenderModelToStencil(const LittleEngine::FMatrix4& p_worldMatrix, LittleEngine::Model& p_model);
 
 		/**
 		* Render a model outline using the data stored in the stencil buffer
@@ -100,7 +100,7 @@ namespace LittleEngine::Editor::Core
 		* @param p_model
 		* @param p_width
 		*/
-		void RenderModelOutline(const LittleEngine::FMatrix4& p_worldMatrix, LittleEngine::Rendering::Resources::Model& p_model, float p_width);
+		void RenderModelOutline(const LittleEngine::FMatrix4& p_worldMatrix, LittleEngine::Model& p_model, float p_width);
 
 		/**
 		* Render the actor as a selected actor (Outline)
@@ -157,17 +157,17 @@ namespace LittleEngine::Editor::Core
 		/**
 		* Render model
 		*/
-		void RenderModelAsset(LittleEngine::Rendering::Resources::Model& p_model);
+		void RenderModelAsset(LittleEngine::Model& p_model);
 
 		/**
 		* Render texture
 		*/
-		void RenderTextureAsset(LittleEngine::Rendering::Resources::Texture& p_texture);
+		void RenderTextureAsset(LittleEngine::Texture& p_texture);
 
 		/**
 		* Render material
 		*/
-		void RenderMaterialAsset(LittleEngine::Resources::Material& p_material);
+		void RenderMaterialAsset(LittleEngine::Material& p_material);
 
 		/**
 		* Render the grid
@@ -189,17 +189,17 @@ namespace LittleEngine::Editor::Core
 	private:
 		Context& m_context;
 
-		LittleEngine::Resources::Material m_gridMaterial;
-		LittleEngine::Resources::Material m_stencilFillMaterial;
-		LittleEngine::Resources::Material m_textureMaterial;
-		LittleEngine::Resources::Material m_outlineMaterial;
-		LittleEngine::Resources::Material m_emptyMaterial;
-		LittleEngine::Resources::Material m_defaultMaterial;
-		LittleEngine::Resources::Material m_cameraMaterial;
-		LittleEngine::Resources::Material m_lightMaterial;
-		LittleEngine::Resources::Material m_gizmoArrowMaterial;
-		LittleEngine::Resources::Material m_gizmoBallMaterial;
-		LittleEngine::Resources::Material m_gizmoPickingMaterial;
-		LittleEngine::Resources::Material m_actorPickingMaterial;
+		LittleEngine::Material m_gridMaterial;
+		LittleEngine::Material m_stencilFillMaterial;
+		LittleEngine::Material m_textureMaterial;
+		LittleEngine::Material m_outlineMaterial;
+		LittleEngine::Material m_emptyMaterial;
+		LittleEngine::Material m_defaultMaterial;
+		LittleEngine::Material m_cameraMaterial;
+		LittleEngine::Material m_lightMaterial;
+		LittleEngine::Material m_gizmoArrowMaterial;
+		LittleEngine::Material m_gizmoBallMaterial;
+		LittleEngine::Material m_gizmoPickingMaterial;
+		LittleEngine::Material m_actorPickingMaterial;
 	};
 }

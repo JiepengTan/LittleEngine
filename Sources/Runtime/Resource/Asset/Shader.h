@@ -17,16 +17,16 @@
 
 
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
-	namespace Loaders { class ShaderLoader; }
+	namespace Resources { class ShaderLoader; }
 
 	/**
 	* OpenGL shader program wrapper
 	*/
 	class Shader
 	{
-	friend class Loaders::ShaderLoader;
+	friend class Resources::ShaderLoader;
 
 	public:
 		/**
@@ -121,7 +121,7 @@ namespace LittleEngine::Rendering::Resources
 		* Returns information about the uniform identified by the given name or nullptr if not found
 		* @param p_name
 		*/
-		const UniformInfo* GetUniformInfo(const std::string& p_name) const;
+		const Resources::UniformInfo* GetUniformInfo(const std::string& p_name) const;
 
 		/**
 		* Query the uniforms from the program and store them in the uniform vector
@@ -138,7 +138,7 @@ namespace LittleEngine::Rendering::Resources
 	public:
 		const uint32_t id;
 		const std::string path;
-		std::vector<UniformInfo> uniforms;
+		std::vector<Resources::UniformInfo> uniforms;
 
 	private:
 		std::unordered_map<std::string, int> m_uniformLocationCache;

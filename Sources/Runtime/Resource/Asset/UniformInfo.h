@@ -11,7 +11,7 @@
 
 #include "Resource/Asset/UniformType.h"
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine::Resources
 {
 	/**
 	* Data structure containing information about a uniform

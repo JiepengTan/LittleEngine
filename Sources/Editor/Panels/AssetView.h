@@ -20,7 +20,7 @@ namespace LittleEngine::Editor::Panels
 	class AssetView : public LittleEngine::Editor::Panels::AViewControllable
 	{
 	public:
-		using ViewableResource = std::variant<LittleEngine::Rendering::Resources::Model*, LittleEngine::Rendering::Resources::Texture*, LittleEngine::Resources::Material*>;
+		using ViewableResource = std::variant<LittleEngine::Model*, LittleEngine::Texture*, LittleEngine::Material*>;
 
 		/**
 		* Constructor

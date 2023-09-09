@@ -17,13 +17,13 @@
 #include "Resource/Asset/AnimationData.h"
 #include "Resource/Asset/Animation.h"
 #include "Resource/Asset/Model.h"
-
+using namespace LittleEngine::Rendering;
 static LittleEngine::FMatrix4 ConvertMatrixToGLMFormat(const aiMatrix4x4& p_from)
 {
     return *((LittleEngine::FMatrix4*)(&p_from));
 }
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadMissingBones(LittleEngine::Rendering::Resources::Animation* p_anim,
+void LittleEngine::Resources::AssimpParser::ReadMissingBones(LittleEngine::Animation* p_anim,
                                                                      aiAnimation* animation)
 {
     auto& boneInfoMap = *p_anim->GetBoneInfoMap(); //getting m_BoneInfoMap from Model class
@@ -49,7 +49,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadMissingBones
     }
 }
 
-bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,
+bool LittleEngine::Resources::AssimpParser::LoadAnimation(Animation* p_anim, const std::string& p_fileName,
                                                                   EModelParserFlags p_parserFlags)
 {
     Assimp::Importer importer;
@@ -72,7 +72,7 @@ bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadAnimation(An
 }
 
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
+void LittleEngine::Resources::AssimpParser::ReadHierarchyData(SkeletonBone& p_dest, const aiNode* p_src)
 {
     p_dest.name = p_src->mName.data;
     p_dest.transformation = ConvertMatrixToGLMFormat(p_src->mTransformation); // 直接内存映射
@@ -88,7 +88,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ReadHierarchyDat
 }
 
 
-bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadModel(Model* p_model, const std::string& p_fileName,
+bool LittleEngine::Resources::AssimpParser::LoadModel(Model* p_model, const std::string& p_fileName,
                                                               std::vector<Mesh*>& p_meshes,
                                                               std::vector<std::string>& p_materials,
                                                               EModelParserFlags p_parserFlags)
@@ -115,7 +115,7 @@ bool LittleEngine::Rendering::Resources::Parsers::AssimpParser::LoadModel(Model*
     return true;
 }
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessMaterials(const aiScene* p_scene,
+void LittleEngine::Resources::AssimpParser::ProcessMaterials(const aiScene* p_scene,
                                                                      std::vector<std::string>& p_materials)
 {
     for (uint32_t i = 0; i < p_scene->mNumMaterials; ++i)
@@ -130,7 +130,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessMaterials
     }
 }
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessNode(Model* p_model, void* p_transform, aiNode* p_node,
+void LittleEngine::Resources::AssimpParser::ProcessNode(Model* p_model, void* p_transform, aiNode* p_node,
                                                                 const aiScene* p_scene, std::vector<Mesh*>& p_meshes)
 {
     aiMatrix4x4 nodeTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform) * p_node->mTransformation;
@@ -157,7 +157,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessNode(Mode
 
 
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessVertexBoneInfo(LittleEngine::Rendering::Resources::Model* p_model, aiMesh* p_mesh, LittleEngine::Rendering::Geometry::VertexDataBuffer& p_verticesBuffer)
+void LittleEngine::Resources::AssimpParser::ProcessVertexBoneInfo(LittleEngine::Model* p_model, aiMesh* p_mesh, LittleEngine::Rendering::Geometry::VertexDataBuffer& p_verticesBuffer)
 {
     if(p_mesh->mNumBones ==0) return;
     //1. calc vertex's boneId and weights
@@ -232,7 +232,7 @@ void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessVertexBon
     }
 }
 
-void LittleEngine::Rendering::Resources::Parsers::AssimpParser::ProcessMesh(LittleEngine::Rendering::Resources::Model* p_model,
+void LittleEngine::Resources::AssimpParser::ProcessMesh(LittleEngine::Model* p_model,
                                                                 void* p_transform,
                                                                 aiMesh* p_mesh, const aiScene* p_scene,
                                                                 Geometry::VertexDataBuffer& p_verticesBuffer,

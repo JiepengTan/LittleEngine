@@ -17,7 +17,7 @@
 #include "Modules/Framework/ECS/Components/CAmbientSphereLight.h"
 
 using namespace LittleEngine;
-using namespace LittleEngine::Rendering::Resources;
+using namespace LittleEngine::Resources;
 using namespace LittleEngine::Resources;
 
 LittleGame::Core::GameRenderer::GameRenderer(Context & p_context) :
@@ -26,7 +26,7 @@ LittleGame::Core::GameRenderer::GameRenderer(Context & p_context) :
 	/* Empty Material */
 	m_emptyMaterial.SetShader(m_context.shaderManager[":Shaders\\Unlit.glsl"]);
 	m_emptyMaterial.Set("u_Diffuse", FVector3(1.f, 0.f, 1.f));
-	m_emptyMaterial.Set<LittleEngine::Rendering::Resources::Texture*>("u_DiffuseMap", nullptr);
+	m_emptyMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
 	m_context.renderer->RegisterModelMatrixSender([this](const LittleEngine::FMatrix4 & p_modelMatrix)
 	{

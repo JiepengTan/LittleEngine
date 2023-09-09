@@ -14,29 +14,29 @@ namespace LittleEngine::ResourceManagement
     /**
     * ResourceManager of materials
     */
-    class AnimationManager : public AResourceManager<LittleEngine::Rendering::Resources::Animation>
+    class AnimationManager : public AResourceManager<LittleEngine::Animation>
     {
     public:
         /**
         * Create the resource identified by the given path
         * @param p_path
         */
-        virtual LittleEngine::Rendering::Resources::Animation* CreateResource(const std::string & p_path) override;
+        virtual LittleEngine::Animation* CreateResource(const std::string & p_path) override;
 
         /**
         * Destroy the given resource
         * @param p_resource
         */
-        virtual void DestroyResource(LittleEngine::Rendering::Resources::Animation* p_resource) override;
+        virtual void DestroyResource(LittleEngine::Animation* p_resource) override;
 
         /**
         * Reload the given resource
         * @param p_resource
         * @param p_path
         */
-        virtual void ReloadResource(LittleEngine::Rendering::Resources::Animation* p_resource, const std::string& p_path) override;
+        virtual void ReloadResource(LittleEngine::Animation* p_resource, const std::string& p_path) override;
 
     public:
-        LittleEngine::Rendering::Resources::Model* currentModel;
+        LittleEngine::Model* currentModel;
     };
 }

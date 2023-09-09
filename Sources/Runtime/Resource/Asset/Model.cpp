@@ -7,22 +7,22 @@
 #include "algorithm"
 
 #include "Resource/Asset/Model.h"
-
-const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Rendering::Resources::Model::GetBoundingSphere() const
+using namespace LittleEngine::Rendering;
+const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Model::GetBoundingSphere() const
 {
 	return m_boundingSphere;
 }
 
-LittleEngine::Rendering::Resources::Model::Model(const std::string & p_path) : path(p_path)
+LittleEngine::Model::Model(const std::string & p_path) : path(p_path)
 {
 }
-LittleEngine::Rendering::Resources::Model::~Model()
+LittleEngine::Model::~Model()
 {
 	for (auto mesh : m_meshes)
 		delete mesh;
 }
 
-void LittleEngine::Rendering::Resources::Model::ComputeBoundingSphere()
+void LittleEngine::Model::ComputeBoundingSphere()
 {
 	if (m_meshes.size() == 1)
 	{
@@ -61,12 +61,12 @@ void LittleEngine::Rendering::Resources::Model::ComputeBoundingSphere()
 	}
 }
 
-const std::vector<LittleEngine::Rendering::Resources::Mesh*>& LittleEngine::Rendering::Resources::Model::GetMeshes() const
+const std::vector<LittleEngine::Mesh*>& LittleEngine::Model::GetMeshes() const
 {
 	return m_meshes;
 }
 
-const std::vector<std::string>& LittleEngine::Rendering::Resources::Model::GetMaterialNames() const
+const std::vector<std::string>& LittleEngine::Model::GetMaterialNames() const
 {
 	return m_materialNames;
 }

@@ -37,7 +37,7 @@ namespace LittleEngine
 		* Defines the sound to play on the audio source
 		* @param p_sound
 		*/
-		void SetSound(LittleEngine::Audio::Resources::Sound* p_sound);
+		void SetSound(LittleEngine::Sound* p_sound);
 
 		/**
 		* Defines if the audio source should autoplay (Play sound on enable)
@@ -83,7 +83,7 @@ namespace LittleEngine
 		/**
 		* Returns the sound attached to the audio source
 		*/
-		LittleEngine::Audio::Resources::Sound* GetSound() const;
+		LittleEngine::Sound* GetSound() const;
 
 		/**
 		* Returns true if the audio source should call "Play" OnEnable
@@ -170,7 +170,7 @@ namespace LittleEngine
 	private:
 		LittleEngine::Audio::Entities::AudioSource* GetSource();
 	private:
-		LittleEngine::Audio::Resources::Sound* m_sound = nullptr;
+		LittleEngine::Sound* m_sound = nullptr;
 		std::unique_ptr<LittleEngine::Audio::Entities::AudioSource> m_audioSource;
 		bool m_autoPlay = false;
 	};

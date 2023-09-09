@@ -8,22 +8,18 @@
 #include "Core/Maths/FQuaternion.h"
 
 /* Forward declaration */
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
+	class IMesh;
+	class Mesh;
 	class Model;
 	class Texture;
 	class Shader;
-}
-
-namespace LittleEngine::Audio::Resources
-{
 	class Sound;
-}
-
-namespace LittleEngine::Resources
-{
 	class Material;
 }
+
+
 namespace LittleEngine{
 	class IBaseSerializer
 	{
@@ -31,12 +27,7 @@ namespace LittleEngine{
 	};
 	class ISerializer
 	{
-		typedef LittleEngine::Rendering::Resources::Model Model;
-		typedef LittleEngine::Rendering::Resources::Texture Texture;
-		typedef LittleEngine::Rendering::Resources::Shader Shader;
-		typedef LittleEngine::Resources::Material Material;
-		typedef LittleEngine::Audio::Resources::Sound Sound;
-		typedef LittleEngine::Color Color;
+
 	public:
 		ISerializer() = default;
 		virtual ~ISerializer()= default;

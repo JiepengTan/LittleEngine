@@ -24,7 +24,7 @@ namespace LittleEngine::Editor::Panels
 	class AssetProperties : public LittleEngine::UI::Panels::PanelWindow
 	{
 	public:
-		using EditableAssets = std::variant<LittleEngine::Rendering::Resources::Model*, LittleEngine::Rendering::Resources::Texture*>;
+		using EditableAssets = std::variant<LittleEngine::Model*, LittleEngine::Texture*>;
 
 		/**
 		* Constructor

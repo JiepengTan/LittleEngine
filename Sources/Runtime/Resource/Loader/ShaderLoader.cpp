@@ -15,9 +15,9 @@
 
 #include "Core/Tools/Utils/PathParser.h"
 
-std::string LittleEngine::Rendering::Resources::Loaders::ShaderLoader::__FILE_TRACE;
+std::string LittleEngine::Resources::ShaderLoader::__FILE_TRACE;
 
-LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Create(const std::string& p_filePath)
+LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::Create(const std::string& p_filePath)
 {
 	__FILE_TRACE = p_filePath;
 
@@ -31,7 +31,7 @@ LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::
 	return nullptr;
 }
 
-LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
 {
 	uint32_t programID = CreateProgram(p_vertexShader, p_fragmentShader);
 
@@ -41,7 +41,7 @@ LittleEngine::Rendering::Resources::Shader* LittleEngine::Rendering::Resources::
 	return nullptr;
 }
 
-void LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(Shader& p_shader, const std::string& p_filePath)
+void LittleEngine::Resources::ShaderLoader::Recompile(Shader& p_shader, const std::string& p_filePath)
 {
 	__FILE_TRACE = p_filePath;
 
@@ -71,7 +71,7 @@ void LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(Shader
 	}
 }
 
-bool LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(Shader*& p_shader)
+bool LittleEngine::Resources::ShaderLoader::Destroy(Shader*& p_shader)
 {
 	if (p_shader)
 	{
@@ -109,7 +109,7 @@ void ReadFileAndHandleIncludes(std::stringstream& output, std::string p_filepath
 	}
 }
 
-std::pair<std::string, std::string> LittleEngine::Rendering::Resources::Loaders::ShaderLoader::ParseShader(const std::string& p_filePath)
+std::pair<std::string, std::string> LittleEngine::Resources::ShaderLoader::ParseShader(const std::string& p_filePath)
 {
 	std::stringstream source;
 	ReadFileAndHandleIncludes(source, p_filePath);
@@ -142,7 +142,7 @@ std::pair<std::string, std::string> LittleEngine::Rendering::Resources::Loaders:
 	};
 }
 
-uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateProgram(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+uint32_t LittleEngine::Resources::ShaderLoader::CreateProgram(const std::string& p_vertexShader, const std::string& p_fragmentShader)
 {
 	const uint32_t program = glCreateProgram();
 
@@ -181,7 +181,7 @@ uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CreateProgra
 	return program;
 }
 
-uint32_t LittleEngine::Rendering::Resources::Loaders::ShaderLoader::CompileShader(uint32_t p_type, const std::string& p_source)
+uint32_t LittleEngine::Resources::ShaderLoader::CompileShader(uint32_t p_type, const std::string& p_source)
 {
 	const uint32_t id = glCreateShader(p_type);
 

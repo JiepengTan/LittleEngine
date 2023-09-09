@@ -51,6 +51,6 @@ namespace LittleGame::Core
 
 	private:
 		Context& m_context;
-		LittleEngine::Resources::Material m_emptyMaterial;
+		LittleEngine::Material m_emptyMaterial;
 	};
 }

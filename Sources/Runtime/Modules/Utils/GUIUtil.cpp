@@ -39,7 +39,7 @@ const float GUIUtil::_MIN_FLOAT = -999999999.f;
 const float GUIUtil::_MAX_FLOAT = +999999999.f;
 
 LittleEngine::UI::Internal::WidgetContainer* GUIUtil::m_root = nullptr;
-LittleEngine::Rendering::Resources::Texture* GUIUtil::__EMPTY_TEXTURE = nullptr;
+LittleEngine::Texture* GUIUtil::__EMPTY_TEXTURE = nullptr;
 
 std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, LittleEngine::UI::Internal::EMemoryMode>>&
 	GUIUtil::GetWidgets()
@@ -47,7 +47,7 @@ std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, LittleEngine::UI::Int
 	return m_root->GetWidgets();
 }
 
-void GUIUtil::ProvideEmptyTexture(LittleEngine::Rendering::Resources::Texture& p_emptyTexture)
+void GUIUtil::ProvideEmptyTexture(LittleEngine::Texture& p_emptyTexture)
 {
 	__EMPTY_TEXTURE = &p_emptyTexture;
 }
@@ -113,7 +113,7 @@ void GUIUtil::DrawColor(const std::string & p_name, LittleEngine::Color & p_colo
 	dispatcher.RegisterReference(p_color);
 }
 
-LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMesh(const std::string & p_name, LittleEngine::Rendering::Resources::Model *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMesh(const std::string & p_name, LittleEngine::Model *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 
@@ -151,7 +151,7 @@ LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMesh(const std::string & p_
 	return widget;
 }
 
-LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, LittleEngine::Rendering::Resources::Texture *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string & p_name, LittleEngine::Texture *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 
@@ -189,7 +189,7 @@ LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string
 	return widget;
 }
 
-LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawShader(const std::string & p_name, LittleEngine::Rendering::Resources::Shader *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawShader(const std::string & p_name, LittleEngine::Shader *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 
@@ -227,7 +227,7 @@ LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawShader(const std::string & 
 	return widget;
 }
 
-LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMaterial(const std::string & p_name, LittleEngine::Resources::Material *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMaterial(const std::string & p_name, LittleEngine::Material *& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 
@@ -265,7 +265,7 @@ LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawMaterial(const std::string 
 	return widget;
 }
 
-LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawSound(const std::string& p_name, LittleEngine::Audio::Resources::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
+LittleEngine::UI::Widgets::Texts::Text& GUIUtil::DrawSound(const std::string& p_name, LittleEngine::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier)
 {
 	CreateTitle( p_name);
 

@@ -8,13 +8,13 @@
 #include "Core/Maths/FMatrix4.h"
 #include "Modules/Framework/ECS/Component.h"
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine::Resources
 {
-	class Animation;
 	class Skeleton;
 }
 namespace LittleEngine
 {
+	class Animation;
 	REFLECTION_COMPONENT_TYPE(CAnimator)
 	CLASS (CAnimator : public Component, WhiteListFields)
 	{
@@ -32,7 +32,7 @@ namespace LittleEngine
 		void UpdateBonesGameObjects();
 		void UpdateBoneMatrix();
 		void DumpAnimationLog();
-		void PlayAnimation(LittleEngine::Rendering::Resources::Animation* pAnimation);
+		void PlayAnimation(LittleEngine::Animation* pAnimation);
 		/**
 		* Serialize the component
 		* @param p_doc
@@ -58,13 +58,13 @@ namespace LittleEngine
 		void ToggleBones();
 
 	private:
-		void CalculateBoneTransform(const LittleEngine::Rendering::Resources::SkeletonBone& node, const LittleEngine::FMatrix4&  parentTransform);
-		void CreateBoneActors(const LittleEngine::Rendering::Resources::SkeletonBone& node,  LittleEngine::FMatrix4  parentTransform);
+		void CalculateBoneTransform(const LittleEngine::Resources::SkeletonBone& node, const LittleEngine::FMatrix4&  parentTransform);
+		void CreateBoneActors(const LittleEngine::Resources::SkeletonBone& node,  LittleEngine::FMatrix4  parentTransform);
 	private:
         META(Enable)
 		float m_currentTime;
 		bool m_showDebugBones;
-		LittleEngine::Rendering::Resources::Animation* m_curAnim;
+		LittleEngine::Animation* m_curAnim;
 
 		std::vector<LittleEngine::FMatrix4> m_finalBoneMatrices;
 		// debug infos

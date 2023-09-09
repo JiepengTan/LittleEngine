@@ -58,7 +58,7 @@ namespace LittleEngine::Rendering::Buffers
         */
         uint32_t GetTextureID();
 
-        LittleEngine::Rendering::Resources::Texture* GetTexture();
+        LittleEngine::Texture* GetTexture();
         /**
         * Returns the ID of the OpenGL render buffer
         */
@@ -70,6 +70,6 @@ namespace LittleEngine::Rendering::Buffers
         uint32_t m_depthStencilBuffer = 0;
         uint16_t m_width = 0;
         uint16_t m_height = 0;
-        Resources::Texture* m_texturePtr;
+        Texture* m_texturePtr;
     };
 }

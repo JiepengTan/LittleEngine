@@ -1,6 +1,6 @@
 #pragma once
 
-namespace LittleEngine::Resources
+namespace LittleEngine
 {
     class Material;
 }
@@ -11,10 +11,10 @@ namespace LittleEngine
     private:
         static unsigned int _QuadVAO;
         static unsigned int _QuadVBO;
-        static std::vector<LittleEngine::Resources::Material*> _DebugMats;
-        static LittleEngine::Resources::Material*  GetOrCreateDebugQuadMat();
+        static std::vector<LittleEngine::Material*> _DebugMats;
+        static LittleEngine::Material*  GetOrCreateDebugQuadMat();
     public:
-        static void DrawDebugQuad(LittleEngine::Rendering::Resources::Texture* p_tex);
+        static void DrawDebugQuad(LittleEngine::Texture* p_tex);
     };
 }
 

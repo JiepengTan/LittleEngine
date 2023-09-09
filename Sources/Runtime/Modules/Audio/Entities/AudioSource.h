@@ -142,7 +142,7 @@ namespace LittleEngine::Audio::Entities
 		* Play the given sound
 		* @param p_sound
 		*/
-		void Play(const Resources::Sound& p_sound);
+		void Play(const Sound& p_sound);
 
 		/**
 		* Resume the audio source

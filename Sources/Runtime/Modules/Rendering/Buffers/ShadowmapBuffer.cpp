@@ -36,7 +36,7 @@ LittleEngine::Rendering::Buffers::ShadowmapBuffer::ShadowmapBuffer(uint16_t p_wi
 	float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	m_texturePtr = new Resources::Texture(m_renderTexture);
+	m_texturePtr = new Texture(m_renderTexture);
 	/* Setup framebuffer */
 	Resize(m_width, m_height);
 }
@@ -89,7 +89,7 @@ uint32_t LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetTextureID()
 	return m_renderTexture;
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetTexture()
+LittleEngine::Texture* LittleEngine::Rendering::Buffers::ShadowmapBuffer::GetTexture()
 {
 	return m_texturePtr;
 }

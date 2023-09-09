@@ -49,12 +49,12 @@ namespace LittleEngine
 		* Defines the model to use
 		* @param p_model
 		*/
-		void SetModel(LittleEngine::Rendering::Resources::Model* p_model);
+		void SetModel(LittleEngine::Model* p_model);
 
 		/**
 		* Returns the current model
 		*/
-		LittleEngine::Rendering::Resources::Model* GetModel();
+		LittleEngine::Model* GetModel();
 
 		/**
 		* Sets a bounding mode
@@ -104,7 +104,7 @@ namespace LittleEngine
 	private:
 		LittleEngine::Eventing::Event<> m_modelChangedEvent;
 		//META(Enable)
-		LittleEngine::Rendering::Resources::Model* m_model = nullptr;
+		LittleEngine::Model* m_model = nullptr;
 		META(Enable)
 		Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
 		META(Enable)

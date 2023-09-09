@@ -36,13 +36,13 @@ std::string LittleEngine::CModelRenderer::GetName()
 	return "Model Renderer";
 }
 
-void LittleEngine::CModelRenderer::SetModel(LittleEngine::Rendering::Resources::Model* p_model)
+void LittleEngine::CModelRenderer::SetModel(LittleEngine::Model* p_model)
 {
 	m_model = p_model;
 	m_modelChangedEvent.Invoke();
 }
 
-LittleEngine::Rendering::Resources::Model * LittleEngine::CModelRenderer::GetModel()
+LittleEngine::Model * LittleEngine::CModelRenderer::GetModel()
 {
 	return m_model;
 }

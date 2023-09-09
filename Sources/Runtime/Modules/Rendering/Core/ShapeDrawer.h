@@ -56,9 +56,9 @@ namespace LittleEngine::Rendering::Core
 		void DrawGrid(const LittleEngine::FVector3& p_viewPos, const LittleEngine::FVector3& p_color, int32_t p_gridSize = 50, float p_linear = 0.0f, float p_quadratic = 0.0f, float p_fadeThreshold = 0.0f, float p_lineWidth = 1.0f);
 
 	private:
-		LittleEngine::Rendering::Resources::Shader* m_lineShader = nullptr;
-		LittleEngine::Rendering::Resources::Shader* m_gridShader = nullptr;
-		LittleEngine::Rendering::Resources::Mesh* m_lineMesh = nullptr;
+		LittleEngine::Shader* m_lineShader = nullptr;
+		LittleEngine::Shader* m_gridShader = nullptr;
+		LittleEngine::Mesh* m_lineMesh = nullptr;
 		LittleEngine::Rendering::Core::Renderer& m_renderer;
 	};
 }

@@ -10,11 +10,8 @@
 
 #include "Resource/Parser/AssimpParser.h"
 #include "Resource/Asset/Model.h"
-namespace LittleEngine::Rendering::Resources
-{
-	class Model;
-}
-namespace LittleEngine::Rendering::Resources::Loaders
+
+namespace LittleEngine::Resources
 {
 	/**
 	* Handle the Model creation and destruction
@@ -32,7 +29,7 @@ namespace LittleEngine::Rendering::Resources::Loaders
 		* @param p_filepath
 		* @param p_parserFlags
 		*/
-		static Model* Create(const std::string& p_filepath, Parsers::EModelParserFlags p_parserFlags = Parsers::EModelParserFlags::NONE);
+		static Model* Create(const std::string& p_filepath, EModelParserFlags p_parserFlags = EModelParserFlags::NONE);
 
 		/**
 		* Reload a model from file
@@ -40,7 +37,7 @@ namespace LittleEngine::Rendering::Resources::Loaders
 		* @param p_filePath
 		* @param p_parserFlags
 		*/
-		static void Reload(Model& p_model, const std::string& p_filePath, Parsers::EModelParserFlags p_parserFlags = Parsers::EModelParserFlags::NONE);
+		static void Reload(Model& p_model, const std::string& p_filePath, EModelParserFlags p_parserFlags = EModelParserFlags::NONE);
 
 		/**
 		* Disabled constructor
@@ -49,6 +46,6 @@ namespace LittleEngine::Rendering::Resources::Loaders
 		static bool Destroy(Model*& p_modelInstance);
 
 	private:
-		static Parsers::AssimpParser __ASSIMP;
+		static AssimpParser __ASSIMP;
 	};
 }

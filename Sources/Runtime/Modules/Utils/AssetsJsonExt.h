@@ -10,25 +10,25 @@
 namespace LittleEngine
 {
   template<>
-  Json JsonSerializer::WriteRes(LittleEngine::Rendering::Resources::Model* instance);
+  Json JsonSerializer::WriteRes(LittleEngine::Model* instance);
   template<>
-  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Rendering::Resources::Model*& instance);
+  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Model*& instance);
   template<>
-  Json JsonSerializer::WriteRes(LittleEngine::Rendering::Resources::Texture* instance);
+  Json JsonSerializer::WriteRes(LittleEngine::Texture* instance);
   template<>
-  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Rendering::Resources::Texture*& instance);
+  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Texture*& instance);
   template<>
-  Json JsonSerializer::WriteRes(LittleEngine::Rendering::Resources::Shader* instance);
+  Json JsonSerializer::WriteRes(LittleEngine::Shader* instance);
   template<>
-  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Rendering::Resources::Shader*& instance);
+  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Shader*& instance);
   template<>
-  Json JsonSerializer::WriteRes(LittleEngine::Resources::Material* instance);
+  Json JsonSerializer::WriteRes(LittleEngine::Material* instance);
   template<>
-  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Resources::Material*& instance);
+  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Material*& instance);
   template<>
-  Json JsonSerializer::WriteRes(LittleEngine::Audio::Resources::Sound* instance);
+  Json JsonSerializer::WriteRes(LittleEngine::Sound* instance);
   template<>
-  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Audio::Resources::Sound*& instance);
+  void JsonSerializer::ReadRes(const Json& json_context, LittleEngine::Sound*& instance);
   template<>
   Json JsonSerializer::WriteRes(LittleEngine::TextAsset* instance);
   template<>

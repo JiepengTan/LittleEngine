@@ -29,7 +29,7 @@ std::string LittleEngine::CAudioSource::GetName()
 	return "Audio Source";
 }
 
-void LittleEngine::CAudioSource::SetSound(LittleEngine::Audio::Resources::Sound* p_sound)
+void LittleEngine::CAudioSource::SetSound(LittleEngine::Sound* p_sound)
 {
 	m_sound = p_sound;
 }
@@ -69,7 +69,7 @@ void LittleEngine::CAudioSource::SetAttenuationThreshold(float p_distance)
 	m_audioSource->SetAttenuationThreshold(p_distance);
 }
 
-LittleEngine::Audio::Resources::Sound* LittleEngine::CAudioSource::GetSound() const
+LittleEngine::Sound* LittleEngine::CAudioSource::GetSound() const
 {
 	return m_sound;
 }

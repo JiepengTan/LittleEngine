@@ -96,7 +96,7 @@ void LittleGame::Core::Game::Update(float p_deltaTime)
 
 	#ifdef _DEBUG
 	if (m_context.inputManager->IsKeyPressed(LittleEngine::Windowing::Inputs::EKey::KEY_R))
-		LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
+		LittleEngine::Resources::ShaderLoader::Recompile(*m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
 	#endif
 
 	if (m_showDebugInformation)

@@ -26,7 +26,7 @@ namespace LittleEngine
 {
     SceneRenderer::SceneRenderer(Rendering::Context::Driver& p_driver) :
         Rendering::Core::Renderer(p_driver), m_isGPUSkin(false),
-        m_emptyTexture(Rendering::Resources::Loaders::TextureLoader::CreateColor
+        m_emptyTexture(Resources::TextureLoader::CreateColor
             (
                 (255 << 24) | (255 << 16) | (255 << 8) | 255,
                 Rendering::Settings::ETextureFilteringMode::NEAREST,
@@ -39,7 +39,7 @@ namespace LittleEngine
 
     SceneRenderer::~SceneRenderer()
     {
-        Rendering::Resources::Loaders::TextureLoader::Destroy(m_emptyTexture);
+        Resources::TextureLoader::Destroy(m_emptyTexture);
     }
 
     SharedPtr<CCamera> SceneRenderer::FindMainCamera(Scene* p_scene)
@@ -169,7 +169,7 @@ namespace LittleEngine
         const FVector3& p_cameraPosition,
         const Rendering::LowRenderer::Camera& p_camera,
         const Rendering::Data::Frustum* p_customFrustum,
-        Resources::Material* p_defaultMaterial
+        Material* p_defaultMaterial
     )
     {
         OpaqueDrawables opaqueMeshes;
@@ -224,7 +224,7 @@ namespace LittleEngine
         SceneRenderer::TransparentDrawables& p_transparents,
         const Scene& p_scene,
         const FVector3& p_cameraPosition,
-        Resources::Material* p_defaultMaterial
+        Material* p_defaultMaterial
     )
     {
         for (SharedPtr<CModelRenderer> modelRenderer : p_scene.GetRenderers())
@@ -246,7 +246,7 @@ namespace LittleEngine
                         std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                         for (auto mesh : model->GetMeshes())
                         {
-                            Resources::Material* material = nullptr;
+                            Material* material = nullptr;
 
                             if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
                             {
@@ -280,7 +280,7 @@ namespace LittleEngine
         const Scene& p_scene,
         const FVector3& p_cameraPosition,
         const Rendering::Data::Frustum& p_frustum,
-        Resources::Material* p_defaultMaterial
+        Material* p_defaultMaterial
     )
     {
         using namespace LittleEngine;
@@ -318,7 +318,7 @@ namespace LittleEngine
                                 ? modelRenderer->GetCustomBoundingSphere()
                                 : model->GetBoundingSphere();
 
-                        std::vector<std::reference_wrapper<Rendering::Resources::Mesh>> meshes;
+                        std::vector<std::reference_wrapper<Mesh>> meshes;
 
                         {
                             PROFILER_SPY("Frustum Culling");
@@ -336,7 +336,7 @@ namespace LittleEngine
                             std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                             for (const auto& mesh : meshes)
                             {
-                                Resources::Material* material = nullptr;
+                                Material* material = nullptr;
 
                                 if (mesh.get().GetMaterialIndex() < MAX_MATERIAL_COUNT)
                                 {
@@ -372,7 +372,7 @@ namespace LittleEngine
     (
         const Scene& p_scene,
         const FVector3& p_cameraPosition,
-        Resources::Material* p_defaultMaterial
+        Material* p_defaultMaterial
     )
     {
         SceneRenderer::OpaqueDrawables opaqueDrawables;
@@ -398,7 +398,7 @@ namespace LittleEngine
                         std::vector<FMatrix4>* boneAryPtr = GetBoneMatrix(modelRenderer);
                         for (auto mesh : model->GetMeshes())
                         {
-                            Resources::Material* material = nullptr;
+                            Material* material = nullptr;
 
                             if (mesh->GetMaterialIndex() < MAX_MATERIAL_COUNT)
                             {
@@ -435,33 +435,33 @@ namespace LittleEngine
     }
 
     void SceneRenderer::DrawModelWithSingleMaterial(
-        Rendering::Resources::Model& p_model, Resources::Material& p_material,
-        FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial)
+        Model& p_model, Material& p_material,
+        FMatrix4 const* p_modelMatrix, Material* p_defaultMaterial)
     {
         if (p_modelMatrix)
             m_modelMatrixSender(*p_modelMatrix);
 
         for (auto mesh : p_model.GetMeshes())
         {
-            Resources::Material* material = p_material.GetShader() ? &p_material : p_defaultMaterial;
+            Material* material = p_material.GetShader() ? &p_material : p_defaultMaterial;
 
             if (material)
                 DrawMesh(*mesh, *material, nullptr, nullptr);
         }
     }
 
-    void SceneRenderer::DrawModelWithMaterials(Rendering::Resources::Model& p_model,
-                                               std::vector<Resources::Material*>
+    void SceneRenderer::DrawModelWithMaterials(Model& p_model,
+                                               std::vector<Material*>
                                                p_materials,
                                                FMatrix4 const* p_modelMatrix,
-                                               Resources::Material* p_defaultMaterial)
+                                               Material* p_defaultMaterial)
     {
         if (p_modelMatrix)
             m_modelMatrixSender(*p_modelMatrix);
 
         for (auto mesh : p_model.GetMeshes())
         {
-            Resources::Material* material = p_materials.size() > mesh->GetMaterialIndex()
+            Material* material = p_materials.size() > mesh->GetMaterialIndex()
                                                 ? p_materials[mesh->GetMaterialIndex()]
                                                 : p_defaultMaterial;
             if (material)
@@ -469,8 +469,8 @@ namespace LittleEngine
         }
     }
 
-    void SceneRenderer::DrawMesh(Rendering::Resources::Mesh& p_mesh,
-                                 Resources::Material& p_material,
+    void SceneRenderer::DrawMesh(Mesh& p_mesh,
+                                 Material& p_material,
                                  FMatrix4 const* p_modelMatrix,
                                  std::vector<FMatrix4>* p_boneMatrixAry
     )

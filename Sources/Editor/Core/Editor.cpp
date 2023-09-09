@@ -26,8 +26,8 @@
 
 using namespace LittleEngine::ResourceManagement;
 using namespace LittleEngine::Editor::Panels;
-using namespace LittleEngine::Rendering::Resources::Loaders;
-using namespace LittleEngine::Rendering::Resources::Parsers;
+using namespace LittleEngine::Resources;
+using namespace LittleEngine::Resources;
 
 LittleEngine::Editor::Core::Editor::Editor(Context& p_context) : 
 	m_context(p_context),

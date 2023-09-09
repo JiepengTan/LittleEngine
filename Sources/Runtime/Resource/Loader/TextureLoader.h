@@ -12,7 +12,7 @@
 #include "Resource/Asset/Texture.h"
 
 
-namespace LittleEngine::Rendering::Resources::Loaders
+namespace LittleEngine::Resources
 {
 	/**
 	* Handle the Texture creation and destruction

@@ -151,7 +151,7 @@ bool LittleEngine::Audio::Entities::AudioSource::IsFinished() const
 		return true;
 }
 
-void LittleEngine::Audio::Entities::AudioSource::Play(const Resources::Sound& p_sound)
+void LittleEngine::Audio::Entities::AudioSource::Play(const Sound& p_sound)
 {
 	/* Stops and destroy the previous sound (If any) */
 	StopAndDestroyTrackedSound();

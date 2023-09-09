@@ -19,23 +19,13 @@
 #include "Modules/UI/Widgets/Visual/Image.h"
 #include "Core/Base/Color.h"
 
-
-
-namespace LittleEngine::Resources
-{
-	class Material;
-}
-
-namespace LittleEngine::Audio::Resources
-{
-	class Sound;
-}
-
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 	class Model;
 	class Shader;
 	class Texture;
+	class Sound;
+	class Material;
 }
 
 namespace LittleEngine
@@ -56,7 +46,7 @@ namespace LittleEngine
 		* Defines the texture to use when there is no texture in a texture resource field
 		* @param p_emptyTexture
 		*/
-		static void ProvideEmptyTexture(LittleEngine::Rendering::Resources::Texture& p_emptyTexture);
+		static void ProvideEmptyTexture(LittleEngine::Texture& p_emptyTexture);
 
 		/**
 		* Draw a title with the title color
@@ -74,11 +64,11 @@ namespace LittleEngine
 		static void DrawQuat(const std::string& p_name, LittleEngine::FQuaternion& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
 		static void DrawString(const std::string& p_name, std::string& p_data);
 		static void DrawColor(const std::string& p_name, LittleEngine::Color& p_color, bool p_hasAlpha = false);
-		static LittleEngine::UI::Widgets::Texts::Text& DrawMesh(const std::string& p_name, LittleEngine::Rendering::Resources::Model*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
-		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string& p_name, LittleEngine::Rendering::Resources::Texture*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
-		static LittleEngine::UI::Widgets::Texts::Text& DrawShader(const std::string& p_name, LittleEngine::Rendering::Resources::Shader*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
-		static LittleEngine::UI::Widgets::Texts::Text& DrawMaterial(const std::string& p_name, LittleEngine::Resources::Material*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
-		static LittleEngine::UI::Widgets::Texts::Text& DrawSound(const std::string& p_name, LittleEngine::Audio::Resources::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawMesh(const std::string& p_name, LittleEngine::Model*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string& p_name, LittleEngine::Texture*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawShader(const std::string& p_name, LittleEngine::Shader*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawMaterial(const std::string& p_name, LittleEngine::Material*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
+		static LittleEngine::UI::Widgets::Texts::Text& DrawSound(const std::string& p_name, LittleEngine::Sound*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 		static LittleEngine::UI::Widgets::Texts::Text& DrawAsset(const std::string& p_name, std::string& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 
 		template <typename T>
@@ -105,7 +95,7 @@ namespace LittleEngine
 		static std::string GetFormat();
 
 	private:
-		static LittleEngine::Rendering::Resources::Texture* __EMPTY_TEXTURE;
+		static LittleEngine::Texture* __EMPTY_TEXTURE;
 	};
 }
 

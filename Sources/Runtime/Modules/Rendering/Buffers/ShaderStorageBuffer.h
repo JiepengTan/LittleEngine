@@ -11,7 +11,7 @@
 #include "Modules/Rendering/Context/Driver.h"
 #include "Modules/Rendering/Buffers/EAccessSpecifier.h"
 
-namespace LittleEngine::Rendering::Resources { class Shader; }
+namespace LittleEngine { class Shader; }
 
 namespace LittleEngine::Rendering::Buffers
 {

@@ -158,11 +158,11 @@ namespace LittleEngine::Editor
                               std::filesystem::copy_options::overwrite_existing);
 
         // refresh shaders
-        Rendering::Resources::Loaders::ShaderLoader::Recompile(
+        Resources::ShaderLoader::Recompile(
             *m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
-        Rendering::Resources::Loaders::ShaderLoader::Recompile(
+        Resources::ShaderLoader::Recompile(
             *m_context.shaderManager[":Shaders\\StandardPBR.glsl"], "Data\\Engine\\Shaders\\StandardPBR.glsl");
-        Rendering::Resources::Loaders::ShaderLoader::Recompile(
+        Resources::ShaderLoader::Recompile(
             *m_context.shaderManager[":Shaders\\ShadowCaster.glsl"], "Data\\Engine\\Shaders\\ShadowCaster.glsl");
     }
 
@@ -765,24 +765,24 @@ namespace LittleEngine::Editor
 
     void Core::EditorActions::OpenAssetShader(std::string p_path, bool m_protected)
     {
-        //PreviewAsset<Rendering::Resources::Shader,ResourceManagement::ShaderManager>(p_path,m_protected);
+        //PreviewAsset<Shader,ResourceManagement::ShaderManager>(p_path,m_protected);
     }
 
     void Core::EditorActions::OpenAssetTexture(std::string p_path, bool m_protected)
     {
-        PreviewAsset<Rendering::Resources::Texture, ResourceManagement::TextureManager>(
+        PreviewAsset<Texture, ResourceManagement::TextureManager>(
             p_path, m_protected);
     }
 
     void Core::EditorActions::OpenAssetModel(std::string p_path, bool m_protected)
     {
-        PreviewAsset<Rendering::Resources::Model, ResourceManagement::ModelManager>(
+        PreviewAsset<Model, ResourceManagement::ModelManager>(
             p_path, m_protected);
     }
 
     void Core::EditorActions::OpenAssetMaterial(std::string p_path, bool m_protected)
     {
-        Resources::Material* material = OVSERVICE(ResourceManagement::MaterialManager)[
+        Material* material = OVSERVICE(ResourceManagement::MaterialManager)[
             EDITOR_EXEC(GetResourcePath(p_path, m_protected))];
         if (material)
         {
@@ -791,7 +791,7 @@ namespace LittleEngine::Editor
             materialEditor.Open();
             materialEditor.Focus();
 
-            Resources::Material* resource = Global::ServiceLocator::Get<
+            Material* resource = Global::ServiceLocator::Get<
                 ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(p_path, m_protected))];
             auto& assetView = EDITOR_PANEL(Panels::AssetView, "Asset View");
             assetView.SetResource(resource);
@@ -803,14 +803,14 @@ namespace LittleEngine::Editor
     void Core::EditorActions::CompileShaders()
     {
         for (auto shader : m_context.shaderManager.GetResources())
-            Rendering::Resources::Loaders::ShaderLoader::Recompile(
+            Resources::ShaderLoader::Recompile(
                 *shader.second, GetRealPath(shader.second->path));
     }
 
     void Core::EditorActions::SaveMaterials()
     {
         for (auto& [id, material] : m_context.materialManager.GetResources())
-            Resources::Loaders::MaterialLoader::Save(*material, GetRealPath(material->path));
+            Resources::MaterialLoader::Save(*material, GetRealPath(material->path));
     }
 
     bool Core::EditorActions::ImportAsset(const std::string& p_initialDestinationDirectory)
@@ -1004,46 +1004,46 @@ namespace LittleEngine::Editor
             if (Global::ServiceLocator::Get<ResourceManagement::ModelManager>().
                 MoveResource(p_previousName, p_newName))
             {
-                Rendering::Resources::Model* resource = Global::ServiceLocator::Get<
+                Model* resource = Global::ServiceLocator::Get<
                     ResourceManagement::ModelManager>()[p_newName];
                 *reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(
-                    Rendering::Resources::Model, path)) = p_newName;
+                    Model, path)) = p_newName;
             }
 
             if (Global::ServiceLocator::Get<ResourceManagement::TextureManager>().
                 MoveResource(p_previousName, p_newName))
             {
-                Rendering::Resources::Texture* resource = Global::ServiceLocator::Get<
+                Texture* resource = Global::ServiceLocator::Get<
                     ResourceManagement::TextureManager>()[p_newName];
                 *reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(
-                    Rendering::Resources::Texture, path)) = p_newName;
+                    Texture, path)) = p_newName;
             }
 
             if (Global::ServiceLocator::Get<ResourceManagement::ShaderManager>().
                 MoveResource(p_previousName, p_newName))
             {
-                Rendering::Resources::Shader* resource = Global::ServiceLocator::Get<
+                Shader* resource = Global::ServiceLocator::Get<
                     ResourceManagement::ShaderManager>()[p_newName];
                 *reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(
-                    Rendering::Resources::Shader, path)) = p_newName;
+                    Shader, path)) = p_newName;
             }
 
             if (Global::ServiceLocator::Get<ResourceManagement::MaterialManager>().
                 MoveResource(p_previousName, p_newName))
             {
-                Resources::Material* resource = Global::ServiceLocator::Get<
+                Material* resource = Global::ServiceLocator::Get<
                     ResourceManagement::MaterialManager>()[p_newName];
                 *reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(
-                    Resources::Material, path)) = p_newName;
+                    Material, path)) = p_newName;
             }
 
             if (Global::ServiceLocator::Get<ResourceManagement::SoundManager>().
                 MoveResource(p_previousName, p_newName))
             {
-                Audio::Resources::Sound* resource = Global::ServiceLocator::Get<
+                Sound* resource = Global::ServiceLocator::Get<
                     ResourceManagement::SoundManager>()[p_newName];
                 *reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(
-                    Audio::Resources::Sound, path)) = p_newName;
+                    Sound, path)) = p_newName;
             }
         }
         else
@@ -1055,15 +1055,15 @@ namespace LittleEngine::Editor
                          ResourceManagement::MaterialManager>().GetResources())
                     if (instance)
                         for (auto& [name, value] : instance->GetUniformsData())
-                            if (value.has_value() && value.type() == typeid(Rendering::Resources::Texture
+                            if (value.has_value() && value.type() == typeid(Texture
                                 *))
-                                if (std::any_cast<Rendering::Resources::Texture*>(value) == texture)
-                                    value = static_cast<Rendering::Resources::Texture*>(nullptr);
+                                if (std::any_cast<Texture*>(value) == texture)
+                                    value = static_cast<Texture*>(nullptr);
 
                 auto& assetView = EDITOR_PANEL(Panels::AssetView, "Asset View");
                 auto assetViewRes = assetView.GetResource();
-                if (auto pval = std::get_if<Rendering::Resources::Texture*>(&assetViewRes); pval && *pval)
-                    assetView.SetResource(static_cast<Rendering::Resources::Texture*>(nullptr));
+                if (auto pval = std::get_if<Texture*>(&assetViewRes); pval && *pval)
+                    assetView.SetResource(static_cast<Texture*>(nullptr));
 
                 Global::ServiceLocator::Get<ResourceManagement::TextureManager>().
                     UnloadResource(p_previousName);
@@ -1088,8 +1088,8 @@ namespace LittleEngine::Editor
             {
                 auto& assetView = EDITOR_PANEL(Panels::AssetView, "Asset View");
                 auto assetViewRes = assetView.GetResource();
-                if (auto pval = std::get_if<Rendering::Resources::Model*>(&assetViewRes); pval && *pval)
-                    assetView.SetResource(static_cast<Rendering::Resources::Model*>(nullptr));
+                if (auto pval = std::get_if<Model*>(&assetViewRes); pval && *pval)
+                    assetView.SetResource(static_cast<Model*>(nullptr));
 
                 if (auto currentScene = m_context.sceneManager.GetCurrentScene())
                     for (auto actor : currentScene->GetActorsInternal())
@@ -1111,8 +1111,8 @@ namespace LittleEngine::Editor
 
                 auto& assetView = EDITOR_PANEL(Panels::AssetView, "Asset View");
                 auto assetViewRes = assetView.GetResource();
-                if (auto pval = std::get_if<Resources::Material*>(&assetViewRes); pval && *pval)
-                    assetView.SetResource(static_cast<Resources::Material*>(nullptr));
+                if (auto pval = std::get_if<Material*>(&assetViewRes); pval && *pval)
+                    assetView.SetResource(static_cast<Material*>(nullptr));
 
                 if (auto currentScene = m_context.sceneManager.GetCurrentScene())
                     for (auto actor : currentScene->GetActorsInternal())

@@ -8,11 +8,11 @@ namespace LittleEngine
 {
 	class SerializeUtil
 	{
-		typedef LittleEngine::Rendering::Resources::Model Model;
-		typedef LittleEngine::Rendering::Resources::Texture Texture;
-		typedef LittleEngine::Rendering::Resources::Shader Shader;
-		typedef LittleEngine::Resources::Material Material;
-		typedef LittleEngine::Audio::Resources::Sound Sound;
+		typedef LittleEngine::Model Model;
+		typedef LittleEngine::Texture Texture;
+		typedef LittleEngine::Shader Shader;
+		typedef LittleEngine::Material Material;
+		typedef LittleEngine::Sound Sound;
 		typedef LittleEngine::Color Color;
 	private:
 		static LittleEngine::ISerializer* m_serializer;

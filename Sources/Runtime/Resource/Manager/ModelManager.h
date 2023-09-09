@@ -15,26 +15,26 @@ namespace LittleEngine::ResourceManagement
 	/**
 	* ResourceManager of models
 	*/
-	class ModelManager : public AResourceManager<LittleEngine::Rendering::Resources::Model>
+	class ModelManager : public AResourceManager<LittleEngine::Model>
 	{
 	public:
 		/**
 		* Create the resource identified by the given path
 		* @param p_path
 		*/
-		virtual LittleEngine::Rendering::Resources::Model* CreateResource(const std::string & p_path) override;
+		virtual LittleEngine::Model* CreateResource(const std::string & p_path) override;
 
 		/**
 		* Destroy the given resource
 		* @param p_resource
 		*/
-		virtual void DestroyResource(LittleEngine::Rendering::Resources::Model* p_resource) override;
+		virtual void DestroyResource(LittleEngine::Model* p_resource) override;
 
 		/**
 		* Reload the given resource
 		* @param p_resource
 		* @param p_path
 		*/
-		virtual void ReloadResource(LittleEngine::Rendering::Resources::Model* p_resource, const std::string& p_path) override;
+		virtual void ReloadResource(LittleEngine::Model* p_resource, const std::string& p_path) override;
 	};
 }

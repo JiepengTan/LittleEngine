@@ -8,7 +8,7 @@
 
 #include "Resource/Asset/Material.h"
 
-namespace LittleEngine::Resources::Loaders
+namespace LittleEngine::Resources
 {
 	/**
 	* Handle the creation of materials

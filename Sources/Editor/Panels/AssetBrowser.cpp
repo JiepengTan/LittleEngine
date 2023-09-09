@@ -102,7 +102,7 @@ public:
 		}
 	}
 
-	LittleEngine::Rendering::Resources::Texture* texture = nullptr;
+	LittleEngine::Texture* texture = nullptr;
 	LittleEngine::UI::Widgets::Visual::Image image;
 };
 
@@ -690,12 +690,12 @@ public:
 			if (shaderManager.IsResourceRegistered(resourcePath))
 			{
 				/* Trying to recompile */
-				LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Recompile(*shaderManager[resourcePath], filePath);
+				LittleEngine::Resources::ShaderLoader::Recompile(*shaderManager[resourcePath], filePath);
 			}
 			else
 			{
 				/* Trying to compile */
-				LittleEngine::Rendering::Resources::Shader* shader = OVSERVICE(LittleEngine::ResourceManagement::ShaderManager)[resourcePath];
+				LittleEngine::Shader* shader = OVSERVICE(LittleEngine::ResourceManagement::ShaderManager)[resourcePath];
 				if (shader)
 					LOG_INFO("[COMPILE] \"" + filePath + "\": Success!");
 			}
@@ -704,7 +704,7 @@ public:
 	}
 };
 
-class ModelContextualMenu : public PreviewableContextualMenu<LittleEngine::Rendering::Resources::Model, LittleEngine::ResourceManagement::ModelManager>
+class ModelContextualMenu : public PreviewableContextualMenu<LittleEngine::Model, LittleEngine::ResourceManagement::ModelManager>
 {
 public:
 	ModelContextualMenu(const std::string& p_filePath, bool p_protected = false) : PreviewableContextualMenu(p_filePath, p_protected) {}
@@ -844,7 +844,7 @@ public:
 	}
 };
 
-class TextureContextualMenu : public PreviewableContextualMenu<LittleEngine::Rendering::Resources::Texture, LittleEngine::ResourceManagement::TextureManager>
+class TextureContextualMenu : public PreviewableContextualMenu<LittleEngine::Texture, LittleEngine::ResourceManagement::TextureManager>
 {
 public:
 	TextureContextualMenu(const std::string& p_filePath, bool p_protected = false) : PreviewableContextualMenu(p_filePath, p_protected) {}
@@ -887,7 +887,7 @@ public:
 	}
 };
 
-class MaterialContextualMenu : public PreviewableContextualMenu<LittleEngine::Resources::Material, LittleEngine::ResourceManagement::MaterialManager>
+class MaterialContextualMenu : public PreviewableContextualMenu<LittleEngine::Material, LittleEngine::ResourceManagement::MaterialManager>
 {
 public:
 	MaterialContextualMenu(const std::string& p_filePath, bool p_protected = false) : PreviewableContextualMenu(p_filePath, p_protected) {}
@@ -898,7 +898,7 @@ public:
 
 		editAction.ClickedEvent += [this]
 		{
-			LittleEngine::Resources::Material* material = OVSERVICE(LittleEngine::ResourceManagement::MaterialManager)[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
+			LittleEngine::Material* material = OVSERVICE(LittleEngine::ResourceManagement::MaterialManager)[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
 			if (material)
 			{
 				auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
@@ -906,7 +906,7 @@ public:
 				materialEditor.Open();
 				materialEditor.Focus();
 				
-				LittleEngine::Resources::Material* resource = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
+				LittleEngine::Material* resource = GetGlobalService<LittleEngine::ResourceManagement::MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
 				auto& assetView = EDITOR_PANEL(LittleEngine::Editor::Panels::AssetView, "Asset View");
 				assetView.SetResource(resource);
 				assetView.Open();
@@ -919,7 +919,7 @@ public:
 		{
 			auto materialManager = OVSERVICE(LittleEngine::ResourceManagement::MaterialManager);
 			auto resourcePath = EDITOR_EXEC(GetResourcePath(filePath, m_protected));
-			LittleEngine::Resources::Material* material = materialManager[resourcePath];
+			LittleEngine::Material* material = materialManager[resourcePath];
 			if (material)
 			{
 				materialManager.AResourceManager::ReloadResource(resourcePath);

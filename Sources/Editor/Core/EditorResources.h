@@ -33,29 +33,29 @@ namespace LittleEngine::Editor::Core
 		* Returns the file icon identified by the given string or nullptr on fail
 		* @param p_filename
 		*/
-		LittleEngine::Rendering::Resources::Texture* GetFileIcon(const std::string& p_filename);
+		LittleEngine::Texture* GetFileIcon(const std::string& p_filename);
 
 		/**
 		* Returns the texture identified by the given string or nullptr on fail
 		* @param p_id
 		*/
-		LittleEngine::Rendering::Resources::Texture* GetTexture(const std::string& p_id);
+		LittleEngine::Texture* GetTexture(const std::string& p_id);
 
 		/**
 		* Returns the model identified by the given string or nullptr on fail
 		* @param p_id
 		*/
-		LittleEngine::Rendering::Resources::Model* GetModel(const std::string& p_id);
+		LittleEngine::Model* GetModel(const std::string& p_id);
 
 		/**
 		* Returns the shader identified by the given string or nullptr on fail
 		* @param p_id
 		*/
-		LittleEngine::Rendering::Resources::Shader* GetShader(const std::string& p_id);
+		LittleEngine::Shader* GetShader(const std::string& p_id);
 
 	private:
-		std::unordered_map<std::string, LittleEngine::Rendering::Resources::Texture*> m_textures;
-		std::unordered_map<std::string, LittleEngine::Rendering::Resources::Model*> m_models;
-		std::unordered_map<std::string, LittleEngine::Rendering::Resources::Shader*> m_shaders;
+		std::unordered_map<std::string, LittleEngine::Texture*> m_textures;
+		std::unordered_map<std::string, LittleEngine::Model*> m_models;
+		std::unordered_map<std::string, LittleEngine::Shader*> m_shaders;
 	};
 }

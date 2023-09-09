@@ -12,7 +12,7 @@
 #include "Modules/UI/Widgets/Layout/Columns.h"
 #include "Resource/Asset/Shader.h"
 
-namespace LittleEngine::Resources { class Material; }
+namespace LittleEngine { class Material; }
 
 namespace LittleEngine::Editor::Panels
 {
@@ -41,12 +41,12 @@ namespace LittleEngine::Editor::Panels
 		* Defines the target material of the material editor
 		* @param p_newTarget
 		*/
-		void SetTarget(LittleEngine::Resources::Material& p_newTarget);
+		void SetTarget(LittleEngine::Material& p_newTarget);
 
 		/**
 		* Returns the target of the material editor
 		*/
-		LittleEngine::Resources::Material* GetTarget() const;
+		LittleEngine::Material* GetTarget() const;
 
 		/**
 		* Remove the target of the material editor (Clear the material editor)
@@ -77,8 +77,8 @@ namespace LittleEngine::Editor::Panels
 		void GenerateMaterialSettingsContent();
 
 	private:
-		LittleEngine::Resources::Material* m_target		= nullptr;
-		LittleEngine::Rendering::Resources::Shader* m_shader	= nullptr;
+		LittleEngine::Material* m_target		= nullptr;
+		LittleEngine::Shader* m_shader	= nullptr;
 
 		LittleEngine::UI::Widgets::Texts::Text* m_targetMaterialText	= nullptr;
 		LittleEngine::UI::Widgets::Texts::Text* m_shaderText			= nullptr;

@@ -8,13 +8,12 @@
 
 #include "any"
 #include "map"
-
+#include "Resource/Asset/Texture.h"
 #include "Resource/Asset/Shader.h"
-
 #include "Modules/Framework/API/ISerializable.h"
 
 
-namespace LittleEngine::Resources
+namespace LittleEngine
 {
 	/**
 	* A material is a combination of a shader and some settings (Material settings and shader settings)
@@ -26,7 +25,7 @@ namespace LittleEngine::Resources
 		* Defines the shader to attach to this material instance
 		* @param p_shader
 		*/
-		void SetShader(LittleEngine::Rendering::Resources::Shader* p_shader);
+		void SetShader(Shader* p_shader);
 
 		/**
 		* Fill uniform with default uniform values
@@ -37,7 +36,7 @@ namespace LittleEngine::Resources
 		* Bind the material and send its uniform data to the GPU
 		* @parma p_emptyTexture (The texture to use if a texture uniform is nullptr)
 		*/
-		void Bind(LittleEngine::Rendering::Resources::Texture* p_emptyTexture);
+		void Bind(Texture* p_emptyTexture);
 
 		/**
 		* Unbind the material
@@ -60,7 +59,7 @@ namespace LittleEngine::Resources
 		/**
 		* Returns the attached shader
 		*/
-		LittleEngine::Rendering::Resources::Shader*& GetShader();
+		Shader*& GetShader();
 
 		/**
 		* Returns true if the material has a shader attached
@@ -172,7 +171,7 @@ namespace LittleEngine::Resources
 		std::string path;
 
 	private:
-		LittleEngine::Rendering::Resources::Shader* m_shader = nullptr;
+		Shader* m_shader = nullptr;
 		std::map<std::string, std::any> m_uniformsData;
 
 		bool m_blendable		= false;

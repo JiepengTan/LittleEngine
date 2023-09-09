@@ -10,7 +10,7 @@
 
 #include "Resource/Asset/Material.h"
 
-namespace LittleEngine::Resources
+namespace LittleEngine
 {
 	template<typename T>
 	inline void Material::Set(const std::string p_key, const T& p_value,bool p_isForce )

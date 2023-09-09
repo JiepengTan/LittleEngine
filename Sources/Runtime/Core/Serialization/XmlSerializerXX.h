@@ -20,20 +20,12 @@
 
 
 /* Forward declaration */
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 	class Model;
 	class Texture;
 	class Shader;
-}
-
-namespace LittleEngine::Audio::Resources
-{
 	class Sound;
-}
-
-namespace LittleEngine::Resources
-{
 	class Material;
 }
 
@@ -44,11 +36,11 @@ namespace LittleEngine
 	{
 		tinyxml2::XMLDocument p_doc;
 		tinyxml2::XMLNode* p_node;
-		typedef LittleEngine::Rendering::Resources::Model Model;
-		typedef LittleEngine::Rendering::Resources::Texture Texture;
-		typedef LittleEngine::Rendering::Resources::Shader Shader;
-		typedef LittleEngine::Resources::Material Material;
-		typedef LittleEngine::Audio::Resources::Sound Sound;
+		typedef LittleEngine::Model Model;
+		typedef LittleEngine::Texture Texture;
+		typedef LittleEngine::Shader Shader;
+		typedef LittleEngine::Material Material;
+		typedef LittleEngine::Sound Sound;
 		typedef LittleEngine::Color Color;
 	public:
 		XmlSerializerXX() = default;

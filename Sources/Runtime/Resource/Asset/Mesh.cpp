@@ -8,7 +8,9 @@
 
 #include "Resource/Asset/Mesh.h"
 
-LittleEngine::Rendering::Resources::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
+using namespace LittleEngine::Rendering;
+
+LittleEngine::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vector<uint32_t>& p_indices,
 			uint32_t p_materialIndex,
 			Geometry::EVertexDataFlags p_dataFlag,
 			bool p_isReadWrite ):
@@ -80,7 +82,7 @@ LittleEngine::Rendering::Resources::Mesh::Mesh(Geometry::VertexDataBuffer& p_ver
 
 
 
-LittleEngine::Rendering::Resources::Mesh::~Mesh()
+LittleEngine::Mesh::~Mesh()
 {
 	for (int i = 0; i<(int) Geometry::EVertexDataFlagsIndex::count; i++)
 	{
@@ -99,14 +101,14 @@ LittleEngine::Rendering::Resources::Mesh::~Mesh()
 	m_animatedPositions = nullptr;
 		/**/
 }
-void* LittleEngine::Rendering::Resources::Mesh::GetDataPtrs(Geometry::EVertexDataFlagsIndex typeIdx)
+void* LittleEngine::Mesh::GetDataPtrs(Geometry::EVertexDataFlagsIndex typeIdx)
 {
 	if(m_dataPtrs[(int)typeIdx] != nullptr)
 	{
 		return m_dataPtrs[(int)typeIdx];
 	}
 }
-void LittleEngine::Rendering::Resources::Mesh::Rebind(bool p_recreateBound)
+void LittleEngine::Mesh::Rebind(bool p_recreateBound)
 {
 	Bind();
 	auto& info =  Geometry::VertexStructInfos[(int)Geometry::EVertexDataFlagsIndex::position];
@@ -115,49 +117,49 @@ void LittleEngine::Rendering::Resources::Mesh::Rebind(bool p_recreateBound)
 	if(p_recreateBound)	ComputeBoundingSphere();
 	Unbind();
 }
-void LittleEngine::Rendering::Resources::Mesh::Bind()
+void LittleEngine::Mesh::Bind()
 {
 	m_vertexArray.Bind();
 }
 
-void LittleEngine::Rendering::Resources::Mesh::Unbind()
+void LittleEngine::Mesh::Unbind()
 {
 	m_vertexArray.Unbind();
 }
 
-uint32_t LittleEngine::Rendering::Resources::Mesh::GetVertexCount()
+uint32_t LittleEngine::Mesh::GetVertexCount()
 {
 	return m_vertexCount;
 }
 
-uint32_t LittleEngine::Rendering::Resources::Mesh::GetIndexCount()
+uint32_t LittleEngine::Mesh::GetIndexCount()
 {
 	return m_indicesCount;
 }
 
-uint32_t LittleEngine::Rendering::Resources::Mesh::GetMaterialIndex() const
+uint32_t LittleEngine::Mesh::GetMaterialIndex() const
 {
 	return m_materialIndex;
 }
 
-const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Rendering::Resources::Mesh::GetBoundingSphere() const
+const LittleEngine::Rendering::Geometry::BoundingSphere& LittleEngine::Mesh::GetBoundingSphere() const
 {
 	return m_boundingSphere;
 }
 
-float* LittleEngine::Rendering::Resources::Mesh::GetPositions() const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position]);}
+float* LittleEngine::Mesh::GetPositions() const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::position]);}
 
-float* LittleEngine::Rendering::Resources::Mesh::GetBoneWeights()const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneWeight]);}
+float* LittleEngine::Mesh::GetBoneWeights()const{return (float*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneWeight]);}
 
-int* LittleEngine::Rendering::Resources::Mesh::GetBoneIds() const{return (int*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneId]);}
+int* LittleEngine::Mesh::GetBoneIds() const{return (int*)(m_dataPtrs[(int)Geometry::EVertexDataFlagsIndex::boneId]);}
 
-float* LittleEngine::Rendering::Resources::Mesh::GetAnimatedPositions()const{return m_animatedPositions;}
+float* LittleEngine::Mesh::GetAnimatedPositions()const{return m_animatedPositions;}
 
-int LittleEngine::Rendering::Resources::Mesh:: GetPositionBufferSize(){
+int LittleEngine::Mesh:: GetPositionBufferSize(){
 	return m_vertexCount * Geometry::VertexStructInfos[(int)Geometry::EVertexDataFlagsIndex::position].MemorySize();
 }
 
-void LittleEngine::Rendering::Resources::Mesh::ComputeBoundingSphere()
+void LittleEngine::Mesh::ComputeBoundingSphere()
 {
 	m_boundingSphere.position = LittleEngine::FVector3::Zero;
 	m_boundingSphere.radius = 0.0f;

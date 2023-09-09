@@ -40,7 +40,7 @@ std::string LittleEngine::CMaterialRenderer::GetName()
 	return "Material Renderer";
 }
 
-void LittleEngine::CMaterialRenderer::FillWithMaterial(LittleEngine::Resources::Material & p_material)
+void LittleEngine::CMaterialRenderer::FillWithMaterial(LittleEngine::Material & p_material)
 {
 	SetMaterialAtIndex(0,&p_material);
 }
@@ -49,7 +49,7 @@ void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index,const s
 	auto mat = GetGlobalService<ResourceManagement::MaterialManager>().GetResource(p_matPath);
 	SetMaterialAtIndex(p_index,mat);
 }
-void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material* p_material)
+void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, LittleEngine::Material* p_material)
 {
 	auto count = m_materials.size();
 	for (int i =count ;i<=p_index;i++)
@@ -62,7 +62,7 @@ void LittleEngine::CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, Little
 	
 }
 
-LittleEngine::Resources::Material* LittleEngine::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
+LittleEngine::Material* LittleEngine::CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
 {
 	if(p_index> m_materials.size()	) return nullptr;
 	return m_materials.at(p_index);
@@ -77,7 +77,7 @@ void LittleEngine::CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
 	}
 }
 
-void LittleEngine::CMaterialRenderer::RemoveMaterialByInstance(LittleEngine::Resources::Material& p_instance)
+void LittleEngine::CMaterialRenderer::RemoveMaterialByInstance(LittleEngine::Material& p_instance)
 {
 	for (uint8_t i = 0; i < m_materials.size(); ++i)
 	{
@@ -142,7 +142,7 @@ void LittleEngine::CMaterialRenderer::OnDeserialize(ISerializer p_serializer)
 	UpdateMaterialList();
 }
 
-std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer( const std::string& p_name, LittleEngine::Resources::Material*& p_data)
+std::array<LittleEngine::UI::Widgets::AWidget*, 3> CustomMaterialDrawer( const std::string& p_name, LittleEngine::Material*& p_data)
 {
 	std::array<LittleEngine::UI::Widgets::AWidget*, 3> widgets;
 

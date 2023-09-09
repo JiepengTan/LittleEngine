@@ -8,12 +8,12 @@
 
 #include "Resource/Asset/Model.h"
 
-LittleEngine::Rendering::Resources::Parsers::AssimpParser LittleEngine::Rendering::Resources::Loaders::ModelLoader::__ASSIMP;
+LittleEngine::Resources::AssimpParser LittleEngine::Resources::ModelLoader::__ASSIMP;
 
 
 
-LittleEngine::Rendering::Resources::Model* LittleEngine::Rendering::Resources::Loaders::ModelLoader::Create(const std::string& p_filepath,
-                                                                                    LittleEngine::Rendering::Resources::Parsers::EModelParserFlags p_parserFlags)
+LittleEngine::Model* LittleEngine::Resources::ModelLoader::Create(const std::string& p_filepath,
+                                                                                    LittleEngine::Resources::EModelParserFlags p_parserFlags)
 {
 	Model* result = new Model(p_filepath);
 	
@@ -30,7 +30,7 @@ LittleEngine::Rendering::Resources::Model* LittleEngine::Rendering::Resources::L
 
 
 
-void LittleEngine::Rendering::Resources::Loaders::ModelLoader::Reload(Model& p_model, const std::string& p_filePath, Parsers::EModelParserFlags p_parserFlags)
+void LittleEngine::Resources::ModelLoader::Reload(Model& p_model, const std::string& p_filePath, EModelParserFlags p_parserFlags)
 {
 	Model* newModel = Create(p_filePath, p_parserFlags);
 
@@ -44,7 +44,7 @@ void LittleEngine::Rendering::Resources::Loaders::ModelLoader::Reload(Model& p_m
 	}
 }
 
-bool LittleEngine::Rendering::Resources::Loaders::ModelLoader::Destroy(Model*& p_modelInstance)
+bool LittleEngine::Resources::ModelLoader::Destroy(Model*& p_modelInstance)
 {
 	if (p_modelInstance)
 	{

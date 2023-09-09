@@ -10,7 +10,7 @@
 
 #include "Resource/Asset/Sound.h"
 
-namespace LittleEngine::Audio::Resources::Loaders
+namespace LittleEngine::Resources
 {
 	/**
 	* Handle the Mesh creation and destruction

@@ -126,14 +126,14 @@ void LittleEngine::Editor::Panels::MaterialEditor::Refresh()
 		SetTarget(*m_target);
 }
 
-void LittleEngine::Editor::Panels::MaterialEditor::SetTarget(LittleEngine::Resources::Material & p_newTarget)
+void LittleEngine::Editor::Panels::MaterialEditor::SetTarget(LittleEngine::Material & p_newTarget)
 {
 	m_target = &p_newTarget;
 	m_targetMaterialText->content = m_target->path;
 	OnMaterialDropped();
 }
 
-LittleEngine::Resources::Material * LittleEngine::Editor::Panels::MaterialEditor::GetTarget() const
+LittleEngine::Material * LittleEngine::Editor::Panels::MaterialEditor::GetTarget() const
 {
 	return m_target;
 }
@@ -210,7 +210,7 @@ void LittleEngine::Editor::Panels::MaterialEditor::CreateHeaderButtons()
 	saveButton.ClickedEvent += [this]
 	{
 		if (m_target)
-			LittleEngine::Resources::Loaders::MaterialLoader::Save(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
+			LittleEngine::Resources::MaterialLoader::Save(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
 	};
 
 	saveButton.lineBreak = false;
@@ -220,7 +220,7 @@ void LittleEngine::Editor::Panels::MaterialEditor::CreateHeaderButtons()
 	reloadButton.ClickedEvent += [this]
 	{
 		if (m_target)
-			LittleEngine::Resources::Loaders::MaterialLoader::Reload(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
+			LittleEngine::Resources::MaterialLoader::Reload(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
 
 		OnMaterialDropped();
 	};
@@ -309,7 +309,7 @@ std::string UniformFormat(const std::string& p_string)
 
 void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent()
 {
-	using namespace LittleEngine::Rendering::Resources;
+	using namespace LittleEngine::Resources;
 
 	m_shaderSettingsColumns->RemoveAllWidgets(); // Ensure that the m_shaderSettingsColumns is empty
 
@@ -363,11 +363,11 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateMaterialSettingsConte
 {
 	m_materialSettingsColumns->RemoveAllWidgets(); // Ensure that the m_shaderSettingsColumns is empty
 	GUIUtil::m_root =m_materialSettingsColumns;
-	GUIUtil::DrawBoolean( "Blendable", std::bind(&LittleEngine::Resources::Material::IsBlendable, m_target), std::bind(&LittleEngine::Resources::Material::SetBlendable, m_target, std::placeholders::_1));
-	GUIUtil::DrawBoolean( "Back-face Culling", std::bind(&LittleEngine::Resources::Material::HasBackfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetBackfaceCulling, m_target, std::placeholders::_1));
-	GUIUtil::DrawBoolean( "Front-face Culling", std::bind(&LittleEngine::Resources::Material::HasFrontfaceCulling, m_target), std::bind(&LittleEngine::Resources::Material::SetFrontfaceCulling, m_target, std::placeholders::_1));
-	GUIUtil::DrawBoolean( "Depth Test", std::bind(&LittleEngine::Resources::Material::HasDepthTest, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthTest, m_target, std::placeholders::_1));
-	GUIUtil::DrawBoolean( "Depth Writing", std::bind(&LittleEngine::Resources::Material::HasDepthWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetDepthWriting, m_target, std::placeholders::_1));
-	GUIUtil::DrawBoolean( "Color Writing", std::bind(&LittleEngine::Resources::Material::HasColorWriting, m_target), std::bind(&LittleEngine::Resources::Material::SetColorWriting, m_target, std::placeholders::_1));
-	GUIUtil::DrawScalar<int>( "GPU Instances", std::bind(&LittleEngine::Resources::Material::GetGPUInstances, m_target), std::bind(&LittleEngine::Resources::Material::SetGPUInstances, m_target, std::placeholders::_1), 1.0f, 0, 100000);
+	GUIUtil::DrawBoolean( "Blendable", std::bind(&LittleEngine::Material::IsBlendable, m_target), std::bind(&LittleEngine::Material::SetBlendable, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Back-face Culling", std::bind(&LittleEngine::Material::HasBackfaceCulling, m_target), std::bind(&LittleEngine::Material::SetBackfaceCulling, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Front-face Culling", std::bind(&LittleEngine::Material::HasFrontfaceCulling, m_target), std::bind(&LittleEngine::Material::SetFrontfaceCulling, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Depth Test", std::bind(&LittleEngine::Material::HasDepthTest, m_target), std::bind(&LittleEngine::Material::SetDepthTest, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Depth Writing", std::bind(&LittleEngine::Material::HasDepthWriting, m_target), std::bind(&LittleEngine::Material::SetDepthWriting, m_target, std::placeholders::_1));
+	GUIUtil::DrawBoolean( "Color Writing", std::bind(&LittleEngine::Material::HasColorWriting, m_target), std::bind(&LittleEngine::Material::SetColorWriting, m_target, std::placeholders::_1));
+	GUIUtil::DrawScalar<int>( "GPU Instances", std::bind(&LittleEngine::Material::GetGPUInstances, m_target), std::bind(&LittleEngine::Material::SetGPUInstances, m_target, std::placeholders::_1), 1.0f, 0, 100000);
 }

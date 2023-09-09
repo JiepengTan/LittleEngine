@@ -10,16 +10,16 @@
 
 
 
-namespace LittleEngine::Audio::Resources
+namespace LittleEngine
 {
-	namespace Loaders { class SoundLoader; }
+	namespace Resources { class SoundLoader; }
 
 	/**
 	* Playable sound
 	*/
 	class Sound
 	{
-		friend class Loaders::SoundLoader;
+		friend class Resources::SoundLoader;
 
 	private:
 		Sound(const std::string& p_path);

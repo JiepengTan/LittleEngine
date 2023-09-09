@@ -31,7 +31,7 @@ namespace LittleEngine::Audio::Core
 		* @param p_looped
 		* @param p_track
 		*/
-		std::unique_ptr<Tracking::SoundTracker> PlaySound(const Resources::Sound& p_sound, bool p_autoPlay = true, bool p_looped = false, bool p_track = false);
+		std::unique_ptr<Tracking::SoundTracker> PlaySound(const Sound& p_sound, bool p_autoPlay = true, bool p_looped = false, bool p_track = false);
 
 		/**
 		* Play a sound in 3D and return a SoundTracker if tracking is asked
@@ -41,7 +41,7 @@ namespace LittleEngine::Audio::Core
 		* @param p_position
 		* @param p_track
 		*/
-		std::unique_ptr<Tracking::SoundTracker> PlaySpatialSound(const Resources::Sound& p_sound, bool p_autoPlay = true, bool p_looped = false, const LittleEngine::FVector3& p_position = {0.0f, 0.0f, 0.0f}, bool p_track = false);
+		std::unique_ptr<Tracking::SoundTracker> PlaySpatialSound(const Sound& p_sound, bool p_autoPlay = true, bool p_looped = false, const LittleEngine::FVector3& p_position = {0.0f, 0.0f, 0.0f}, bool p_track = false);
 
 	private:
 		AudioEngine& m_audioEngine;

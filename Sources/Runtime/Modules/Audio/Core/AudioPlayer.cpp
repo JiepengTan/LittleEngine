@@ -12,7 +12,7 @@ LittleEngine::Audio::Core::AudioPlayer::AudioPlayer(AudioEngine& p_audioEngine) 
 {
 }
 
-std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio::Core::AudioPlayer::PlaySound(const Resources::Sound& p_sound, bool p_autoPlay, bool p_looped, bool p_track)
+std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio::Core::AudioPlayer::PlaySound(const Sound& p_sound, bool p_autoPlay, bool p_looped, bool p_track)
 {
 	std::unique_ptr<Tracking::SoundTracker> result;
 
@@ -29,7 +29,7 @@ std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio
 	return result;
 }
 
-std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio::Core::AudioPlayer::PlaySpatialSound(const Resources::Sound& p_sound, bool p_autoPlay, bool p_looped, const LittleEngine::FVector3& p_position, bool p_track)
+std::unique_ptr<LittleEngine::Audio::Tracking::SoundTracker> LittleEngine::Audio::Core::AudioPlayer::PlaySpatialSound(const Sound& p_sound, bool p_autoPlay, bool p_looped, const LittleEngine::FVector3& p_position, bool p_track)
 {
 	std::unique_ptr<Tracking::SoundTracker> result;
 

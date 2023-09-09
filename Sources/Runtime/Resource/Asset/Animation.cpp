@@ -15,9 +15,9 @@
 
 using namespace std;
 using namespace LittleEngine;
+using namespace LittleEngine::Rendering;
 
-
-LittleEngine::Rendering::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, const aiNodeAnim* channel):
+LittleEngine::Resources::BoneFrames::BoneFrames(const std::string& name, int ID, const aiNodeAnim* channel):
     m_LocalTransform(LittleEngine::FMatrix4::Identity),
     m_Name(name),
     m_ID(ID)
@@ -57,7 +57,7 @@ LittleEngine::Rendering::Resources::BoneFrames::BoneFrames(const std::string& na
     }
 }
 
-void LittleEngine::Rendering::Resources::BoneFrames::Update(float animationTime)
+void LittleEngine::Resources::BoneFrames::Update(float animationTime)
 {
     LittleEngine::FMatrix4 translation = InterpolatePosition(animationTime);
     LittleEngine::FMatrix4 rotation = InterpolateRotation(animationTime);
@@ -66,7 +66,7 @@ void LittleEngine::Rendering::Resources::BoneFrames::Update(float animationTime)
 }
 
 
-int LittleEngine::Rendering::Resources::BoneFrames::GetPositionIndex(float animationTime)
+int LittleEngine::Resources::BoneFrames::GetPositionIndex(float animationTime)
 {
     for (int index = 0; index < m_NumPositions - 1; ++index)
     {
@@ -76,7 +76,7 @@ int LittleEngine::Rendering::Resources::BoneFrames::GetPositionIndex(float anima
     return 0;
 }
 
-int LittleEngine::Rendering::Resources::BoneFrames::GetRotationIndex(float animationTime)
+int LittleEngine::Resources::BoneFrames::GetRotationIndex(float animationTime)
 {
     for (int index = 0; index < m_NumRotations - 1; ++index)
     {
@@ -86,7 +86,7 @@ int LittleEngine::Rendering::Resources::BoneFrames::GetRotationIndex(float anima
     return 0;
 }
 
-int LittleEngine::Rendering::Resources::BoneFrames::GetScaleIndex(float animationTime)
+int LittleEngine::Resources::BoneFrames::GetScaleIndex(float animationTime)
 {
     for (int index = 0; index < m_NumScalings - 1; ++index)
     {
@@ -97,7 +97,7 @@ int LittleEngine::Rendering::Resources::BoneFrames::GetScaleIndex(float animatio
 }
 
 
-float LittleEngine::Rendering::Resources::BoneFrames::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
+float LittleEngine::Resources::BoneFrames::GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
 {
     float scaleFactor = 0.0f;
     float midWayLength = animationTime - lastTimeStamp;
@@ -106,7 +106,7 @@ float LittleEngine::Rendering::Resources::BoneFrames::GetScaleFactor(float lastT
     return scaleFactor;
 }
 
-LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolatePosition(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Resources::BoneFrames::InterpolatePosition(float animationTime)
 {
     if (1 == m_NumPositions)
         return FMatrix4::Translate(LittleEngine::FMatrix4::Identity, m_Positions[0].position);
@@ -120,7 +120,7 @@ LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::Interpola
     return FMatrix4::Translate(FMatrix4::Identity, finalPosition);
 }
 
-LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolateRotation(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Resources::BoneFrames::InterpolateRotation(float animationTime)
 {
     if (1 == m_NumRotations)
     {
@@ -138,7 +138,7 @@ LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::Interpola
     return FQuaternion::ToMatrix4(finalRotation);
 }
 
-LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::InterpolateScaling(float animationTime)
+LittleEngine::FMatrix4 LittleEngine::Resources::BoneFrames::InterpolateScaling(float animationTime)
 {
     if (1 == m_NumScalings)
         return FMatrix4::Scale(LittleEngine::FMatrix4::Identity, m_Scales[0].scale);
@@ -154,10 +154,10 @@ LittleEngine::FMatrix4 LittleEngine::Rendering::Resources::BoneFrames::Interpola
 
 
 
-LittleEngine::Rendering::Resources::BoneFrames* LittleEngine::Rendering::Resources::Animation::FindBone(const std::string& name)
+LittleEngine::Resources::BoneFrames* LittleEngine::Animation::FindBone(const std::string& name)
 {
     auto iter = std::find_if(m_Bones.begin(), m_Bones.end(),
-                             [&](const BoneFrames& Bone)
+                             [&](const Resources::BoneFrames& Bone)
                              {
                                  return Bone.GetBoneName() == name;
                              }

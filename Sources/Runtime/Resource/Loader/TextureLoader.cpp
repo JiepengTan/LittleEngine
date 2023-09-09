@@ -11,7 +11,7 @@
 
 #include "Resource/Loader/TextureLoader.h"
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	int textureWidth;
@@ -51,7 +51,7 @@ LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources:
 	}
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateColor(uint32_t p_data, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateColor(uint32_t p_data, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -74,7 +74,7 @@ LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources:
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -97,7 +97,7 @@ LittleEngine::Rendering::Resources::Texture* LittleEngine::Rendering::Resources:
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
-void LittleEngine::Rendering::Resources::Loaders::TextureLoader::Reload(Texture& p_texture, const std::string& p_filePath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+void LittleEngine::Resources::TextureLoader::Reload(Texture& p_texture, const std::string& p_filePath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	Texture* newTexture = Create(p_filePath, p_firstFilter, p_secondFilter, p_generateMipmap);
 
@@ -109,14 +109,14 @@ void LittleEngine::Rendering::Resources::Loaders::TextureLoader::Reload(Texture&
 		*const_cast<uint32_t*>(&p_texture.width) = newTexture->width;
 		*const_cast<uint32_t*>(&p_texture.height) = newTexture->height;
 		*const_cast<uint32_t*>(&p_texture.bitsPerPixel) = newTexture->bitsPerPixel;
-		*const_cast<Settings::ETextureFilteringMode*>(&p_texture.firstFilter) = newTexture->firstFilter;
-		*const_cast<Settings::ETextureFilteringMode*>(&p_texture.secondFilter) = newTexture->secondFilter;
+		*const_cast<Rendering::Settings::ETextureFilteringMode*>(&p_texture.firstFilter) = newTexture->firstFilter;
+		*const_cast<Rendering::Settings::ETextureFilteringMode*>(&p_texture.secondFilter) = newTexture->secondFilter;
 		*const_cast<bool*>(&p_texture.isMimapped) = newTexture->isMimapped;
 		delete newTexture;
 	}
 }
 
-bool LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(Texture*& p_textureInstance)
+bool LittleEngine::Resources::TextureLoader::Destroy(Texture*& p_textureInstance)
 {
 	if (p_textureInstance)
 	{

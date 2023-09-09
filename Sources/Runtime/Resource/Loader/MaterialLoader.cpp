@@ -6,21 +6,21 @@
 
 #include "Resource/Loader/MaterialLoader.h"
 
-LittleEngine::Resources::Material * LittleEngine::Resources::Loaders::MaterialLoader::Create(const std::string & p_path)
+LittleEngine::Material * LittleEngine::Resources::MaterialLoader::Create(const std::string & p_path)
 {
 	return nullptr;
 }
 
-void LittleEngine::Resources::Loaders::MaterialLoader::Reload(Material& p_material, const std::string& p_path)
+void LittleEngine::Resources::MaterialLoader::Reload(Material& p_material, const std::string& p_path)
 {
 }
 
-void LittleEngine::Resources::Loaders::MaterialLoader::Save(Material& p_material, const std::string& p_path)
+void LittleEngine::Resources::MaterialLoader::Save(Material& p_material, const std::string& p_path)
 {
 
 }
 
-bool LittleEngine::Resources::Loaders::MaterialLoader::Destroy(Material *& p_material)
+bool LittleEngine::Resources::MaterialLoader::Destroy(Material *& p_material)
 {
 	return true;
 }

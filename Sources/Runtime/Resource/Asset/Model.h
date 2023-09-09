@@ -11,12 +11,9 @@
 #include "string"
 #include "Resource/Asset/AnimationData.h"
 #include "Resource/Asset/Mesh.h"
-namespace LittleEngine::Rendering::Resources::Loaders
-{
-	class ModelLoader;
-}
+namespace LittleEngine::Resources{	class ModelLoader;}
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 
 	/**
@@ -24,7 +21,7 @@ namespace LittleEngine::Rendering::Resources
 	*/
 	class Model
 	{
-		friend class LittleEngine::Rendering::Resources::Loaders::ModelLoader;
+		friend class LittleEngine::Resources::ModelLoader;
 
 	public:
 		/**
@@ -51,15 +48,15 @@ namespace LittleEngine::Rendering::Resources
 	public:
 		const std::string path;
 		int& GetBoneCount() { return m_BoneCounter; }
-		std::map<std::string, LittleEngine::Rendering::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
+		std::map<std::string, LittleEngine::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
 		bool isSkinMesh;
 		
 	private:
 		std::vector<Mesh*> m_meshes;
 		std::vector<std::string> m_materialNames;
 
-		Geometry::BoundingSphere m_boundingSphere;
-		std::map<std::string, LittleEngine::Rendering::Resources::BoneInfo> m_name2BoneInfo;
+		Rendering::Geometry::BoundingSphere m_boundingSphere;
+		std::map<std::string, LittleEngine::Resources::BoneInfo> m_name2BoneInfo;
 		int m_BoneCounter = 0;
 	};
 }

@@ -278,7 +278,7 @@ namespace LittleEngine::Rendering::Core
 		* @param p_primitiveMode
 		* @param p_instances
 		*/
-		void Draw(Resources::IMesh& p_mesh, Settings::EPrimitiveMode p_primitiveMode = Settings::EPrimitiveMode::TRIANGLES, uint32_t p_instances = 1);
+		void Draw(IMesh& p_mesh, Settings::EPrimitiveMode p_primitiveMode = Settings::EPrimitiveMode::TRIANGLES, uint32_t p_instances = 1);
 
 		/**
 		* Returns the list of meshes from a model that should be rendered
@@ -288,9 +288,9 @@ namespace LittleEngine::Rendering::Core
 		* @param p_frustum
 		* @param p_cullingOptions
 		*/
-		std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> GetMeshesInFrustum
+		std::vector<std::reference_wrapper<LittleEngine::Mesh>> GetMeshesInFrustum
 		(
-			const LittleEngine::Rendering::Resources::Model& p_model,
+			const LittleEngine::Model& p_model,
 			const LittleEngine::Rendering::Geometry::BoundingSphere& p_modelBoundingSphere,
 			const LittleEngine::FTransform& p_modelTransform,
 			const LittleEngine::Rendering::Data::Frustum& p_frustum,

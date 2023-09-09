@@ -20,29 +20,29 @@ std::tuple<LittleEngine::Rendering::Settings::ETextureFilteringMode, LittleEngin
 	return { static_cast<LittleEngine::Rendering::Settings::ETextureFilteringMode>(min), static_cast<LittleEngine::Rendering::Settings::ETextureFilteringMode>(mag), mipmap };
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::ResourceManagement::TextureManager::CreateResource(const std::string & p_path)
+LittleEngine::Texture* LittleEngine::ResourceManagement::TextureManager::CreateResource(const std::string & p_path)
 {
 	std::string realPath = PathUtil::GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
-	LittleEngine::Rendering::Resources::Texture* texture = LittleEngine::Rendering::Resources::Loaders::TextureLoader::Create(realPath, min, mag, mipmap);
+	LittleEngine::Texture* texture = LittleEngine::Resources::TextureLoader::Create(realPath, min, mag, mipmap);
 	if (texture)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(LittleEngine::Rendering::Resources::Texture, path)) = p_path; // Force the resource path to fit the given path
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(LittleEngine::Texture, path)) = p_path; // Force the resource path to fit the given path
 
 	return texture;
 }
 
-void LittleEngine::ResourceManagement::TextureManager::DestroyResource(LittleEngine::Rendering::Resources::Texture* p_resource)
+void LittleEngine::ResourceManagement::TextureManager::DestroyResource(LittleEngine::Texture* p_resource)
 {
-	LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(p_resource);
+	LittleEngine::Resources::TextureLoader::Destroy(p_resource);
 }
 
-void LittleEngine::ResourceManagement::TextureManager::ReloadResource(LittleEngine::Rendering::Resources::Texture* p_resource, const std::string& p_path)
+void LittleEngine::ResourceManagement::TextureManager::ReloadResource(LittleEngine::Texture* p_resource, const std::string& p_path)
 {
 	std::string realPath = PathUtil::GetRealPath(p_path);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
-	LittleEngine::Rendering::Resources::Loaders::TextureLoader::Reload(*p_resource, realPath, min, mag, mipmap);
+	LittleEngine::Resources::TextureLoader::Reload(*p_resource, realPath, min, mag, mipmap);
 }

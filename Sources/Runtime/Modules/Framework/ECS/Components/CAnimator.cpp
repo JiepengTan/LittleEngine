@@ -77,7 +77,7 @@ void LittleEngine::CAnimator::OnStart()
     LoadAnimations();
 }
 
-void LittleEngine::CAnimator::CreateBoneActors(const LittleEngine::Rendering::Resources::SkeletonBone& node,
+void LittleEngine::CAnimator::CreateBoneActors(const LittleEngine::Resources::SkeletonBone& node,
                                                           LittleEngine::FMatrix4 parentTransform)
 {
     std::string nodeName = node.name;
@@ -220,18 +220,18 @@ void LittleEngine::CAnimator::OnUpdate(float dt)
     }
 }
 
-void LittleEngine::CAnimator::PlayAnimation(LittleEngine::Rendering::Resources::Animation* pAnimation)
+void LittleEngine::CAnimator::PlayAnimation(LittleEngine::Animation* pAnimation)
 {
     m_curAnim = pAnimation;
     m_currentTime = 0.0f;
 }
 
-void LittleEngine::CAnimator::CalculateBoneTransform(const LittleEngine::Rendering::Resources::SkeletonBone& node,
+void LittleEngine::CAnimator::CalculateBoneTransform(const LittleEngine::Resources::SkeletonBone& node,
                                                                 const LittleEngine::FMatrix4& parentTransform)
 {
     std::string nodeName = node.name;
     LittleEngine::FMatrix4 nodeTransform = node.transformation;
-    LittleEngine::Rendering::Resources::BoneFrames* bone = m_curAnim->FindBone(nodeName);
+    LittleEngine::Resources::BoneFrames* bone = m_curAnim->FindBone(nodeName);
     if (bone)
     {
         bone->Update(m_currentTime);

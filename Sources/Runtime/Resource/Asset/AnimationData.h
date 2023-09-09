@@ -7,7 +7,7 @@
 
 struct aiNodeAnim;
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine::Resources
 {
     struct BoneInfo
     {

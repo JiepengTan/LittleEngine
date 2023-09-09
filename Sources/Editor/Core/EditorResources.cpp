@@ -16,28 +16,28 @@
 
 LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
 {
-	using namespace LittleEngine::Rendering::Resources::Loaders;
+	using namespace LittleEngine::Resources;
 
 	std::string buttonsFolder	= p_editorAssetsPath + "Textures\\Buttons\\";
 	std::string iconsFolder		= p_editorAssetsPath + "Textures\\Icons\\";
 	std::string modelsFolder	= p_editorAssetsPath + "Models\\";
 	std::string shadersFolder	= p_editorAssetsPath + "Shaders\\";
 
-	LittleEngine::Rendering::Resources::Parsers::EModelParserFlags modelParserFlags = LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::NONE;
+	LittleEngine::Resources::EModelParserFlags modelParserFlags = LittleEngine::Resources::EModelParserFlags::NONE;
 
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::TRIANGULATE;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GEN_SMOOTH_NORMALS;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_MESHES;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::OPTIMIZE_GRAPH;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::FIND_INSTANCES;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::CALC_TANGENT_SPACE;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::JOIN_IDENTICAL_VERTICES;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::DEBONE;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::FIND_INVALID_DATA;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GEN_UV_COORDS;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::PRE_TRANSFORM_VERTICES;
-	modelParserFlags |= LittleEngine::Rendering::Resources::Parsers::EModelParserFlags::GLOBAL_SCALE;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::TRIANGULATE;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::GEN_SMOOTH_NORMALS;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::OPTIMIZE_MESHES;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::OPTIMIZE_GRAPH;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::FIND_INSTANCES;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::CALC_TANGENT_SPACE;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::JOIN_IDENTICAL_VERTICES;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::DEBONE;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::FIND_INVALID_DATA;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::GEN_UV_COORDS;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::PRE_TRANSFORM_VERTICES;
+	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::GLOBAL_SCALE;
 
 	LittleEngine::Rendering::Settings::ETextureFilteringMode firstFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
 	LittleEngine::Rendering::Settings::ETextureFilteringMode secondFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
@@ -172,7 +172,7 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	/* From memory */
 	{
 		std::vector<uint64_t> raw = EMPTY_TEXTURE;
-		m_textures["Empty_Texture"] = LittleEngine::Rendering::Resources::Loaders::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
+		m_textures["Empty_Texture"] = LittleEngine::Resources::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
 		GUIUtil::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
 	}
 }
@@ -180,22 +180,22 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 LittleEngine::Editor::Core::EditorResources::~EditorResources()
 {
 	for (auto[id, texture] : m_textures)
-		LittleEngine::Rendering::Resources::Loaders::TextureLoader::Destroy(texture);
+		LittleEngine::Resources::TextureLoader::Destroy(texture);
 
 	for (auto [id, mesh] : m_models)
-		LittleEngine::Rendering::Resources::Loaders::ModelLoader::Destroy(mesh);
+		LittleEngine::Resources::ModelLoader::Destroy(mesh);
 
 	for (auto [id, shader] : m_shaders)
-		LittleEngine::Rendering::Resources::Loaders::ShaderLoader::Destroy(shader);
+		LittleEngine::Resources::ShaderLoader::Destroy(shader);
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Editor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
+LittleEngine::Texture* LittleEngine::Editor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
 {
 	using namespace LittleEngine::Utils;
 	return GetTexture("Icon_" + PathParser::FileTypeToString(PathParser::GetFileType(p_filename)));
 }
 
-LittleEngine::Rendering::Resources::Texture* LittleEngine::Editor::Core::EditorResources::GetTexture(const std::string& p_id)
+LittleEngine::Texture* LittleEngine::Editor::Core::EditorResources::GetTexture(const std::string& p_id)
 {
 	if (m_textures.find(p_id) != m_textures.end())
 		return m_textures.at(p_id);
@@ -203,7 +203,7 @@ LittleEngine::Rendering::Resources::Texture* LittleEngine::Editor::Core::EditorR
 	return nullptr;
 }
 
-LittleEngine::Rendering::Resources::Model* LittleEngine::Editor::Core::EditorResources::GetModel(const std::string& p_id)
+LittleEngine::Model* LittleEngine::Editor::Core::EditorResources::GetModel(const std::string& p_id)
 {
 	if (m_models.find(p_id) != m_models.end())
 		return m_models.at(p_id);
@@ -211,7 +211,7 @@ LittleEngine::Rendering::Resources::Model* LittleEngine::Editor::Core::EditorRes
 	return nullptr;
 }
 
-LittleEngine::Rendering::Resources::Shader* LittleEngine::Editor::Core::EditorResources::GetShader(const std::string& p_id)
+LittleEngine::Shader* LittleEngine::Editor::Core::EditorResources::GetShader(const std::string& p_id)
 {
 	if (m_shaders.find(p_id) != m_shaders.end())
 		return m_shaders.at(p_id);

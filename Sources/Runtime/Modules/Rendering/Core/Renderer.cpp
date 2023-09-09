@@ -210,7 +210,7 @@ void LittleEngine::Rendering::Core::Renderer::ClearFrameInfo()
 	m_frameInfo.polyCount		= 0;
 }
 
-void LittleEngine::Rendering::Core::Renderer::Draw(Resources::IMesh& p_mesh, Settings::EPrimitiveMode p_primitiveMode, uint32_t p_instances)
+void LittleEngine::Rendering::Core::Renderer::Draw(IMesh& p_mesh, Settings::EPrimitiveMode p_primitiveMode, uint32_t p_instances)
 {
 	if (p_instances > 0)
 	{
@@ -241,9 +241,9 @@ void LittleEngine::Rendering::Core::Renderer::Draw(Resources::IMesh& p_mesh, Set
 	}
 }
 
-std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> LittleEngine::Rendering::Core::Renderer::GetMeshesInFrustum
+std::vector<std::reference_wrapper<LittleEngine::Mesh>> LittleEngine::Rendering::Core::Renderer::GetMeshesInFrustum
 (
-	const LittleEngine::Rendering::Resources::Model& p_model,
+	const LittleEngine::Model& p_model,
 	const LittleEngine::Rendering::Geometry::BoundingSphere& p_modelBoundingSphere,
 	const LittleEngine::FTransform& p_modelTransform,
 	const LittleEngine::Rendering::Data::Frustum& p_frustum,
@@ -254,7 +254,7 @@ std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> Li
 
 	if (!frustumPerModel || p_frustum.BoundingSphereInFrustum(p_modelBoundingSphere, p_modelTransform))
 	{
-		std::vector<std::reference_wrapper<LittleEngine::Rendering::Resources::Mesh>> result;
+		std::vector<std::reference_wrapper<LittleEngine::Mesh>> result;
 
 		const bool frustumPerMesh = LittleEngine::Rendering::Settings::IsFlagSet(Settings::ECullingOptions::FRUSTUM_PER_MESH, p_cullingOptions);
 

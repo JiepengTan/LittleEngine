@@ -14,16 +14,16 @@
 
 
 namespace LittleEngine::Rendering::Buffers { class ShadowmapBuffer; }
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
-	namespace Loaders { class TextureLoader; }
+	namespace Resources { class TextureLoader; }
 
 	/**
 	* OpenGL texture wrapper
 	*/
 	class Texture
 	{
-		friend class Loaders::TextureLoader;
+		friend class Resources::TextureLoader;
 		friend class LittleEngine::Rendering::Buffers::ShadowmapBuffer;
 	public:
 		/**
@@ -39,7 +39,8 @@ namespace LittleEngine::Rendering::Resources
 
 	private:
 		Texture(uint32_t p_id);
-		Texture(const std::string p_path, uint32_t p_id, uint32_t p_width, uint32_t p_height, uint32_t p_bpp, Settings::ETextureFilteringMode p_firstFilter, Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		Texture(const std::string p_path, uint32_t p_id, uint32_t p_width, uint32_t p_height, uint32_t p_bpp,
+		        Rendering::Settings::ETextureFilteringMode p_firstFilter, Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 		~Texture() = default;
 
 	public:
@@ -47,8 +48,8 @@ namespace LittleEngine::Rendering::Resources
 		const uint32_t width;
 		const uint32_t height;
 		const uint32_t bitsPerPixel;
-		const Settings::ETextureFilteringMode firstFilter;
-		const Settings::ETextureFilteringMode secondFilter;
+		const Rendering::Settings::ETextureFilteringMode firstFilter;
+		const Rendering::Settings::ETextureFilteringMode secondFilter;
 		const std::string path;
 		const bool isMimapped;
 	};

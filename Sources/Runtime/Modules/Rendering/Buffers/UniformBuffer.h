@@ -12,7 +12,7 @@
 #include "Modules/Rendering/Context/Driver.h"
 #include "Modules/Rendering/Buffers/EAccessSpecifier.h"
 
-namespace LittleEngine::Rendering::Resources { class Shader; }
+namespace LittleEngine { class Shader; }
 
 namespace LittleEngine::Rendering::Buffers
 {
@@ -73,7 +73,7 @@ namespace LittleEngine::Rendering::Buffers
 		* @param p_uniformBlockLocation
 		* @param p_bindingPoint
 		*/
-		static void BindBlockToShader(LittleEngine::Rendering::Resources::Shader& p_shader, uint32_t p_uniformBlockLocation, uint32_t p_bindingPoint = 0);
+		static void BindBlockToShader(LittleEngine::Shader& p_shader, uint32_t p_uniformBlockLocation, uint32_t p_bindingPoint = 0);
 
 		/**
 		* Bind a block identified by the given name to the given shader
@@ -81,14 +81,14 @@ namespace LittleEngine::Rendering::Buffers
 		* @param p_name
 		* @param p_bindingPoint
 		*/
-		static void BindBlockToShader(LittleEngine::Rendering::Resources::Shader& p_shader, const std::string& p_name, uint32_t p_bindingPoint = 0);
+		static void BindBlockToShader(LittleEngine::Shader& p_shader, const std::string& p_name, uint32_t p_bindingPoint = 0);
 
 		/**
 		* Return the location of the block (ID)
 		* @param p_shader
 		* @param p_name
 		*/
-		static uint32_t GetBlockLocation(LittleEngine::Rendering::Resources::Shader& p_shader, const std::string& p_name);
+		static uint32_t GetBlockLocation(LittleEngine::Shader& p_shader, const std::string& p_name);
 
 	private:
 		uint32_t m_bufferID;

@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace LittleEngine::Rendering::Resources::Parsers
+namespace LittleEngine::Resources
 {
 	/**
 	* Some flags that can be used for model parsing

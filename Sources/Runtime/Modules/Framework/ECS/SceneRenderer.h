@@ -28,7 +28,7 @@ namespace LittleEngine
 	class SceneRenderer : public Rendering::Core::Renderer
 	{
 	public:
-		using Drawable				= std::tuple<FMatrix4, Rendering::Resources::Mesh*, Resources::Material*, FMatrix4, std::vector<FMatrix4>*  >;
+		using Drawable				= std::tuple<FMatrix4, Mesh*, Material*, FMatrix4, std::vector<FMatrix4>*  >;
 		using OpaqueDrawables		= std::multimap<float, Drawable, std::less<float>>;
 		using TransparentDrawables	= std::multimap<float, Drawable, std::greater<float>>;
 
@@ -79,7 +79,7 @@ namespace LittleEngine
 			const FVector3& p_cameraPosition,
 			const Rendering::LowRenderer::Camera& p_camera,
 			const Rendering::Data::Frustum* p_customFrustum = nullptr,
-			Resources::Material* p_defaultMaterial = nullptr
+			Material* p_defaultMaterial = nullptr
 		);
 		/**
 			* Draw shadow map using the given scene 
@@ -107,7 +107,7 @@ namespace LittleEngine
 			const Scene& p_scene,
 			const FVector3& p_cameraPosition,
 			const Rendering::Data::Frustum& p_frustum,
-			Resources::Material* p_defaultMaterial
+			Material* p_defaultMaterial
 		);
 
 		/**
@@ -120,7 +120,7 @@ namespace LittleEngine
 		(
 			const Scene& p_scene,
 			const FVector3& p_cameraPosition,
-			Resources::Material* p_defaultMaterial
+			Material* p_defaultMaterial
 		);
 
 		/**
@@ -136,7 +136,7 @@ namespace LittleEngine
 		* @param p_modelMatrix
 		* @param p_defaultMaterial (Used if the given material has no shader attached)
 		*/
-		void DrawModelWithSingleMaterial(Rendering::Resources::Model& p_model, Resources::Material& p_material, FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial = nullptr);
+		void DrawModelWithSingleMaterial(Model& p_model, Material& p_material, FMatrix4 const* p_modelMatrix, Material* p_defaultMaterial = nullptr);
 
 		/**
 		* Draw the model using the given materials
@@ -144,7 +144,7 @@ namespace LittleEngine
 		* @param p_modelMatrix
 		* @param p_defaultMaterial (Used when a submesh material has no shader attached)
 		*/
-		void DrawModelWithMaterials(Rendering::Resources::Model& p_model, std::vector<Resources::Material*> p_materials, FMatrix4 const* p_modelMatrix, Resources::Material* p_defaultMaterial = nullptr);
+		void DrawModelWithMaterials(Model& p_model, std::vector<Material*> p_materials, FMatrix4 const* p_modelMatrix, Material* p_defaultMaterial = nullptr);
 
 		/**
 		* Try drawing a mesh using the given material (Fails if the material has no shader attached)
@@ -152,7 +152,7 @@ namespace LittleEngine
 		* @param p_material
 		* @param p_modelMatrix (If set to nullptr, no data will be sent to the GPU)
 		*/
-		void DrawMesh(Rendering::Resources::Mesh& p_mesh, Resources::Material& p_material, FMatrix4 const* p_modelMatrix,std::vector<FMatrix4>* p_boneMatrixAry = nullptr);
+		void DrawMesh(Mesh& p_mesh, Material& p_material, FMatrix4 const* p_modelMatrix,std::vector<FMatrix4>* p_boneMatrixAry = nullptr);
 
 		/**
 		* Register the given function as the model matrix sender.
@@ -176,7 +176,7 @@ namespace LittleEngine
 		std::function<void(FMatrix4)> m_modelMatrixSender;
 		std::function<void(FMatrix4)> m_userMatrixSender;
 		std::unique_ptr<Rendering::Buffers::ShadowmapBuffer> m_shadowmapBuffer = nullptr;
-		Rendering::Resources::Texture* m_emptyTexture = nullptr;
+		Texture* m_emptyTexture = nullptr;
 		FMatrix4 m_lightSpaceVPMatrix;
 		FVector4 m_lightInfo;
 		bool m_isGPUSkin;

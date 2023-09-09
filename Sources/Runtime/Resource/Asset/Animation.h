@@ -5,23 +5,20 @@
 #include "Resource/Asset/AnimationData.h"
 #include "Resource/Loader/ModelLoader.h"
 
-namespace LittleEngine::Rendering::Resources
-{
-    class AnimationLoader;
-}
+namespace LittleEngine::Resources{class AnimationLoader;}
 
 
-namespace LittleEngine::Rendering::Resources
+namespace LittleEngine
 {
 
     class Animation
     {
-        friend class AnimationLoader;
+        friend class Resources::AnimationLoader;
     public:
         Animation() = default;
         ~Animation() = default;
-        BoneFrames* FindBone(const std::string& name);
-        void AddBone(const BoneFrames& bone){m_Bones.push_back(bone);}
+        Resources::BoneFrames* FindBone(const std::string& name);
+        void AddBone(const Resources::BoneFrames& bone){m_Bones.push_back(bone);}
         
         inline int GetTicksPerSecond() { return m_TicksPerSecond; }
         inline float GetDuration() { return m_Duration; }  
@@ -30,19 +27,19 @@ namespace LittleEngine::Rendering::Resources
 
     public:
 
-        std::map<std::string, BoneInfo>* GetBoneInfoMap() { return m_name2BoneInfo; }
+        std::map<std::string, Resources::BoneInfo>* GetBoneInfoMap() { return m_name2BoneInfo; }
         int* GetBoneCounter() { return m_BoneCounter; }
         int GetBoneCount() { return *m_BoneCounter; }
         
-        SkeletonBone& GetSkeletonRoot() { return m_skeletonRoot; }
+        Resources::SkeletonBone& GetSkeletonRoot() { return m_skeletonRoot; }
         std::string path;
         float m_Duration;
         int m_TicksPerSecond;
     public:
-        std::vector<BoneFrames> m_Bones;
-        SkeletonBone m_skeletonRoot;
+        std::vector<Resources::BoneFrames> m_Bones;
+        Resources::SkeletonBone m_skeletonRoot;
         
-        std::map<std::string, BoneInfo>* m_name2BoneInfo;
+        std::map<std::string, Resources::BoneInfo>* m_name2BoneInfo;
         int* m_BoneCounter ;
     };
 }

@@ -29,7 +29,7 @@ namespace LittleEngine
 	{
 		REFLECTION_COMPONENT_BODY(CMaterialRenderer)
 	public:
-		using MaterialList = std::vector<LittleEngine::Resources::Material*>;
+		using MaterialList = std::vector<LittleEngine::Material*>;
 		using MaterialField = std::vector<std::array<LittleEngine::UI::Widgets::AWidget*, 3>>;
 
 		/**
@@ -46,20 +46,20 @@ namespace LittleEngine
 		* Fill the material renderer with the given material
 		* @param p_material
 		*/
-		void FillWithMaterial(LittleEngine::Resources::Material& p_material);
+		void FillWithMaterial(LittleEngine::Material& p_material);
 
 		/**
 		* Defines the material to use for the given index
 		* @param p_index
 		* @param p_material
 		*/
-		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Resources::Material* p_material);
+		void SetMaterialAtIndex(uint8_t p_index, LittleEngine::Material* p_material);
 		void SetMaterialAtIndex(uint8_t p_index,const std::string& p_matPath);
 		/**
 		* Returns the material to use at index
 		* @param p_index
 		*/
-		LittleEngine::Resources::Material* GetMaterialAtIndex(uint8_t p_index);
+		LittleEngine::Material* GetMaterialAtIndex(uint8_t p_index);
 
 		/**
 		* Remove the material at index
@@ -71,7 +71,7 @@ namespace LittleEngine
 		* Remove the material by instance
 		* @param p_instance
 		*/
-		void RemoveMaterialByInstance(LittleEngine::Resources::Material& p_instance);
+		void RemoveMaterialByInstance(LittleEngine::Material& p_instance);
 
 		/**
 		* Remove every materials
@@ -131,7 +131,7 @@ namespace LittleEngine
 		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
 
 	private:
-		std::vector<LittleEngine::Resources::Material*> m_materials;
+		std::vector<LittleEngine::Material*> m_materials;
 		MaterialField  m_materialFields;
 		META(Enable)
 		std::vector<std::string> m_materialNames;

@@ -12,18 +12,18 @@
 #include "Modules/Rendering/Geometry/Vertex.h"
 #include "Resource/Parser/IModelParser.h"
 
-namespace LittleEngine::Rendering::Resources
+struct aiAnimation;
+struct aiMesh;
+struct aiNode;
+namespace LittleEngine
 {
 	class Animation;
 	class Model;
 	class Mesh;
-	struct SkeletonBone;
 }
-struct aiAnimation;
-struct aiMesh;
-struct aiNode;
-namespace LittleEngine::Rendering::Resources::Parsers
+namespace LittleEngine::Resources
 {
+	struct SkeletonBone;
 	/**
 	* A simple class to load assimp model data (Vertices only)
 	*/
@@ -47,15 +47,15 @@ namespace LittleEngine::Rendering::Resources::Parsers
 		) override;
 		bool LoadAnimation(Animation* p_anim, const std::string& p_fileName,EModelParserFlags p_parserFlags);
 	private:
-		void ReadMissingBones(LittleEngine::Rendering::Resources::Animation* p_anim, aiAnimation* animation);
+		void ReadMissingBones(LittleEngine::Animation* p_anim, aiAnimation* animation);
 		void ReadHierarchyData(SkeletonBone& p_dest, const struct aiNode* src);
 		void ProcessMaterials(const struct aiScene* p_scene, std::vector<std::string>& p_materials);;
 		void ProcessNode(Model* p_model,void* p_transform, struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Mesh*>& p_meshes);
 		void NormalizedBoneWeights(float* weightPtr, unsigned vertexCount);
-		void ProcessVertexBoneInfo(LittleEngine::Rendering::Resources::Model* p_model, aiMesh* p_mesh,LittleEngine::Rendering::Geometry::VertexDataBuffer& p_verticesBuffer);
+		void ProcessVertexBoneInfo(LittleEngine::Model* p_model, aiMesh* p_mesh,LittleEngine::Rendering::Geometry::VertexDataBuffer& p_verticesBuffer);
 		void NormalizedBoneWeights(aiMesh* p_mesh, float* weightPtr);
-		void ProcessMesh(LittleEngine::Rendering::Resources::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene,
-		                 Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices);
+		void ProcessMesh(LittleEngine::Model* p_model,void* p_transform, struct aiMesh* p_mesh, const struct aiScene* p_scene,
+		                 Rendering::Geometry::VertexDataBuffer& p_verticesBuffer, std::vector<uint32_t>& p_outIndices);
 	
 	private:
 		std::map<std::string, SkeletonBone> m_name2Bone ;
