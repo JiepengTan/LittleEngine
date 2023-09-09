@@ -138,12 +138,13 @@ namespace LittleEngine
         {
             m_parentID = k_invalidID;
             transform->SetParent(nullptr);
+            m_scene->OnActorDetach(m_actorID,m_parentID);
         }else
         {
             m_parentID = p_parent->m_actorID;
             transform->SetParent(p_parent->transform);
             p_parent->m_childrenIds.emplace(m_actorID);
-            Scene::AttachEvent.Invoke(m_scene->GetActor(m_actorID), p_parent);
+            m_scene->OnActorAttach(m_actorID,m_parentID);
         }
         /* Define the given parent as the new parent */
 

@@ -207,6 +207,13 @@ namespace LittleEngine::Editor
         {
             AddActorByInstance(actor);
         }
+        for (auto actor : actors)
+        {
+            if(actor->HasParent())
+            {
+                AttachActorToParent(actor);
+            }
+        }
     }
     void Panels::Hierarchy::Clear()
     {
