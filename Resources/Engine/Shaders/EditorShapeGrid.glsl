@@ -39,5 +39,6 @@ float AlphaFromAttenuation()
 
 void main()
 {
-	FRAGMENT_COLOR = vec4(color, AlphaFromAttenuation());
+	//FRAGMENT_COLOR = vec4(color, AlphaFromAttenuation());
+	FRAGMENT_COLOR = vec4(color, 1.0);
 }

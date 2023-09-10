@@ -275,8 +275,10 @@ namespace LittleEngine::Editor
 
         for (auto cameraId : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().cameras)
         {
-            auto camera = m_context.sceneManager.GetCurrentScene()->GetActor(cameraId)->GetComponent<CModelRenderer>();
-            auto actor = camera->GetActor();
+            auto cameraModel = m_context.sceneManager.GetCurrentScene()->GetActor(cameraId)->GetComponent<CModelRenderer>();
+            if(cameraModel == nullptr)
+                continue;
+            auto actor = cameraModel->GetActor();
 
             if (actor->IsActive())
             {

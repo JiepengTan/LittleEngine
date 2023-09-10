@@ -35,6 +35,8 @@
 #include "../Editor/Panels/Inspector.h"
 #include "../Editor/Panels/ProjectSettings.h"
 #include "../Editor/Panels/MaterialEditor.h"
+#include "Core/Tools/Filesystem/FileUtil.h"
+#include "Core/Tools/Utils/StringUtil.h"
 #include "Resource/Data/ResIncludeScene.h"
 
 namespace LittleEngine::Editor
@@ -157,14 +159,15 @@ namespace LittleEngine::Editor
                               std::filesystem::copy_options::recursive |
                               std::filesystem::copy_options::overwrite_existing);
 
-        // refresh shaders
-        Resources::ShaderLoader::Recompile(
-            *m_context.shaderManager[":Shaders\\Standard.glsl"], "Data\\Engine\\Shaders\\Standard.glsl");
-        Resources::ShaderLoader::Recompile(
-            *m_context.shaderManager[":Shaders\\StandardPBR.glsl"], "Data\\Engine\\Shaders\\StandardPBR.glsl");
-        Resources::ShaderLoader::Recompile(
-            *m_context.shaderManager[":Shaders\\ShadowCaster.glsl"], "Data\\Engine\\Shaders\\ShadowCaster.glsl");
-    }
+        auto reloadShader = [this](const std::string& shaderName){
+            Resources::ShaderLoader::Recompile(
+        *m_context.shaderManager[":Shaders\\"+shaderName +".glsl"], "../../Resources//Engine/Shaders/"+shaderName+ ".glsl");
+        };
+        PathUtil::WalkFileName(srcDir,"(.+).glsl",[&reloadShader](const std::string& file){
+            reloadShader(StringUtil::Replace(file,".glsl",""));
+        });
+        
+     }
 
     std::optional<std::string> Core::EditorActions::SelectBuildFolder()
     {
