@@ -297,7 +297,9 @@ namespace LittleEngine::Editor
         for (auto lightId : scene->GetFastAccessComponents().lights)
         {
             auto actor = scene->GetActor(lightId);
+            if(actor == nullptr) continue;
             auto light = actor->GetComponent<CLight>();
+            if(light == nullptr) continue;
             if (actor->IsActive())
             {
                 auto& model = *m_context.editorResources->GetModel("Vertical_Plane");

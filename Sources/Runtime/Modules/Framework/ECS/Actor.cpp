@@ -440,11 +440,11 @@ namespace LittleEngine
                 actor->RecursiveWasActiveUpdate();
         }
     }
-    void Actor::NotifyComponentAdd(CompPtr p_comp)
+    void Actor::NotifyComponentAdd(CompPtr p_comp)const
     {
         m_scene->OnComponentAdded(p_comp);
     }
-    void Actor::NotifyComponentRemoved(CompPtr p_comp)
+    void Actor::NotifyComponentRemoved(CompPtr p_comp) const
     {
         m_scene->OnComponentRemoved(p_comp);
     }
