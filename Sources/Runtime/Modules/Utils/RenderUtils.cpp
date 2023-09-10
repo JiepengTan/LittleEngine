@@ -14,44 +14,12 @@ LittleEngine::Material* LittleEngine::RenderUtils::GetOrCreateDebugQuadMat()
 {
     if(_DebugMats.size()>0) return _DebugMats[0];
     auto vertstr = R"(
-#version 430 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aTexCoords;
-out vec2 TexCoords;
-void main()
-{
-    TexCoords = aTexCoords;
-    vec3 pos= aPos;
-    pos.xy *= 0.5;
-    pos.xy += 0.5;
-    gl_Position = vec4(pos, 1.0);
-})";
+)";
 
     auto fragStr = R"(
-#version 430 core
-out vec4 FragColor;
+)";
 
-in vec2 TexCoords;
-uniform sampler2D u_DebugTex;
-uniform float near_plane;
-uniform float far_plane;
-
-// required when using a perspective projection matrix
-float LinearizeDepth(float depth)
-{
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));	
-}
-
-void main()
-{             
-    float texVal = texture(u_DebugTex, TexCoords).r;
-    // FragColor = vec4(vec3(LinearizeDepth(texVal) / far_plane), 1.0); // perspective
-    FragColor = vec4(texVal,texVal,texVal, 1.0); // orthographic
-    //FragColor = vec4(1,0,0,1);
-})";
-
-    auto shader	= LittleEngine::Resources::ShaderLoader::CreateFromSource(vertstr, fragStr,"DebugQuad");
+    auto shader	= ResourcesUtils::LoadShader(":Shaders\\DebugQuad.glsl"); 
     auto mat = new LittleEngine::Material();
     mat->SetDepthTest(false);
     mat->SetBlendable(false);
