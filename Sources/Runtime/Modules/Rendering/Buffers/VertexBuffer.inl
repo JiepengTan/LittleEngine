@@ -19,8 +19,7 @@ namespace LittleEngine::Rendering::Buffers
 		glGenBuffers(1, &m_bufferID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
 		glBufferData(GL_ARRAY_BUFFER, p_elementCount *p_elemTypeSize, p_data, GL_STATIC_DRAW);
-		std::cout<<"GL_ARRAY_BUFFER m_bufferID ="<<m_bufferID<< " VertexBuffer ctor  ptr= "<<(long)p_data<<" size =" << p_elementCount *p_elemTypeSize<< std::endl;
-      
+		//std::cout<<"GL_ARRAY_BUFFER m_bufferID ="<<m_bufferID<< " VertexBuffer ctor  ptr= "<<(long)p_data<<" size =" << p_elementCount *p_elemTypeSize<< std::endl;
 	}
 	
 	template <class T>
@@ -54,7 +53,7 @@ namespace LittleEngine::Rendering::Buffers
 	inline void VertexBuffer<T>::Bind()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
-		std::cout<<"Bind GL_ARRAY_BUFFER m_bufferID ="<<m_bufferID<< std::endl;
+		//std::cout<<"Bind GL_ARRAY_BUFFER m_bufferID ="<<m_bufferID<< std::endl;
 	}
 
 	template <class T>

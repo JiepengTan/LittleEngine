@@ -20,8 +20,7 @@ LittleEngine::Rendering::Geometry::VertexDataBuffer::VertexDataBuffer(int p_size
         {
             dataPtrs[(int)element.pos] = malloc(count * element.MemorySize());
             dataLen[(int)element.pos] =count * element.elemCount;
-            
-            std::cout<<(int)element.pos << " alloc " << (count * element.MemorySize())  <<" ptr= " << (long)(dataPtrs[(int)element.pos])<< std::endl;
+            //std::cout<<(int)element.pos << " alloc " << (count * element.MemorySize())  <<" ptr= " << (long)(dataPtrs[(int)element.pos])<< std::endl;
         }
     }
 }
@@ -32,7 +31,7 @@ LittleEngine::Rendering::Geometry::VertexDataBuffer::~VertexDataBuffer()
     {
         if (dataPtrs[i] != nullptr)
         {
-            std::cout<<i << " free ptr " << (long)dataPtrs[i]<< std::endl;
+            //std::cout<<i << " free ptr " << (long)dataPtrs[i]<< std::endl;
             free(dataPtrs[i]);
         }
         dataPtrs[i] = nullptr;

@@ -18,7 +18,6 @@ namespace LittleEngine::Rendering::Buffers
 		p_vertexBuffer.Bind();
 		glEnableVertexAttribArray(p_attribute);
 		glVertexAttribPointer(static_cast<GLuint>(p_attribute), static_cast<GLint>(p_count), static_cast<GLenum>(p_type), GL_FALSE, static_cast<GLsizei>(p_stride), reinterpret_cast<const GLvoid*>(p_offset));
-		std::cout<< " BindAttribute  VertexBufferId= p_attribute= "<<p_attribute <<"  p_count= " << p_count <<"  p_type= " << (int)p_type << " p_stride= " << p_stride<< " p_offset= " << p_offset << std::endl;
-	
+		//std::cout<< " BindAttribute  VertexBufferId= p_attribute= "<<p_attribute <<"  p_count= " << p_count <<"  p_type= " << (int)p_type << " p_stride= " << p_stride<< " p_offset= " << p_offset << std::endl;
 	}
 }

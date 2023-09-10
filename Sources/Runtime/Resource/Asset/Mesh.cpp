@@ -36,7 +36,7 @@ LittleEngine::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vect
 		auto ptr  = p_vertices.GetDataPtr(info.pos);
 		if(ptr != nullptr)
 		{
-			std::cout<< " create vertexBuffer ctor  ptr= "<<(long)ptr<<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
+			//std::cout<< " create vertexBuffer ctor  ptr= "<<(long)ptr<<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
 			m_vertexBuffer[(int)info.pos] = std::make_unique<Buffers::VertexBuffer<float>>(ptr, m_vertexCount * info.elemCount,  info.elemTypeSize);
 		}
 	}
@@ -71,7 +71,7 @@ LittleEngine::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vect
 		if(m_vertexBuffer[(int)info.pos] != nullptr)
 		{
 			Buffers::VertexBuffer<float>& ptr = *m_vertexBuffer[(int)info.pos];
-			std::cout<< " BindAttribute  VertexBufferId= "<<ptr.GetID() <<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
+			//std::cout<< " BindAttribute  VertexBufferId= "<<ptr.GetID() <<"  idx " << i << " info.pos= " << (int)info.pos << std::endl;
 			m_vertexArray.BindAttribute(i, ptr,  info.elemType, info.elemCount, info.MemorySize(), 0);
 		}
 	}
