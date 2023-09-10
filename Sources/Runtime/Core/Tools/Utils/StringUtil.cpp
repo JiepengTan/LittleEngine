@@ -69,20 +69,22 @@ namespace LittleEngine
         return true;
     }
 
-    std::string StringUtil::Replace(std::string& source_string, std::string sub_string, const std::string new_string)
+    std::string StringUtil::Replace(const std::string& source_string,const  std::string& sub_string, const std::string& new_string)
     {
         std::string::size_type pos = 0;
-        while ((pos = source_string.find(sub_string)) != std::string::npos)
+        auto str = source_string;
+        while ((pos = str.find(sub_string)) != std::string::npos)
         {
-            source_string.replace(pos, sub_string.length(), new_string);
+            str.replace(pos, sub_string.length(), new_string);
         }
-        return source_string;
+        return str;
     }
 
-    std::string StringUtil::Replace(std::string& source_string, char taget_char, const char new_char)
+    std::string StringUtil::Replace(const std::string& source_string, char taget_char, const char new_char)
     {
-        std::replace(source_string.begin(), source_string.end(), taget_char, new_char);
-        return source_string;
+        auto str = source_string;
+        std::replace(str.begin(), str.end(), taget_char, new_char);
+        return str;
     }
 
     std::string StringUtil::ToUpper(std::string& source_string)
