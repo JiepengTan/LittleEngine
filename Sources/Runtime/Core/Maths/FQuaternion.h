@@ -19,10 +19,10 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a Quaternion with float precision
 	*/
-	REFLECTION_TYPE(FQuaternion)
+	REFLECTION_STRUCT_TYPE(FQuaternion)
 	STRUCT(FQuaternion, Fields)
 	{
-		REFLECTION_BODY(FQuaternion)
+		REFLECTION_STRUCT_BODY(FQuaternion)
 	public:
 		FFloat x;
 		FFloat y;

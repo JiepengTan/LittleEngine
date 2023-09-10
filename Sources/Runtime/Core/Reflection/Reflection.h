@@ -28,7 +28,7 @@ namespace LittleEngine
     
 
         
-#define REFLECTION_TYPE(class_name) \
+#define REFLECTION_BASIC_TYPE(class_name) \
     namespace Reflection \
     { \
         namespace TypeFieldReflectionOparator \
@@ -37,37 +37,40 @@ namespace LittleEngine
         } \
     };\
 
-    
-#define REFLECTION_BODY(class_name) \
+#define REFLECTION_BASIC_BODY(class_name) \
     friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
     friend class JsonSerializer;\
     public :\
-    virtual std::string ToString();\
-    virtual Json ToJson();\
     static ::LittleEngine::TypeID MetaTypeId;\
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
     static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
+
+#define REFLECTION_TYPE(class_name)\
+    REFLECTION_BASIC_TYPE(class_name)
+
+#define REFLECTION_BODY(class_name) \
+    REFLECTION_BASIC_BODY(class_name)\
+    virtual std::string ToString();\
+    virtual Json ToJson();\
+
     
+#define REFLECTION_STRUCT_TYPE(class_name) \
+    REFLECTION_BASIC_TYPE(class_name)
+
+//!!! pure data type should not define a virtual function
+// that would make compiler create a virtual function table pointer
+// which would cause memory alignment bug !
+#define REFLECTION_STRUCT_BODY(class_name) \
+    REFLECTION_BASIC_BODY(class_name)\
+    std::string ToString();\
+    Json ToJson();\
 
     
 #define REFLECTION_COMPONENT_TYPE(class_name) \
-    namespace Reflection \
-    { \
-        namespace TypeFieldReflectionOparator \
-        { \
-            class Type##class_name##Operator; \
-        } \
-    };\
+    REFLECTION_BASIC_TYPE(class_name)
 
 #define REFLECTION_COMPONENT_BODY(class_name) \
-    friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
-    friend class JsonSerializer;\
-    public :\
-    virtual std::string ToString();\
-    virtual Json ToJson();\
-    static ::LittleEngine::TypeID MetaTypeId;\
-    static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
-    static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}\
+    REFLECTION_BODY(class_name)\
     \
     ##class_name(){\
         _LE_InternalMetaTypeID = class_name##::MetaTypeId;\

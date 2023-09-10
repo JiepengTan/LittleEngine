@@ -15,10 +15,10 @@ namespace LittleEngine
     class Mesh;
     
     // 资源的内部数据，没有文件映射关系
-    REFLECTION_TYPE(ResData)
+    REFLECTION_STRUCT_TYPE(ResData)
     STRUCT(ResData, Fields)
     {
-        REFLECTION_BODY(ResData)
+        REFLECTION_STRUCT_BODY(ResData)
     };
 
     // resource object, There are specific file types that correspond to it

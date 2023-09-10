@@ -28,10 +28,10 @@ namespace LittleEngine
 	* Mathematic representation of a 4x4 Matrix of floats
 	*/
 
-	REFLECTION_TYPE(FMatrix4)
+	REFLECTION_STRUCT_TYPE(FMatrix4)
 	STRUCT(FMatrix4, Fields)
 	{
-		REFLECTION_BODY(FMatrix4)
+		REFLECTION_STRUCT_BODY(FMatrix4)
 	public:
 		FFloat data[16];
 		static const FMatrix4 Identity;

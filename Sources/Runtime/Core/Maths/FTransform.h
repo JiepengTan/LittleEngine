@@ -16,10 +16,10 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a 3D transformation with float precision
 	*/
-	REFLECTION_TYPE(FTransform)
+	REFLECTION_STRUCT_TYPE(FTransform)
 	STRUCT(FTransform, WhiteListFields)
 	{
-		REFLECTION_BODY(FTransform)
+		REFLECTION_STRUCT_BODY(FTransform)
 	public:
 		/**
 		* Create a transform without setting a parent

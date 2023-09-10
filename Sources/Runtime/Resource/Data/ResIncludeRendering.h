@@ -7,10 +7,10 @@ namespace LittleEngine
 {
 
     class Component;
-    REFLECTION_TYPE(ResLight)
+    REFLECTION_STRUCT_TYPE(ResLight)
     STRUCT(ResLight: public ResData, Fields)
     {
-        REFLECTION_BODY(ResLight)
+        REFLECTION_STRUCT_BODY(ResLight)
     public:
         FVector3	        color		= { 1.f, 1.f, 1.f };
         float				intensity	= 1.f;
@@ -21,10 +21,10 @@ namespace LittleEngine
         float				outerCutoff = 15.f;
         float				type		= 0.0f;
     };
-    REFLECTION_TYPE(ResUniformInfo)
+    REFLECTION_STRUCT_TYPE(ResUniformInfo)
     STRUCT(ResUniformInfo: public ResData, Fields)
     {
-        REFLECTION_BODY(ResUniformInfo)
+        REFLECTION_STRUCT_BODY(ResUniformInfo)
     public:
         FVector4    m_data = FVector4::Zero;
         
@@ -63,10 +63,10 @@ namespace LittleEngine
         void SetTexture(Texture* val){ Set(val);}
     };
     
-    REFLECTION_TYPE(ResMaterial)
+    REFLECTION_STRUCT_TYPE(ResMaterial)
     STRUCT(ResMaterial: public ResData, Fields)
     {
-        REFLECTION_BODY(ResMaterial)
+        REFLECTION_STRUCT_BODY(ResMaterial)
     public:
         bool m_blendable		= false;
         bool m_backfaceCulling	= true;

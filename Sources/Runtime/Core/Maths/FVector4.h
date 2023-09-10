@@ -14,10 +14,10 @@ namespace LittleEngine
 	/**
 	* Mathematic representation of a 4D vector of floats
 	*/
-	REFLECTION_TYPE(FVector4)
+	REFLECTION_STRUCT_TYPE(FVector4)
 	STRUCT(FVector4, Fields)
 	{
-		REFLECTION_BODY(FVector4)
+		REFLECTION_STRUCT_BODY(FVector4)
 	public:
 		static const FVector4 One;
 		static const FVector4 Zero;
