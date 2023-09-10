@@ -150,15 +150,10 @@ namespace LittleEngine::Editor
         m_panelsManager.GetPanelAs<Panels::Inspector>("Inspector").Refresh();
         if (m_context.scriptInterpreter->IsOk())
             LOG_INFO("Scripts interpretation succeeded!");
-
-        // copy shaders
+#if DEBUG
         auto srcDir = std::filesystem::canonical("../../Resources//Engine/Shaders").string();
         auto dstDir = std::filesystem::canonical("Data/Engine/Shaders").string();
-        LOG_INFO("copyDir " + srcDir + "=>" + dstDir);
-        std::filesystem::copy(srcDir, dstDir,
-                              std::filesystem::copy_options::recursive |
-                              std::filesystem::copy_options::overwrite_existing);
-
+        // reload shaders
         auto reloadShader = [this](const std::string& shaderName){
             Resources::ShaderLoader::Recompile(
         *m_context.shaderManager[":Shaders\\"+shaderName +".glsl"], "../../Resources//Engine/Shaders/"+shaderName+ ".glsl");
@@ -166,6 +161,20 @@ namespace LittleEngine::Editor
         PathUtil::WalkFileName(srcDir,"(.+).glsl",[&reloadShader](const std::string& file){
             reloadShader(StringUtil::Replace(file,".glsl",""));
         });
+        
+        // copy shaders
+        LOG_INFO("CopyDir Shader from Engine to Demo " + srcDir + "=>" + dstDir);
+        std::filesystem::copy(srcDir, dstDir,
+                              std::filesystem::copy_options::recursive |
+                              std::filesystem::copy_options::overwrite_existing);
+        // copy material
+        srcDir= std::filesystem::canonical("Data/Engine/Materials").string();
+        dstDir = std::filesystem::canonical("../../Resources//Engine/Materials").string();
+        LOG_INFO("CopyDir Material from Demo to Engine " + srcDir + "=>" + dstDir);
+        std::filesystem::copy(srcDir, dstDir,
+                              std::filesystem::copy_options::recursive |
+                              std::filesystem::copy_options::overwrite_existing);
+#endif
         
      }
 
