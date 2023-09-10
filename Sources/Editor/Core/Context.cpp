@@ -54,7 +54,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	ServiceLocator::Provide<TextAssetManager>(textAssetManager);
 
 	
-	LOG_INFO("EditorContext::Init ");
+	LOG_INFO("DebugProgress EditorContext::Init ");
 	
 	/* Settings */
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
@@ -76,19 +76,19 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	device->SetVsync(true);
 	
 	
-	LOG_INFO("EditorContext::create devices ");
+	LOG_INFO("DebugProgress EditorContext::create devices ");
 	/* Graphics context creation */
 	driver = std::make_unique<LittleEngine::Rendering::Context::Driver>(LittleEngine::Rendering::Settings::DriverSettings{ true });
-	LOG_INFO("EditorContext::renderer Init");
+	LOG_INFO("DebugProgress EditorContext::renderer Init");
 	renderer = std::make_unique<LittleEngine::SceneRenderer>(*driver);
 	renderer->SetCapability(LittleEngine::Rendering::Settings::ERenderingCapability::MULTISAMPLE, true);
-	LOG_INFO("EditorContext::shapeDrawer Init");
+	LOG_INFO("DebugProgress EditorContext::shapeDrawer Init");
 	shapeDrawer = std::make_unique<LittleEngine::Rendering::Core::ShapeDrawer>(*renderer);
 
-	LOG_INFO("EditorContext::create_directories Init  ");
+	LOG_INFO("DebugProgress EditorContext::create_directories Init  ");
 	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\");
 	
-	LOG_INFO("EditorContext::uiManager Init  ");
+	LOG_INFO("DebugProgress EditorContext::uiManager Init  ");
 	uiManager = std::make_unique<LittleEngine::UI::Core::UIManager>(window->GetGlfwWindow(), LittleEngine::UI::Styling::EStyle::ALTERNATIVE_DARK);
 	uiManager->LoadFont("Ruda_Big", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
 	uiManager->LoadFont("Ruda_Small", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
@@ -102,20 +102,20 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini"))
 		uiManager->ResetLayout("Config\\layout.ini");
 
-	LOG_INFO("EditorContext::audioEngine Init  ");
+	LOG_INFO("DebugProgress EditorContext::audioEngine Init  ");
 	/* Audio */
 	audioEngine = std::make_unique<LittleEngine::Audio::Core::AudioEngine>(projectAssetsPath);
 	audioPlayer = std::make_unique<LittleEngine::Audio::Core::AudioPlayer>(*audioEngine);
 
-	LOG_INFO("EditorContext::editorResources Init  ");
+	LOG_INFO("DebugProgress EditorContext::editorResources Init  ");
 	/* Editor resources */
 	editorResources = std::make_unique<LittleEngine::Editor::Core::EditorResources>(editorAssetsPath);
 
-	LOG_INFO("EditorContext::physicsEngine Init  ");
+	LOG_INFO("DebugProgress EditorContext::physicsEngine Init  ");
 	/* Physics engine */
 	physicsEngine = std::make_unique<LittleEngine::Physics::Core::PhysicsEngine>(LittleEngine::Physics::Settings::PhysicsSettings{ {0.0f, -9.81f, 0.0f } });
 
-	LOG_INFO("EditorContext::ServiceLocator Init  ");
+	LOG_INFO("DebugProgress EditorContext::ServiceLocator Init  ");
 	/* Service Locator providing */
 	ServiceLocator::Provide<LittleEngine::Physics::Core::PhysicsEngine>(*physicsEngine);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
@@ -124,11 +124,11 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioEngine>(*audioEngine);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioPlayer>(*audioPlayer);
 	
-	LOG_INFO("EditorContext::scriptInterpreter Init  ");
+	LOG_INFO("DebugProgress EditorContext::scriptInterpreter Init  ");
 	/* Scripting */
 	scriptInterpreter = std::make_unique<LittleEngine::Scripting::ScriptInterpreter>(projectScriptsPath);
 
-	LOG_INFO("EditorContext::engineUBO Init  ");
+	LOG_INFO("DebugProgress EditorContext::engineUBO Init  ");
 	engineUBO = std::make_unique<LittleEngine::Rendering::Buffers::UniformBuffer>
 	(
 		/* UBO Data Layout */
@@ -164,7 +164,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 
 	simulatedLightSSBO->SendBlocks<LittleEngine::FMatrix4>(simulatedLights.data(), simulatedLights.size() * sizeof(LittleEngine::FMatrix4));
 
-	LOG_INFO("EditorContext::ApplyProjectSettings  ");
+	LOG_INFO("DebugProgress EditorContext::ApplyProjectSettings  ");
 	ApplyProjectSettings();
 }
 

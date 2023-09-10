@@ -86,13 +86,10 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	m_models["Arrow_Picking"]		= ModelLoader::Create(modelsFolder + "Arrow_Picking.fbx", modelParserFlags);
 	m_models["Camera"]			= ModelLoader::Create(modelsFolder + "Camera.fbx", modelParserFlags);
 
-	LOG_INFO("ResourcesUtils::LoadShader Editors Start");
 	/* Shaders */
 	m_shaders["Grid"]			= ResourcesUtils::LoadShader(":Shaders\\EditorGrid.glsl");
 	m_shaders["Gizmo"]		= ResourcesUtils::LoadShader(":Shaders\\EditorGizmo.glsl");
 	m_shaders["Billboard"]	= ResourcesUtils::LoadShader(":Shaders\\EditorBillboard.glsl");
-
-	LOG_INFO("ResourcesUtils::LoadShader Editors End");
 	
 }
 
