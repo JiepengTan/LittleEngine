@@ -64,19 +64,9 @@ namespace LittleEngine
 		*/
 		void SetIntensity(float p_intensity);
 
-		/**
-		* Serialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnSerialize(ISerializer p_serializer) override;
 
-		/**
-		* Deserialize the component
-		* @param p_doc
-		* @param p_node
-		*/
-		virtual void OnDeserialize(ISerializer p_serializer) override;
+		virtual void OnAfterSceneLoaded(ActorPtr p_actor) override;
+
 
 		/**
 		* Defines how the component should be drawn in the inspector

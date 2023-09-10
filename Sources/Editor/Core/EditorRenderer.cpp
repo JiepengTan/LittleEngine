@@ -227,8 +227,7 @@ namespace LittleEngine::Editor
         /* Render cameras */
         for (auto cameraId : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().cameras)
         {
-            auto camera = scene.GetActor(cameraId)->GetComponent<CModelRenderer>();
-            auto actor = camera->GetActor();
+            auto actor =scene.GetActor(cameraId);
 
             if (actor->IsActive())
             {
@@ -251,9 +250,7 @@ namespace LittleEngine::Editor
 
             for (auto lightId : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
             {
-                auto light = scene.GetActor(lightId)->GetComponent<CModelRenderer>();
-                auto actor = light->GetActor();
-
+                auto actor = scene.GetActor(lightId);
                 if (actor->IsActive())
                     PreparePickingMaterial(actor, m_lightMaterial);
                 auto& model = *m_context.editorResources->GetModel("Vertical_Plane");

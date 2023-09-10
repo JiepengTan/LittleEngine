@@ -25,10 +25,20 @@ namespace LittleEngine
 	* A Renderer capable of rendering stuffs linked with the ECS. It is a convenient class that should be used instead of Rendering::Core::Renderer
 	* when you plan to use the LittleEngine ECS architecture.
 	*/
+
 	class SceneRenderer : public Rendering::Core::Renderer
 	{
 	public:
-		using Drawable				= std::tuple<FMatrix4, Mesh*, Material*, FMatrix4, std::vector<FMatrix4>*  >;
+		class Drawable
+		{
+		public:
+			FMatrix4 modelMatrix;
+			Mesh* mesh;
+			Material* material;
+			FMatrix4 userMatrix;
+			std::vector<FMatrix4>* boneMatrixAry;
+			
+		};
 		using OpaqueDrawables		= std::multimap<float, Drawable, std::less<float>>;
 		using TransparentDrawables	= std::multimap<float, Drawable, std::greater<float>>;
 

@@ -29,7 +29,7 @@ namespace LittleEngine::Rendering::Entities
 		* @param p_type
 		*/
 		Light(LittleEngine::FTransform& p_tranform, Type p_type);
-		void DoInit(LittleEngine::FTransform& p_tranform, Type p_type) ;
+		void DoInit(LittleEngine::FTransform& p_tranform) ;
 		/**
 		* Generate the light matrix, ready to send to the GPU
 		*/

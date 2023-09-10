@@ -19,13 +19,12 @@ uint32_t Pack(const LittleEngine::FVector3& p_toPack)
 LittleEngine::Rendering::Entities::Light::Light(): m_transform()
 {
 }
-void LittleEngine::Rendering::Entities::Light::DoInit(LittleEngine::FTransform& p_tranform, Type p_type) 
+void LittleEngine::Rendering::Entities::Light::DoInit(LittleEngine::FTransform& p_tranform) 
 {
-	type=(static_cast<float>(p_type));
 	m_transform=(&p_tranform);
 }
 LittleEngine::Rendering::Entities::Light::Light(LittleEngine::FTransform& p_tranform, Type p_type) :
-	type(static_cast<float>(p_type)), m_transform(&p_tranform)
+	 m_transform(&p_tranform)
 {
 	
 }

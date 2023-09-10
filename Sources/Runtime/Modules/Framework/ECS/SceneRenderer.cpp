@@ -59,8 +59,8 @@ namespace LittleEngine
         const Scene& p_scene)
     {
         std::vector<FMatrix4> result;
-
-        for (auto light : p_scene.GetLights())
+        auto lights =  p_scene.GetLights();
+        for (auto light :lights)
         {
             if (light->GetActor()->IsActive())
             {
@@ -150,9 +150,9 @@ namespace LittleEngine
             shadowMat->GetShader()->SetUniformMat4("u_LightSpaceMatrix", m_lightSpaceVPMatrix);
             for (const auto& [distance, drawable] : opaqueMeshes)
             {
-                auto& modelMatrix = std::get<0>(drawable);
+                auto& modelMatrix = drawable.modelMatrix;
                 shadowMat->GetShader()->SetUniformMat4("u_Local2World", modelMatrix);
-                auto mesh = std::get<1>(drawable);
+                auto mesh = drawable.mesh;
                 Draw(*mesh, Rendering::Settings::EPrimitiveMode::TRIANGLES, 1);
             }
             shadowMat->UnBind();
@@ -190,13 +190,12 @@ namespace LittleEngine
         // render shadow
 
         DrawShadowmap(p_scene, p_cameraPosition, p_camera, opaqueMeshes);
-        {
-            for (const auto& [distance, drawable] : opaqueMeshes)
-                DrawDrawable(drawable);
+        
+        for (const auto& [distance, drawable] : opaqueMeshes)
+            DrawDrawable(drawable);
 
-            for (const auto& [distance, drawable] : transparentMeshes)
-                DrawDrawable(drawable);
-        }
+        for (const auto& [distance, drawable] : transparentMeshes)
+            DrawDrawable(drawable);
 
         /*
         if(p_camera.m_CameraType == Rendering::Settings::ECameraType ::Game)
@@ -256,7 +255,8 @@ namespace LittleEngine
                             if (material)
                             {
                                 SceneRenderer::Drawable element = {
-                                    transform.GetWorldMatrix(), mesh, material, materialRenderer->GetUserMatrix(),
+                                    transform.GetWorldMatrix(),
+                                    mesh, material, materialRenderer->GetUserMatrix(),
                                     boneAryPtr
                                 };
 
@@ -424,8 +424,8 @@ namespace LittleEngine
 
     void SceneRenderer::DrawDrawable(const Drawable& p_toDraw)
     {
-        m_userMatrixSender(std::get<3>(p_toDraw));
-        DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw), std::get<4>(p_toDraw));
+        m_userMatrixSender(p_toDraw.userMatrix);
+        DrawMesh(*p_toDraw.mesh, *p_toDraw.material, &p_toDraw.modelMatrix, p_toDraw.boneMatrixAry);
     }
 
     void SceneRenderer::DrawModelWithSingleMaterial(

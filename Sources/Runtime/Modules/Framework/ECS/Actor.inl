@@ -23,10 +23,10 @@ namespace LittleEngine
 			LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
 			comp->SetActor(ptr);
 			m_components[comp->GetTypeID()] = comp;
+			comp->OnAwake();
 			NotifyComponentAdd(comp);
 			if (m_playing && IsActive())
 			{
-				comp->OnAwake();
 				comp->OnEnable();
 				comp->OnStart();
 			}		
@@ -59,9 +59,11 @@ namespace LittleEngine
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
 		auto key = T::GetStaticTypeID();
-		if(m_components.count(key) != 0)
+		for (auto comp : m_components)
 		{
-			return std::dynamic_pointer_cast<T>(m_components.at(key));
+			// TODO tanjp use gen child id map to find quickly
+			auto ptr =  std::dynamic_pointer_cast<T>(comp.second);
+			if(ptr != nullptr) return ptr;
 		}
 		return nullptr;
 	}

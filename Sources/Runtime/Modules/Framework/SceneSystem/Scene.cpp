@@ -212,21 +212,33 @@ namespace LittleEngine
     
     void Scene::OnComponentAdded(CompPtr p_compononent)
     {
-        if(p_compononent->GetTypeID() == CModelRenderer::GetStaticTypeID())
+        auto compId = p_compononent->GetTypeID();
+        if(compId == CModelRenderer::GetStaticTypeID())
             m_fastAccessComponents.modelRenderers.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CCamera::GetStaticTypeID())
+        if(compId == CCamera::GetStaticTypeID())
             m_fastAccessComponents.cameras.insert(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CLight::GetStaticTypeID())
+        if(compId == CDirectionalLight::GetStaticTypeID()
+            ||compId == CSpotLight::GetStaticTypeID()
+            ||compId == CPointLight::GetStaticTypeID()
+            ||compId == CAmbientBoxLight::GetStaticTypeID()
+            ||compId == CAmbientSphereLight::GetStaticTypeID()
+            )
             m_fastAccessComponents.lights.insert(p_compononent->GetActor()->GetID());
     }
 
     void Scene::OnComponentRemoved(CompPtr p_compononent)
     {
-        if(p_compononent->GetTypeID() == CModelRenderer::GetStaticTypeID())
+        auto compId = p_compononent->GetTypeID();
+        if(compId == CModelRenderer::GetStaticTypeID())
             m_fastAccessComponents.modelRenderers.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CCamera::GetStaticTypeID())
+        if(compId == CCamera::GetStaticTypeID())
             m_fastAccessComponents.cameras.erase(p_compononent->GetActor()->GetID());
-        if(p_compononent->GetTypeID() == CLight::GetStaticTypeID())
+        if(compId ==CDirectionalLight::GetStaticTypeID()
+            ||compId == CSpotLight::GetStaticTypeID()
+            ||compId == CPointLight::GetStaticTypeID()
+            ||compId == CAmbientBoxLight::GetStaticTypeID()
+            ||compId == CAmbientSphereLight::GetStaticTypeID()
+            )
             m_fastAccessComponents.lights.erase(p_compononent->GetActor()->GetID());
     }
 
@@ -327,6 +339,15 @@ namespace LittleEngine
         for (auto actor : actors)
         {
             actor->OnAfterSceneLoaded(this);
+        }
+        // update components cache
+        for (auto actor : actors)
+        {
+            auto comps = actor->GetComponentsInternal();
+            for (auto component : comps)
+            {
+                OnComponentAdded(component);
+            }
         }
     }
     void Scene::SaveTo(ResScene& resScene)

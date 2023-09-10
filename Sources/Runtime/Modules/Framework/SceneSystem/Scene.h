@@ -171,7 +171,9 @@ namespace LittleEngine
 				auto actor = GetActor(ident);
 				if(actor != nullptr)
 				{
-					vector.push_back(actor->GetComponent<T>());
+					auto comp = actor->GetComponent<T>();
+					if(comp!= nullptr)
+						vector.push_back(comp);
 				}
 			}
 			return vector;

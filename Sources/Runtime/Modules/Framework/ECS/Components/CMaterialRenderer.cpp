@@ -29,7 +29,7 @@ void LittleEngine::CMaterialRenderer::OnConstruction()
 	{
 		m_materials[i] = MaterialResPtr::NullPtr;
 	}
-	for (auto item : m_materialFields)
+	for (auto& item : m_materialFields)
 	{
 		item.fill(nullptr);
 	}
@@ -159,7 +159,7 @@ void LittleEngine::CMaterialRenderer::UpdateMaterialList()
 {
 	for (uint8_t i = 0; i <MAX_MATERIAL_COUNT; ++i)
 	{
-		if (m_materialFields[i][0])
+		if (m_materialFields[i][0] != nullptr)
 		{
 			bool enabled = !m_materials[i].GetPath().empty();
 			m_materialFields[i][0]->enabled = enabled;

@@ -18,7 +18,7 @@
 
 void LittleEngine::CLight::OnAwake()
 {
-	m_data.DoInit (owner->transform->GetFTransform(), {});
+	m_data.DoInit (owner->transform->GetFTransform());
 }
 
 
@@ -46,6 +46,13 @@ void LittleEngine::CLight::SetIntensity(float p_intensity)
 {
 	m_data.intensity = p_intensity;
 }
+
+void LittleEngine::CLight::OnAfterSceneLoaded(ActorPtr p_actor)
+{
+	Component::OnAfterSceneLoaded(p_actor);
+	m_data.DoInit(p_actor->transform->GetFTransform());
+}
+
 LittleEngine::Rendering::Entities::Light::Type LittleEngine::CLight::GetLightType()
 {
 	return static_cast<LittleEngine::Rendering::Entities::Light::Type>(m_data.type);
@@ -53,21 +60,6 @@ LittleEngine::Rendering::Entities::Light::Type LittleEngine::CLight::GetLightTyp
 bool LittleEngine::CLight::IsDirectional()
 {
 	return GetLightType() == LittleEngine::Rendering::Entities::Light::Type::DIRECTIONAL;
-}
-void LittleEngine::CLight::OnSerialize(ISerializer p_serializer)
-{
-	
-
-	SerializeUtil::SerializeVec3("color", m_data.color);
-	SerializeUtil::SerializeFloat("intensity", m_data.intensity);
-}
-
-void LittleEngine::CLight::OnDeserialize(ISerializer p_serializer)
-{
-	
-
-	SerializeUtil::DeserializeVec3("color", m_data.color);
-	SerializeUtil::DeserializeFloat("intensity", m_data.intensity);
 }
 
 void LittleEngine::CLight::OnInspector()
