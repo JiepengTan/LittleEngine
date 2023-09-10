@@ -11,8 +11,9 @@ LittleEngine::Shader* LittleEngine::ResourceManagement::ShaderManager::CreateRes
 	std::string realPath = PathUtil::GetRealPath(p_path);
 	LittleEngine::Shader* shader = LittleEngine::Resources::ShaderLoader::Create(realPath);
 	if (shader)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(shader) + offsetof(LittleEngine::Shader, path)) = p_path; // Force the resource path to fit the given path
-
+	{
+		shader->path = p_path; // Force the resource path to fit the given path
+	}
 	return shader;
 }
 

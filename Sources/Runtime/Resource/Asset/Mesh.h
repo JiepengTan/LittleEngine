@@ -96,7 +96,7 @@ namespace LittleEngine
 		float* m_animatedPositions;
 		Rendering::Geometry::EVertexDataFlags m_dataFlags;
 		
-		Rendering::Geometry::BoundingSphere m_boundingSphere;
+		Rendering::Geometry::BoundingSphere m_boundingSphere ;
 
 	public:
 

@@ -27,7 +27,12 @@ LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::Create(const std::s
 	uint32_t programID = CreateProgram(source.first, source.second);
 
 	if (programID)
+	{
 		return new Shader(p_filePath, programID);
+	}else
+	{
+		LOG_ERROR("Create Shader Failed " + p_filePath);
+	}
 
 	return nullptr;
 }

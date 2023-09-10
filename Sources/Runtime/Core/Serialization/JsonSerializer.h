@@ -97,7 +97,7 @@ namespace LittleEngine
             }
             else
             {
-                static_assert(always_false<T>, "Serializer::Write<T> has not been implemented yet!"); // TODO tanjp open it after implement code gen 
+                static_assert(always_false<T>, "Serializer::Write<T> has not been implemented yet!");  
                 return Json();
             }
         }
@@ -111,7 +111,7 @@ namespace LittleEngine
             }
             else
             {
-                static_assert(always_false<T>, "Serializer::Read<T> has not been implemented yet!");// TODO tanjp open it after implement code gen
+                static_assert(always_false<T>, "Serializer::Read<T> has not been implemented yet!");
                 return instance;
             }
         }

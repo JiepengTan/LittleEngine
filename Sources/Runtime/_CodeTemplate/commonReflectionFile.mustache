@@ -7,6 +7,8 @@
 namespace {{class_namespace}}{
     TypeID {{class_name}}::MetaTypeId = {{class_type_id}};
     {{#class_is_struct}}struct {{class_name}}; {{/class_is_struct}}{{^class_is_struct}}class {{class_name}}; {{/class_is_struct}}
+    std::string {{class_name}}::ToString(){ return ToJson().dump();}
+    Json {{class_name}}::ToJson(){ return LittleEngine::JsonSerializer::Write(*this);}
 }
 {{/class_defines}}
 

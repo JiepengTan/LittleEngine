@@ -137,7 +137,7 @@ namespace LittleEngine
 
 	public:
 		const uint32_t id;
-		const std::string path;
+		std::string path;
 		std::vector<Resources::UniformInfo> uniforms;
 
 	private:

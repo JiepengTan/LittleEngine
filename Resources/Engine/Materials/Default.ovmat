@@ -1,41 +1,185 @@
-<root>
-    <shader>:Shaders\Standard.glsl</shader>
-    <settings>
-        <blendable>false</blendable>
-        <backface_culling>true</backface_culling>
-        <depth_test>true</depth_test>
-        <gpu_instances>1</gpu_instances>
-    </settings>
-    <uniforms>
-        <uniform>
-            <name>diffuseColor</name>
-            <value>
-                <x>1</x>
-                <y>0.99998999</y>
-                <z>0.99998999</z>
-                <w>0</w>
-            </value>
-        </uniform>
-        <uniform>
-            <name>diffuseTexture</name>
-            <value>?</value>
-        </uniform>
-        <uniform>
-            <name>specularColor</name>
-            <value>
-                <x>1e-06</x>
-                <y>9.9998999e-07</y>
-                <z>9.9998999e-07</z>
-                <w>0</w>
-            </value>
-        </uniform>
-        <uniform>
-            <name>shineness</name>
-            <value>64</value>
-        </uniform>
-        <uniform>
-            <name>specularTexture</name>
-            <value>?</value>
-        </uniform>
-    </uniforms>
-</root>
+{
+  "res": {
+    "backfaceCulling": true,
+    "blendable": false,
+    "colorWriting": true,
+    "depthTest": true,
+    "depthWriting": true,
+    "frontfaceCulling": false,
+    "gpuInstances": 1,
+    "shader": {
+      "guid": ":Shaders\\Standard.glsl",
+      "resType": 2
+    },
+    "uniformsData": [
+      {
+        "data": {
+          "w": -107374176,
+          "x": 1,
+          "y": 1,
+          "z": -107374176
+        },
+        "key": "u_Diffuse",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35666
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_DiffuseMap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35678
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_EnableNormalMapping",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35670
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_HeightMap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35678
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_HeightScale",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 5126
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_MaskMap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35678
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_NormalMap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35678
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 100,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_Shininess",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 5126
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 1,
+          "y": -107374176,
+          "z": -107374176
+        },
+        "key": "u_Specular",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35665
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_SpecularMap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35678
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": -107374176,
+          "y": -107374176,
+          "z": 0
+        },
+        "key": "u_TextureOffset",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35664
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": -107374176,
+          "y": -107374176,
+          "z": 0
+        },
+        "key": "u_TextureTiling",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35664
+      }
+    ]
+  }
+}

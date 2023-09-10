@@ -13,22 +13,26 @@
 #include "Modules/Framework/API/ISerializable.h"
 #include "Resource/Data/ResIncludeRendering.h"
 
-
 namespace LittleEngine
 {
 	/**
 	* A material is a combination of a shader and some settings (Material settings and shader settings)
 	*/
-	class Material 
+	REFLECTION_TYPE(Material)
+	CLASS(Material, WhiteListFields)
 	{
+		REFLECTION_BODY(Material)
+		
 	public:
+		Material() = default;
+		virtual ~Material()= default;
+		
 		/**
 		* Defines the shader to attach to this material instance
 		* @param p_shader
 		*/
 		void SetShader(StringText p_path);
 		void SetShader(Shader* p_shader);
-
 		/**
 		* Fill uniform with default uniform values
 		*/

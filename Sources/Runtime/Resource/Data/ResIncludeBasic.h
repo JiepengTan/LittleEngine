@@ -16,7 +16,7 @@ namespace LittleEngine
     
     // 资源的内部数据，没有文件映射关系
     REFLECTION_TYPE(ResData)
-    CLASS(ResData, Fields)
+    STRUCT(ResData, Fields)
     {
         REFLECTION_BODY(ResData)
     };

@@ -154,7 +154,7 @@ namespace LittleEngine
     public:\
         static restypename##ResPtr NullPtr;\
     public:\
-        restypename##ResPtr(StringText guid, ##restypename##* instance) :ResPtr(EResType::ERes##restypename,guid,nullptr)  {}\
+        restypename##ResPtr(StringText guid, ##restypename##* instance) :ResPtr(EResType::ERes##restypename,guid,instance)  {}\
         restypename##ResPtr() :ResPtr(EResType::ERes##restypename,"",nullptr)  {}\
     };\
     template<>\

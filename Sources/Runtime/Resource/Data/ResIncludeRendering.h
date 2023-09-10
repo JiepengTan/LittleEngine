@@ -8,7 +8,7 @@ namespace LittleEngine
 
     class Component;
     REFLECTION_TYPE(ResLight)
-    CLASS(ResLight: public ResData, Fields)
+    STRUCT(ResLight: public ResData, Fields)
     {
         REFLECTION_BODY(ResLight)
     public:
@@ -26,11 +26,11 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResUniformInfo)
     public:
-        FVector4    m_data;
+        FVector4    m_data = FVector4::Zero;
         
-        UniformType     m_uniformType;
-        std::string    m_key;
-        TextureResPtr   m_texture;
+        UniformType    m_uniformType = UniformType::UNIFORM_SAMPLER_CUBE;
+        std::string    m_key = "";
+        TextureResPtr   m_texture = TextureResPtr::NullPtr;
 
         bool GetBool() const { return m_data.x>0.5f;}
         int GetInt() const{ return (int)(m_data.x+0.5f);}
@@ -50,7 +50,7 @@ namespace LittleEngine
     };
     
     REFLECTION_TYPE(ResMaterial)
-    CLASS(ResMaterial: public ResData, Fields)
+    STRUCT(ResMaterial: public ResData, Fields)
     {
         REFLECTION_BODY(ResMaterial)
     public:
@@ -61,8 +61,8 @@ namespace LittleEngine
         bool m_depthWriting		= true;
         bool m_colorWriting		= true;
         int  m_gpuInstances		= 1;
-		ShaderResPtr        m_shader ;
-        std::vector<ResUniformInfo> m_uniformsData;
+		ShaderResPtr        m_shader = ShaderResPtr::NullPtr;
+        std::vector<ResUniformInfo> m_uniformsData = {};
     };
     
 }

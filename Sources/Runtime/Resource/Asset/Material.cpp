@@ -110,7 +110,7 @@ namespace LittleEngine
 
     bool Material::HasShader() const
     {
-        return m_res.m_shader;
+        return m_res.m_shader != nullptr;
     }
 
     void Material::SetBlendable(bool p_transparent)

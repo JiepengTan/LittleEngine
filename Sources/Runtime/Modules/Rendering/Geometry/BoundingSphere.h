@@ -18,6 +18,11 @@ namespace LittleEngine::Rendering::Geometry
 	{
 		REFLECTION_BODY(BoundingSphere)
 	public:
+		BoundingSphere(float p_radius = 1.0f)
+		{
+			radius = p_radius;
+			position = FVector3::Zero;
+		}
 		LittleEngine::FVector3 position;
 		float radius;
 	};

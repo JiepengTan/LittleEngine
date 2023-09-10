@@ -93,7 +93,7 @@ namespace LittleEngine
 		META(Enable)
 		ModelResPtr m_model ;
 		META(Enable)
-		Rendering::Geometry::BoundingSphere m_customBoundingSphere = { {}, 1.0f };
+		Rendering::Geometry::BoundingSphere m_customBoundingSphere;
 		META(Enable)
 		EFrustumBehaviour m_frustumBehaviour = EFrustumBehaviour::CULL_MODEL;
 	};

@@ -42,6 +42,8 @@ namespace LittleEngine
     friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
     friend class JsonSerializer;\
     public :\
+    virtual std::string ToString();\
+    virtual Json ToJson();\
     static ::LittleEngine::TypeID MetaTypeId;\
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
     static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
@@ -61,6 +63,8 @@ namespace LittleEngine
     friend class Reflection::TypeFieldReflectionOparator::Type##class_name##Operator; \
     friend class JsonSerializer;\
     public :\
+    virtual std::string ToString();\
+    virtual Json ToJson();\
     static ::LittleEngine::TypeID MetaTypeId;\
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
     static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}\
