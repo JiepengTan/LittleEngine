@@ -13,12 +13,6 @@ std::vector<LittleEngine::Material*>LittleEngine::RenderUtils:: _DebugMats;
 LittleEngine::Material* LittleEngine::RenderUtils::GetOrCreateDebugQuadMat()
 {
     if(_DebugMats.size()>0) return _DebugMats[0];
-    auto vertstr = R"(
-)";
-
-    auto fragStr = R"(
-)";
-
     auto shader	= ResourcesUtils::LoadShader(":Shaders\\DebugQuad.glsl"); 
     auto mat = new LittleEngine::Material();
     mat->SetDepthTest(false);

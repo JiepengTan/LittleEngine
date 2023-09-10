@@ -119,7 +119,6 @@
     <ClInclude Include="Panels\ProjectSettings.h" />
     <ClInclude Include="Panels\SceneView.h" />
     <ClInclude Include="Panels\Toolbar.h" />
-    <ClInclude Include="Resources\RawShaders.h" />
     <ClInclude Include="Resources\RawTextures.h" />
     <ClInclude Include="Settings\EditorSettings.h" />
     <ClInclude Include="Utils\ActorCreationMenu.h" />
@@ -153,7 +152,6 @@
     <ClCompile Include="Panels\ProjectSettings.cpp" />
     <ClCompile Include="Panels\SceneView.cpp" />
     <ClCompile Include="Panels\Toolbar.cpp" />
-    <ClCompile Include="Resources\RawShaders.cpp" />
     <ClCompile Include="Settings\EditorSettings.cpp" />
     <ClCompile Include="Utils\ActorCreationMenu.cpp" />
   </ItemGroup>

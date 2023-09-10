@@ -12,33 +12,13 @@ LittleEngine::Rendering::Core::ShapeDrawer::ShapeDrawer(LittleEngine::Rendering:
 
 	Geometry::VertexDataBuffer vertices(2,Geometry::EVertexDataFlags::vdf_allNoBone);
 	m_lineMesh = new Mesh(vertices, { 0, 1 }, 0,Geometry::EVertexDataFlags::vdf_allNoBone,false);
-
-	std::string vertexShader = R"(
-
-
-)";
-
-	std::string fragmentShader = R"(
-
-)";
-
 	m_lineShader = ResourcesUtils::LoadShader(":Shaders\\ShapeLine.glsl"); 
-
-	vertexShader = R"(
-
-
-)";
-
-	fragmentShader = R"(
-)";
-
 	m_gridShader = ResourcesUtils::LoadShader(":Shaders\\ShapeGrid.glsl");  
 }
 
 LittleEngine::Rendering::Core::ShapeDrawer::~ShapeDrawer()
 {
 	delete m_lineMesh;
-	LittleEngine::Resources::ShaderLoader::Destroy(m_lineShader);
 }
 
 void LittleEngine::Rendering::Core::ShapeDrawer::SetViewProjection(const LittleEngine::FMatrix4& p_viewProjection)

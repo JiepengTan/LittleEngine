@@ -12,7 +12,6 @@
 
 #include "../Editor/Core/EditorResources.h"
 #include "../Editor/Resources/RawTextures.h"
-#include "../Editor/Resources/RawShaders.h"
 
 LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& p_editorAssetsPath)
 {
@@ -182,8 +181,6 @@ LittleEngine::Editor::Core::EditorResources::~EditorResources()
 	for (auto [id, mesh] : m_models)
 		LittleEngine::Resources::ModelLoader::Destroy(mesh);
 
-	for (auto [id, shader] : m_shaders)
-		LittleEngine::Resources::ShaderLoader::Destroy(shader);
 }
 
 LittleEngine::Texture* LittleEngine::Editor::Core::EditorResources::GetFileIcon(const std::string& p_filename)
