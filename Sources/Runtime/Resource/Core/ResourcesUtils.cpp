@@ -14,20 +14,36 @@ namespace LittleEngine
     void ResourcesUtils::DoNothing(){}
     
 #define DEFINE_RES_LOAD_FUNCTION(restypename)\
-    restypename* ResourcesUtils::Load##restypename(StringText guid){\
-        return GetGlobalService<ResourceManagement::##restypename##Manager>().GetResource(guid);\
+    restypename* ResourcesUtils::Load##restypename(StringText guid, bool p_tryToLoadIfNotFound ){\
+        return GetGlobalService<ResourceManagement::##restypename##Manager>().GetResource(guid,p_tryToLoadIfNotFound);\
     }\
-    restypename##ResPtr ResourcesUtils::Load##restypename##ResPtr(StringText guid){\
-        auto ptr = Load##restypename(guid);\
+    restypename##ResPtr ResourcesUtils::Load##restypename##ResPtr(StringText guid, bool p_tryToLoadIfNotFound){\
+        auto ptr = Load##restypename(guid,p_tryToLoadIfNotFound);\
         return restypename##ResPtr(guid,ptr);\
     }\
     void ResourcesUtils::Register##restypename(const StringText& guid, ##restypename* p_resPtr){\
         GetGlobalService<ResourceManagement::##restypename##Manager>().RegisterResource(guid,p_resPtr);\
     }
 
+    // show macro for shader 
+    Shader* ResourcesUtils::LoadShader(std::string guid, bool p_tryToLoadIfNotFound)
+    {
+        return LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ShaderManager>().GetResource(
+            guid, p_tryToLoadIfNotFound);
+    }
 
-    
-    DEFINE_RES_LOAD_FUNCTION(Shader);
+    ShaderResPtr ResourcesUtils::LoadShaderResPtr(std::string guid, bool p_tryToLoadIfNotFound)
+    {
+        auto ptr = LoadShader(guid, p_tryToLoadIfNotFound);
+        return ShaderResPtr(guid, ptr);
+    }
+
+    void ResourcesUtils::RegisterShader(const std::string& guid, Shader* p_resPtr)
+    {
+        LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ShaderManager>().RegisterResource(guid, p_resPtr);
+    }
+
+    //DEFINE_RES_LOAD_FUNCTION(Shader);
     DEFINE_RES_LOAD_FUNCTION(Texture);
     DEFINE_RES_LOAD_FUNCTION(Model);
     DEFINE_RES_LOAD_FUNCTION(Animation);

@@ -74,7 +74,9 @@ LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateColor(uint3
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
-LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height,
+	LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter,
+	LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);

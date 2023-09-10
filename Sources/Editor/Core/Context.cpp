@@ -44,6 +44,18 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	AnimationManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	TextAssetManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
 	
+	// init managers
+	ServiceLocator::Provide<ModelManager>(modelManager);
+	ServiceLocator::Provide<TextureManager>(textureManager);
+	ServiceLocator::Provide<ShaderManager>(shaderManager);
+	ServiceLocator::Provide<MaterialManager>(materialManager);
+	ServiceLocator::Provide<SoundManager>(soundManager);
+	ServiceLocator::Provide<AnimationManager>(animationManager);
+	ServiceLocator::Provide<TextAssetManager>(textAssetManager);
+
+	
+	LOG_INFO("EditorContext::Init ");
+	
 	/* Settings */
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
 	deviceSettings.contextMajorVersion = 4;
@@ -62,15 +74,21 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	window->MakeCurrentContext();
 
 	device->SetVsync(true);
-
+	
+	
+	LOG_INFO("EditorContext::create devices ");
 	/* Graphics context creation */
 	driver = std::make_unique<LittleEngine::Rendering::Context::Driver>(LittleEngine::Rendering::Settings::DriverSettings{ true });
+	LOG_INFO("EditorContext::renderer Init");
 	renderer = std::make_unique<LittleEngine::SceneRenderer>(*driver);
 	renderer->SetCapability(LittleEngine::Rendering::Settings::ERenderingCapability::MULTISAMPLE, true);
+	LOG_INFO("EditorContext::shapeDrawer Init");
 	shapeDrawer = std::make_unique<LittleEngine::Rendering::Core::ShapeDrawer>(*renderer);
 
+	LOG_INFO("EditorContext::create_directories Init  ");
 	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\");
 	
+	LOG_INFO("EditorContext::uiManager Init  ");
 	uiManager = std::make_unique<LittleEngine::UI::Core::UIManager>(window->GetGlfwWindow(), LittleEngine::UI::Styling::EStyle::ALTERNATIVE_DARK);
 	uiManager->LoadFont("Ruda_Big", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
 	uiManager->LoadFont("Ruda_Small", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
@@ -84,34 +102,33 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\layout.ini"))
 		uiManager->ResetLayout("Config\\layout.ini");
 
+	LOG_INFO("EditorContext::audioEngine Init  ");
 	/* Audio */
 	audioEngine = std::make_unique<LittleEngine::Audio::Core::AudioEngine>(projectAssetsPath);
 	audioPlayer = std::make_unique<LittleEngine::Audio::Core::AudioPlayer>(*audioEngine);
 
+	LOG_INFO("EditorContext::editorResources Init  ");
 	/* Editor resources */
 	editorResources = std::make_unique<LittleEngine::Editor::Core::EditorResources>(editorAssetsPath);
 
+	LOG_INFO("EditorContext::physicsEngine Init  ");
 	/* Physics engine */
 	physicsEngine = std::make_unique<LittleEngine::Physics::Core::PhysicsEngine>(LittleEngine::Physics::Settings::PhysicsSettings{ {0.0f, -9.81f, 0.0f } });
 
+	LOG_INFO("EditorContext::ServiceLocator Init  ");
 	/* Service Locator providing */
 	ServiceLocator::Provide<LittleEngine::Physics::Core::PhysicsEngine>(*physicsEngine);
-	ServiceLocator::Provide<ModelManager>(modelManager);
-	ServiceLocator::Provide<TextureManager>(textureManager);
-	ServiceLocator::Provide<ShaderManager>(shaderManager);
-	ServiceLocator::Provide<MaterialManager>(materialManager);
-	ServiceLocator::Provide<SoundManager>(soundManager);
-	ServiceLocator::Provide<AnimationManager>(animationManager);
-	ServiceLocator::Provide<TextAssetManager>(textAssetManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Inputs::InputManager>(*inputManager);
 	ServiceLocator::Provide<LittleEngine::Windowing::Window>(*window);
 	ServiceLocator::Provide<LittleEngine::SceneManager>(sceneManager);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioEngine>(*audioEngine);
 	ServiceLocator::Provide<LittleEngine::Audio::Core::AudioPlayer>(*audioPlayer);
 	
+	LOG_INFO("EditorContext::scriptInterpreter Init  ");
 	/* Scripting */
 	scriptInterpreter = std::make_unique<LittleEngine::Scripting::ScriptInterpreter>(projectScriptsPath);
 
+	LOG_INFO("EditorContext::engineUBO Init  ");
 	engineUBO = std::make_unique<LittleEngine::Rendering::Buffers::UniformBuffer>
 	(
 		/* UBO Data Layout */
@@ -147,6 +164,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 
 	simulatedLightSSBO->SendBlocks<LittleEngine::FMatrix4>(simulatedLights.data(), simulatedLights.size() * sizeof(LittleEngine::FMatrix4));
 
+	LOG_INFO("EditorContext::ApplyProjectSettings  ");
 	ApplyProjectSettings();
 }
 

@@ -12,8 +12,8 @@ LittleEngine::Rendering::Core::ShapeDrawer::ShapeDrawer(LittleEngine::Rendering:
 
 	Geometry::VertexDataBuffer vertices(2,Geometry::EVertexDataFlags::vdf_allNoBone);
 	m_lineMesh = new Mesh(vertices, { 0, 1 }, 0,Geometry::EVertexDataFlags::vdf_allNoBone,false);
-	m_lineShader = ResourcesUtils::LoadShader(":Shaders\\ShapeLine.glsl"); 
-	m_gridShader = ResourcesUtils::LoadShader(":Shaders\\ShapeGrid.glsl");  
+	m_lineShader = ResourcesUtils::LoadShader(":Shaders\\EditorShapeLine.glsl"); 
+	m_gridShader = ResourcesUtils::LoadShader(":Shaders\\EditorShapeGrid.glsl");  
 }
 
 LittleEngine::Rendering::Core::ShapeDrawer::~ShapeDrawer()

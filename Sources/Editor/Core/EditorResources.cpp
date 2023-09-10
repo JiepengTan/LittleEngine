@@ -38,139 +38,62 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::PRE_TRANSFORM_VERTICES;
 	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::GLOBAL_SCALE;
 
-	LittleEngine::Rendering::Settings::ETextureFilteringMode firstFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
-	LittleEngine::Rendering::Settings::ETextureFilteringMode secondFilterEditor = LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR;
-
-	LittleEngine::Rendering::Settings::ETextureFilteringMode firstFilterBillboard = LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
-	LittleEngine::Rendering::Settings::ETextureFilteringMode secondFilterBillboard = LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
-
 	/* Buttons */
-
-	{
-		std::vector<uint64_t> raw = BUTTON_PLAY;
-		m_textures["Button_Play"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BUTTON_PAUSE;
-		m_textures["Button_Pause"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BUTTON_STOP;
-		m_textures["Button_Stop"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BUTTON_NEXT;
-		m_textures["Button_Next"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BUTTON_REFRESH;
-		m_textures["Button_Refresh"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-	}
-
+	auto CreateTex = [](std::vector<uint64_t>&  rawDataBytes,int texSize,bool isLinear){
+		auto mode = isLinear?
+			LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR:
+			LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
+		return TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(rawDataBytes.data()),
+			texSize, texSize, mode, mode, false);
+	};
+	std::vector<uint64_t> raw;
+	raw = EMPTY_TEXTURE;	m_textures["Empty_Texture"] =CreateTex(raw,64,true);
+	raw = BUTTON_PLAY;		m_textures["Button_Play"] =CreateTex(raw,64,true);
+	raw = BUTTON_PAUSE;		m_textures["Button_Pause"] =CreateTex(raw, 64,true);
+	raw = BUTTON_STOP;		m_textures["Button_Stop"] =CreateTex(raw, 64,true);
+	raw = BUTTON_NEXT;		m_textures["Button_Next"] =CreateTex(raw, 64,true);
+	raw = BUTTON_REFRESH;	m_textures["Button_Refresh"] =CreateTex(raw, 64,true);
 	/* Icons */
-	{
-		std::vector<uint64_t> raw = ICON_FILE;
-		m_textures["Icon_Unknown"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
+	raw = ICON_FILE;		m_textures["Icon_Unknown"] =CreateTex(raw, 16,true);
+	raw = ICON_FOLDER;		m_textures["Icon_Folder"] =CreateTex(raw, 16,true);
+	raw = ICON_TEXTURE;		m_textures["Icon_Texture"] =CreateTex(raw, 16,true);
+	raw = ICON_MODEL;		m_textures["Icon_Model"] =CreateTex(raw, 16,true);
+	raw = ICON_SHADER;		m_textures["Icon_Shader"] =CreateTex(raw, 16,true);
+	raw = ICON_MATERIAL;	m_textures["Icon_Material"] =CreateTex(raw, 16,true);
+	raw = ICON_SCENE;		m_textures["Icon_Scene"] =CreateTex(raw, 16,true);
+	raw = ICON_SOUND;		m_textures["Icon_Sound"] =CreateTex(raw, 16,true);
+	raw = ICON_SCRIPT;		m_textures["Icon_Script"] =CreateTex(raw, 16,true);
+	raw = ICON_FONT;		m_textures["Icon_Font"] =CreateTex(raw, 16,true);
+	
+	raw = BILL_PLIGHT; 		m_textures["Bill_Point_Light"] =CreateTex(raw, 128,false);
+	raw = BILL_SLIGHT; 		m_textures["Bill_Spot_Light"] =CreateTex(raw, 128,false);
+	raw = BILL_DLIGHT; 		m_textures["Bill_Directional_Light"] =CreateTex(raw, 128,false);
+	raw = BILL_ABLIGHT;		m_textures["Bill_Ambient_Box_Light"] =CreateTex(raw, 128,false);
+	raw = BILL_ASLIGHT; 	m_textures["Bill_Ambient_Sphere_Light"] =CreateTex(raw, 128,false);
 
-	{
-		std::vector<uint64_t> raw = ICON_FOLDER;
-		m_textures["Icon_Folder"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_TEXTURE;
-		m_textures["Icon_Texture"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_MODEL;
-		m_textures["Icon_Model"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_SHADER;
-		m_textures["Icon_Shader"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_MATERIAL;
-		m_textures["Icon_Material"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_SCENE;
-		m_textures["Icon_Scene"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_SOUND;
-		m_textures["Icon_Sound"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_SCRIPT;
-		m_textures["Icon_Script"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = ICON_FONT;
-		m_textures["Icon_Font"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BILL_PLIGHT;
-		m_textures["Bill_Point_Light"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BILL_SLIGHT;
-		m_textures["Bill_Spot_Light"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BILL_DLIGHT;
-		m_textures["Bill_Directional_Light"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BILL_ABLIGHT;
-		m_textures["Bill_Ambient_Box_Light"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
-	}
-
-	{
-		std::vector<uint64_t> raw = BILL_ASLIGHT;
-		m_textures["Bill_Ambient_Sphere_Light"] = TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
-	}
-
+	GUIUtil::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
+	
 	/* Models */
-	m_models["Cube"]			= ModelLoader::Create(modelsFolder + "Cube.fbx", modelParserFlags);
-	m_models["Cylinder"]		= ModelLoader::Create(modelsFolder + "Cylinder.fbx", modelParserFlags);
-	m_models["Plane"]			= ModelLoader::Create(modelsFolder + "Plane.fbx", modelParserFlags);
+	m_models["Cube"]				= ModelLoader::Create(modelsFolder + "Cube.fbx", modelParserFlags);
+	m_models["Cylinder"]			= ModelLoader::Create(modelsFolder + "Cylinder.fbx", modelParserFlags);
+	m_models["Plane"]				= ModelLoader::Create(modelsFolder + "Plane.fbx", modelParserFlags);
 	m_models["Vertical_Plane"]	= ModelLoader::Create(modelsFolder + "Vertical_Plane.fbx", modelParserFlags);
-	m_models["Roll"]			= ModelLoader::Create(modelsFolder + "Roll.fbx", modelParserFlags);
+	m_models["Roll"]				= ModelLoader::Create(modelsFolder + "Roll.fbx", modelParserFlags);
 	m_models["Sphere"]			= ModelLoader::Create(modelsFolder + "Sphere.fbx", modelParserFlags);
 	m_models["Arrow_Translate"]	= ModelLoader::Create(modelsFolder + "Arrow_Translate.fbx", modelParserFlags);
-	m_models["Arrow_Rotate"]	= ModelLoader::Create(modelsFolder + "Arrow_Rotate.fbx", modelParserFlags);
+	m_models["Arrow_Rotate"]		= ModelLoader::Create(modelsFolder + "Arrow_Rotate.fbx", modelParserFlags);
 	m_models["Arrow_Scale"]		= ModelLoader::Create(modelsFolder + "Arrow_Scale.fbx", modelParserFlags);
-	m_models["Arrow_Picking"]	= ModelLoader::Create(modelsFolder + "Arrow_Picking.fbx", modelParserFlags);
+	m_models["Arrow_Picking"]		= ModelLoader::Create(modelsFolder + "Arrow_Picking.fbx", modelParserFlags);
 	m_models["Camera"]			= ModelLoader::Create(modelsFolder + "Camera.fbx", modelParserFlags);
 
+	LOG_INFO("ResourcesUtils::LoadShader Editors Start");
 	/* Shaders */
-	m_shaders["Grid"]		= ResourcesUtils::LoadShader(":Shaders\\EditorGrid.glsl");
+	m_shaders["Grid"]			= ResourcesUtils::LoadShader(":Shaders\\EditorGrid.glsl");
 	m_shaders["Gizmo"]		= ResourcesUtils::LoadShader(":Shaders\\EditorGizmo.glsl");
 	m_shaders["Billboard"]	= ResourcesUtils::LoadShader(":Shaders\\EditorBillboard.glsl");
 
-	/* From memory */
-	{
-		std::vector<uint64_t> raw = EMPTY_TEXTURE;
-		m_textures["Empty_Texture"] = LittleEngine::Resources::TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
-		GUIUtil::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
-	}
+	LOG_INFO("ResourcesUtils::LoadShader Editors End");
+	
 }
 
 LittleEngine::Editor::Core::EditorResources::~EditorResources()

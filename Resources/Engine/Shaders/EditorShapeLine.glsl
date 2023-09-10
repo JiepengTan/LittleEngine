@@ -1,8 +1,6 @@
 #shader vertex
 #version 430 core
 
-#version 430 core
-
 uniform vec3 start;
 uniform vec3 end;
 uniform mat4 viewProjection;

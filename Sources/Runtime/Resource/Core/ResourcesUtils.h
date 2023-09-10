@@ -21,12 +21,13 @@ namespace LittleEngine
     public:
         
     #define DELCARE_RES_LOAD_FUNCTION(restypename)\
-        static restypename* Load##restypename(StringText guid);\
-        static restypename##ResPtr Load##restypename##ResPtr(StringText guid);\
+        static restypename* Load##restypename(StringText guid, bool p_tryToLoadIfNotFound = true);\
+        static restypename##ResPtr Load##restypename##ResPtr(StringText guid, bool p_tryToLoadIfNotFound = true);\
         static void Register##restypename(const StringText& guid, ##restypename* p_resPtr);
 
-        static Shader* LoadShader(std::string guid);
-        static ShaderResPtr LoadShaderResPtr(std::string guid);
+        // show macro for shader 
+        static Shader* LoadShader(std::string guid, bool p_tryToLoadIfNotFound = true);
+        static ShaderResPtr LoadShaderResPtr(std::string guid, bool p_tryToLoadIfNotFound = true);
         static void RegisterShader(const std::string& guid, Shader* p_resPtr);
         
         //DELCARE_RES_LOAD_FUNCTION(Shader)
