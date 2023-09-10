@@ -341,13 +341,13 @@ void LittleEngine::Editor::Panels::MaterialEditor::GenerateShaderSettingsContent
 
 	for (auto& [order, info] : sortedUniformsData)
 	{
-		auto uniformData = m_target->GetShader()->GetUniformInfo(info.first);
+		auto uniformData = m_target->GetProperty(info.first);
 		
 		GUIUtil::m_root = m_shaderSettingsColumns;
-		auto& data = info.second->m_data;
+		auto& data = uniformData->m_data;
 		if (uniformData)
 		{
-			switch (uniformData->type)
+			switch (uniformData->m_uniformType)
 			{
 				case UniformType::UNIFORM_BOOL:			GUIUtil::DrawBoolean( UniformFormat(info.first), reinterpret_cast<bool&>(data));																	break;
 				case UniformType::UNIFORM_INT:			GUIUtil::DrawScalar<int>( UniformFormat(info.first), reinterpret_cast<int&>(data));																break;

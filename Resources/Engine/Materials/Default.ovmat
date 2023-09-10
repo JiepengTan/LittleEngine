@@ -14,10 +14,10 @@
     "uniformsData": [
       {
         "data": {
-          "w": -107374176,
+          "w": 1,
           "x": 1,
           "y": 1,
-          "z": -107374176
+          "z": 1
         },
         "key": "u_Diffuse",
         "texture": {
@@ -128,8 +128,8 @@
         "data": {
           "w": 0,
           "x": 1,
-          "y": -107374176,
-          "z": -107374176
+          "y": 1,
+          "z": 1
         },
         "key": "u_Specular",
         "texture": {
@@ -155,8 +155,8 @@
       {
         "data": {
           "w": 0,
-          "x": -107374176,
-          "y": -107374176,
+          "x": 0,
+          "y": 0,
           "z": 0
         },
         "key": "u_TextureOffset",
@@ -169,8 +169,8 @@
       {
         "data": {
           "w": 0,
-          "x": -107374176,
-          "y": -107374176,
+          "x": 1,
+          "y": 1,
           "z": 0
         },
         "key": "u_TextureTiling",
@@ -179,6 +179,20 @@
           "resType": 3
         },
         "uniformType": 35664
+      },
+      {
+        "data": {
+          "w": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "key": "u_Shadowmap",
+        "texture": {
+          "guid": "",
+          "resType": 3
+        },
+        "uniformType": 35680
       }
     ]
   }
