@@ -8,7 +8,7 @@ LittleEngine::Rendering::Geometry::VertexDataBuffer::VertexDataBuffer(int p_size
     dataFlags(p_dataFlag)
 {
     count = p_size;
-    std::cout << "Mesh vertexCount " << count<< std::endl;
+    //std::cout << "Mesh vertexCount " << count<< std::endl;
     for (int i = 0; i < VERTEX_DATA_FLAGS_INDEX_COUNT; i++)
     {
         dataPtrs[i] = nullptr;

@@ -20,7 +20,7 @@ LittleEngine::Mesh::Mesh(Geometry::VertexDataBuffer& p_vertices, const std::vect
 	m_dataFlags(p_dataFlag)
 {
 	m_vertexArray.Bind();
-	std::cout<< "Create Mesh ====================   " <<std::endl;
+	//std::cout<< "Create Mesh ====================   " <<std::endl;
 	isSkinMesh = (m_dataFlags & (Geometry::EVertexDataFlags::vdf_boneId |  Geometry::EVertexDataFlags::vdf_boneWeight) ) != 0;
 	isReadWriteable = p_isReadWrite;
 	for (int i=0;i<VERTEX_DATA_FLAGS_INDEX_COUNT;i++)
