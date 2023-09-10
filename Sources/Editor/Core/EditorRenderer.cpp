@@ -73,14 +73,14 @@ namespace LittleEngine::Editor
     {
         /* Default Material */
         m_defaultMaterial.SetShader(":Shaders\\Standard.glsl");
-        m_defaultMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
-        m_defaultMaterial.Set("u_Shininess", 100.0f);
-        m_defaultMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_defaultMaterial.SetProperty("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
+        m_defaultMaterial.SetProperty("u_Shininess", 100.0f);
+        m_defaultMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Empty Material */
         m_emptyMaterial.SetShader(":Shaders\\Unlit.glsl");
-        m_emptyMaterial.Set("u_Diffuse", FVector4(1.f, 0.f, 1.f, 1.0f));
-        m_emptyMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_emptyMaterial.SetProperty("u_Diffuse", FVector4(1.f, 0.f, 1.f, 1.0f));
+        m_emptyMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Grid Material */
         m_gridMaterial.SetShader(m_context.editorResources->GetShader("Grid"));
@@ -90,12 +90,12 @@ namespace LittleEngine::Editor
 
         /* Camera Material */
         m_cameraMaterial.SetShader(":Shaders\\Lambert.glsl");
-        m_cameraMaterial.Set("u_Diffuse", FVector4(0.0f, 0.3f, 0.7f, 1.0f));
-        m_cameraMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_cameraMaterial.SetProperty("u_Diffuse", FVector4(0.0f, 0.3f, 0.7f, 1.0f));
+        m_cameraMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Light Material */
         m_lightMaterial.SetShader(m_context.editorResources->GetShader("Billboard"));
-        m_lightMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 0.5f, 0.5f));
+        m_lightMaterial.SetProperty("u_Diffuse", FVector4(1.f, 1.f, 0.5f, 0.5f));
         m_lightMaterial.SetBackfaceCulling(false);
         m_lightMaterial.SetBlendable(true);
         m_lightMaterial.SetDepthTest(false);
@@ -105,41 +105,41 @@ namespace LittleEngine::Editor
         m_stencilFillMaterial.SetBackfaceCulling(true);
         m_stencilFillMaterial.SetDepthTest(false);
         m_stencilFillMaterial.SetColorWriting(false);
-        m_stencilFillMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_stencilFillMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Texture Material */
         m_textureMaterial.SetShader(":Shaders\\Unlit.glsl");
-        m_textureMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
+        m_textureMaterial.SetProperty("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.f));
         m_textureMaterial.SetBackfaceCulling(false);
         m_textureMaterial.SetBlendable(true);
-        m_textureMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_textureMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
         /* Outline Material */
         m_outlineMaterial.SetShader(":Shaders\\Unlit.glsl");
-        m_outlineMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_outlineMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
         m_outlineMaterial.SetDepthTest(false);
 
         /* Gizmo Arrow Material */
         m_gizmoArrowMaterial.SetShader(m_context.editorResources->GetShader("Gizmo"));
         m_gizmoArrowMaterial.SetGPUInstances(3);
-        m_gizmoArrowMaterial.Set("u_IsBall", false);
-        m_gizmoArrowMaterial.Set("u_IsPickable", false);
+        m_gizmoArrowMaterial.SetProperty("u_IsBall", false);
+        m_gizmoArrowMaterial.SetProperty("u_IsPickable", false);
 
         /* Gizmo Ball Material */
         m_gizmoBallMaterial.SetShader(m_context.editorResources->GetShader("Gizmo"));
-        m_gizmoBallMaterial.Set("u_IsBall", true);
-        m_gizmoBallMaterial.Set("u_IsPickable", false);
+        m_gizmoBallMaterial.SetProperty("u_IsBall", true);
+        m_gizmoBallMaterial.SetProperty("u_IsPickable", false);
 
         /* Gizmo Pickable Material */
         m_gizmoPickingMaterial.SetShader(m_context.editorResources->GetShader("Gizmo"));
         m_gizmoPickingMaterial.SetGPUInstances(3);
-        m_gizmoPickingMaterial.Set("u_IsBall", false);
-        m_gizmoPickingMaterial.Set("u_IsPickable", true);
+        m_gizmoPickingMaterial.SetProperty("u_IsBall", false);
+        m_gizmoPickingMaterial.SetProperty("u_IsPickable", true);
 
         /* Picking Material */
         m_actorPickingMaterial.SetShader(":Shaders\\Unlit.glsl");
-        m_actorPickingMaterial.Set("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.0f));
-        m_actorPickingMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+        m_actorPickingMaterial.SetProperty("u_Diffuse", FVector4(1.f, 1.f, 1.f, 1.0f));
+        m_actorPickingMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
         m_actorPickingMaterial.SetFrontfaceCulling(false);
         m_actorPickingMaterial.SetBackfaceCulling(false);
     }
@@ -152,7 +152,7 @@ namespace LittleEngine::Editor
         auto bytes = reinterpret_cast<uint8_t*>(&actorID);
         auto color = FVector4{bytes[0] / 255.0f, bytes[1] / 255.0f, bytes[2] / 255.0f, 1.0f};
 
-        p_material.Set("u_Diffuse", color);
+        p_material.SetProperty("u_Diffuse", color);
     }
 
     LittleEngine::FMatrix4 Editor::Core::EditorRenderer::CalculateCameraModelMatrix(ActorPtr p_actor)
@@ -246,8 +246,8 @@ namespace LittleEngine::Editor
             m_context.renderer->Clear(false, true, false);
 
             m_lightMaterial.SetDepthTest(true);
-            m_lightMaterial.Set<float>("u_Scale", Settings::EditorSettings::LightBillboardScale * 0.1f);
-            m_lightMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+            m_lightMaterial.SetProperty<float>("u_Scale", Settings::EditorSettings::LightBillboardScale * 0.1f);
+            m_lightMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
             for (auto lightId : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
             {
@@ -295,7 +295,7 @@ namespace LittleEngine::Editor
         using namespace LittleEngine;
 
         m_lightMaterial.SetDepthTest(false);
-        m_lightMaterial.Set<float>("u_Scale", Settings::EditorSettings::LightBillboardScale * 0.1f);
+        m_lightMaterial.SetProperty<float>("u_Scale", Settings::EditorSettings::LightBillboardScale * 0.1f);
         auto scene = m_context.sceneManager.GetCurrentScene();
         for (auto lightId : scene->GetFastAccessComponents().lights)
         {
@@ -329,8 +329,8 @@ namespace LittleEngine::Editor
                 }
 
                 const auto& lightColor = light->GetColor();
-                m_lightMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", texture);
-                m_lightMaterial.Set<LittleEngine::FVector4>("u_Diffuse",
+                m_lightMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", texture);
+                m_lightMaterial.SetProperty<LittleEngine::FVector4>("u_Diffuse",
                                                             LittleEngine::FVector4(
                                                                 lightColor.x, lightColor.y, lightColor.z, 0.75f));
                 m_context.renderer->DrawModelWithSingleMaterial(model, m_lightMaterial, &modelMatrix);
@@ -354,7 +354,7 @@ namespace LittleEngine::Editor
             FMatrix4 sphereModel = model * LittleEngine::FMatrix4::Scaling({0.1f, 0.1f, 0.1f});
             m_context.renderer->DrawModelWithSingleMaterial(*m_context.editorResources->GetModel("Sphere"),
                                                             m_gizmoBallMaterial, &sphereModel);
-            m_gizmoArrowMaterial.Set("u_HighlightedAxis", p_highlightedAxis);
+            m_gizmoArrowMaterial.SetProperty("u_HighlightedAxis", p_highlightedAxis);
 
             switch (p_operation)
             {
@@ -410,7 +410,7 @@ namespace LittleEngine::Editor
     {
         float outlineWidth = p_isSelected ? 5.0f : 2.5f;
 
-        m_outlineMaterial.Set("u_Diffuse",
+        m_outlineMaterial.SetProperty("u_Diffuse",
                               p_isSelected ? FVector4(1.f, 0.7f, 0.f, 1.0f) : FVector4(1.f, 1.f, 0.f, 1.0f));
 
         if (p_actor->IsActive())
@@ -1041,7 +1041,7 @@ namespace LittleEngine::Editor
     {
         FMatrix4 model = FMatrix4::RotateOnAxisX(FMatrix4::Scaling({5.f, 5.f, 5.f}), 90.f * 0.0174f);
 
-        m_textureMaterial.Set<Texture*>("u_DiffuseMap", &p_texture);
+        m_textureMaterial.SetProperty<Texture*>("u_DiffuseMap", &p_texture);
         m_context.renderer->DrawModelWithSingleMaterial(*m_context.editorResources->GetModel("Plane"),
                                                         m_textureMaterial, &model);
     }
@@ -1061,7 +1061,7 @@ namespace LittleEngine::Editor
         FMatrix4 model = FMatrix4::Translation({p_viewPos.x, 0.0f, p_viewPos.z}) * FMatrix4::Scaling({
             gridSize * 2.0f, 1.f, gridSize * 2.0f
         });
-        m_gridMaterial.Set("u_Color", p_color);
+        m_gridMaterial.SetProperty("u_Color", p_color);
         m_context.renderer->DrawModelWithSingleMaterial(*m_context.editorResources->GetModel("Plane"), m_gridMaterial,
                                                         &model);
 

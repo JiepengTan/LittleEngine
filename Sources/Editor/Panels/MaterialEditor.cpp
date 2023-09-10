@@ -157,7 +157,7 @@ void LittleEngine::Editor::Panels::MaterialEditor::Preview()
 
 void LittleEngine::Editor::Panels::MaterialEditor::Reset()
 {
-	if (m_target && m_shader)
+	if (m_target && m_shader != nullptr)
 	{
 		m_target->SetShader(nullptr);
 		OnShaderDropped();

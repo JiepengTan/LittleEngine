@@ -86,7 +86,52 @@ namespace LittleEngine
             instance.SetTypeName(type_name);
             return ReadPointer(json_context, instance.GetPtrReference());
         }
-    
+        template<typename T>
+        static Json Write(const std::vector<T>& instance)
+        {
+            Json::array jsonAry;
+            for (auto& item : instance){
+                jsonAry.emplace_back(JsonSerializer::Write(item));
+            }
+            return Json(jsonAry);
+        }
+        template<typename T>
+        static std::vector<T>& Read(const Json& json_context, std::vector<T>& instance)
+        {
+            assert(json_context.is_array());
+            Json::array jsonAry = json_context.array_items();
+            instance.resize(jsonAry.size());
+            for (size_t index=0; index < jsonAry.size();++index){
+                JsonSerializer::Read(jsonAry[index], instance[index]);
+            }
+            return instance;
+        }
+        template<typename K,typename V>
+        static Json Write(const std::map<K,V>& instance)
+        {
+            Json::array jsonAry;
+            for (auto& item : instance){
+                jsonAry.emplace_back(JsonSerializer::Write(item.first));
+                jsonAry.emplace_back(JsonSerializer::Write(item.second));
+            }
+            return Json(jsonAry);
+        }
+        template<typename K,typename V>
+        static std::map<K,V>& Read(const Json& json_context, std::map<K,V>& instance)
+        {
+            assert(json_context.is_array());
+            Json::array jsonAry = json_context.array_items();
+            instance.resize(jsonAry.size()/2);
+            for (size_t index=0; index < jsonAry.size()/2;++index){
+                K key;
+                V val;
+                JsonSerializer::Read(jsonAry[index], key);
+                JsonSerializer::Read(jsonAry[index], val);
+                instance[key] = val;
+            }
+            return instance;
+        }
+        
         
         template<typename T>
         static Json Write(const T& instance)

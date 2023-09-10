@@ -12,30 +12,27 @@
 
 namespace LittleEngine
 {
-	template<typename T>
-	inline void Material::Set(const std::string p_key, const T& p_value,bool p_isForce )
+	template <typename T>
+	void Material::SetProperty(const std::string p_key, const T& p_value, bool p_isForce)
 	{
-		if (HasShader())
+		auto ptr= GetProperty(p_key);
+		if(ptr == nullptr)
 		{
-			if (m_uniformsData.find(p_key) != m_uniformsData.end() )
-				m_uniformsData[p_key] = std::any(p_value);
-			else if(p_isForce)
-			{
-				m_uniformsData[p_key] = std::any(p_value);
-			}
-		}
-		else
+			ResUniformInfo newVal;
+			newVal.m_key = p_key;
+			newVal.Set(p_value);
+			m_res.m_uniformsData.push_back(newVal);
+		}else
 		{
-			LOG_ERROR("Material Set failed: No attached shader " + path);
+			ptr->Set(p_value);
 		}
 	}
 
-	template<typename T>
-	inline const T& Material::Get(const std::string p_key)
+	template <typename T>
+	void Material::GetProperty(const std::string p_key, T& val)
 	{
-		if (m_uniformsData.find(p_key) != m_uniformsData.end())
-			return T();
-		else
-			return std::any_cast<T>(m_uniformsData.at(p_key));
+		auto ptr= GetProperty(p_key);
+		if(ptr != nullptr)
+			ptr->Get(val);
 	}
 }

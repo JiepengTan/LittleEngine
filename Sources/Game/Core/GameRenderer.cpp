@@ -25,8 +25,8 @@ LittleGame::Core::GameRenderer::GameRenderer(Context & p_context) :
 {
 	/* Empty Material */
 	m_emptyMaterial.SetShader(":Shaders\\Unlit.glsl");
-	m_emptyMaterial.Set("u_Diffuse", FVector3(1.f, 0.f, 1.f));
-	m_emptyMaterial.Set<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
+	m_emptyMaterial.SetProperty("u_Diffuse", FVector3(1.f, 0.f, 1.f));
+	m_emptyMaterial.SetProperty<LittleEngine::Texture*>("u_DiffuseMap", nullptr);
 
 	m_context.renderer->RegisterModelMatrixSender([this](const LittleEngine::FMatrix4 & p_modelMatrix)
 	{

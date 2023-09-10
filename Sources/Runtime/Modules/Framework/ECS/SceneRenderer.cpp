@@ -470,7 +470,7 @@ namespace LittleEngine
     )
     {
         using namespace Rendering::Settings;
-        p_material.Set("u_Shadowmap", m_shadowmapBuffer->GetTexture(), true);
+        p_material.SetProperty("u_Shadowmap", m_shadowmapBuffer->GetTexture(), true);
         if (p_material.HasShader() && p_material.GetGPUInstances() > 0)
         {
             if (p_modelMatrix)

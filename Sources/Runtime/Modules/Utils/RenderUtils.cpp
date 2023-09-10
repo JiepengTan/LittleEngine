@@ -28,9 +28,9 @@ void LittleEngine::RenderUtils::DrawDebugQuad(LittleEngine::Texture* p_tex)
 {
     auto material = GetOrCreateDebugQuadMat();
     if (material == nullptr) return;
-    material->Set("u_DebugTex", p_tex);
-    material->Set("near_plane", 0.1f);
-    material->Set("far_plane", 100);
+    material->SetProperty("u_DebugTex", p_tex);
+    material->SetProperty("near_plane", 0.1f);
+    material->SetProperty("far_plane", 100);
     material->Bind(nullptr);
     if (_QuadVAO == 0)
     {

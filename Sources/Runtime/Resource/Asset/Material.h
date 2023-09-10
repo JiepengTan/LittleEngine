@@ -54,13 +54,19 @@ namespace LittleEngine
 		* @param p_key
 		* @param p_value
 		*/
-		template<typename T> void Set(const std::string p_key, const T& p_value, bool p_isForce = false);
+		template< typename  T>
+		void SetProperty(const std::string p_key, const T& p_value, bool p_isForce = false);
 
 		/**
 		* Set a shader uniform value
 		* @param p_key
 		*/
-		template<typename T> const T& Get(const std::string p_key);
+		template< typename  T>
+		void GetProperty(const std::string p_key,T & val);
+
+		ResUniformInfo* GetProperty(const std::string p_key);
+
+		bool HasProperty(const std::string p_key) const;
 
 		/**
 		* Returns the attached shader
@@ -164,12 +170,11 @@ namespace LittleEngine
 		std::string path;
 
 	private:
-		Shader* m_shader = nullptr;
-		std::map<std::string, std::any> m_uniformsData;
-		bool m_isDirty = false;
 		META(Enable)
 		ResMaterial m_res;
 	};
+
+
 }
 
 #include "Resource/Asset/Material.inl"

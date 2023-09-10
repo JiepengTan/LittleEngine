@@ -17,7 +17,14 @@ namespace LittleEngine
     
     void Material::SetShader(Shader* p_shader)
     {
-        SetShader(p_shader->path);
+        if(p_shader == nullptr)
+        {
+            m_res.m_shader = ShaderResPtr::NullPtr;
+            m_res.m_uniformsData.clear();
+        }else
+        {
+            SetShader(p_shader->path);
+        }
     }
     void Material::SetShader(StringText p_path)
     {
@@ -101,6 +108,24 @@ namespace LittleEngine
     {
         if (HasShader())
             m_res.m_shader->Unbind();
+    }
+
+    ResUniformInfo* Material::GetProperty(const std::string p_key)
+    {
+        for (auto& element : m_res.m_uniformsData)
+        {
+            if(element.m_key == p_key) return &element;
+        }
+        return nullptr;
+    }
+
+    bool Material::HasProperty(const std::string p_key) const
+    {
+        for (auto& element : m_res.m_uniformsData)
+        {
+            if(element.m_key == p_key) return true;
+        }
+        return false;
     }
 
     Shader*& Material::GetShader()

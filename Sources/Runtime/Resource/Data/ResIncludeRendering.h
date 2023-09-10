@@ -38,15 +38,29 @@ namespace LittleEngine
         FVector2 GetVector2()const { return FVector2(m_data.x,m_data.y);}
         FVector3 GetVector3()const { return FVector3(m_data.x,m_data.y,m_data.z);}
         FVector4 GetVector4()const { return m_data;}
-
-
-        void SetBool(bool val){ m_data.x = val?1.0f:0.0f; }
-        void SetInt(int val){ m_data.x = (float)val;}
-        void SetFloat(float val){ m_data.x = val;}
-        void SetVector2(FVector2 val){ m_data.x = val.x;m_data.y = val.y;}
-        void SetVector3(FVector3 val){ m_data.x = val.x;m_data.y = val.y;m_data.z = val.z;}
-        void SetVector4(FVector4 val){ m_data = val;}
-        void SetTexture(Texture* texture){m_texture = TextureResPtr::NullPtr;}
+        
+        void Get(bool& val) const { val=GetBool();}
+        void Get(int& val) const{ val= GetInt();}
+        void Get(float& val) const{ val= GetFloat();}
+        void Get(FVector2& val)const { val= GetVector2();}
+        void Get(FVector3& val)const { val= GetVector3();}
+        void Get(FVector4& val)const { val= GetVector4();}
+        
+        void Set(const bool& val){ m_data.x = val?1.0f:0.0f; }
+        void Set(const int& val){ m_data.x = (float)val;}
+        void Set(const float& val){ m_data.x = val;}
+        void Set(const FVector2& val){ m_data.x = val.x;m_data.y = val.y;}
+        void Set(const FVector3& val){ m_data.x = val.x;m_data.y = val.y;m_data.z = val.z;}
+        void Set(const FVector4& val){ m_data = val;}
+        void Set(Texture* texture){m_texture = TextureResPtr::NullPtr;}
+        
+        void SetBool(const bool& val){ Set(val); }
+        void SetInt(const int& val){  Set(val);}
+        void SetFloat(const float& val){  Set(val);}
+        void SetVector2(const FVector2& val){  Set(val);}
+        void SetVector3(const FVector3& val){  Set(val);}
+        void SetVector4(const FVector4& val){  Set(val);}
+        void SetTexture(Texture* val){ Set(val);}
     };
     
     REFLECTION_TYPE(ResMaterial)
@@ -62,6 +76,7 @@ namespace LittleEngine
         bool m_colorWriting		= true;
         int  m_gpuInstances		= 1;
 		ShaderResPtr        m_shader = ShaderResPtr::NullPtr;
+		// TODO tanjp use map instead of vector
         std::vector<ResUniformInfo> m_uniformsData = {};
     };
     
