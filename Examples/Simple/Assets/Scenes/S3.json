@@ -1,0 +1,51 @@
+{
+  "actors": [
+    {
+      "active": true,
+      "actorID": 9,
+      "childrenIds": [],
+      "components": [
+        {
+          "$context": {
+            "instanceId": 1.4829735431805719e+19,
+            "isUpdateInEdit": false,
+            "transform": {
+              "localPosition": {
+                "x": 0,
+                "y": 3.2000000476837158,
+                "z": 3.4500000476837158
+              },
+              "localRotation": {
+                "w": 0.999869704246521,
+                "x": 0,
+                "y": 0,
+                "z": 0.016143593937158585
+              },
+              "localScale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              }
+            }
+          },
+          "$typeName": "CTransform"
+        },
+        {
+          "$context": {
+            "instanceId": 1.4829735431805719e+19,
+            "isUpdateInEdit": false
+          },
+          "$typeName": "CPointLight"
+        }
+      ],
+      "instanceId": 1.4829735431805719e+19,
+      "name": "Point Light",
+      "parentID": 1.8446744073709552e+19,
+      "prefabGuid": "",
+      "tag": ""
+    }
+  ],
+  "guid": "",
+  "name": "",
+  "sceneId": -858993460
+}
