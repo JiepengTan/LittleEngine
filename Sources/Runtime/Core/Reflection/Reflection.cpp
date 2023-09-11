@@ -295,10 +295,11 @@ namespace LittleEngine
         bool TypeMeta::IsSubclassOf(TypeID typeId)
         {
             if(m_id2BaseClassTypes.count(typeId) == 0) return false;
-            auto& suppers = m_id2BaseClassTypes.at(typeId);
+            auto& suppers = m_id2BaseClassTypes.at(m_typeId);
             for (auto supper : suppers)
             {
-                if(supper->m_typeId == typeId) return true;
+                if(supper->m_typeId == typeId)
+                    return true;
             }
             return false;
         }
