@@ -30,6 +30,6 @@ namespace LittleEngine::Test
         REFLECTION_BODY(Test2)
 
         public:
-        std::vector<LittleEngine::Reflection::ReflectionPtr<BaseTest>> m_test_base_array;
+        std::vector<LittleEngine::Reflection::MetaPtr<BaseTest>> m_test_base_array;
     };
 } // namespace LittleEngine

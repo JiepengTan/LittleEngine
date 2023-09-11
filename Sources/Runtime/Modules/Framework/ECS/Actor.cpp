@@ -75,7 +75,7 @@ namespace LittleEngine
         auto& comps = GetComponentsCopy(m_components);
         for (auto comp : comps)
         {
-            p_resActor.m_components.push_back( Reflection::ReflectionPtr<Component>(comp->GetTypeName(),comp.get()));
+            p_resActor.m_components.push_back( Reflection::MetaPtr<Component>(comp->GetTypeName(),comp.get()));
         }
         for (auto child : m_childrenIds)
         {

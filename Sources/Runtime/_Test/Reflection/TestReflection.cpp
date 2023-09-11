@@ -13,10 +13,10 @@ namespace LittleEngine::Test
     void DebugShowReflectionMetas()
     {
         std::cout<<"========= Meta Infos ============="<<std::endl;
-        auto allTypeInfos = LittleEngine::Reflection::TypeMeta::GetBaseClassInfos();
+        auto allTypeInfos = LittleEngine::Reflection::TypeInfo::GetBaseClassInfos();
         for (auto context : allTypeInfos)
         {
-            auto child = LittleEngine::Reflection::TypeMeta::GetType(context.first);
+            auto child = LittleEngine::Reflection::TypeInfo::GetType(context.first);
             auto supers = context.second;
             std::cout<<child->GetTypeName()<<":";
             for (auto super : supers)
@@ -70,22 +70,23 @@ namespace LittleEngine::Test
         LittleEngine::JsonSerializer::Read(test2_json, test2_out);
         LOG_INFO(test2_context.c_str());
         // reflection
-        auto                       Meta = TypeMetaDef(Test2, &test2_out);
+        auto                       Meta = LittleEngine::Reflection::TypeInfo::GetType(Test2::GetStaticTypeID());
+        auto instance = &test2_out;
         LittleEngine::Reflection::FieldAccessor* fields;
-        int                        fields_count = Meta.m_meta->GetFieldsList(fields);
+        int                        fields_count = Meta->GetFieldsList(fields);
         for (int i = 0; i < fields_count; ++i)
         {
             auto filed_accesser = fields[i];
             std::cout << filed_accesser.GetFieldTypeName() << " " << filed_accesser.GetFieldName() << " "
-                      << (char*)filed_accesser.Get(Meta.m_instance) << std::endl;
+                      << (char*)filed_accesser.Get(instance) << std::endl;
             if (filed_accesser.IsArrayType())
             {
                 LittleEngine::Reflection::ArrayAccessor array_accesser;
-                if (LittleEngine::Reflection::TypeMeta::NewArrayAccessorFromName(filed_accesser.GetFieldTypeName(), array_accesser))
+                if (LittleEngine::Reflection::TypeInfo::NewArrayAccessorFromName(filed_accesser.GetFieldTypeName(), array_accesser))
                 {
-                    void* field_instance = filed_accesser.Get(Meta.m_instance);
+                    void* field_instance = filed_accesser.Get(instance);
                     int   count          = array_accesser.GetSize(field_instance);
-                    auto  typeMetaItem   = LittleEngine::Reflection::TypeMeta::GetType(array_accesser.GetElementTypeName());
+                    auto  typeMetaItem   = LittleEngine::Reflection::TypeInfo::GetType(array_accesser.GetElementTypeName());
                     for (int index = 0; index < count; ++index)
                     {
                         std::cout << ":L:" << index << ":R:" << (int*)array_accesser.Get(index, field_instance)

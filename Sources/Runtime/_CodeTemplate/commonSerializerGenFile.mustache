@@ -4,9 +4,10 @@
 {{/include_headfiles}}
 
 namespace LittleEngine{
-    {{#class_defines}}template<>
+{{#class_defines}}
+    template<>
     Json JsonSerializer::Write(const {{class_full_name}}& instance);
     template<>
     {{class_full_name}}& JsonSerializer::Read(const Json& json_context, {{class_full_name}}& instance);
-    {{/class_defines}}
-}//namespace
+{{/class_defines}}
+}

@@ -6,7 +6,7 @@
 {{/include_headfiles}}
 
 
-void LittleEngine::Reflection::TypeMetaRegister::MetaRegister(){
+void LittleEngine::Reflection::MetaRegisterUtil::RegisterAll(){
     {{#sourefile_names}}LittleEngine::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
     {{/sourefile_names}}
     

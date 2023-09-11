@@ -1,15 +1,26 @@
 ﻿#include "TypeUtil.h"
 
+#include "Core/Reflection/Reflection.h"
+
 namespace LittleEngine
 {
-    TMap<TypeID, TVector<Reflection::TypeMeta*> > TypeUtil::GetBaseClassInfos()
+    void TypeUtil::LoadAllTypeInfo()
     {
-        return Reflection::TypeMeta::GetBaseClassInfos();
+        Reflection::MetaRegisterUtil::RegisterAll();
+    }
+    void TypeUtil::UnloadAllTypeInfo()
+    {
+        Reflection::MetaRegisterUtil::UnRegisterAll();
     }
 
-    TVector<Reflection::TypeMeta*>  TypeUtil::GetAllTypes()
+    TMap<TypeID, TVector<Reflection::TypeInfo*> > TypeUtil::GetBaseClassInfos()
     {
-        return Reflection::TypeMeta::GetAllTypes();
+        return Reflection::TypeInfo::GetBaseClassInfos();
+    }
+
+    TVector<Reflection::TypeInfo*> TypeUtil::GetAllTypes()
+    {
+        return Reflection::TypeInfo::GetAllTypes();
     }
 }
 

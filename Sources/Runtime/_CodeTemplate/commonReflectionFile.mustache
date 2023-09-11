@@ -13,8 +13,8 @@ namespace {{class_namespace}}{
 {{/class_defines}}
 
 {{#class_defines}}
-namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator{
-    class Type{{class_name}}Operator{
+namespace {{class_namespace}}::MetaCodeGen{
+    class TypeOperator_{{class_name}}{
     public:
         static const char* GetClassName(){ return "{{class_name}}";}
         static void* ConstructorWithJson(const Json& json_context){
@@ -32,17 +32,6 @@ namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator{
             return baseIds;
         };
 
-        // base class
-        static int Get{{class_name}}BaseClassReflectionInstanceList(LittleEngine::Reflection::ReflectionInstance* &out_list, void* instance){
-            int count = {{class_base_class_size}};
-            {{#class_has_base}}out_list = new LittleEngine::Reflection::ReflectionInstance[count];
-            for (int i=0;i<count;++i){
-            {{#class_base_class_defines}}
-            out_list[i] = TypeMetaDef({{class_base_class_name}},static_cast<{{class_name}}*>(instance));
-            {{/class_base_class_defines}}
-            }{{/class_has_base}}
-            return count;
-        }
         // fields
         {{#class_field_defines}}
         
@@ -64,14 +53,12 @@ namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator{
         static void Invoke_{{class_method_name}}(void * instance){static_cast<{{class_name}}*>(instance)->{{class_method_name}}();}
         {{/class_method_defines}}
     };
-}//namespace {{class_namespace}}::Reflection::TypeFieldReflectionOparator
 
 {{#vector_exist}}
-namespace {{class_namespace}}::Reflection::ArrayReflectionOperator{
     {{#vector_defines}}
-#ifndef Array{{vector_useful_name}}OperatorMACRO
-#define Array{{vector_useful_name}}OperatorMACRO
-    class Array{{vector_useful_name}}Operator{
+#ifndef ArrayOperator_{{vector_useful_name}}MACRO
+#define ArrayOperator_{{vector_useful_name}}MACRO
+    class ArrayOperator_{{vector_useful_name}}{
         public:
             static const char* GetArrayTypeName(){ return "{{{vector_type_name}}}";}
             static const char* GetElementTypeName(){ return "{{{vector_element_type_name}}}";}
@@ -88,78 +75,84 @@ namespace {{class_namespace}}::Reflection::ArrayReflectionOperator{
                 (*static_cast<{{{vector_type_name}}}*>(instance))[index] = *static_cast<{{{vector_element_type_name}}}*>(element_value);
             }
     };
-#endif //Array{{vector_useful_name}}Operator
+#endif ArrayOperator_{{vector_useful_name}}MACRO
     {{/vector_defines}}
-}//namespace {{class_namespace}}::Reflection::ArrayReflectionOperator
 {{/vector_exist}}
 
+}
 {{/class_defines}}
 
  {{#class_defines}}
- namespace {{class_namespace}}::Reflection{
+ namespace {{class_namespace}}::MetaCodeGen{
     void TypeWrapperRegister_{{class_name}}(){
         // register field info
-        {{#class_field_defines}}FieldFunctionTuple* field_function_tuple_{{class_field_name}}=new FieldFunctionTuple{
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::Set_{{class_field_name}},
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::Get_{{class_field_name}},
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::GetClassName,
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::GetFieldName_{{class_field_name}},
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::GetFieldTypeName_{{class_field_name}},
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::IsArray_{{class_field_name}}
+        {{#class_field_defines}}
+        LittleEngine::Reflection::FieldFunctionTuple* field_function_tuple_{{class_field_name}}=new LittleEngine::Reflection::FieldFunctionTuple{
+            &TypeOperator_{{class_name}}::Set_{{class_field_name}},
+            &TypeOperator_{{class_name}}::Get_{{class_field_name}},
+            &TypeOperator_{{class_name}}::GetClassName,
+            &TypeOperator_{{class_name}}::GetFieldName_{{class_field_name}},
+            &TypeOperator_{{class_name}}::GetFieldTypeName_{{class_field_name}},
+            &TypeOperator_{{class_name}}::IsArray_{{class_field_name}}
             };
-        REGISTER_FIELD_TO_MAP("{{class_name}}", field_function_tuple_{{class_field_name}});
+        META_REGISTER_FIELD_TO_MAP("{{class_name}}", field_function_tuple_{{class_field_name}});
         {{/class_field_defines}}
 
         // register function info
         {{#class_method_defines}}
-        MethodFunctionTuple* method_function_tuple_{{class_method_name}}=new MethodFunctionTuple{
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::GetMethodName_{{class_method_name}},
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::Invoke_{{class_method_name}});
-        REGISTER_Method_TO_MAP("{{class_name}}", method_function_tuple_{{class_method_name}}
+        LittleEngine::Reflection::MethodFunctionTuple* method_function_tuple_{{class_method_name}}=new LittleEngine::Reflection::MethodFunctionTuple{
+            &TypeOperator_{{class_name}}::GetMethodName_{{class_method_name}},
+            &TypeOperator_{{class_name}}::Invoke_{{class_method_name}});
+        META_REGISTER_Method_TO_MAP("{{class_name}}", method_function_tuple_{{class_method_name}}
         };
         {{/class_method_defines}}
 
         // register array info
-        {{#vector_exist}}{{#vector_defines}}ArrayFunctionTuple* array_tuple_{{vector_useful_name}} = new ArrayFunctionTuple{
-            &ArrayReflectionOperator::Array{{vector_useful_name}}Operator::Set,
-            &ArrayReflectionOperator::Array{{vector_useful_name}}Operator::Get,
-            &ArrayReflectionOperator::Array{{vector_useful_name}}Operator::GetSize,
-            &ArrayReflectionOperator::Array{{vector_useful_name}}Operator::GetArrayTypeName,
-            &ArrayReflectionOperator::Array{{vector_useful_name}}Operator::GetElementTypeName
+    {{#vector_exist}}
+        {{#vector_defines}}
+        LittleEngine::Reflection::ArrayFunctionTuple* array_tuple_{{vector_useful_name}} = new LittleEngine::Reflection::ArrayFunctionTuple{
+            &ArrayOperator_{{vector_useful_name}}::Set,
+            &ArrayOperator_{{vector_useful_name}}::Get,
+            &ArrayOperator_{{vector_useful_name}}::GetSize,
+            &ArrayOperator_{{vector_useful_name}}::GetArrayTypeName,
+            &ArrayOperator_{{vector_useful_name}}::GetElementTypeName
          };
-        REGISTER_ARRAY_TO_MAP("{{{vector_type_name}}}", array_tuple_{{vector_useful_name}});
-        {{/vector_defines}}{{/vector_exist}}
+        META_REGISTER_ARRAY_TO_MAP("{{{vector_type_name}}}", array_tuple_{{vector_useful_name}});
+        {{/vector_defines}}
+    {{/vector_exist}}
 
         // register class type info
-        {{#class_need_register}}ClassFunctionTuple* class_function_tuple_{{class_name}}=new ClassFunctionTuple{
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::Get{{class_name}}BaseClassReflectionInstanceList,
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::ConstructorWithJson,
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::WriteByName,
-            &TypeFieldReflectionOparator::Type{{class_name}}Operator::GetBaseClassIds
+        {{#class_need_register}}
+        LittleEngine::Reflection::ClassFunctionTuple* class_function_tuple_{{class_name}}=new LittleEngine::Reflection::ClassFunctionTuple{
+            &TypeOperator_{{class_name}}::ConstructorWithJson,
+            &TypeOperator_{{class_name}}::WriteByName,
+            &TypeOperator_{{class_name}}::GetBaseClassIds
               };
-        REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
+        META_REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
     }
 
     void TypeWrapperRegisterMetaType_{{class_name}}(){
-        REGISTER_META_TYPE_INFO("{{class_name}}", {{class_type_id}});
+        META_REGISTER_META_TYPE_INFO("{{class_name}}", {{class_type_id}});
     }
 
-}//namespace {{class_namespace}}::Reflection
+}
 {{/class_defines}}
 
 
 namespace LittleEngine::Reflection::TypeWrappersRegister{
     void {{sourefile_name_upper_camel_case}}()
     {
-        {{#class_defines}} {{class_namespace}}::Reflection::TypeWrapperRegister_{{class_name}}();
-        {{/class_defines}}
+    {{#class_defines}} 
+        {{class_namespace}}::MetaCodeGen::TypeWrapperRegister_{{class_name}}();
+    {{/class_defines}}
     }
     
     void {{sourefile_name_upper_camel_case}}_RegitserMetaType()
     {
-        {{#class_defines}} {{class_namespace}}::Reflection::TypeWrapperRegisterMetaType_{{class_name}}();
-        {{/class_defines}}
+    {{#class_defines}}
+        {{class_namespace}}::MetaCodeGen::TypeWrapperRegisterMetaType_{{class_name}}();
+    {{/class_defines}}
     }
 }
 

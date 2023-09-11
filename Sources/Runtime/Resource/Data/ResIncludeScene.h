@@ -25,7 +25,7 @@ namespace LittleEngine
         bool			m_active = true;
         ActorID	        m_actorID = 0;
         ActorID			m_parentID = 0;
-        std::vector<Reflection::ReflectionPtr<Component>> m_components;
+        std::vector<Reflection::MetaPtr<Component>> m_components;
         std::vector<ActorID> m_childrenIds;
     };
     

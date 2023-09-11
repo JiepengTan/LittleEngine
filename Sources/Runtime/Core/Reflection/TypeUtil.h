@@ -6,9 +6,12 @@ namespace LittleEngine
 {
     class TypeUtil
     {
-
     public:
-        static TMap<TypeID, TVector<Reflection::TypeMeta*> > GetBaseClassInfos();
-        static TVector<Reflection::TypeMeta*>  GetAllTypes();
+        static void LoadAllTypeInfo();
+        static void UnloadAllTypeInfo();
+        
+    public:
+        static TMap<TypeID, TVector<Reflection::TypeInfo*> > GetBaseClassInfos();
+        static TVector<Reflection::TypeInfo*>  GetAllTypes();
     };
 }

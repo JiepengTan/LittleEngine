@@ -64,23 +64,23 @@ namespace LittleEngine
             }
             else
             {
-                auto inst = Reflection::TypeMeta::CreateFromNameAndJson(type_name, json_context["$context"]);
+                auto inst = Reflection::TypeInfo::CreateFromNameAndJson(type_name, json_context["$context"]);
                 instance = static_cast<T*>(inst);
             }
             return instance;
         }
 
         template<typename T>
-        static Json Write(const Reflection::ReflectionPtr<T>& instance)
+        static Json Write(const Reflection::MetaPtr<T>& instance)
         {
             T*          instance_ptr = static_cast<T*>(instance.operator->());
             std::string type_name    = instance.GetTypeName();
             return Json::object {{"$typeName", Json(type_name)},
-                                  {"$context", Reflection::TypeMeta::WriteByName(type_name, instance_ptr)}};
+                                  {"$context", Reflection::TypeInfo::WriteByName(type_name, instance_ptr)}};
         }
 
         template<typename T>
-        static T*& Read(const Json& json_context, Reflection::ReflectionPtr<T>& instance)
+        static T*& Read(const Json& json_context, Reflection::MetaPtr<T>& instance)
         {
             std::string type_name = json_context["$typeName"].string_value();
             instance.SetTypeName(type_name);

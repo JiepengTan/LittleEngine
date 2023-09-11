@@ -19,9 +19,7 @@
 
 #include "Windows.h"
 #include "Core/Base/Application.h"
-#include "Core/Reflection/ReflectionRegister.h"
-#include "_Generated/Serializer/AllSerializer.ipp"
-#include "_Generated/Reflection/AllReflection.h"
+#include "Core/Reflection/TypeUtil.h"
 #include "_Test/TestManager.h"
 
 FORCE_DEDICATED_GPU
@@ -53,7 +51,7 @@ INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nC
 int main(int argc, char** argv)
 {
 	UpdateWorkingDirectory(argv[0]);
-	LittleEngine::Reflection::TypeMetaRegister::MetaRegister();
+	LittleEngine::TypeUtil::LoadAllTypeInfo();
 	
 	LittleEngine::Test::RunTests();
 	
@@ -91,6 +89,7 @@ int main(int argc, char** argv)
 	if (ready)
 		TryRun(projectPath, projectName);
 
+	LittleEngine::TypeUtil::UnloadAllTypeInfo();
 	return EXIT_SUCCESS;
 }
 
