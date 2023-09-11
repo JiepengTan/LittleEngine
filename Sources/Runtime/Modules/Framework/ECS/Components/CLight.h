@@ -75,6 +75,7 @@ namespace LittleEngine
 		virtual void OnInspector() override;
 		
 	protected:
+		META(Enable)
 		LittleEngine::Rendering::Entities::Light m_data;
 	};
 }

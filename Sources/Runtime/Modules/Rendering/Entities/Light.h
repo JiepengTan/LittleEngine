@@ -16,8 +16,11 @@ namespace LittleEngine::Rendering::Entities
 	/**
 	* Data structure that can represent any type of light
 	*/
-	struct Light
+	REFLECTION_STRUCT_TYPE(Light)
+	STRUCT(Light,WhiteListFields)
 	{
+		REFLECTION_STRUCT_BODY(Light)
+	public:
 		/**
 		* Light types
 		*/
@@ -45,15 +48,16 @@ namespace LittleEngine::Rendering::Entities
 		*/
 		const LittleEngine::FTransform* GetTransform() const;
 
-		FVector3			color		= { 1.f, 1.f, 1.f };
-		float				intensity	= 1.f;
-		float				constant	= 0.0f;
-		float				linear		= 0.0f;
-		float				quadratic	= 1.0f;
-		float				cutoff		= 12.f;
-		float				outerCutoff = 15.f;
-		float				type		= 0.0f;
-
+		
+		META(Enable) FVector3		color		= { 1.f, 1.f, 1.f };
+		META(Enable) float			intensity	= 1.f;
+		META(Enable) float			constant	= 0.0f;
+		META(Enable) float			linear		= 0.0f;
+		META(Enable) float			quadratic	= 1.0f;
+		META(Enable) float			cutoff		= 12.f;
+		META(Enable) float			outerCutoff = 15.f;
+		META(Enable) float			type		= 0.0f;
+	
 	protected:
 		LittleEngine::FTransform* m_transform;
 	};
