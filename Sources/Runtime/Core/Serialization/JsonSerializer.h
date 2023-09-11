@@ -96,15 +96,15 @@ namespace LittleEngine
             return Json(jsonAry);
         }
         template<typename T>
-        static std::vector<T>& Read(const Json& json_context, std::vector<T>& instance)
+        static std::vector<T>& Read(const Json& json_context, std::vector<T>& vec)
         {
             assert(json_context.is_array());
             Json::array jsonAry = json_context.array_items();
-            instance.resize(jsonAry.size());
+            vec.resize(jsonAry.size());
             for (size_t index=0; index < jsonAry.size();++index){
-                JsonSerializer::Read(jsonAry[index], instance[index]);
+                JsonSerializer::Read(jsonAry[index], vec[index]);
             }
-            return instance;
+            return vec;
         }
         template<typename K,typename V>
         static Json Write(const std::map<K,V>& instance)

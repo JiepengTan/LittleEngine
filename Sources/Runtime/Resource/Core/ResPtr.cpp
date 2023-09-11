@@ -23,8 +23,9 @@ namespace LittleEngine
         instance.Reset(resType,guid,ptr);\
         return instance;\
     }
+    
 
-
+   
     DEFINE_RES_PTR_JSON_SERIALIZER(Shader) 
     DEFINE_RES_PTR_JSON_SERIALIZER(Texture)
     DEFINE_RES_PTR_JSON_SERIALIZER(Model) 

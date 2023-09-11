@@ -50,7 +50,7 @@ namespace LittleEngine
 		const uint32_t bitsPerPixel;
 		const Rendering::Settings::ETextureFilteringMode firstFilter;
 		const Rendering::Settings::ETextureFilteringMode secondFilter;
-		const std::string path;
+		std::string path;
 		const bool isMimapped;
 	};
 }

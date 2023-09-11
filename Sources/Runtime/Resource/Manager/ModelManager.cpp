@@ -55,7 +55,7 @@ LittleEngine::Model* LittleEngine::ResourceManagement::ModelManager::CreateResou
 	std::string realPath = PathUtil::GetRealPath(p_path);
 	auto model = LittleEngine::Resources::ModelLoader::Create(realPath, GetAssetMetadata(realPath));
 	if (model)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(LittleEngine::Model, path)) = p_path; // Force the resource path to fit the given path
+		model->path = p_path; // Force the resource path to fit the given path
 
 	return model;
 }

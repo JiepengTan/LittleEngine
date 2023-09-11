@@ -28,7 +28,7 @@ LittleEngine::Texture* LittleEngine::ResourceManagement::TextureManager::CreateR
 
 	LittleEngine::Texture* texture = LittleEngine::Resources::TextureLoader::Create(realPath, min, mag, mipmap);
 	if (texture)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(LittleEngine::Texture, path)) = p_path; // Force the resource path to fit the given path
+		texture->path = p_path; // Force the resource path to fit the given path
 
 	return texture;
 }

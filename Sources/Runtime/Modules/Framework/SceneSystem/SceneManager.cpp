@@ -113,6 +113,11 @@ bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneS
 	LoadEmptyScene();
 	std::string error;
 	auto&& asset_json = Json::parse(p_sceneStr, error);
+	if(!error.empty())
+	{
+		LOG_ERROR( + "Load Scene error : " + error);
+		return false;
+	}
 	ResScene resScene;
 	JsonSerializer::Read(asset_json,resScene);
 	m_currentScene->LoadFrom(resScene);

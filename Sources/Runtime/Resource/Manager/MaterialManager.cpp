@@ -13,7 +13,7 @@ LittleEngine::Material * LittleEngine::ResourceManagement::MaterialManager::Crea
 	Material* material = LittleEngine::Resources::MaterialLoader::Create(realPath);
 	if (material)
 	{
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(material) + offsetof(Material, path)) = p_path; // Force the resource path to fit the given path
+		material->path = p_path; // Force the resource path to fit the given path
 	}
 
 	return material;

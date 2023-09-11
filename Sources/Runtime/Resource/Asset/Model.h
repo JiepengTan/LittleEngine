@@ -46,7 +46,7 @@ namespace LittleEngine
 		void ComputeBoundingSphere();
 
 	public:
-		const std::string path;
+		std::string path;
 		int& GetBoneCount() { return m_BoneCounter; }
 		std::map<std::string, LittleEngine::Resources::BoneInfo>& GetBoneInfoMap() { return m_name2BoneInfo; }
 		bool isSkinMesh;
