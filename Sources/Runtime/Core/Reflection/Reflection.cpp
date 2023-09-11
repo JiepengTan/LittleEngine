@@ -12,12 +12,73 @@ namespace LittleEngine
         const char* k_unknown_type = "UnknownType";
         const char* k_unknown      = "Unknown";
 
+        
         static std::map<TypeID, std::string>                    m_id2ClassNameMap;
         static std::map<std::string, ClassFunctionTuple*>       m_classMap;
         static std::multimap<std::string, FieldFunctionTuple*>  m_fieldMap;
         static std::multimap<std::string, MethodFunctionTuple*> m_methodMap;
         static std::map<std::string, ArrayFunctionTuple*>       m_arrayMap;
 
+        
+        std::map<TypeID,TypeMeta*> TypeMeta::m_id2Types;
+        std::map<std::string,TypeMeta*> TypeMeta::m_name2Types;
+        std::map<TypeID,std::vector<TypeMeta*>> TypeMeta::m_id2BaseClassTypes;
+        
+        TypeMeta* TypeMeta::GetType(std::string type_name)
+        {
+            if(m_name2Types.count(type_name) == 0) return nullptr;
+            return m_name2Types.at(type_name);
+        }
+        TypeMeta* TypeMeta::GetType(TypeID typeId)
+        {
+            if(m_id2Types.count(typeId) == 0) return nullptr;
+            return m_id2Types.at(typeId);
+        }
+        void GetBaseClass()
+        {
+            
+        }
+        
+        void TypeMeta::RecvGetSuperClassMetas(std::string type_name,std::vector<TypeMeta*>& supperClasses)
+        {
+            auto ids = GetBaseClassIds(type_name);
+            for (auto id : ids)
+            {
+                if(m_id2Types.count(id) == 0)
+                {
+                    auto className= m_id2ClassNameMap.at(id);
+                    auto base= RegisterType(className,id);
+                    supperClasses.push_back(base);
+                }else
+                {
+                    supperClasses.push_back(m_id2Types.at(id));
+                }
+                RecvGetSuperClassMetas(m_id2ClassNameMap.at(id),supperClasses);
+            }
+        }
+        TypeMeta* TypeMeta::RegisterType(std::string type_name,TypeID typeId)
+        {
+            if(m_id2Types.count(typeId) !=0) return m_id2Types.at(typeId);
+            TypeMeta* meta = new TypeMeta(type_name,typeId);
+            m_name2Types.emplace(type_name,meta);
+            m_id2Types.emplace(typeId,meta);
+            std::vector<TypeMeta*> baseClasses;
+            RecvGetSuperClassMetas(type_name,baseClasses);
+            m_id2BaseClassTypes[typeId] = baseClasses;
+            return meta;
+        }
+        
+        void TypeMeta::Clear()
+        {
+            for (auto item : m_id2Types)
+            {
+                delete item.second;
+            }
+            m_name2Types.clear();
+            m_id2Types.clear();
+        }
+
+        
         void TypeMetaRegisterInterface::RegisterToFieldMap(const char* name, FieldFunctionTuple* value)
         {
             m_fieldMap.insert(std::make_pair(name, value));
@@ -85,12 +146,12 @@ namespace LittleEngine
             m_arrayMap.clear();
         }
 
-        TypeMeta::TypeMeta(std::string type_name) : m_typeName(type_name)
+        TypeMeta::TypeMeta(std::string type_name,TypeID typeId) : m_typeName(type_name)
         {
             m_isValid = false;
             m_fields.clear();
             m_methods.clear();
-
+            m_typeId = typeId;
             auto fileds_iter = m_fieldMap.equal_range(type_name);
             while (fileds_iter.first != fileds_iter.second)
             {
@@ -112,13 +173,12 @@ namespace LittleEngine
             }
         }
 
-        TypeMeta::TypeMeta() : m_typeName(k_unknown_type), m_isValid(false) { m_fields.clear(); m_methods.clear(); }
-
-        TypeMeta TypeMeta::NewMetaFromName(std::string type_name)
+        TypeMeta::TypeMeta() : m_typeName(k_unknown_type), m_isValid(false), m_typeId(0)
         {
-            TypeMeta f_type(type_name);
-            return f_type;
+            m_fields.clear();
+            m_methods.clear();
         }
+
 
         bool TypeMeta::NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor)
         {
@@ -138,7 +198,7 @@ namespace LittleEngine
             auto iter = m_classMap.find(type_name);
             if (iter != m_classMap.end())
             {
-                return (std::get<1>(*iter->second)(json_context));
+                return (iter->second->ConstructorWithJsonFunc(json_context));
             }
             return nullptr;
         }
@@ -146,10 +206,9 @@ namespace LittleEngine
         ReflectionInstance TypeMeta::NewFromNameAndJson(std::string type_name, const Json& json_context)
         {
             auto iter = m_classMap.find(type_name);
-
             if (iter != m_classMap.end())
             {
-                return ReflectionInstance(TypeMeta(type_name), (std::get<1>(*iter->second)(json_context)));
+                return ReflectionInstance(GetType(type_name), ( iter->second->ConstructorWithJsonFunc(json_context)));
             }
             return ReflectionInstance();
         }
@@ -160,12 +219,14 @@ namespace LittleEngine
 
             if (iter != m_classMap.end())
             {
-                return std::get<2>(*iter->second)(instance);
+                return iter->second->WriteJsonByNameFunc(instance);
             }
             return Json();
         }
 
         std::string TypeMeta::GetTypeName() { return m_typeName; }
+
+        TypeID TypeMeta::GetTypeID() const { return m_typeId;}
 
         int TypeMeta::GetFieldsList(FieldAccessor*& out_list)
         {
@@ -189,13 +250,23 @@ namespace LittleEngine
             return count;
         }
 
+        
+        std::vector<TypeID> TypeMeta::GetBaseClassIds(std::string type_name){
+            auto iter = m_classMap.find(type_name);
+            if (iter != m_classMap.end())
+            {
+                return iter->second->GetBaseClassIds();
+            }
+            return std::vector<TypeID>();
+        }
+                
         int TypeMeta::GetBaseClassReflectionInstanceList(ReflectionInstance*& out_list, void* instance)
         {
             auto iter = m_classMap.find(m_typeName);
 
             if (iter != m_classMap.end())
             {
-                return (std::get<0>(*iter->second))(out_list, instance);
+                return iter->second->GetBaseClassReflectionInstanceList(out_list, instance);
             }
 
             return 0;
@@ -219,6 +290,22 @@ namespace LittleEngine
             if (it != m_methods.end())
                 return *it;
             return MethodAccessor(nullptr);
+        }
+
+        bool TypeMeta::IsSubclassOf(TypeID typeId)
+        {
+            if(m_id2BaseClassTypes.count(typeId) == 0) return false;
+            auto& suppers = m_id2BaseClassTypes.at(typeId);
+            for (auto supper : suppers)
+            {
+                if(supper->m_typeId == typeId) return true;
+            }
+            return false;
+        }
+
+        bool TypeMeta::IsAssignableFrom(TypeID typeId)
+        {
+            return typeId == m_typeId || IsSubclassOf(typeId);
         }
 
         TypeMeta& TypeMeta::operator=(const TypeMeta& dest)
@@ -255,34 +342,31 @@ namespace LittleEngine
                 return;
             }
 
-            m_fieldTypeName = (std::get<4>(*m_functions))();
-            m_fieldName      = (std::get<3>(*m_functions))();
+            m_fieldTypeName = m_functions->GetFieldType();
+            m_fieldName      = m_functions->GetFiledName();
         }
 
         void* FieldAccessor::Get(void* instance)
         {
             // todo: should check validation
-            return static_cast<void*>((std::get<1>(*m_functions))(instance));
+            return static_cast<void*>(m_functions->Get(instance));
         }
 
         void FieldAccessor::Set(void* instance, void* value)
         {
             // todo: should check validation
-            (std::get<0>(*m_functions))(instance, value);
+            m_functions->Set(instance, value);
         }
 
-        TypeMeta FieldAccessor::GetOwnerTypeMeta()
+        TypeMeta* FieldAccessor::GetOwnerTypeMeta()
         {
             // todo: should check validation
-            TypeMeta f_type((std::get<2>(*m_functions))());
-            return f_type;
+            return TypeMeta::GetType(m_functions->GetClassName());
         }
 
-        bool FieldAccessor::GetTypeMeta(TypeMeta& field_type)
+        bool FieldAccessor::HasTypeMeta()
         {
-            TypeMeta f_type(m_fieldTypeName);
-            field_type = f_type;
-            return f_type.m_isValid;
+            return TypeMeta::GetType(m_fieldTypeName) == nullptr;
         }
 
         const char* FieldAccessor::GetFieldName() const { return m_fieldName; }
@@ -291,7 +375,7 @@ namespace LittleEngine
         bool FieldAccessor::IsArrayType()
         {
             // todo: should check validation
-            return (std::get<5>(*m_functions))();
+            return m_functions->IsArray();
         }
 
         FieldAccessor& FieldAccessor::operator=(const FieldAccessor& dest)
@@ -320,10 +404,10 @@ namespace LittleEngine
                 return;
             }
 
-            m_methodName      = (std::get<0>(*m_functions))();
+            m_methodName      = m_functions->GetMethodName();
         }
         const char* MethodAccessor::GetMethodName() const{
-            return (std::get<0>(*m_functions))();
+            return m_functions->GetMethodName();
         }
         MethodAccessor& MethodAccessor::operator=(const MethodAccessor& dest)
         {
@@ -335,7 +419,7 @@ namespace LittleEngine
             m_methodName      = dest.m_methodName;
             return *this;
         }
-        void MethodAccessor::Invoke(void* instance) { (std::get<1>(*m_functions))(instance); }
+        void MethodAccessor::Invoke(void* instance) { m_functions->Invoke(instance); }
         ArrayAccessor::ArrayAccessor() :
             m_func(nullptr), m_arrayTypeName("UnKnownType"), m_elementTypeName("UnKnownType")
         {}
@@ -349,8 +433,8 @@ namespace LittleEngine
                 return;
             }
 
-            m_arrayTypeName   = std::get<3>(*m_func)();
-            m_elementTypeName = std::get<4>(*m_func)();
+            m_arrayTypeName   =m_func->GetArrayTypeName();
+            m_elementTypeName =m_func->GetElementTypeName();
         }
         const char* ArrayAccessor::GetArrayTypeName() { return m_arrayTypeName; }
         const char* ArrayAccessor::GetElementTypeName() { return m_elementTypeName; }
@@ -359,7 +443,7 @@ namespace LittleEngine
             // todo: should check validation
             size_t count = GetSize(instance);
             // todo: should check validation(index < count)
-            std::get<0> (*m_func)(index, instance, element_value);
+           m_func->Set (index, instance, element_value);
         }
 
         void* ArrayAccessor::Get(int index, void* instance)
@@ -367,13 +451,13 @@ namespace LittleEngine
             // todo: should check validation
             size_t count = GetSize(instance);
             // todo: should check validation(index < count)
-            return std::get<1>(*m_func)(index, instance);
+            return m_func->Get(index, instance);
         }
 
         int ArrayAccessor::GetSize(void* instance)
         {
             // todo: should check validation
-            return std::get<2>(*m_func)(instance);
+            return m_func->GetSize(instance);
         }
 
         ArrayAccessor& ArrayAccessor::operator=(ArrayAccessor& dest)

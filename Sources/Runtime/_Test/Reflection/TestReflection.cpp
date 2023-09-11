@@ -10,6 +10,24 @@
 
 namespace LittleEngine::Test
 {
+    void DebugShowReflectionMetas()
+    {
+        std::cout<<"========= Meta Infos ============="<<std::endl;
+        auto allTypeInfos = LittleEngine::Reflection::TypeMeta::GetBaseClassInfos();
+        for (auto context : allTypeInfos)
+        {
+            auto child = LittleEngine::Reflection::TypeMeta::GetType(context.first);
+            auto supers = context.second;
+            std::cout<<child->GetTypeName()<<":";
+            for (auto super : supers)
+            {
+                std::cout<<super->GetTypeName()<<",";
+            }
+            std::cout<<std::endl;
+        }
+        std::cout<<"Meta Infos End"<<std::endl;
+    }
+
     void DoReflectionTest()
     {
         Test1 test1_in;
@@ -51,11 +69,10 @@ namespace LittleEngine::Test
         auto&& test2_json = Json::parse(test2_context, err);
         LittleEngine::JsonSerializer::Read(test2_json, test2_out);
         LOG_INFO(test2_context.c_str());
-
         // reflection
         auto                       Meta = TypeMetaDef(Test2, &test2_out);
         LittleEngine::Reflection::FieldAccessor* fields;
-        int                        fields_count = Meta.m_meta.GetFieldsList(fields);
+        int                        fields_count = Meta.m_meta->GetFieldsList(fields);
         for (int i = 0; i < fields_count; ++i)
         {
             auto filed_accesser = fields[i];
@@ -68,7 +85,7 @@ namespace LittleEngine::Test
                 {
                     void* field_instance = filed_accesser.Get(Meta.m_instance);
                     int   count          = array_accesser.GetSize(field_instance);
-                    auto  typeMetaItem   = LittleEngine::Reflection::TypeMeta::NewMetaFromName(array_accesser.GetElementTypeName());
+                    auto  typeMetaItem   = LittleEngine::Reflection::TypeMeta::GetType(array_accesser.GetElementTypeName());
                     for (int index = 0; index < count; ++index)
                     {
                         std::cout << ":L:" << index << ":R:" << (int*)array_accesser.Get(index, field_instance)
@@ -78,5 +95,8 @@ namespace LittleEngine::Test
                 }
             }
         }
+
+        
+        DebugShowReflectionMetas();
     }
 } // namespace LittleEngine

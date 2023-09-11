@@ -9,4 +9,8 @@
 void LittleEngine::Reflection::TypeMetaRegister::MetaRegister(){
     {{#sourefile_names}}LittleEngine::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}();
     {{/sourefile_names}}
+    
+    {{#sourefile_names}}LittleEngine::Reflection::TypeWrappersRegister::{{sourefile_name_upper_camel_case}}_RegitserMetaType();
+    {{/sourefile_names}}
+    
 }

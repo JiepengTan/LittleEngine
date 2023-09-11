@@ -42,6 +42,9 @@ namespace LittleEngine
     friend class JsonSerializer;\
     public :\
     static ::LittleEngine::TypeID MetaTypeId;\
+    static LittleEngine::Reflection::TypeMeta* GetStaticType(){ return LittleEngine::Reflection::TypeMeta::GetType(GetStaticTypeID()); }\
+    static bool IsStaticSubclassOf(::LittleEngine::TypeID typeId){ return GetStaticType()->IsSubclassOf(typeId); }\
+    static bool IsStaticAssignableFrom(::LittleEngine::TypeID typeId){ return GetStaticType()->IsAssignableFrom(typeId); }\
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
     static std::string GetStaticTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(class_name##::MetaTypeId);}
 
@@ -76,6 +79,9 @@ namespace LittleEngine
         _LE_InternalMetaTypeID = class_name##::MetaTypeId;\
         OnConstruction();\
     }\
+    virtual LittleEngine::Reflection::TypeMeta* GetType(){ return LittleEngine::Reflection::TypeMeta::GetType(_LE_InternalMetaTypeID); }\
+    virtual bool IsSubclassOf(::LittleEngine::TypeID typeId){ return GetType()->IsSubclassOf(typeId); }\
+    virtual bool IsAssignableFrom(::LittleEngine::TypeID typeId){ return GetType()->IsAssignableFrom(typeId); }\
     virtual ::LittleEngine::TypeID GetTypeID(){ return _LE_InternalMetaTypeID;}\
     virtual std::string GetTypeName(){ return LittleEngine::Reflection::TypeMetaRegisterInterface::GetTypeName(_LE_InternalMetaTypeID);}
 
@@ -85,6 +91,7 @@ namespace LittleEngine
 #define REGISTER_Method_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToMethodMap(name, value);
 #define REGISTER_BASE_CLASS_TO_MAP(name, value, typeId) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToClassMap(name, value, typeId);
 #define REGISTER_ARRAY_TO_MAP(name, value) LittleEngine::Reflection::TypeMetaRegisterInterface::RegisterToArrayMap(name, value);
+#define REGISTER_META_TYPE_INFO(name, typeId) LittleEngine::Reflection::TypeMeta::RegisterType(name, typeId);
 #define UNREGISTER_ALL LittleEngine::Reflection::TypeMetaRegisterInterface::UnRegisterAll();
 
 #define PICCOLO_REFLECTION_NEW(name, ...) LittleEngine::Reflection::ReflectionPtr(#name, new name(__VA_ARGS__));
@@ -98,12 +105,9 @@ namespace LittleEngine
     *static_cast<type*>(dst_ptr) = *static_cast<type*>(src_ptr.GetPtr());
 
 #define TypeMetaDef(class_name, ptr) \
-    LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
-                                            (class_name*)ptr)
+    LittleEngine::Reflection::ReflectionInstance\
+        (LittleEngine::Reflection::TypeMeta::GetType(#class_name),(class_name*)ptr)
 
-#define TypeMetaDefPtr(class_name, ptr) \
-    new LittleEngine::Reflection::ReflectionInstance(LittleEngine::Reflection::TypeMeta::NewMetaFromName(#class_name), \
-                                                (class_name*)ptr)
 
     template<typename T, typename U, typename = void>
     struct is_safely_castable : std::false_type
@@ -130,16 +134,47 @@ namespace LittleEngine
     typedef std::function<bool()>                  GetBoolFunc;
     typedef std::function<void(void*)>             InvokeFunction;
 
+    
     typedef std::function<void*(const Json&)>                           ConstructorWithJson;
     typedef std::function<Json(void*)>                                  WriteJsonByName;
     typedef std::function<int(Reflection::ReflectionInstance*&, void*)> GetBaseClassReflectionInstanceListFunc;
+    typedef std::function<std::vector<TypeID>(void)>                    GetBaseClassIdsFunc;
+    
+    class FieldFunctionTuple
+    {
+    public:
+        SetFunction Set;
+        GetFunction Get;
+        GetNameFunction GetClassName;
+        GetNameFunction GetFiledName;
+        GetNameFunction GetFieldType;
+        GetBoolFunc IsArray;
+    };
+    class MethodFunctionTuple
+    {
+    public:
+       GetNameFunction GetMethodName;
+        InvokeFunction Invoke;
+    };
+    class ClassFunctionTuple
+    {
+    public:
+        GetBaseClassReflectionInstanceListFunc GetBaseClassReflectionInstanceList;
+        ConstructorWithJson ConstructorWithJsonFunc;
+        WriteJsonByName WriteJsonByNameFunc;
+        GetBaseClassIdsFunc GetBaseClassIds;
+    };
+    class ArrayFunctionTuple
+    {
+    public:
+        SetArrayFunc Set;
+        GetArrayFunc Get;
+        GetSizeFunc GetSize;
+        GetNameFunction GetArrayTypeName;
+        GetNameFunction GetElementTypeName;
+    };
 
-    typedef std::tuple<SetFunction, GetFunction, GetNameFunction, GetNameFunction, GetNameFunction, GetBoolFunc>
-                                                       FieldFunctionTuple;
-    typedef std::tuple<GetNameFunction, InvokeFunction> MethodFunctionTuple;
-    typedef std::tuple<GetBaseClassReflectionInstanceListFunc, ConstructorWithJson, WriteJsonByName> ClassFunctionTuple;
-    typedef std::tuple<SetArrayFunc, GetArrayFunc, GetSizeFunc, GetNameFunction, GetNameFunction>      ArrayFunctionTuple;
-
+    
     namespace Reflection
     {
         class TypeMeta;
@@ -158,6 +193,8 @@ namespace LittleEngine
             static void UnRegisterAll();
             
         };
+   
+        typedef std::tuple<std::string, TypeID>        MetaIdName;
         class TypeMeta
         {
             friend class FieldAccessor;
@@ -169,7 +206,6 @@ namespace LittleEngine
 
             // static void Register();
 
-            static TypeMeta NewMetaFromName(std::string type_name);
 
             static bool               NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor);
             static ReflectionInstance NewFromNameAndJson(std::string type_name, const Json& json_context);
@@ -178,6 +214,7 @@ namespace LittleEngine
             static Json               WriteByName(std::string type_name, void* instance);
 
             std::string GetTypeName();
+            TypeID GetTypeID() const;
 
             int GetFieldsList(FieldAccessor*& out_list);
             int GetMethodsList(MethodAccessor*& out_list);
@@ -186,22 +223,35 @@ namespace LittleEngine
 
             FieldAccessor GetFieldByName(const char* name);
             MethodAccessor GetMethodByName(const char* name);
-
+            bool IsSubclassOf(TypeID typeId);
+            bool IsAssignableFrom(TypeID typeId);
             bool IsValid() { return m_isValid; }
 
             TypeMeta& operator=(const TypeMeta& dest);
 
+            static TypeMeta* GetType(std::string type_name);
+            static TypeMeta* GetType(TypeID typeId);
+            static TypeMeta* RegisterType(std::string type_name,TypeID typeId);
+            static std::map<TypeID,std::vector<TypeMeta*>> GetBaseClassInfos() { return m_id2BaseClassTypes;}
         private:
-            TypeMeta(std::string type_name);
-
+            TypeMeta(std::string type_name,TypeID typeId);
+            static TypeMeta NewMetaFromName(std::string type_name);
+            static std::vector<TypeID> GetBaseClassIds(std::string type_name);
+            static void RecvGetSuperClassMetas(std::string type_name,std::vector<TypeMeta*>& supperClasses);
+           
+            static void Clear();
+            static std::map<TypeID,TypeMeta*> m_id2Types;
+            static std::map<std::string,TypeMeta*> m_name2Types;
+            static std::map<TypeID,std::vector<TypeMeta*>> m_id2BaseClassTypes;
         private:
             std::vector<FieldAccessor, std::allocator<FieldAccessor>>   m_fields;
             std::vector<MethodAccessor, std::allocator<MethodAccessor>> m_methods;
             std::string                                                 m_typeName;
 
             bool m_isValid;
+            TypeID m_typeId;
         };
-
+        
         class FieldAccessor
         {
             friend class TypeMeta;
@@ -212,7 +262,7 @@ namespace LittleEngine
             void* Get(void* instance);
             void  Set(void* instance, void* value);
 
-            TypeMeta GetOwnerTypeMeta();
+            TypeMeta* GetOwnerTypeMeta();
 
             /**
              * param: TypeMeta out_type
@@ -222,7 +272,7 @@ namespace LittleEngine
              *        true: it's a reflection type
              *        false: it's not a reflection type
              */
-            bool        GetTypeMeta(TypeMeta& field_type);
+            bool        HasTypeMeta();
             const char* GetFieldName() const;
             const char* GetFieldTypeName();
             bool        IsArrayType();
@@ -287,15 +337,15 @@ namespace LittleEngine
         class ReflectionInstance
         {
         public:
-            ReflectionInstance(TypeMeta Meta, void* instance) : m_meta(Meta), m_instance(instance) {}
-            ReflectionInstance() : m_meta(), m_instance(nullptr) {}
+            ReflectionInstance(TypeMeta* Meta, void* instance) : m_meta(Meta), m_instance(instance) {}
+            ReflectionInstance() : m_meta(nullptr), m_instance(nullptr) {}
 
             ReflectionInstance& operator=(ReflectionInstance& dest);
 
             ReflectionInstance& operator=(ReflectionInstance&& dest);
 
         public:
-            TypeMeta m_meta;
+            TypeMeta* m_meta;
             void*    m_instance;
         };
 
