@@ -44,6 +44,7 @@
 
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "../Editor/Core/EditorActions.h"
+#include "Core/Reflection/TypeUtil.h"
 
 using namespace LittleEngine;
 using namespace UI::Widgets;
@@ -83,29 +84,28 @@ Panels::Inspector::Inspector
 	{
 		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<UI::Widgets::Selection::ComboBox>(0);
 		componentSelectorWidget.lineBreak = false;
-		componentSelectorWidget.choices.emplace(0, "Model Renderer");
-		componentSelectorWidget.choices.emplace(1, "Camera");
-		componentSelectorWidget.choices.emplace(2, "Physical Box");
-		componentSelectorWidget.choices.emplace(3, "Physical Sphere");
-		componentSelectorWidget.choices.emplace(4, "Physical Capsule");
-		componentSelectorWidget.choices.emplace(5, "Point Light");
-		componentSelectorWidget.choices.emplace(6, "Directional Light");
-		componentSelectorWidget.choices.emplace(7, "Spot Light");
-		componentSelectorWidget.choices.emplace(8, "Ambient Box Light");
-		componentSelectorWidget.choices.emplace(9, "Ambient Sphere Light");
-		componentSelectorWidget.choices.emplace(10, "Material Renderer");
-		componentSelectorWidget.choices.emplace(11, "Audio Source");
-		componentSelectorWidget.choices.emplace(12, "Audio Listener");
-		componentSelectorWidget.choices.emplace(13, "CAnimator");
-
+		auto types = TypeUtil::GetAllTypes();
+		TVector<TypeInfoPtr> compTypes ;
+		int idx = 0;
+		for (auto type : types)
+		{
+			if(type->IsSubclassOf(Component::GetStaticTypeID()))
+			{
+				componentSelectorWidget.choices.emplace(idx++, type->GetTypeName());
+				compTypes.push_back(type);
+			}
+		}
 		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
 		addComponentButton.idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
 		addComponentButton.textColor = Color::White;
-		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
+		addComponentButton.ClickedEvent += [&componentSelectorWidget,&compTypes, this]
 		{
+			auto clickType = compTypes[componentSelectorWidget.currentChoice];
+			//GetTargetActor()->AddComponent(clickType->GetType());// TODO tanjp 完成Component 的动态创建
 			switch (componentSelectorWidget.currentChoice)
 			{
-			case 0: GetTargetActor()->AddComponent<CModelRenderer>(); GetTargetActor()->AddComponent<CMaterialRenderer>(); break;
+			case 0: GetTargetActor()->AddComponent<CModelRenderer>();
+				GetTargetActor()->AddComponent<CMaterialRenderer>(); break;
 			case 1: GetTargetActor()->AddComponent<CCamera>();				break;
 			case 2: GetTargetActor()->AddComponent<CPhysicalBox>();			break;
 			case 3: GetTargetActor()->AddComponent<CPhysicalSphere>();		break;

@@ -37,7 +37,7 @@ namespace LittleEngine
     friend class JsonSerializer;\
     public :\
     static ::LittleEngine::TypeID MetaTypeId;\
-    static LittleEngine::Reflection::TypeInfo* GetStaticType(){ return LittleEngine::Reflection::TypeInfo::GetType(GetStaticTypeID()); }\
+    static LittleEngine::TypeInfoPtr GetStaticType(){ return LittleEngine::Reflection::TypeInfo::GetType(GetStaticTypeID()); }\
     static bool IsStaticSubclassOf(::LittleEngine::TypeID typeId){ return GetStaticType()->IsSubclassOf(typeId); }\
     static bool IsStaticAssignableFrom(::LittleEngine::TypeID typeId){ return GetStaticType()->IsAssignableFrom(typeId); }\
     static ::LittleEngine::TypeID GetStaticTypeID(){ return class_name##::MetaTypeId;}\
@@ -74,7 +74,7 @@ namespace LittleEngine
         _LE_InternalMetaTypeID = class_name##::MetaTypeId;\
         OnConstruction();\
     }\
-    virtual LittleEngine::Reflection::TypeInfo* GetType(){ return LittleEngine::Reflection::TypeInfo::GetType(_LE_InternalMetaTypeID); }\
+    virtual LittleEngine::TypeInfoPtr GetType(){ return LittleEngine::Reflection::TypeInfo::GetType(_LE_InternalMetaTypeID); }\
     virtual bool IsSubclassOf(::LittleEngine::TypeID typeId){ return GetType()->IsSubclassOf(typeId); }\
     virtual bool IsAssignableFrom(::LittleEngine::TypeID typeId){ return GetType()->IsAssignableFrom(typeId); }\
     virtual ::LittleEngine::TypeID GetTypeID(){ return _LE_InternalMetaTypeID;}\

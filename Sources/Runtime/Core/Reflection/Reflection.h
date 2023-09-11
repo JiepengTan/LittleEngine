@@ -5,3 +5,4 @@
 #include "Core/Reflection/Meta/MetaAccessor.h"
 #include "Core/Reflection/Meta/MetaFunctionPointer.h"
 #include "Core/Reflection/Meta/TypeInfo.h"
+#include "Core/Reflection/TypeUtil.h"

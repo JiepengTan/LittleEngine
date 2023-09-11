@@ -19,18 +19,9 @@ namespace LittleEngine
 		if (auto found = GetComponent<T>(); !found)
 		{
 			auto comp = std::make_shared<T>();
-			ActorPtr ptr = GetSceneActor(m_actorID);
-			LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
-			comp->SetActor(ptr);
-			m_components.push_back(comp);
-			comp->OnAwake();
-			NotifyComponentAdd(comp);
-			if (m_playing && IsActive())
-			{
-				comp->OnEnable();
-				comp->OnStart();
-			}		
-			return comp;
+			auto basePtr = std::dynamic_pointer_cast<Component>(comp);
+			OnAddComponent(basePtr);
+			return std::dynamic_pointer_cast<T>(basePtr);
 		}
 		else
 		{

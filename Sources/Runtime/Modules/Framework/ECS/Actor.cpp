@@ -8,6 +8,7 @@
 
 #include "Modules/Framework/ECS/Actor.h"
 #include "Modules/Framework/SceneSystem/Scene.h"
+#include "Modules/Framework/SceneSystem/Scene.h"
 
 namespace LittleEngine
 {
@@ -368,6 +369,18 @@ namespace LittleEngine
         std::for_each(comps.begin(), comps.end(), [&](auto element) { element->OnTriggerExit(p_otherObject); });
     }
 
+  
+    std::shared_ptr<Component> Actor::AddComponent(TypeID typeId)
+    {
+        if(!TypeUtil::IsSubclassOf<Component>(typeId))
+            return nullptr;
+        Component* compRawPtr = (Component*)TypeUtil::CreateInstance(typeId);
+        SharedPtr<Component> comp;
+        comp.reset(compRawPtr);
+        OnAddComponent(comp);
+        return comp;
+    }
+
     bool Actor::RemoveComponent(SharedPtr<Component> p_component)
     {
         if(p_component == nullptr) return false;
@@ -386,6 +399,21 @@ namespace LittleEngine
     CompVector& Actor::GetComponentsInternal()
     {
         return GetComponentsCopy(m_components);
+    }
+
+    void Actor::OnAddComponent(SharedPtr<Component>& comp)
+    {
+        ActorPtr ptr = GetSceneActor(m_actorID);
+        LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
+        comp->SetActor(ptr);
+        m_components.push_back(comp);
+        comp->OnAwake();
+        NotifyComponentAdd(comp);
+        if (m_playing && IsActive())
+        {
+            comp->OnEnable();
+            comp->OnStart();
+        }		
     }
 
     void Actor::RecursiveActiveUpdate()

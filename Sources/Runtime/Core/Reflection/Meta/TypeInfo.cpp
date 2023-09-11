@@ -9,11 +9,31 @@
 
 namespace LittleEngine::Reflection
 {
-    std::map<TypeID, TypeInfo*> TypeInfo::m_id2Types;
     TVector<TypeInfo*> TypeInfo::m_allTypes;
+    std::map<TypeID, TypeInfo*> TypeInfo::m_id2Types;
     std::map<std::string, TypeInfo*> TypeInfo::m_name2Types;
     std::map<TypeID, std::vector<TypeInfo*>> TypeInfo::m_id2BaseClassTypes;
 
+    
+    void* TypeInfo::CreateInstance()
+    {
+        return MetaRegisterUtil::m_id2ClassMap.at(GetTypeID())->Constructor();
+    }
+    void* TypeInfo::CreateInstance(TypeID typeId)
+    {
+        auto type = GetType(typeId);
+        if(type == nullptr)
+            return nullptr;
+        return type->CreateInstance();
+    }
+    void* TypeInfo::CreateInstance(std::string type_name)
+    {
+        auto type = GetType(type_name);
+        if(type == nullptr)
+            return nullptr;
+        return type->CreateInstance();
+    }
+    
     TypeInfo* TypeInfo::GetType(std::string type_name)
     {
         if (m_name2Types.count(type_name) == 0) return nullptr;
@@ -46,7 +66,7 @@ namespace LittleEngine::Reflection
         {
             if (m_id2Types.count(id) == 0)
             {
-                auto className = MetaRegisterUtil::m_id2ClassNameMap.at(id);
+                auto className = MetaRegisterUtil::m_id2NameMap.at(id);
                 auto base = RegisterType(className, id);
                 supperClasses.push_back(base);
             }
@@ -54,7 +74,7 @@ namespace LittleEngine::Reflection
             {
                 supperClasses.push_back(m_id2Types.at(id));
             }
-            RecvGetSuperClassMetas(MetaRegisterUtil::m_id2ClassNameMap.at(id), supperClasses);
+            RecvGetSuperClassMetas(MetaRegisterUtil::m_id2NameMap.at(id), supperClasses);
         }
     }
 
@@ -89,7 +109,7 @@ namespace LittleEngine::Reflection
         m_fields.clear();
         m_methods.clear();
         m_typeId = typeId;
-        auto fileds_iter = MetaRegisterUtil::m_fieldMap.equal_range(type_name);
+        auto fileds_iter = MetaRegisterUtil::m_name2FieldMap.equal_range(type_name);
         while (fileds_iter.first != fileds_iter.second)
         {
             FieldAccessor f_field(fileds_iter.first->second);
@@ -99,7 +119,7 @@ namespace LittleEngine::Reflection
             ++fileds_iter.first;
         }
 
-        auto methods_iter = MetaRegisterUtil::m_methodMap.equal_range(type_name);
+        auto methods_iter = MetaRegisterUtil::m_name2MethodMap.equal_range(type_name);
         while (methods_iter.first != methods_iter.second)
         {
             MethodAccessor f_method(methods_iter.first->second);
@@ -119,9 +139,9 @@ namespace LittleEngine::Reflection
 
     bool TypeInfo::NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor)
     {
-        auto iter = MetaRegisterUtil::m_arrayMap.find(array_type_name);
+        auto iter = MetaRegisterUtil::m_name2ArrayMap.find(array_type_name);
 
-        if (iter != MetaRegisterUtil::m_arrayMap.end())
+        if (iter != MetaRegisterUtil::m_name2ArrayMap.end())
         {
             ArrayAccessor New_accessor(iter->second);
             accessor = New_accessor;
@@ -133,21 +153,21 @@ namespace LittleEngine::Reflection
 
     void* TypeInfo::CreateFromNameAndJson(std::string type_name, const Json& json_context)
     {
-        auto iter = MetaRegisterUtil::m_classMap.find(type_name);
-        if (iter != MetaRegisterUtil::m_classMap.end())
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
+        if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
-            return (iter->second->ConstructorWithJsonFunc(json_context));
+            return (iter->second->ConstructorWithJson(json_context));
         }
         return nullptr;
     }
 
     Json TypeInfo::WriteByName(std::string type_name, void* instance)
     {
-        auto iter = MetaRegisterUtil::m_classMap.find(type_name);
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
 
-        if (iter != MetaRegisterUtil::m_classMap.end())
+        if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
-            return iter->second->WriteJsonByNameFunc(instance);
+            return iter->second->WriteJsonByName(instance);
         }
         return Json();
     }
@@ -181,8 +201,8 @@ namespace LittleEngine::Reflection
 
     std::vector<TypeID> TypeInfo::GetBaseClassIds(std::string type_name)
     {
-        auto iter = MetaRegisterUtil::m_classMap.find(type_name);
-        if (iter != MetaRegisterUtil::m_classMap.end())
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
+        if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
             return iter->second->GetBaseClassIds();
         }

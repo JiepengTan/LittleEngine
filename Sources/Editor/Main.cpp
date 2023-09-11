@@ -51,6 +51,7 @@ INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nC
 int main(int argc, char** argv)
 {
 	UpdateWorkingDirectory(argv[0]);
+	
 	LittleEngine::TypeUtil::LoadAllTypeInfo();
 	
 	LittleEngine::Test::RunTests();

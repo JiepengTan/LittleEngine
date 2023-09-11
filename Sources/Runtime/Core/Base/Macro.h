@@ -28,6 +28,7 @@
 #define TSet            std::set
 #define TUnorderedMap   std::unordered_map
 #define TUnorderedSet   std::unordered_set
+#define TMultiMap		std::multimap
 #define TQueue          std::queue
 
 #define MakeSharedPtr     std::make_shared

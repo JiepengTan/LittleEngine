@@ -202,7 +202,8 @@ namespace LittleEngine
 		*/
 		template<typename T>
 		SharedPtr<T> AddComponent();
-
+		SharedPtr<Component> AddComponent(TypeID typeId);
+		
 		/**
 		* Remove the given component
 		*/
@@ -229,6 +230,7 @@ namespace LittleEngine
 
 
 	private:
+		void OnAddComponent(SharedPtr<Component>& comp);
 		/**
 		 * @brief Deleted copy constructor
 		 * @param p_actor

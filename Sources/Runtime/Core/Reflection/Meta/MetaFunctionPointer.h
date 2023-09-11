@@ -29,9 +29,10 @@ namespace LittleEngine::Reflection
     typedef std::function<bool()>                  GetBoolFunc;
     typedef std::function<void(void*)>             InvokeFunction;
 
-    typedef std::function<void*(const Json&)>                           ConstructorWithJson;
-    typedef std::function<Json(void*)>                                  WriteJsonByName;
+    typedef std::function<void*(const Json&)>                           ConstructorWithJsonFunc;
+    typedef std::function<Json(void*)>                                  WriteJsonByNameFunc;
     typedef std::function<std::vector<TypeID>(void)>                    GetBaseClassIdsFunc;
+    typedef std::function<void*(void)>                                  ConstructorFunc;
     
     class FieldFunctionTuple
     {
@@ -52,9 +53,10 @@ namespace LittleEngine::Reflection
     class ClassFunctionTuple
     {
     public:
-        ConstructorWithJson ConstructorWithJsonFunc;
-        WriteJsonByName WriteJsonByNameFunc;
+        ConstructorWithJsonFunc ConstructorWithJson;
+        WriteJsonByNameFunc WriteJsonByName;
         GetBaseClassIdsFunc GetBaseClassIds;
+        ConstructorFunc Constructor;
     };
     class ArrayFunctionTuple
     {

@@ -37,6 +37,9 @@ namespace LittleEngine::Reflection
         static TypeInfo* GetType(std::string type_name);
         static TypeInfo* GetType(TypeID typeId);
         static TypeInfo* RegisterType(std::string type_name,TypeID typeId);
+        void*  CreateInstance();
+        static void* CreateInstance(TypeID typeId);
+        static void* CreateInstance(std::string type_name);
         
         static TMap<TypeID,TVector<TypeInfo*> > GetBaseClassInfos();
         static TVector<TypeInfo*>  GetAllTypes();
@@ -49,8 +52,8 @@ namespace LittleEngine::Reflection
        
         static void Clear();
         static std::map<TypeID,TypeInfo*> m_id2Types;
-        static TVector<TypeInfo*>  m_allTypes;
         static std::map<std::string,TypeInfo*> m_name2Types;
+        static TVector<TypeInfo*>  m_allTypes;
         static std::map<TypeID,std::vector<TypeInfo*>> m_id2BaseClassTypes;
     private:
 

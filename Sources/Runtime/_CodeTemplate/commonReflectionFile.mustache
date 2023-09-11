@@ -31,6 +31,10 @@ namespace {{class_namespace}}::MetaCodeGen{
             {{#class_base_class_defines}}baseIds.push_back({{class_base_class_name}}::MetaTypeId); {{/class_base_class_defines}}
             return baseIds;
         };
+        static void* ConstructorNew(){
+            return new {{class_name}};
+        }
+        
 
         // fields
         {{#class_field_defines}}
@@ -126,16 +130,12 @@ namespace {{class_namespace}}::MetaCodeGen{
         LittleEngine::Reflection::ClassFunctionTuple* class_function_tuple_{{class_name}}=new LittleEngine::Reflection::ClassFunctionTuple{
             &TypeOperator_{{class_name}}::ConstructorWithJson,
             &TypeOperator_{{class_name}}::WriteByName,
-            &TypeOperator_{{class_name}}::GetBaseClassIds
+            &TypeOperator_{{class_name}}::GetBaseClassIds,
+            &TypeOperator_{{class_name}}::ConstructorNew
               };
         META_REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
     }
-
-    void TypeWrapperRegisterMetaType_{{class_name}}(){
-        META_REGISTER_META_TYPE_INFO("{{class_name}}", {{class_type_id}});
-    }
-
 }
 {{/class_defines}}
 
@@ -145,13 +145,6 @@ namespace LittleEngine::Reflection::TypeWrappersRegister{
     {
     {{#class_defines}} 
         {{class_namespace}}::MetaCodeGen::TypeWrapperRegister_{{class_name}}();
-    {{/class_defines}}
-    }
-    
-    void {{sourefile_name_upper_camel_case}}_RegitserMetaType()
-    {
-    {{#class_defines}}
-        {{class_namespace}}::MetaCodeGen::TypeWrapperRegisterMetaType_{{class_name}}();
     {{/class_defines}}
     }
 }

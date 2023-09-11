@@ -1,38 +1,82 @@
 #include "assert.h"
 
 #include "Core/Reflection/Reflection.h"
+#include "TypeInfo.h"
 #include "MetaRegisterUtil.h"
 
 #include "_Generated/Reflection/AllReflection.h"
 #include "_Generated/Serializer/AllSerializer.ipp"
 namespace LittleEngine::Reflection
 {
-    std::map<TypeID, std::string>                    MetaRegisterUtil::m_id2ClassNameMap;
-    std::map<std::string, ClassFunctionTuple*>       MetaRegisterUtil::m_classMap;
-    std::multimap<std::string, FieldFunctionTuple*>  MetaRegisterUtil::m_fieldMap;
-    std::multimap<std::string, MethodFunctionTuple*> MetaRegisterUtil::m_methodMap;
-    std::map<std::string, ArrayFunctionTuple*>       MetaRegisterUtil::m_arrayMap;
+    std::map<std::string,TypeID>                     MetaRegisterUtil::m_name2IdMap;
+    std::map<std::string, ClassFunctionTuple*>       MetaRegisterUtil::m_name2ClassMap;
+    std::multimap<std::string, FieldFunctionTuple*>  MetaRegisterUtil::m_name2FieldMap;
+    std::multimap<std::string, MethodFunctionTuple*> MetaRegisterUtil::m_name2MethodMap;
+    std::map<std::string, ArrayFunctionTuple*>       MetaRegisterUtil::m_name2ArrayMap;
+    
+    std::map<TypeID, std::string>                    MetaRegisterUtil::m_id2NameMap;
+    std::map<TypeID, ClassFunctionTuple*>            MetaRegisterUtil::m_id2ClassMap;
+    std::multimap<TypeID, FieldFunctionTuple*>       MetaRegisterUtil::m_id2FieldMap;
+    std::multimap<TypeID, MethodFunctionTuple*>      MetaRegisterUtil::m_id2MethodMap;
+    std::map<TypeID, ArrayFunctionTuple*>            MetaRegisterUtil::m_id2ArrayMap;
+
 
     
-    TypeInfo* MetaRegisterUtil::RegisterType(
-        std::string type_name, TypeID typeId)
+#define  __ClearContainer(mapContainer)\
+    for (auto ident : ##mapContainer)\
+        delete ident.second;\
+    ##mapContainer.clear();
+    
+#define  __CopyNameMap2IdMap( mapName)\
+    for (auto ident : m_name2##mapName)\
+        m_id2##mapName.emplace(m_name2IdMap[ident.first],ident.second);
+    
+    void MetaRegisterUtil::RegisterAll()
     {
-        return TypeInfo::RegisterType(type_name, typeId);
-    }
+        RegisterAllCodeGen();
+        // Build inheritance relationship 
+        for (auto ident : m_name2IdMap)
+            TypeInfo::RegisterType(ident.first, ident.second);
         
+        for (auto ident : m_id2NameMap)
+            m_name2IdMap.emplace(ident.second,ident.first);
+
+        __CopyNameMap2IdMap(MethodMap)
+        __CopyNameMap2IdMap(FieldMap)
+        __CopyNameMap2IdMap(ClassMap)
+        __CopyNameMap2IdMap(ArrayMap);
+    }
+    
+    void MetaRegisterUtil::UnRegisterAll()
+    {
+        m_id2NameMap.clear();
+        m_name2IdMap.clear();
+        
+        __ClearContainer(m_name2MethodMap)
+        __ClearContainer(m_name2FieldMap)
+        __ClearContainer(m_name2ClassMap)
+        __ClearContainer(m_name2ArrayMap)
+
+        __ClearContainer(m_id2ClassMap)
+        __ClearContainer(m_id2FieldMap)
+        __ClearContainer(m_id2MethodMap)
+        __ClearContainer(m_id2ArrayMap)
+    }
+    
+    
     void MetaRegisterUtil::RegisterToFieldMap(const char* name, FieldFunctionTuple* value)
     {
-        m_fieldMap.insert(std::make_pair(name, value));
+        m_name2FieldMap.insert(std::make_pair(name, value));
     }
     void MetaRegisterUtil::RegisterToMethodMap(const char* name, MethodFunctionTuple* value)
     {
-        m_methodMap.insert(std::make_pair(name, value));
+        m_name2MethodMap.insert(std::make_pair(name, value));
     }
     void MetaRegisterUtil::RegisterToArrayMap(const char* name, ArrayFunctionTuple* value)
     {
-        if (m_arrayMap.find(name) == m_arrayMap.end())
+        if (m_name2ArrayMap.find(name) == m_name2ArrayMap.end())
         {
-            m_arrayMap.insert(std::make_pair(name, value));
+            m_name2ArrayMap.insert(std::make_pair(name, value));
         }
         else
         {
@@ -40,50 +84,23 @@ namespace LittleEngine::Reflection
         }
     }
 
-    std::string MetaRegisterUtil::GetTypeName(TypeID typeId)
-    {
-        if (m_id2ClassNameMap.find(typeId) != m_id2ClassNameMap.end())
-        {
-            return m_id2ClassNameMap.at(typeId);
-        }
-        return k_unknown_type;
-    }
 
-    void MetaRegisterUtil::RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId)
+    void MetaRegisterUtil::RegisterToClassMap(const char* type_name, ClassFunctionTuple* value, TypeID typeId)
     {
-        if (m_id2ClassNameMap.find(typeId) == m_id2ClassNameMap.end())
+        if (m_name2IdMap.find(type_name) == m_name2IdMap.end())
         {
-            m_id2ClassNameMap.insert(std::make_pair(typeId, std::string(name)));
-        }
-            
-        if (m_classMap.find(name) == m_classMap.end())
-        {
-            m_id2ClassNameMap.insert(std::make_pair(typeId, std::string(name)));
-            m_classMap.insert(std::make_pair(name, value));
-        }
-        else
-        {
-            delete value;
+            m_name2IdMap.insert(std::make_pair( std::string(type_name),typeId));
+            m_name2ClassMap.insert(std::make_pair(type_name, value));
         }
     }
         
-
-    void MetaRegisterUtil::UnRegisterAll()
+    std::string MetaRegisterUtil::GetTypeName(TypeID typeId)
     {
-        for (const auto& itr : m_fieldMap)
+        if (m_id2NameMap.find(typeId) != m_id2NameMap.end())
         {
-            delete itr.second;
+            return m_id2NameMap.at(typeId);
         }
-        m_fieldMap.clear();
-        for (const auto& itr : m_classMap)
-        {
-            delete itr.second;
-        }
-        m_classMap.clear();
-        for (const auto& itr : m_arrayMap)
-        {
-            delete itr.second;
-        }
-        m_arrayMap.clear();
+        return k_unknown_type;
     }
-} // namespace LittleEngine
+    
+} 

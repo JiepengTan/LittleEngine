@@ -13,14 +13,24 @@ namespace LittleEngine
         Reflection::MetaRegisterUtil::UnRegisterAll();
     }
 
-    TMap<TypeID, TVector<Reflection::TypeInfo*> > TypeUtil::GetBaseClassInfos()
+    TMap<TypeID, TVector<TypeInfoPtr> > TypeUtil::GetBaseClassInfos()
     {
         return Reflection::TypeInfo::GetBaseClassInfos();
     }
 
-    TVector<Reflection::TypeInfo*> TypeUtil::GetAllTypes()
+    TVector<TypeInfoPtr> TypeUtil::GetAllTypes()
     {
         return Reflection::TypeInfo::GetAllTypes();
     }
+
+    TypeInfoPtr TypeUtil::GetType(TypeID typeId)
+    {
+        return Reflection::TypeInfo::GetType(typeId);
+    }
+    TypeInfoPtr TypeUtil::GetType(std::string typeName)
+    {
+        return Reflection::TypeInfo::GetType(typeName);
+    }
+  
 }
 

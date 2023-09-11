@@ -19,14 +19,21 @@ namespace LittleEngine::Reflection
     {
         friend class TypeInfo;
         
-        static std::map<TypeID, std::string>                    m_id2ClassNameMap;
-        static std::map<std::string, ClassFunctionTuple*>       m_classMap;
-        static std::multimap<std::string, FieldFunctionTuple*>  m_fieldMap;
-        static std::multimap<std::string, MethodFunctionTuple*> m_methodMap;
-        static std::map<std::string, ArrayFunctionTuple*>       m_arrayMap;
+        static std::map<TypeID, std::string>                    m_id2NameMap;
+        static std::map<std::string,TypeID>                     m_name2IdMap;
+        static std::map<std::string, ClassFunctionTuple*>       m_name2ClassMap;
+        static std::multimap<std::string, FieldFunctionTuple*>  m_name2FieldMap;
+        static std::multimap<std::string, MethodFunctionTuple*> m_name2MethodMap;
+        static std::map<std::string, ArrayFunctionTuple*>       m_name2ArrayMap;
         
+        static std::map<TypeID, ClassFunctionTuple*>            m_id2ClassMap;
+        static std::multimap<TypeID, FieldFunctionTuple*>       m_id2FieldMap;
+        static std::multimap<TypeID, MethodFunctionTuple*>      m_id2MethodMap;
+        static std::map<TypeID, ArrayFunctionTuple*>            m_id2ArrayMap;
+        
+        static void RegisterAllCodeGen();
     public:
-        static void RegisterToClassMap(const char* name, ClassFunctionTuple* value, TypeID typeId);
+        static void RegisterToClassMap(const char* type_name, ClassFunctionTuple* value, TypeID typeId);
         static void RegisterToFieldMap(const char* name, FieldFunctionTuple* value);
 
         static void RegisterToMethodMap(const char* name, MethodFunctionTuple* value);
@@ -37,7 +44,5 @@ namespace LittleEngine::Reflection
         static void RegisterAll();
         static void UnRegisterAll();
     };
-    
 
-   
 } // namespace LittleEngine
