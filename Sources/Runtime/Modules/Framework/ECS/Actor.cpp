@@ -55,7 +55,7 @@ namespace LittleEngine
         {
             SharedPtr<Component> sptr;
             sptr.reset(comp.GetPtr());
-            m_components[comp->GetTypeID()] = sptr;
+            m_components.push_back(sptr);
         }
         for (auto child : p_resActor.m_childrenIds)
         {
@@ -231,12 +231,12 @@ namespace LittleEngine
         m_sleeping = p_sleeping;
     }
 
-    std::vector<std::shared_ptr<Component>>& Actor::GetComponentsCopy(CompMap& comps)
+    CompVector& Actor::GetComponentsCopy(CompVector& comps)
     {
         m_tempComponents.clear();
-        for (auto ident : comps)
+        for (auto item : comps)
         {
-            m_tempComponents.push_back(ident.second);
+            m_tempComponents.push_back(item);
         }
         return m_tempComponents;
     }
@@ -355,11 +355,14 @@ namespace LittleEngine
     bool Actor::RemoveComponent(SharedPtr<Component> p_component)
     {
         if(p_component == nullptr) return false;
-        if (m_components.count(p_component->GetTypeID()) != 0)
+        for (auto it = m_components.begin();it!= m_components.end();++it)
         {
-            m_scene->OnComponentRemoved(p_component);
-            m_components.erase(p_component->GetTypeID());
-            return true;
+            if (it->get() == p_component.get())
+            {
+                NotifyComponentRemoved(p_component);
+                m_components.erase(it);
+                return true;
+            }
         }
         return false;
     }
@@ -367,38 +370,6 @@ namespace LittleEngine
     CompVector& Actor::GetComponentsInternal()
     {
         return GetComponentsCopy(m_components);
-    }
-
-    void Actor::OnSerialize(ISerializer p_serializer)
-    {
-        SerializeUtil::SerializeString( "name", m_name);
-        SerializeUtil::SerializeString( "tag", m_tag);
-        SerializeUtil::SerializeBoolean( "active", m_active);
-        SerializeUtil::SerializeInt64( "id", m_actorID);
-        SerializeUtil::SerializeInt64( "parent", m_parentID);
-
-        SerializeUtil::SerializeInt( "m_components", m_components.size());
-        for (auto& item : m_components)
-        {
-            auto comp = item.second;
-            SerializeUtil::SerializeString( "type", comp->GetName());
-            auto component = item.second;
-            /* Data serialization of the component */
-            component->OnSerialize(p_serializer);
-        }
-    }
-
-    void Actor::OnDeserialize(ISerializer p_serializer)
-    {
-        SerializeUtil::DeserializeString("name", m_name);
-        SerializeUtil::DeserializeString("tag", m_tag);
-        SerializeUtil::DeserializeBoolean("active", m_active);
-        SerializeUtil::DeserializeUInt64("id", m_actorID);
-        SerializeUtil::DeserializeUInt64("parent", m_parentID);
-
-        // TODO
-        int count = 0;
-        SerializeUtil::DeserializeInt("parent", count);
     }
 
     void Actor::RecursiveActiveUpdate()

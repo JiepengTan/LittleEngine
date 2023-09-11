@@ -227,15 +227,6 @@ namespace LittleEngine
 		CompVector& GetComponentsInternal();
 
 
-		/**
-		* Serialize all the components
-		*/
-		virtual void OnSerialize(ISerializer p_serializer) override;
-
-		/**
-		* Deserialize all the components
-		*/
-		virtual void OnDeserialize(ISerializer p_serializer) override;
 
 	private:
 		/**
@@ -318,7 +309,7 @@ namespace LittleEngine
 		bool IsDestroyed() const;
 		bool IsDestroying() const;
 		
-		CompVector& GetComponentsCopy(CompMap& comps);
+		CompVector& GetComponentsCopy(CompVector& comps);
 	public:
 		SharedPtr<CTransform> transform;
 	private:
@@ -349,7 +340,7 @@ namespace LittleEngine
 
 		/* Actors components */
 		
-		CompMap m_components;
+		CompVector m_components;
 		CompVector m_tempComponents;
 		/**
 		* Mark the Actor as "Destroyed". A "Destroyed" actor will be removed from the scene by the scene itself

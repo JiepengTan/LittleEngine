@@ -22,7 +22,7 @@ namespace LittleEngine
 			ActorPtr ptr = GetSceneActor(m_actorID);
 			LE_ASSERT(ptr!= nullptr,"Can not find a actor in scene" + std::to_string(m_actorID));
 			comp->SetActor(ptr);
-			m_components[comp->GetTypeID()] = comp;
+			m_components.push_back(comp);
 			comp->OnAwake();
 			NotifyComponentAdd(comp);
 			if (m_playing && IsActive())
@@ -44,13 +44,17 @@ namespace LittleEngine
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
 		static_assert(!std::is_same<CTransform, T>::value, "You can't remove a CTransform from an actor");
 		auto key = T::GetStaticTypeID();
-		if(m_components.count(key) != 0)
+		for (auto it = m_components.begin();it!= m_components.end();++it)
 		{
-			auto comp = m_components.at(key);
-			NotifyComponentRemoved(comp);
-			m_components.erase(key);
-			return true;
+			auto& item = *it;
+			if (item->IsAssignableFrom(key))
+			{
+				NotifyComponentRemoved(item);
+				m_components.erase(it);
+				return true;
+			}
 		}
+		
 		return false;
 	}
 
@@ -59,11 +63,10 @@ namespace LittleEngine
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
 		auto key = T::GetStaticTypeID();
-		for (auto comp : m_components)
+		for (auto& item : m_components)
 		{
-			// TODO tanjp use gen child id map to find quickly
-			auto ptr =  std::dynamic_pointer_cast<T>(comp.second);
-			if(ptr != nullptr) return ptr;
+			if(item->IsAssignableFrom(key))
+				return std::dynamic_pointer_cast<T>(item);
 		}
 		return nullptr;
 	}

@@ -44,6 +44,6 @@ bool LittleEngine::Resources::MaterialLoader::Destroy(Material *& p_material)
 	{
 		delete p_material;
 		p_material = nullptr;
-		return true;
 	}
+	return true;	
 }
