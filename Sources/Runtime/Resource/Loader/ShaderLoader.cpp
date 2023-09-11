@@ -28,6 +28,7 @@ LittleEngine::Shader* LittleEngine::Resources::ShaderLoader::Create(const std::s
 
 	if (programID)
 	{
+		LOG_WARNING("ShaderManager  programID= "+ std::to_string(programID) + " path"+ p_filePath);
 		return new Shader(p_filePath, programID);
 	}else
 	{

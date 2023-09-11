@@ -21,6 +21,7 @@ namespace LittleEngine
 
         
         std::map<TypeID,TypeMeta*> TypeMeta::m_id2Types;
+        TVector<Reflection::TypeMeta*>  TypeMeta::m_allTypes;
         std::map<std::string,TypeMeta*> TypeMeta::m_name2Types;
         std::map<TypeID,std::vector<TypeMeta*>> TypeMeta::m_id2BaseClassTypes;
         
@@ -34,9 +35,17 @@ namespace LittleEngine
             if(m_id2Types.count(typeId) == 0) return nullptr;
             return m_id2Types.at(typeId);
         }
-        void GetBaseClass()
+        TVector<TypeMeta*> TypeMeta::GetAllTypes()
         {
-            
+            if(m_allTypes.size() != m_id2Types.size())
+            {
+                m_allTypes.clear();
+                for (auto item : m_id2Types)
+                {
+                    m_allTypes.push_back(item.second);
+                }
+            }
+            return m_allTypes;
         }
         
         void TypeMeta::RecvGetSuperClassMetas(std::string type_name,std::vector<TypeMeta*>& supperClasses)
@@ -145,6 +154,8 @@ namespace LittleEngine
             }
             m_arrayMap.clear();
         }
+
+
 
         TypeMeta::TypeMeta(std::string type_name,TypeID typeId) : m_typeName(type_name)
         {

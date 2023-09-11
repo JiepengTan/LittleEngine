@@ -91,6 +91,7 @@
     <ClCompile Include="Core\Base\Macro.cpp" />
     <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
+    <ClCompile Include="Core\Reflection\TypeUtil.cpp" />
     <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
     <ClCompile Include="Core\Tools\Filesystem\FileUtil.cpp" />
     <ClCompile Include="Core\Tools\Filesystem\PathUtil.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Core\Maths\Internal\TransformNotifier.h" />
     <ClInclude Include="Core\Reflection\Reflection.h" />
     <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
+    <ClInclude Include="Core\Reflection\TypeUtil.h" />
     <ClInclude Include="Core\Serialization\ISerializer.h" />
     <ClInclude Include="Core\Serialization\Json.h" />
     <ClInclude Include="Core\Serialization\JsonSerializer.h" />

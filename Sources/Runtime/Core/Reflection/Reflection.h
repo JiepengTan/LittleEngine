@@ -232,7 +232,10 @@ namespace LittleEngine
             static TypeMeta* GetType(std::string type_name);
             static TypeMeta* GetType(TypeID typeId);
             static TypeMeta* RegisterType(std::string type_name,TypeID typeId);
-            static std::map<TypeID,std::vector<TypeMeta*>> GetBaseClassInfos() { return m_id2BaseClassTypes;}
+            
+            static TMap<TypeID,TVector<Reflection::TypeMeta*> > GetBaseClassInfos() { return m_id2BaseClassTypes;}
+            static TVector<Reflection::TypeMeta*>  GetAllTypes();
+
         private:
             TypeMeta(std::string type_name,TypeID typeId);
             static TypeMeta NewMetaFromName(std::string type_name);
@@ -241,6 +244,7 @@ namespace LittleEngine
            
             static void Clear();
             static std::map<TypeID,TypeMeta*> m_id2Types;
+            static TVector<Reflection::TypeMeta*>  m_allTypes;
             static std::map<std::string,TypeMeta*> m_name2Types;
             static std::map<TypeID,std::vector<TypeMeta*>> m_id2BaseClassTypes;
         private:
