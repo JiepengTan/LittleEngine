@@ -106,6 +106,10 @@ namespace LittleEngine
 		*/
 		void ScaleLocal(const struct LittleEngine::FVector3& p_scale);
 
+		void OnSceneLoadedUpdate(SharedPtr<CTransform> p_parent)
+		{
+			m_transform.OnSceneLoadedUpdate(p_parent == nullptr?nullptr:&p_parent->GetFTransform());
+		}
 		void UpdateWorldMatrix(){m_transform.UpdateWorldMatrix();}
 		/**
 		* Return the position in local space

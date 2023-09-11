@@ -312,11 +312,10 @@ namespace LittleEngine
             rootActors.pop();
             if(actor->m_parentID == k_invalidID)
             {
-                actor->transform->SetParent(nullptr);
-                actor->transform->UpdateWorldMatrix();
+                actor->transform->OnSceneLoadedUpdate(nullptr);
             }else
             {
-                actor->transform->SetParent(GetActor(actor->m_parentID)->transform);
+                actor->transform->OnSceneLoadedUpdate(GetActor(actor->m_parentID)->transform);
             }
             for (auto child : actor->m_childrenIds)
             {

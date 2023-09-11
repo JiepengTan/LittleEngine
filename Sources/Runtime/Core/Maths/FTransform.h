@@ -76,7 +76,7 @@ namespace LittleEngine
 		* @param p_scale
 		*/
 		void GenerateMatricesLocal(FVector3 p_position, FQuaternion p_rotation, FVector3 p_scale);
-
+		void OnSceneLoadedUpdate(LittleEngine::FTransform* parent);
 		/**
 		* Re-update world matrix to use parent transformations
 		*/

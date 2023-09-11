@@ -59,7 +59,7 @@ namespace LittleEngine
         }
         for (auto child : p_resActor.m_childrenIds)
         {
-            m_childrenIds.emplace(child);
+            m_childrenIds.push_back(child);
         }
         transform = GetComponent<CTransform>();
     }
@@ -76,6 +76,10 @@ namespace LittleEngine
         for (auto comp : comps)
         {
             p_resActor.m_components.push_back( Reflection::ReflectionPtr<Component>(comp->GetTypeName(),comp.get()));
+        }
+        for (auto child : m_childrenIds)
+        {
+            p_resActor.m_childrenIds.push_back(child);
         }
     }
 
@@ -133,6 +137,9 @@ namespace LittleEngine
 
     void Actor::SetParent(ActorPtr p_parent)
     {
+        if(p_parent == nullptr && m_parentID == k_invalidID) return;
+        if(p_parent->m_actorID == m_parentID ) return;
+        
         DetachFromParent();
         if(p_parent == nullptr)
         {
@@ -143,7 +150,7 @@ namespace LittleEngine
         {
             m_parentID = p_parent->m_actorID;
             transform->SetParent(p_parent->transform);
-            p_parent->m_childrenIds.emplace(m_actorID);
+            p_parent->m_childrenIds.push_back(m_actorID);
             m_scene->OnActorAttach(m_actorID,m_parentID);
         }
         /* Define the given parent as the new parent */
@@ -153,12 +160,18 @@ namespace LittleEngine
 
     void Actor::DetachFromParent()
     {
-
         /* Remove the actor from the parent children list */
         auto parent = m_scene->GetActor(m_parentID);
         if (parent && parent->IsAlive())
         {
-            parent->m_childrenIds.erase(m_actorID);
+            auto& childrenIds = parent->m_childrenIds;
+            for (auto it = childrenIds.begin();it!= childrenIds.end();++it)
+            {
+                if(*it == m_actorID){
+                    childrenIds.erase(it);
+                    break;
+                }
+            }
         }
         m_scene->OnActorDetach(m_actorID,m_parentID);
         m_parentID = 0;
@@ -195,9 +208,9 @@ namespace LittleEngine
     bool Actor::Destroy()
     {
         if (!IsAlive()) return false;
-        m_scene->DestroyActor(this);
         for (auto child : m_childrenIds)
             m_scene->DestroyActor(child);
+        m_scene->DestroyActor(this);
         return true;
     }
 

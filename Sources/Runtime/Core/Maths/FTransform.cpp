@@ -75,6 +75,23 @@ void LittleEngine::FTransform::GenerateMatricesLocal(FVector3 p_position, FQuate
 
 	UpdateWorldMatrix();
 }
+
+void LittleEngine::FTransform::OnSceneLoadedUpdate(LittleEngine::FTransform* parent)
+{
+	m_parent = nullptr;
+	m_localMatrix = FMatrix4::Translation(m_localPosition)
+		* FQuaternion::ToMatrix4(FQuaternion::Normalize(m_localRotation))
+		* FMatrix4::Scaling(m_localScale);
+	if(parent != nullptr)
+	{
+		m_parent = parent;
+		m_notificationHandlerID = m_parent->Notifier.AddNotificationHandler(
+			std::bind(&FTransform::NotificationHandler, this, std::placeholders::_1));
+	}
+	m_worldMatrix = HasParent() ? m_parent->m_worldMatrix * m_localMatrix : m_localMatrix;
+	PreDecomposeWorldMatrix();
+}
+
 void LittleEngine::FTransform::SetLocalMatrix(FMatrix4 p_localMatrix)
 {
 	m_localMatrix= p_localMatrix;

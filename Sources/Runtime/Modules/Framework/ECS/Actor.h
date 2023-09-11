@@ -336,7 +336,8 @@ namespace LittleEngine
 		/* Parenting system stuff */
 		META(Enable)
 		ActorID				m_parentID = 0;
-		TSet<ActorID>		m_childrenIds;
+		META(Enable)
+		TVector<ActorID>	m_childrenIds;
 
 		/* Actors components */
 		
