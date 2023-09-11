@@ -124,8 +124,8 @@ namespace LittleEngine
         LOG_INFO("DestroyActor Actor " + std::to_string(p_target->GetID()));
         auto actor = m_actors[p_target->GetID()];
         m_tempDeleteActors.push_back(actor);
-        DestroyedEvent.Invoke(actor);
         actor->OnDestroy();
+        DestroyedEvent.Invoke(actor);
         m_actors.erase(actor->GetID());
         return true;
     }
@@ -212,33 +212,21 @@ namespace LittleEngine
     
     void Scene::OnComponentAdded(CompPtr p_compononent)
     {
-        auto compId = p_compononent->GetTypeID();
-        if(compId == CModelRenderer::GetStaticTypeID())
+        if(p_compononent->IsAssignableFrom(CModelRenderer::GetStaticTypeID()))
             m_fastAccessComponents.modelRenderers.insert(p_compononent->GetActor()->GetID());
-        if(compId == CCamera::GetStaticTypeID())
+        if(p_compononent->IsAssignableFrom(CCamera::GetStaticTypeID()))
             m_fastAccessComponents.cameras.insert(p_compononent->GetActor()->GetID());
-        if(compId == CDirectionalLight::GetStaticTypeID()
-            ||compId == CSpotLight::GetStaticTypeID()
-            ||compId == CPointLight::GetStaticTypeID()
-            ||compId == CAmbientBoxLight::GetStaticTypeID()
-            ||compId == CAmbientSphereLight::GetStaticTypeID()
-            )
+        if(p_compononent->IsAssignableFrom(CLight::GetStaticTypeID()))
             m_fastAccessComponents.lights.insert(p_compononent->GetActor()->GetID());
     }
 
     void Scene::OnComponentRemoved(CompPtr p_compononent)
     {
-        auto compId = p_compononent->GetTypeID();
-        if(compId == CModelRenderer::GetStaticTypeID())
+        if(p_compononent->IsAssignableFrom(CModelRenderer::GetStaticTypeID()))
             m_fastAccessComponents.modelRenderers.erase(p_compononent->GetActor()->GetID());
-        if(compId == CCamera::GetStaticTypeID())
+        if(p_compononent->IsAssignableFrom(CCamera::GetStaticTypeID()))
             m_fastAccessComponents.cameras.erase(p_compononent->GetActor()->GetID());
-        if(compId ==CDirectionalLight::GetStaticTypeID()
-            ||compId == CSpotLight::GetStaticTypeID()
-            ||compId == CPointLight::GetStaticTypeID()
-            ||compId == CAmbientBoxLight::GetStaticTypeID()
-            ||compId == CAmbientSphereLight::GetStaticTypeID()
-            )
+        if(p_compononent->IsAssignableFrom(CLight::GetStaticTypeID()))
             m_fastAccessComponents.lights.erase(p_compononent->GetActor()->GetID());
     }
 

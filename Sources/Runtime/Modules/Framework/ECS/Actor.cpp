@@ -279,7 +279,10 @@ namespace LittleEngine
 
         auto comps = GetComponentsCopy(m_components);
         for (auto component : comps)
-            component->OnDestroy(); 
+        {
+            NotifyComponentRemoved(component);
+            component->OnDestroy();
+        }
 
         DetachFromParent();
 

@@ -73,13 +73,25 @@ void LittleEngine::UI::Internal::WidgetContainer::DrawWidgets()
 	CollectGarbages();
     if (m_reversedDrawOrder)
     {
-        for (auto it = m_widgets.crbegin(); it != m_widgets.crend(); ++it)
+    	m_tempForUpdate.clear();
+    	for (auto element : m_widgets)
+    	{
+    		m_tempForUpdate.push_back(element);
+    	}
+        for (auto it = m_tempForUpdate.crbegin(); it != m_tempForUpdate.crend(); ++it)
             it->first->Draw();
     }
     else
     {
-        for (const auto& widget : m_widgets)
-            widget.first->Draw();
+    	m_tempForUpdate.clear();
+	    for (auto element : m_widgets)
+	    {
+	    	m_tempForUpdate.push_back(element);
+	    }
+        for (const auto& widget : m_tempForUpdate)
+        {
+        	widget.first->Draw();
+        }
     }
 }
 

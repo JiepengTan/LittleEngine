@@ -27,10 +27,9 @@ namespace LittleEngine
         ResPtr() : m_resType(), m_instance(nullptr) {}
 
         ResPtr(const ResPtr& dest) : m_resType(dest.m_resType), m_instance(dest.m_instance) {}
-        void Reset(EResType type,StringText guid, T* instance)
+        void Reset(StringText guid, T* instance)
         {
             m_guid = guid;
-            m_resType = type;
             m_instance = instance;
         }
         template<typename U /*, typename = typename std::enable_if<std::is_safely_castable<T*, U*>::value>::type */>
@@ -162,9 +161,27 @@ namespace LittleEngine
     template<>\
     restypename##ResPtr& JsonSerializer::Read(const Json& json_context, restypename##ResPtr& instance);\
 
+    class ShaderResPtr : public ResPtr<Shader>
+    {
+    public:
+        static ShaderResPtr NullPtr;
+
+    public:
+        ShaderResPtr(std::string guid, Shader* instance) : ResPtr(EResType::EResShader, guid, instance)
+        {
+        }
+
+        ShaderResPtr() : ResPtr(EResType::EResShader, "", nullptr)
+        {
+        }
+    };
+
+    template <>
+    Json JsonSerializer::Write(const ShaderResPtr& instance);
+    template <>
+    ShaderResPtr& JsonSerializer::Read(const Json& json_context, ShaderResPtr& instance);
     
-    
-    DECLARE_RES_PTR_TYPE(Shader) 
+    //DECLARE_RES_PTR_TYPE(Shader) 
     DECLARE_RES_PTR_TYPE(Texture)
     DECLARE_RES_PTR_TYPE(Model) 
     DECLARE_RES_PTR_TYPE(Animation) 

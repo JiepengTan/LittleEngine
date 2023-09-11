@@ -6,10 +6,11 @@
 
 #include "Resource/Manager/MaterialManager.h"
 
+#include "Core/Tools/Utils/StringUtil.h"
+
 LittleEngine::Material * LittleEngine::ResourceManagement::MaterialManager::CreateResource(const std::string & p_path)
 {
 	std::string realPath = PathUtil::GetRealPath(p_path);
-
 	Material* material = LittleEngine::Resources::MaterialLoader::Create(realPath);
 	if (material)
 	{

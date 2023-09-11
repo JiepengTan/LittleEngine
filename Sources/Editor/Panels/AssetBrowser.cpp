@@ -165,13 +165,13 @@ public:
 	}
 
 	virtual void DeleteItem() = 0;
-
 public:
 	bool m_protected;
 	std::string filePath;
 	LittleEngine::Eventing::Event<std::string> DestroyedEvent;
 	LittleEngine::Eventing::Event<std::string, std::string> RenamedEvent;
 };
+
 
 class FolderContextualMenu : public BrowserItemContextualMenu
 {
@@ -274,235 +274,63 @@ public:
 				} while (std::filesystem::exists(finalPath));
 
 				std::ofstream outfile(finalPath);
-				outfile << "<root><scene><actors><actor><name>Directional Light</name><tag></tag><active>true</active><id>1</id><parent>0</parent><components><component><type>class LittleEngine::CDirectionalLight</type><data><diffuse><x>1</x><y>1</y><z>1</z></diffuse><specular><x>1</x><y>1</y><z>1</z></specular><intensity>0.75</intensity></data></component><component><type>class LittleEngine::CTransform</type><data><position><x>0</x><y>10</y><z>0</z></position><rotation><x>0.81379771</x><y>-0.17101006</y><z>0.29619816</z><w>0.46984628</w></rotation><scale><x>1</x><y>1</y><z>1</z></scale></data></component></components><behaviours/></actor><actor><name>Ambient Light</name><tag></tag><active>true</active><id>2</id><parent>0</parent><components><component><type>class LittleEngine::CAmbientSphereLight</type><data><ambient><x>1</x><y>1</y><z>1</z></ambient><intensity>0.1</intensity><radius>10000</radius></data></component><component><type>class LittleEngine::CTransform</type><data><position><x>0</x><y>0</y><z>0</z></position><rotation><x>0</x><y>0</y><z>0</z><w>1</w></rotation><scale><x>1</x><y>1</y><z>1</z></scale></data></component></components><behaviours/></actor><actor><name>Main Camera</name><tag></tag><active>true</active><id>3</id><parent>0</parent><components><component><type>class LittleEngine::CCamera</type><data><fov>45</fov><near>0.1</near><far>1000</far><clear_color><x>0.1921569</x><y>0.3019608</y><z>0.47450981</z></clear_color></data></component><component><type>class LittleEngine::CTransform</type><data><position><x>0</x><y>3</y><z>8</z></position><rotation><x>-7.5904039e-09</x><y>0.98480773</y><z>-0.17364819</z><w>-4.3047311e-08</w></rotation><scale><x>1</x><y>1</y><z>1</z></scale></data></component></components><behaviours/></actor></actors></scene></root>" << std::endl; // Empty scene content
-
+				outfile << "{\"actors\":[],\"sceneId\": -1}" << std::endl; // Empty scene content
 				ItemAddedEvent.Invoke(finalPath);
 				Close();
 			};
-
-			createStandardShader.EnterPressedEvent += [this](std::string newShaderName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				std::filesystem::copy_file(EDITOR_CONTEXT(engineAssetsPath) + "Shaders\\Standard.glsl", finalPath);
-				ItemAddedEvent.Invoke(finalPath);
-				Close();
-			};
-
-			createStandardPBRShader.EnterPressedEvent += [this](std::string newShaderName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				std::filesystem::copy_file(EDITOR_CONTEXT(engineAssetsPath) + "Shaders\\StandardPBR.glsl", finalPath);
-				ItemAddedEvent.Invoke(finalPath);
-				Close();
-			};
-
-			createUnlitShader.EnterPressedEvent += [this](std::string newShaderName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				std::filesystem::copy_file(EDITOR_CONTEXT(engineAssetsPath) + "Shaders\\Unlit.glsl", finalPath);
-				ItemAddedEvent.Invoke(finalPath);
-				Close();
-			};
-
-			createLambertShader.EnterPressedEvent += [this](std::string newShaderName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				std::filesystem::copy_file(EDITOR_CONTEXT(engineAssetsPath) + "Shaders\\Lambert.glsl", finalPath);
-				ItemAddedEvent.Invoke(finalPath);
-				Close();
-			};
+			createLambertShader.EnterPressedEvent += [this](std::string newShaderName){CreateShader(newShaderName,"Lambert");};
+			createStandardShader.EnterPressedEvent += [this](std::string newShaderName){CreateShader(newShaderName,"Standard");};
+			createStandardPBRShader.EnterPressedEvent += [this](std::string newShaderName){CreateShader(newShaderName,"StandardPBR");};
+			createUnlitShader.EnterPressedEvent += [this](std::string newShaderName){CreateShader(newShaderName,"Unlit");};
+			createLambertShader.EnterPressedEvent += [this](std::string newShaderName){CreateShader(newShaderName,"Lambert");};
 			
-			createEmptyMaterial.EnterPressedEvent += [this](std::string materialName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				{
-					std::ofstream outfile(finalPath);
-					outfile << "<root><shader>?</shader></root>" << std::endl; // Empty material content
-				}
-
-				ItemAddedEvent.Invoke(finalPath);
-
-				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
-				{
-					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
-					materialEditor.SetTarget(*instance);
-					materialEditor.Open();
-					materialEditor.Focus();
-					materialEditor.Preview();
-				}
-				Close();
-			};
-
-			createStandardMaterial.EnterPressedEvent += [this](std::string materialName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				{
-					std::ofstream outfile(finalPath);
-					outfile << "<root><shader>:Shaders\\Standard.glsl</shader></root>" << std::endl; // Empty standard material content
-				}
-
-				ItemAddedEvent.Invoke(finalPath);
-
-				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
-				{
-					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
-					materialEditor.SetTarget(*instance);
-					materialEditor.Open();
-					materialEditor.Focus();
-					materialEditor.Preview();
-				}
-				Close();
-			};
-
-			createStandardPBRMaterial.EnterPressedEvent += [this](std::string materialName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				{
-					std::ofstream outfile(finalPath);
-					outfile << "<root><shader>:Shaders\\StandardPBR.glsl</shader></root>" << std::endl; // Empty standard material content
-				}
-
-				ItemAddedEvent.Invoke(finalPath);
-
-				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
-				{
-					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
-					materialEditor.SetTarget(*instance);
-					materialEditor.Open();
-					materialEditor.Focus();
-					materialEditor.Preview();
-				}
-				Close();
-			};
-
-			createUnlitMaterial.EnterPressedEvent += [this](std::string materialName)
-			{
-				std::string newSceneName = "Material";
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				{
-					std::ofstream outfile(finalPath);
-					outfile << "<root><shader>:Shaders\\Unlit.glsl</shader></root>" << std::endl; // Empty unlit material content
-				}
-
-				ItemAddedEvent.Invoke(finalPath);
-
-				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
-				{
-					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
-					materialEditor.SetTarget(*instance);
-					materialEditor.Open();
-					materialEditor.Focus();
-					materialEditor.Preview();
-				}
-				Close();
-			};
-
-			createLambertMaterial.EnterPressedEvent += [this](std::string materialName)
-			{
-				size_t fails = 0;
-				std::string finalPath;
-
-				do
-				{
-					finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
-
-					++fails;
-				} while (std::filesystem::exists(finalPath));
-
-				{
-					std::ofstream outfile(finalPath);
-					outfile << "<root><shader>:Shaders\\Lambert.glsl</shader></root>" << std::endl; // Empty unlit material content
-				}
-
-				ItemAddedEvent.Invoke(finalPath);
-
-				if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
-				{
-					auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
-					materialEditor.SetTarget(*instance);
-					materialEditor.Open();
-					materialEditor.Focus();
-					materialEditor.Preview();
-				}
-				Close();
-			};
-
+			createEmptyMaterial.EnterPressedEvent += [this](std::string materialName)			{CreateMaterial(materialName,"");};
+			createStandardMaterial.EnterPressedEvent += [this](std::string materialName)			{CreateMaterial(materialName,"Standard");};
+			createStandardPBRMaterial.EnterPressedEvent += [this](std::string materialName)			{CreateMaterial(materialName,"StandardPBR");};
+			createUnlitMaterial.EnterPressedEvent += [this](std::string materialName)			{CreateMaterial(materialName,"Unlit");};
+			createLambertMaterial.EnterPressedEvent += [this](std::string materialName)			{CreateMaterial(materialName,"Lambert");};
 			BrowserItemContextualMenu::CreateList();
 		}
 	}
+	void CreateShader(const std::string& newShaderName,const std::string& templateName)
+	{
+		size_t fails = 0;
+		std::string finalPath;
+		do
+		{
+			finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
+			++fails;
+		} while (std::filesystem::exists(finalPath));
+		std::filesystem::copy_file(EDITOR_CONTEXT(engineAssetsPath) + "Shaders\\"+templateName +".glsl", finalPath);
+		ItemAddedEvent.Invoke(finalPath);
+		Close();
+	};
+	void CreateMaterial(const std::string& materialName,const std::string& shaderName)
+	{
+		size_t fails = 0;
+		std::string finalPath;
+		do
+		{
+			finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
 
+			++fails;
+		} while (std::filesystem::exists(finalPath));
+		{
+			std::ofstream outfile(finalPath);
+			outfile << "{\"res\": {\"shader\": {\"guid\": \":Shaders/"+shaderName+".glsl\"}}}" << std::endl; // Empty material content
+		}
+		ItemAddedEvent.Invoke(finalPath);
+
+		if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+		{
+			auto& materialEditor = EDITOR_PANEL(LittleEngine::Editor::Panels::MaterialEditor, "Material Editor");
+			materialEditor.SetTarget(*instance);
+			materialEditor.Open();
+			materialEditor.Focus();
+			materialEditor.Preview();
+		}
+		Close();
+	};
 	virtual void DeleteItem() override
 	{
 		using namespace LittleEngine::Windowing::Dialogs;

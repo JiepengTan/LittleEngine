@@ -77,6 +77,7 @@ namespace LittleEngine::UI::Internal
 
 	protected:
 		std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>> m_widgets;
+		std::vector<std::pair<LittleEngine::UI::Widgets::AWidget*, Internal::EMemoryMode>> m_tempForUpdate;
         bool m_reversedDrawOrder = false;
 	};
 }

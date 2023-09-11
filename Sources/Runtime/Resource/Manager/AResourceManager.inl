@@ -9,6 +9,7 @@
 #include "algorithm"
 
 #include "Core/Tools/Filesystem/PathUtil.h"
+#include "Core/Tools/Utils/StringUtil.h"
 #include "Resource/Manager/AResourceManager.h"
 
 namespace LittleEngine::ResourceManagement
@@ -16,13 +17,14 @@ namespace LittleEngine::ResourceManagement
 	template<typename T>
 	inline T* AResourceManager<T>::LoadResource(const std::string & p_path)
 	{
-		if (auto resource = GetResource(p_path, false); resource)
+		auto path = StringUtil::Replace(p_path,"\\","/");
+		if (auto resource = GetResource(path, false); resource)
 			return resource;
 		else
 		{
-			auto newResource = CreateResource(p_path);
+			auto newResource = CreateResource(path);
 			if (newResource)
-				return RegisterResource(p_path, newResource);
+				return RegisterResource(path, newResource);
 			else
 				return nullptr;
 		}
@@ -82,7 +84,8 @@ namespace LittleEngine::ResourceManagement
 		if (auto resource = GetResource(p_path, false); resource)
 			DestroyResource(resource);
 
-		m_resources[p_path] = p_instance;
+		auto path = StringUtil::Replace(p_path,"\\","/");
+		m_resources[path] = p_instance;
 
 		return p_instance;
 	}
@@ -90,20 +93,22 @@ namespace LittleEngine::ResourceManagement
 	template<typename T>
 	inline void AResourceManager<T>::UnregisterResource(const std::string & p_path)
 	{
-		m_resources.erase(p_path);
+		auto path = StringUtil::Replace(p_path,"\\","/");
+		m_resources.erase(path);
 	}
 
 	template<typename T>
 	inline T* AResourceManager<T>::GetResource(const std::string& p_path, bool p_tryToLoadIfNotFound)
 	{
 		if(p_path.empty()) return nullptr;
-		if (auto resource = m_resources.find(p_path); resource != m_resources.end())
+		auto path = StringUtil::Replace(p_path,"\\","/");
+		if (auto resource = m_resources.find(path); resource != m_resources.end())
 		{
 			return resource->second;
 		}
 		else if (p_tryToLoadIfNotFound)
 		{
-			return LoadResource(p_path);
+			return LoadResource(path);
 		}
 
 		return nullptr;
