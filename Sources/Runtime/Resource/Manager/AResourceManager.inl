@@ -96,6 +96,7 @@ namespace LittleEngine::ResourceManagement
 	template<typename T>
 	inline T* AResourceManager<T>::GetResource(const std::string& p_path, bool p_tryToLoadIfNotFound)
 	{
+		if(p_path.empty()) return nullptr;
 		if (auto resource = m_resources.find(p_path); resource != m_resources.end())
 		{
 			return resource->second;
