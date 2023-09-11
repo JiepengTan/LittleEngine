@@ -52,7 +52,7 @@ namespace LittleEngine
         void Set(const FVector2& val){ m_data.x = val.x;m_data.y = val.y;}
         void Set(const FVector3& val){ m_data.x = val.x;m_data.y = val.y;m_data.z = val.z;}
         void Set(const FVector4& val){ m_data = val;}
-        void Set(Texture* texture){m_texture = TextureResPtr::NullPtr;}
+        void Set(Texture* texture){m_texture.Reset("",texture);}
         
         void SetBool(const bool& val){ Set(val); }
         void SetInt(const int& val){  Set(val);}
