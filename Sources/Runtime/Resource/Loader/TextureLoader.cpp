@@ -8,7 +8,6 @@
 
 #include "GL/glew.h"
 #include "stb_image/stb_image.h"
-
 #include "Resource/Loader/TextureLoader.h"
 
 LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
@@ -73,10 +72,10 @@ LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateColor(uint3
 
 	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
-
 LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height,
 	LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter,
-	LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+	LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap
+	,const std::string& p_name )
 {
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -96,7 +95,7 @@ LittleEngine::Texture* LittleEngine::Resources::TextureLoader::CreateFromMemory(
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return new Texture("", textureID, 1, 1, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
+	return new Texture("", textureID, p_width, p_height, 32, p_firstFilter, p_secondFilter, p_generateMipmap);
 }
 
 void LittleEngine::Resources::TextureLoader::Reload(Texture& p_texture, const std::string& p_filePath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)

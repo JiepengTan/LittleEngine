@@ -269,15 +269,12 @@ namespace LittleEngine::Editor
     void LittleEngine::Editor::Core::EditorRenderer::RenderCameras()
     {
         using namespace LittleEngine;
+        auto curScene = m_context.sceneManager.GetCurrentScene();
 
-        for (auto cameraId : m_context.sceneManager.GetCurrentScene()->GetFastAccessComponents().cameras)
+        for (auto cameraId : curScene->GetFastAccessComponents().cameras)
         {
-            auto cameraModel = m_context.sceneManager.GetCurrentScene()->GetActor(cameraId)->GetComponent<CModelRenderer>();
-            if(cameraModel == nullptr)
-                continue;
-            auto actor = cameraModel->GetActor();
-
-            if (actor->IsActive())
+            auto actor = curScene->GetActor(cameraId);
+            if (actor!= nullptr&& actor->IsActive())
             {
                 auto& model = *m_context.editorResources->GetModel("Camera");
                 auto modelMatrix = CalculateCameraModelMatrix(actor);
@@ -306,25 +303,20 @@ namespace LittleEngine::Editor
                 auto modelMatrix = FMatrix4::Translation(actor->transform->GetWorldPosition());
 
                 LittleEngine::Texture* texture = nullptr;
-
-                switch (static_cast<LittleEngine::Rendering::Entities::Light::Type>(static_cast<int>(light->GetData().
-                    type)))
+                auto lightType = static_cast<LittleEngine::Rendering::Entities::Light::Type>(
+                                            static_cast<int>(light->GetData().type));
+                switch (lightType)
                 {
-                case LittleEngine::Rendering::Entities::Light::Type::POINT: texture = m_context.editorResources->
-                        GetTexture("Bill_Point_Light");
-                    break;
-                case LittleEngine::Rendering::Entities::Light::Type::SPOT: texture = m_context.editorResources->
-                        GetTexture("Bill_Spot_Light");
-                    break;
-                case LittleEngine::Rendering::Entities::Light::Type::DIRECTIONAL: texture = m_context.editorResources->
-                        GetTexture("Bill_Directional_Light");
-                    break;
-                case LittleEngine::Rendering::Entities::Light::Type::AMBIENT_BOX: texture = m_context.editorResources->
-                        GetTexture("Bill_Ambient_Box_Light");
-                    break;
-                case LittleEngine::Rendering::Entities::Light::Type::AMBIENT_SPHERE: texture = m_context.editorResources
-                        ->GetTexture("Bill_Ambient_Sphere_Light");
-                    break;
+                case LittleEngine::Rendering::Entities::Light::Type::POINT:
+                    texture = m_context.editorResources-> GetTexture("Bill_Point_Light");break;
+                case LittleEngine::Rendering::Entities::Light::Type::SPOT:
+                    texture = m_context.editorResources->GetTexture("Bill_Spot_Light"); break;
+                case LittleEngine::Rendering::Entities::Light::Type::DIRECTIONAL:
+                    texture = m_context.editorResources-> GetTexture("Bill_Directional_Light");    break;
+                case LittleEngine::Rendering::Entities::Light::Type::AMBIENT_BOX:
+                    texture = m_context.editorResources->GetTexture("Bill_Ambient_Box_Light");   break;
+                case LittleEngine::Rendering::Entities::Light::Type::AMBIENT_SPHERE:
+                    texture = m_context.editorResources ->GetTexture("Bill_Ambient_Sphere_Light");   break;
                 }
 
                 const auto& lightColor = light->GetColor();

@@ -17,7 +17,6 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 {
 	using namespace LittleEngine::Resources;
 
-	std::string buttonsFolder	= p_editorAssetsPath + "Textures\\Buttons\\";
 	std::string iconsFolder		= p_editorAssetsPath + "Textures\\Icons\\";
 	std::string modelsFolder	= p_editorAssetsPath + "Models\\";
 	std::string shadersFolder	= p_editorAssetsPath + "Shaders\\";
@@ -39,37 +38,35 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 	modelParserFlags |= LittleEngine::Resources::EModelParserFlags::GLOBAL_SCALE;
 
 	/* Buttons */
-	auto CreateTex = [](std::vector<uint64_t>&  rawDataBytes,int texSize,bool isLinear){
+	auto CreateTex = [this,iconsFolder ](const std::string& p_name,bool isLinear){
 		auto mode = isLinear?
 			LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR:
 			LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
-		return TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(rawDataBytes.data()),
-			texSize, texSize, mode, mode, false);
+		m_textures[p_name]= TextureLoader::Create(iconsFolder + p_name + ".png",mode, mode, false);
 	};
-	std::vector<uint64_t> raw;
-	raw = EMPTY_TEXTURE;	m_textures["Empty_Texture"] =CreateTex(raw,64,true);
-	raw = BUTTON_PLAY;		m_textures["Button_Play"] =CreateTex(raw,64,true);
-	raw = BUTTON_PAUSE;		m_textures["Button_Pause"] =CreateTex(raw, 64,true);
-	raw = BUTTON_STOP;		m_textures["Button_Stop"] =CreateTex(raw, 64,true);
-	raw = BUTTON_NEXT;		m_textures["Button_Next"] =CreateTex(raw, 64,true);
-	raw = BUTTON_REFRESH;	m_textures["Button_Refresh"] =CreateTex(raw, 64,true);
+	CreateTex("Empty_Texture",true);
+	CreateTex("Button_Play",true);
+	CreateTex("Button_Pause",true);
+	CreateTex("Button_Stop",true);
+	CreateTex("Button_Next",true);
+	CreateTex("Button_Refresh",true);
 	/* Icons */
-	raw = ICON_FILE;		m_textures["Icon_Unknown"] =CreateTex(raw, 16,true);
-	raw = ICON_FOLDER;		m_textures["Icon_Folder"] =CreateTex(raw, 16,true);
-	raw = ICON_TEXTURE;		m_textures["Icon_Texture"] =CreateTex(raw, 16,true);
-	raw = ICON_MODEL;		m_textures["Icon_Model"] =CreateTex(raw, 16,true);
-	raw = ICON_SHADER;		m_textures["Icon_Shader"] =CreateTex(raw, 16,true);
-	raw = ICON_MATERIAL;	m_textures["Icon_Material"] =CreateTex(raw, 16,true);
-	raw = ICON_SCENE;		m_textures["Icon_Scene"] =CreateTex(raw, 16,true);
-	raw = ICON_SOUND;		m_textures["Icon_Sound"] =CreateTex(raw, 16,true);
-	raw = ICON_SCRIPT;		m_textures["Icon_Script"] =CreateTex(raw, 16,true);
-	raw = ICON_FONT;		m_textures["Icon_Font"] =CreateTex(raw, 16,true);
+	CreateTex("Icon_Unknown",true);
+	CreateTex("Icon_Folder",true);
+	CreateTex("Icon_Texture",true);
+	CreateTex("Icon_Model",true);
+	CreateTex("Icon_Shader",true);
+	CreateTex("Icon_Material",true);
+	CreateTex("Icon_Scene",true);
+	CreateTex("Icon_Sound",true);
+	CreateTex("Icon_Script",true);
+	CreateTex("Icon_Font",true);
 	
-	raw = BILL_PLIGHT; 		m_textures["Bill_Point_Light"] =CreateTex(raw, 128,false);
-	raw = BILL_SLIGHT; 		m_textures["Bill_Spot_Light"] =CreateTex(raw, 128,false);
-	raw = BILL_DLIGHT; 		m_textures["Bill_Directional_Light"] =CreateTex(raw, 128,false);
-	raw = BILL_ABLIGHT;		m_textures["Bill_Ambient_Box_Light"] =CreateTex(raw, 128,false);
-	raw = BILL_ASLIGHT; 	m_textures["Bill_Ambient_Sphere_Light"] =CreateTex(raw, 128,false);
+	CreateTex("Bill_Point_Light",false);
+	CreateTex("Bill_Spot_Light",false);
+	CreateTex("Bill_Directional_Light",false);
+	CreateTex("Bill_Ambient_Box_Light",false);
+	CreateTex("Bill_Ambient_Sphere_Light",false);
 
 	GUIUtil::ProvideEmptyTexture(*m_textures["Empty_Texture"]);
 	

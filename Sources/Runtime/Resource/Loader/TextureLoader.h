@@ -52,7 +52,7 @@ namespace LittleEngine::Resources
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap,const std::string& p_name = "");
 
 		/**
 		* Reload a texture from file

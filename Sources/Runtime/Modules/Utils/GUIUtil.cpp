@@ -174,8 +174,9 @@ LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string
 		{
 			if (auto resource = OVSERVICE(LittleEngine::ResourceManagement::TextureManager).GetResource(p_receivedData.first); resource)
 			{
+				auto filePath = p_receivedData.first;
 				p_data = resource;
-				guid = p_receivedData.first;
+				guid = filePath;
 				widget.textureID.id = resource->id;
 				if (p_updateNotifier)
 					p_updateNotifier->Invoke();
