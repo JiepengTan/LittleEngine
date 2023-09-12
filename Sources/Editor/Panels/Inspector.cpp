@@ -45,6 +45,7 @@
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "../Editor/Core/EditorActions.h"
 #include "Core/Reflection/TypeUtil.h"
+#include "Modules/UI/Widgets/Layout/InspectorProxy.h"
 
 using namespace LittleEngine;
 using namespace UI::Widgets;
@@ -208,14 +209,15 @@ void Panels::Inspector::RefreshAddComponentPanel()
 		EDITOR_EXEC(DelayAction([this] { Refresh(); }));
 	};
 
-	m_componentSelectorWidget->ValueChangedEvent += [this](int p_value)
+	m_componentSelectorWidget->ValueChangedEvent += [this,compTypes](int p_value)
 	{
 		auto defineButtonsStates = [this](bool p_componentExists)
 		{
 			m_addComponentButton->disabled = p_componentExists;
 			m_addComponentButton->idleBackgroundColor = !p_componentExists ? Color{ 0.7f, 0.5f, 0.f } : Color{ 0.1f, 0.1f, 0.1f };
 		};
-		auto comp =GetTargetActor()->GetComponent(p_value);
+		auto type= compTypes.at(p_value);
+		auto comp =GetTargetActor()->GetComponent(type->GetTypeID());
 		defineButtonsStates(nullptr !=comp);	
 	};
 }
@@ -223,7 +225,7 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 {
 	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetName());
+		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetTypeName());
 		header.closable = p_component->GetTypeID() != LittleEngine:: CTransform::GetStaticTypeID();
 		header.CloseEvent += [this, &header, p_component]
 		{
@@ -235,9 +237,15 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 			}
 		};
 		auto& columns = header.CreateWidget<UI::Widgets::Layout::Columns<2>>();
-		columns.widths[0] = 200;
+		columns.widths[0] = GUIUtil::_DEFAULT_COLUME_WIDTH;
 		GUIUtil::m_root = &columns;
 		p_component->OnInspector();
+		auto& inspectorProxy = header.CreateWidget<UI::Widgets::Layout::InspectorProxy>();
+		
+		inspectorProxy.SetDrawCallback([p_component]()
+		{
+			p_component->OnInspectorGUI();
+		});
 	}
 }
 

@@ -558,6 +558,8 @@
     <ClCompile Include="Core\Tools\Filesystem\FileUtil.cpp" />
     <ClCompile Include="Core\Tools\Filesystem\PathUtil.cpp" />
     <ClCompile Include="Core\Tools\Utils\StringUtil.cpp" />
+    <ClCompile Include="Modules\UI\Widgets\Layout\InspectorProxy.cpp" />
+    <ClCompile Include="Modules\Utils\InspectorUtil.cpp" />
     <ClCompile Include="Resource\Asset\Animation.cpp" />
     <ClCompile Include="Resource\Asset\Material.cpp" />
     <ClCompile Include="Resource\Asset\Mesh.cpp" />
@@ -584,6 +586,7 @@
     <ClCompile Include="Resource\Manager\TextAssetManager.cpp" />
     <ClCompile Include="Resource\Manager\TextureManager.cpp" />
     <ClCompile Include="Resource\Parser\AssimpParser.cpp" />
+    <ClCompile Include="_Test\Component\TestComp2.cpp" />
     <ClCompile Include="_Test\Reflection\TestReflection.cpp" />
     <ClCompile Include="_Test\TestManager.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
@@ -778,6 +781,7 @@
     <ClInclude Include="Modules\UI\Widgets\Layout\Dummy.h" />
     <ClInclude Include="Modules\UI\Widgets\Layout\Group.h" />
     <ClInclude Include="Modules\UI\Widgets\Layout\GroupCollapsable.h" />
+    <ClInclude Include="Modules\UI\Widgets\Layout\InspectorProxy.h" />
     <ClInclude Include="Modules\UI\Widgets\Layout\NewLine.h" />
     <ClInclude Include="Modules\UI\Widgets\Layout\Spacing.h" />
     <ClInclude Include="Modules\UI\Widgets\Layout\TreeNode.h" />
@@ -813,6 +817,7 @@
     <ClInclude Include="Modules\UI\Widgets\Visual\ProgressBar.h" />
     <ClInclude Include="Modules\UI\Widgets\Visual\Separator.h" />
     <ClInclude Include="Modules\Utils\ActorUtils.h" />
+    <ClInclude Include="Modules\Utils\InspectorUtil.h" />
     <ClInclude Include="Modules\Utils\GUIUtil.h" />
     <ClInclude Include="Modules\Utils\GUIUtil.inl" />
     <ClInclude Include="Modules\Utils\RenderUtils.h" />
@@ -1030,6 +1035,7 @@
     <ClInclude Include="_Generated\Serializer\Actor.serializer.gen.h" />
     <ClInclude Include="_Generated\Serializer\AllSerializer.h" />
     <ClInclude Include="_Generated\Serializer\AllSerializer.ipp" />
+    <ClInclude Include="_Test\Component\TestComp2.h" />
     <ClInclude Include="_Test\Reflection\TestReflection.h" />
     <ClInclude Include="_Test\TestManager.h" />
   </ItemGroup>

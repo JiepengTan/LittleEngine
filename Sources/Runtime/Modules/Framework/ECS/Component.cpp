@@ -7,6 +7,7 @@
 
 #include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Actor.h"
+#include "Modules/Utils/InspectorUtil.h"
 
 #if DEBUG
 void LittleEngine::Component::_LE_InitDebugInfo()
@@ -36,4 +37,9 @@ void LittleEngine::Component::OnSerialize(ISerializer p_serializer)
 void LittleEngine::Component::OnDeserialize(ISerializer p_serializer)
 {
     Object::OnDeserialize(p_serializer);
+}
+
+void LittleEngine::Component::OnInspectorGUI()
+{
+    //InspectorUtil::DrawDefault(this);
 }

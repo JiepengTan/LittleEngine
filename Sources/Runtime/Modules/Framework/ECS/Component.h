@@ -133,6 +133,7 @@ namespace LittleEngine
 		virtual void OnInspector(){}
 		virtual void OnSerialize(ISerializer p_serializer) override;
 		virtual void OnDeserialize(ISerializer p_serializer) override;
+		virtual void OnInspectorGUI();
 	public:
         META(Enable)
 		bool isUpdateInEdit = false;

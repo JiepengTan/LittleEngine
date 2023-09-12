@@ -37,7 +37,8 @@ const LittleEngine::Color GUIUtil::TitleColor = { 0.85f, 0.65f, 0.0f };
 const LittleEngine::Color GUIUtil::ClearButtonColor = { 0.5f, 0.0f, 0.0f };
 const float GUIUtil::_MIN_FLOAT = -999999999.f;
 const float GUIUtil::_MAX_FLOAT = +999999999.f;
-
+const float GUIUtil::_DEFAULT_COLUME_WIDTH = 200;
+	
 LittleEngine::UI::Internal::WidgetContainer* GUIUtil::m_root = nullptr;
 LittleEngine::Texture* GUIUtil::__EMPTY_TEXTURE = nullptr;
 

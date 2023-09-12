@@ -39,6 +39,8 @@ namespace LittleEngine
 		static const LittleEngine::Color TitleColor;
 		static const LittleEngine::Color ClearButtonColor;
 
+		static const float _DEFAULT_COLUME_WIDTH;
+		
 		static const float _MIN_FLOAT;
 		static const float _MAX_FLOAT;
 		static LittleEngine::UI::Internal::WidgetContainer* m_root;
