@@ -23,9 +23,10 @@ namespace LittleEngine::Reflection
 
     
 #define  __ClearContainer(mapContainer)\
-    for (auto ident : ##mapContainer)\
+    for (auto ident : m_name2##mapContainer)\
         delete ident.second;\
-    ##mapContainer.clear();
+    m_name2##mapContainer.clear();\
+    m_id2##mapContainer.clear();
     
 #define  __CopyNameMap2IdMap( mapName)\
     for (auto ident : m_name2##mapName)\
@@ -52,15 +53,11 @@ namespace LittleEngine::Reflection
         m_id2NameMap.clear();
         m_name2IdMap.clear();
         
-        __ClearContainer(m_name2MethodMap)
-        __ClearContainer(m_name2FieldMap)
-        __ClearContainer(m_name2ClassMap)
-        __ClearContainer(m_name2ArrayMap)
+        __ClearContainer(MethodMap)
+        __ClearContainer(FieldMap)
+        __ClearContainer(ClassMap)
+        __ClearContainer(ArrayMap)
 
-        __ClearContainer(m_id2ClassMap)
-        __ClearContainer(m_id2FieldMap)
-        __ClearContainer(m_id2MethodMap)
-        __ClearContainer(m_id2ArrayMap)
     }
     
     

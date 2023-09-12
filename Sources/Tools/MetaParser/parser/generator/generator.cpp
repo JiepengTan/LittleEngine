@@ -17,6 +17,7 @@ namespace Generator
         Class classInfo = *class_temp;
         class_def.set("class_name", class_temp->getClassName());
         class_def.set("class_is_abstract", class_temp->isAbstract() ?"true":"false");
+        class_def.set("class_meta_datas", class_temp->getMetaDataString() );
         class_def.set("class_namespace", class_temp->getCurrentNamespaceStr());
         class_def.set("class_full_name", class_temp->getFullName());
         class_def.set("class_full_code_name", class_temp->getFullCodeName());

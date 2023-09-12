@@ -33,7 +33,18 @@ namespace LittleEngine::Reflection
             return nullptr;
         return type->CreateInstance();
     }
-    
+
+    bool TypeInfo::HasMeta(std::string metaKey)
+    {
+        return m_metaData.count(metaKey) == 0;
+    }
+
+    std::string TypeInfo::GetMeta(std::string metaKey)
+    {
+        if(m_metaData.count(metaKey) == 0) return "";
+        return m_metaData.at(metaKey);
+    }
+
     TypeInfo* TypeInfo::GetType(std::string typeName)
     {
         if (m_name2Types.count(typeName) == 0) return nullptr;
@@ -102,6 +113,7 @@ namespace LittleEngine::Reflection
     {
         if (m_id2Types.count(typeId) != 0) return m_id2Types.at(typeId);
         TypeInfo* meta = new TypeInfo(typeName, typeId);
+        meta->m_metaData = MetaRegisterUtil::m_name2ClassMap.at(typeName)->GetMetaData();
         m_name2Types.emplace(typeName, meta);
         m_id2Types.emplace(typeId, meta);
         std::vector<TypeInfo*> baseClasses;

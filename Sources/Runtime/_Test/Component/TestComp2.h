@@ -5,7 +5,7 @@
 namespace LittleEngine
 {
     REFLECTION_COMPONENT_TYPE(TestComp2)
-    CLASS (TestComp2 : public Component, WhiteListFields)
+    CLASS (TestComp2 : public Component, WhiteListFields, CustomerEditor )
     {
         REFLECTION_COMPONENT_BODY(TestComp2)
     public:

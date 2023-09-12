@@ -25,11 +25,12 @@ namespace LittleEngine
 
 namespace LittleEngine
 {
+	const float _MIN_FLOAT = -9999999.f;
+	const float _MAX_FLOAT = +9999999.f;
+	
 	class Component;
     class InspectorUtil
     {
-    	#define  _MIN_FLOAT  -9999999.f
-    	#define  _MAX_FLOAT  +9999999.f
     	static uint64_t s_unique_id;
     	static std::string s_unique_id_str;
     	static std::string s_startWidgetId;
@@ -41,7 +42,6 @@ namespace LittleEngine
     	static void DrawDefault(Component* component);
     	static bool DrawButton(const std::string& p_nameconst, FVector2 p_size = FVector2(0.f, 0.f), bool p_disabled = false);
 
-    	/*
 		template <typename T>
 		static bool DrawScalar(const std::string& p_name, T& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
 		static bool DrawBoolean(const std::string& p_name, bool& p_data);
@@ -59,7 +59,14 @@ namespace LittleEngine
 		static bool DrawMaterial(const std::string& p_name, Material*& p_data);
 		static bool DrawSound(const std::string& p_name, Sound*& p_data);
 		static bool DrawAsset(const std::string& p_name, std::string& p_data);
-    	*/
+    	
+    	/**/
 		
     };
+
+    template <typename T>
+    bool InspectorUtil::DrawScalar(const std::string& p_name, T& p_data, float p_step, T p_min, T p_max)
+    {
+    	return false;
+    }
 }

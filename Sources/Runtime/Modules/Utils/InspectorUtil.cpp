@@ -1,7 +1,11 @@
 ﻿#include "InspectorUtil.h"
 
+#include "../../../Tools/MetaParser/parser/meta/meta_data_config.h"
+#include "Core/Reflection/MetaDefine.h"
 #include "ImGui/imgui_internal.h"
+#include "Modules/Framework/ECS/Component.h"
 #include "Modules/UI/Internal/Converter.h"
+#include "Core/Reflection/TypeUtil.h"
 using namespace LittleEngine::UI::Internal;
 namespace LittleEngine
 {
@@ -29,9 +33,14 @@ namespace LittleEngine
 
     void InspectorUtil::DrawDefault(Component* component)
     {
-        if(DrawButton("Hello world"))
+        if(component == nullptr) return;
+        auto type = component->GetType();
+        if(type->HasMeta(NativeProperty::CustomerEditor))
         {
-            LOG_INFO("asdafsfff   DrawDefault");
+            if(DrawButton("Hello world"))
+            {
+                LOG_INFO("asdafsfff   DrawDefault");
+            }
         }
     }
 
@@ -60,5 +69,80 @@ namespace LittleEngine
         style.Colors[ImGuiCol_ButtonActive]		= defaultClickedColor;
         style.Colors[ImGuiCol_Text]				= defaultTextColor;
         return clicked;
+    }
+
+    bool InspectorUtil::DrawBoolean(const std::string& p_name, bool& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawVec2(const std::string& p_name, FVector2& p_data, float p_step, float p_min, float p_max)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawVec3(const std::string& p_name, FVector3& p_data, float p_step, float p_min, float p_max)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawVec4(const std::string& p_name, FVector4& p_data, float p_step, float p_min, float p_max)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step, float p_min, float p_max)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawString(const std::string& p_name, std::string& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawMesh(const std::string& p_name, Model*& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawTexture(const std::string& p_name, Texture*& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawTexture(const std::string& p_name, Texture*& p_data, std::string& guid)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawTexture(const std::string& p_name, TextureResPtr& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawShader(const std::string& p_name, Shader*& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawMaterial(const std::string& p_name, Material*& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawSound(const std::string& p_name, Sound*& p_data)
+    {
+        return false;
+    }
+
+    bool InspectorUtil::DrawAsset(const std::string& p_name, std::string& p_data)
+    {
+        return false;
     }
 }

@@ -48,7 +48,20 @@ bool Class::isAbstract(void) const
 {
     return m_meta_data.getFlag(NativeProperty::Abstract);
 }
-
+std::string Class::getMetaDataString()const
+{
+    std::string retStr= "";
+    auto infos = m_meta_data.getAllProperties();
+    for (auto element : infos)
+    {
+        retStr += "{\"" +element.first + "\",\""+element.second + "\"},";
+    }
+    return retStr;
+}
+bool Class::isCustomEditor(void) const
+{
+    return m_meta_data.getFlag(NativeProperty::CustomerEditor);
+}
 bool Class::shouldCompileFields(void) const
 {
     return m_meta_data.getFlag(NativeProperty::All) || m_meta_data.getFlag(NativeProperty::Fields) ||

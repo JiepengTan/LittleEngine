@@ -33,6 +33,7 @@ namespace LittleEngine::Reflection
     typedef std::function<Json(void*)>                                  WriteJsonByNameFunc;
     typedef std::function<std::vector<TypeID>(void)>                    GetBaseClassIdsFunc;
     typedef std::function<void*(void)>                                  ConstructorFunc;
+    typedef std::function<std::map<std::string,std::string>(void)>      GetMetaDataFunc;
     
     class FieldFunctionTuple
     {
@@ -58,6 +59,7 @@ namespace LittleEngine::Reflection
         GetBaseClassIdsFunc GetBaseClassIds;
         ConstructorFunc Constructor;
         GetBoolFunc    IsAbstract;
+        GetMetaDataFunc    GetMetaData;
     };
     class ArrayFunctionTuple
     {

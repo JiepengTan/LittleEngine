@@ -27,6 +27,8 @@ namespace {{class_namespace}}::MetaCodeGen{
         }
         
         static bool IsAbstract(){ return {{class_is_abstract}} ;}
+        
+        static std::map<std::string,std::string> GetMetaData(){ return std::map<std::string,std::string>{ {{{class_meta_datas}}} };}
 
         static std::vector<TypeID> GetBaseClassIds(){
             std::vector<TypeID> baseIds ;
@@ -134,7 +136,8 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::WriteByName,
             &TypeOperator_{{class_name}}::GetBaseClassIds,
             &TypeOperator_{{class_name}}::ConstructorNew,
-            &TypeOperator_{{class_name}}::IsAbstract
+            &TypeOperator_{{class_name}}::IsAbstract,
+            &TypeOperator_{{class_name}}::GetMetaData,
               };
         META_REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
