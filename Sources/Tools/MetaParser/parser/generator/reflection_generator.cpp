@@ -126,6 +126,7 @@ namespace Generator
             class_def.set("array_defines", array_defines);
             class_def.set("vector_defines", vector_defines);
             class_defines.push_back(class_def);
+            m_class_defines.emplace(class_temp->type_id, class_def);
         }
 
         mustache_data.set("class_defines", class_defines);
@@ -148,7 +149,8 @@ namespace Generator
         Mustache::data mustache_data;
         Mustache::data include_headfiles = Mustache::data::type::list;
         Mustache::data sourefile_names    = Mustache::data::type::list;
-
+        Mustache::data class_defines    = Mustache::data::type::list;
+        
         for (auto& head_file : m_head_file_list)
         {
             include_headfiles.push_back(Mustache::data("headfile_name", head_file));
@@ -157,6 +159,11 @@ namespace Generator
         {
             sourefile_names.push_back(Mustache::data("sourefile_name_upper_camel_case", sourefile_name_upper_camel_case));
         }
+        for (auto element : m_class_defines)
+        {
+            class_defines.push_back(element.second);
+        }
+        mustache_data.set("class_defines", class_defines);
         mustache_data.set("include_headfiles", include_headfiles);
         mustache_data.set("sourefile_names", sourefile_names);
         std::string render_string =

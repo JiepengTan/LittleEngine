@@ -1,7 +1,22 @@
 #pragma once
 #include "Core/Serialization/JsonSerializer.h"
 
+
 {{#include_headfiles}}
 #include "{{headfile_name}}"
 {{/include_headfiles}}
+
+
+
+
+
+namespace LittleEngine{
+    enum class ECodeGenTypes
+    {
+    {{#class_defines}}
+        {{class_full_code_name}} = {{class_type_id}},
+    {{/class_defines}}
+    EunmCount
+    };
+}
 

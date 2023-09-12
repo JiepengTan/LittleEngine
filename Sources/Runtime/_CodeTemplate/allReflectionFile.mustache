@@ -1,6 +1,22 @@
 #pragma once
 #include "Core/Reflection/Reflection.h"
 #include "_Generated/Serializer/AllSerializer.h"
+
+
+
+namespace LittleEngine::Reflection{
+    enum class ECodeGenTypeID
+    {
+    {{#class_defines}}
+        {{class_full_code_name}} = {{class_type_id}},
+    {{/class_defines}}
+    EunmCount
+    };
+}
+
+
+
+
 {{#include_headfiles}}
 #include "{{headfile_name}}"
 {{/include_headfiles}}

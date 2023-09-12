@@ -195,6 +195,7 @@ int MetaParser::parse(void)
 void MetaParser::generateFiles(void)
 {
     std::cerr << "Start generate runtime schemas(" << m_schema_modules.size() << ")..." << std::endl;
+    std::map<int,std::string> typeId2Name;
     for (auto& schema : m_schema_modules)
     {
         for (auto& generator_iter : m_generators)

@@ -18,5 +18,6 @@ namespace Generator
     private:
         std::vector<std::string> m_head_file_list;
         std::vector<std::string> m_sourcefile_list;
+        std::map<int,Mustache::data> m_class_defines;
     };
 } // namespace Generator

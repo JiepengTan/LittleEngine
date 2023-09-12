@@ -34,12 +34,12 @@ namespace LittleEngine::Reflection
     void MetaRegisterUtil::RegisterAll()
     {
         RegisterAllCodeGen();
+        for (auto ident : m_name2IdMap )
+            m_id2NameMap.emplace(ident.second,ident.first);
         // Build inheritance relationship 
         for (auto ident : m_name2IdMap)
             TypeInfo::RegisterType(ident.first, ident.second);
-        
-        for (auto ident : m_id2NameMap)
-            m_name2IdMap.emplace(ident.second,ident.first);
+         
 
         __CopyNameMap2IdMap(MethodMap)
         __CopyNameMap2IdMap(FieldMap)
