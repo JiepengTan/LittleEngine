@@ -105,6 +105,7 @@ Panels::Inspector::Inspector
 			LOG_INFO("Click " + typeName + " typeId " +std::to_string( clickType->GetTypeID()));
 			GetTargetActor()->AddComponent(clickType->GetTypeID());
 			componentSelectorWidget.ValueChangedEvent.Invoke(componentSelectorWidget.currentChoice);
+			EDITOR_EXEC(DelayAction([this] { Refresh(); }));
 		};
 
 		componentSelectorWidget.ValueChangedEvent += [this, &addComponentButton](int p_value)
@@ -209,11 +210,15 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
 	{
 		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetName());
-		header.closable = p_component->GetTypeID() == LittleEngine:: CTransform::GetStaticTypeID();
-		header.CloseEvent += [this, &header, &p_component]
-		{ 
-			if (p_component->GetActor()->RemoveComponent(p_component))
+		header.closable = p_component->GetTypeID() != LittleEngine:: CTransform::GetStaticTypeID();
+		header.CloseEvent += [this, &header, p_component]
+		{
+			auto actor= p_component->GetActor();
+			if (actor->RemoveComponent(p_component))
+			{
 				m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
+				EDITOR_EXEC(DelayAction([this] { Refresh(); }));
+			}
 		};
 		auto& columns = header.CreateWidget<UI::Widgets::Layout::Columns<2>>();
 		columns.widths[0] = 200;

@@ -44,6 +44,10 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
 }
 
 bool Class::shouldCompile(void) const { return shouldCompileFields()|| shouldCompileMethods(); }
+bool Class::isAbstract(void) const
+{
+    return m_meta_data.getFlag(NativeProperty::Abstract);
+}
 
 bool Class::shouldCompileFields(void) const
 {

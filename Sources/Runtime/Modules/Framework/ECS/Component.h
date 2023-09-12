@@ -18,7 +18,7 @@ namespace LittleEngine
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
 	REFLECTION_COMPONENT_TYPE(Component)
-	CLASS (Component: public Object, WhiteListFields)
+	CLASS (Component: public Object, WhiteListFields,Abstract)
 	{
 		REFLECTION_COMPONENT_BODY(Component)
 		friend class Actor;

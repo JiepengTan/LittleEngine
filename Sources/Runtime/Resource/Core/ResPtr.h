@@ -159,7 +159,7 @@ namespace LittleEngine
     template<>\
     Json JsonSerializer::Write(const restypename##ResPtr& instance);\
     template<>\
-    restypename##ResPtr& JsonSerializer::Read(const Json& json_context, restypename##ResPtr& instance);\
+    restypename##ResPtr& JsonSerializer::Read(const Json& jsonContext, restypename##ResPtr& instance);\
 
     class ShaderResPtr : public ResPtr<Shader>
     {
@@ -179,7 +179,7 @@ namespace LittleEngine
     template <>
     Json JsonSerializer::Write(const ShaderResPtr& instance);
     template <>
-    ShaderResPtr& JsonSerializer::Read(const Json& json_context, ShaderResPtr& instance);
+    ShaderResPtr& JsonSerializer::Read(const Json& jsonContext, ShaderResPtr& instance);
     
     //DECLARE_RES_PTR_TYPE(Shader) 
     DECLARE_RES_PTR_TYPE(Texture)

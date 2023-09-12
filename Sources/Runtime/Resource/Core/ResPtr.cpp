@@ -14,10 +14,10 @@ namespace LittleEngine
         };\
     }\
     template<>\
-    restypename##ResPtr& JsonSerializer::Read(const Json& json_context, restypename##ResPtr& instance)\
+    restypename##ResPtr& JsonSerializer::Read(const Json& jsonContext, restypename##ResPtr& instance)\
     {\
-        if(json_context["guid"].is_null()){instance.Reset("",nullptr);return instance;} \
-        auto guid = json_context["guid"].string_value();\
+        if(jsonContext["guid"].is_null()){instance.Reset("",nullptr);return instance;} \
+        auto guid = jsonContext["guid"].string_value();\
         auto ptr = ResourcesUtils::Load##restypename##(guid);\
         instance.Reset(guid,ptr);\
         return instance;\
@@ -33,10 +33,10 @@ namespace LittleEngine
     }
 
     template <>
-    ShaderResPtr& JsonSerializer::Read(const Json& json_context, ShaderResPtr& instance)
+    ShaderResPtr& JsonSerializer::Read(const Json& jsonContext, ShaderResPtr& instance)
     {
-        if (json_context["guid"].is_null()) { instance.Reset("", nullptr); }
-        auto guid = json_context["guid"].string_value();
+        if (jsonContext["guid"].is_null()) { instance.Reset("", nullptr); }
+        auto guid = jsonContext["guid"].string_value();
         auto ptr = ResourcesUtils::LoadShader(guid);
         instance.Reset(guid, ptr);
         return instance;

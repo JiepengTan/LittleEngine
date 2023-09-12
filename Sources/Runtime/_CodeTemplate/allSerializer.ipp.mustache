@@ -11,10 +11,10 @@ namespace LittleEngine{
     template<>
     Json JsonSerializer::Write(const {{class_full_name}}& instance){
         Json::object ret_context;
-        {{#class_base_class_defines}}auto&&  json_context_{{class_base_class_index}} = JsonSerializer::Write(*({{class_base_class_name}}*)&instance);
-        assert(json_context_{{class_base_class_index}}.is_object());
-        auto&& json_context_map_{{class_base_class_index}} = json_context_{{class_base_class_index}}.object_items();
-        ret_context.insert(json_context_map_{{class_base_class_index}}.begin() , json_context_map_{{class_base_class_index}}.end());{{/class_base_class_defines}}
+        {{#class_base_class_defines}}auto&&  jsonContext_{{class_base_class_index}} = JsonSerializer::Write(*({{class_base_class_name}}*)&instance);
+        assert(jsonContext_{{class_base_class_index}}.is_object());
+        auto&& jsonContext_map_{{class_base_class_index}} = jsonContext_{{class_base_class_index}}.object_items();
+        ret_context.insert(jsonContext_map_{{class_base_class_index}}.begin() , jsonContext_map_{{class_base_class_index}}.end());{{/class_base_class_defines}}
         {{#class_field_defines}}
             {{#class_field_is_array}}
             Json::array {{class_field_name}}_json;
@@ -32,21 +32,21 @@ namespace LittleEngine{
         return  Json(ret_context);
     }
     template<>
-    {{class_full_name}}& JsonSerializer::Read(const Json& json_context, {{class_full_name}}& instance){
-        assert(json_context.is_object());
-        {{#class_base_class_defines}}JsonSerializer::Read(json_context,*({{class_base_class_name}}*)&instance);{{/class_base_class_defines}}
+    {{class_full_name}}& JsonSerializer::Read(const Json& jsonContext, {{class_full_name}}& instance){
+        assert(jsonContext.is_object());
+        {{#class_base_class_defines}}JsonSerializer::Read(jsonContext,*({{class_base_class_name}}*)&instance);{{/class_base_class_defines}}
         {{#class_field_defines}}
-        if(!json_context["{{class_field_display_name}}"].is_null()){
+        if(!jsonContext["{{class_field_display_name}}"].is_null()){
              {{#class_field_is_array}}
-            assert(json_context["{{class_field_display_name}}"].is_array());
-            Json::array array_{{class_field_name}} = json_context["{{class_field_display_name}}"].array_items();
+            assert(jsonContext["{{class_field_display_name}}"].is_array());
+            Json::array array_{{class_field_name}} = jsonContext["{{class_field_display_name}}"].array_items();
             for (size_t index=0; index < array_{{class_field_name}}.size();++index){
                 JsonSerializer::Read(array_{{class_field_name}}[index], instance.{{class_field_name}}[index]);
             }{{/class_field_is_array}} 
             {{^class_field_is_array}} 
-            {{#class_field_is_enum}}JsonSerializer::ReadEnum(json_context["{{class_field_display_name}}"], instance.{{class_field_name}}); {{/class_field_is_enum}} 
-            {{#class_field_is_normal}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_normal}} 
-            {{#class_field_is_pointer}}JsonSerializer::Read(json_context["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_pointer}} 
+            {{#class_field_is_enum}}JsonSerializer::ReadEnum(jsonContext["{{class_field_display_name}}"], instance.{{class_field_name}}); {{/class_field_is_enum}} 
+            {{#class_field_is_normal}}JsonSerializer::Read(jsonContext["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_normal}} 
+            {{#class_field_is_pointer}}JsonSerializer::Read(jsonContext["{{class_field_display_name}}"], instance.{{class_field_name}});{{/class_field_is_pointer}} 
             {{/class_field_is_array}}
         }{{/class_field_defines}}
         return instance;
@@ -59,9 +59,9 @@ namespace LittleEngine{
             const {{class_full_name}}& item = *({{class_full_name}}*) instance;
             return LittleEngine::JsonSerializer::Write(item);
         }
-        void JsonSerializer_Read_{{class_full_code_name}}(const Json& json_context, void* instance){
+        void JsonSerializer_Read_{{class_full_code_name}}(const Json& jsonContext, void* instance){
             {{class_full_name}}& item = *({{class_full_name}}*) instance;
-            LittleEngine::JsonSerializer::Read(json_context, item);
+            LittleEngine::JsonSerializer::Read(jsonContext, item);
         }
     }
     {{/class_defines}}

@@ -26,18 +26,18 @@ namespace LittleEngine::Reflection
             return nullptr;
         return type->CreateInstance();
     }
-    void* TypeInfo::CreateInstance(std::string type_name)
+    void* TypeInfo::CreateInstance(std::string typeName)
     {
-        auto type = GetType(type_name);
+        auto type = GetType(typeName);
         if(type == nullptr)
             return nullptr;
         return type->CreateInstance();
     }
     
-    TypeInfo* TypeInfo::GetType(std::string type_name)
+    TypeInfo* TypeInfo::GetType(std::string typeName)
     {
-        if (m_name2Types.count(type_name) == 0) return nullptr;
-        return m_name2Types.at(type_name);
+        if (m_name2Types.count(typeName) == 0) return nullptr;
+        return m_name2Types.at(typeName);
     }
 
     TypeInfo* TypeInfo::GetType(TypeID typeId)
@@ -45,16 +45,26 @@ namespace LittleEngine::Reflection
         if (m_id2Types.count(typeId) == 0) return nullptr;
         return m_id2Types.at(typeId);
     }
-
+    bool TypeInfo::IsAbstract(TypeID typeId)
+    {
+        if (m_id2Types.count(typeId) == 0) return false;
+        return GetType(typeId)->IsAbstract();
+    }
+    bool TypeInfo::IsAbstract(std::string typeName)
+    {
+        if (m_name2Types.count(typeName) == 0) return false;
+        return GetType(typeName)->IsAbstract();
+    }
     bool TypeInfo::HasType(TypeID typeId)
     {
         return m_id2Types.count(typeId) != 0;
     }
 
-    bool TypeInfo::HasType(std::string type_name)
+    bool TypeInfo::HasType(std::string typeName)
     {      
-        return m_name2Types.count(type_name) != 0;
+        return m_name2Types.count(typeName) != 0;
     }
+
 
     TVector<TypeInfo*> TypeInfo::GetAllTypes()
     {
@@ -69,9 +79,9 @@ namespace LittleEngine::Reflection
         return m_allTypes;
     }
 
-    void TypeInfo::RecvGetSuperClassMetas(std::string type_name, std::vector<TypeInfo*>& supperClasses)
+    void TypeInfo::RecvGetSuperClassMetas(std::string typeName, std::vector<TypeInfo*>& supperClasses)
     {
-        auto ids = GetBaseClassIds(type_name);
+        auto ids = GetBaseClassIds(typeName);
         for (auto id : ids)
         {
             if (m_id2Types.count(id) == 0)
@@ -88,14 +98,14 @@ namespace LittleEngine::Reflection
         }
     }
 
-    TypeInfo* TypeInfo::RegisterType(std::string type_name, TypeID typeId)
+    TypeInfo* TypeInfo::RegisterType(std::string typeName, TypeID typeId)
     {
         if (m_id2Types.count(typeId) != 0) return m_id2Types.at(typeId);
-        TypeInfo* meta = new TypeInfo(type_name, typeId);
-        m_name2Types.emplace(type_name, meta);
+        TypeInfo* meta = new TypeInfo(typeName, typeId);
+        m_name2Types.emplace(typeName, meta);
         m_id2Types.emplace(typeId, meta);
         std::vector<TypeInfo*> baseClasses;
-        RecvGetSuperClassMetas(type_name, baseClasses);
+        RecvGetSuperClassMetas(typeName, baseClasses);
         m_id2BaseClassTypes[typeId] = baseClasses;
         return meta;
     }
@@ -113,13 +123,13 @@ namespace LittleEngine::Reflection
     }
 
 
-    TypeInfo::TypeInfo(std::string type_name, TypeID typeId) : m_typeName(type_name)
+    TypeInfo::TypeInfo(std::string typeName, TypeID typeId) : m_typeName(typeName)
     {
         m_isValid = false;
         m_fields.clear();
         m_methods.clear();
         m_typeId = typeId;
-        auto fileds_iter = MetaRegisterUtil::m_name2FieldMap.equal_range(type_name);
+        auto fileds_iter = MetaRegisterUtil::m_name2FieldMap.equal_range(typeName);
         while (fileds_iter.first != fileds_iter.second)
         {
             FieldAccessor f_field(fileds_iter.first->second);
@@ -129,7 +139,7 @@ namespace LittleEngine::Reflection
             ++fileds_iter.first;
         }
 
-        auto methods_iter = MetaRegisterUtil::m_name2MethodMap.equal_range(type_name);
+        auto methods_iter = MetaRegisterUtil::m_name2MethodMap.equal_range(typeName);
         while (methods_iter.first != methods_iter.second)
         {
             MethodAccessor f_method(methods_iter.first->second);
@@ -147,9 +157,9 @@ namespace LittleEngine::Reflection
     }
 
 
-    bool TypeInfo::NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor)
+    bool TypeInfo::NewArrayAccessorFromName(std::string arrayTypeName, ArrayAccessor& accessor)
     {
-        auto iter = MetaRegisterUtil::m_name2ArrayMap.find(array_type_name);
+        auto iter = MetaRegisterUtil::m_name2ArrayMap.find(arrayTypeName);
 
         if (iter != MetaRegisterUtil::m_name2ArrayMap.end())
         {
@@ -161,19 +171,19 @@ namespace LittleEngine::Reflection
         return false;
     }
 
-    void* TypeInfo::CreateFromNameAndJson(std::string type_name, const Json& json_context)
+    void* TypeInfo::CreateFromNameAndJson(std::string typeName, const Json& jsonContext)
     {
-        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(typeName);
         if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
-            return (iter->second->ConstructorWithJson(json_context));
+            return (iter->second->ConstructorWithJson(jsonContext));
         }
         return nullptr;
     }
 
-    Json TypeInfo::WriteByName(std::string type_name, void* instance)
+    Json TypeInfo::WriteByName(std::string typeName, void* instance)
     {
-        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(typeName);
 
         if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
@@ -186,32 +196,32 @@ namespace LittleEngine::Reflection
 
     TypeID TypeInfo::GetTypeID() const { return m_typeId; }
 
-    int TypeInfo::GetFieldsList(FieldAccessor*& out_list)
+    int TypeInfo::GetFieldsList(FieldAccessor*& outList)
     {
         int count = m_fields.size();
-        out_list = new FieldAccessor[count];
+        outList = new FieldAccessor[count];
         for (int i = 0; i < count; ++i)
         {
-            out_list[i] = m_fields[i];
+            outList[i] = m_fields[i];
         }
         return count;
     }
 
-    int TypeInfo::GetMethodsList(MethodAccessor*& out_list)
+    int TypeInfo::GetMethodsList(MethodAccessor*& outList)
     {
         int count = m_methods.size();
-        out_list = new MethodAccessor[count];
+        outList = new MethodAccessor[count];
         for (int i = 0; i < count; ++i)
         {
-            out_list[i] = m_methods[i];
+            outList[i] = m_methods[i];
         }
         return count;
     }
 
 
-    std::vector<TypeID> TypeInfo::GetBaseClassIds(std::string type_name)
+    std::vector<TypeID> TypeInfo::GetBaseClassIds(std::string typeName)
     {
-        auto iter = MetaRegisterUtil::m_name2ClassMap.find(type_name);
+        auto iter = MetaRegisterUtil::m_name2ClassMap.find(typeName);
         if (iter != MetaRegisterUtil::m_name2ClassMap.end())
         {
             return iter->second->GetBaseClassIds();
@@ -258,6 +268,11 @@ namespace LittleEngine::Reflection
     bool TypeInfo::IsAssignableFrom(TypeID typeId)
     {
         return typeId == m_typeId || IsSubclassOf(typeId);
+    }
+
+    bool TypeInfo::IsAbstract()
+    {
+        return MetaRegisterUtil::m_id2ClassMap.at(GetTypeID())->IsAbstract();
     }
 
     TypeInfo& TypeInfo::operator=(const TypeInfo& dest)

@@ -20,6 +20,9 @@ namespace LittleEngine
         static bool HasType(std::string typeName) {  return GetType(typeName) != nullptr; }
         static std::string GetTypeName(TypeID typeId);
         static TypeID GetTypeID(std::string typeName);
+        static bool IsAbstract(TypeID typeId){ return Reflection::TypeInfo::IsAbstract(typeId);}
+        static bool IsAbstract(std::string typeName){ return Reflection::TypeInfo::IsAbstract(typeName);}
+        
         static void* CreateInstance(TypeID typeId){ return Reflection::TypeInfo::CreateInstance(typeId);}
         static void* CreateInstance(std::string typeName){ return Reflection::TypeInfo::CreateInstance(typeName);}
         

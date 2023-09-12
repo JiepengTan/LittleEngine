@@ -23,6 +23,7 @@ public:
     Class(const Cursor& cursor, const Namespace& current_namespace);
 
     virtual bool shouldCompile(void) const;
+    virtual bool isAbstract(void) const;
 
     bool shouldCompileFields(void) const;
     bool shouldCompileMethods(void) const;

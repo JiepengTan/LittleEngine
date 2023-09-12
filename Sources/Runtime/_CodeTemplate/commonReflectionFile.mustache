@@ -17,15 +17,17 @@ namespace {{class_namespace}}::MetaCodeGen{
     class TypeOperator_{{class_name}}{
     public:
         static const char* GetClassName(){ return "{{class_name}}";}
-        static void* ConstructorWithJson(const Json& json_context){
+        static void* ConstructorWithJson(const Json& jsonContext){
             {{class_name}}* ret_instance= new {{class_name}};
-            LittleEngine::JsonSerializer::Read(json_context, *ret_instance);
+            LittleEngine::JsonSerializer::Read(jsonContext, *ret_instance);
             return ret_instance;
         }
         static Json WriteByName(void* instance){
             return LittleEngine::JsonSerializer::Write(*({{class_name}}*)instance);
         }
         
+        static bool IsAbstract(){ return {{class_is_abstract}} ;}
+
         static std::vector<TypeID> GetBaseClassIds(){
             std::vector<TypeID> baseIds ;
             {{#class_base_class_defines}}baseIds.push_back({{class_base_class_name}}::MetaTypeId); {{/class_base_class_defines}}
@@ -131,7 +133,8 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::ConstructorWithJson,
             &TypeOperator_{{class_name}}::WriteByName,
             &TypeOperator_{{class_name}}::GetBaseClassIds,
-            &TypeOperator_{{class_name}}::ConstructorNew
+            &TypeOperator_{{class_name}}::ConstructorNew,
+            &TypeOperator_{{class_name}}::IsAbstract
               };
         META_REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}

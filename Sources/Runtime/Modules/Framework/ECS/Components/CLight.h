@@ -18,7 +18,7 @@ namespace LittleEngine
 	* Base class for any light
 	*/
 	REFLECTION_COMPONENT_TYPE(CLight)
-	CLASS (CLight : public Component, WhiteListFields)
+	CLASS (CLight : public Component, WhiteListFields,Abstract)
 	{
 		REFLECTION_COMPONENT_BODY(CLight)
 	public:

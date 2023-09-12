@@ -15,15 +15,15 @@ namespace LittleEngine::Reflection
 
         // static void Register();
 
-        static bool               NewArrayAccessorFromName(std::string array_type_name, ArrayAccessor& accessor);
-        static void*              CreateFromNameAndJson(std::string type_name, const Json& json_context);
-        static Json               WriteByName(std::string type_name, void* instance);
+        static bool               NewArrayAccessorFromName(std::string arrayTypeName, ArrayAccessor& accessor);
+        static void*              CreateFromNameAndJson(std::string typeName, const Json& jsonContext);
+        static Json               WriteByName(std::string typeName, void* instance);
 
         std::string GetTypeName();
         TypeID GetTypeID() const;
 
-        int GetFieldsList(FieldAccessor*& out_list);
-        int GetMethodsList(MethodAccessor*& out_list);
+        int GetFieldsList(FieldAccessor*& outList);
+        int GetMethodsList(MethodAccessor*& outList);
 
 
         FieldAccessor GetFieldByName(const char* name);
@@ -31,26 +31,29 @@ namespace LittleEngine::Reflection
         bool IsSubclassOf(TypeID typeId);
         bool IsAssignableFrom(TypeID typeId);
         bool IsValid() { return m_isValid; }
+        bool IsAbstract();
 
         TypeInfo& operator=(const TypeInfo& dest);
 
-        static TypeInfo* GetType(std::string type_name);
+        static TypeInfo* GetType(std::string typeName);
         static TypeInfo* GetType(TypeID typeId);
         static bool HasType(TypeID typeId);
-        static bool HasType(std::string type_name);
-        static TypeInfo* RegisterType(std::string type_name,TypeID typeId);
+        static bool HasType(std::string typeName);
+        static bool IsAbstract(TypeID typeId);
+        static bool IsAbstract(std::string typeName);
+        static TypeInfo* RegisterType(std::string typeName,TypeID typeId);
         void*  CreateInstance();
         static void* CreateInstance(TypeID typeId);
-        static void* CreateInstance(std::string type_name);
+        static void* CreateInstance(std::string typeName);
         
         static TMap<TypeID,TVector<TypeInfo*> > GetBaseClassInfos();
         static TVector<TypeInfo*>  GetAllTypes();
 
     private:
-        TypeInfo(std::string type_name,TypeID typeId);
-        static TypeInfo NewMetaFromName(std::string type_name);
-        static std::vector<TypeID> GetBaseClassIds(std::string type_name);
-        static void RecvGetSuperClassMetas(std::string type_name,std::vector<TypeInfo*>& supperClasses);
+        TypeInfo(std::string typeName,TypeID typeId);
+        static TypeInfo NewMetaFromName(std::string typeName);
+        static std::vector<TypeID> GetBaseClassIds(std::string typeName);
+        static void RecvGetSuperClassMetas(std::string typeName,std::vector<TypeInfo*>& supperClasses);
        
         static void Clear();
         static std::map<TypeID,TypeInfo*> m_id2Types;

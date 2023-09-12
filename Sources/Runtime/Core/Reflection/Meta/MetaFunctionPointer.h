@@ -57,6 +57,7 @@ namespace LittleEngine::Reflection
         WriteJsonByNameFunc WriteJsonByName;
         GetBaseClassIdsFunc GetBaseClassIds;
         ConstructorFunc Constructor;
+        GetBoolFunc    IsAbstract;
     };
     class ArrayFunctionTuple
     {

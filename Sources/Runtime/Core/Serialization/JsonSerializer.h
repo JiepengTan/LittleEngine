@@ -15,17 +15,17 @@ namespace LittleEngine
     {
     public:
         typedef Json (* __FunPtrWriteComponent)(void* data);
-        typedef void (* __FunPtrReadComponent)(const Json& json_context,void* data);
+        typedef void (* __FunPtrReadComponent)(const Json& jsonContext,void* data);
         static std::map<TypeID,__FunPtrReadComponent> Id2ReadFunctionMap;
         static std::map<TypeID,__FunPtrWriteComponent> Id2WriteFunctionMap;
         
     public:
         
         template<typename T>
-        static void ReadEnum(const Json& json_context, T& instance)
+        static void ReadEnum(const Json& jsonContext, T& instance)
         {
-            assert(json_context.is_number());
-            instance = (T)(int)(json_context.number_value());
+            assert(jsonContext.is_number());
+            instance = (T)(int)(jsonContext.number_value());
         }
         template<typename T>
         static Json WriteEnum(T& instance)
@@ -40,7 +40,7 @@ namespace LittleEngine
             return Json();
         }
         template<typename T>
-        static void ReadRes(const Json& json_context, T*& instance)
+        static void ReadRes(const Json& jsonContext, T*& instance)
         {
             static_assert(always_false<T>, "Serializer::Read<T> has not been implemented yet!");  
         }
@@ -52,19 +52,19 @@ namespace LittleEngine
         }
 
         template<typename T>
-        static T*& ReadPointer(const Json& json_context, T*& instance)
+        static T*& ReadPointer(const Json& jsonContext, T*& instance)
         {
             assert(instance == nullptr);
-            std::string type_name = json_context["$typeName"].string_value();
+            std::string type_name = jsonContext["$typeName"].string_value();
             assert(!type_name.empty());
             if ('*' == type_name[0])
             {
                 instance = new T;
-                Read(json_context["$context"], *instance);
+                Read(jsonContext["$context"], *instance);
             }
             else
             {
-                auto inst = Reflection::TypeInfo::CreateFromNameAndJson(type_name, json_context["$context"]);
+                auto inst = Reflection::TypeInfo::CreateFromNameAndJson(type_name, jsonContext["$context"]);
                 instance = static_cast<T*>(inst);
             }
             return instance;
@@ -80,11 +80,11 @@ namespace LittleEngine
         }
 
         template<typename T>
-        static T*& Read(const Json& json_context, Reflection::MetaPtr<T>& instance)
+        static T*& Read(const Json& jsonContext, Reflection::MetaPtr<T>& instance)
         {
-            std::string type_name = json_context["$typeName"].string_value();
+            std::string type_name = jsonContext["$typeName"].string_value();
             instance.SetTypeName(type_name);
-            return ReadPointer(json_context, instance.GetPtrReference());
+            return ReadPointer(jsonContext, instance.GetPtrReference());
         }
         template<typename T>
         static Json Write(const std::vector<T>& instance)
@@ -96,10 +96,10 @@ namespace LittleEngine
             return Json(jsonAry);
         }
         template<typename T>
-        static std::vector<T>& Read(const Json& json_context, std::vector<T>& vec)
+        static std::vector<T>& Read(const Json& jsonContext, std::vector<T>& vec)
         {
-            assert(json_context.is_array());
-            Json::array jsonAry = json_context.array_items();
+            assert(jsonContext.is_array());
+            Json::array jsonAry = jsonContext.array_items();
             vec.resize(jsonAry.size());
             for (size_t index=0; index < jsonAry.size();++index){
                 JsonSerializer::Read(jsonAry[index], vec[index]);
@@ -117,10 +117,10 @@ namespace LittleEngine
             return Json(jsonAry);
         }
         template<typename K,typename V>
-        static std::map<K,V>& Read(const Json& json_context, std::map<K,V>& instance)
+        static std::map<K,V>& Read(const Json& jsonContext, std::map<K,V>& instance)
         {
-            assert(json_context.is_array());
-            Json::array jsonAry = json_context.array_items();
+            assert(jsonContext.is_array());
+            Json::array jsonAry = jsonContext.array_items();
             instance.resize(jsonAry.size()/2);
             for (size_t index=0; index < jsonAry.size()/2;++index){
                 K key;
@@ -148,11 +148,11 @@ namespace LittleEngine
         }
         
         template<typename T>
-        static T& Read(const Json& json_context, T& instance)
+        static T& Read(const Json& jsonContext, T& instance)
         {
             if constexpr (std::is_pointer<T>::value)
             {
-                return ReadPointer(json_context, instance);
+                return ReadPointer(jsonContext, instance);
             }
             else
             {
@@ -169,48 +169,48 @@ namespace LittleEngine
     template<>
     Json JsonSerializer::Write(const char& instance);
     template<>
-    char& JsonSerializer::Read(const Json& json_context, char& instance);
+    char& JsonSerializer::Read(const Json& jsonContext, char& instance);
 
     
     template<>
     Json JsonSerializer::Write(const int& instance);
     template<>
-    int& JsonSerializer::Read(const Json& json_context, int& instance);
+    int& JsonSerializer::Read(const Json& jsonContext, int& instance);
     
     template<>
     Json JsonSerializer::Write(const unsigned int& instance);
     template<>
-    unsigned int& JsonSerializer::Read(const Json& json_context, unsigned int& instance);
+    unsigned int& JsonSerializer::Read(const Json& jsonContext, unsigned int& instance);
     
     template<>
     Json JsonSerializer::Write(const int64_t& instance);
     template<>
-    int64_t& JsonSerializer::Read(const Json& json_context, int64_t& instance);
+    int64_t& JsonSerializer::Read(const Json& jsonContext, int64_t& instance);
     
     template<>
     Json JsonSerializer::Write(const uint64_t& instance);
     template<>
-    uint64_t& JsonSerializer::Read(const Json& json_context, uint64_t& instance);
+    uint64_t& JsonSerializer::Read(const Json& jsonContext, uint64_t& instance);
 
     
     template<>
     Json JsonSerializer::Write(const float& instance);
     template<>
-    float& JsonSerializer::Read(const Json& json_context, float& instance);
+    float& JsonSerializer::Read(const Json& jsonContext, float& instance);
 
     template<>
     Json JsonSerializer::Write(const double& instance);
     template<>
-    double& JsonSerializer::Read(const Json& json_context, double& instance);
+    double& JsonSerializer::Read(const Json& jsonContext, double& instance);
 
     template<>
     Json JsonSerializer::Write(const bool& instance);
     template<>
-    bool& JsonSerializer::Read(const Json& json_context, bool& instance);
+    bool& JsonSerializer::Read(const Json& jsonContext, bool& instance);
 
     template<>
     Json JsonSerializer::Write(const std::string& instance);
     template<>
-    std::string& JsonSerializer::Read(const Json& json_context, std::string& instance);
+    std::string& JsonSerializer::Read(const Json& jsonContext, std::string& instance);
 
 } // namespace LittleEngine
