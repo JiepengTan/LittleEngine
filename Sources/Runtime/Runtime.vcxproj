@@ -91,6 +91,7 @@
     <ClCompile Include="Core\Base\Macro.cpp" />
     <ClCompile Include="Core\Base\Object.cpp" />
     <ClCompile Include="Core\Maths\FFloat.cpp" />
+    <ClCompile Include="Core\Reflection\MetaDefine.cpp" />
     <ClCompile Include="Core\Reflection\Meta\MetaAccessor.cpp">
       <AssemblerOutput>NoListing</AssemblerOutput>
       <AssemblerListingLocation>..\..\Bin-Int\Debug\Runtime\</AssemblerListingLocation>
@@ -589,6 +590,7 @@
     <ClCompile Include="_Test\Component\TestComp2.cpp" />
     <ClCompile Include="_Test\Reflection\TestReflection.cpp" />
     <ClCompile Include="_Test\TestManager.cpp" />
+    <ClInclude Include="..\Tools\MetaParser\parser\meta\meta_data_config.h" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\HardwareInfo.h" />
@@ -619,6 +621,7 @@
     <ClInclude Include="Core\Maths\FVector3.h" />
     <ClInclude Include="Core\Maths\FVector4.h" />
     <ClInclude Include="Core\Maths\Internal\TransformNotifier.h" />
+    <ClInclude Include="Core\Reflection\MetaDefine.h" />
     <ClInclude Include="Core\Reflection\Meta\MetaAccessor.h" />
     <ClInclude Include="Core\Reflection\Meta\MetaFunctionPointer.h" />
     <ClInclude Include="Core\Reflection\Meta\MetaMacro.h" />
