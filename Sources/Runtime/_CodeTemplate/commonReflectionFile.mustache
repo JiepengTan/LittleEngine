@@ -16,7 +16,7 @@ namespace {{class_namespace}}{
 namespace {{class_namespace}}::MetaCodeGen{
     class TypeOperator_{{class_name}}{
     public:
-        static const char* GetClassName(){ return "{{class_name}}";}
+        static std::string GetClassName(){ return "{{class_name}}";}
         static void* ConstructorWithJson(const Json& jsonContext){
             {{class_name}}* ret_instance= new {{class_name}};
             LittleEngine::JsonSerializer::Read(jsonContext, *ret_instance);
@@ -49,15 +49,15 @@ namespace {{class_namespace}}::MetaCodeGen{
             {{#class_field_is_not_container}}static_cast<{{class_name}}*>(instance)->{{class_field_name}} = *static_cast<{{{class_field_type}}}*>(field_value);{{/class_field_is_not_container}} 
          }
         static void* Get_{{class_field_name}}(void* instance){ return static_cast<void*>(&(static_cast<{{class_name}}*>(instance)->{{class_field_name}}));}
-        static const char* GetFieldName_{{class_field_name}}(){ return "{{class_field_name}}";}
-        static const char* GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
+        static std::string GetFieldName_{{class_field_name}}(){ return "{{class_field_name}}";}
+        static std::string GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
         static bool IsVector_{{class_field_name}}(){ {{#class_field_is_vector}}return true;{{/class_field_is_vector}}{{^class_field_is_vector}}return false;{{/class_field_is_vector}} }
         static bool IsArray_{{class_field_name}}(){ {{#class_field_is_array}}return true;{{/class_field_is_array}}{{^class_field_is_array}}return false;{{/class_field_is_array}} }
         {{/class_field_defines}}
 
         // methods
         {{#class_method_defines}}
-        static const char* GetMethodName_{{class_method_name}}(){ return "{{class_method_name}}";}
+        static std::string GetMethodName_{{class_method_name}}(){ return "{{class_method_name}}";}
         static void Invoke_{{class_method_name}}(void * instance){static_cast<{{class_name}}*>(instance)->{{class_method_name}}();}
         {{/class_method_defines}}
     };
@@ -68,8 +68,8 @@ namespace {{class_namespace}}::MetaCodeGen{
 #define ArrayOperator_{{vector_useful_name}}MACRO
     class ArrayOperator_{{vector_useful_name}}{
         public:
-            static const char* GetArrayTypeName(){ return "{{{vector_type_name}}}";}
-            static const char* GetElementTypeName(){ return "{{{vector_element_type_name}}}";}
+            static std::string GetArrayTypeName(){ return "{{{vector_type_name}}}";}
+            static std::string GetElementTypeName(){ return "{{{vector_element_type_name}}}";}
             static int GetSize(void* instance){
                 //todo: should check validation
                 return static_cast<int>(static_cast<{{{vector_type_name}}}*>(instance)->size());
@@ -110,9 +110,9 @@ namespace {{class_namespace}}::MetaCodeGen{
         {{#class_method_defines}}
         LittleEngine::Reflection::MethodFunctionTuple* method_function_tuple_{{class_method_name}}=new LittleEngine::Reflection::MethodFunctionTuple{
             &TypeOperator_{{class_name}}::GetMethodName_{{class_method_name}},
-            &TypeOperator_{{class_name}}::Invoke_{{class_method_name}});
-        META_REGISTER_Method_TO_MAP("{{class_name}}", method_function_tuple_{{class_method_name}}
-        };
+            &TypeOperator_{{class_name}}::Invoke_{{class_method_name}}
+            };
+        META_REGISTER_Method_TO_MAP("{{class_name}}", method_function_tuple_{{class_method_name}} );
         {{/class_method_defines}}
 
         // register array info

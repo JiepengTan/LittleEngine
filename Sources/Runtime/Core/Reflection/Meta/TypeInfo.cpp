@@ -242,26 +242,22 @@ namespace LittleEngine::Reflection
     }
 
 
-    FieldAccessor TypeInfo::GetFieldByName(const char* name)
+    FieldAccessor* TypeInfo::GetFieldByName(std::string name)
     {
-        const auto it = std::find_if(m_fields.begin(), m_fields.end(), [&](const auto& i)
+        for (auto& element : m_fields)
         {
-            return std::strcmp(i.GetFieldName(), name) == 0;
-        });
-        if (it != m_fields.end())
-            return *it;
-        return FieldAccessor(nullptr);
+            if(element.GetFieldName() == name) return &element;
+        }
+        return nullptr;
     }
 
-    MethodAccessor TypeInfo::GetMethodByName(const char* name)
+    MethodAccessor* TypeInfo::GetMethodByName(std::string name)
     {
-        const auto it = std::find_if(m_methods.begin(), m_methods.end(), [&](const auto& i)
+        for (auto& element : m_methods)
         {
-            return std::strcmp(i.GetMethodName(), name) == 0;
-        });
-        if (it != m_methods.end())
-            return *it;
-        return MethodAccessor(nullptr);
+            if(element.GetMethodName() == name) return &element;
+        }
+        return nullptr;
     }
 
     bool TypeInfo::IsSubclassOf(TypeID typeId)

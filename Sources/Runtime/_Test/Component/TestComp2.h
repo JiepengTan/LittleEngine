@@ -5,34 +5,50 @@
 namespace LittleEngine
 {
     REFLECTION_COMPONENT_TYPE(TestComp2)
-    CLASS (TestComp2 : public Component, WhiteListFields, CustomerEditor )
+    CLASS (TestComp2 : public Component, Fields,WhiteListMethods, CustomerEditor )
     {
         REFLECTION_COMPONENT_BODY(TestComp2)
     public:
         void OnUpdate(float dt) override
         {
-            LOG_INFO("Hello world TestComp2");
+            LOG_INFO("Hello world TestComp2"); 
         }
-    private:
-        META(OnEnable)
-        float dataFloat;
-        META(OnEnable)
-        FVector2 dataVec2;
-        META(OnEnable)
-        FVector3 dataVec3;
-        META(OnEnable)
-        FVector4 dataVec4;
-        META(OnEnable)
-        Color dataColor;
-        META(OnEnable)
-        TextureResPtr ptr1;
-        META(OnEnable)
-        ModelResPtr ptr2;
-        META(OnEnable)
-        SoundResPtr ptr3;
-        META(OnEnable)
-        MaterialResPtr  ptr4;
-        META(OnEnable)
-        ShaderResPtr ptr5;
+
+        META(Enable)
+        void Hello()
+        {
+            LOG_INFO("Hello "); 
+        }
+        
+        META(Enable)
+        void HelloLittleEngine()
+        {
+            LOG_INFO("HelloLittleEngine "); 
+        }
+
+        
+        public:
+        char _char;
+        //int8_t int8_t;
+        //uint8_t uint8_t;
+        //int16_t int16_t;
+        //uint16_t uint16_t;
+        int32_t int32_t;
+        uint32_t uint32_t;
+        int64_t int64_t;
+        uint64_t uint64_t;
+        float _float;
+        double _double;
+        bool _bool;
+        std::string _string;
+        FVector2 _FVector2;
+        FVector3 _FVector3;
+        FVector4 _FVector4;
+        Color _Color;
+        TextureResPtr _TextureResPtr;
+        ModelResPtr _ModelResPtr;
+        SoundResPtr _SoundResPtr;
+        MaterialResPtr  _MaterialResPtr;
+        ShaderResPtr _ShaderResPtr;
     };
 }

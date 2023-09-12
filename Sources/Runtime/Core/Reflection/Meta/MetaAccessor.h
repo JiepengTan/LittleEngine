@@ -9,15 +9,14 @@ namespace LittleEngine::Reflection
 
     public:
         FieldAccessor();
-
         void* Get(void* instance);
         void  Set(void* instance, void* value);
 
         TypeInfo* GetOwnerTypeInfo();
 
         bool        HasTypeInfo();
-        const char* GetFieldName() const;
-        const char* GetFieldTypeName();
+        std::string GetFieldName() const;
+        std::string GetFieldTypeName();
         bool        IsArrayType();
 
         FieldAccessor& operator=(const FieldAccessor& dest);
@@ -27,9 +26,11 @@ namespace LittleEngine::Reflection
 
     private:
         FieldFunctionTuple* m_functions;
-        const char*         m_fieldName;
-        const char*         m_fieldTypeName;
+        std::string         m_fieldName;
+        std::string         m_fieldTypeName;
     };
+
+
     class MethodAccessor
     {
         friend class TypeInfo;
@@ -39,7 +40,7 @@ namespace LittleEngine::Reflection
 
         void Invoke(void* instance);
 
-        const char* GetMethodName() const;
+        std::string GetMethodName() const;
 
         MethodAccessor& operator=(const MethodAccessor& dest);
 
@@ -48,7 +49,7 @@ namespace LittleEngine::Reflection
 
     private:
         MethodFunctionTuple* m_functions;
-        const char*          m_methodName;
+        std::string          m_methodName;
     };
     /**
      *  Function reflection is not implemented, so use this as an std::vector accessor
@@ -59,8 +60,8 @@ namespace LittleEngine::Reflection
 
     public:
         ArrayAccessor();
-        const char* GetArrayTypeName();
-        const char* GetElementTypeName();
+        std::string GetArrayTypeName();
+        std::string GetElementTypeName();
         void        Set(int index, void* instance, void* element_value);
 
         void* Get(int index, void* instance);
@@ -73,7 +74,7 @@ namespace LittleEngine::Reflection
 
     private:
         ArrayFunctionTuple* m_func;
-        const char*         m_arrayTypeName;
-        const char*         m_elementTypeName;
+        std::string         m_arrayTypeName;
+        std::string         m_elementTypeName;
     };
 }

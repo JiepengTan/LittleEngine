@@ -16,6 +16,12 @@ namespace LittleEngine
         static TVector<TypeInfoPtr>  GetAllTypes();
         static TypeInfoPtr GetType(TypeID typeId);
         static TypeInfoPtr GetType(std::string typeName);
+        template<typename T>
+        static T* GetField(void* instance, Reflection::FieldAccessor& field);
+        template<typename T>
+        static void SetField(void* instance, Reflection::FieldAccessor& field, T* val);
+
+        
         static bool HasType(TypeID typeId) { return GetType(typeId) != nullptr; }
         static bool HasType(std::string typeName) {  return GetType(typeName) != nullptr; }
         static std::string GetTypeName(TypeID typeId);
@@ -29,7 +35,19 @@ namespace LittleEngine
         template<typename  T>
         static bool IsSubclassOf(TypeID typeId);
     };
-  
+
+    template <typename T>
+    T* TypeUtil::GetField(void* instance, Reflection::FieldAccessor& field)
+    {
+        return static_cast<T*>(field.Get(instance));
+    }
+
+    template <typename T>
+    void TypeUtil::SetField(void* instance, Reflection::FieldAccessor& field, T* val)
+    {
+        field.Set(instance,val);
+    }
+
     template <typename T>
     bool TypeUtil::IsSubclassOf(TypeID typeId)
     {

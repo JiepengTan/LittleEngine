@@ -30,8 +30,8 @@ namespace LittleEngine::Reflection
         std::string GetMeta(std::string metaKey);
         
         
-        FieldAccessor GetFieldByName(const char* name);
-        MethodAccessor GetMethodByName(const char* name);
+        FieldAccessor* GetFieldByName(std::string name);
+        MethodAccessor* GetMethodByName(std::string name);
         bool IsSubclassOf(TypeID typeId);
         bool IsAssignableFrom(TypeID typeId);
         bool IsValid() { return m_isValid; }
@@ -58,6 +58,8 @@ namespace LittleEngine::Reflection
         static TMap<TypeID,TVector<TypeInfo*> > GetBaseClassInfos();
         static TVector<TypeInfo*>  GetAllTypes();
 
+        std::vector<FieldAccessor>& GetFields(){ return m_fields;}
+        std::vector<MethodAccessor>& GetMethods(){ return m_methods;}
     private:
         TypeInfo(std::string typeName,TypeID typeId);
         static TypeInfo NewMetaFromName(std::string typeName);

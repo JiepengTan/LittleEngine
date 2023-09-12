@@ -22,7 +22,7 @@ namespace LittleEngine::Reflection
     } // namespace Reflection
     typedef std::function<void(void*, void*)>      SetFunction;
     typedef std::function<void*(void*)>            GetFunction;
-    typedef std::function<const char*()>           GetNameFunction;
+    typedef std::function<std::string()>           GetNameFunction;
     typedef std::function<void(int, void*, void*)> SetArrayFunc;
     typedef std::function<void*(int, void*)>       GetArrayFunc;
     typedef std::function<int(void*)>              GetSizeFunc;

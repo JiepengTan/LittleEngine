@@ -27,8 +27,7 @@ namespace LittleEngine::Reflection
 
     void* FieldAccessor::Get(void* instance)
     {
-        // todo: should check validation
-        return static_cast<void*>(m_functions->Get(instance));
+        return m_functions->Get(instance);
     }
 
     void FieldAccessor::Set(void* instance, void* value)
@@ -48,8 +47,8 @@ namespace LittleEngine::Reflection
         return TypeInfo::GetType(m_fieldTypeName) == nullptr;
     }
 
-    const char* FieldAccessor::GetFieldName() const { return m_fieldName; }
-    const char* FieldAccessor::GetFieldTypeName() { return m_fieldTypeName; }
+    std::string FieldAccessor::GetFieldName() const { return m_fieldName; }
+    std::string FieldAccessor::GetFieldTypeName() { return m_fieldTypeName; }
 
     bool FieldAccessor::IsArrayType()
     {
@@ -85,8 +84,8 @@ namespace LittleEngine::Reflection
 
         m_methodName      = m_functions->GetMethodName();
     }
-    const char* MethodAccessor::GetMethodName() const{
-        return m_functions->GetMethodName();
+    std::string MethodAccessor::GetMethodName() const{
+        return m_methodName;
     }
     MethodAccessor& MethodAccessor::operator=(const MethodAccessor& dest)
     {
@@ -115,8 +114,8 @@ namespace LittleEngine::Reflection
         m_arrayTypeName   =m_func->GetArrayTypeName();
         m_elementTypeName =m_func->GetElementTypeName();
     }
-    const char* ArrayAccessor::GetArrayTypeName() { return m_arrayTypeName; }
-    const char* ArrayAccessor::GetElementTypeName() { return m_elementTypeName; }
+    std::string ArrayAccessor::GetArrayTypeName() { return m_arrayTypeName; }
+    std::string ArrayAccessor::GetElementTypeName() { return m_elementTypeName; }
     void        ArrayAccessor::Set(int index, void* instance, void* element_value)
     {
         // todo: should check validation
