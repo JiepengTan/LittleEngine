@@ -407,6 +407,11 @@ namespace LittleEngine
         return false;
     }
 
+    bool Actor::HasComponent(TypeID typeId)
+    {
+        return GetComponent(typeId) != nullptr;
+    }
+
     CompVector& Actor::GetComponentsInternal()
     {
         return GetComponentsCopy(m_components);

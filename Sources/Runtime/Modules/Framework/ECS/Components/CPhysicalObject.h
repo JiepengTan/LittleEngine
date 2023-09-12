@@ -15,7 +15,7 @@ namespace LittleEngine
 	* Base class for any physical object
 	*/
 	REFLECTION_COMPONENT_TYPE(CPhysicalObject)
-	CLASS (CPhysicalObject : public Component, WhiteListFields)
+	CLASS (CPhysicalObject : public Component, WhiteListFields,Abstract)
 	{
 		REFLECTION_COMPONENT_BODY(CPhysicalObject)
 	public:

@@ -223,6 +223,10 @@ namespace LittleEngine
 		SharedPtr<T> GetComponent();
 		SharedPtr<Component> GetComponent(TypeID typeId);
 		
+		template<typename T>
+		bool HasComponent();
+		bool HasComponent(TypeID typeId);
+		
 		/**
 		* Returns a reference to the vector of components
 		*/

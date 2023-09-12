@@ -61,4 +61,10 @@ namespace LittleEngine
 		}
 		return nullptr;
 	}
+
+	template <typename T>
+	bool Actor::HasComponent()
+	{
+		return HasComponent(T::GetStaticTypeID());
+	}
 }

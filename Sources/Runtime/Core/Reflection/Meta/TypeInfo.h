@@ -31,6 +31,10 @@ namespace LittleEngine::Reflection
         bool IsSubclassOf(TypeID typeId);
         bool IsAssignableFrom(TypeID typeId);
         bool IsValid() { return m_isValid; }
+        template<class T>
+        bool IsAssignableFrom(){
+            return IsAssignableFrom(T::GetStaticTypeID());
+        }
         bool IsAbstract();
 
         TypeInfo& operator=(const TypeInfo& dest);
