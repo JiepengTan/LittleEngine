@@ -18,8 +18,8 @@ namespace LittleEngine
         static TypeInfoPtr GetType(std::string typeName);
         static bool HasType(TypeID typeId) { return GetType(typeId) != nullptr; }
         static bool HasType(std::string typeName) {  return GetType(typeName) != nullptr; }
-        static std::string GetTypeName(TypeID typeId) { if(!HasType(typeId))  return ""; return GetType(typeId)->GetTypeName(); }
-        static TypeID GetTypeID(std::string typeName) { if(!HasType(typeName))  return k_invalidID; return GetType(typeName)->GetTypeID(); }
+        static std::string GetTypeName(TypeID typeId);
+        static TypeID GetTypeID(std::string typeName);
         static void* CreateInstance(TypeID typeId){ return Reflection::TypeInfo::CreateInstance(typeId);}
         static void* CreateInstance(std::string typeName){ return Reflection::TypeInfo::CreateInstance(typeName);}
         

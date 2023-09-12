@@ -31,6 +31,19 @@ namespace LittleEngine
     {
         return Reflection::TypeInfo::GetType(typeName);
     }
-  
+
+    std::string TypeUtil::GetTypeName(TypeID typeId)
+    {
+        if(!HasType(typeId))
+            return "";
+        return GetType(typeId)->GetTypeName();
+    }
+
+    TypeID TypeUtil::GetTypeID(std::string typeName)
+    {
+        if(!HasType(typeName))
+            return k_invalidTypeID;
+        return GetType(typeName)->GetTypeID();
+    }
 }
 

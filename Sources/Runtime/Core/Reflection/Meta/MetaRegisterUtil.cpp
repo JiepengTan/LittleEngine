@@ -44,7 +44,7 @@ namespace LittleEngine::Reflection
         __CopyNameMap2IdMap(MethodMap)
         __CopyNameMap2IdMap(FieldMap)
         __CopyNameMap2IdMap(ClassMap)
-        __CopyNameMap2IdMap(ArrayMap);
+        __CopyNameMap2IdMap(ArrayMap)
     }
     
     void MetaRegisterUtil::UnRegisterAll()

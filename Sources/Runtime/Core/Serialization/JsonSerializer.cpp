@@ -15,7 +15,7 @@ namespace LittleEngine
     char& JsonSerializer::Read(const Json& json_context, char& instance)
     {
         assert(json_context.is_number());
-        return instance = json_context.number_value();
+        return instance = (char)json_context.number_value();
     }
 
     

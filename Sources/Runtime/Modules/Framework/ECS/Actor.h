@@ -221,6 +221,7 @@ namespace LittleEngine
 		*/
 		template<typename T>
 		SharedPtr<T> GetComponent();
+		SharedPtr<Component> GetComponent(TypeID typeId);
 		
 		/**
 		* Returns a reference to the vector of components

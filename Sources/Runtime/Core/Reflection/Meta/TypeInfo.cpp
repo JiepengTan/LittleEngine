@@ -46,6 +46,16 @@ namespace LittleEngine::Reflection
         return m_id2Types.at(typeId);
     }
 
+    bool TypeInfo::HasType(TypeID typeId)
+    {
+        return m_id2Types.count(typeId) != 0;
+    }
+
+    bool TypeInfo::HasType(std::string type_name)
+    {      
+        return m_name2Types.count(type_name) != 0;
+    }
+
     TVector<TypeInfo*> TypeInfo::GetAllTypes()
     {
         if (m_allTypes.size() != m_id2Types.size())
@@ -234,7 +244,8 @@ namespace LittleEngine::Reflection
 
     bool TypeInfo::IsSubclassOf(TypeID typeId)
     {
-        if (m_id2BaseClassTypes.count(typeId) == 0) return false;
+        if (!HasType(typeId))
+            return false;
         auto& suppers = m_id2BaseClassTypes.at(m_typeId);
         for (auto supper : suppers)
         {

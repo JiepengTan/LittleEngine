@@ -36,6 +36,8 @@ namespace LittleEngine::Reflection
 
         static TypeInfo* GetType(std::string type_name);
         static TypeInfo* GetType(TypeID typeId);
+        static bool HasType(TypeID typeId);
+        static bool HasType(std::string type_name);
         static TypeInfo* RegisterType(std::string type_name,TypeID typeId);
         void*  CreateInstance();
         static void* CreateInstance(TypeID typeId);

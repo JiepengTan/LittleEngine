@@ -53,10 +53,10 @@ namespace LittleEngine
 	SharedPtr<T> Actor::GetComponent()
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T should derive from AComponent");
-		auto key = T::GetStaticTypeID();
+		auto typeId = T::GetStaticTypeID();
 		for (auto& item : m_components)
 		{
-			if(item->IsAssignableFrom(key))
+			if(item->IsAssignableFrom(typeId))
 				return std::dynamic_pointer_cast<T>(item);
 		}
 		return nullptr;

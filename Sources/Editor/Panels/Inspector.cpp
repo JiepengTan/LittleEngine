@@ -98,29 +98,12 @@ Panels::Inspector::Inspector
 		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
 		addComponentButton.idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
 		addComponentButton.textColor = Color::White;
-		addComponentButton.ClickedEvent += [&componentSelectorWidget,&compTypes, this]
+		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
 		{
-			auto clickType = compTypes[componentSelectorWidget.currentChoice];
-			//GetTargetActor()->AddComponent(clickType->GetType());// TODO tanjp 完成Component 的动态创建
-			switch (componentSelectorWidget.currentChoice)
-			{
-			case 0: GetTargetActor()->AddComponent<CModelRenderer>();
-				GetTargetActor()->AddComponent<CMaterialRenderer>(); break;
-			case 1: GetTargetActor()->AddComponent<CCamera>();				break;
-			case 2: GetTargetActor()->AddComponent<CPhysicalBox>();			break;
-			case 3: GetTargetActor()->AddComponent<CPhysicalSphere>();		break;
-			case 4: GetTargetActor()->AddComponent<CPhysicalCapsule>();		break;
-			case 5: GetTargetActor()->AddComponent<CPointLight>();			break;
-			case 6: GetTargetActor()->AddComponent<CDirectionalLight>();	break;
-			case 7: GetTargetActor()->AddComponent<CSpotLight>();			break;
-			case 8: GetTargetActor()->AddComponent<CAmbientBoxLight>();		break;
-			case 9: GetTargetActor()->AddComponent<CAmbientSphereLight>();	break;
-			case 10: GetTargetActor()->AddComponent<CMaterialRenderer>();	break;
-			case 11: GetTargetActor()->AddComponent<CAudioSource>();		break;
-			case 12: GetTargetActor()->AddComponent<CAudioListener>();		break;
-			case 13: GetTargetActor()->AddComponent<CAnimator>();		break;
-			}
-
+			auto typeName = componentSelectorWidget.choices.at(componentSelectorWidget.currentChoice);
+			auto clickType =TypeUtil::GetType(typeName);
+			LOG_INFO("Click " + typeName + " typeId " +std::to_string( clickType->GetTypeID()));
+			GetTargetActor()->AddComponent(clickType->GetTypeID());
 			componentSelectorWidget.ValueChangedEvent.Invoke(componentSelectorWidget.currentChoice);
 		};
 
@@ -131,24 +114,8 @@ Panels::Inspector::Inspector
 				addComponentButton.disabled = p_componentExists;
 				addComponentButton.idleBackgroundColor = !p_componentExists ? Color{ 0.7f, 0.5f, 0.f } : Color{ 0.1f, 0.1f, 0.1f };
 			};
-
-			switch (p_value)
-			{
-			case 0: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CModelRenderer>());		return;
-			case 1: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CCamera>());				return;
-			case 2: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 3: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 4: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPhysicalObject>());		return;
-			case 5: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CPointLight>());			return;
-			case 6: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CDirectionalLight>());	return;
-			case 7: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CSpotLight>());			return;
-			case 8: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAmbientBoxLight>());	return;
-			case 9: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAmbientSphereLight>());	return;
-			case 10: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CMaterialRenderer>());	return;
-			case 11: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAudioSource>());		return;
-			case 12: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAudioListener>());		return;
-			case 13: defineButtonsStates(nullptr !=GetTargetActor()->GetComponent<CAnimator>());		return;
-			}
+			auto comp =GetTargetActor()->GetComponent(p_value);
+			defineButtonsStates(nullptr !=comp);	
 		};
 
 		m_componentSelectorWidget = &componentSelectorWidget;

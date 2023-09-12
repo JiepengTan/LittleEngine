@@ -72,6 +72,8 @@ namespace LittleEngine
 	using CompPtr = SharedPtr<Component>;
 
 	
-	constexpr ObjectID k_maxID = std::numeric_limits<std::size_t>::max();
-	constexpr ObjectID k_invalidID = std::numeric_limits<std::size_t>::max();
+	constexpr ObjectID k_maxID = std::numeric_limits<ObjectID>::max();
+	constexpr ObjectID k_invalidID = std::numeric_limits<ObjectID>::max();
+	constexpr TypeID k_maxTypeID = std::numeric_limits<TypeID>::max();
+	constexpr TypeID k_invalidTypeID = std::numeric_limits<TypeID>::max();
 }

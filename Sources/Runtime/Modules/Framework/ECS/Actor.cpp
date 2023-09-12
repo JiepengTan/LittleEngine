@@ -370,7 +370,18 @@ namespace LittleEngine
     }
 
   
-    std::shared_ptr<Component> Actor::AddComponent(TypeID typeId)
+    SharedPtr<Component> Actor::GetComponent(TypeID typeId)
+    {
+        if(!TypeUtil::IsSubclassOf<Component>(typeId))
+            return nullptr;
+        for (auto& item : m_components)
+        {
+            if(item->IsAssignableFrom(typeId))
+                return item;
+        }
+        return nullptr;
+    }
+    SharedPtr<Component> Actor::AddComponent(TypeID typeId)
     {
         if(!TypeUtil::IsSubclassOf<Component>(typeId))
             return nullptr;
