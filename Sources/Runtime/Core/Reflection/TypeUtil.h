@@ -16,6 +16,10 @@ namespace LittleEngine
         static TVector<TypeInfoPtr>  GetAllTypes();
         static TypeInfoPtr GetType(TypeID typeId);
         static TypeInfoPtr GetType(std::string typeName);
+        static bool HasType(TypeID typeId) { return GetType(typeId) != nullptr; }
+        static bool HasType(std::string typeName) {  return GetType(typeName) != nullptr; }
+        static std::string GetTypeName(TypeID typeId) { if(!HasType(typeId))  return ""; return GetType(typeId)->GetTypeName(); }
+        static TypeID GetTypeID(std::string typeName) { if(!HasType(typeName))  return k_invalidID; return GetType(typeName)->GetTypeID(); }
         static void* CreateInstance(TypeID typeId){ return Reflection::TypeInfo::CreateInstance(typeId);}
         static void* CreateInstance(std::string typeName){ return Reflection::TypeInfo::CreateInstance(typeName);}
         

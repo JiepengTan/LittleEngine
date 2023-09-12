@@ -72,6 +72,7 @@ namespace LittleEngine
     \
     ##class_name(){\
         _LE_InternalMetaTypeID = class_name##::MetaTypeId;\
+        _LE_InitDebugInfo();\
         OnConstruction();\
     }\
     virtual LittleEngine::TypeInfoPtr GetType(){ return LittleEngine::Reflection::TypeInfo::GetType(_LE_InternalMetaTypeID); }\

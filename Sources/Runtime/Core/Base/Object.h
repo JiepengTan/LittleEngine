@@ -8,8 +8,6 @@
 namespace LittleEngine
 {
     
-    constexpr ObjectID k_maxID = std::numeric_limits<std::size_t>::max();
-    constexpr ObjectID k_invalidID = std::numeric_limits<std::size_t>::max();
     class ObjectIDAllocator
     {
     public:

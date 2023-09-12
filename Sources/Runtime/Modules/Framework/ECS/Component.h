@@ -24,6 +24,10 @@ namespace LittleEngine
 		friend class Actor;
 	protected:
 		TypeID _LE_InternalMetaTypeID;// internal type id for reflection
+		void _LE_InitDebugInfo();
+#if DEBUG
+		std::string _LE_InternalMetaTypeName;
+#endif
 	public:
 		/**
 		* Destroying a AComponent will call dervied classes destructors

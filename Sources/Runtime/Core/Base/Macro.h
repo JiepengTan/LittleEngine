@@ -70,4 +70,8 @@ namespace LittleEngine
 	using CompVector = TVector<SharedPtr<Component>>;
 	using ActorPtr = SharedPtr<Actor>;
 	using CompPtr = SharedPtr<Component>;
+
+	
+	constexpr ObjectID k_maxID = std::numeric_limits<std::size_t>::max();
+	constexpr ObjectID k_invalidID = std::numeric_limits<std::size_t>::max();
 }

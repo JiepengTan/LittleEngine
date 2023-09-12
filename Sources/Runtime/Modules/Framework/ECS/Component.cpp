@@ -8,6 +8,12 @@
 #include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Actor.h"
 
+#if DEBUG
+void LittleEngine::Component::_LE_InitDebugInfo()
+{
+    _LE_InternalMetaTypeName = TypeUtil::GetTypeName(_LE_InternalMetaTypeID);
+}
+#endif
 LittleEngine::Component::~Component()
 {
 }
