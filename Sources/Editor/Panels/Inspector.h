@@ -79,15 +79,18 @@ namespace LittleEngine::Editor::Panels
 		*/
 		void Refresh();
 
+		void RefreshAddComponentPanel();
 	private:
 		ActorPtr m_targetActor = nullptr;
 		UI::Widgets::Layout::Group* m_actorInfo;
 		UI::Widgets::Layout::Group* m_inspectorHeader;
 		UI::Widgets::Selection::ComboBox* m_componentSelectorWidget;
         UI::Widgets::InputFields::InputText* m_scriptSelectorWidget;
-
+        UI::Widgets::Buttons::Button* m_addComponentButton;
+		
 		uint64_t m_componentAddedListener	= 0;
 		uint64_t m_componentRemovedListener = 0;
 		uint64_t m_destroyedListener		= 0;
+		
 	};
 }

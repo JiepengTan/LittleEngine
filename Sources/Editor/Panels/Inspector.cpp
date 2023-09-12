@@ -51,7 +51,7 @@ using namespace UI::Widgets;
 
 namespace LittleEngine::Editor
 {
-	
+
 Panels::Inspector::Inspector
 (
 	const std::string& p_title,
@@ -82,44 +82,10 @@ Panels::Inspector::Inspector
 
 	/* Component select + button */
 	{
-		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<UI::Widgets::Selection::ComboBox>(0);
-		componentSelectorWidget.lineBreak = false;
-		auto types = TypeUtil::GetAllTypes();
-		TVector<TypeInfoPtr> compTypes ;
-		int idx = 0;
-		for (auto type : types)
-		{
-			if(type->IsSubclassOf(Component::GetStaticTypeID()))
-			{
-				componentSelectorWidget.choices.emplace(idx++, type->GetTypeName());
-				compTypes.push_back(type);
-			}
-		}
-		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
-		addComponentButton.idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
-		addComponentButton.textColor = Color::White;
-		addComponentButton.ClickedEvent += [&componentSelectorWidget, this]
-		{
-			auto typeName = componentSelectorWidget.choices.at(componentSelectorWidget.currentChoice);
-			auto clickType =TypeUtil::GetType(typeName);
-			LOG_INFO("Click " + typeName + " typeId " +std::to_string( clickType->GetTypeID()));
-			GetTargetActor()->AddComponent(clickType->GetTypeID());
-			componentSelectorWidget.ValueChangedEvent.Invoke(componentSelectorWidget.currentChoice);
-			EDITOR_EXEC(DelayAction([this] { Refresh(); }));
-		};
-
-		componentSelectorWidget.ValueChangedEvent += [this, &addComponentButton](int p_value)
-		{
-			auto defineButtonsStates = [&addComponentButton](bool p_componentExists)
-			{
-				addComponentButton.disabled = p_componentExists;
-				addComponentButton.idleBackgroundColor = !p_componentExists ? Color{ 0.7f, 0.5f, 0.f } : Color{ 0.1f, 0.1f, 0.1f };
-			};
-			auto comp =GetTargetActor()->GetComponent(p_value);
-			defineButtonsStates(nullptr !=comp);	
-		};
-
-		m_componentSelectorWidget = &componentSelectorWidget;
+		m_componentSelectorWidget = &m_inspectorHeader->CreateWidget<UI::Widgets::Selection::ComboBox>(0);
+		m_addComponentButton = &m_inspectorHeader->CreateWidget<UI::Widgets::Buttons::Button>("Add Component", FVector2{ 100.f, 0 });
+	
+		RefreshAddComponentPanel();
 	}
 
 	
@@ -203,8 +169,56 @@ void Panels::Inspector::CreateActorInspector(ActorPtr p_target)
 			DrawComponent(comp);
 		}
 	}
+		
+	RefreshAddComponentPanel();
 }
 
+void Panels::Inspector::RefreshAddComponentPanel()
+{
+		
+	m_componentSelectorWidget->choices.clear();
+	m_componentSelectorWidget->ValueChangedEvent.RemoveAllListeners();
+	m_addComponentButton->ClickedEvent.RemoveAllListeners();
+	m_componentSelectorWidget->lineBreak = false;
+	auto types = TypeUtil::GetAllTypes();
+	TVector<TypeInfoPtr> compTypes ;
+	int idx = 0;
+	for (auto type : types)
+	{
+		if(!type->IsSubclassOf(Component::GetStaticTypeID())
+			|| type->IsAbstract()
+			|| type->IsAssignableFrom<CTransform>()
+		)
+			continue;
+		if(GetTargetActor() != nullptr &&GetTargetActor()->HasComponent(type->GetTypeID()))
+			continue;
+		m_componentSelectorWidget->choices.emplace(idx++, type->GetTypeName());
+		compTypes.push_back(type);
+	}
+		
+	m_addComponentButton->idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
+	m_addComponentButton->textColor = Color::White;
+	m_addComponentButton->ClickedEvent += [this]
+	{
+		auto typeName = m_componentSelectorWidget->choices.at(m_componentSelectorWidget->currentChoice);
+		auto clickType =TypeUtil::GetType(typeName);
+		LOG_INFO("Click " + typeName + " typeId " +std::to_string( clickType->GetTypeID()));
+		GetTargetActor()->AddComponent(clickType->GetTypeID());
+		m_componentSelectorWidget->ValueChangedEvent.Invoke(m_componentSelectorWidget->currentChoice);
+		EDITOR_EXEC(DelayAction([this] { Refresh(); }));
+	};
+
+	m_componentSelectorWidget->ValueChangedEvent += [this](int p_value)
+	{
+		auto defineButtonsStates = [this](bool p_componentExists)
+		{
+			m_addComponentButton->disabled = p_componentExists;
+			m_addComponentButton->idleBackgroundColor = !p_componentExists ? Color{ 0.7f, 0.5f, 0.f } : Color{ 0.1f, 0.1f, 0.1f };
+		};
+		auto comp =GetTargetActor()->GetComponent(p_value);
+		defineButtonsStates(nullptr !=comp);	
+	};
+}
 void Panels::Inspector::DrawComponent(CompPtr p_component)
 {
 	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
