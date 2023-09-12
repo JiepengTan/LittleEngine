@@ -36,7 +36,7 @@ namespace LittleEngine::Reflection
 
     bool TypeInfo::HasMeta(std::string metaKey)
     {
-        return m_metaData.count(metaKey) == 0;
+        return m_metaData.count(metaKey) != 0;
     }
 
     std::string TypeInfo::GetMeta(std::string metaKey)

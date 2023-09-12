@@ -41,5 +41,5 @@ void LittleEngine::Component::OnDeserialize(ISerializer p_serializer)
 
 void LittleEngine::Component::OnInspectorGUI()
 {
-    //InspectorUtil::DrawDefault(this);
+    InspectorUtil::DrawDefault(this);
 }

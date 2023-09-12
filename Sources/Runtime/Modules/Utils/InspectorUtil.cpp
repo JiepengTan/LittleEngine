@@ -1,6 +1,5 @@
 ﻿#include "InspectorUtil.h"
 
-#include "../../../Tools/MetaParser/parser/meta/meta_data_config.h"
 #include "Core/Reflection/MetaDefine.h"
 #include "ImGui/imgui_internal.h"
 #include "Modules/Framework/ECS/Component.h"
@@ -33,14 +32,10 @@ namespace LittleEngine
 
     void InspectorUtil::DrawDefault(Component* component)
     {
-        if(component == nullptr) return;
-        auto type = component->GetType();
-        if(type->HasMeta(NativeProperty::CustomerEditor))
+
+        if(DrawButton("Hello world"))
         {
-            if(DrawButton("Hello world"))
-            {
-                LOG_INFO("asdafsfff   DrawDefault");
-            }
+            LOG_INFO("asdafsfff   DrawDefault");
         }
     }
 

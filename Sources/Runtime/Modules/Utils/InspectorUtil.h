@@ -1,6 +1,7 @@
 ﻿#pragma once
 #pragma once
 
+#include "GUIUtil.h"
 #include "Core/Maths/FVector2.h"
 #include "Core/Maths/FVector3.h"
 #include "Core/Maths/FVector4.h"
@@ -25,8 +26,6 @@ namespace LittleEngine
 
 namespace LittleEngine
 {
-	const float _MIN_FLOAT = -9999999.f;
-	const float _MAX_FLOAT = +9999999.f;
 	
 	class Component;
     class InspectorUtil
@@ -45,10 +44,10 @@ namespace LittleEngine
 		template <typename T>
 		static bool DrawScalar(const std::string& p_name, T& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
 		static bool DrawBoolean(const std::string& p_name, bool& p_data);
-		static bool DrawVec2(const std::string& p_name, FVector2& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static bool DrawVec3(const std::string& p_name, FVector3& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static bool DrawVec4(const std::string& p_name, FVector4& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
-		static bool DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
+		static bool DrawVec2(const std::string& p_name, FVector2& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
+		static bool DrawVec3(const std::string& p_name, FVector3& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
+		static bool DrawVec4(const std::string& p_name, FVector4& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
+		static bool DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
 		static bool DrawString(const std::string& p_name, std::string& p_data);
 		static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = false);
 		static bool DrawMesh(const std::string& p_name, Model*& p_data);

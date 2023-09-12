@@ -13,7 +13,6 @@ namespace LittleEngine
         {
             LOG_INFO("Hello world TestComp2");
         }
-        void OnInspectorGUI() override;
     private:
         META(OnEnable)
         float dataFloat;

@@ -44,6 +44,7 @@
 
 #include "Modules/Framework/ECS/Components/CAnimator.h"
 #include "../Editor/Core/EditorActions.h"
+#include "Core/Reflection/MetaDefine.h"
 #include "Core/Reflection/TypeUtil.h"
 #include "Modules/UI/Widgets/Layout/InspectorProxy.h"
 
@@ -240,12 +241,15 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 		columns.widths[0] = GUIUtil::_DEFAULT_COLUME_WIDTH;
 		GUIUtil::m_root = &columns;
 		p_component->OnInspector();
-		auto& inspectorProxy = header.CreateWidget<UI::Widgets::Layout::InspectorProxy>();
-		
-		inspectorProxy.SetDrawCallback([p_component]()
+		auto type = p_component->GetType();
+		if(type->HasMeta(MetaDefine::CustomerEditor))
 		{
-			p_component->OnInspectorGUI();
-		});
+			auto& inspectorProxy = header.CreateWidget<UI::Widgets::Layout::InspectorProxy>();
+			inspectorProxy.SetDrawCallback([p_component]()
+			{
+				p_component->OnInspectorGUI();
+			});
+		}
 	}
 }
 
