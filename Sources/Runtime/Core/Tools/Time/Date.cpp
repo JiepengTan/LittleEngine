@@ -7,7 +7,7 @@
 #include "ctime"
 
 #include "Core/Tools/Time/Date.h"
-
+#include "windows.h"
 std::string LittleEngine::Time::Date::GetDateAsString()
 {
 	std::string date;
@@ -40,4 +40,19 @@ std::string LittleEngine::Time::Date::GetDateAsString()
 	}
 
 	return date;
+}
+
+std::string LittleEngine::Time::Date::GetTimeAsString()
+{
+	std::string date;
+	SYSTEMTIME wtm;
+	GetLocalTime(&wtm);
+	auto millsec = wtm.wMilliseconds;
+	auto str = std::to_string(millsec);
+	if(millsec<10)str="00"+str;
+	else if(millsec<100)str="0"+str;
+	return std::to_string(wtm.wHour) + ":"+
+			std::to_string(wtm.wMinute) + ":"+
+			std::to_string(wtm.wSecond) + "."+
+			str;
 }

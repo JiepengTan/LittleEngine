@@ -26,5 +26,6 @@ namespace LittleEngine::Time
 		* Return the current date in a string format
 		*/
 		static std::string GetDateAsString();
+		static std::string GetTimeAsString();
 	};
 }

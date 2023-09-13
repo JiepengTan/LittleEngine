@@ -15,7 +15,7 @@ std::map<std::string, OvDebug::HistoryHandler>	OvDebug::Logger::HISTORY_HANDLER_
 
 void OvDebug::Logger::Log(const std::string& p_message, ELogLevel p_logLevel, ELogMode p_logMode, std::string p_handlerId)
 {
-	LogData logData{ p_message, p_logLevel, LittleEngine::Time::Date::GetDateAsString() };
+	LogData logData{ p_message, p_logLevel, LittleEngine::Time::Date::GetTimeAsString()};
 
 	switch (p_logMode)
 	{
