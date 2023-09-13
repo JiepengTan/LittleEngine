@@ -65,6 +65,8 @@ namespace LittleEngine
 		static void DrawVec4(const std::string& p_name, LittleEngine::FVector4& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
 		static void DrawQuat(const std::string& p_name, LittleEngine::FQuaternion& p_data, float p_step = 1.f, float p_min = _MIN_FLOAT, float p_max = _MAX_FLOAT);
 		static void DrawString(const std::string& p_name, std::string& p_data);
+		static void DrawLabel(const std::string & p_name, const std::string & p_data);
+		static void DrawSpace(){DrawLabel("","");}
 		static void DrawColor(const std::string& p_name, LittleEngine::Color& p_color, bool p_hasAlpha = false);
 		static LittleEngine::UI::Widgets::Texts::Text& DrawMesh(const std::string& p_name, LittleEngine::Model*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);
 		static LittleEngine::UI::Widgets::Visual::Image& DrawTexture(const std::string& p_name, LittleEngine::Texture*& p_data, LittleEngine::Eventing::Event<>* p_updateNotifier = nullptr);

@@ -65,23 +65,36 @@ Panels::Inspector::Inspector
 	m_inspectorHeader->enabled = false;
 	m_actorInfo = &CreateWidget<UI::Widgets::Layout::Group>();
 
-	auto& headerColumns = m_inspectorHeader->CreateWidget<UI::Widgets::Layout::Columns<2>>();
+	auto& headerColumns = m_inspectorHeader->CreateWidget<UI::Widgets::Layout::Columns<3>>();
 	GUIUtil::m_root =&headerColumns;
+	headerColumns.widths[0] = 50;
+	headerColumns.widths[1] = 100;
+	// draw active
+	auto& widget = GUIUtil::m_root->CreateWidget<LittleEngine::UI::Widgets::Selection::CheckBox>();
+	auto& dispatcher = widget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<bool>>();
+	dispatcher.RegisterGatherer([this]()
+	{
+		bool value = m_targetActor ? m_targetActor->IsSelfActive() : false;
+		return reinterpret_cast<bool&>(value);
+	});
+
+	dispatcher.RegisterProvider([this](bool p_value)
+	{
+		if (m_targetActor) m_targetActor->SetActive(p_value);
+	});
+	
 	/* Name field */
 	auto nameGatherer = [this] { return m_targetActor ? m_targetActor->GetName() : "%undef%"; };
 	auto nameProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetName(p_newName); };
-	GUIUtil::DrawString( "Name", nameGatherer, nameProvider);
+	GUIUtil::DrawString( "", nameGatherer, nameProvider);
 
-	/* Tag field */
-	auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
-	auto tagProvider = [this](const std::string & p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
-	GUIUtil::DrawString( "Tag", tagGatherer, tagProvider);
-
-	/* Active field */
-	auto activeGatherer = [this] { return m_targetActor ? m_targetActor->IsSelfActive() : false; };
-	auto activeProvider = [this](bool p_active) { if (m_targetActor) m_targetActor->SetActive(p_active); };
-	GUIUtil::DrawBoolean( "Active", activeGatherer, activeProvider);
-
+	GUIUtil::m_root = &m_inspectorHeader->CreateWidget<UI::Widgets::Layout::Columns<2>>();
+	GUIUtil::DrawLabel("","");
+	///* Tag field */
+	//auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
+	//auto tagProvider = [this](const std::string & p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
+	//GUIUtil::DrawString( "Tag", tagGatherer, tagProvider);
+	
 	/* Component select + button */
 	{
 		m_componentSelectorWidget = &m_inspectorHeader->CreateWidget<UI::Widgets::Selection::ComboBox>(0);
@@ -90,8 +103,6 @@ Panels::Inspector::Inspector
 		RefreshAddComponentPanel();
 	}
 
-	
-	m_inspectorHeader->CreateWidget<UI::Widgets::Visual::Separator>();
 	m_destroyedListener = Scene::DestroyedEvent += [this](ActorPtr p_destroyed)
 	{ 
 		if (p_destroyed == m_targetActor)
@@ -242,7 +253,7 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 		GUIUtil::m_root = &columns;
 		p_component->OnInspector();
 		auto type = p_component->GetType();
-		if(type->HasMeta(MetaDefine::CustomerEditor))
+		if(!type->HasMeta(MetaDefine::CustomerEditor))
 		{
 			auto& inspectorProxy = header.CreateWidget<UI::Widgets::Layout::InspectorProxy>();
 			inspectorProxy.SetDrawCallback([p_component]()

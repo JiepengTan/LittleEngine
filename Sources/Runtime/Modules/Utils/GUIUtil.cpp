@@ -97,7 +97,12 @@ void GUIUtil::DrawQuat(const std::string & p_name, LittleEngine::FQuaternion & p
 	auto& dispatcher = widget.AddPlugin<LittleEngine::UI::Plugins::DataDispatcher<std::array<float, 4>>>();
 	dispatcher.RegisterReference(reinterpret_cast<std::array<float, 4>&>(p_data));
 }
-
+	
+void GUIUtil::DrawLabel(const std::string & p_name,const std::string & p_data)
+{
+	CreateTitle(p_name);
+	auto& widget = m_root->CreateWidget<LittleEngine::UI::Widgets::Texts::Text>(p_data);
+}
 void GUIUtil::DrawString(const std::string & p_name, std::string & p_data)
 {
 	CreateTitle( p_name);
