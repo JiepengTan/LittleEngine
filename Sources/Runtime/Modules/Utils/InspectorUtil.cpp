@@ -5,6 +5,7 @@
 #include "Modules/Framework/ECS/Component.h"
 #include "Modules/UI/Internal/Converter.h"
 #include "Core/Reflection/TypeUtil.h"
+#include "Core/Tools/Utils/PathParser.h"
 using namespace LittleEngine::UI::Internal;
 
 namespace LittleEngine
@@ -50,10 +51,10 @@ namespace LittleEngine
     {
     }
 
-    void InspectorUtil::DrawTitle(const std::string& p_name)
+    void InspectorUtil::DrawTitle(const std::string& p_name,int columnCount)
     {
         ImGui::Columns(1);
-        ImGui::Columns(3,GetUniqueName(),false);
+        ImGui::Columns(columnCount,GetUniqueName(),false);
         // draw indent
         ImGui::LabelText(GetUniqueName()," ");
         ImGui::SetColumnWidth(0,(s_globalIndent-1)*s_indentSpaceFactor +0);
@@ -62,6 +63,7 @@ namespace LittleEngine
         ImGui::TextColored(Converter::ToImVec4(GUIUtil::TitleColor), p_name.c_str());
         //ImGui::SetColumnWidth(0, -1);
         ImGui::NextColumn();
+        
         // draw content
         // ...
     }
@@ -99,8 +101,13 @@ namespace LittleEngine
         __REGISTER_FUNCTION(LittleEngine::FVector4,DrawVec4);
         __REGISTER_FUNCTION(LittleEngine::FQuaternion,DrawQuat);
         __REGISTER_FUNCTION(LittleEngine::Color,DrawColor);
+        __REGISTER_FUNCTION(LittleEngine::ShaderResPtr,DrawAsset);
+        __REGISTER_FUNCTION(LittleEngine::TextureResPtr,DrawAsset);
+        __REGISTER_FUNCTION(LittleEngine::ModelResPtr,DrawAsset);
+        __REGISTER_FUNCTION(LittleEngine::AnimationResPtr,DrawAsset);
+        __REGISTER_FUNCTION(LittleEngine::SoundResPtr,DrawAsset);
+        __REGISTER_FUNCTION(LittleEngine::MaterialResPtr,DrawAsset);
 
-        
     }
     
     
@@ -223,6 +230,14 @@ namespace LittleEngine
         return true;
     }
 
+    bool InspectorUtil::DrawText(const std::string& p_name, std::string& p_data)
+    {
+        DrawTitle(p_name);
+        auto rawLabel = p_data;
+        ImGui::Text(p_data.c_str());
+        return rawLabel == p_data;
+    }
+
 
     bool InspectorUtil::DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha)
     {
@@ -234,43 +249,81 @@ namespace LittleEngine
             return  ImGui::ColorEdit3(GetUniqueName(), &p_color.r, flags);
     }
 
-    bool InspectorUtil::DrawMesh(const std::string& p_name, Model*& p_data)
+#define _DrawAsset(p_name,p_resPtr,p_shaderType)\
+    auto& path = p_resPtr.GetGuidReference();\
+    auto& ptrs = p_resPtr.GetPtrReference();\
+    bool isDirty = DrawResPtr(p_name, path, (void*&)ptrs,Utils::PathParser::EFileType::p_shaderType);\
+    if(isDirty)\
+        ResourcesUtils::LoadRes(path,ptrs,true);\
+    return isDirty;
+    
+    bool InspectorUtil::DrawAsset(const std::string& p_name, ModelResPtr& p_data)
     {
-        return false;
+        _DrawAsset(p_name,p_data,MODEL)
     }
-
-    bool InspectorUtil::DrawTexture(const std::string& p_name, Texture*& p_data)
+    bool InspectorUtil::DrawAsset(const std::string& p_name, TextureResPtr& p_data)
     {
-        return false;
+        _DrawAsset(p_name,p_data,TEXTURE)
     }
-
-    bool InspectorUtil::DrawTexture(const std::string& p_name, Texture*& p_data, std::string& guid)
+    bool InspectorUtil::DrawAsset(const std::string& p_name, ShaderResPtr& p_data)
     {
-        return false;
+        _DrawAsset(p_name,p_data,SHADER)
     }
-
-    bool InspectorUtil::DrawTexture(const std::string& p_name, TextureResPtr& p_data)
+    bool InspectorUtil::DrawAsset(const std::string& p_name, AnimationResPtr& p_data)
     {
-        return false;
+        _DrawAsset(p_name,p_data,MODEL)
     }
-
-    bool InspectorUtil::DrawShader(const std::string& p_name, Shader*& p_data)
+    bool InspectorUtil::DrawAsset(const std::string& p_name, MaterialResPtr& p_data)
     {
-        return false;
+        _DrawAsset(p_name,p_data,MATERIAL)
     }
-
-    bool InspectorUtil::DrawMaterial(const std::string& p_name, Material*& p_data)
+    bool InspectorUtil::DrawAsset(const std::string& p_name, SoundResPtr& p_data)
     {
-        return false;
-    }
-
-    bool InspectorUtil::DrawSound(const std::string& p_name, Sound*& p_data)
-    {
-        return false;
+        _DrawAsset(p_name,p_data,SOUND)
     }
 
     bool InspectorUtil::DrawAsset(const std::string& p_name, std::string& p_data)
     {
+        return false;
+    }
+
+    
+    bool InspectorUtil::DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs, LittleEngine::Utils::PathParser::EFileType type)
+    {
+        DrawTitle(p_name,4);
+        // draw input
+        ImGuiWindow* window = ImGui::GetCurrentWindow();
+        ImGui::SetColumnWidth(2,window->ContentSize.x -180);
+        //ImGui::TextColored(Converter::ToImVec4(GUIUtil::ClearButtonColor), content.c_str());
+        std::string previousContent = content;
+        content.resize(256, '\0');
+        bool enterPressed = ImGui::InputText(GetUniqueName(), &content[0], 256, ImGuiInputTextFlags_EnterReturnsTrue);
+        content = content.c_str();
+        // apply DragDrop
+        if (ImGui::BeginDragDropTarget())
+        {
+            ImGuiDragDropFlags target_flags = 0;
+				
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("File", target_flags))
+            {
+                auto path = *(std::string*) payload->Data;
+                if (LittleEngine::Utils::PathParser::GetFileType(path) == type)
+                {
+                    content = path;
+                    return true;
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+        // draw clean button
+        ImGui::NextColumn();
+        if (ImGui::Button(GetUniqueName("Clear"),ImVec2(100,0)))
+        {
+            content = "";
+            ptrs = nullptr;
+            return true;
+        }
+        ImGui::NextColumn();
         return false;
     }
 }

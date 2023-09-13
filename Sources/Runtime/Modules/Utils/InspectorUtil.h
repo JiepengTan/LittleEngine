@@ -7,15 +7,11 @@
 #include "Core/Maths/FVector4.h"
 #include "Core/Maths/FQuaternion.h"
 
-#include "Modules/UI/Internal/WidgetContainer.h"
 #include "Modules/UI/Widgets/Texts/Text.h"
-#include "Modules/UI/Widgets/Drags/DragSingleScalar.h"
-#include "Modules/UI/Widgets/Drags/DragMultipleScalars.h"
-#include "Modules/UI/Widgets/InputFields/InputText.h"
-#include "Modules/UI/Widgets/Visual/Image.h"
 #include "Core/Base/Color.h"
-#include "Modules/Framework/ECS/Component.h"
+#include "Core/Tools/Utils/PathParser.h"
 #include "Resource/Core/ResPtr.h"
+
 namespace LittleEngine
 {
     class Model;
@@ -27,7 +23,6 @@ namespace LittleEngine
 
 namespace LittleEngine
 {
-	
 	class Component;
     class InspectorUtil
     {
@@ -40,7 +35,7 @@ namespace LittleEngine
     	static std::unordered_map<std::string,TypeDrawFunc> s_type2DrawFunction;
     	
     	static void DrawIndent();
-    	static void DrawTitle(const std::string& p_name);
+    	static void DrawTitle(const std::string& p_name,int columnCount = 3);
     	static const char* GetUniqueName(const std::string& p_name = "");
     	static void RegisterTypeDrawFunction(std::string typeName,TypeDrawFunc func);
 	    static void CheckRegisterTypeDrawFunctions();
@@ -62,19 +57,19 @@ namespace LittleEngine
 		static bool DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
 		static bool DrawString(const std::string& p_name, std::string& p_data);
     	static bool DrawLabel(const std::string& p_name,const std::string& p_data);
+    	static bool DrawText(const std::string& p_name, std::string& p_data);
 		static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = true);
-		static bool DrawMesh(const std::string& p_name, Model*& p_data);
-		static bool DrawTexture(const std::string& p_name, Texture*& p_data);
-		static bool DrawTexture(const std::string & p_name, Texture *& p_data, std::string& guid);
-		static bool DrawTexture(const std::string & p_name, TextureResPtr& p_data);
-		static bool DrawShader(const std::string& p_name, Shader*& p_data);
-		static bool DrawMaterial(const std::string& p_name, Material*& p_data);
-		static bool DrawSound(const std::string& p_name, Sound*& p_data);
+		static bool DrawAsset(const std::string& p_name, ModelResPtr& p_data);
+		static bool DrawAsset(const std::string& p_name, TextureResPtr& p_data);
+	    static bool DrawAsset(const std::string& p_name, ShaderResPtr& p_data);
+		static bool DrawAsset(const std::string& p_name, AnimationResPtr& p_data);
+		static bool DrawAsset(const std::string& p_name, MaterialResPtr& p_data);
+		static bool DrawAsset(const std::string& p_name, SoundResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, std::string& p_data);
+	    static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,LittleEngine::Utils::PathParser::EFileType type);
     	
-    	/**/
-		
     };
+
 	template <typename T, int _Size>
 	bool InspectorUtil::DrawScalarN(const std::string& p_name, T*& p_data, float p_step, T p_min, T p_max)
 	{
@@ -107,6 +102,7 @@ namespace LittleEngine
     bool InspectorUtil::DrawScalar(const std::string& p_name, T& p_data, float p_step, T p_min, T p_max)
     {
     	DrawTitle(p_name);
+		
     	auto m_dataType =GUIUtil:: GetDataType<T>();
     	auto format = GUIUtil::GetFormat<T>();
     	

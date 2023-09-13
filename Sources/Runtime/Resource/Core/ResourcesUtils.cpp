@@ -14,10 +14,13 @@ namespace LittleEngine
     void ResourcesUtils::DoNothing(){}
     
 #define DEFINE_RES_LOAD_FUNCTION(restypename)\
-    restypename* ResourcesUtils::Load##restypename(StringText guid, bool p_tryToLoadIfNotFound ){\
+    void ResourcesUtils::LoadRes(const StringText& guid, restypename*& ptr,bool p_tryToLoadIfNotFound){\
+        ptr = GetGlobalService<ResourceManagement::##restypename##Manager>().GetResource(guid,p_tryToLoadIfNotFound);\
+    }\
+    restypename* ResourcesUtils::Load##restypename(const StringText& guid, bool p_tryToLoadIfNotFound ){\
         return GetGlobalService<ResourceManagement::##restypename##Manager>().GetResource(guid,p_tryToLoadIfNotFound);\
     }\
-    restypename##ResPtr ResourcesUtils::Load##restypename##ResPtr(StringText guid, bool p_tryToLoadIfNotFound){\
+    restypename##ResPtr ResourcesUtils::Load##restypename##ResPtr(const StringText& guid, bool p_tryToLoadIfNotFound){\
         auto ptr = Load##restypename(guid,p_tryToLoadIfNotFound);\
         return restypename##ResPtr(guid,ptr);\
     }\
@@ -25,14 +28,20 @@ namespace LittleEngine
         GetGlobalService<ResourceManagement::##restypename##Manager>().RegisterResource(guid,p_resPtr);\
     }
 
-    // show macro for shader 
-    Shader* ResourcesUtils::LoadShader(std::string guid, bool p_tryToLoadIfNotFound)
+    // show macro for shader
+    void ResourcesUtils::LoadRes(const std::string& guid, Shader*& ptr, bool p_tryToLoadIfNotFound )
+   {
+       ptr = LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ShaderManager>().GetResource(
+           guid, p_tryToLoadIfNotFound);
+   }
+
+    Shader* ResourcesUtils::LoadShader(const std::string& guid, bool p_tryToLoadIfNotFound)
     {
         return LittleEngine::Global::ServiceLocator::Get<ResourceManagement::ShaderManager>().GetResource(
             guid, p_tryToLoadIfNotFound);
     }
 
-    ShaderResPtr ResourcesUtils::LoadShaderResPtr(std::string guid, bool p_tryToLoadIfNotFound)
+    ShaderResPtr ResourcesUtils::LoadShaderResPtr(const std::string& guid, bool p_tryToLoadIfNotFound)
     {
         auto ptr = LoadShader(guid, p_tryToLoadIfNotFound);
         return ShaderResPtr(guid, ptr);
