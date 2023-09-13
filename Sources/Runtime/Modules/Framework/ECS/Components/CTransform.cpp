@@ -50,6 +50,16 @@ void LittleEngine::CTransform::SetLocalRotation(LittleEngine::FQuaternion p_newR
 	m_transform.SetLocalRotation(p_newRotation);
 }
 
+void LittleEngine::CTransform::SetLocalEuler(LittleEngine::FVector3 p_euler)
+{
+	SetLocalRotation(FQuaternion(p_euler));
+}
+
+void LittleEngine::CTransform::SetWorldEuler(LittleEngine::FVector3 p_euler)
+{
+	SetWorldRotation(FQuaternion(p_euler));
+}
+
 void LittleEngine::CTransform::SetLocalScale(LittleEngine::FVector3 p_newScale)
 {
 	m_transform.SetLocalScale(p_newScale);

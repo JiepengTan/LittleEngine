@@ -14,6 +14,6 @@ namespace NativeProperty
     const auto WhiteListMethods = "WhiteListMethods";
     
     const auto Abstract = "Abstract";
-    const auto CustomerEditor = "CustomerEditor";
+    const auto CustomEditor = "CustomEditor";
 
 } // namespace NativeProperty

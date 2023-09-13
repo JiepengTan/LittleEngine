@@ -24,7 +24,7 @@ namespace LittleEngine
 	* A Behaviour is a script that is used to manipulate an actor over time
 	*/
 	REFLECTION_TYPE(Behaviour)
-	CLASS (Behaviour: public Component, WhiteListFields,Abstract)
+	CLASS (Behaviour: public Component, WhiteListFields,CustomEditor,Abstract)
 	{
 		REFLECTION_BODY(Behaviour)
 	public:

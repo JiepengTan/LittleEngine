@@ -19,7 +19,7 @@ namespace LittleEngine
 	* Represents an audio source. Its position in the world is important if the spatial sound settings is on
 	*/
 	REFLECTION_COMPONENT_TYPE(CAudioSource)
-	CLASS (CAudioSource : public Component, WhiteListFields)
+	CLASS (CAudioSource : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CAudioSource)
 	public:

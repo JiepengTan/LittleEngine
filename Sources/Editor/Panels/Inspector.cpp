@@ -253,7 +253,7 @@ void Panels::Inspector::DrawComponent(CompPtr p_component)
 		GUIUtil::m_root = &columns;
 		p_component->OnInspector();
 		auto type = p_component->GetType();
-		if(!type->HasMeta(MetaDefine::CustomerEditor))
+		if(!type->HasMeta(MetaDefine::CustomEditor))
 		{
 			auto& inspectorProxy = header.CreateWidget<UI::Widgets::Layout::InspectorProxy>();
 			inspectorProxy.SetDrawCallback([p_component]()

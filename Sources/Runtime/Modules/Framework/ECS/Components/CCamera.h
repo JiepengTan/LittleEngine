@@ -17,7 +17,7 @@ namespace LittleEngine
 	* Represents a camera entity. Its position will determine its view matrix
 	*/
 	REFLECTION_COMPONENT_TYPE(CCamera)
-	CLASS (CCamera : public Component, WhiteListFields)
+	CLASS (CCamera : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CCamera)
 	public:

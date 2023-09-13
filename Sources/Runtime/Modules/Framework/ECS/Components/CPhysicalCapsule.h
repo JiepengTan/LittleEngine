@@ -18,7 +18,7 @@ namespace LittleEngine
 	* Represent a physical object with a capsule hape
 	*/
 	REFLECTION_COMPONENT_TYPE(CPhysicalCapsule)
-	CLASS (CPhysicalCapsule : public CPhysicalObject, WhiteListFields)
+	CLASS (CPhysicalCapsule : public CPhysicalObject, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CPhysicalCapsule)
 	public:

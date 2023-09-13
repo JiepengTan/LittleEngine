@@ -18,7 +18,7 @@ namespace LittleEngine
 	* A light that is localized and has attenuation
 	*/
 	REFLECTION_COMPONENT_TYPE(CPointLight)
-	CLASS (CPointLight : public CLight, WhiteListFields)
+	CLASS (CPointLight : public CLight, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CPointLight)
 	public:

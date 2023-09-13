@@ -13,12 +13,13 @@ namespace LittleEngine
 {
 	class Actor;
 	class CPhysicalObject;
+	class CTransform;
 	/**
 	* AComponent is the base class for any component.
 	* A component is a set of data and behaviours (Entity-Component without systems) that is interpreted by the engine (Or the user)
 	*/
 	REFLECTION_COMPONENT_TYPE(Component)
-	CLASS (Component: public Object, WhiteListFields,Abstract)
+	CLASS (Component: public Object, WhiteListFields, CustomEditor, Abstract)
 	{
 		REFLECTION_COMPONENT_BODY(Component)
 		friend class Actor;
@@ -75,6 +76,7 @@ namespace LittleEngine
 		*/
 		virtual void OnUpdate(float p_deltaTime) {}
 
+		SharedPtr<CTransform> GetTransform();
 		/**
 		* Called every physics frame
 		* @param p_deltaTime

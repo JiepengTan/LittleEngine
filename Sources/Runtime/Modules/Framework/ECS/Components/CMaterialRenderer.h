@@ -26,7 +26,7 @@ namespace LittleEngine
 	* A component that handle a material list, necessary for model rendering
 	*/
 	REFLECTION_COMPONENT_TYPE(CMaterialRenderer)
-	CLASS (CMaterialRenderer : public Component, WhiteListFields)
+	CLASS (CMaterialRenderer : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CMaterialRenderer)
 	public:

@@ -19,6 +19,11 @@ LittleEngine::Component::~Component()
 {
 }
 
+std::shared_ptr<LittleEngine::CTransform> LittleEngine::Component::GetTransform()
+{
+    return GetActor()->transform;
+}
+
 void LittleEngine::Component::SetActor(ActorPtr actor)
 {
     LE_ASSERT(actor!= nullptr,"Actor should not be null!");

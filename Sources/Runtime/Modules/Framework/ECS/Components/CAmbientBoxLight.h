@@ -26,7 +26,7 @@ namespace LittleEngine
 	* Represents an ambient light with a box shape
 	*/
 	REFLECTION_COMPONENT_TYPE(CAmbientBoxLight)
-	CLASS (CAmbientBoxLight : public CLight, WhiteListFields)
+	CLASS (CAmbientBoxLight : public CLight, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CAmbientBoxLight)
 	public:

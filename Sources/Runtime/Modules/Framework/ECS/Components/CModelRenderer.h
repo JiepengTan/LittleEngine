@@ -20,7 +20,7 @@ namespace LittleEngine
 	* A ModelRenderer is necessary in combination with a MaterialRenderer to render a model in the world
 	*/
 	REFLECTION_COMPONENT_TYPE(CModelRenderer)
-	CLASS (CModelRenderer : public Component, WhiteListFields)
+	CLASS (CModelRenderer : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CModelRenderer)
 		friend class CMaterialRenderer;

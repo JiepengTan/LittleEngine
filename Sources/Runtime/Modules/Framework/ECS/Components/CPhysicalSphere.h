@@ -18,7 +18,7 @@ namespace LittleEngine
 	* Represent a physical object with a sphere shape
 	*/
 	REFLECTION_COMPONENT_TYPE(CPhysicalSphere)
-	CLASS (CPhysicalSphere : public CPhysicalObject, WhiteListFields)
+	CLASS (CPhysicalSphere : public CPhysicalObject, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CPhysicalSphere)
 	public:

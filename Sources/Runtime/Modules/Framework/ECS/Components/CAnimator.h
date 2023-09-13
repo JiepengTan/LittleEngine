@@ -16,7 +16,7 @@ namespace LittleEngine
 {
 	class Animation;
 	REFLECTION_COMPONENT_TYPE(CAnimator)
-	CLASS (CAnimator : public Component, WhiteListFields)
+	CLASS (CAnimator : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CAnimator)
 	public:

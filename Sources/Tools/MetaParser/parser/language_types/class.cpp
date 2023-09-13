@@ -60,7 +60,7 @@ std::string Class::getMetaDataString()const
 }
 bool Class::isCustomEditor(void) const
 {
-    return m_meta_data.getFlag(NativeProperty::CustomerEditor);
+    return m_meta_data.getFlag(NativeProperty::CustomEditor);
 }
 bool Class::shouldCompileFields(void) const
 {

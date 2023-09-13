@@ -22,7 +22,7 @@ namespace LittleEngine
 	* Represents the 3D transformations applied to an actor
 	*/
 	REFLECTION_COMPONENT_TYPE(CTransform)
-	CLASS (CTransform : public Component, WhiteListFields)
+	CLASS (CTransform : public LittleEngine::Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CTransform)
 	public:
@@ -62,6 +62,8 @@ namespace LittleEngine
 		* @param p_newRotation
 		*/
 		void SetLocalRotation(LittleEngine::FQuaternion p_newRotation);
+		void SetLocalEuler(LittleEngine::FVector3 p_euler);
+		void SetWorldEuler(LittleEngine::FVector3 p_euler);
 
 		/**
 		* Set the scale of the transform in the local space

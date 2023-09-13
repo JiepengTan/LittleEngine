@@ -37,7 +37,7 @@ namespace LittleEngine
 	* composed of componenents and behaviours (scripts)
 	*/
 	REFLECTION_TYPE(Actor)
-	CLASS (Actor :public Object , WhiteListFields)
+	CLASS (Actor :public Object , WhiteListFields,CustomEditor)
 	{
 		
 		REFLECTION_BODY(Actor)

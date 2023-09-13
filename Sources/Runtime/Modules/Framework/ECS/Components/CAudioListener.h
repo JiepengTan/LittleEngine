@@ -21,7 +21,7 @@ namespace LittleEngine
 	* attenuation of spatialized sounds
 	*/
 	REFLECTION_COMPONENT_TYPE(CAudioListener)
-	CLASS (CAudioListener : public Component, WhiteListFields)
+	CLASS (CAudioListener : public Component, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CAudioListener)
 	public:

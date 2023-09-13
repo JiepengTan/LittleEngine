@@ -16,7 +16,7 @@ namespace LittleEngine
 	* A simple light that has no attenuation and that has a direction
 	*/
 	REFLECTION_COMPONENT_TYPE(CDirectionalLight)
-	CLASS (CDirectionalLight : public CLight, WhiteListFields)
+	CLASS (CDirectionalLight : public CLight, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CDirectionalLight)
 	public:

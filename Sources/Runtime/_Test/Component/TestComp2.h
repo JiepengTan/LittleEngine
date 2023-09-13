@@ -18,14 +18,10 @@ namespace LittleEngine::Test
     };
     
     REFLECTION_COMPONENT_TYPE(TestEditorInspector)
-    CLASS (TestEditorInspector : public LittleEngine::Component, Fields,WhiteListMethods, CustomerEditor )
+    CLASS (TestEditorInspector : public LittleEngine::Component, Fields,WhiteListMethods )
     {
         REFLECTION_COMPONENT_BODY(TestEditorInspector)
     public:
-        void OnUpdate(float dt) override
-        {
-            LOG_INFO("Hello world TestComp2"); 
-        }
 
         META(Enable)
         void Hello()
@@ -42,10 +38,6 @@ namespace LittleEngine::Test
         
         public:
         char _char = 'a';
-        //int8_t int8_t;
-        //uint8_t uint8_t;
-        //int16_t int16_t;
-        //uint16_t uint16_t;
         int32_t int32_t = 0;
         uint32_t uint32_t = 0;
         TestStruct2 uniform_info;

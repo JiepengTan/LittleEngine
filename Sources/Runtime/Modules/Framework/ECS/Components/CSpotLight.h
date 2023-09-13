@@ -16,7 +16,7 @@ namespace LittleEngine
 	* A light that is localized, has attenuation and has a direction
 	*/
 	REFLECTION_COMPONENT_TYPE(CSpotLight)
-	CLASS (CSpotLight : public CLight, WhiteListFields)
+	CLASS (CSpotLight : public CLight, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CSpotLight)
 	public:

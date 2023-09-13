@@ -18,7 +18,7 @@ namespace LittleEngine
 	* Represent a physical object with a box shape
 	*/
 	REFLECTION_COMPONENT_TYPE(CPhysicalBox)
-	CLASS (CPhysicalBox : public CPhysicalObject, WhiteListFields)
+	CLASS (CPhysicalBox : public CPhysicalObject, WhiteListFields,CustomEditor)
 	{
 		REFLECTION_COMPONENT_BODY(CPhysicalBox)
 	public:
