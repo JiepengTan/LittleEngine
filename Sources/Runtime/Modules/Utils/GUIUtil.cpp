@@ -177,7 +177,7 @@ LittleEngine::UI::Widgets::Visual::Image& GUIUtil::DrawTexture(const std::string
 			{
 				auto filePath = p_receivedData.first;
 				p_data = resource;
-				guid = filePath;
+				//guid = filePath; // TODO tanjp fixed it by direct use TextureResPtr
 				widget.textureID.id = resource->id;
 				if (p_updateNotifier)
 					p_updateNotifier->Invoke();
