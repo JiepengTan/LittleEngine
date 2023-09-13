@@ -66,8 +66,9 @@ namespace LittleEngine
 		static bool DrawAsset(const std::string& p_name, MaterialResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, SoundResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, std::string& p_data);
-	    static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,LittleEngine::Utils::PathParser::EFileType type);
-    	
+	    static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
+	    	LittleEngine::Utils::PathParser::EFileType type,uint32_t texId = 0);
+    		
     };
 
 	template <typename T, int _Size>

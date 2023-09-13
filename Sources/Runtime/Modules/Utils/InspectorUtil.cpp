@@ -6,6 +6,7 @@
 #include "Modules/UI/Internal/Converter.h"
 #include "Core/Reflection/TypeUtil.h"
 #include "Core/Tools/Utils/PathParser.h"
+#include "Resource/Asset/Texture.h"
 using namespace LittleEngine::UI::Internal;
 
 namespace LittleEngine
@@ -249,21 +250,26 @@ namespace LittleEngine
             return  ImGui::ColorEdit3(GetUniqueName(), &p_color.r, flags);
     }
 
-#define _DrawAsset(p_name,p_resPtr,p_shaderType)\
+#define _DrawRawAsset(p_name,p_resPtr,p_shaderType,texId)\
     auto& path = p_resPtr.GetGuidReference();\
     auto& ptrs = p_resPtr.GetPtrReference();\
-    bool isDirty = DrawResPtr(p_name, path, (void*&)ptrs,Utils::PathParser::EFileType::p_shaderType);\
+    bool isDirty = DrawResPtr(p_name, path, (void*&)ptrs,Utils::PathParser::EFileType::p_shaderType,texId);\
     if(isDirty)\
         ResourcesUtils::LoadRes(path,ptrs,true);\
     return isDirty;
     
+#define _DrawAsset(p_name,p_resPtr,p_shaderType)\
+    _DrawRawAsset(p_name,p_resPtr,p_shaderType,0)
+    
+    bool InspectorUtil::DrawAsset(const std::string& p_name, TextureResPtr& p_data)
+    {
+        auto texId = (p_data.GetPtr() == nullptr)? 0:p_data.GetPtr()->id;
+        _DrawRawAsset(p_name,p_data,TEXTURE,texId)
+    }
+    
     bool InspectorUtil::DrawAsset(const std::string& p_name, ModelResPtr& p_data)
     {
         _DrawAsset(p_name,p_data,MODEL)
-    }
-    bool InspectorUtil::DrawAsset(const std::string& p_name, TextureResPtr& p_data)
-    {
-        _DrawAsset(p_name,p_data,TEXTURE)
     }
     bool InspectorUtil::DrawAsset(const std::string& p_name, ShaderResPtr& p_data)
     {
@@ -287,18 +293,27 @@ namespace LittleEngine
         return false;
     }
 
+
     
-    bool InspectorUtil::DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs, LittleEngine::Utils::PathParser::EFileType type)
+    bool InspectorUtil::DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
+        LittleEngine::Utils::PathParser::EFileType type,uint32_t texId )
     {
         DrawTitle(p_name,4);
         // draw input
         ImGuiWindow* window = ImGui::GetCurrentWindow();
         ImGui::SetColumnWidth(2,window->ContentSize.x -180);
         //ImGui::TextColored(Converter::ToImVec4(GUIUtil::ClearButtonColor), content.c_str());
-        std::string previousContent = content;
-        content.resize(256, '\0');
-        bool enterPressed = ImGui::InputText(GetUniqueName(), &content[0], 256, ImGuiInputTextFlags_EnterReturnsTrue);
-        content = content.c_str();
+        if(type == Utils::PathParser::EFileType::TEXTURE)
+        {
+            texId = texId ==0 ?(GUIUtil::__EMPTY_TEXTURE ? GUIUtil::__EMPTY_TEXTURE->id : 0): texId ;
+            ImGui::Image((void*)texId, ImVec2(75,75), ImVec2(0.f, 1.f), ImVec2(1.f, 0.f));
+        }else
+        {
+            std::string previousContent = content;
+            content.resize(256, '\0');
+            bool enterPressed = ImGui::InputText(GetUniqueName(), &content[0], 256, ImGuiInputTextFlags_EnterReturnsTrue);
+            content = content.c_str();
+        }
         // apply DragDrop
         if (ImGui::BeginDragDropTarget())
         {

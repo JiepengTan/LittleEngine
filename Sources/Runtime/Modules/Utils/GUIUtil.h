@@ -99,7 +99,7 @@ namespace LittleEngine
 		template <typename T>
 		static std::string GetFormat();
 
-	private:
+	public:
 		static LittleEngine::Texture* __EMPTY_TEXTURE;
 	};
 }
