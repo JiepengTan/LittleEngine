@@ -517,8 +517,7 @@ namespace LittleEngine::Editor
             if (m_context.scriptInterpreter->IsOk())
             {
                 PlayEvent.Invoke();
-                m_sceneBackup.Clear();
-	            m_context.sceneManager.GetCurrentScene()->SaveTo(m_sceneBackup);
+	            m_sceneBackup = m_context.sceneManager.BackupScene();
                 
                 m_panelsManager.GetPanelAs<Panels::GameView>("Game View").Focus();
                 m_context.sceneManager.GetCurrentScene()->Play();
@@ -560,11 +559,11 @@ namespace LittleEngine::Editor
             if (auto targetActor = EDITOR_PANEL(Panels::Inspector, "Inspector").GetTargetActor())
                 focusedActorID = targetActor->GetID();
 
-            m_context.sceneManager.LoadSceneFromRes(m_sceneBackup);
+            m_context.sceneManager.LoadSceneFromMemory(m_sceneBackup);
             if (loadedFromDisk)
                 m_context.sceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
             // To bo able to save or reload the scene whereas the scene is loaded from memory (Supposed to have no path)
-            m_sceneBackup.Clear();
+            m_sceneBackup.clear();
             EDITOR_PANEL(Panels::SceneView, "Scene View").Focus();
             if (auto actorInstance = m_context.sceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
                 EDITOR_PANEL(Panels::Inspector, "Inspector").FocusActor(actorInstance);

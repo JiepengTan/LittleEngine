@@ -94,7 +94,13 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 	LOG_ERROR("LoadScene faild =" + p_path);
 	return false;
 }
-
+std::string LittleEngine::SceneManager::BackupScene()
+{
+	ResScene resScene;
+	m_currentScene->SaveTo(resScene);
+	auto&& json = JsonSerializer::Write(resScene);
+	return json.dump(); 
+}
 bool LittleEngine::SceneManager::SaveScene(const std::string& p_path)
 {
 	auto fullPath = PathUtil::GetRealPath(p_path);
@@ -119,16 +125,12 @@ bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneS
 	}
 	ResScene resScene;
 	JsonSerializer::Read(asset_json,resScene);
-	return LoadSceneFromRes(resScene);
-}
-
-bool LittleEngine::SceneManager::LoadSceneFromRes(ResScene p_resScene)
-{
 	LoadEmptyScene();
-	m_currentScene->LoadFrom(p_resScene);
+	m_currentScene->LoadFrom(resScene);
 	SceneLoadEvent.Invoke(m_currentScene);
 	return true;
 }
+
 
 void LittleEngine::SceneManager::UnloadCurrentScene()
 {

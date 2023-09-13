@@ -62,12 +62,12 @@ namespace LittleEngine
 		bool LoadScene(const std::string& p_path, bool p_absolute = false);
 
 		bool SaveScene(const std::string& p_path);
+		std::string BackupScene();
 		/**
 		* Load specific scene in memory
 		* @param p_scenePath
 		*/
 		bool LoadSceneFromMemory(const std::string& p_sceneStr);
-		bool LoadSceneFromRes(ResScene p_resScene);
 
 		/**
 		* Destroy current scene from memory
