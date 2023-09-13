@@ -11,7 +11,7 @@ Field::Field(const Cursor& cursor, const Namespace& current_namespace, Class* pa
     m_type= Utils::getTypeNameWithNamespace(cursor.getType());
     Utils::replaceAll(m_type, " ", "");
     //Utils::replaceAll(m_type, "LittleEngine::", "");
-    std::cout<<m_name << " cursor.getType().GetKind() " << cursor.getType().GetKind() <<std::endl;
+    //std::cout<<m_name << " cursor.getType().GetKind() " << cursor.getType().GetKind() <<std::endl;
     m_is_enum = cursor.getType().GetKind() == CXType_Enum;
     m_is_pointer = cursor.getType().GetKind() == CXType_Pointer;
     auto ret_string = Utils::getStringWithoutQuot(m_meta_data.getProperty("default"));

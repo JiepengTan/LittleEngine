@@ -85,18 +85,16 @@ namespace LittleEngine
     {
         if (!s_type2DrawFunction.empty()) return;
         // TODO tanjp support other basic types
-        __REGISTER_FUNCTION(std::string,DrawString);
+        __REGISTER_FUNCTION(float,DrawScalar);
+        __REGISTER_FUNCTION(double,DrawScalar);
         __REGISTER_FUNCTION(int32_t,DrawScalar);
         __REGISTER_FUNCTION(int64_t,DrawScalar);
         __REGISTER_FUNCTION(uint32_t,DrawScalar);
         __REGISTER_FUNCTION(uint64_t,DrawScalar);
-        __REGISTER_FUNCTION(float,DrawScalar);
-        __REGISTER_FUNCTION(double,DrawScalar);
+        __REGISTER_FUNCTION(char,DrawScalar);
+        __REGISTER_FUNCTION(std::string,DrawString);
         __REGISTER_FUNCTION(bool,DrawBoolean);
         
-        //RegisterTypeDrawFunction("int32_t", [](auto* instance, auto& field){
-        //    DrawScalar(field.GetFieldName(), *TypeUtil::GetField<int32_t>(instance, field));
-        //});
         
     }
     

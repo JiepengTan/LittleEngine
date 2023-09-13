@@ -23,6 +23,7 @@ namespace LittleEngine
 		else if constexpr (std::is_same<T, int16_t>::value)		return ImGuiDataType_S16;
 		else if constexpr (std::is_same<T, int32_t>::value)		return ImGuiDataType_S32;
 		else if constexpr (std::is_same<T, int64_t>::value)		return ImGuiDataType_S64;
+		else if constexpr (std::is_same<T, char>::value)		return ImGuiDataType_U8;
 	}
 
 	template<typename T>

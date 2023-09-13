@@ -83,7 +83,7 @@ namespace Generator
                 {
                     auto sizeStr = field->m_type.substr(startIdx+1,endIdx-startIdx-1);
                     sizeStr = Utils::trim(sizeStr,white_space_string);
-                    std::cout << "arysize field->m_type "+ field->m_type +  " result= " + sizeStr <<std::endl;
+                    //std::cout << "arysize field->m_type "+ field->m_type +  " result= " + sizeStr <<std::endl;
                     size = std::stoi(sizeStr);
                 }else
                 {
