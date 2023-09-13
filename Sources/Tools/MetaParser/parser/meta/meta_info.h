@@ -11,6 +11,7 @@ public:
 
     bool getFlag(const std::string& key) const;
 
+    bool isEmpty()const ;
     std::map<std::string, std::string> getAllProperties() const{ return m_properties;}
 private:
     typedef std::pair<std::string, std::string> Property;

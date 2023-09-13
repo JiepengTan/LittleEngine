@@ -69,6 +69,7 @@ namespace Generator
             filed_define.set("class_field_is_enum", field->m_is_enum);
             filed_define.set("class_field_is_pointer", field->m_is_pointer);
             filed_define.set("class_field_is_normal", !field->m_is_pointer&&!field->m_is_enum);
+            filed_define.set("class_field_meta_datas", field->getMetaDataString());
             
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);
@@ -99,13 +100,26 @@ namespace Generator
 
     void GeneratorInterface::genClassMethodRenderData(std::shared_ptr<Class> class_temp, Mustache::data& method_defs)
     {
+        auto methods = class_temp->m_methods;
        for (auto& method : class_temp->m_methods)
         {
             if (!method->shouldCompile())
                 continue;
             Mustache::data method_define;
 
-            method_define.set("class_method_name", method->m_name);   
+            method_define.set("class_method_name", method->m_name);  
+            method_define.set("class_method_return_type", method->getReturnType());
+            method_define.set("class_method_void_declare", method->getVoidDeclareStr());  
+            method_define.set("class_method_void_call", method->getVoidCallStr());     
+            method_define.set("class_method_normal_declare", method->getDeclareStr());  
+            method_define.set("class_method_normal_call", method->getCallStr());
+            method_define.set("class_method_param_types", method->getParamsType());
+            method_define.set("class_mothod_meta_datas", method->getMetaDataString());
+            method_define.set("class_mothod_return_str", method->getReturnStr());
+            method_define.set("class_mothod_has_return", method->hasReturn());
+            method_define.set("class_mothod_has_params", method->hasParams());
+           
+           
             method_defs.push_back(method_define);
         }
     }

@@ -53,12 +53,28 @@ namespace {{class_namespace}}::MetaCodeGen{
         static std::string GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
         static bool IsVector_{{class_field_name}}(){ {{#class_field_is_vector}}return true;{{/class_field_is_vector}}{{^class_field_is_vector}}return false;{{/class_field_is_vector}} }
         static bool IsArray_{{class_field_name}}(){ {{#class_field_is_array}}return true;{{/class_field_is_array}}{{^class_field_is_array}}return false;{{/class_field_is_array}} }
+        static std::map<std::string,std::string> GetFieldMetaData_{{class_field_name}}(){ return std::map<std::string,std::string>{ {{{class_field_meta_datas}}} };}
         {{/class_field_defines}}
 
         // methods
         {{#class_method_defines}}
         static std::string GetMethodName_{{class_method_name}}(){ return "{{class_method_name}}";}
-        static void Invoke_{{class_method_name}}(void * instance){static_cast<{{class_name}}*>(instance)->{{class_method_name}}();}
+        static std::map<std::string,std::string> GetMethodMetaData_{{class_method_name}}(){ return std::map<std::string,std::string>{ {{{class_mothod_meta_datas}}} };}
+        static std::vector<std::string> GetMethodParamTypes_{{class_method_name}}(){ return std::vector<std::string>{ {{{class_method_param_types}}} } ;}
+        static std::string GetMethodReturnType_{{class_method_name}}(){ return "{{class_method_return_type}}";}
+        static void InvokeFullVoid_{{class_method_name}}(void* retValPtr, void* instance{{#class_mothod_has_params}}, {{/class_mothod_has_params}} {{class_method_void_declare}} ) { 
+            {{#class_mothod_has_return}}   *(  ({{ class_method_return_type }}*) retValPtr) = {{/class_mothod_has_return}} 
+            static_cast<{{class_name}}*>(instance)->{{class_method_name}}({{class_method_void_call}}) ;
+        }
+        static void InvokeCorrectVoid_{{class_method_name}}(void* retValPtr, void* instance{{#class_mothod_has_params}}, {{/class_mothod_has_params}} {{class_method_normal_declare}} ) { 
+            {{#class_mothod_has_return}}   *(  ({{ class_method_return_type }}*) retValPtr) = {{/class_mothod_has_return}} 
+            static_cast<{{class_name}}*>(instance)->{{class_method_name}}({{class_method_normal_call}}) ;
+        }
+        static void InvokeVoid_{{class_method_name}}(void* retValPtr, void* instance,void* _1,void* _2 ,void* _3,void* _4,void* _5 ,void* _6  ) { 
+            {{#class_mothod_has_return}}   *(  ({{ class_method_return_type }}*) retValPtr) = {{/class_mothod_has_return}} 
+            static_cast<{{class_name}}*>(instance)->{{class_method_name}}({{class_method_void_call}}) ;
+        }
+
         {{/class_method_defines}}
     };
 
@@ -101,7 +117,8 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::GetClassName,
             &TypeOperator_{{class_name}}::GetFieldName_{{class_field_name}},
             &TypeOperator_{{class_name}}::GetFieldTypeName_{{class_field_name}},
-            &TypeOperator_{{class_name}}::IsArray_{{class_field_name}}
+            &TypeOperator_{{class_name}}::IsArray_{{class_field_name}},
+            &TypeOperator_{{class_name}}::GetFieldMetaData_{{class_field_name}}
             };
         META_REGISTER_FIELD_TO_MAP("{{class_full_name}}", field_function_tuple_{{class_field_name}});
         {{/class_field_defines}}
@@ -110,7 +127,10 @@ namespace {{class_namespace}}::MetaCodeGen{
         {{#class_method_defines}}
         LittleEngine::Reflection::MethodFunctionTuple* method_function_tuple_{{class_method_name}}=new LittleEngine::Reflection::MethodFunctionTuple{
             &TypeOperator_{{class_name}}::GetMethodName_{{class_method_name}},
-            &TypeOperator_{{class_name}}::Invoke_{{class_method_name}}
+            &TypeOperator_{{class_name}}::GetMethodMetaData_{{class_method_name}},
+            &TypeOperator_{{class_name}}::InvokeVoid_{{class_method_name}},
+            &TypeOperator_{{class_name}}::GetMethodReturnType_{{class_method_name}},
+            &TypeOperator_{{class_name}}::GetMethodParamTypes_{{class_method_name}},
             };
         META_REGISTER_Method_TO_MAP("{{class_full_name}}", method_function_tuple_{{class_method_name}} );
         {{/class_method_defines}}

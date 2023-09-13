@@ -10,6 +10,18 @@ TypeInfo::TypeInfo(const Cursor& cursor, const Namespace& current_namespace) :
 
 const MetaInfo& TypeInfo::getMetaData(void) const { return m_meta_data; }
 
+const std::string TypeInfo::getMetaDataString() const
+{
+    std::string retStr= "";
+    auto infos = m_meta_data.getAllProperties();
+    for (auto element : infos)
+    {
+        retStr += "{\"" +element.first + "\",\""+element.second + "\"},";
+    }
+    return retStr;
+}
+
+
 std::string TypeInfo::getSourceFile(void) const { return m_root_cursor.getSourceFile(); }
 
 Namespace TypeInfo::getCurrentNamespace() const { return m_namespace; }

@@ -13,7 +13,8 @@ public:
     virtual ~TypeInfo(void) {}
 
     const MetaInfo& getMetaData(void) const;
-
+    const std::string getMetaDataString(void) const;
+    
     std::string getSourceFile(void) const;
 
     Namespace getCurrentNamespace() const;

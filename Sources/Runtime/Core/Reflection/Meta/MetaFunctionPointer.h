@@ -29,11 +29,19 @@ namespace LittleEngine::Reflection
     typedef std::function<bool()>                  GetBoolFunc;
     typedef std::function<void(void*)>             InvokeFunction;
 
+    
     typedef std::function<void*(const Json&)>                           ConstructorWithJsonFunc;
     typedef std::function<Json(void*)>                                  WriteJsonByNameFunc;
     typedef std::function<std::vector<TypeID>(void)>                    GetBaseClassIdsFunc;
     typedef std::function<void*(void)>                                  ConstructorFunc;
     typedef std::function<std::map<std::string,std::string>(void)>      GetMetaDataFunc;
+    
+    //(void* retValPtr, void* instance, void* _1,void* _2 ,
+    //      void* _3,void* _4,void* _5 ,void* _6  )
+    typedef std::function<void(void* ,void* ,void* ,void* ,
+                               void* ,void* ,void* ,void* )>            GenericInvokeFunction;
+    typedef std::function<std::string(void)>                            GetFuncReturnTypeFunc;
+    typedef std::function<std::vector<std::string>(void)>               GetFuncParamsTypeFunc;
     
     class FieldFunctionTuple
     {
@@ -44,12 +52,16 @@ namespace LittleEngine::Reflection
         GetNameFunction GetFiledName;
         GetNameFunction GetFieldType;
         GetBoolFunc IsArray;
+        GetMetaDataFunc GetMetaData;
     };
     class MethodFunctionTuple
     {
     public:
-       GetNameFunction GetMethodName;
-        InvokeFunction Invoke;
+        GetNameFunction GetMethodName;
+        GetMetaDataFunc GetMetaData;
+        GenericInvokeFunction GenericInvoke_Return_Instance_6Params;
+        GetFuncReturnTypeFunc GetFuncReturnType;
+        GetFuncParamsTypeFunc GetFuncParamsType;
     };
     class ClassFunctionTuple
     {
@@ -69,5 +81,6 @@ namespace LittleEngine::Reflection
         GetSizeFunc GetSize;
         GetNameFunction GetArrayTypeName;
         GetNameFunction GetElementTypeName;
+        GetMetaDataFunc    GetMetaData;
     };
 }

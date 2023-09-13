@@ -23,6 +23,7 @@ namespace LittleEngine::Reflection
 
         m_fieldTypeName = m_functions->GetFieldType();
         m_fieldName      = m_functions->GetFiledName();
+        m_metaData = m_functions->GetMetaData();
     }
 
     void* FieldAccessor::Get(void* instance)
@@ -55,6 +56,16 @@ namespace LittleEngine::Reflection
     std::string FieldAccessor::GetFieldName() const { return m_fieldName; }
     std::string FieldAccessor::GetFieldTypeName() { return m_fieldTypeName; }
 
+    bool FieldAccessor::HasMeta(std::string metaKey)
+    {
+        return m_metaData.count(metaKey) != 0;
+    }
+
+    std::string FieldAccessor::GetMeta(std::string metaKey)
+    {
+        if(m_metaData.count(metaKey) == 0) return "";
+        return m_metaData.at(metaKey);
+    }
     bool FieldAccessor::IsArrayType()
     {
         // todo: should check validation
@@ -70,6 +81,7 @@ namespace LittleEngine::Reflection
         m_functions       = dest.m_functions;
         m_fieldName      = dest.m_fieldName;
         m_fieldTypeName = dest.m_fieldTypeName;
+        m_metaData        = dest.m_metaData;
         return *this;
     }
 
@@ -77,6 +89,22 @@ namespace LittleEngine::Reflection
     {
         m_methodName = k_unknown;
         m_functions   = nullptr;
+    }
+
+    std::vector<std::string> MethodAccessor::GetParamsTypeName() const
+    {
+        return m_functions->GetFuncParamsType();
+    }
+
+    std::string MethodAccessor::GetReturnTypeName() const
+    {
+        return m_functions->GetFuncReturnType();
+    }
+
+    void MethodAccessor::Invoke(void* retrunPtr, void* instance, void* _1, void* _2, void* _3, void* _4, void* _5,
+                                void* _6)
+    {
+        m_functions->GenericInvoke_Return_Instance_6Params(retrunPtr,instance,_1,_2,_3,_4,_5,_6);
     }
 
     MethodAccessor::MethodAccessor(MethodFunctionTuple* functions) : m_functions(functions)
@@ -88,6 +116,7 @@ namespace LittleEngine::Reflection
         }
 
         m_methodName      = m_functions->GetMethodName();
+        m_metaData = m_functions->GetMetaData();
     }
     std::string MethodAccessor::GetMethodName() const{
         return m_methodName;
@@ -100,9 +129,21 @@ namespace LittleEngine::Reflection
         }
         m_functions       = dest.m_functions;
         m_methodName      = dest.m_methodName;
+        m_metaData        = dest.m_metaData;
         return *this;
     }
-    void MethodAccessor::Invoke(void* instance) { m_functions->Invoke(instance); }
+
+    bool MethodAccessor::HasMeta(std::string metaKey)
+    {
+        return m_metaData.count(metaKey) != 0;
+    }
+
+    std::string MethodAccessor::GetMeta(std::string metaKey)
+    {
+        if(m_metaData.count(metaKey) == 0) return "";
+        return m_metaData.at(metaKey);
+    }
+    
     ArrayAccessor::ArrayAccessor() :
         m_func(nullptr), m_arrayTypeName("UnKnownType"), m_elementTypeName("UnKnownType")
     {}
@@ -118,6 +159,7 @@ namespace LittleEngine::Reflection
 
         m_arrayTypeName   =m_func->GetArrayTypeName();
         m_elementTypeName =m_func->GetElementTypeName();
+        m_metaData = m_func->GetMetaData();
     }
     std::string ArrayAccessor::GetArrayTypeName() { return m_arrayTypeName; }
     std::string ArrayAccessor::GetElementTypeName() { return m_elementTypeName; }
@@ -152,6 +194,7 @@ namespace LittleEngine::Reflection
         m_func              = dest.m_func;
         m_arrayTypeName   = dest.m_arrayTypeName;
         m_elementTypeName = dest.m_elementTypeName;
+        m_metaData        = dest.m_metaData;
         return *this;
     }
 }

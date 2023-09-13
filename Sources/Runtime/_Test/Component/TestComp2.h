@@ -23,13 +23,13 @@ namespace LittleEngine::Test
         REFLECTION_COMPONENT_BODY(TestEditorInspector)
     public:
 
-        META(Enable)
+        META(Button)
         void Hello()
         {
             LOG_INFO("Hello "); 
         }
         
-        META(Enable)
+        META(Button)
         void HelloLittleEngine()
         {
             LOG_INFO("HelloLittleEngine "); 

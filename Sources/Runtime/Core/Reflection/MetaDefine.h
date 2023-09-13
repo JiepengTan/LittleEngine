@@ -14,9 +14,11 @@ namespace LittleEngine::MetaDefine
     const auto WhiteListFields = "WhiteListFields";
     const auto WhiteListMethods = "WhiteListMethods";
 
+    const auto Abstract = "Abstract";
+    
     const auto CustomEditor = "CustomEditor";
 
-
-    const auto Abstract = "Abstract";
- 
+    
+    const auto Button = "Button";
+    const auto OnValueChanged = "OnValueChanged";
 }

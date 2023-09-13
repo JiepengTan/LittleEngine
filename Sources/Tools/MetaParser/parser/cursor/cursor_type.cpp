@@ -14,6 +14,11 @@ std::string CursorType::GetDisplayName(void) const
     return display_name;
 }
 
+CursorType CursorType::getReturnType() const
+{
+    return clang_getResultType(m_handle);
+}
+
 int CursorType::GetArgumentCount(void) const { return clang_getNumArgTypes(m_handle); }
 
 CursorType CursorType::GetArgument(unsigned index) const { return clang_getArgType(m_handle, index); }

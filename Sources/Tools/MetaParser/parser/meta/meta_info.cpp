@@ -27,6 +27,11 @@ std::string MetaInfo::getProperty(const std::string& key) const
 
 bool MetaInfo::getFlag(const std::string& key) const { return m_properties.find(key) != m_properties.end(); }
 
+bool MetaInfo::isEmpty() const
+{
+    return m_properties.size()==0;
+}
+
 std::vector<MetaInfo::Property> MetaInfo::extractProperties(const Cursor& cursor) const
 {
     std::vector<Property> ret_list;

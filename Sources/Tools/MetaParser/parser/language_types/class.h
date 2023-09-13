@@ -24,8 +24,6 @@ public:
 
     virtual bool shouldCompile(void) const;
     virtual bool isAbstract(void) const;
-    virtual bool isCustomEditor(void) const;
-    virtual std::string getMetaDataString(void) const;
     
     bool shouldCompileFields(void) const;
     bool shouldCompileMethods(void) const;

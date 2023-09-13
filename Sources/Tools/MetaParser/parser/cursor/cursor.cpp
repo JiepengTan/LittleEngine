@@ -10,7 +10,6 @@ CXCursorKind Cursor::getKind(void) const { return m_handle.kind; }
 std::string Cursor::getSpelling(void) const
 {
     std::string spelling;
-
     Utils::toString(clang_getCursorSpelling(m_handle), spelling);
 
     return spelling;
@@ -46,6 +45,8 @@ std::string Cursor::getSourceFile(void) const
 bool Cursor::isDefinition(void) const { return clang_isCursorDefinition(m_handle); }
 
 CursorType Cursor::getType(void) const { return clang_getCursorType(m_handle); }
+
+
 
 Cursor::List Cursor::getChildren(void) const
 {

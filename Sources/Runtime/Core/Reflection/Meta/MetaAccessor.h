@@ -20,6 +20,9 @@ namespace LittleEngine::Reflection
         std::string GetFieldTypeName();
         bool        IsArrayType();
 
+        bool HasMeta(std::string metaKey);
+        std::string GetMeta(std::string metaKey);
+        
         FieldAccessor& operator=(const FieldAccessor& dest);
 
     private:
@@ -29,6 +32,7 @@ namespace LittleEngine::Reflection
         FieldFunctionTuple* m_functions;
         std::string         m_fieldName;
         std::string         m_fieldTypeName;
+        std::map<std::string,std::string> m_metaData;
     };
 
 
@@ -39,7 +43,11 @@ namespace LittleEngine::Reflection
     public:
         MethodAccessor();
 
-        void Invoke(void* instance);
+        std::vector<std::string> GetParamsTypeName() const;
+        std::string GetReturnTypeName() const;
+        void Invoke(void* retrunPtr,void* instance,void* _1= nullptr,void* _2= nullptr,void* _3= nullptr,void* _4= nullptr,void* _5= nullptr,void* _6 = nullptr);
+        bool HasMeta(std::string metaKey);
+        std::string GetMeta(std::string metaKey);
 
         std::string GetMethodName() const;
 
@@ -51,6 +59,7 @@ namespace LittleEngine::Reflection
     private:
         MethodFunctionTuple* m_functions;
         std::string          m_methodName;
+        std::map<std::string,std::string> m_metaData;
     };
     /**
      *  Function reflection is not implemented, so use this as an std::vector accessor
@@ -77,5 +86,6 @@ namespace LittleEngine::Reflection
         ArrayFunctionTuple* m_func;
         std::string         m_arrayTypeName;
         std::string         m_elementTypeName;
+        std::map<std::string,std::string> m_metaData;
     };
 }

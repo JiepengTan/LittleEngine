@@ -130,7 +130,7 @@ namespace LittleEngine
                     auto filedValue = field.Get(instance);
                     if(filedValue != nullptr)
                     {
-                        if (CollapsingHeader(fieldTypeName))
+                        if (DrawCollapsingHeader(fieldTypeName))
                         {
                             DrawUnknownInstance(fieldTypeName,filedValue);
                         }
@@ -158,7 +158,7 @@ namespace LittleEngine
             auto name = element.GetMethodName();
             if (DrawButton("   " + name + "   "))
             {
-                element.Invoke(component);
+                element.Invoke(nullptr,component);
             }
         }
         ImGui::Columns(1);
@@ -171,7 +171,7 @@ namespace LittleEngine
         return clicked;
     }
 
-    bool InspectorUtil::CollapsingHeader(const std::string& p_name)
+    bool InspectorUtil::DrawCollapsingHeader(const std::string& p_name)
     {
         ImGui::Columns(1);
         ImGui::Columns(2,GetUniqueName(),false);

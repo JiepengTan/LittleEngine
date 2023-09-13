@@ -8,9 +8,11 @@ public:
     CursorType(const CXType& handle);
 
     std::string GetDisplayName(void) const;
-
+    
     int GetArgumentCount(void) const;
 
+    CursorType getReturnType(void) const;
+    
     CursorType GetArgument(unsigned index) const;
 
     CursorType GetCanonicalType(void) const;

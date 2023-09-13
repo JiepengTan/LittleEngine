@@ -40,12 +40,20 @@ namespace LittleEngine
     	static void RegisterTypeDrawFunction(std::string typeName,TypeDrawFunc func);
 	    static void CheckRegisterTypeDrawFunctions();
     	static void DrawUnknownInstance(std::string typeName,void* instance);
+    	static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
+			LittleEngine::Utils::PathParser::EFileType type,uint32_t texId = 0);
     public:
     	static void OnComponentStart(std::string& startWidgetId);
-    	static void DrawDefault(Component* component);
-    	static bool DrawButton(const std::string& p_nameconst, FVector2 p_size = FVector2(0.f, 0.f), bool p_disabled = false);
+
     	
-    	static bool CollapsingHeader(const std::string& p_name);
+    public:
+    	static void DrawDefault(Component* component);
+
+    	static bool DrawString(const std::string& p_name, std::string& p_data);
+    	static bool DrawLabel(const std::string& p_name,const std::string& p_data);
+    	static bool DrawText(const std::string& p_name, std::string& p_data);
+    	static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = true);
+    	
     	template <typename T, int _Size>
 		static bool DrawScalarN(const std::string& p_name, T*& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
 		template <typename T>
@@ -55,10 +63,8 @@ namespace LittleEngine
 		static bool DrawVec3(const std::string& p_name, FVector3& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
 		static bool DrawVec4(const std::string& p_name, FVector4& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
 		static bool DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
-		static bool DrawString(const std::string& p_name, std::string& p_data);
-    	static bool DrawLabel(const std::string& p_name,const std::string& p_data);
-    	static bool DrawText(const std::string& p_name, std::string& p_data);
-		static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = true);
+
+    	
 		static bool DrawAsset(const std::string& p_name, ModelResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, TextureResPtr& p_data);
 	    static bool DrawAsset(const std::string& p_name, ShaderResPtr& p_data);
@@ -66,8 +72,9 @@ namespace LittleEngine
 		static bool DrawAsset(const std::string& p_name, MaterialResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, SoundResPtr& p_data);
 		static bool DrawAsset(const std::string& p_name, std::string& p_data);
-	    static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
-	    	LittleEngine::Utils::PathParser::EFileType type,uint32_t texId = 0);
+    	
+    	static bool DrawButton(const std::string& p_nameconst, FVector2 p_size = FVector2(0.f, 0.f), bool p_disabled = false);
+    	static bool DrawCollapsingHeader(const std::string& p_name);
     		
     };
 

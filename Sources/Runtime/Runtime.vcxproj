@@ -588,6 +588,7 @@
     <ClCompile Include="Resource\Manager\TextureManager.cpp" />
     <ClCompile Include="Resource\Parser\AssimpParser.cpp" />
     <ClCompile Include="_Test\Component\TestComp2.cpp" />
+    <ClCompile Include="_Test\Component\TestComp3.cpp" />
     <ClCompile Include="_Test\Reflection\TestReflection.cpp" />
     <ClCompile Include="_Test\TestManager.cpp" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
@@ -1038,6 +1039,7 @@
     <ClInclude Include="_Generated\Serializer\AllSerializer.h" />
     <ClInclude Include="_Generated\Serializer\AllSerializer.ipp" />
     <ClInclude Include="_Test\Component\TestComp2.h" />
+    <ClInclude Include="_Test\Component\TestComp3.h" />
     <ClInclude Include="_Test\Reflection\TestReflection.h" />
     <ClInclude Include="_Test\TestManager.h" />
   </ItemGroup>
