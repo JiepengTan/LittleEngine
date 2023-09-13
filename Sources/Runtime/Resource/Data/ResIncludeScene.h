@@ -43,7 +43,11 @@ namespace LittleEngine
     {
         REFLECTION_BODY(ResScene)
     public:
-        int m_sceneId;
+        int m_sceneId = 0;
         std::vector<LittleEngine::ResActor> m_actors;
+        void Clear(){
+            m_actors.clear();
+            m_sceneId = 0;
+        }
     };
 }

@@ -110,7 +110,6 @@ bool LittleEngine::SceneManager::SaveScene(const std::string& p_path)
 
 bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneStr)
 {
-	LoadEmptyScene();
 	std::string error;
 	auto&& asset_json = Json::parse(p_sceneStr, error);
 	if(!error.empty())
@@ -120,7 +119,13 @@ bool LittleEngine::SceneManager::LoadSceneFromMemory(const std::string& p_sceneS
 	}
 	ResScene resScene;
 	JsonSerializer::Read(asset_json,resScene);
-	m_currentScene->LoadFrom(resScene);
+	return LoadSceneFromRes(resScene);
+}
+
+bool LittleEngine::SceneManager::LoadSceneFromRes(ResScene p_resScene)
+{
+	LoadEmptyScene();
+	m_currentScene->LoadFrom(p_resScene);
 	SceneLoadEvent.Invoke(m_currentScene);
 	return true;
 }

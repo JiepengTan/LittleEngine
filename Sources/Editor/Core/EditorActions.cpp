@@ -517,12 +517,8 @@ namespace LittleEngine::Editor
             if (m_context.scriptInterpreter->IsOk())
             {
                 PlayEvent.Invoke();
-                m_sceneBackup.clear();
-                // TODO tanjp save scene
-                //tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
-                //m_sceneBackup.InsertFirstChild(node);
-                //m_context.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
-                ResScene resScene;
+                m_sceneBackup.Clear();
+	            m_context.sceneManager.GetCurrentScene()->SaveTo(m_sceneBackup);
                 
                 m_panelsManager.GetPanelAs<Panels::GameView>("Game View").Focus();
                 m_context.sceneManager.GetCurrentScene()->Play();
@@ -564,11 +560,11 @@ namespace LittleEngine::Editor
             if (auto targetActor = EDITOR_PANEL(Panels::Inspector, "Inspector").GetTargetActor())
                 focusedActorID = targetActor->GetID();
 
-            m_context.sceneManager.LoadSceneFromMemory(m_sceneBackup);
+            m_context.sceneManager.LoadSceneFromRes(m_sceneBackup);
             if (loadedFromDisk)
                 m_context.sceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
             // To bo able to save or reload the scene whereas the scene is loaded from memory (Supposed to have no path)
-            m_sceneBackup.clear();
+            m_sceneBackup.Clear();
             EDITOR_PANEL(Panels::SceneView, "Scene View").Focus();
             if (auto actorInstance = m_context.sceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
                 EDITOR_PANEL(Panels::Inspector, "Inspector").FocusActor(actorInstance);

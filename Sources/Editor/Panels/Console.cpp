@@ -22,16 +22,7 @@ std::pair<LittleEngine::Color, std::string> GetWidgetSettingsFromLogData(const O
 	LittleEngine::Color logColor;
 	std::string logHeader;
 	std::string logDateFormated = "[";
-	bool isSecondPart = false;
-	std::for_each(p_logData.date.begin(), p_logData.date.end(), [&logDateFormated, &isSecondPart](char c)
-	{ 
-		if (isSecondPart)
-			logDateFormated.push_back(c == '-' ? ':' : c);
-
-		if (c == '_')
-			isSecondPart = true;
-	});
-
+	logDateFormated+= p_logData.date;
 	logDateFormated += "] ";
 
 	switch (p_logData.logLevel)

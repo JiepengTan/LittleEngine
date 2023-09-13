@@ -67,6 +67,7 @@ namespace LittleEngine
 		* @param p_scenePath
 		*/
 		bool LoadSceneFromMemory(const std::string& p_sceneStr);
+		bool LoadSceneFromRes(ResScene p_resScene);
 
 		/**
 		* Destroy current scene from memory
