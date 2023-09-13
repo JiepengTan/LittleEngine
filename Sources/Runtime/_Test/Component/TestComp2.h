@@ -3,7 +3,7 @@
 #include "Modules/Framework/ECS/Component.h"
 #include "Resource/Asset/UniformInfo.h"
 
-namespace LittleEngine
+namespace LittleEngine::Test
 {
     REFLECTION_STRUCT_TYPE(TestStruct2)
     STRUCT(TestStruct2: public ResData, Fields)
@@ -17,10 +17,10 @@ namespace LittleEngine
         ResUniformInfo	defaultValue;
     };
     
-    REFLECTION_COMPONENT_TYPE(TestComp2)
-    CLASS (TestComp2 : public Component, Fields,WhiteListMethods, CustomerEditor )
+    REFLECTION_COMPONENT_TYPE(TestEditorInspector)
+    CLASS (TestEditorInspector : public LittleEngine::Component, Fields,WhiteListMethods, CustomerEditor )
     {
-        REFLECTION_COMPONENT_BODY(TestComp2)
+        REFLECTION_COMPONENT_BODY(TestEditorInspector)
     public:
         void OnUpdate(float dt) override
         {
@@ -58,6 +58,7 @@ namespace LittleEngine
         FVector2 _FVector2;
         FVector3 _FVector3;
         FVector4 _FVector4;
+        FQuaternion _FQuaternion;
         Color _Color;
         TextureResPtr _TextureResPtr;
         ModelResPtr _ModelResPtr;

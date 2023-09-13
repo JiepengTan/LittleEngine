@@ -433,19 +433,19 @@
               "r": 1
             },
             "_FVector2": {
-              "x": 0,
-              "y": 0
+              "x": 26,
+              "y": 21
             },
             "_FVector3": {
-              "x": 0,
-              "y": 0,
-              "z": 0
+              "x": 11,
+              "y": -31,
+              "z": -20
             },
             "_FVector4": {
-              "w": 0,
-              "x": 0,
-              "y": 0,
-              "z": 0
+              "w": 3,
+              "x": 26,
+              "y": 36,
+              "z": 31
             },
             "_MaterialResPtr": {
               "guid": ""
@@ -493,7 +493,7 @@
               "type": -842150451
             }
           },
-          "$typeName": "LittleEngine::TestComp2"
+          "$typeName": "LittleEngine::Test::TestEditorInspector"
         }
       ],
       "instanceId": 1.4829735431805719e+19,

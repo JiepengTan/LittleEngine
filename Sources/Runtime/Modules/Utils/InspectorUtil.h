@@ -51,6 +51,8 @@ namespace LittleEngine
     	static bool DrawButton(const std::string& p_nameconst, FVector2 p_size = FVector2(0.f, 0.f), bool p_disabled = false);
     	
     	static bool CollapsingHeader(const std::string& p_name);
+    	template <typename T, int _Size>
+		static bool DrawScalarN(const std::string& p_name, T*& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
 		template <typename T>
 		static bool DrawScalar(const std::string& p_name, T& p_data, float p_step = 1.f, T p_min = std::numeric_limits<T>::min(), T p_max = std::numeric_limits<T>::max());
 		static bool DrawBoolean(const std::string& p_name, bool& p_data);
@@ -60,7 +62,7 @@ namespace LittleEngine
 		static bool DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step = 1.f, float p_min = GUIUtil::_MIN_FLOAT, float p_max = GUIUtil::_MAX_FLOAT);
 		static bool DrawString(const std::string& p_name, std::string& p_data);
     	static bool DrawLabel(const std::string& p_name,const std::string& p_data);
-		static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = false);
+		static bool DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha = true);
 		static bool DrawMesh(const std::string& p_name, Model*& p_data);
 		static bool DrawTexture(const std::string& p_name, Texture*& p_data);
 		static bool DrawTexture(const std::string & p_name, Texture *& p_data, std::string& guid);
@@ -73,7 +75,34 @@ namespace LittleEngine
     	/**/
 		
     };
-
+	template <typename T, int _Size>
+	bool InspectorUtil::DrawScalarN(const std::string& p_name, T*& p_data, float p_step, T p_min, T p_max)
+	{
+		DrawTitle(p_name);
+		auto m_dataType =GUIUtil:: GetDataType<T>();
+		auto format = GUIUtil::GetFormat<T>();
+    	
+		auto min = p_min;
+		auto max = p_max;
+		if (max < min)
+		{
+			auto temp = max;
+			max = min;
+			min = max;
+		}
+		for (size_t i = 0; i < _Size; ++i)
+		{
+			if (p_data[i] < min)
+				p_data[i] = min;
+			else if (p_data[i] > max)
+				p_data[i] = max;
+		}
+		if (ImGui::DragScalarN(GetUniqueName(), m_dataType, p_data, _Size, p_step, &min, &max, format.c_str()))
+		{
+			return true;
+		}
+		return false;
+	}
     template <typename T>
     bool InspectorUtil::DrawScalar(const std::string& p_name, T& p_data, float p_step, T p_min, T p_max)
     {

@@ -65,6 +65,12 @@ namespace LittleEngine
             else
             {
                 auto inst = Reflection::TypeInfo::CreateFromNameAndJson(type_name, jsonContext["$context"]);
+                if(inst == nullptr)
+                {
+#if DEBUG
+                    LOG_WARNING("Parse type error "+ type_name );
+#endif
+                }
                 instance = static_cast<T*>(inst);
             }
             return instance;

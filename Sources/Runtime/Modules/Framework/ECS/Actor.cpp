@@ -54,6 +54,9 @@ namespace LittleEngine
         m_parentID = p_resActor.m_parentID;
         for (auto comp : p_resActor.m_components)
         {
+            // ignore missing component
+            if(comp == nullptr)
+                continue;
             SharedPtr<Component> sptr;
             sptr.reset(comp.GetPtr());
             m_components.push_back(sptr);

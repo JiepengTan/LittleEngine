@@ -94,7 +94,12 @@ namespace LittleEngine
         __REGISTER_FUNCTION(char,DrawScalar);
         __REGISTER_FUNCTION(std::string,DrawString);
         __REGISTER_FUNCTION(bool,DrawBoolean);
-        
+        __REGISTER_FUNCTION(LittleEngine::FVector2,DrawVec2);
+        __REGISTER_FUNCTION(LittleEngine::FVector3,DrawVec3);
+        __REGISTER_FUNCTION(LittleEngine::FVector4,DrawVec4);
+        __REGISTER_FUNCTION(LittleEngine::FQuaternion,DrawQuat);
+        __REGISTER_FUNCTION(LittleEngine::Color,DrawColor);
+
         
     }
     
@@ -179,22 +184,26 @@ namespace LittleEngine
 
     bool InspectorUtil::DrawVec2(const std::string& p_name, FVector2& p_data, float p_step, float p_min, float p_max)
     {
-        return false;
+        float* ptr = (float*)&p_data;
+        return DrawScalarN<float,2>(p_name,ptr,p_step,p_min,p_max);
     }
 
     bool InspectorUtil::DrawVec3(const std::string& p_name, FVector3& p_data, float p_step, float p_min, float p_max)
     {
-        return false;
+        float* ptr = (float*)&p_data;
+        return DrawScalarN<float,3>(p_name,ptr,p_step,p_min,p_max);
     }
 
     bool InspectorUtil::DrawVec4(const std::string& p_name, FVector4& p_data, float p_step, float p_min, float p_max)
     {
-        return false;
+        float* ptr = (float*)&p_data;
+        return DrawScalarN<float,4>(p_name,ptr,p_step,p_min,p_max);
     }
 
     bool InspectorUtil::DrawQuat(const std::string& p_name, FQuaternion& p_data, float p_step, float p_min, float p_max)
     {
-        return false;
+        float* ptr = (float*)&p_data;
+        return DrawScalarN<float,4>(p_name,ptr,p_step,p_min,p_max);
     }
 
     bool InspectorUtil::DrawString(const std::string& p_name, std::string& content)
@@ -217,7 +226,12 @@ namespace LittleEngine
 
     bool InspectorUtil::DrawColor(const std::string& p_name, Color& p_color, bool p_hasAlpha)
     {
-        return false;
+        DrawTitle(p_name);
+	    int flags = !p_hasAlpha ? ImGuiColorEditFlags_NoAlpha : 0;
+        if(p_hasAlpha)
+            return  ImGui::ColorEdit4(GetUniqueName(), &p_color.r, flags);
+        else
+            return  ImGui::ColorEdit3(GetUniqueName(), &p_color.r, flags);
     }
 
     bool InspectorUtil::DrawMesh(const std::string& p_name, Model*& p_data)
