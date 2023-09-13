@@ -29,7 +29,7 @@ namespace Utils
 
     std::string getNameWithoutFirstM(std::string& name);
 
-    std::string getTypeNameWithoutNamespace(const CursorType& type);
+    std::string getTypeNameWithNamespace(const CursorType& type);
 
     std::string getNameWithoutContainer(std::string name);
     std::string getNameForArray(std::string name);

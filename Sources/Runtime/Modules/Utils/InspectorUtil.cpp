@@ -36,6 +36,8 @@ namespace LittleEngine
     uint64_t InspectorUtil::s_unique_id = 0;
     std::string InspectorUtil::s_unique_id_str = "";
     std::string InspectorUtil::s_startWidgetId = "";
+    int InspectorUtil::s_globalIndent = 0;
+    int InspectorUtil::s_indentSpaceFactor = 20;
     std::unordered_map<std::string, InspectorUtil::TypeDrawFunc> InspectorUtil::s_type2DrawFunction;
 
     void InspectorUtil::OnComponentStart(std::string& startWidgetId)
@@ -44,12 +46,24 @@ namespace LittleEngine
         s_unique_id = 0;
     }
 
+    void InspectorUtil::DrawIndent()
+    {
+    }
+
     void InspectorUtil::DrawTitle(const std::string& p_name)
     {
         ImGui::Columns(1);
-        ImGui::Columns(static_cast<int>(2), GetUniqueName(), false);
-        ImGui::TextColored(Converter::ToImVec4(GUIUtil::TitleColor), p_name.c_str());
+        ImGui::Columns(3,GetUniqueName(),false);
+        // draw indent
+        ImGui::LabelText(GetUniqueName()," ");
+        ImGui::SetColumnWidth(0,(s_globalIndent-1)*s_indentSpaceFactor +0);
         ImGui::NextColumn();
+        // draw title
+        ImGui::TextColored(Converter::ToImVec4(GUIUtil::TitleColor), p_name.c_str());
+        //ImGui::SetColumnWidth(0, -1);
+        ImGui::NextColumn();
+        // draw content
+        // ...
     }
 
     const char* InspectorUtil::GetUniqueName(const std::string& p_name)
@@ -62,28 +76,71 @@ namespace LittleEngine
     {
         s_type2DrawFunction.emplace(typeName, func);
     }
-
+#define __REGISTER_FUNCTION(type,funcName)\
+    RegisterTypeDrawFunction(#type, [](auto* instance, auto& field){\
+      ##funcName##(field.GetFieldName(), *TypeUtil::GetField<##type##>(instance, field));\
+  })
+    
     void InspectorUtil::CheckRegisterTypeDrawFunctions()
     {
         if (!s_type2DrawFunction.empty()) return;
         // TODO tanjp support other basic types
-        RegisterTypeDrawFunction("std::string", [](auto* instance, auto& field){
-            DrawString(field.GetFieldName(), *TypeUtil::GetField<std::string>(instance, field));
-        });
+        __REGISTER_FUNCTION(std::string,DrawString);
+        __REGISTER_FUNCTION(int32_t,DrawScalar);
+        __REGISTER_FUNCTION(int64_t,DrawScalar);
+        __REGISTER_FUNCTION(uint32_t,DrawScalar);
+        __REGISTER_FUNCTION(uint64_t,DrawScalar);
+        __REGISTER_FUNCTION(float,DrawScalar);
+        __REGISTER_FUNCTION(double,DrawScalar);
+        __REGISTER_FUNCTION(bool,DrawBoolean);
+        
+        //RegisterTypeDrawFunction("int32_t", [](auto* instance, auto& field){
+        //    DrawScalar(field.GetFieldName(), *TypeUtil::GetField<int32_t>(instance, field));
+        //});
+        
     }
-
-
-    void InspectorUtil::DrawDefault(Component* component)
+    
+    
+    void InspectorUtil::DrawUnknownInstance(std::string typeName,void* instance)
     {
-        CheckRegisterTypeDrawFunctions();
-        auto type = component->GetType();
-        for (auto& element : type->GetFields())
+        s_globalIndent++;
+        auto type  =TypeUtil::GetType(typeName);
+        if(type == nullptr) return;
+        for (auto& field : type->GetFields())
         {
-            auto name = element.GetFieldTypeName();
-            if(s_type2DrawFunction.count(name) !=0 ){
-                s_type2DrawFunction.at(name)(component, element);
+            auto fieldTypeName = field.GetFieldTypeName();
+            if(s_type2DrawFunction.count(fieldTypeName) !=0 ){
+                s_type2DrawFunction.at(fieldTypeName)(instance, field);
+            }else
+            {
+                //continue;;
+                if(field.HasTypeInfo())
+                {
+                    auto filedValue = field.Get(instance);
+                    if(filedValue != nullptr)
+                    {
+                        if (CollapsingHeader(fieldTypeName))
+                        {
+                            DrawUnknownInstance(fieldTypeName,filedValue);
+                        }
+                    }else
+                    {
+                        DrawLabel(field.GetFieldName(), fieldTypeName+ ": nullptr");
+                    }
+                }else
+                {
+                    DrawLabel(field.GetFieldName(), " unknown type " +fieldTypeName );
+                }
             }
         }
+        s_globalIndent--;
+    }
+    void InspectorUtil::DrawDefault(Component* component)
+    {
+        s_globalIndent= 0;
+        CheckRegisterTypeDrawFunctions();
+        auto type = component->GetType();
+        DrawUnknownInstance(type->GetTypeName(),component);
         ImGui::Columns(1);
         for (auto& element : type->GetMethods())
         {
@@ -99,34 +156,27 @@ namespace LittleEngine
 
     bool InspectorUtil::DrawButton(const std::string& p_name, FVector2 p_size, bool p_disabled)
     {
-        auto& style = ImGui::GetStyle();
-        auto idleBackgroundColor = Converter::ToColor(style.Colors[ImGuiCol_Button]);
-        auto hoveredBackgroundColor = Converter::ToColor(style.Colors[ImGuiCol_ButtonHovered]);
-        auto clickedBackgroundColor = Converter::ToColor(style.Colors[ImGuiCol_ButtonActive]);
-        auto textColor = Converter::ToColor(style.Colors[ImGuiCol_Text]);
-
-        auto defaultIdleColor = style.Colors[ImGuiCol_Button];
-        auto defaultHoveredColor = style.Colors[ImGuiCol_ButtonHovered];
-        auto defaultClickedColor = style.Colors[ImGuiCol_ButtonActive];
-        auto defaultTextColor = style.Colors[ImGuiCol_Text];
-
-        style.Colors[ImGuiCol_Button] = Converter::ToImVec4(idleBackgroundColor);
-        style.Colors[ImGuiCol_ButtonHovered] = Converter::ToImVec4(hoveredBackgroundColor);
-        style.Colors[ImGuiCol_ButtonActive] = Converter::ToImVec4(clickedBackgroundColor);
-        style.Colors[ImGuiCol_Text] = Converter::ToImVec4(textColor);
-
         bool clicked = ImGui::Button(GetUniqueName(p_name), Converter::ToImVec2(p_size));
-
-        style.Colors[ImGuiCol_Button] = defaultIdleColor;
-        style.Colors[ImGuiCol_ButtonHovered] = defaultHoveredColor;
-        style.Colors[ImGuiCol_ButtonActive] = defaultClickedColor;
-        style.Colors[ImGuiCol_Text] = defaultTextColor;
         return clicked;
+    }
+
+    bool InspectorUtil::CollapsingHeader(const std::string& p_name)
+    {
+        ImGui::Columns(1);
+        ImGui::Columns(2,GetUniqueName(),false);
+        // draw indent
+        ImGui::LabelText(GetUniqueName()," ");
+        ImGui::SetColumnWidth(0,(s_globalIndent)*s_indentSpaceFactor +0);
+        ImGui::NextColumn();
+        return ImGui::CollapsingHeader(GetUniqueName(p_name),  nullptr);                      
     }
 
     bool InspectorUtil::DrawBoolean(const std::string& p_name, bool& p_data)
     {
-        return false;
+        DrawTitle(p_name);
+        auto oldVal = p_data;
+        ImGui::Checkbox(GetUniqueName(), &p_data);
+        return oldVal!= p_data;
     }
 
     bool InspectorUtil::DrawVec2(const std::string& p_name, FVector2& p_data, float p_step, float p_min, float p_max)
@@ -159,7 +209,7 @@ namespace LittleEngine
         return previousContent != content;
     }
 
-    bool InspectorUtil::DrawLabel(const std::string& p_name, std::string& p_data)
+    bool InspectorUtil::DrawLabel(const std::string& p_name,const std::string& p_data)
     {
         DrawTitle(p_name);
         ImGui::TextColored(Converter::ToImVec4(GUIUtil::TitleColor), p_data.c_str());

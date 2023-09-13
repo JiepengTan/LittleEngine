@@ -103,7 +103,7 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::GetFieldTypeName_{{class_field_name}},
             &TypeOperator_{{class_name}}::IsArray_{{class_field_name}}
             };
-        META_REGISTER_FIELD_TO_MAP("{{class_name}}", field_function_tuple_{{class_field_name}});
+        META_REGISTER_FIELD_TO_MAP("{{class_full_name}}", field_function_tuple_{{class_field_name}});
         {{/class_field_defines}}
 
         // register function info
@@ -112,7 +112,7 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::GetMethodName_{{class_method_name}},
             &TypeOperator_{{class_name}}::Invoke_{{class_method_name}}
             };
-        META_REGISTER_Method_TO_MAP("{{class_name}}", method_function_tuple_{{class_method_name}} );
+        META_REGISTER_Method_TO_MAP("{{class_full_name}}", method_function_tuple_{{class_method_name}} );
         {{/class_method_defines}}
 
         // register array info
@@ -139,7 +139,7 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::IsAbstract,
             &TypeOperator_{{class_name}}::GetMetaData,
               };
-        META_REGISTER_BASE_CLASS_TO_MAP("{{class_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
+        META_REGISTER_BASE_CLASS_TO_MAP("{{class_full_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
     }
 }

@@ -17,7 +17,8 @@ namespace Utils
 
     std::string getQualifiedName(const CursorType& type) { return type.GetDisplayName(); }
 
-    std::string getTypeNameWithoutNamespace(const CursorType& type)
+
+    std::string getTypeNameWithNamespace(const CursorType& type)
     {
         std::string&& type_name = type.GetDisplayName();
         return type_name;

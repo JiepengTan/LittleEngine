@@ -12,8 +12,9 @@ namespace LittleEngine::Reflection
         void* Get(void* instance);
         void  Set(void* instance, void* value);
 
-        TypeInfo* GetOwnerTypeInfo();
+        TypeInfo*   GetOwnerTypeInfo();
 
+        TypeInfo*   GetType();
         bool        HasTypeInfo();
         std::string GetFieldName() const;
         std::string GetFieldTypeName();

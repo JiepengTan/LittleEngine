@@ -42,9 +42,14 @@ namespace LittleEngine::Reflection
         return TypeInfo::GetType(m_functions->GetClassName());
     }
 
+    TypeInfo* FieldAccessor::GetType()
+    {
+        return TypeInfo::GetType(m_fieldTypeName);
+    }
+
     bool FieldAccessor::HasTypeInfo()
     {
-        return TypeInfo::GetType(m_fieldTypeName) == nullptr;
+        return TypeInfo::GetType(m_fieldTypeName) != nullptr;
     }
 
     std::string FieldAccessor::GetFieldName() const { return m_fieldName; }

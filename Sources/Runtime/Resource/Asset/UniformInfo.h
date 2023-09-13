@@ -17,8 +17,11 @@ namespace LittleEngine::Resources
 	/**
 	* Data structure containing information about a uniform
 	*/
-	struct UniformInfo
+	REFLECTION_STRUCT_TYPE(UniformInfo)
+	STRUCT(UniformInfo: public ResData, Fields)
 	{
+		REFLECTION_STRUCT_BODY(UniformInfo)
+	public:
 		UniformType		type;
 		std::string		name;
 		uint32_t		location;

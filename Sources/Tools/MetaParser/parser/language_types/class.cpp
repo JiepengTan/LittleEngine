@@ -2,15 +2,18 @@
 
 #include "class.h"
 
-BaseClass::BaseClass(const Cursor& cursor) : name(Utils::getTypeNameWithoutNamespace(cursor.getType())) {}
+BaseClass::BaseClass(const Cursor& cursor) : name(Utils::getTypeNameWithNamespace(cursor.getType())) {}
 int Class::s_type_id = 1;
 Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     TypeInfo(cursor, current_namespace), m_name(cursor.getDisplayName()),
-    m_qualified_name(Utils::getTypeNameWithoutNamespace(cursor.getType())),
-    m_display_name(Utils::getNameWithoutFirstM(m_qualified_name))
+    m_full_name(Utils::getTypeNameWithNamespace(cursor.getType())),
+    m_display_name(Utils::getNameWithoutFirstM(m_full_name))
 {
     is_struct = cursor.getKind() == CXCursor_StructDecl;
    
+    if(shouldCompile()){
+        type_id = s_type_id++;
+    }
     auto rawName = cursor.getDisplayName();
     std::string curNamespace = "";
     //for (auto nameItem : current_namespace)  curNamespace += nameItem + "::";
@@ -37,9 +40,6 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
             default:
                 break;
         }
-    }
-    if(shouldCompile()){
-        type_id = s_type_id++;
     }
 }
 

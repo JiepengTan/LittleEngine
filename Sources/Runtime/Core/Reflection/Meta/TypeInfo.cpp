@@ -47,7 +47,9 @@ namespace LittleEngine::Reflection
 
     TypeInfo* TypeInfo::GetType(std::string typeName)
     {
-        if (m_name2Types.count(typeName) == 0) return nullptr;
+        auto& types = m_name2Types;
+        if (m_name2Types.count(typeName) == 0)
+            return nullptr;
         return m_name2Types.at(typeName);
     }
 

@@ -590,7 +590,6 @@
     <ClCompile Include="_Test\Component\TestComp2.cpp" />
     <ClCompile Include="_Test\Reflection\TestReflection.cpp" />
     <ClCompile Include="_Test\TestManager.cpp" />
-    <ClInclude Include="..\Tools\MetaParser\parser\meta\meta_data_config.h" />
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\GPUInfo.h" />
     <ClInclude Include="Core\Analytics\Hardware\HardwareInfo.h" />

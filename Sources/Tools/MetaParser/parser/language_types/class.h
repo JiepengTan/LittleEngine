@@ -41,7 +41,7 @@ public:
 public:
     std::string m_name;
 
-    std::string m_qualified_name;
+    std::string m_full_name;
 
     SharedPtrVector<Field> m_fields;
     SharedPtrVector<Method> m_methods;
