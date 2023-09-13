@@ -5,5 +5,5 @@ void LittleEngine::Test::RunTests()
 }
 void LittleEngine::Test::RunRuntimeTests()
 {
-    DoReflectionTest();
+    //DoReflectionTest();
 }

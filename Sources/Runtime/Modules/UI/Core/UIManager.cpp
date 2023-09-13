@@ -174,7 +174,6 @@ bool LittleEngine::UI::Core::UIManager::LoadFont(const std::string& p_id, const 
 {
 	if (m_fonts.find(p_id) == m_fonts.end())
 	{
-		LOG_INFO("load font path =" + p_path);
 		auto& io = ImGui::GetIO();
 		ImFont* fontInstance = io.Fonts->AddFontFromFileTTF(p_path.c_str(), p_fontSize);
 
