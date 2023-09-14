@@ -53,6 +53,11 @@ namespace LittleEngine
         return GetType(typeId)->GetTypeName();
     }
 
+    std::string TypeUtil::GetTypeNameWithoutNamespace(TypeID typeId)
+    {
+        return Reflection::MetaRegisterUtil::GetTypeNameWithoutNamespace(typeId);
+    }
+
     TypeID TypeUtil::GetTypeID(std::string typeName)
     {
         if(!HasType(typeName))

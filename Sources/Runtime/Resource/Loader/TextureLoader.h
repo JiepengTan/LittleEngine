@@ -25,6 +25,7 @@ namespace LittleEngine::Resources
 		*/
 		TextureLoader() = delete;
 
+		static void* LoadRawData(const std::string& p_filepath);
 		/**
 		* Create a texture from file
 		* @param p_filePath

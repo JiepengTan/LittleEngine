@@ -235,9 +235,9 @@ void Panels::Inspector::RefreshAddComponentPanel()
 }
 void Panels::Inspector::DrawComponent(CompPtr p_component)
 {
-	//if (auto inspectorItem = dynamic_cast<API::IInspectorItem*>(&p_component); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(p_component->GetTypeName());
+		auto headerName = TypeUtil::GetTypeNameWithoutNamespace(p_component->GetTypeID());
+		auto& header = m_actorInfo->CreateWidget<UI::Widgets::Layout::GroupCollapsable>(headerName);
 		header.closable = p_component->GetTypeID() != LittleEngine:: CTransform::GetStaticTypeID();
 		header.CloseEvent += [this, &header, p_component]
 		{

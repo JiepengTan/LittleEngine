@@ -40,6 +40,7 @@ namespace LittleEngine::Reflection
         static void RegisterToArrayMap(const char* name, ArrayFunctionTuple* value);
         static TypeInfo* RegisterType(std::string type_name,TypeID typeId);
         static std::string GetTypeName(TypeID typeId);
+        static std::string GetTypeNameWithoutNamespace(TypeID typeId);
     public:
         static void RegisterAll();
         static void UnRegisterAll();

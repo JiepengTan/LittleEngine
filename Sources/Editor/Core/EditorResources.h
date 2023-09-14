@@ -40,7 +40,7 @@ namespace LittleEngine::Editor::Core
 		* @param p_id
 		*/
 		LittleEngine::Texture* GetTexture(const std::string& p_id);
-
+		
 		/**
 		* Returns the model identified by the given string or nullptr on fail
 		* @param p_id
@@ -57,5 +57,6 @@ namespace LittleEngine::Editor::Core
 		std::unordered_map<std::string, LittleEngine::Texture*> m_textures;
 		std::unordered_map<std::string, LittleEngine::Model*> m_models;
 		std::unordered_map<std::string, LittleEngine::Shader*> m_shaders;
+
 	};
 }

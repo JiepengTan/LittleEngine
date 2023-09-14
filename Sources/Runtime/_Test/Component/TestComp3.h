@@ -31,9 +31,9 @@ namespace LittleEngine::Test
         void OnClickHello(){ LOG_INFO("hello  " + std::to_string(health));}
 
         META(Enable)
-        void PrintValue()
+        void PrintValue(float p_value)
         {
-            LOG_INFO("OnValueChanged_degY " + std::to_string(degY));
+            LOG_INFO("OnValueChanged_degY " + std::to_string(p_value));
         }
         META(Enable)
         float PrintValueAAA(float p_value,int val,Component* info)

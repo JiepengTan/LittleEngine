@@ -4,6 +4,7 @@
 #include "TypeInfo.h"
 #include "MetaRegisterUtil.h"
 
+#include "Core/Tools/Utils/StringUtil.h"
 #include "_Generated/Reflection/AllReflection.h"
 #include "_Generated/Serializer/AllSerializer.ipp"
 namespace LittleEngine::Reflection
@@ -99,5 +100,12 @@ namespace LittleEngine::Reflection
         }
         return k_unknown_type;
     }
-    
+
+    std::string MetaRegisterUtil::GetTypeNameWithoutNamespace(TypeID typeId)
+    {
+        auto fullName = GetTypeName(typeId);
+        auto startIdx = fullName.find_last_of(':');
+        if(startIdx == -1) return fullName;
+        return fullName.substr(startIdx+1,fullName.size()- startIdx+1);
+    }
 } 

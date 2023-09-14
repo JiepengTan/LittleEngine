@@ -10,6 +10,16 @@
 #include "stb_image/stb_image.h"
 #include "Resource/Loader/TextureLoader.h"
 
+void* LittleEngine::Resources::TextureLoader::LoadRawData(const std::string& p_filepath)
+{
+	
+	int textureWidth;
+	int textureHeight;
+	int bitsPerPixel;
+	unsigned char* dataBuffer = stbi_load(p_filepath.c_str(), &textureWidth, &textureHeight, &bitsPerPixel, 4);
+	return dataBuffer;
+}
+
 LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 	GLuint textureID;
@@ -18,7 +28,7 @@ LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std:
 	int bitsPerPixel;
 	glGenTextures(1, &textureID);
 
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(false);
 	unsigned char* dataBuffer = stbi_load(p_filepath.c_str(), &textureWidth, &textureHeight, &bitsPerPixel, 4);
 
 	if (dataBuffer)
