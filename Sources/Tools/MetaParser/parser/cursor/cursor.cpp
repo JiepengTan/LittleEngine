@@ -42,6 +42,16 @@ std::string Cursor::getSourceFile(void) const
     return filename;
 }
 
+int64_t Cursor::getEnumVal() const
+{
+    return  clang_getEnumConstantDeclValue(m_handle);
+}
+
+CursorType Cursor::getEnumIntType() const
+{
+    return  clang_getEnumDeclIntegerType(m_handle);
+}
+
 bool Cursor::isDefinition(void) const { return clang_isCursorDefinition(m_handle); }
 
 CursorType Cursor::getType(void) const { return clang_getCursorType(m_handle); }

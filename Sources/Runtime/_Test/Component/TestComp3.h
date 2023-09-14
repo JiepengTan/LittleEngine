@@ -2,6 +2,7 @@
 #include "Core/Reflection/Reflection.h"
 #include "Modules/Framework/ECS/Component.h"
 #include "Modules/Framework/ECS/Components/CTransform.h"
+#include "Resource/Asset/UniformType.h"
 
 namespace LittleEngine::Test
 {
@@ -14,9 +15,16 @@ namespace LittleEngine::Test
         float health = 3;
         StringName name;
 
-        void OnStart() override
+        std::string OnStarts()
         {
             LOG_INFO("Hello Little Fish! name = " + name);
+            LittleEngine::UniformType instance;
+            switch (instance)
+            {
+                case UniformType::UNIFORM_BOOL: return "UNIFORM_BOOL";
+                default: break;
+            }
+            return "unknown type  UniformType " + std::to_string((int64_t)instance) ;
         }
         float rotateSpeed = 10;
         META(OnValueChanged:PrintValue)

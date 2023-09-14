@@ -41,7 +41,20 @@ namespace LittleEngine::Reflection
     typedef std::function<void(void* ,void* ,void* ,void* ,
                                void* ,void* ,void* ,void* )>            GenericInvokeFunction;
     typedef std::function<std::string(void)>                            GetFuncReturnTypeFunc;
-    typedef std::function<std::vector<std::string>(void)>               GetFuncParamsTypeFunc;
+    typedef std::function<std::vector<std::string>(void)>               GetStringVectorFunction;
+    typedef std::function<std::vector<int64_t>(void)>                   GetLongVectorFunction;
+
+    typedef std::function<std::string(void*)>                           EnumToStringFunc;
+    typedef std::function<void(const std::string&,void*)>               EnumFromStringFunc;
+    
+    class EnumFunctionTuple
+    {
+    public:
+        GetStringVectorFunction EnumNameVector;
+        GetLongVectorFunction EnumValueVector;
+        EnumToStringFunc EnumToString;
+        EnumFromStringFunc EnumFromString;
+    };
     
     class FieldFunctionTuple
     {
@@ -53,6 +66,7 @@ namespace LittleEngine::Reflection
         GetNameFunction GetFieldType;
         GetBoolFunc IsArray;
         GetMetaDataFunc GetMetaData;
+        GetBoolFunc IsEnum;
     };
     class MethodFunctionTuple
     {
@@ -61,7 +75,7 @@ namespace LittleEngine::Reflection
         GetMetaDataFunc GetMetaData;
         GenericInvokeFunction GenericInvoke_Return_Instance_6Params;
         GetFuncReturnTypeFunc GetFuncReturnType;
-        GetFuncParamsTypeFunc GetFuncParamsType;
+        GetStringVectorFunction GetFuncParamsType;
     };
     class ClassFunctionTuple
     {
@@ -72,6 +86,7 @@ namespace LittleEngine::Reflection
         ConstructorFunc Constructor;
         GetBoolFunc    IsAbstract;
         GetMetaDataFunc    GetMetaData;
+        GetBoolFunc    IsEnum;
     };
     class ArrayFunctionTuple
     {

@@ -8,7 +8,7 @@ class Field : public TypeInfo
 {
 
 public:
-    Field(const Cursor& cursor, const Namespace& current_namespace, Class* parent = nullptr);
+    Field(const Cursor& cursor, const Namespace& current_namespace, Class* parent = nullptr,bool isEnum = false);
 
     virtual ~Field(void) {}
 
@@ -25,6 +25,7 @@ public:
 
     std::string m_default;
 
+    int64_t  m_enum_value = 0;
     bool m_is_enum;
     bool m_is_pointer;
     bool isAccessible(void) const;

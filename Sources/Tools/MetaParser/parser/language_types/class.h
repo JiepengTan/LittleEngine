@@ -48,6 +48,8 @@ public:
     int type_id;
     bool isAccessible(void) const;
     bool is_struct;
+    bool is_enum;
+    std::string enum_type_name;
 public:
     static int s_type_id;
 };

@@ -18,6 +18,8 @@ public:
 
     std::string getSourceFile(void) const;
 
+    int64_t getEnumVal()const ;
+    CursorType getEnumIntType()const ;
     bool isDefinition(void) const;
 
     CursorType getType(void) const;

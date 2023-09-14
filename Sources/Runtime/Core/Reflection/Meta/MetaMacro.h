@@ -17,10 +17,12 @@ namespace LittleEngine
     #define META(...) __attribute__((annotate(#__VA_ARGS__)))
     #define CLASS(class_name, ...) class __attribute__((annotate(#__VA_ARGS__))) class_name
     #define STRUCT(struct_name, ...) struct __attribute__((annotate(#__VA_ARGS__))) struct_name
+    #define ENUM(enum_name, ...) enum class __attribute__((annotate(#__VA_ARGS__))) enum_name
 #else
     #define META(...)
     #define CLASS(class_name, ...) class class_name
     #define STRUCT(struct_name, ...) struct struct_name
+    #define ENUM(enum_name, ...) enum class enum_name
 #endif // __REFLECTION_PARSER__
 
     
@@ -61,7 +63,18 @@ namespace LittleEngine
 #define REFLECTION_STRUCT_BODY(class_name) \
     REFLECTION_BASIC_BODY(class_name)\
     std::string ToString();\
-    Json ToJson();\
+    Json ToJson();
+
+    
+#define REFLECTION_ENUM_TYPE(class_name) \
+    friend class MetaCodeGen::TypeOperator_##class_name; \
+    friend class JsonSerializer;\
+
+//!!! pure data type should not define a virtual function
+// that would make compiler create a virtual function table pointer
+// which would cause memory alignment bug !
+#define REFLECTION_ENUM_BODY(class_name) \
+    REFLECTION_BASIC_BODY(class_name)\
 
     
 #define REFLECTION_COMPONENT_TYPE(class_name) \

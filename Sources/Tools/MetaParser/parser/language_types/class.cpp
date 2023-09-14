@@ -10,7 +10,11 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
     m_display_name(Utils::getNameWithoutFirstM(m_full_name))
 {
     is_struct = cursor.getKind() == CXCursor_StructDecl;
-   
+    is_enum = cursor.getKind() == CXCursor_EnumDecl;
+    if(is_enum)
+    {
+        enum_type_name = cursor.getEnumIntType().GetDisplayName();
+    }
     if(shouldCompile()){
         type_id = s_type_id++;
     }
@@ -37,6 +41,9 @@ Class::Class(const Cursor& cursor, const Namespace& current_namespace) :
             // method
             case CXCursor_CXXMethod:
                 m_methods.emplace_back(new Method(child, current_namespace, this));
+                break;
+            case CXCursor_EnumConstantDecl:
+                m_fields.emplace_back(new Field(child, current_namespace, this, true));
             default:
                 break;
         }

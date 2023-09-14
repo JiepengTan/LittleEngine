@@ -9,17 +9,20 @@
 #include "_Generated/Serializer/AllSerializer.ipp"
 namespace LittleEngine::Reflection
 {
+    
     std::map<std::string,TypeID>                     MetaRegisterUtil::m_name2IdMap;
     std::map<std::string, ClassFunctionTuple*>       MetaRegisterUtil::m_name2ClassMap;
     std::multimap<std::string, FieldFunctionTuple*>  MetaRegisterUtil::m_name2FieldMap;
     std::multimap<std::string, MethodFunctionTuple*> MetaRegisterUtil::m_name2MethodMap;
     std::map<std::string, ArrayFunctionTuple*>       MetaRegisterUtil::m_name2ArrayMap;
+    std::map<std::string, EnumFunctionTuple*>        MetaRegisterUtil::m_name2EnumMap;
     
     std::map<TypeID, std::string>                    MetaRegisterUtil::m_id2NameMap;
     std::map<TypeID, ClassFunctionTuple*>            MetaRegisterUtil::m_id2ClassMap;
     std::multimap<TypeID, FieldFunctionTuple*>       MetaRegisterUtil::m_id2FieldMap;
     std::multimap<TypeID, MethodFunctionTuple*>      MetaRegisterUtil::m_id2MethodMap;
     std::map<TypeID, ArrayFunctionTuple*>            MetaRegisterUtil::m_id2ArrayMap;
+    std::map<TypeID, EnumFunctionTuple*>             MetaRegisterUtil::m_id2EnumMap;
 
 
     
@@ -47,6 +50,7 @@ namespace LittleEngine::Reflection
         __CopyNameMap2IdMap(FieldMap)
         __CopyNameMap2IdMap(ClassMap)
         __CopyNameMap2IdMap(ArrayMap)
+        __CopyNameMap2IdMap(EnumMap)
     }
     
     void MetaRegisterUtil::UnRegisterAll()
@@ -58,19 +62,25 @@ namespace LittleEngine::Reflection
         __ClearContainer(FieldMap)
         __ClearContainer(ClassMap)
         __ClearContainer(ArrayMap)
+        __ClearContainer(EnumMap)
 
     }
     
-    
-    void MetaRegisterUtil::RegisterToFieldMap(const char* name, FieldFunctionTuple* value)
+    void MetaRegisterUtil::RegisterToEnumMap(std::string name, EnumFunctionTuple* value, TypeID typeId)
+    {
+        m_name2EnumMap.insert(std::make_pair(name, value));
+    }
+    void MetaRegisterUtil::RegisterToFieldMap(std::string name, FieldFunctionTuple* value)
     {
         m_name2FieldMap.insert(std::make_pair(name, value));
     }
-    void MetaRegisterUtil::RegisterToMethodMap(const char* name, MethodFunctionTuple* value)
+
+    
+    void MetaRegisterUtil::RegisterToMethodMap(std::string name, MethodFunctionTuple* value)
     {
         m_name2MethodMap.insert(std::make_pair(name, value));
     }
-    void MetaRegisterUtil::RegisterToArrayMap(const char* name, ArrayFunctionTuple* value)
+    void MetaRegisterUtil::RegisterToArrayMap(std::string name, ArrayFunctionTuple* value)
     {
         if (m_name2ArrayMap.find(name) == m_name2ArrayMap.end())
         {
@@ -83,7 +93,7 @@ namespace LittleEngine::Reflection
     }
 
 
-    void MetaRegisterUtil::RegisterToClassMap(const char* type_name, ClassFunctionTuple* value, TypeID typeId)
+    void MetaRegisterUtil::RegisterToClassMap(std::string type_name, ClassFunctionTuple* value, TypeID typeId)
     {
         if (m_name2IdMap.find(type_name) == m_name2IdMap.end())
         {

@@ -34,6 +34,55 @@ namespace LittleEngine::Reflection
         return type->CreateInstance();
     }
 
+    std::vector<std::string> TypeInfo::GetEnumNameVector(TypeID typeId)
+    {
+        if(!HasType(typeId) || !GetType(typeId)->IsEnum()) return {};
+        return MetaRegisterUtil::m_id2EnumMap.at(typeId)->EnumNameVector();
+    }
+
+    std::vector<int64_t> TypeInfo::GetEnumValueVector(TypeID typeId)
+    {
+        if(!HasType(typeId) || !GetType(typeId)->IsEnum()) return {};
+        return MetaRegisterUtil::m_id2EnumMap.at(typeId)->EnumValueVector();
+    }
+
+    std::vector<std::string> TypeInfo::GetEnumNameVector(const std::string& typeName)
+    {
+        if(!HasType(typeName) || !GetType(typeName)->IsEnum()) return {};
+        return MetaRegisterUtil::m_name2EnumMap.at(typeName)->EnumNameVector();
+    }
+
+    std::vector<int64_t> TypeInfo::GetEnumValueVector(const std::string& typeName)
+    {
+        if(!HasType(typeName) || !GetType(typeName)->IsEnum()) return {};
+        return MetaRegisterUtil::m_name2EnumMap.at(typeName)->EnumValueVector();
+    }
+
+    void TypeInfo::EnumFromString(TypeID typeId, const std::string& strValue, void* instance)
+    {
+        if(!HasType(typeId) || !GetType(typeId)->IsEnum()) return;
+        return MetaRegisterUtil::m_id2EnumMap.at(typeId)->EnumFromString(strValue,instance);
+    }
+
+    std::string TypeInfo::EnumToString(TypeID typeId, void* instance)
+    {
+        if(!HasType(typeId) || !GetType(typeId)->IsEnum()) return {};
+        return MetaRegisterUtil::m_id2EnumMap.at(typeId)->EnumToString(instance);
+    }
+
+    void TypeInfo::EnumFromString(const std::string& typeName, const std::string& strValue, void* instance)
+    {
+        if(!HasType(typeName) || !GetType(typeName)->IsEnum()) return;
+        return MetaRegisterUtil::m_name2EnumMap.at(typeName)->EnumFromString(strValue,instance);
+    }
+
+    std::string TypeInfo::EnumToString(const std::string& typeName, void* instance)
+    {
+        if(!HasType(typeName) || !GetType(typeName)->IsEnum()) return {};
+        return MetaRegisterUtil::m_name2EnumMap.at(typeName)->EnumToString(instance);
+    }
+    
+
     bool TypeInfo::HasMeta(std::string metaKey)
     {
         return m_metaData.count(metaKey) != 0;
@@ -68,6 +117,19 @@ namespace LittleEngine::Reflection
         if (m_name2Types.count(typeName) == 0) return false;
         return GetType(typeName)->IsAbstract();
     }
+
+    bool TypeInfo::IsEnum(TypeID typeId)
+    {
+        if (m_id2Types.count(typeId) == 0) return false;
+        return GetType(typeId)->IsEnum();
+    }
+
+    bool TypeInfo::IsEnum(std::string typeName)
+    {
+        if (m_name2Types.count(typeName) == 0) return false;
+        return GetType(typeName)->IsEnum();
+    }
+
     bool TypeInfo::HasType(TypeID typeId)
     {
         return m_id2Types.count(typeId) != 0;
@@ -283,6 +345,11 @@ namespace LittleEngine::Reflection
     bool TypeInfo::IsAbstract()
     {
         return MetaRegisterUtil::m_id2ClassMap.at(GetTypeID())->IsAbstract();
+    }
+
+    bool TypeInfo::IsEnum()
+    {
+    return MetaRegisterUtil::m_id2ClassMap.at(GetTypeID())->IsEnum();
     }
 
     TypeInfo& TypeInfo::operator=(const TypeInfo& dest)

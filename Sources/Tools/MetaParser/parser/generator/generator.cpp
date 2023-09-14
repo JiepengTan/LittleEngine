@@ -15,7 +15,10 @@ namespace Generator
     void GeneratorInterface::genClassRenderData(std::shared_ptr<Class> class_temp, Mustache::data& class_def)
     {
         Class classInfo = *class_temp;
+        
         class_def.set("class_name", class_temp->getClassName());
+        class_def.set("class_is_enum", class_temp->is_enum);
+        class_def.set("class_enum_type_name", class_temp->enum_type_name);
         class_def.set("class_is_abstract", class_temp->isAbstract() ?"true":"false");
         class_def.set("class_meta_datas", class_temp->getMetaDataString() );
         class_def.set("class_namespace", class_temp->getCurrentNamespaceStr());
@@ -70,6 +73,7 @@ namespace Generator
             filed_define.set("class_field_is_pointer", field->m_is_pointer);
             filed_define.set("class_field_is_normal", !field->m_is_pointer&&!field->m_is_enum);
             filed_define.set("class_field_meta_datas", field->getMetaDataString());
+            filed_define.set("class_field_enum_value", field->m_enum_value);
             
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);

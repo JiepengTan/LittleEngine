@@ -13,7 +13,8 @@ namespace LittleEngine
 	/**
 	* Defines the types that a uniform can take
 	*/
-	enum class UniformType 
+
+	ENUM(UniformType, Fields)
 	{
 		UNIFORM_BOOL			= 0x8B56,
 		UNIFORM_INT				= 0x1404,

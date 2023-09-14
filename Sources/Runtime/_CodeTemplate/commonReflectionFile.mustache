@@ -4,19 +4,92 @@
 {{/include_headfiles}}
 
 {{#class_defines}}
+    {{#class_is_enum}}
+namespace LittleEngine{
+
+    std::vector<std::string> EnumNameVector_{{class_full_code_name}}(){
+       return std::vector<std::string>{
+        {{#class_field_defines}} "{{class_field_name}}",
+        {{/class_field_defines}}  
+       };
+    }
+    std::vector<int64_t> EnumValueVector_{{class_full_code_name}}(){
+       return std::vector<int64_t>{
+        {{#class_field_defines}} (int64_t){{class_full_name}}::{{class_field_name}},
+        {{/class_field_defines}}  
+       };
+    }
+
+    std::vector<std::string> EnumNameVector({{class_full_name}} instance){
+       return EnumNameVector_{{class_full_code_name}}();
+    }
+    std::vector<int64_t> EnumValueVector({{class_full_name}} instance){
+       return EnumValueVector_{{class_full_code_name}}();
+    }
+
+
+
+    void EnumFromString_{{class_full_code_name}}(const std::string& strValue,void* instance){
+        {{class_full_name}} value;
+        while (true)
+        {
+        {{#class_field_defines}} if(strValue == "{{class_field_name}}"){ value = {{class_full_name}}::{{class_field_name}}; break;}
+        {{/class_field_defines}}  
+            LOG_ERROR("unknown type  {{class_full_name}} " + strValue); return;
+        }
+        *(({{class_full_name}}*)instance) = value;
+    }
+    std::string EnumToString_{{class_full_code_name}}(void* instance){
+        {{class_full_name}}& value = *(({{class_full_name}}*)instance);
+        while (true)
+        {
+        {{#class_field_defines}} if(value == {{class_full_name}}::{{class_field_name}}) return "{{class_field_name}}";
+        {{/class_field_defines}}  
+        }
+        LOG_ERROR("unknown type  {{class_full_name}} " + std::to_string((int64_t)instance));
+        return "" ;
+    }
+    
+    void EnumFromString(const std::string& strValue,{{class_full_name}}& instance){
+       EnumFromString_{{class_full_code_name}}(strValue,&instance);
+    }
+
+    std::string EnumToString({{class_full_name}} instance){
+        return EnumToString_{{class_full_code_name}}(&instance) ;
+    }
+}
+    {{/class_is_enum}}
+
+    {{^class_is_enum}}
 namespace {{class_namespace}}{
     TypeID {{class_name}}::MetaTypeId = {{class_type_id}};
     {{#class_is_struct}}struct {{class_name}}; {{/class_is_struct}}{{^class_is_struct}}class {{class_name}}; {{/class_is_struct}}
     std::string {{class_name}}::ToString(){ return ToJson().dump();}
     Json {{class_name}}::ToJson(){ return LittleEngine::JsonSerializer::Write(*this);}
 }
+    {{/class_is_enum}}
+
 {{/class_defines}}
 
 {{#class_defines}}
 namespace {{class_namespace}}::MetaCodeGen{
     class TypeOperator_{{class_name}}{
     public:
-        static std::string GetClassName(){ return "{{class_name}}";}
+    {{#class_is_enum}}
+        static void* ConstructorWithJson(const Json& jsonContext){
+            int64_t value = 0;
+            LittleEngine::JsonSerializer::Read(jsonContext, value);
+            {{class_name}}* ret_instance= new {{class_name}};
+            *ret_instance = ({{class_name}})({{class_enum_type_name}})value;
+            return ret_instance;
+        }
+        static Json WriteByName(void* instance){
+            int64_t value = (int64_t)(*({{class_name}}*)instance);
+            return LittleEngine::JsonSerializer::Write(value);
+        }
+        static bool IsEnum(){ return true; }
+    {{/class_is_enum}}
+    {{^class_is_enum}}
         static void* ConstructorWithJson(const Json& jsonContext){
             {{class_name}}* ret_instance= new {{class_name}};
             LittleEngine::JsonSerializer::Read(jsonContext, *ret_instance);
@@ -25,6 +98,10 @@ namespace {{class_namespace}}::MetaCodeGen{
         static Json WriteByName(void* instance){
             return LittleEngine::JsonSerializer::Write(*({{class_name}}*)instance);
         }
+        static bool IsEnum(){ return false; }
+    {{/class_is_enum}}
+
+        static std::string GetClassName(){ return "{{class_name}}";}
         
         static bool IsAbstract(){ return {{class_is_abstract}} ;}
         
@@ -39,21 +116,33 @@ namespace {{class_namespace}}::MetaCodeGen{
             return new {{class_name}};
         }
         
+        
 
         // fields
-        {{#class_field_defines}}
-        
+        {{#class_field_defines}}  
+    {{#class_is_enum}}
+        static void Set_{{class_field_name}}(void* instance, void* field_value){ 
+            //*instance = *field_value;
+        }
+        static void* Get_{{class_field_name}}(void* instance){ 
+            return instance;
+        }
+    {{/class_is_enum}}
+    {{^class_is_enum}}    
         static void Set_{{class_field_name}}(void* instance, void* field_value){ 
             {{#class_field_is_array}}memcpy(&static_cast<{{class_name}}*>(instance)->{{class_field_name}},field_value,sizeof({{class_name}}::{{class_field_name}}));{{/class_field_is_array}}
             {{#class_field_is_vector}}memcpy(&static_cast<{{class_name}}*>(instance)->{{class_field_name}},field_value,sizeof({{class_name}}::{{class_field_name}}));{{/class_field_is_vector}}
             {{#class_field_is_not_container}}static_cast<{{class_name}}*>(instance)->{{class_field_name}} = *static_cast<{{{class_field_type}}}*>(field_value);{{/class_field_is_not_container}} 
          }
         static void* Get_{{class_field_name}}(void* instance){ return static_cast<void*>(&(static_cast<{{class_name}}*>(instance)->{{class_field_name}}));}
+    {{/class_is_enum}}
         static std::string GetFieldName_{{class_field_name}}(){ return "{{class_field_name}}";}
         static std::string GetFieldTypeName_{{class_field_name}}(){ return "{{{class_field_type}}}";}
         static bool IsVector_{{class_field_name}}(){ {{#class_field_is_vector}}return true;{{/class_field_is_vector}}{{^class_field_is_vector}}return false;{{/class_field_is_vector}} }
         static bool IsArray_{{class_field_name}}(){ {{#class_field_is_array}}return true;{{/class_field_is_array}}{{^class_field_is_array}}return false;{{/class_field_is_array}} }
         static std::map<std::string,std::string> GetFieldMetaData_{{class_field_name}}(){ return std::map<std::string,std::string>{ {{{class_field_meta_datas}}} };}
+        static bool IsEnum_{{class_field_name}}(){ {{#class_field_is_enum}}return true;{{/class_field_is_enum}}{{^class_field_is_enum}}return false;{{/class_field_is_enum}} }
+        
         {{/class_field_defines}}
 
         // methods
@@ -118,7 +207,8 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::GetFieldName_{{class_field_name}},
             &TypeOperator_{{class_name}}::GetFieldTypeName_{{class_field_name}},
             &TypeOperator_{{class_name}}::IsArray_{{class_field_name}},
-            &TypeOperator_{{class_name}}::GetFieldMetaData_{{class_field_name}}
+            &TypeOperator_{{class_name}}::GetFieldMetaData_{{class_field_name}},
+            &TypeOperator_{{class_name}}::IsEnum_{{class_field_name}}
             };
         META_REGISTER_FIELD_TO_MAP("{{class_full_name}}", field_function_tuple_{{class_field_name}});
         {{/class_field_defines}}
@@ -158,9 +248,22 @@ namespace {{class_namespace}}::MetaCodeGen{
             &TypeOperator_{{class_name}}::ConstructorNew,
             &TypeOperator_{{class_name}}::IsAbstract,
             &TypeOperator_{{class_name}}::GetMetaData,
+            &TypeOperator_{{class_name}}::IsEnum,
               };
         META_REGISTER_BASE_CLASS_TO_MAP("{{class_full_name}}", class_function_tuple_{{class_name}}, {{class_type_id}});
         {{/class_need_register}}
+
+        
+        {{#class_is_enum}}
+        LittleEngine::Reflection::EnumFunctionTuple* class_enum_tuple_{{class_name}}=new LittleEngine::Reflection::EnumFunctionTuple{
+            &LittleEngine::EnumNameVector_{{class_full_code_name}},
+            &LittleEngine::EnumValueVector_{{class_full_code_name}},
+            &LittleEngine::EnumToString_{{class_full_code_name}},
+            &LittleEngine::EnumFromString_{{class_full_code_name}},
+              };
+        META_REGISTER_ENUM_TO_MAP("{{class_full_name}}", class_enum_tuple_{{class_name}}, {{class_type_id}});
+    
+        {{/class_is_enum}}
     }
 }
 {{/class_defines}}

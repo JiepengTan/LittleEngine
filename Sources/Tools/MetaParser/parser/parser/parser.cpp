@@ -214,7 +214,11 @@ void MetaParser::buildClassAST(const Cursor& cursor, Namespace& current_namespac
         auto kind = child.getKind();
 
         // actual definition and a class or struct
-        if (child.isDefinition() && (kind == CXCursor_ClassDecl || kind == CXCursor_StructDecl))
+        if (child.isDefinition() &&
+            (kind == CXCursor_ClassDecl
+            || kind == CXCursor_StructDecl
+            || kind == CXCursor_EnumDecl
+            ))
         {
             auto class_ptr = std::make_shared<Class>(child, current_namespace);
 

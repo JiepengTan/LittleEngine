@@ -40,6 +40,7 @@ namespace LittleEngine::Reflection
             return IsAssignableFrom(T::GetStaticTypeID());
         }
         bool IsAbstract();
+        bool IsEnum();
 
         TypeInfo& operator=(const TypeInfo& dest);
 
@@ -49,10 +50,22 @@ namespace LittleEngine::Reflection
         static bool HasType(std::string typeName);
         static bool IsAbstract(TypeID typeId);
         static bool IsAbstract(std::string typeName);
+        static bool IsEnum(TypeID typeId);
+        static bool IsEnum(std::string typeName);
+        
         static TypeInfo* RegisterType(std::string typeName,TypeID typeId);
         void*  CreateInstance();
         static void* CreateInstance(TypeID typeId);
         static void* CreateInstance(std::string typeName);
+
+        static std::vector<std::string> GetEnumNameVector(TypeID typeId);
+        static std::vector<int64_t> GetEnumValueVector(TypeID typeId);
+        static std::vector<std::string> GetEnumNameVector(const std::string& typeName);
+        static std::vector<int64_t> GetEnumValueVector(const std::string& typeName);
+        static void EnumFromString(TypeID typeId, const std::string& strValue,void* instance);
+        static std::string EnumToString(TypeID typeId, void* instance);
+        static void EnumFromString(const std::string& typeName, const std::string& strValue,void* instance);
+        static std::string EnumToString(const std::string& typeName, void* instance);
         
         
         static TMap<TypeID,TVector<TypeInfo*> > GetBaseClassInfos();

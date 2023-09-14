@@ -5,9 +5,11 @@
 
 namespace LittleEngine{
 {{#class_defines}}
-    template<>
-    Json JsonSerializer::Write(const {{class_full_name}}& instance);
-    template<>
-    {{class_full_name}}& JsonSerializer::Read(const Json& jsonContext, {{class_full_name}}& instance);
+    {{^class_is_enum}}
+        template<>
+        Json JsonSerializer::Write(const {{class_full_name}}& instance);
+        template<>
+        {{class_full_name}}& JsonSerializer::Read(const Json& jsonContext, {{class_full_name}}& instance);
+    {{/class_is_enum}}
 {{/class_defines}}
 }
