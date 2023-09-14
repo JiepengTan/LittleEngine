@@ -73,7 +73,7 @@ namespace Generator
             filed_define.set("class_field_is_pointer", field->m_is_pointer);
             filed_define.set("class_field_is_normal", !field->m_is_pointer&&!field->m_is_enum);
             filed_define.set("class_field_meta_datas", field->getMetaDataString());
-            filed_define.set("class_field_enum_value", field->m_enum_value);
+            filed_define.set("class_field_enum_value", std::to_string(field->m_enum_value));
             
             bool is_vector = field->m_type.find(vector_prefix) == 0;
             filed_define.set("class_field_is_vector", is_vector);
