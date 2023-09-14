@@ -871,7 +871,8 @@ void LittleEngine::Editor::Panels::AssetBrowser::ConsiderItem(LittleEngine::UI::
 	/* Find the icon to apply to the item */
 	uint32_t iconTextureID = isDirectory ? EDITOR_CONTEXT(editorResources)->GetTexture("Icon_Folder")->id : EDITOR_CONTEXT(editorResources)->GetFileIcon(itemname)->id;
 
-	itemGroup.CreateWidget<Visual::Image>(iconTextureID, LittleEngine::FVector2{ 16, 16 }).lineBreak = false;
+	auto& iconImage = itemGroup.CreateWidget<Visual::Image>(iconTextureID, LittleEngine::FVector2{ 16, 16 });
+	iconImage.lineBreak = false;
 
 	/* If the entry is a directory, the content must be a tree node, otherwise (= is a file), a text will suffice */
 	if (isDirectory)
@@ -1123,6 +1124,7 @@ void LittleEngine::Editor::Panels::AssetBrowser::ConsiderItem(LittleEngine::UI::
 		{
 			auto& texturePreview = clickableText.AddPlugin<TexturePreview>();
 			texturePreview.SetPath(resourceFormatPath);
+			iconImage.guid = resourceFormatPath;
 		}
 	}
 }

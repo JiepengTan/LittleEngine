@@ -31,6 +31,7 @@ namespace LittleEngine::UI::Widgets::Visual
 
 	public:
 		Internal::TextureID textureID;
+		std::string guid;
 		LittleEngine::FVector2 size;
 	};
 }
