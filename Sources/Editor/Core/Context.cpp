@@ -21,7 +21,7 @@ using namespace LittleEngine::ResourceManagement;
 LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, const std::string& p_projectName) :
 	projectPath(p_projectPath),
 	projectName(p_projectName),
-	projectFilePath(p_projectPath + p_projectName + ".ovproject"),
+	projectFilePath(p_projectPath + p_projectName + ".project"),
 	engineAssetsPath(std::filesystem::canonical("Data\\Engine").string() + "\\"),
 	projectAssetsPath(p_projectPath + "Assets\\"),
 	projectScriptsPath(p_projectPath + "Scripts\\"),

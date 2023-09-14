@@ -69,7 +69,7 @@ public:
 		openProjectButton.ClickedEvent += [this]
 		{
 			LittleEngine::Windowing::Dialogs::OpenFileDialog dialog("Open project");
-			dialog.AddFileType("Overload Project", "*.ovproject");
+			dialog.AddFileType("Overload Project", "*.project");
 			dialog.Show();
 
 			std::string ovProjectPath = dialog.GetSelectedFilePath();
@@ -189,7 +189,7 @@ public:
 			std::filesystem::create_directory(p_path);
 			std::filesystem::create_directory(p_path + "Assets\\");
 			std::filesystem::create_directory(p_path + "Scripts\\");
-			std::ofstream projectFile(p_path + '\\' + LittleEngine::Utils::PathParser::GetElementName(std::string(p_path.data(), p_path.data() + p_path.size() - 1)) + ".ovproject");
+			std::ofstream projectFile(p_path + '\\' + LittleEngine::Utils::PathParser::GetElementName(std::string(p_path.data(), p_path.data() + p_path.size() - 1)) + ".project");
 		}
 	}
 

@@ -73,12 +73,12 @@ int main(int argc, char** argv)
 			// Project file given as argument ==> Open the project
 			std::string projectFile = argv[1];
 
-			if (LittleEngine::Utils::PathParser::GetExtension(projectFile) == "ovproject")
+			if (LittleEngine::Utils::PathParser::GetExtension(projectFile) == "project")
 			{
 				ready = true;
 				projectPath = LittleEngine::Utils::PathParser::GetContainingFolder(projectFile);
 				projectName = LittleEngine::Utils::PathParser::GetElementName(projectFile);
-				LittleEngine::Utils::String::Replace(projectName, ".ovproject", "");
+				LittleEngine::Utils::String::Replace(projectName, ".project", "");
 			}
 
 			hub.RegisterProject(projectPath);
