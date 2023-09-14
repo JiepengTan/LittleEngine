@@ -19,6 +19,7 @@ namespace LittleEngine::Reflection
         std::string GetFieldName() const;
         std::string GetFieldTypeName();
         bool        IsArrayType();
+        bool        IsEnum();
 
         bool HasMeta(std::string metaKey);
         std::string GetMeta(std::string metaKey);

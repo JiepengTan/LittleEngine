@@ -4,6 +4,7 @@
 namespace LittleEngine::Reflection
 {
 
+    
     template<typename T, typename U, typename = void>
     struct is_safely_castable : std::false_type
     {};
@@ -12,14 +13,13 @@ namespace LittleEngine::Reflection
     struct is_safely_castable<T, U, std::void_t<decltype(static_cast<U>(std::declval<T>()))>> : std::true_type
     {};
 
-    namespace Reflection
-    {
-        class TypeInfo;
-        class FieldAccessor;
-        class MethodAccessor;
-        class ArrayAccessor;
-        class ReflectionInstance;
-    } // namespace Reflection
+    class TypeInfo;
+    class FieldAccessor;
+    class MethodAccessor;
+    class ArrayAccessor;
+    class ReflectionInstance;
+    
+    // namespace Reflection
     typedef std::function<void(void*, void*)>      SetFunction;
     typedef std::function<void*(void*)>            GetFunction;
     typedef std::function<std::string()>           GetNameFunction;

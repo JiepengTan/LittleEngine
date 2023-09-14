@@ -72,6 +72,11 @@ namespace LittleEngine::Reflection
         return m_functions->IsArray();
     }
 
+    bool FieldAccessor::IsEnum()
+    {
+        return m_functions->IsEnum();
+    }
+
     FieldAccessor& FieldAccessor::operator=(const FieldAccessor& dest)
     {
         if (this == &dest)

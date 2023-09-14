@@ -33,7 +33,7 @@ namespace LittleEngine{
         {{class_full_name}} value;
         while (true)
         {
-        {{#class_field_defines}} if(strValue == "{{class_field_name}}"){ value = {{class_full_name}}::{{class_field_name}}; break;}
+        {{#class_field_defines}}   if(strValue == "{{class_field_name}}"){ value = {{class_full_name}}::{{class_field_name}}; break;}
         {{/class_field_defines}}  
             LOG_ERROR("unknown type  {{class_full_name}} " + strValue); return;
         }
@@ -43,8 +43,9 @@ namespace LittleEngine{
         {{class_full_name}}& value = *(({{class_full_name}}*)instance);
         while (true)
         {
-        {{#class_field_defines}} if(value == {{class_full_name}}::{{class_field_name}}) return "{{class_field_name}}";
+        {{#class_field_defines}}   if(value == {{class_full_name}}::{{class_field_name}}) return "{{class_field_name}}";
         {{/class_field_defines}}  
+            break;
         }
         LOG_ERROR("unknown type  {{class_full_name}} " + std::to_string((int64_t)instance));
         return "" ;
@@ -117,16 +118,21 @@ namespace {{class_namespace}}::MetaCodeGen{
         }
         
         
-
         // fields
         {{#class_field_defines}}  
     {{#class_is_enum}}
         static void Set_{{class_field_name}}(void* instance, void* field_value){ 
-            //*instance = *field_value;
+            //int64_t value = *((int64_t*) (field_value));
+            //static_cast<{{class_name}}*>(instance)->{{class_field_name}} = ({{class_enum_type_name}})value;
         }
         static void* Get_{{class_field_name}}(void* instance){ 
+            // TODO this is not mutilthread safe!!
+            //static int64_t tempval;
+            //tempval = (int64_t)(static_cast<{{class_name}}*>(instance)->{{class_field_name}});
+            //return static_cast<void*>(&tempVal);
             return instance;
         }
+    
     {{/class_is_enum}}
     {{^class_is_enum}}    
         static void Set_{{class_field_name}}(void* instance, void* field_value){ 

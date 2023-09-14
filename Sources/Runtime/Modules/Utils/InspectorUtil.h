@@ -46,6 +46,7 @@ namespace LittleEngine
     	
     	static void DrawInstance(std::string p_typeName,void* p_instance);
     	static void DrawFieldMeta(TypeInfoPtr p_type,void* p_instance, Reflection::FieldAccessor& p_field,bool p_isDirty);
+    	static bool DrawEnum(void* p_instance, Reflection::FieldAccessor& p_field);
     	static void DrawMethodMeta(Component* p_component);
     public:
     	static void OnComponentStart(std::string& p_startWidgetId);

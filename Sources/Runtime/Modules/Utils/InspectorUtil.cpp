@@ -63,7 +63,6 @@ namespace LittleEngine
     void InspectorUtil::CheckRegisterTypeDrawFunctions()
     {
         if (!s_type2DrawFunction.empty()) return;
-        // TODO tanjp support other basic types
         __REGISTER_FUNCTION(float,DrawScalar);
         __REGISTER_FUNCTION(double,DrawScalar);
         __REGISTER_FUNCTION(int32_t,DrawScalar);
@@ -102,6 +101,41 @@ namespace LittleEngine
         }
     }
 
+    bool InspectorUtil::DrawEnum(void* p_instance, Reflection::FieldAccessor& p_field)
+    {
+        DrawTitle(p_field.GetFieldName());
+        auto fieldTypeName = p_field.GetFieldTypeName();
+        auto curValue = TypeUtil::EnumToString(fieldTypeName,p_field.Get(p_instance));
+        auto enumNames = TypeUtil::GetEnumNameVector(fieldTypeName);
+        // if value invalid ,set to first number
+        if(curValue.empty())
+        {
+            curValue = enumNames[0];
+            TypeUtil::EnumFromString(fieldTypeName,curValue,p_field.Get(p_instance));
+        }
+        int count = enumNames.size();
+        if (ImGui::BeginCombo(GetUniqueName(), curValue.c_str()))
+        {
+            for (int i=0;i<count;i++)
+            {
+                bool selected =enumNames[i] == curValue;
+
+                if (ImGui::Selectable(enumNames[i].c_str(), selected))
+                {
+                    if (!selected)
+                    {
+                        ImGui::SetItemDefaultFocus();
+                        TypeUtil::EnumFromString(fieldTypeName,enumNames[i],p_field.Get(p_instance));
+                        ImGui::EndCombo();
+                        return true;
+                    }
+                }
+            }
+            ImGui::EndCombo();
+        }
+        return false;
+    }
+
     void InspectorUtil::DrawInstance(std::string p_typeName,void* p_instance)
     {
         s_globalIndent++;
@@ -110,6 +144,13 @@ namespace LittleEngine
         for (auto& field : type->GetFields())
         {
             auto fieldTypeName = field.GetFieldTypeName();
+            auto fieldType  = TypeUtil::GetType(fieldTypeName);
+            if(fieldType != nullptr && fieldType->IsEnum())
+            {
+                // draw enum
+                DrawEnum(p_instance,field);
+                continue;
+            }
             if(s_type2DrawFunction.count(fieldTypeName) !=0 ){
                 bool isDirty = s_type2DrawFunction.at(fieldTypeName)(p_instance, field);
                 // handle Meta OnValueChanged 

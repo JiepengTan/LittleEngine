@@ -64,5 +64,57 @@ namespace LittleEngine
             return k_invalidTypeID;
         return GetType(typeName)->GetTypeID();
     }
+    
+    std::vector<std::string> TypeUtil::GetEnumNameVector(TypeID typeId)
+    {
+        return Reflection::TypeInfo::GetEnumNameVector(typeId);
+    }
+
+    std::vector<int64_t> TypeUtil::GetEnumValueVector(TypeID typeId)
+    {
+        return Reflection::TypeInfo::GetEnumValueVector(typeId);
+    }
+
+    std::vector<std::string> TypeUtil::GetEnumNameVector(const std::string& typeName)
+    {
+        return Reflection::TypeInfo::GetEnumNameVector(typeName);
+    }
+
+    std::vector<int64_t> TypeUtil::GetEnumValueVector(const std::string& typeName)
+    {
+        return Reflection::TypeInfo::GetEnumValueVector(typeName);
+    }
+
+    void TypeUtil::EnumFromString(TypeID typeId, const std::string& strValue, void* instance)
+    {
+        Reflection::TypeInfo::EnumFromString(typeId,strValue,instance);
+    }
+
+    std::string TypeUtil::EnumToString(TypeID typeId, void* instance)
+    {
+        return Reflection::TypeInfo::EnumToString(typeId,instance);
+    }
+
+    void TypeUtil::EnumFromString(const std::string& typeName, const std::string& strValue, void* instance)
+    {
+        Reflection::TypeInfo::EnumFromString(typeName,strValue,instance);
+    }
+
+    std::string TypeUtil::EnumToString(const std::string& typeName, void* instance)
+    {
+        return Reflection::TypeInfo::EnumToString(typeName,instance);
+    }
+    
+    int64_t TypeUtil::GetEnumValue(void* p_instance, Reflection::FieldAccessor p_field)
+    {
+        _ASSERT(p_field.IsEnum(),"shoud call GetEnumValue in a enum field");
+        return *(int64_t*)p_field.Get(p_instance);
+    }
+
+    void TypeUtil::SetEnumValue(void* p_instance, Reflection::FieldAccessor p_field, int64_t p_value)
+    {
+        _ASSERT(p_field.IsEnum(),"shoud call SetEnumValue in a enum field");
+        return p_field.Set(p_instance,(int64_t*) p_value);
+    }
 }
 

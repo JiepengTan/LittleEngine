@@ -49,6 +49,8 @@ namespace LittleEngine
         static std::string EnumToString(TypeID typeId, void* instance);
         static void EnumFromString(const std::string& typeName, const std::string& strValue,void* instance);
         static std::string EnumToString(const std::string& typeName, void* instance);
+        static int64_t GetEnumValue(void* p_instance,Reflection::FieldAccessor p_field);
+        static void SetEnumValue(void* p_instance,Reflection::FieldAccessor p_field,int64_t p_value);
     };
 
     template <typename T>
@@ -71,44 +73,5 @@ namespace LittleEngine
         return type->IsSubclassOf(T::GetStaticTypeID());
     }
 
-    
-    inline std::vector<std::string> TypeUtil::GetEnumNameVector(TypeID typeId)
-    {
-        return Reflection::TypeInfo::GetEnumNameVector(typeId);
-    }
 
-    inline std::vector<int64_t> TypeUtil::GetEnumValueVector(TypeID typeId)
-    {
-        return Reflection::TypeInfo::GetEnumValueVector(typeId);
-    }
-
-    inline std::vector<std::string> TypeUtil::GetEnumNameVector(const std::string& typeName)
-    {
-        return Reflection::TypeInfo::GetEnumNameVector(typeName);
-    }
-
-    inline std::vector<int64_t> TypeUtil::GetEnumValueVector(const std::string& typeName)
-    {
-        return Reflection::TypeInfo::GetEnumValueVector(typeName);
-    }
-
-    inline void TypeUtil::EnumFromString(TypeID typeId, const std::string& strValue, void* instance)
-    {
-        Reflection::TypeInfo::EnumFromString(typeId,strValue,instance);
-    }
-
-    inline std::string TypeUtil::EnumToString(TypeID typeId, void* instance)
-    {
-        return Reflection::TypeInfo::EnumToString(typeId,instance);
-    }
-
-    inline void TypeUtil::EnumFromString(const std::string& typeName, const std::string& strValue, void* instance)
-    {
-        Reflection::TypeInfo::EnumFromString(typeName,strValue,instance);
-    }
-
-    inline std::string TypeUtil::EnumToString(const std::string& typeName, void* instance)
-    {
-        return Reflection::TypeInfo::EnumToString(typeName,instance);
-    }
 }

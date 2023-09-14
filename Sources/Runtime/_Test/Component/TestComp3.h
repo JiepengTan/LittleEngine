@@ -15,16 +15,9 @@ namespace LittleEngine::Test
         float health = 3;
         StringName name;
 
-        std::string OnStarts()
+        void OnStart() override
         {
             LOG_INFO("Hello Little Fish! name = " + name);
-            LittleEngine::UniformType instance;
-            switch (instance)
-            {
-                case UniformType::UNIFORM_BOOL: return "UNIFORM_BOOL";
-                default: break;
-            }
-            return "unknown type  UniformType " + std::to_string((int64_t)instance) ;
         }
         float rotateSpeed = 10;
         META(OnValueChanged:PrintValue)

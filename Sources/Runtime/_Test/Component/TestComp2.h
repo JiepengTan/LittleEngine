@@ -11,7 +11,7 @@ namespace LittleEngine::Test
         REFLECTION_STRUCT_BODY(TestStruct2)
     public:
         std::string		name2;
-        UniformType		type;
+        UniformType		type = UniformType::UNIFORM_INT;
         std::string		name;
         uint32_t		location;
         ResUniformInfo	defaultValue;
