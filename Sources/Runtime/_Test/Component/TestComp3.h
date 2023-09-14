@@ -4,8 +4,15 @@
 #include "Modules/Framework/ECS/Components/CTransform.h"
 #include "Resource/Asset/UniformType.h"
 
-namespace LittleEngine::Test
+namespace LittleEngine
 {
+    ENUM(ETestComp3, Fields) 
+    {
+        Val1			= 1,
+        Val3			= 2,
+        ValAy			= 0x1406,
+    };
+    
     REFLECTION_COMPONENT_TYPE(TestComp3)
     CLASS (TestComp3 : public LittleEngine::Component, Fields,WhiteListMethods )
     {
@@ -14,7 +21,7 @@ namespace LittleEngine::Test
 
         float health = 3;
         StringName name;
-
+        ETestComp3 enumField2;
         void OnStart() override
         {
             LOG_INFO("Hello Little Fish! name = " + name);

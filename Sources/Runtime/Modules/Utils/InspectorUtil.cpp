@@ -163,7 +163,7 @@ namespace LittleEngine
                     auto filedValue = field.Get(p_instance);
                     if(filedValue != nullptr)
                     {
-                        if (DrawCollapsingHeader(fieldTypeName))
+                        if (DrawCollapsingHeader(field.GetFieldName()))
                         {
                             DrawInstance(fieldTypeName,filedValue);
                         }

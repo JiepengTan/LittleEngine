@@ -40,11 +40,13 @@ int parse(std::string project_input_file_name,
 
 int main(int argc, char* args[])
 {
-    
-    argc = 4;
-    args[1] =(char*) "I:/Projects/OverloadEngine/Overload/Sources/Runtime/../../Bin/Tools/CodeAnalyzerOutput.txt";
-    args[2] =(char*) "I:/Projects/OverloadEngine/Overload/Sources/Runtime/../../Sources/Runtime";
-    args[3] =(char*) "I:/Projects/OverloadEngine/Overload/Sources/Runtime/../../Bin/Tools/tempBuild.json";
+    if(argc<4)
+    {
+        argc = 4;
+        args[1] =(char*) "../../../Bin/Tools/CodeAnalyzerOutput.txt";
+        args[2] =(char*) "../../../Sources/Runtime";
+        args[3] =(char*) "../../../Bin/Tools/tempBuild.json";
+    }
     std::cout << "Arguments Count"<< argc <<std::endl;
     if(argc <4)
     {
