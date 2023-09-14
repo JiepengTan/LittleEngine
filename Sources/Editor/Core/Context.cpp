@@ -60,7 +60,7 @@ LittleEngine::Editor::Core::Context::Context(const std::string& p_projectPath, c
 	LittleEngine::Windowing::Settings::DeviceSettings deviceSettings;
 	deviceSettings.contextMajorVersion = 4;
 	deviceSettings.contextMinorVersion = 3;
-	windowSettings.title = "Overload Editor";
+	windowSettings.title = "Little Editor";
 	windowSettings.width = 1280;
 	windowSettings.height = 720;
 	windowSettings.maximized = true;
@@ -185,7 +185,7 @@ void LittleEngine::Editor::Core::Context::ResetProjectSettings()
 	projectSettings.Add<int>("y_resolution", 720);
 	projectSettings.Add<bool>("fullscreen", false);
 	projectSettings.Add<std::string>("executable_name", "Game");
-	projectSettings.Add<std::string>("start_scene", "Scene.ovscene");
+	projectSettings.Add<std::string>("start_scene", "Scene.scene");
 	projectSettings.Add<bool>("vsync", true);
 	projectSettings.Add<bool>("multisampling", true);
 	projectSettings.Add<int>("samples", 4);

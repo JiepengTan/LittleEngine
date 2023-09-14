@@ -119,7 +119,7 @@ namespace LittleEngine::Editor
     {
         Windowing::Dialogs::SaveFileDialog dialog("New Scene");
         dialog.SetInitialDirectory(m_context.projectAssetsPath + "New Scene");
-        dialog.DefineExtension("Overload Scene", ".ovscene");
+        dialog.DefineExtension("Overload Scene", ".scene");
         dialog.Show();
 
         if (dialog.HasSucceeded())
@@ -612,7 +612,7 @@ namespace LittleEngine::Editor
         modelRenderer->SetModel(p_path);
 
         auto materialRenderer = instance->AddComponent<CMaterialRenderer>();
-        materialRenderer->FillWithMaterial(":Materials\\Default.ovmat");
+        materialRenderer->FillWithMaterial(":Materials\\Default.mat");
 
         if (p_focusOnCreation)
             SelectActor(instance);

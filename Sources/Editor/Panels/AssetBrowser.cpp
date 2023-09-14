@@ -268,7 +268,7 @@ public:
 
 				do
 				{
-					finalPath = filePath + (!fails ? newSceneName : newSceneName + " (" + std::to_string(fails) + ')') + ".ovscene";
+					finalPath = filePath + (!fails ? newSceneName : newSceneName + " (" + std::to_string(fails) + ')') + ".scene";
 
 					++fails;
 				} while (std::filesystem::exists(finalPath));
@@ -311,7 +311,7 @@ public:
 		std::string finalPath;
 		do
 		{
-			finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
+			finalPath = filePath + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".mat";
 
 			++fails;
 		} while (std::filesystem::exists(finalPath));
@@ -568,7 +568,7 @@ public:
 
 						do
 						{
-							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
+							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".mat";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
@@ -596,7 +596,7 @@ public:
 
 						do
 						{
-							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
+							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".mat";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
@@ -624,7 +624,7 @@ public:
 
 						do
 						{
-							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
+							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".mat";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
@@ -652,7 +652,7 @@ public:
 
 						do
 						{
-							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".ovmat";
+							finalPath = LittleEngine::Utils::PathParser::GetContainingFolder(filePath) + (!fails ? materialName : materialName + " (" + std::to_string(fails) + ')') + ".mat";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));

@@ -105,10 +105,10 @@ LittleEngine::Utils::PathParser::EFileType LittleEngine::Utils::PathParser::GetF
 
 	if (ext == "fbx" || ext == "obj")											return EFileType::MODEL;
 	else if (ext == "png" || ext == "jpeg" || ext == "jpg" || ext == "tga")		return EFileType::TEXTURE;
-	else if (ext == "glsl")														return EFileType::SHADER;
-	else if (ext == "ovmat")													return EFileType::MATERIAL;
+	else if (ext == "glsl" || ext == "shader")														return EFileType::SHADER;
+	else if (ext == "mat")														return EFileType::MATERIAL;
 	else if (ext == "wav" || ext == "mp3" || ext == "ogg")						return EFileType::SOUND;
-	else if (ext == "ovscene")													return EFileType::SCENE;
+	else if (ext == "scene")													return EFileType::SCENE;
 	else if (ext == "lua")														return EFileType::SCRIPT;
 	else if (ext == "ttf")														return EFileType::FONT;
 

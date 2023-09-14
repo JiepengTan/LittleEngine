@@ -40,6 +40,6 @@ LittleEngine::ActorPtr LittleEngine::ActorUtils::CreateActorWithModel(const std:
     modelRenderer->SetModel( ":Models\\" + p_modelName + ".fbx");
 
     auto materialRenderer = instance->AddComponent<LittleEngine::CMaterialRenderer>();
-    materialRenderer->FillWithMaterial(":Materials\\Default.ovmat");
+    materialRenderer->FillWithMaterial(":Materials\\Default.mat");
     return instance;
 }

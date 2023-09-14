@@ -128,7 +128,7 @@ namespace LittleEngine
         m_shadowmapBuffer->Bind();
         auto shadowMat = Global::ServiceLocator::Get<
                 ResourceManagement::MaterialManager>()
-            .GetResource(":Materials/Shadowmap.ovmat");
+            .GetResource(":Materials/Shadowmap.mat");
         auto mainLight = FindMainLight(p_scene);
         if (mainLight != nullptr)
         {

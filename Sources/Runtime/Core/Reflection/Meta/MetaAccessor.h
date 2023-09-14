@@ -23,6 +23,7 @@ namespace LittleEngine::Reflection
         bool HasMeta(std::string metaKey);
         std::string GetMeta(std::string metaKey);
         
+        
         FieldAccessor& operator=(const FieldAccessor& dest);
 
     private:
@@ -45,7 +46,7 @@ namespace LittleEngine::Reflection
 
         std::vector<std::string> GetParamsTypeName() const;
         std::string GetReturnTypeName() const;
-        void Invoke(void* retrunPtr,void* instance,void* _1= nullptr,void* _2= nullptr,void* _3= nullptr,void* _4= nullptr,void* _5= nullptr,void* _6 = nullptr);
+        void Invoke(void* returnValue,void* instance,void* _1= nullptr,void* _2= nullptr,void* _3= nullptr,void* _4= nullptr,void* _5= nullptr,void* _6 = nullptr);
         bool HasMeta(std::string metaKey);
         std::string GetMeta(std::string metaKey);
 

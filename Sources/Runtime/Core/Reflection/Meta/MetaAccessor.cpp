@@ -101,10 +101,10 @@ namespace LittleEngine::Reflection
         return m_functions->GetFuncReturnType();
     }
 
-    void MethodAccessor::Invoke(void* retrunPtr, void* instance, void* _1, void* _2, void* _3, void* _4, void* _5,
+    void MethodAccessor::Invoke(void* returnValue, void* instance, void* _1, void* _2, void* _3, void* _4, void* _5,
                                 void* _6)
     {
-        m_functions->GenericInvoke_Return_Instance_6Params(retrunPtr,instance,_1,_2,_3,_4,_5,_6);
+        m_functions->GenericInvoke_Return_Instance_6Params(returnValue,instance,_1,_2,_3,_4,_5,_6);
     }
 
     MethodAccessor::MethodAccessor(MethodFunctionTuple* functions) : m_functions(functions)
