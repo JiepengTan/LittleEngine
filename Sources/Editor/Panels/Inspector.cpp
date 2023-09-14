@@ -205,10 +205,16 @@ void Panels::Inspector::RefreshAddComponentPanel()
 			continue;
 		if(GetTargetActor() != nullptr &&GetTargetActor()->HasComponent(type->GetTypeID()))
 			continue;
-		m_componentSelectorWidget->choices.emplace(idx++, type->GetTypeName());
 		compTypes.push_back(type);
 	}
-		
+	std::sort(compTypes.begin(),compTypes.end(),[](TypeInfoPtr& a,TypeInfoPtr& b)
+	{
+		return( a->GetTypeName() < b->GetTypeName());
+	});
+	for (auto type : compTypes)
+	{
+		m_componentSelectorWidget->choices.emplace(idx++, type->GetTypeName());
+	}
 	m_addComponentButton->idleBackgroundColor = Color{ 0.7f, 0.5f, 0.f };
 	m_addComponentButton->textColor = Color::White;
 	m_addComponentButton->ClickedEvent += [this]
