@@ -42,7 +42,7 @@ LittleEngine::Editor::Core::EditorResources::EditorResources(const std::string& 
 		auto mode = isLinear?
 			LittleEngine::Rendering::Settings::ETextureFilteringMode::LINEAR:
 			LittleEngine::Rendering::Settings::ETextureFilteringMode::NEAREST;
-		m_textures[p_name]= TextureLoader::Create(iconsFolder + p_name + ".png",mode, mode, false);
+		m_textures[p_name]= TextureLoader::Create(iconsFolder + p_name + ".png",mode, mode, false, false);
 	};
 	CreateTex("Logo_Engine",true);
 	CreateTex("Empty_Texture",true);

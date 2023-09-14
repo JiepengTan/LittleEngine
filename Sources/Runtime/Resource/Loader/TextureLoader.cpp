@@ -20,7 +20,7 @@ void* LittleEngine::Resources::TextureLoader::LoadRawData(const std::string& p_f
 	return dataBuffer;
 }
 
-LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap ,bool p_flip)
 {
 	GLuint textureID;
 	int textureWidth;
@@ -28,7 +28,7 @@ LittleEngine::Texture* LittleEngine::Resources::TextureLoader::Create(const std:
 	int bitsPerPixel;
 	glGenTextures(1, &textureID);
 
-	stbi_set_flip_vertically_on_load(false);
+	stbi_set_flip_vertically_on_load(p_flip);
 	unsigned char* dataBuffer = stbi_load(p_filepath.c_str(), &textureWidth, &textureHeight, &bitsPerPixel, 4);
 
 	if (dataBuffer)

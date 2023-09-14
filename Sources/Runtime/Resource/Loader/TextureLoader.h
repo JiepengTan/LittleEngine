@@ -33,7 +33,7 @@ namespace LittleEngine::Resources
 		* @param p_secondFilter
 		* @param p_generateMipmap
 		*/
-		static Texture* Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Texture* Create(const std::string& p_filepath, LittleEngine::Rendering::Settings::ETextureFilteringMode p_firstFilter, LittleEngine::Rendering::Settings::ETextureFilteringMode p_secondFilter, bool p_generateMipmap, bool p_flip= true);
 
 		/**
 		* Create a texture from a single pixel color
