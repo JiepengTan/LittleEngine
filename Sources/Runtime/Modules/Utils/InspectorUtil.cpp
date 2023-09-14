@@ -11,30 +11,6 @@ using namespace LittleEngine::UI::Internal;
 
 namespace LittleEngine
 {
-    class BuildInTypeName
-    {
-        const std::string Byte = "int";
-        const std::string SByte = "int";
-        const std::string Int = "int";
-        const std::string UInt = "int";
-        const std::string Long = "int";
-        const std::string ULong = "int";
-        const std::string Float = "int";
-        const std::string Double = "int";
-        const std::string Bool = "int";
-        const std::string String = "int";
-        const std::string Color = "int";
-        const std::string FVector2 = "int";
-        const std::string FVector3 = "int";
-        const std::string FVector4 = "int";
-        const std::string FQuaternion = "int";
-        const std::string TextureResPtr = "int";
-        const std::string ModelResPtr = "int";
-        const std::string SoundResPtr = "int";
-        const std::string MaterialResPtr = "int";
-        const std::string ShaderResPtr = "int";
-    };
-
     uint64_t InspectorUtil::s_unique_id = 0;
     std::string InspectorUtil::s_unique_id_str = "";
     std::string InspectorUtil::s_startWidgetId = "";
@@ -42,9 +18,9 @@ namespace LittleEngine
     int InspectorUtil::s_indentSpaceFactor = 20;
     std::unordered_map<std::string, InspectorUtil::TypeDrawFunc> InspectorUtil::s_type2DrawFunction;
 
-    void InspectorUtil::OnComponentStart(std::string& startWidgetId)
+    void InspectorUtil::OnComponentStart(std::string& p_startWidgetId)
     {
-        s_startWidgetId = startWidgetId;
+        s_startWidgetId = p_startWidgetId;
         s_unique_id = 0;
     }
 
@@ -75,14 +51,14 @@ namespace LittleEngine
         return s_unique_id_str.c_str();
     }
 
-    void InspectorUtil::RegisterTypeDrawFunction(std::string typeName, TypeDrawFunc func)
+    void InspectorUtil::RegisterTypeDrawFunction(std::string p_typeName, TypeDrawFunc p_func)
     {
-        s_type2DrawFunction.emplace(typeName, func);
+        s_type2DrawFunction.emplace(p_typeName, p_func);
     }
 #define __REGISTER_FUNCTION(type,funcName)\
-    RegisterTypeDrawFunction(#type, [](auto* instance, auto& field){\
-      ##funcName##(field.GetFieldName(), *TypeUtil::GetField<##type##>(instance, field));\
-  })
+    RegisterTypeDrawFunction(#type, [](auto* instance, auto& field)->bool{\
+      return  funcName##(field.GetFieldName(), *TypeUtil::GetField<##type##>(instance, field));\
+    })
     
     void InspectorUtil::CheckRegisterTypeDrawFunctions()
     {
@@ -108,31 +84,47 @@ namespace LittleEngine
         __REGISTER_FUNCTION(LittleEngine::AnimationResPtr,DrawAsset);
         __REGISTER_FUNCTION(LittleEngine::SoundResPtr,DrawAsset);
         __REGISTER_FUNCTION(LittleEngine::MaterialResPtr,DrawAsset);
-
     }
-    
-    
-    void InspectorUtil::DrawUnknownInstance(std::string typeName,void* instance)
+
+
+    void InspectorUtil::DrawFieldMeta(TypeInfoPtr p_type,void* p_instance, 
+        Reflection::FieldAccessor& p_field, bool p_isDirty)
+    {
+        if(p_isDirty && p_field.HasMeta(MetaDefine::OnValueChanged))
+        {
+            auto funcName = p_field.GetMeta(MetaDefine::OnValueChanged);
+            auto funcs = p_type->GetMethodByName(funcName);
+            if(funcs != nullptr)
+            {
+                auto val = p_field.Get(p_instance);
+                funcs->Invoke(nullptr,p_instance,val);
+            }
+        }
+    }
+
+    void InspectorUtil::DrawInstance(std::string p_typeName,void* p_instance)
     {
         s_globalIndent++;
-        auto type  =TypeUtil::GetType(typeName);
+        auto type  =TypeUtil::GetType(p_typeName);
         if(type == nullptr) return;
         for (auto& field : type->GetFields())
         {
             auto fieldTypeName = field.GetFieldTypeName();
             if(s_type2DrawFunction.count(fieldTypeName) !=0 ){
-                s_type2DrawFunction.at(fieldTypeName)(instance, field);
+                bool isDirty = s_type2DrawFunction.at(fieldTypeName)(p_instance, field);
+                // handle Meta OnValueChanged 
+                DrawFieldMeta(type, p_instance, field, isDirty);
             }else
             {
                 //continue;;
                 if(field.HasTypeInfo())
                 {
-                    auto filedValue = field.Get(instance);
+                    auto filedValue = field.Get(p_instance);
                     if(filedValue != nullptr)
                     {
                         if (DrawCollapsingHeader(fieldTypeName))
                         {
-                            DrawUnknownInstance(fieldTypeName,filedValue);
+                            DrawInstance(fieldTypeName,filedValue);
                         }
                     }else
                     {
@@ -146,21 +138,30 @@ namespace LittleEngine
         }
         s_globalIndent--;
     }
-    void InspectorUtil::DrawDefault(Component* component)
+
+    void InspectorUtil::DrawMethodMeta(Component* p_component)
     {
-        s_globalIndent= 0;
-        CheckRegisterTypeDrawFunctions();
-        auto type = component->GetType();
-        DrawUnknownInstance(type->GetTypeName(),component);
-        ImGui::Columns(1);
+        auto type = p_component->GetType();
         for (auto& element : type->GetMethods())
         {
             auto name = element.GetMethodName();
-            if (DrawButton("   " + name + "   "))
+            if(element.HasMeta(MetaDefine::Button))
             {
-                element.Invoke(nullptr,component);
+                if (DrawButton("   " + name + "   "))
+                {
+                    element.Invoke(nullptr,p_component);
+                }
             }
         }
+    }
+    void InspectorUtil::DrawDefault(Component* p_component)
+    {
+        s_globalIndent= 0;
+        CheckRegisterTypeDrawFunctions();
+        auto type = p_component->GetType();
+        DrawInstance(type->GetTypeName(),p_component);
+        ImGui::Columns(1);
+        DrawMethodMeta(p_component);
         ImGui::Columns(1);
        
     }
@@ -250,10 +251,10 @@ namespace LittleEngine
             return  ImGui::ColorEdit3(GetUniqueName(), &p_color.r, flags);
     }
 
-#define _DrawRawAsset(p_name,p_resPtr,p_shaderType,texId)\
+#define _DrawRawAsset(p_name,p_resPtr,p_shaderType,p_texId)\
     auto& path = p_resPtr.GetGuidReference();\
     auto& ptrs = p_resPtr.GetPtrReference();\
-    bool isDirty = DrawResPtr(p_name, path, (void*&)ptrs,Utils::PathParser::EFileType::p_shaderType,texId);\
+    bool isDirty = DrawResPtr(p_name, path, (void*&)ptrs,Utils::PathParser::EFileType::p_shaderType,p_texId);\
     if(isDirty)\
         ResourcesUtils::LoadRes(path,ptrs,true);\
     return isDirty;
@@ -295,24 +296,24 @@ namespace LittleEngine
 
 
     
-    bool InspectorUtil::DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
-        LittleEngine::Utils::PathParser::EFileType type,uint32_t texId )
+    bool InspectorUtil::DrawResPtr(const std::string& p_name, std::string& p_content, void*& p_ptr,
+        LittleEngine::Utils::PathParser::EFileType p_type,uint32_t p_texId )
     {
         DrawTitle(p_name,4);
         // draw input
         ImGuiWindow* window = ImGui::GetCurrentWindow();
         ImGui::SetColumnWidth(2,window->ContentSize.x -180);
         //ImGui::TextColored(Converter::ToImVec4(GUIUtil::ClearButtonColor), content.c_str());
-        if(type == Utils::PathParser::EFileType::TEXTURE)
+        if(p_type == Utils::PathParser::EFileType::TEXTURE)
         {
-            texId = texId ==0 ?(GUIUtil::__EMPTY_TEXTURE ? GUIUtil::__EMPTY_TEXTURE->id : 0): texId ;
-            ImGui::Image((void*)texId, ImVec2(75,75), ImVec2(0.f, 1.f), ImVec2(1.f, 0.f));
+            p_texId = p_texId ==0 ?(GUIUtil::__EMPTY_TEXTURE ? GUIUtil::__EMPTY_TEXTURE->id : 0): p_texId ;
+            ImGui::Image((void*)p_texId, ImVec2(75,75), ImVec2(0.f, 1.f), ImVec2(1.f, 0.f));
         }else
         {
-            std::string previousContent = content;
-            content.resize(256, '\0');
-            bool enterPressed = ImGui::InputText(GetUniqueName(), &content[0], 256, ImGuiInputTextFlags_EnterReturnsTrue);
-            content = content.c_str();
+            std::string previousContent = p_content;
+            p_content.resize(256, '\0');
+            bool enterPressed = ImGui::InputText(GetUniqueName(), &p_content[0], 256, ImGuiInputTextFlags_EnterReturnsTrue);
+            p_content = p_content.c_str();
         }
         // apply DragDrop
         if (ImGui::BeginDragDropTarget())
@@ -322,9 +323,9 @@ namespace LittleEngine
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("File", target_flags))
             {
                 auto path = *(std::string*) payload->Data;
-                if (LittleEngine::Utils::PathParser::GetFileType(path) == type)
+                if (LittleEngine::Utils::PathParser::GetFileType(path) == p_type)
                 {
-                    content = path;
+                    p_content = path;
                     return true;
                 }
             }
@@ -334,8 +335,8 @@ namespace LittleEngine
         ImGui::NextColumn();
         if (ImGui::Button(GetUniqueName("Clear"),ImVec2(100,0)))
         {
-            content = "";
-            ptrs = nullptr;
+            p_content = "";
+            p_ptr = nullptr;
             return true;
         }
         ImGui::NextColumn();

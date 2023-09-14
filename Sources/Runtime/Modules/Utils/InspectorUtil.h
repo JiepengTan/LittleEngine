@@ -26,7 +26,7 @@ namespace LittleEngine
 	class Component;
     class InspectorUtil
     {
-    	typedef std::function<void(void*,Reflection::FieldAccessor&)> TypeDrawFunc; 
+    	typedef std::function<bool(void*,Reflection::FieldAccessor&)> TypeDrawFunc; 
     	static uint64_t s_unique_id;
     	static std::string s_unique_id_str;
     	static std::string s_startWidgetId;
@@ -37,17 +37,22 @@ namespace LittleEngine
     	static void DrawIndent();
     	static void DrawTitle(const std::string& p_name,int columnCount = 3);
     	static const char* GetUniqueName(const std::string& p_name = "");
-    	static void RegisterTypeDrawFunction(std::string typeName,TypeDrawFunc func);
+    	static void RegisterTypeDrawFunction(std::string p_typeName,TypeDrawFunc p_func);
 	    static void CheckRegisterTypeDrawFunctions();
-    	static void DrawUnknownInstance(std::string typeName,void* instance);
-    	static bool DrawResPtr(const std::string& p_name, std::string& content, void*& ptrs,
-			LittleEngine::Utils::PathParser::EFileType type,uint32_t texId = 0);
+    	
+    	
+	    static bool DrawResPtr(const std::string& p_name, std::string& p_content, void*& p_ptr,
+				LittleEngine::Utils::PathParser::EFileType p_type,uint32_t p_texId = 0);
+    	
+    	static void DrawInstance(std::string p_typeName,void* p_instance);
+    	static void DrawFieldMeta(TypeInfoPtr p_type,void* p_instance, Reflection::FieldAccessor& p_field,bool p_isDirty);
+    	static void DrawMethodMeta(Component* p_component);
     public:
-    	static void OnComponentStart(std::string& startWidgetId);
+    	static void OnComponentStart(std::string& p_startWidgetId);
 
     	
     public:
-    	static void DrawDefault(Component* component);
+    	static void DrawDefault(Component* p_component);
 
     	static bool DrawString(const std::string& p_name, std::string& p_data);
     	static bool DrawLabel(const std::string& p_name,const std::string& p_data);
