@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Core\Analytics\Hardware\CPUInfo.cpp">
@@ -19,6 +19,18 @@
     <ClCompile Include="Core\Analytics\Profiling\ProfilerSpy.cpp">
       <Filter>Core\Analytics\Profiling</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Base\Application.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Color.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Macro.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Base\Object.cpp">
+      <Filter>Core\Base</Filter>
+    </ClCompile>
     <ClCompile Include="Core\Debug\Assertion.cpp">
       <Filter>Core\Debug</Filter>
     </ClCompile>
@@ -35,6 +47,9 @@
       <Filter>Core\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\DebugUtil.cpp">
+      <Filter>Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Maths\FFloat.cpp">
       <Filter>Core\Maths</Filter>
     </ClCompile>
     <ClCompile Include="Core\Maths\FMatrix3.cpp">
@@ -61,8 +76,53 @@
     <ClCompile Include="Core\Maths\Internal\TransformNotifier.cpp">
       <Filter>Core\Maths\Internal</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\MetaAccessor.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\MetaFunctionPointer.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\MetaMacro.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\MetaPtr.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\MetaRegisterUtil.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Meta\TypeInfo.cpp">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\MetaDefine.cpp">
+      <Filter>Core\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\Reflection.cpp">
+      <Filter>Core\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Reflection\TypeUtil.cpp">
+      <Filter>Core\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Serialization\JsonSerializer.cpp">
+      <Filter>Core\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Serialization\SerializeUtil.cpp">
+      <Filter>Core\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Serialization\XmlSerializerXX.cpp">
+      <Filter>Core\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Tools\Filesystem\FileUtil.cpp">
+      <Filter>Core\Tools\Filesystem</Filter>
+    </ClCompile>
     <ClCompile Include="Core\Tools\Filesystem\IniFile.cpp">
       <Filter>Core\Tools\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Tools\Filesystem\PathUtil.cpp">
+      <Filter>Core\Tools\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Tools\Guid.cpp">
+      <Filter>Core\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Core\Tools\Time\Clock.cpp">
       <Filter>Core\Tools\Time</Filter>
@@ -82,6 +142,9 @@
     <ClCompile Include="Core\Tools\Utils\String.cpp">
       <Filter>Core\Tools\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Tools\Utils\StringUtil.cpp">
+      <Filter>Core\Tools\Utils</Filter>
+    </ClCompile>
     <ClCompile Include="Core\Tools\Utils\SystemCalls.cpp">
       <Filter>Core\Tools\Utils</Filter>
     </ClCompile>
@@ -97,17 +160,86 @@
     <ClCompile Include="Modules\Audio\Entities\AudioSource.cpp">
       <Filter>Modules\Audio\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Modules\Audio\Resources\Loaders\SoundLoader.cpp">
-      <Filter>Modules\Audio\Resources\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\Audio\Resources\Sound.cpp">
-      <Filter>Modules\Audio\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Modules\Audio\Tracking\SoundStopEventBinder.cpp">
       <Filter>Modules\Audio\Tracking</Filter>
     </ClCompile>
     <ClCompile Include="Modules\Audio\Tracking\SoundTracker.cpp">
       <Filter>Modules\Audio\Tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Actor.cpp">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Behaviour.cpp">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Component.cpp">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientBoxLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientSphereLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CAnimator.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CAudioListener.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CAudioSource.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CCamera.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CDirectionalLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CMaterialRenderer.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CModelRenderer.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalBox.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalCapsule.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalObject.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalSphere.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CPointLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CSpotLight.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\Components\CTransform.cpp">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\PhysicsWrapper.cpp">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\ECS\SceneRenderer.cpp">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\Global\ServiceLocator.cpp">
+      <Filter>Modules\Framework\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\SceneSystem\Scene.cpp">
+      <Filter>Modules\Framework\SceneSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Framework\SceneSystem\SceneManager.cpp">
+      <Filter>Modules\Framework\SceneSystem</Filter>
     </ClCompile>
     <ClCompile Include="Modules\Physics\Core\PhysicsEngine.cpp">
       <Filter>Modules\Physics\Core</Filter>
@@ -126,6 +258,63 @@
     </ClCompile>
     <ClCompile Include="Modules\Physics\Tools\Conversion.cpp">
       <Filter>Modules\Physics\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\Framebuffer.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\IndexBuffer.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\ShaderStorageBuffer.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\ShadowmapBuffer.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\UniformBuffer.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Buffers\VertexArray.cpp">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Context\Driver.cpp">
+      <Filter>Modules\Rendering\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Core\Renderer.cpp">
+      <Filter>Modules\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Core\ShapeDrawer.cpp">
+      <Filter>Modules\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Data\Frustum.cpp">
+      <Filter>Modules\Rendering\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Entities\Light.cpp">
+      <Filter>Modules\Rendering\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\Geometry\Vertex.cpp">
+      <Filter>Modules\Rendering\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Rendering\LowRenderer\Camera.cpp">
+      <Filter>Modules\Rendering\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\LuaActorBinder.cpp">
+      <Filter>Modules\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\LuaBinder.cpp">
+      <Filter>Modules\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\LuaComponentBinder.cpp">
+      <Filter>Modules\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\LuaGlobalsBinder.cpp">
+      <Filter>Modules\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\LuaMathsBinder.cpp">
+      <Filter>Modules\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Scripting\ScriptInterpreter.cpp">
+      <Filter>Modules\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="Modules\UI\Core\UIManager.cpp">
       <Filter>Modules\UI\Core</Filter>
@@ -156,9 +345,6 @@
     </ClCompile>
     <ClCompile Include="Modules\UI\Plugins\ContextualMenu.cpp">
       <Filter>Modules\UI\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="Modules\UI\Types\Color.cpp">
-      <Filter>Modules\UI\Types</Filter>
     </ClCompile>
     <ClCompile Include="Modules\UI\Widgets\AWidget.cpp">
       <Filter>Modules\UI\Widgets</Filter>
@@ -206,6 +392,9 @@
       <Filter>Modules\UI\Widgets\Layout</Filter>
     </ClCompile>
     <ClCompile Include="Modules\UI\Widgets\Layout\GroupCollapsable.cpp">
+      <Filter>Modules\UI\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\UI\Widgets\Layout\InspectorProxy.cpp">
       <Filter>Modules\UI\Widgets\Layout</Filter>
     </ClCompile>
     <ClCompile Include="Modules\UI\Widgets\Layout\NewLine.cpp">
@@ -292,6 +481,18 @@
     <ClCompile Include="Modules\UI\Widgets\Visual\Separator.cpp">
       <Filter>Modules\UI\Widgets\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="Modules\Utils\ActorUtils.cpp">
+      <Filter>Modules\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Utils\GUIUtil.cpp">
+      <Filter>Modules\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Utils\InspectorUtil.cpp">
+      <Filter>Modules\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\Utils\RenderUtils.cpp">
+      <Filter>Modules\Utils</Filter>
+    </ClCompile>
     <ClCompile Include="Platform\Windowing\Context\Device.cpp">
       <Filter>Platform\Windowing\Context</Filter>
     </ClCompile>
@@ -313,82 +514,96 @@
     <ClCompile Include="Platform\Windowing\Window.cpp">
       <Filter>Platform\Windowing</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Base\Application.cpp" />
-    <ClCompile Include="Core\Base\Macro.cpp" />
-    <ClCompile Include="Core\Base\Object.cpp" />
-    <ClCompile Include="Core\Maths\FFloat.cpp" />
-    <ClCompile Include="Core\Serialization\JsonSerializer.cpp" />
-    <ClCompile Include="Core\Reflection\Example\MetaExample.cpp" />
-    <ClCompile Include="Core\Reflection\Reflection.cpp" />
-    <ClCompile Include="Core\Reflection\ReflectionRegister.cpp" />
-    <ClCompile Include="Core\Tools\Guid.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Actor.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Behaviour.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Component.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientBoxLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CAmbientSphereLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CAnimator.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CAudioListener.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CAudioSource.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CCamera.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CDirectionalLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CMaterialRenderer.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CModelRenderer.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalBox.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalCapsule.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalObject.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CPhysicalSphere.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CPointLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CSpotLight.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\Components\CTransform.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\PhysicsWrapper.cpp" />
-    <ClCompile Include="Modules\Framework\ECS\SceneRenderer.cpp" />
-    <ClCompile Include="Modules\Framework\Global\ServiceLocator.cpp" />
-    <ClCompile Include="Modules\Framework\SceneSystem\Scene.cpp" />
-    <ClCompile Include="Modules\Framework\SceneSystem\SceneManager.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\Framebuffer.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\ShaderStorageBuffer.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\ShadowmapBuffer.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\UniformBuffer.cpp" />
-    <ClCompile Include="Modules\Rendering\Buffers\VertexArray.cpp" />
-    <ClCompile Include="Modules\Rendering\Context\Driver.cpp" />
-    <ClCompile Include="Modules\Rendering\Core\Renderer.cpp" />
-    <ClCompile Include="Modules\Rendering\Core\ShapeDrawer.cpp" />
-    <ClCompile Include="Modules\Rendering\Data\Frustum.cpp" />
-    <ClCompile Include="Modules\Rendering\Entities\Light.cpp" />
-    <ClCompile Include="Modules\Rendering\Geometry\Vertex.cpp" />
-    <ClCompile Include="Modules\Rendering\LowRenderer\Camera.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\AnimationManager.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\MaterialManager.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\ModelManager.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\ShaderManager.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\SoundManager.cpp" />
-    <ClCompile Include="Modules\Rendering\ResourceManagement\TextureManager.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Animation.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Loaders\AnimationLoader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Loaders\MaterialLoader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Loaders\ModelLoader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Loaders\ShaderLoader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Loaders\TextureLoader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Material.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Mesh.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Model.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Parsers\AssimpParser.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Shader.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Skeleton.cpp" />
-    <ClCompile Include="Modules\Rendering\Resources\Texture.cpp" />
-    <ClCompile Include="Modules\Scripting\LuaActorBinder.cpp" />
-    <ClCompile Include="Modules\Scripting\LuaBinder.cpp" />
-    <ClCompile Include="Modules\Scripting\LuaComponentBinder.cpp" />
-    <ClCompile Include="Modules\Scripting\LuaGlobalsBinder.cpp" />
-    <ClCompile Include="Modules\Scripting\LuaMathsBinder.cpp" />
-    <ClCompile Include="Modules\Scripting\ScriptInterpreter.cpp" />
-    <ClCompile Include="Modules\Utils\ActorUtils.cpp" />
-    <ClCompile Include="Modules\Utils\GUIDrawer.cpp" />
-    <ClCompile Include="Modules\Utils\RenderUtils.cpp" />
-    <ClCompile Include="Modules\Utils\Serializer.cpp" />
+    <ClCompile Include="Resource\Asset\Animation.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Material.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Mesh.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Model.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Shader.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Skeleton.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Sound.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\TextAsset.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Asset\Texture.cpp">
+      <Filter>Resource\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Core\ResMeta.cpp">
+      <Filter>Resource\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Core\ResPtr.cpp">
+      <Filter>Resource\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Core\ResourcesUtils.cpp">
+      <Filter>Resource\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\AnimationLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\MaterialLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\ModelLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\ShaderLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\SoundLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Loader\TextureLoader.cpp">
+      <Filter>Resource\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\AnimationManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\MaterialManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\ModelManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\ShaderManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\SoundManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\TextAssetManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Manager\TextureManager.cpp">
+      <Filter>Resource\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Parser\AssimpParser.cpp">
+      <Filter>Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="_Test\Component\TestComp2.cpp">
+      <Filter>_Test\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="_Test\Component\TestComp3.cpp">
+      <Filter>_Test\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="_Test\Reflection\TestReflection.cpp">
+      <Filter>_Test\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="_Test\TestManager.cpp">
+      <Filter>_Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Analytics\Hardware\CPUInfo.h">
@@ -415,6 +630,21 @@
     <ClInclude Include="Core\Analytics\Profiling\ProfilerSpy.h">
       <Filter>Core\Analytics\Profiling</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Base\Application.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Color.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Macro.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Base\Object.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CoreInclude.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Core\Debug\Assertion.h">
       <Filter>Core\Debug</Filter>
     </ClInclude>
@@ -437,6 +667,9 @@
       <Filter>Core\Debug</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\DebugUtil.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\FFloat.h">
       <Filter>Core\Maths</Filter>
     </ClInclude>
     <ClInclude Include="Core\Maths\FMatrix3.h">
@@ -463,11 +696,68 @@
     <ClInclude Include="Core\Maths\Internal\TransformNotifier.h">
       <Filter>Core\Maths\Internal</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\MetaAccessor.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\MetaFunctionPointer.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\MetaMacro.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\MetaPtr.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\MetaRegisterUtil.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Meta\TypeInfo.h">
+      <Filter>Core\Reflection\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\MetaDefine.h">
+      <Filter>Core\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\Reflection.h">
+      <Filter>Core\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Reflection\TypeUtil.h">
+      <Filter>Core\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Serialization\ISerializer.h">
+      <Filter>Core\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Serialization\Json.h">
+      <Filter>Core\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Serialization\JsonSerializer.h">
+      <Filter>Core\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Serialization\SerializeUtil.h">
+      <Filter>Core\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Serialization\XmlSerializerXX.h">
+      <Filter>Core\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\String\StringName.h">
+      <Filter>Core\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\String\StringText.h">
+      <Filter>Core\String</Filter>
+    </ClInclude>
     <ClInclude Include="Core\Tools\Eventing\Event.h">
       <Filter>Core\Tools\Eventing</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Tools\Filesystem\FileUtil.h">
+      <Filter>Core\Tools\Filesystem</Filter>
+    </ClInclude>
     <ClInclude Include="Core\Tools\Filesystem\IniFile.h">
       <Filter>Core\Tools\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tools\Filesystem\PathUtil.h">
+      <Filter>Core\Tools\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Tools\Guid.h">
+      <Filter>Core\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Core\Tools\Time\Clock.h">
       <Filter>Core\Tools\Time</Filter>
@@ -490,6 +780,9 @@
     <ClInclude Include="Core\Tools\Utils\String.h">
       <Filter>Core\Tools\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Tools\Utils\StringUtil.h">
+      <Filter>Core\Tools\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="Core\Tools\Utils\SystemCalls.h">
       <Filter>Core\Tools\Utils</Filter>
     </ClInclude>
@@ -505,17 +798,92 @@
     <ClInclude Include="Modules\Audio\Entities\AudioSource.h">
       <Filter>Modules\Audio\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Modules\Audio\Resources\Loaders\SoundLoader.h">
-      <Filter>Modules\Audio\Resources\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\Audio\Resources\Sound.h">
-      <Filter>Modules\Audio\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Modules\Audio\Tracking\SoundStopEventBinder.h">
       <Filter>Modules\Audio\Tracking</Filter>
     </ClInclude>
     <ClInclude Include="Modules\Audio\Tracking\SoundTracker.h">
       <Filter>Modules\Audio\Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\API\IInspectorItem.h">
+      <Filter>Modules\Framework\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\API\ISerializable.h">
+      <Filter>Modules\Framework\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Actor.h">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Behaviour.h">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Component.h">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientBoxLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientSphereLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CAnimator.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CAudioListener.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CAudioSource.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CCamera.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CDirectionalLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CMaterialRenderer.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CModelRenderer.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalBox.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalCapsule.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalObject.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalSphere.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CPointLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CSpotLight.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Components\CTransform.h">
+      <Filter>Modules\Framework\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\PhysicsWrapper.h">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\SceneRenderer.h">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\Global\ServiceLocator.h">
+      <Filter>Modules\Framework\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\SceneSystem\Scene.h">
+      <Filter>Modules\Framework\SceneSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\SceneSystem\SceneManager.h">
+      <Filter>Modules\Framework\SceneSystem</Filter>
     </ClInclude>
     <ClInclude Include="Modules\Physics\Core\PhysicsEngine.h">
       <Filter>Modules\Physics\Core</Filter>
@@ -543,6 +911,111 @@
     </ClInclude>
     <ClInclude Include="Modules\Physics\Tools\Conversion.h">
       <Filter>Modules\Physics\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\EAccessSpecifier.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\Framebuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\IndexBuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\ShadowmapBuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.h">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Context\Driver.h">
+      <Filter>Modules\Rendering\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Core\Renderer.h">
+      <Filter>Modules\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Core\ShapeDrawer.h">
+      <Filter>Modules\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Data\Frustum.h">
+      <Filter>Modules\Rendering\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Entities\Light.h">
+      <Filter>Modules\Rendering\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Geometry\BoundingSphere.h">
+      <Filter>Modules\Rendering\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Geometry\Vertex.h">
+      <Filter>Modules\Rendering\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\LowRenderer\Camera.h">
+      <Filter>Modules\Rendering\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\DriverSettings.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EComparaisonAlgorithm.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\ECullFace.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\ECullingOptions.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EOperation.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EPixelDataFormat.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EPixelDataType.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EPrimitiveMode.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\EProjectionMode.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\ERasterizationMode.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\ERenderingCapability.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Settings\ETextureFilteringMode.h">
+      <Filter>Modules\Rendering\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Utils\Defines.h">
+      <Filter>Modules\Rendering\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\LuaActorBinder.h">
+      <Filter>Modules\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\LuaBinder.h">
+      <Filter>Modules\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\LuaComponentBinder.h">
+      <Filter>Modules\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\LuaGlobalsBinder.h">
+      <Filter>Modules\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\LuaMathsBinder.h">
+      <Filter>Modules\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Scripting\ScriptInterpreter.h">
+      <Filter>Modules\Scripting</Filter>
     </ClInclude>
     <ClInclude Include="Modules\UI\API\IDrawable.h">
       <Filter>Modules\UI\API</Filter>
@@ -606,9 +1079,6 @@
     </ClInclude>
     <ClInclude Include="Modules\UI\Styling\EStyle.h">
       <Filter>Modules\UI\Styling</Filter>
-    </ClInclude>
-    <ClInclude Include="Modules\UI\Types\Color.h">
-      <Filter>Modules\UI\Types</Filter>
     </ClInclude>
     <ClInclude Include="Modules\UI\Widgets\AWidget.h">
       <Filter>Modules\UI\Widgets</Filter>
@@ -695,6 +1165,9 @@
       <Filter>Modules\UI\Widgets\Layout</Filter>
     </ClInclude>
     <ClInclude Include="Modules\UI\Widgets\Layout\GroupCollapsable.h">
+      <Filter>Modules\UI\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\UI\Widgets\Layout\InspectorProxy.h">
       <Filter>Modules\UI\Widgets\Layout</Filter>
     </ClInclude>
     <ClInclude Include="Modules\UI\Widgets\Layout\NewLine.h">
@@ -799,6 +1272,18 @@
     <ClInclude Include="Modules\UI\Widgets\Visual\Separator.h">
       <Filter>Modules\UI\Widgets\Visual</Filter>
     </ClInclude>
+    <ClInclude Include="Modules\Utils\ActorUtils.h">
+      <Filter>Modules\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Utils\GUIUtil.h">
+      <Filter>Modules\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Utils\InspectorUtil.h">
+      <Filter>Modules\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Utils\RenderUtils.h">
+      <Filter>Modules\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="Platform\Windowing\Context\Device.h">
       <Filter>Platform\Windowing\Context</Filter>
     </ClInclude>
@@ -847,361 +1332,433 @@
     <ClInclude Include="Platform\Windowing\Window.h">
       <Filter>Platform\Windowing</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Base\Application.h" />
-    <ClInclude Include="Core\Base\Macro.h" />
-    <ClInclude Include="Core\Base\Object.h" />
-    <ClInclude Include="Core\CoreInclude.h" />
-    <ClInclude Include="Core\Maths\FFloat.h" />
-    <ClInclude Include="Core\Reflection\Example\MetaExample.h" />
-    <ClInclude Include="Core\Reflection\Reflection.h" />
-    <ClInclude Include="Core\Reflection\ReflectionRegister.h" />
-    <ClInclude Include="Core\Serialization\Json.h" />
-    <ClInclude Include="Core\Serialization\JsonSerializer.h" />
-    <ClInclude Include="Core\String\StringName.h" />
-    <ClInclude Include="Core\String\StringText.h" />
-    <ClInclude Include="Core\Tools\Guid.h" />
-    <ClInclude Include="Modules\Framework\API\IInspectorItem.h" />
-    <ClInclude Include="Modules\Framework\API\ISerializable.h" />
-    <ClInclude Include="Modules\Framework\ECS\Actor.h" />
-    <ClInclude Include="Modules\Framework\ECS\Actor.inl" />
-    <ClInclude Include="Modules\Framework\ECS\Behaviour.h" />
-    <ClInclude Include="Modules\Framework\ECS\Behaviour.inl" />
-    <ClInclude Include="Modules\Framework\ECS\Component.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientBoxLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CAmbientSphereLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CAnimator.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CAudioListener.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CAudioSource.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CCamera.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CDirectionalLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CMaterialRenderer.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CModelRenderer.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalBox.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalCapsule.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalObject.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CPhysicalSphere.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CPointLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CSpotLight.h" />
-    <ClInclude Include="Modules\Framework\ECS\Components\CTransform.h" />
-    <ClInclude Include="Modules\Framework\ECS\PhysicsWrapper.h" />
-    <ClInclude Include="Modules\Framework\ECS\SceneRenderer.h" />
-    <ClInclude Include="Modules\Framework\Global\ServiceLocator.h" />
-    <ClInclude Include="Modules\Framework\SceneSystem\Scene.h" />
-    <ClInclude Include="Modules\Framework\SceneSystem\SceneManager.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\EAccessSpecifier.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\Framebuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\IndexBuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.inl" />
-    <ClInclude Include="Modules\Rendering\Buffers\ShadowmapBuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.inl" />
-    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.inl" />
-    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.h" />
-    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.inl" />
-    <ClInclude Include="Modules\Rendering\Context\Driver.h" />
-    <ClInclude Include="Modules\Rendering\Core\Renderer.h" />
-    <ClInclude Include="Modules\Rendering\Core\ShapeDrawer.h" />
-    <ClInclude Include="Modules\Rendering\Data\Frustum.h" />
-    <ClInclude Include="Modules\Rendering\Entities\Light.h" />
-    <ClInclude Include="Modules\Rendering\Geometry\BoundingSphere.h" />
-    <ClInclude Include="Modules\Rendering\Geometry\Vertex.h" />
-    <ClInclude Include="Modules\Rendering\LowRenderer\Camera.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\AnimationManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\AResourceManager.inl" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\MaterialManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\ModelManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\ShaderManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\SoundManager.h" />
-    <ClInclude Include="Modules\Rendering\ResourceManagement\TextureManager.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Animation.h" />
-    <ClInclude Include="Modules\Rendering\Resources\AnimationData.h" />
-    <ClInclude Include="Modules\Rendering\Resources\IMesh.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Loaders\AnimationLoader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Loaders\MaterialLoader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Loaders\ModelLoader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Loaders\ShaderLoader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Loaders\TextureLoader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Material.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Material.inl" />
-    <ClInclude Include="Modules\Rendering\Resources\Mesh.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Model.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Parsers\AssimpParser.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Parsers\EModelParserFlags.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Parsers\IModelParser.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Shader.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Skeleton.h" />
-    <ClInclude Include="Modules\Rendering\Resources\Texture.h" />
-    <ClInclude Include="Modules\Rendering\Resources\UniformInfo.h" />
-    <ClInclude Include="Modules\Rendering\Resources\UniformType.h" />
-    <ClInclude Include="Modules\Rendering\Settings\DriverSettings.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EComparaisonAlgorithm.h" />
-    <ClInclude Include="Modules\Rendering\Settings\ECullFace.h" />
-    <ClInclude Include="Modules\Rendering\Settings\ECullingOptions.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EOperation.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EPixelDataFormat.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EPixelDataType.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EPrimitiveMode.h" />
-    <ClInclude Include="Modules\Rendering\Settings\EProjectionMode.h" />
-    <ClInclude Include="Modules\Rendering\Settings\ERasterizationMode.h" />
-    <ClInclude Include="Modules\Rendering\Settings\ERenderingCapability.h" />
-    <ClInclude Include="Modules\Rendering\Settings\ETextureFilteringMode.h" />
-    <ClInclude Include="Modules\Rendering\Utils\Defines.h" />
-    <ClInclude Include="Modules\Scripting\LuaActorBinder.h" />
-    <ClInclude Include="Modules\Scripting\LuaBinder.h" />
-    <ClInclude Include="Modules\Scripting\LuaComponentBinder.h" />
-    <ClInclude Include="Modules\Scripting\LuaGlobalsBinder.h" />
-    <ClInclude Include="Modules\Scripting\LuaMathsBinder.h" />
-    <ClInclude Include="Modules\Scripting\ScriptInterpreter.h" />
-    <ClInclude Include="Modules\Utils\ActorUtils.h" />
-    <ClInclude Include="Modules\Utils\GUIDrawer.h" />
-    <ClInclude Include="Modules\Utils\GUIDrawer.inl" />
-    <ClInclude Include="Modules\Utils\RenderUtils.h" />
-    <ClInclude Include="Modules\Utils\Serializer.h" />
-    <ClInclude Include="Resource\ResIncludeBasic.h" />
-    <ClInclude Include="Resource\ResInclude.h" />
-    <ClInclude Include="Resource\ResIncludeAnimation.h" />
-    <ClInclude Include="Resource\ResIncludeAudio.h" />
-    <ClInclude Include="Resource\ResIncludeRendering.h" />
-    <ClInclude Include="Resource\ResIncludeScene.h" />
+    <ClInclude Include="Resource\Asset\Animation.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\AnimationData.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\IMesh.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Material.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Mesh.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Model.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Shader.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Skeleton.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Sound.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\TextAsset.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Texture.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\UniformInfo.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\UniformType.h">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Core\ResMeta.h">
+      <Filter>Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Core\ResPtr.h">
+      <Filter>Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Core\ResourcesUtils.h">
+      <Filter>Resource\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Data\ResIncludeAnimation.h">
+      <Filter>Resource\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Data\ResIncludeAudio.h">
+      <Filter>Resource\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Data\ResIncludeBasic.h">
+      <Filter>Resource\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Data\ResIncludeRendering.h">
+      <Filter>Resource\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Data\ResIncludeScene.h">
+      <Filter>Resource\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\AnimationLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\MaterialLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\ModelLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\ShaderLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\SoundLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Loader\TextureLoader.h">
+      <Filter>Resource\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\AResourceManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\AnimationManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\MaterialManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\ModelManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\ShaderManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\SoundManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\TextAssetManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\TextureManager.h">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Parser\AssimpParser.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Parser\EModelParserFlags.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Parser\IModelParser.h">
+      <Filter>Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResInclude.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="_Generated\Reflection\AllReflection.h">
+      <Filter>_Generated\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="_Generated\Reflection\CTransform.reflection.gen.h">
+      <Filter>_Generated\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="_Generated\Serializer\Actor.serializer.gen.h">
+      <Filter>_Generated\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="_Generated\Serializer\AllSerializer.h">
+      <Filter>_Generated\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="_Test\Component\TestComp2.h">
+      <Filter>_Test\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="_Test\Component\TestComp3.h">
+      <Filter>_Test\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="_Test\Reflection\TestReflection.h">
+      <Filter>_Test\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="_Test\TestManager.h">
+      <Filter>_Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Behaviour.inl">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Framework\ECS\Actor.inl">
+      <Filter>Modules\Framework\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="_Generated\Serializer\AllSerializer.ipp">
+      <Filter>_Generated\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Utils\GUIUtil.inl">
+      <Filter>Modules\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Manager\AResourceManager.inl">
+      <Filter>Resource\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Asset\Material.inl">
+      <Filter>Resource\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\ShaderStorageBuffer.inl">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\UniformBuffer.inl">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\VertexArray.inl">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\Rendering\Buffers\VertexBuffer.inl">
+      <Filter>Modules\Rendering\Buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
-      <UniqueIdentifier>{1E6EB561-5299-38DA-9F1D-EB1497EF68C8}</UniqueIdentifier>
+      <UniqueIdentifier>{60350B57-63A5-3607-8ABF-76BEB5D35ADC}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Analytics">
-      <UniqueIdentifier>{88BCCDD7-FA6E-33D4-98C7-94C98F6DC3FD}</UniqueIdentifier>
+      <UniqueIdentifier>{72B17D3C-DABB-3015-A763-BD65543D5AE1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Analytics\Hardware">
-      <UniqueIdentifier>{A764FC2E-8E4B-398A-A9DD-E47A9FDAD826}</UniqueIdentifier>
+      <UniqueIdentifier>{57224D6E-0DCF-30EB-B7EF-CFB835E46D58}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Analytics\Profiling">
-      <UniqueIdentifier>{8202A1CF-D2CE-3248-BCC5-3010E89D1D56}</UniqueIdentifier>
+      <UniqueIdentifier>{2E0FA3BD-B6C3-3C2E-90B3-A824B550BBBE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Base">
+      <UniqueIdentifier>{A559F147-7C31-3C3C-8D52-49FFE7919E36}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Debug">
-      <UniqueIdentifier>{672ED9E7-5335-3A7C-897A-661705F37250}</UniqueIdentifier>
+      <UniqueIdentifier>{ED7ADB91-F014-3D49-BF9B-2EC39CB7F7D4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Maths">
-      <UniqueIdentifier>{8C2AA4B2-AE65-3C1B-B45B-B85A55827FA3}</UniqueIdentifier>
+      <UniqueIdentifier>{FD3E464C-33EE-3525-9547-0489F1809205}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Maths\Internal">
-      <UniqueIdentifier>{BD2F6902-D495-3AC1-980C-738DDCFF0DC9}</UniqueIdentifier>
+      <UniqueIdentifier>{B1D62207-2620-3ACB-ABB1-5D987D105831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Reflection">
+      <UniqueIdentifier>{BBF344BC-2818-36F1-AF52-9E4AB982527A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Reflection\Meta">
+      <UniqueIdentifier>{A2179693-9928-399C-9FD3-B535D9E3280E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Serialization">
+      <UniqueIdentifier>{8FE096B8-DC94-353E-A35C-F23FA1F526F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\String">
+      <UniqueIdentifier>{A7567EEA-5AFC-39C1-8594-AFA0CA7B223A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Tools">
-      <UniqueIdentifier>{2666B0ED-AB01-3AA6-9A6A-F3C2590B7220}</UniqueIdentifier>
+      <UniqueIdentifier>{C280B0C6-231E-330F-8753-7D632CC6AC2C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Tools\Eventing">
-      <UniqueIdentifier>{7EBAC675-FBF9-3D9E-AF74-B5665F370698}</UniqueIdentifier>
+      <UniqueIdentifier>{43FCB265-B4C5-3C60-B8A4-DEDED04F908F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Tools\Filesystem">
-      <UniqueIdentifier>{0F8D1630-5E6F-3487-975E-1FC33DE7FE73}</UniqueIdentifier>
+      <UniqueIdentifier>{801DEC01-4D3E-3503-A0EF-D8A710C82F8F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Tools\Time">
-      <UniqueIdentifier>{94F7F05F-95A8-307B-968C-537F6F547CE6}</UniqueIdentifier>
+      <UniqueIdentifier>{66F4C94B-48FE-3C5B-A1E6-B2B6003318E3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Tools\Utils">
-      <UniqueIdentifier>{387B4A55-60B7-3764-B509-3E47A4C7C722}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay">
-      <UniqueIdentifier>{B7FC9FFB-DB2B-3241-87F5-A5CDD8DB2007}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\API">
-      <UniqueIdentifier>{2F21B1F9-8993-36EA-A05C-1D8A78B95B0F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\ECS">
-      <UniqueIdentifier>{931F8237-F3F3-37C6-8B63-7A01512B4049}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\ECS\Components">
-      <UniqueIdentifier>{2594EAAD-33A4-3588-A871-365F0B8921D6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\Global">
-      <UniqueIdentifier>{1C3575EC-2B9D-3323-8010-B994454B0B21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\Helpers">
-      <UniqueIdentifier>{451148A9-A5EC-3B05-9C69-3A5AE3EA737B}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\SceneSystem">
-      <UniqueIdentifier>{7BBC89A0-2C70-34A9-95B2-8E09DCD15FDD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GamePlay\Scripting">
-      <UniqueIdentifier>{8EDA04DF-E36C-380C-A981-4885E60C84C0}</UniqueIdentifier>
+      <UniqueIdentifier>{E7087C37-6B56-32C6-8700-33907653FF61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules">
-      <UniqueIdentifier>{C652A77D-AB66-30A2-B016-C92444DDBEE5}</UniqueIdentifier>
+      <UniqueIdentifier>{1587D74B-A3BB-31F3-87FB-42F6FE5B6484}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Audio">
-      <UniqueIdentifier>{53237CC8-FF20-3E53-8D43-3149E884B57C}</UniqueIdentifier>
+      <UniqueIdentifier>{6412C678-12BC-369B-BE8A-8AB0A11B6AB6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Audio\Core">
-      <UniqueIdentifier>{0C720178-73BF-3542-AD31-46169AE5A162}</UniqueIdentifier>
+      <UniqueIdentifier>{D6F10C41-1E8F-31BD-817C-1976944BAA34}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Audio\Entities">
-      <UniqueIdentifier>{249B4996-8BE4-3519-8E6F-C8BF8698B59F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Audio\Resources">
-      <UniqueIdentifier>{F134634B-630B-338E-ACA1-09EF17203E45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Audio\Resources\Loaders">
-      <UniqueIdentifier>{B05A32E4-0156-3AB5-A637-3278F5A6FA0C}</UniqueIdentifier>
+      <UniqueIdentifier>{30E9C513-5A41-3DB7-A020-22B0B6C87101}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Audio\Tracking">
-      <UniqueIdentifier>{9D078984-8C21-3526-9575-43E3F7EEF2DC}</UniqueIdentifier>
+      <UniqueIdentifier>{49EC1FB7-70AE-36CD-9BB0-84DFE68D2B71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework">
+      <UniqueIdentifier>{86F794C4-CAB0-30DA-BE86-314E66E6342A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework\API">
+      <UniqueIdentifier>{41448967-2286-3E44-BDA4-5106E9FBF2F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework\ECS">
+      <UniqueIdentifier>{C42118C7-1370-35C7-B851-6AAFFD87AA89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework\ECS\Components">
+      <UniqueIdentifier>{F8861877-3196-3D3B-BE1A-393307055358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework\Global">
+      <UniqueIdentifier>{4B7D51AA-284A-337A-B906-8E4842AF65A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Framework\SceneSystem">
+      <UniqueIdentifier>{4134A97C-B779-37F3-80CC-22818BA3C91D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Physics">
-      <UniqueIdentifier>{92962E11-5B72-391E-BA95-64F8147160F9}</UniqueIdentifier>
+      <UniqueIdentifier>{D6476FF5-722D-3C76-98C0-F2840623B6A7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Physics\Core">
-      <UniqueIdentifier>{DA6DFD8E-0610-35B4-BB57-4AE9DB0691D9}</UniqueIdentifier>
+      <UniqueIdentifier>{ED47402F-7BE9-3DBC-99F5-B57B3460A16B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Physics\Entities">
-      <UniqueIdentifier>{14313F73-A1C5-3DFD-926A-7AE43231DF43}</UniqueIdentifier>
+      <UniqueIdentifier>{B49093D9-9C2B-3A6C-BF84-6F3CF3609A71}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Physics\Settings">
-      <UniqueIdentifier>{884FD47E-0BFF-38CD-B75C-D3C062D4C22B}</UniqueIdentifier>
+      <UniqueIdentifier>{1509D41D-7FAD-36AA-8482-2441F054075A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Physics\Tools">
-      <UniqueIdentifier>{7B9F80E2-82BA-32CD-B7F5-69A4B0C11A3D}</UniqueIdentifier>
+      <UniqueIdentifier>{DB7C9EF0-E346-3007-A213-0B2609C9D0AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering">
+      <UniqueIdentifier>{A866FC60-60CC-3188-95E3-D553339AE6D8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Buffers">
+      <UniqueIdentifier>{0B57CD80-FBD1-3E45-8C07-BB647C80BCF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Context">
+      <UniqueIdentifier>{6A4A6EB0-B9BC-3091-9788-8AB470E9D1B5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Core">
+      <UniqueIdentifier>{4CD6C9D6-CECB-3888-A74F-3E63FC2BBA6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Data">
+      <UniqueIdentifier>{A1F6871E-4E07-33EF-8FB5-7B8C192E95E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Entities">
+      <UniqueIdentifier>{17AE0269-22CB-384B-BF26-BBCB253AE74B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Geometry">
+      <UniqueIdentifier>{85555646-C8D8-3428-959E-666771C18758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\LowRenderer">
+      <UniqueIdentifier>{E3697907-7437-3F0B-BDAA-88965432D7C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Settings">
+      <UniqueIdentifier>{C346213B-1440-3F5B-A056-83E30CF14D41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Rendering\Utils">
+      <UniqueIdentifier>{E7CCE2FD-AA22-3FF1-B229-B5BD30AF37D2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scripting">
+      <UniqueIdentifier>{2816B6C5-4DF5-332D-9AEF-8FACC1652607}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI">
-      <UniqueIdentifier>{6F321B68-E64B-34CE-9BEE-6C3ECEC79D8C}</UniqueIdentifier>
+      <UniqueIdentifier>{FADA1EF7-1C4A-306F-87CD-2D855E374598}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\API">
-      <UniqueIdentifier>{15A1B861-0370-3B52-9EDD-B7C873992985}</UniqueIdentifier>
+      <UniqueIdentifier>{1B9C9952-D3CB-321D-BB44-431D920FA68C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Core">
-      <UniqueIdentifier>{A83B1FBA-A883-30A0-9E75-BE3363AD97BB}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\UI\ImGui">
-      <UniqueIdentifier>{76E627F2-5F67-3F0D-9E2A-D53FA95EB453}</UniqueIdentifier>
+      <UniqueIdentifier>{048AB1FD-715C-36DC-8A9D-BB15C82D631F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Internal">
-      <UniqueIdentifier>{45D6D8AF-1F23-3AC1-9E84-F328076AB5D6}</UniqueIdentifier>
+      <UniqueIdentifier>{54ADFAF2-4F9B-38DF-B7C6-BD4B3290167D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Modules">
-      <UniqueIdentifier>{761AA227-A65F-3768-A07B-A209648C4ED8}</UniqueIdentifier>
+      <UniqueIdentifier>{2DFBFBB8-400D-3C48-8D47-E4CAFBA4C390}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Panels">
-      <UniqueIdentifier>{94F06EE4-AEF5-31BD-9E14-063D096614E6}</UniqueIdentifier>
+      <UniqueIdentifier>{F0890D3E-DB45-3D7E-A30B-7266C26533A9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Plugins">
-      <UniqueIdentifier>{8543F698-FFC5-3D14-A53B-1F44B8377554}</UniqueIdentifier>
+      <UniqueIdentifier>{77666865-AD93-3247-8B21-08D37634036F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Settings">
-      <UniqueIdentifier>{3D616E5C-FD74-3231-8685-E8B256C824C5}</UniqueIdentifier>
+      <UniqueIdentifier>{659103A7-2259-3104-AAF3-4212D5B6FB26}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Styling">
-      <UniqueIdentifier>{91AF9B73-B82D-35E1-BF98-66CF6F65AC2E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\UI\Types">
-      <UniqueIdentifier>{24153B95-EFF8-39D0-ADE9-F9FFBBFC9448}</UniqueIdentifier>
+      <UniqueIdentifier>{61FBB8CD-FE3A-3BF0-A974-B50BA5F2F838}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets">
-      <UniqueIdentifier>{A57680A7-9E7D-3FDC-B79F-B75DFDD1C71B}</UniqueIdentifier>
+      <UniqueIdentifier>{E6C6A50A-612D-3BCE-AA8F-FCDEC74F4E64}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Buttons">
-      <UniqueIdentifier>{21F23FBE-2434-337F-B8F2-2AA03D2723E2}</UniqueIdentifier>
+      <UniqueIdentifier>{501FC77F-4491-3119-919A-37EEAD923FC8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Drags">
-      <UniqueIdentifier>{A25189F9-54C6-3214-A16F-561F8C787286}</UniqueIdentifier>
+      <UniqueIdentifier>{A33B7B34-7197-30BE-93A0-4304881C1A1D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\InputFields">
-      <UniqueIdentifier>{E61748B1-AF15-397D-9074-E67614BFB88D}</UniqueIdentifier>
+      <UniqueIdentifier>{8ED45572-9513-3E80-8E69-EFBF8D739728}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Layout">
-      <UniqueIdentifier>{C767D4D0-1630-3D32-B943-B5A78935CE0F}</UniqueIdentifier>
+      <UniqueIdentifier>{B3F3409C-A236-3477-9665-3B53533B879C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Menu">
-      <UniqueIdentifier>{5839E665-529D-35E4-9E50-AF316E813848}</UniqueIdentifier>
+      <UniqueIdentifier>{6BA07D3D-B31F-3667-B999-DE215EAA218C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Plots">
-      <UniqueIdentifier>{B4783FF9-5141-3C44-82DE-BD000A3D6555}</UniqueIdentifier>
+      <UniqueIdentifier>{23E87ED9-D2B2-3D44-9340-9535BD3E8626}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Selection">
-      <UniqueIdentifier>{AE3E2823-BF38-33D9-A6CE-102BD8C36D61}</UniqueIdentifier>
+      <UniqueIdentifier>{C075DC3B-C03F-360D-9ED4-E2B1AC2DA2BE}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Sliders">
-      <UniqueIdentifier>{349AEA29-DDCC-33DC-8098-C2F8CA5DC9D6}</UniqueIdentifier>
+      <UniqueIdentifier>{6516001C-A6F8-3D68-913B-833167EC33CE}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Texts">
-      <UniqueIdentifier>{4B9D1B11-6022-3934-A412-157ADA82F3B9}</UniqueIdentifier>
+      <UniqueIdentifier>{3BF93D75-3AF9-3CBE-9585-52F206ADF53C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\UI\Widgets\Visual">
-      <UniqueIdentifier>{A956A87B-F3D5-3199-914C-2C030FE6F082}</UniqueIdentifier>
+      <UniqueIdentifier>{C220E0B6-CDDC-34C9-9DA8-DDC5AB01CCF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Utils">
+      <UniqueIdentifier>{689C87CA-1106-3E78-B6FA-F137219EB04E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform">
-      <UniqueIdentifier>{5565FDF5-438D-3BFE-9FD5-E92778F86061}</UniqueIdentifier>
+      <UniqueIdentifier>{402FF329-B751-3F9A-9CB8-7084AAE9049E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing">
-      <UniqueIdentifier>{158D66CD-4AE1-3FA5-84AB-C815E8980CA4}</UniqueIdentifier>
+      <UniqueIdentifier>{B6A9155A-CD8E-3D4B-9671-9FF0491583D3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing\Context">
-      <UniqueIdentifier>{7D03B272-B578-3569-98AE-51DFC23BCB89}</UniqueIdentifier>
+      <UniqueIdentifier>{6A1AA92A-63B7-3BA0-A088-A125D6E3729F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing\Cursor">
-      <UniqueIdentifier>{A22B7418-AC6F-3B5E-A0AB-EF800E3EF232}</UniqueIdentifier>
+      <UniqueIdentifier>{27783566-D9BF-38B3-AC53-788450C2E7E4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing\Dialogs">
-      <UniqueIdentifier>{E6011C9B-3A1C-3CF6-914D-5C46257AA7C1}</UniqueIdentifier>
+      <UniqueIdentifier>{40149949-3921-3705-9AF7-765C35006411}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing\Inputs">
-      <UniqueIdentifier>{8A5079AF-8978-38FB-9BC1-9AB1D63BE509}</UniqueIdentifier>
+      <UniqueIdentifier>{1F9CCACF-EBCF-38D4-A2B4-7F866260E142}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windowing\Settings">
-      <UniqueIdentifier>{88267E8F-E3A9-3697-A11F-A8D4F619F143}</UniqueIdentifier>
+      <UniqueIdentifier>{BB19C0EF-1864-328C-BA5A-1E46BB807EB7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource">
-      <UniqueIdentifier>{8A3E75B2-19F6-360B-9E62-D5D2D36506D2}</UniqueIdentifier>
+      <UniqueIdentifier>{637F2326-368D-37A6-BC86-9BBAE24E40A9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering">
-      <UniqueIdentifier>{9F86A35D-911B-3C50-B06C-A27480557C3B}</UniqueIdentifier>
+    <Filter Include="Resource\Asset">
+      <UniqueIdentifier>{BE5245CA-5B02-33B2-B913-A5193143B964}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Buffers">
-      <UniqueIdentifier>{D5B9BA44-D442-37A6-A70F-C16CDD83CC1B}</UniqueIdentifier>
+    <Filter Include="Resource\Core">
+      <UniqueIdentifier>{BE663FA4-A1F8-343C-8F18-0080DB58F0E3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Context">
-      <UniqueIdentifier>{4BDE441C-CE66-3AD2-825F-8A78059B8F0A}</UniqueIdentifier>
+    <Filter Include="Resource\Data">
+      <UniqueIdentifier>{FC421851-C155-30BE-BE85-6505B897ECA0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Core">
-      <UniqueIdentifier>{FDD1DB01-42CC-35DC-98C7-F463CA143E68}</UniqueIdentifier>
+    <Filter Include="Resource\Loader">
+      <UniqueIdentifier>{570240B5-CCDD-3538-803B-7ED250EF41F1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Data">
-      <UniqueIdentifier>{5933B85C-1EA7-331D-B6A0-C76DD564D887}</UniqueIdentifier>
+    <Filter Include="Resource\Manager">
+      <UniqueIdentifier>{98602E3C-BFB8-334C-AF24-E08B7ADCC21B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Entities">
-      <UniqueIdentifier>{CB2ADB0D-B0F3-3BAA-85AB-3706D2128555}</UniqueIdentifier>
+    <Filter Include="Resource\Parser">
+      <UniqueIdentifier>{456AA06D-EC99-380B-9E68-8B6FDEF0E5E7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Geometry">
-      <UniqueIdentifier>{B0CD3B55-5809-3227-A71F-1D4703FBCA37}</UniqueIdentifier>
+    <Filter Include="_Generated">
+      <UniqueIdentifier>{69BB9712-62E0-33A4-ACBD-DC837DB55810}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\LowRenderer">
-      <UniqueIdentifier>{83F401EB-94B5-3436-8166-83FF3202A964}</UniqueIdentifier>
+    <Filter Include="_Generated\Reflection">
+      <UniqueIdentifier>{21A55B8E-6684-35D9-B8E1-875144DDA28C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Resources">
-      <UniqueIdentifier>{3C8E77B3-7891-3571-871D-70A0D072193C}</UniqueIdentifier>
+    <Filter Include="_Generated\Serializer">
+      <UniqueIdentifier>{68F2B788-4366-369A-94AB-6E8AF1188C0D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Resources\Loaders">
-      <UniqueIdentifier>{9C6B1627-205F-3D09-AE58-18012E279BA7}</UniqueIdentifier>
+    <Filter Include="_Test">
+      <UniqueIdentifier>{53B2F77B-4101-3C48-B5ED-55AFDCC8E3AE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Resources\Parsers">
-      <UniqueIdentifier>{2CE7C210-1B89-3F66-A327-7CD7F0A13B00}</UniqueIdentifier>
+    <Filter Include="_Test\Component">
+      <UniqueIdentifier>{F873FAA7-8752-38D5-8512-08878DF8E1C9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Rendering\Settings">
-      <UniqueIdentifier>{02FD4C76-FDF4-3E3D-94BC-7EA8263714F9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Rendering\Utils">
-      <UniqueIdentifier>{81C34887-7D09-3C15-A527-37483E00BE96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\ResourceManagement">
-      <UniqueIdentifier>{0E150B9A-02B7-34FF-B438-A0E445E0A62F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Resources">
-      <UniqueIdentifier>{0B39BAA5-D135-33D1-9455-D920F81D972E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Resources\Loaders">
-      <UniqueIdentifier>{BC70EB0B-C0A4-33F1-859F-1A66FD61F8C9}</UniqueIdentifier>
+    <Filter Include="_Test\Reflection">
+      <UniqueIdentifier>{2653C277-E16C-3107-A64F-1FE4AD39656B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
