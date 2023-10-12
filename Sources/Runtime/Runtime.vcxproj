@@ -1057,6 +1057,10 @@
     <ProjectReference Include="..\3rdParty\misc\misc.vcxproj">
       <Project>{60a8e6b5-f1a7-468c-9b4d-5dd889701002}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Tools\MetaParser\MetaParser.vcxproj">
+      <Project>{87ce1f81-eede-42d9-99df-97ac2e523b26}</Project>
+      <Name>MetaParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\Rendering\Resources\" />
