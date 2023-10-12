@@ -21,7 +21,7 @@ std::string OvDebug::FileHandler::__APP_LAUNCH_DATE			= LittleEngine::Time::Date
 std::string const OvDebug::FileHandler::__LOG_EXTENSION		= ".ovlog";
 
 std::ofstream OvDebug::FileHandler::OUTPUT_FILE;
-std::string OvDebug::FileHandler::LOG_FILE_PATH = std::string(getenv("APPDATA")) + std::string("\\OverloadTech\\LittleEditor\\Log\\") + __APP_LAUNCH_DATE + __LOG_EXTENSION;
+std::string OvDebug::FileHandler::LOG_FILE_PATH = std::string(getenv("APPDATA")) + std::string("\\OpenSource\\LittleEditor\\Log\\") + __APP_LAUNCH_DATE + __LOG_EXTENSION;
 
 void OvDebug::FileHandler::Log(const LogData& p_logData)
 {

@@ -84,13 +84,17 @@ bool LittleEngine::SceneManager::LoadScene(const std::string& p_path, bool p_abs
 {
 	LOG_INFO("LoadScene =" + p_path);
 	auto textAsset = GetGlobalService<LittleEngine::ResourceManagement::TextAssetManager>().LoadResource(p_path);
-	if (LoadSceneFromMemory(textAsset->text))
-	{
-		LOG_INFO("LoadScene succ =" + p_path);
-		std::string completePath = PathUtil::GetRealPath(p_path);
-		StoreCurrentSceneSourcePath(completePath);
-		return true;
-	}
+        try { 
+	        if (LoadSceneFromMemory(textAsset->text))
+	        {
+        		LOG_INFO("LoadScene succ =" + p_path);
+        		std::string completePath = PathUtil::GetRealPath(p_path);
+        		StoreCurrentSceneSourcePath(completePath);
+        		return true;
+	        }
+        } catch (std::exception ex) {
+			LOG_ERROR("LoadScene faild =" + p_path);
+        }
 	LOG_ERROR("LoadScene faild =" + p_path);
 	return false;
 }

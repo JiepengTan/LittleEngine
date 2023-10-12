@@ -11,14 +11,15 @@
 
 LittleEngine::Material * LittleEngine::Resources::MaterialLoader::Create(const std::string & p_path)
 {
-	Material* ret_instance= new Material;
 	auto jsonStr = FileUtil::ReadAllText(p_path);
 	std::string error;
 	auto&& jsonContext = Json::parse(jsonStr, error);
 	if(jsonContext == nullptr)
 	{
 		LOG_ERROR("Load material failed Path =" + p_path + "  error= " + error);
+		return nullptr;
 	}
+	Material* ret_instance= new Material;
 	LittleEngine::JsonSerializer::Read(jsonContext, *ret_instance);
 	return ret_instance;
 }

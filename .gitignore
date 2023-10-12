@@ -7,3 +7,4 @@ Build/
 Bin/
 Builds/
 Bin-Int/
+/Sources/Runtime/clangLog.txt

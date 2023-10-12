@@ -213,7 +213,7 @@ namespace LittleEngine::Editor
 
         if (p_tempFolder)
         {
-            destinationFolder = std::string(getenv("APPDATA")) + "\\OverloadTech\\Editor\\TempBuild\\";
+            destinationFolder = std::string(getenv("APPDATA")) + "\\OpenSource\\Editor\\TempBuild\\";
             try
             {
                 std::filesystem::remove_all(destinationFolder);

@@ -789,14 +789,6 @@ LittleEngine::Editor::Panels::AssetBrowser::AssetBrowser
 	if (!std::filesystem::exists(m_projectScriptFolder))
 	{
 		std::filesystem::create_directories(m_projectScriptFolder);
-
-		LittleEngine::Windowing::Dialogs::MessageBox message
-		(
-			"Scripts folder not found",
-			"The \"Scripts/\" folders hasn't been found in your project directory.\nIt has been automatically generated",
-			LittleEngine::Windowing::Dialogs::MessageBox::EMessageType::WARNING,
-			LittleEngine::Windowing::Dialogs::MessageBox::EButtonLayout::OK
-		);
 	}
 
 	auto& refreshButton = CreateWidget<Buttons::Button>("Rescan assets");

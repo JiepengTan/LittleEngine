@@ -26,7 +26,7 @@
 #include "Platform/Windowing/Dialogs/OpenFileDialog.h"
 #include "Platform/Windowing/Dialogs/MessageBox.h"
 
-#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OverloadTech\\LittleEditor\\projects.ini")
+#define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "\\OpenSource\\LittleEditor\\projects.ini")
 
 class ProjectHubPanel : public LittleEngine::UI::Panels::PanelWindow
 {
@@ -40,7 +40,7 @@ public:
 		resizable = false;
 		movable = false;
 		titleBar = false;
-		auto appPath = std::string(getenv("APPDATA"))+"\\OverloadTech\\LittleEditor\\";
+		auto appPath = std::string(getenv("APPDATA"))+"\\OpenSource\\LittleEditor\\";
 		std::filesystem::create_directories(appPath );
 
 		SetSize({ 1000, 580 });

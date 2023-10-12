@@ -1,12 +1,19 @@
 #include "FileUtil.h"
+#include "Core/Base/Macro.h"
 #include "PathUtil.h"
 #include "fstream"
 #include "stdexcept"
+
+#include <filesystem>
 namespace LittleEngine
 {
     std::string FileUtil::ReadAllText(const std::string& filePath)
     {
         std::ifstream file(filePath);
+        if(!std::filesystem::exists(filePath)) {
+            LOG_ERROR("Unable to open file: " + filePath);
+            return "";
+        }
         if (file.is_open())
         {
             std::string content((std::istreambuf_iterator<char>(file)),
@@ -14,10 +21,8 @@ namespace LittleEngine
             file.close();
             return content;
         }
-        else
-        {
-            throw std::runtime_error("Unable to open file: " + filePath);
-        }
+        LOG_ERROR("Unable to open file: " + filePath);
+        return "";
     }
 
     std::vector<std::string> FileUtil::ReadAllLines(const std::string& filePath)
