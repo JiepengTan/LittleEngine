@@ -18,7 +18,7 @@
 <p align="center"><img src="https://github.com/JiepengTan/JiepengTan.github.io/blob/master/assets/img/blog/LittleEngine/animation.gif?raw=true" width="768"></p> 
 
 2. 反射-界面和函数调用
-<p align="center"><img src="https://github.com/JiepengTan/JiepengTan.github.io/blob/master/assets/img/blog/LittleEngine/reflection.gif?raw=true" width="768"></p> 
+<p align="center"><img src="https://github.com/JiepengTan/JiepengTan.github.io/blob/master/assets/img/blog/LittleEngine/reflection_basic.gif?raw=true" width="768"></p> 
 
 3. 反射-Enum 支持，序列化
 <p align="center"><img src="https://github.com/JiepengTan/JiepengTan.github.io/blob/master/assets/img/blog/LittleEngine/reflection_add_component.gif?raw=true" width="768"></p> 
